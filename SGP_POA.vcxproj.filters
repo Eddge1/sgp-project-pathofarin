@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SGD_WRAPPERS">
+      <UniqueIdentifier>{ad1a5bc6-565e-492b-b2de-4b0249a761cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStates">
+      <UniqueIdentifier>{841aa4df-5b8d-4b4e-a295-a852cdbb3bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStates\cpp">
+      <UniqueIdentifier>{8feed739-9bbc-44e7-bae3-60e9d5abc018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStates\h">
+      <UniqueIdentifier>{a0e3a00e-8c75-47ad-8a48-3bf50ae09964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AIControllers">
+      <UniqueIdentifier>{ee1ab513-45e9-42c1-a5fb-124649c9462d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AIControllers\cpp">
+      <UniqueIdentifier>{312fdb18-7841-4301-8525-c00ca5d5440e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AIControllers\h">
+      <UniqueIdentifier>{40294311-e455-433f-9f94-603b4202651d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniGames">
+      <UniqueIdentifier>{38ce6bb9-a763-4ac8-8acf-0f4f2fc7ac94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniGames\cpp">
+      <UniqueIdentifier>{086bacad-ff57-44b3-9377-85329b29e5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiniGames\h">
+      <UniqueIdentifier>{73925004-350c-420f-b5e1-a560a21e0cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{33aae731-d7b6-4b15-8341-614a1dfeea3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\cpp">
+      <UniqueIdentifier>{90bdc676-f45b-4496-901e-9fc94764a8a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\h">
+      <UniqueIdentifier>{0e9bc1e1-7657-4a2e-91f1-1c9302cb62f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{50d443f9-8d85-4d05-a5e6-569e7c6d0039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\h">
+      <UniqueIdentifier>{6f971bdc-5fbe-4a5f-9cfc-af6533daddbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\cpp">
+      <UniqueIdentifier>{71eea2c7-1f8c-42fe-83c6-003fc6266941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{aba6107c-e7ac-43c5-952d-8edbab301ed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\cpp">
+      <UniqueIdentifier>{dc008fda-7d8e-4e6d-bc61-96181411eb7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items\h">
+      <UniqueIdentifier>{f7e55dc9-2199-45b4-9f51-145c4f036677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{293fa0ae-cea0-48bd-993a-debeb7075010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\cpp">
+      <UniqueIdentifier>{88290523-d67a-4b38-8faf-7d3c7b2e7537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\h">
+      <UniqueIdentifier>{616c80bb-4f8a-4476-9dca-03737e59c141}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\CSGD_Direct3D.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\CSGD_DirectInput.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\CSGD_EventSystem.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\CSGD_TextureManager.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\CSGD_XAudio2.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="SGD Wrappers\SGD_Math.cpp">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Commands.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RenderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Shops.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BattleState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CharacterMenuState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CreditState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameOverState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GamePlayState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameStateManager.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameStates.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MainMenuState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\OptionsMenu.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ProfileMenuState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ShopState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VictoryState.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIController.cpp">
+      <Filter>AIControllers\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Minigames.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UseItem.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BasicAttack.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ChargeCrystal.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ComboGame.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TriggerSpree.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TriggerMatch.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SteadyShot.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PrecisionStrike.cpp">
+      <Filter>MiniGames\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EnemyUnit.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Entity.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Npcs.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ObjectManager.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Objects.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Player.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlayerUnit.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Units.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Skills.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Tile.cpp">
+      <Filter>World\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Layer.cpp">
+      <Filter>World\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\World.cpp">
+      <Filter>World\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Item.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Armor.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Weapon.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Consumable.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AnimationSystem.cpp">
+      <Filter>Animation\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Animation.cpp">
+      <Filter>Animation\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AnimationTimeStamp.cpp">
+      <Filter>Animation\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Frame.cpp">
+      <Filter>Animation\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SGD Wrappers\CEvent.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\CSGD_Direct3D.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\CSGD_DirectInput.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\CSGD_EventSystem.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\CSGD_TextureManager.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\CSGD_XAudio2.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\IListener.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\SGD_Math.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="SGD Wrappers\SGD_Util.h">
+      <Filter>SGD_WRAPPERS</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Commands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\RenderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Shops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BattleState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CharacterMenuState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CreditState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameOverState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GamePlayState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameStateManager.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\GameStates.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MainMenuState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\OptionsMenu.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ProfileMenuState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ShopState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\VictoryState.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIController.h">
+      <Filter>AIControllers\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Minigames.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\UseItem.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BasicAttack.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TriggerSpree.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TriggerMatch.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SteadyShot.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PrecisionStrike.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ChargeCrystal.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ComboGame.h">
+      <Filter>MiniGames\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\EnemyUnit.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Entity.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Npcs.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Objects.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Player.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PlayerUnit.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Skills.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Units.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ObjectManager.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Layer.h">
+      <Filter>World\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Tile.h">
+      <Filter>World\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\World.h">
+      <Filter>World\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Item.h">
+      <Filter>Items\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Armor.h">
+      <Filter>Items\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Consumable.h">
+      <Filter>Items\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Weapon.h">
+      <Filter>Items\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AnimationSystem.h">
+      <Filter>Animation\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Animation.h">
+      <Filter>Animation\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AnimationTimeStamp.h">
+      <Filter>Animation\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Frame.h">
+      <Filter>Animation\h</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

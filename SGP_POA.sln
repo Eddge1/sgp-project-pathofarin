@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SGP_POA", "SGP_POA.vcxproj", "{A36FE08B-2FF7-42B1-89B8-64E2B33B8F85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A36FE08B-2FF7-42B1-89B8-64E2B33B8F85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A36FE08B-2FF7-42B1-89B8-64E2B33B8F85}.Debug|Win32.Build.0 = Debug|Win32
+		{A36FE08B-2FF7-42B1-89B8-64E2B33B8F85}.Release|Win32.ActiveCfg = Release|Win32
+		{A36FE08B-2FF7-42B1-89B8-64E2B33B8F85}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
