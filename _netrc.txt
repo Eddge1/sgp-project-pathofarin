@@ -1,3 +1,0 @@
-machine code.google.com
-login youremail
-password yourpassword
