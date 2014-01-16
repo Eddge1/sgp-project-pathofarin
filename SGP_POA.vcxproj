@@ -129,6 +129,10 @@
     <ClCompile Include="source\Weapon.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
     <ClCompile Include="source\World.cpp" />
+    <ClCompile Include="TinyXML\tinystr.cpp" />
+    <ClCompile Include="TinyXML\tinyxml.cpp" />
+    <ClCompile Include="TinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="TinyXML\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h" />
@@ -186,6 +190,8 @@
     <ClInclude Include="source\VictoryState.h" />
     <ClInclude Include="source\Weapon.h" />
     <ClInclude Include="source\World.h" />
+    <ClInclude Include="TinyXML\tinystr.h" />
+    <ClInclude Include="TinyXML\tinyxml.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
