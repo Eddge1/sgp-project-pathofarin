@@ -7,6 +7,7 @@ class CObjects
 	float m_fPosY;
 	bool m_bActive;
 	bool m_bRender;
+	unsigned int m_unRef;
 
 public:
 	CObjects(void);
@@ -19,6 +20,10 @@ public:
 	void SetPosY	(float fPos)			{m_fPosY = fPos;}
 
 	virtual ObjectType GetType(void) final	{return m_eType;}
+	virtual void AddRef() final				{m_unRef++;}
+
+
+	virtual void Release() final;
 	void SetType(ObjectType eType)					{m_eType = eType;}
 
 	virtual void Update(float fElapsedTime);
