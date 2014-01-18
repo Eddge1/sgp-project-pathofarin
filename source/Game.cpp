@@ -4,7 +4,6 @@
 
 CGame* CGame::s_pInstance = nullptr;
 
-
 // GetInstance
 CGame* CGame::GetInstance( void ) // Remember these are static.
 {
@@ -86,7 +85,6 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 // - run one frame of the gameplay
 bool CGame::Run( void )
 {
-
 	// Update & render
 	if( Update() == false)
 		return false;
@@ -108,7 +106,7 @@ void CGame::Terminate(void)
 	m_pDI->Terminate();
 	m_pD3D->Terminate();
 
-	// Reset the data members to clean values
+	// Reset the data members to null so they cant use them
 	m_pD3D			= nullptr;
 	m_pDI			= nullptr;
 	m_pTM			= nullptr;
@@ -176,14 +174,12 @@ void CGame::Render(void)
 
 void CGame::ChangeState( CGameStates* pState )
 {
-	// Exit the current state (if any)
+	// Exit the current state if we are in one.
 	if( m_pCurrState != nullptr )
 		m_pCurrState->Sleep();
 
-
 	// Store the new state
 	m_pCurrState = pState;
-
 
 	// Enter the new state (if any)
 	if( m_pCurrState != nullptr )

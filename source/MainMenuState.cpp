@@ -5,6 +5,7 @@
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 
+#include "ProfileMenuState.h"
 #include "Game.h"
 
 CMainMenuState* CMainMenuState::GetInstance( void )
@@ -45,6 +46,10 @@ void CMainMenuState::Update(float fElapsedTime)
 
 void CMainMenuState::Render(void)
 {
+	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
+
+	pD3D->DrawText(_T("This is the Main Menu"), 15,15, D3DCOLOR_XRGB(0,0,0));
+	pD3D->DrawText(_T("Hit 1 to change to a new State"), 15,35, D3DCOLOR_XRGB(0,0,0));
 
 }
 
@@ -55,5 +60,7 @@ bool CMainMenuState::Input(void)
 	if(pDI->KeyPressed(DIK_ESCAPE))
 		return false;
 
+	if(pDI->KeyPressed(DIK_1))
+		CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance());
 	return true;
 }
