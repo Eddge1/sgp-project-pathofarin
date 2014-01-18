@@ -43,6 +43,11 @@ void CMainMenuState::Update(float fElapsedTime)
 
 }
 
+void CMainMenuState::Render(void)
+{
+
+}
+
 bool CMainMenuState::Input(void)
 {
 	return true;
