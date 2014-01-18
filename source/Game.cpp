@@ -42,7 +42,6 @@ CGame::CGame(void)
 
 	// seeding the random number generator
 	srand( (unsigned int)time( nullptr ) );
-
 }
 
 

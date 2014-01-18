@@ -50,5 +50,10 @@ void CMainMenuState::Render(void)
 
 bool CMainMenuState::Input(void)
 {
+	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+
+	if(pDI->KeyPressed(DIK_ESCAPE))
+		return false;
+
 	return true;
 }

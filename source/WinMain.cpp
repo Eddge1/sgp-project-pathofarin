@@ -90,7 +90,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//	Initialize Game here
 	//////////////////////////////////////////
 
-/*	
+
 	// Access the CGame singleton
 	CGame* pGame = CGame::GetInstance();
 
@@ -98,7 +98,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	pGame->Initialize(  hWnd, hInstance, 
 						g_nWINDOW_WIDTH, g_nWINDOW_HEIGHT,
 						g_bIS_WINDOWED );
-*/
 
 	//////////////////////////////////////////
 
@@ -124,8 +123,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//	Run game logic here
 			//////////////////////////////////
 
-			//if( pGame->Update() == false )
-				//PostQuitMessage( 0 );
+			if( pGame->Run() == false)
+				PostQuitMessage( 0 );
 
 		
 			//////////////////////////////////
@@ -138,9 +137,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	// Terminate the game
 
-	//pGame->Terminate();
-	//CGame::DeleteInstance();
-	//pGame = nullptr;
+	pGame->Terminate();
+	CGame::DeleteInstance();
+	pGame = nullptr;
 
 
 	/////////////////////////////////////////
