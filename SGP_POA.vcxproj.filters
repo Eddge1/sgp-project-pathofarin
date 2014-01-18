@@ -132,12 +132,6 @@
     <ClCompile Include="source\GamePlayState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\GameStateManager.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameStates.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\MainMenuState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
@@ -309,9 +303,6 @@
       <Filter>GameStates\h</Filter>
     </ClInclude>
     <ClInclude Include="source\GamePlayState.h">
-      <Filter>GameStates\h</Filter>
-    </ClInclude>
-    <ClInclude Include="source\GameStateManager.h">
       <Filter>GameStates\h</Filter>
     </ClInclude>
     <ClInclude Include="source\GameStates.h">
