@@ -8,7 +8,11 @@
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 
+
+
 #include <ctime>
+
+class CGameStates;
 
 
 class CGame
@@ -25,13 +29,15 @@ public:
 		int nWidth, int nHeight,
 		bool bIsWindowed );
 
-	void Run( void );
+	bool Run( void );
 
 	void Terminate( void );
 
 	// Window Accessors:
 	int GetScreenWidth ( void ) const	{	return m_nScreenWidth;	}
 	int GetScreenHeight( void ) const	{	return m_nScreenHeight;	}
+
+	void ChangeState( CGameStates* pState );
 
 private:
 
@@ -57,12 +63,16 @@ private:
 	CSGD_TextureManager*	m_pTM;
 	CSGD_XAudio2*			m_pXA;
 
+	//TODO: Bitmap font.
+
 	// Window Attributes
 	int						m_nScreenWidth;
 	int						m_nScreenHeight;
 	bool					m_bIsWindowed;
 
 	// Current Game State TODO:
+	CGameStates*				m_pCurrState;
+
 
 	// Current time
 	DWORD					m_dwCurrTime;

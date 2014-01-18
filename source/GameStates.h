@@ -1,15 +1,15 @@
 #pragma once
 class CGameStates
 {
-	CGameStates(void);
-
 	int m_nCursorSelection;
 	int m_nTotalOptions;
 	int m_nBackgroundImg;
 	int m_nBackgroundMusic;
 	int m_nSFXID;
 	int m_nCursorIMG;
+
 public:
+
 	virtual ~CGameStates(void) = 0
 	{
 
@@ -19,8 +19,8 @@ public:
 	virtual void Sleep() = 0;
 
 	virtual bool Input() = 0;
-	virtual void Update() = 0;
-	virtual void Rendeer() = 0;
+	virtual void Update( float fElapsedTime ) = 0;
+	virtual void Render() = 0;
 
 	// ACCESSORS
 	int GetCursorSelection	( void )		{return m_nCursorSelection;}
