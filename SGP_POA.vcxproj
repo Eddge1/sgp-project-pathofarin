@@ -101,8 +101,6 @@
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameOverState.cpp" />
     <ClCompile Include="source\GamePlayState.cpp" />
-    <ClCompile Include="source\GameStateManager.cpp" />
-    <ClCompile Include="source\GameStates.cpp" />
     <ClCompile Include="source\Item.cpp" />
     <ClCompile Include="source\Layer.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
@@ -163,7 +161,6 @@
     <ClInclude Include="source\Game.h" />
     <ClInclude Include="source\GameOverState.h" />
     <ClInclude Include="source\GamePlayState.h" />
-    <ClInclude Include="source\GameStateManager.h" />
     <ClInclude Include="source\GameStates.h" />
     <ClInclude Include="source\Item.h" />
     <ClInclude Include="source\Layer.h" />
