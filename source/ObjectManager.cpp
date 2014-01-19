@@ -7,6 +7,11 @@ CObjectManager::CObjectManager(void)
 	m_bIterating = false;
 }
 
+CObjectManager* CObjectManager::GetInstance()
+{
+	static CObjectManager s_Instance;
+	return &s_Instance;
+}
 
 CObjectManager::~CObjectManager(void)
 {

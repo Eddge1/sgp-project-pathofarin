@@ -1,6 +1,5 @@
 #include "Objects.h"
 
-
 CObjects::CObjects(void)
 {
 	m_eType = OBJ_UNDEFINE;
@@ -17,7 +16,6 @@ CObjects::~CObjects(void)
 
 void CObjects::Update(float fElapsedTime)
 {
-
 }
 
 void CObjects::Release()
