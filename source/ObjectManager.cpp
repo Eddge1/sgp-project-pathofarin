@@ -31,7 +31,7 @@ void CObjectManager::Update(float fElapsedTime)
 
 void CObjectManager::Render(int nLayer)
 {
-	if(nLayer > m_vObjects.size())
+	if(nLayer > m_vObjects.size() - 1)
 		return;
 
 	ObjectVector temp = m_vObjects[nLayer];

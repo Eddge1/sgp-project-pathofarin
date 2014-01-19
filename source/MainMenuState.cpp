@@ -6,6 +6,7 @@
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 
 #include "ProfileMenuState.h"
+#include "GamePlayState.h"
 #include "Game.h"
 
 CMainMenuState* CMainMenuState::GetInstance( void )
@@ -61,6 +62,6 @@ bool CMainMenuState::Input(void)
 		return false;
 
 	if(pDI->KeyPressed(DIK_1))
-		CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance());
+		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 	return true;
 }

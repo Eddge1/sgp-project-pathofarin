@@ -29,7 +29,6 @@ CGamePlayState* CGamePlayState::GetInstance( void )
 CGamePlayState::CGamePlayState(void)
 {
 	m_pES = nullptr;
-	m_pOM = nullptr;
 	m_pRM = nullptr;
 
 	m_pPlayer = nullptr;
@@ -50,25 +49,29 @@ void CGamePlayState::Activate(void)
 	// SGD Wrapper singletons initialized in CGame
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_XAudio2*			pXA	= CSGD_XAudio2::GetInstance();
+	CObjectManager*			pOM = CObjectManager::GetInstance();
+
 
 	m_pES = CSGD_EventSystem::GetInstance();
-	m_pOM = new CObjectManager;
 	m_pRM = new CRenderManager;
 
 	WorldHeight = CGame::GetInstance()->GetScreenHeight();
 	WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
+	m_pPlayer = CreatePlayer();
+
+
 	WorldCamX =  m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2);
 	WorldCamY =  m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2);
 
-	m_pPlayer = CreatePlayer();
 
-	m_pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
+	pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
 
 }
 
 void CGamePlayState::Sleep(void)
 {
+	CObjectManager* pOM = CObjectManager::GetInstance();
 	// Clear the event system
 	if( m_pES != nullptr )
 	{
@@ -76,14 +79,7 @@ void CGamePlayState::Sleep(void)
 		m_pES = nullptr;
 	}
 
-	if( m_pOM != nullptr)
-	{
-		m_pOM->RemoveAll();
-		delete m_pOM;
-		m_pOM = nullptr;
-	}
-
-
+	pOM->RemoveAll();
 	m_pPlayer->Release();
 }
 
@@ -143,6 +139,8 @@ bool CGamePlayState::Input(void)
 
 void CGamePlayState::Update( float fElapsedTime )
 {
+	CObjectManager* pOM = CObjectManager::GetInstance();
+
 	if(bisPaused == false)
 	{
 		WorldCamX = m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2);
@@ -161,7 +159,7 @@ void CGamePlayState::Update( float fElapsedTime )
 
 
 
-		m_pOM->Update(fElapsedTime);
+		pOM->Update(fElapsedTime);
 		m_pES->ProcessEvents();
 
 	}
@@ -171,15 +169,16 @@ void CGamePlayState::Update( float fElapsedTime )
 
 void CGamePlayState::Render(void)
 {
-	//m_pRM->Render();
 
-	RECT player = { m_pPlayer->GetPosX(), m_pPlayer->GetPosY()
-		, m_pPlayer->GetPosX() + 50, m_pPlayer->GetPosY() + 50 };
-	CSGD_Direct3D::GetInstance()->DrawRect( player, D3DCOLOR_XRGB( 120,255,120 ) );
+
 
 	RECT temp = { 0, 0, WorldHeight, WorldWidth };
 	OffsetRect(&temp, -WorldCamX, -WorldCamY);
 	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
+
+	m_pRM->Render();
+
+
 }
 
 CPlayer* CGamePlayState::CreatePlayer()

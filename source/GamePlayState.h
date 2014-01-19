@@ -51,7 +51,6 @@ private:
 
 	// Systems initialized by CGamePlayState
 	CSGD_EventSystem*		m_pES;
-	CObjectManager*			m_pOM;
 	CRenderManager*			m_pRM;
 
 	// Game Entities
