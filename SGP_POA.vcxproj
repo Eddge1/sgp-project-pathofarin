@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_Direct3D.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_DirectInput.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_EventSystem.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="TinyXML\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BitmapFont.h" />
     <ClInclude Include="SGD Wrappers\CEvent.h" />
     <ClInclude Include="SGD Wrappers\CSGD_Direct3D.h" />
     <ClInclude Include="SGD Wrappers\CSGD_DirectInput.h" />
