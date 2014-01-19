@@ -23,6 +23,6 @@ void CObjects::Release()
 	if(m_unRef > 0)
 		m_unRef--;
 
-	if(m_unRef < 1)
+	if(m_unRef == 0)
 		delete this;
 }

@@ -61,8 +61,8 @@ void CGamePlayState::Activate(void)
 	m_pPlayer = CreatePlayer();
 
 
-	WorldCamX =  m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2);
-	WorldCamY =  m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2);
+	WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+	WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 
 	pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
@@ -79,8 +79,11 @@ void CGamePlayState::Sleep(void)
 		m_pES = nullptr;
 	}
 
-	pOM->RemoveAll();
+	delete m_pRM;
+	m_pRM = nullptr;
 	m_pPlayer->Release();
+
+	pOM->RemoveAll();
 }
 
 bool CGamePlayState::Input(void)
@@ -130,10 +133,6 @@ bool CGamePlayState::Input(void)
 		}
 	}
 
-
-
-
-
 	return true;
 }
 
@@ -143,8 +142,8 @@ void CGamePlayState::Update( float fElapsedTime )
 
 	if(bisPaused == false)
 	{
-		WorldCamX = m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2);
-		WorldCamY = m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2);
+		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 
 		if(WorldCamX < 0)
@@ -157,8 +156,6 @@ void CGamePlayState::Update( float fElapsedTime )
 		else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
 			WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
-
-
 		pOM->Update(fElapsedTime);
 		m_pES->ProcessEvents();
 
@@ -169,16 +166,11 @@ void CGamePlayState::Update( float fElapsedTime )
 
 void CGamePlayState::Render(void)
 {
-
-
-
 	RECT temp = { 0, 0, WorldHeight, WorldWidth };
 	OffsetRect(&temp, -WorldCamX, -WorldCamY);
 	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
 
 	m_pRM->Render();
-
-
 }
 
 CPlayer* CGamePlayState::CreatePlayer()

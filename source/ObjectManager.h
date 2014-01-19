@@ -22,7 +22,7 @@ public:
 	static CObjectManager* GetInstance();
 
 	void Update(float fElapsedTime);
-	void Render(int nLayer);
+	void Render(unsigned int nLayer);
 	void AddObject(CObjects* pObject, unsigned int unLayer);
 	void RemoveObject(CObjects* pObject);
 
