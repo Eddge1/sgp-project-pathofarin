@@ -7,6 +7,11 @@ CObjectManager::CObjectManager(void)
 	m_bIterating = false;
 }
 
+CObjectManager* CObjectManager::GetInstance()
+{
+	static CObjectManager s_Instance;
+	return &s_Instance;
+}
 
 CObjectManager::~CObjectManager(void)
 {
@@ -24,23 +29,26 @@ void CObjectManager::Update(float fElapsedTime)
 	}
 }
 
-void CObjectManager::Render(int nLayer)
+void CObjectManager::Render(unsigned int nLayer)
 {
+	if(nLayer > m_vObjects.size() - 1)
+		return;
+
 	ObjectVector temp = m_vObjects[nLayer];
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
 		RECT rTemp = {long(temp[i]->GetPosX()), long(temp[i]->GetPosY()), long(temp[i]->GetPosX() + 10), long(temp[i]->GetPosY() + 10)};
-		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
+		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 	}
 }
 void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 {
 	if(unLayer > m_vObjects.size())
 		m_vObjects.resize(unLayer + 1);
-
+	
 	m_vObjects[unLayer].push_back( pObject );
-
+	pObject->AddRef();
 }
 void CObjectManager::RemoveObject(CObjects* pObject)
 {
@@ -51,6 +59,7 @@ void CObjectManager::RemoveObject(CObjects* pObject)
 		{
 			if(temp[j] == pObject)
 			{
+				temp[j]->Release();
 				temp.erase(temp.begin() + j);
 				return;
 			}
@@ -69,6 +78,7 @@ void CObjectManager::RemoveAll()
 		ObjectVector temp = m_vObjects[i];
 		for(int j = temp.size() - 1; j >= 0; j--)
 		{
+				temp[j]->Release();
 				temp.erase(temp.begin() + j);
 		}
 	}

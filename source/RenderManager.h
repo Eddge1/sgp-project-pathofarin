@@ -1,8 +1,12 @@
 #pragma once
+
 class CRenderManager
 {
+
 public:
 	CRenderManager(void);
-	~CRenderManager(void);
+	virtual ~CRenderManager(void);
+
+	virtual void Render();
 };
 
