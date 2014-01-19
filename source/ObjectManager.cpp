@@ -7,6 +7,11 @@ CObjectManager::CObjectManager(void)
 	m_bIterating = false;
 }
 
+CObjectManager* CObjectManager::GetInstance()
+{
+	static CObjectManager s_Instance;
+	return &s_Instance;
+}
 
 CObjectManager::~CObjectManager(void)
 {
@@ -26,6 +31,9 @@ void CObjectManager::Update(float fElapsedTime)
 
 void CObjectManager::Render(int nLayer)
 {
+	if(nLayer > m_vObjects.size())
+		return;
+
 	ObjectVector temp = m_vObjects[nLayer];
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	for(unsigned int i = 0; i < temp.size(); i++)

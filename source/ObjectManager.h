@@ -6,6 +6,8 @@ class CAnimationSystem;
 
 class CObjectManager
 {
+	CObjectManager(void);
+
 	typedef std::vector< CObjects* >	ObjectVector;
 	typedef ObjectVector::iterator		ObjIterator;
 	typedef std::vector< ObjectVector >	ObjectTable;
@@ -16,8 +18,8 @@ class CObjectManager
 
 public:
 
-	CObjectManager(void);
 	~CObjectManager(void);
+	static CObjectManager* GetInstance();
 
 	void Update(float fElapsedTime);
 	void Render(int nLayer);

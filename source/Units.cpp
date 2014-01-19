@@ -3,7 +3,10 @@
 
 CUnits::CUnits(void)
 {
-
+	SetType(OBJECT_UNIT);
+	m_nLevel = 0;
+	m_nHealth = m_nMaxHealth = 100;
+	m_nAbilityPoints = m_nMaxAbilityPoints = 100;
 }
 
 
@@ -39,11 +42,4 @@ void CUnits::ModifyAP(int nAmount)
 }
 
 void CUnits::Update(float fElapsedTime)
-{
-	if(m_bTurn)
-	{
-
-
-
-	}
-}
+{ }
