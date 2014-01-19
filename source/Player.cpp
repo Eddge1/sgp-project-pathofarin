@@ -19,12 +19,11 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(pDI->KeyDown( DIK_A ) == true )
 	{
-		SetVelX(-500);
+		SetVelX(-100);
 	}
 	else if(pDI->KeyDown( DIK_D ) == true )
 	{
-
-		SetVelX(500);
+		SetVelX(100);
 	}
 	else
 		SetVelX( GetVelX() - (GetVelX() * 0.005f));
@@ -32,11 +31,11 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(pDI->KeyDown( DIK_W ) == true)
 	{
-		SetVelY(-500);
+		SetVelY(-100);
 	}
 
 	else if(pDI->KeyDown( DIK_S ) == true )
-		SetVelY(500);
+		SetVelY(100);
 
 	CEntity::Update(fElapsedTime);
 }
