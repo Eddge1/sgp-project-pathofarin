@@ -147,15 +147,15 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamY = m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2);
 
 
-		if(WorldCamX < 0)
-			WorldCamX = 0;
-		else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
-			WorldCamX = CGame::GetInstance()->GetScreenWidth();
+		//if(WorldCamX < 0)
+		//	WorldCamX = 0;
+		//else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
+		//	WorldCamX = CGame::GetInstance()->GetScreenWidth();
 
-		if(WorldCamY < 0)
-			WorldCamY = 0;
-		else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
-			WorldCamY = CGame::GetInstance()->GetScreenHeight();
+		//if(WorldCamY < 0)
+		//	WorldCamY = 0;
+		//else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
+		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 
 
@@ -176,6 +176,11 @@ void CGamePlayState::Render(void)
 	OffsetRect(&temp, -WorldCamX, -WorldCamY);
 	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
 
+	//RECT player = { m_pPlayer->GetPosX(), m_pPlayer->GetPosY(),  m_pPlayer->GetPosX() + 20, m_pPlayer->GetPosY() + 20};
+	//CSGD_Direct3D::GetInstance()->DrawRect( player, D3DCOLOR_XRGB( 0,0,0 ) );
+
+
+
 	m_pRM->Render();
 
 
@@ -184,8 +189,10 @@ void CGamePlayState::Render(void)
 CPlayer* CGamePlayState::CreatePlayer()
 {
 	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
-	temp->SetPosX(50);
-	temp->SetPosY(50);
+	temp->SetPosX(50.0f);
+	temp->SetPosY(50.0f);
+	temp->SetVelX(0.0f);
+	temp->SetVelY(0.0f);
 	return temp;
 }
 

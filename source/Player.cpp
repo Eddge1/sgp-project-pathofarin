@@ -14,42 +14,29 @@ void CPlayer::Update(float fElapsedTime)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 
+	SetVelX(0);
+	SetVelY(0);
 
 	if(pDI->KeyDown( DIK_A ) == true )
 	{
-		if(GetVelX() > 0 )
-		{
-			SetVelX(GetVelX() - 2 * fElapsedTime);
-		}
-		else
-		{
-			SetVelX(GetVelX() - 0.3 * fElapsedTime);
-
-		}
+		SetVelX(-500);
 	}
 	else if(pDI->KeyDown( DIK_D ) == true )
 	{
-		if(GetVelX() < 0 )
-		{
-			SetVelX(GetVelX() + 2 * fElapsedTime);
-		}
-		else
-		{
-			SetVelX(GetVelX() + 0.3 * fElapsedTime);
-		}
 
+		SetVelX(500);
 	}
 	else
 		SetVelX( GetVelX() - (GetVelX() * 0.005));
 
 
-	if(pDI->KeyPressed( DIK_W ) == true)
+	if(pDI->KeyDown( DIK_W ) == true)
 	{
-		SetVelY(GetVelY() - 0.70);
+		SetVelY(-500);
 	}
 
 	else if(pDI->KeyDown( DIK_S ) == true )
-		SetVelY(GetVelY() + 5 * fElapsedTime);
+		SetVelY(500);
 
 	CEntity::Update(fElapsedTime);
 }
