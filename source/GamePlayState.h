@@ -37,6 +37,7 @@ public:
 
 	CPlayer* CreatePlayer();
 
+	
 
 private:
 
