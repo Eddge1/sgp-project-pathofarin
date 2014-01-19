@@ -19,7 +19,7 @@ class CObjectManager
 public:
 
 	~CObjectManager(void);
-	CObjectManager* GetInstance();
+	static CObjectManager* GetInstance();
 
 	void Update(float fElapsedTime);
 	void Render(int nLayer);
