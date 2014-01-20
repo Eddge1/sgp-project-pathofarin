@@ -68,7 +68,7 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 
 	// Initialize the wrappers
 	m_pD3D->Initialize( hWnd, m_nScreenWidth, m_nScreenHeight, m_bIsWindowed, false );
-	m_pDI->Initialize( hWnd, hInstance, DI_KEYBOARD /*| DI_MOUSE | DI_JOYSTICKS*/ );
+	m_pDI->Initialize( hWnd, hInstance, DI_KEYBOARD /*| DI_MOUSE*/ | DI_JOYSTICKS );
 	m_pTM->Initialize( m_pD3D->GetDirect3DDevice(),	m_pD3D->GetSprite() );
 	m_pXA->Initialize();
 
