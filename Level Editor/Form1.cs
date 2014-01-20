@@ -22,21 +22,21 @@ namespace SGP_PoA_LevelEditor
         Size TileSize = new Size(64, 64);
         Size TileSet = new Size(4, 4);
         Size MouseLoc = new Size(0, 0);
+        Point tileSelected = new Point(0, 0);
 
         int imageID = -1;
-        int tileSelected = 0;
-        int TotalTiles = 25;
         int TotalLayers = 1;
 
         struct myLayers
         {
-            List<int> myTiles;
+            Point[,] myTiles;
 
-            public List<int> MyTiles
+            public Point[,] MyTiles
             {
                 get { return myTiles; }
                 set { myTiles = value; }
             }
+
         };
 
 
@@ -70,32 +70,42 @@ namespace SGP_PoA_LevelEditor
 
         public new void Update()
         {
-            if (nudTileWidth.Value < 1)
-                nudTileWidth.Value = 1;
-            if (nudTileHeight.Value < 1)
-                nudTileHeight.Value = 1;
-
             if (nudTileWidth.Value == 1 && nudTileHeight.Value == 1)
                 nudTileHeight.Value = 8;
-            TileSize.Width = Convert.ToInt32(nudTileWidth.Value);
-            TileSize.Height = Convert.ToInt32(nudTileHeight.Value);
-            
-            TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
-            TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
+
+            if (TileSet.Width != Convert.ToInt32(nudTileWidth.Value))
+            {
+                TileSize.Width = Convert.ToInt32(nudTileWidth.Value);
+                TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
+            }
+            if (TileSet.Height != Convert.ToInt32(nudTileHeight.Value))
+            {
+                TileSize.Height = Convert.ToInt32(nudTileHeight.Value);
+                TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
+            }
 
             if (nudLayer.Value < 1)
                 nudLayer.Value = 1;
 
             if (nudLayer.Value > TotalLayers)
             {
-                tempLayer.MyTiles = new List<int>();
-                for (int i = 0; i < TotalTiles; i++)
-                    tempLayer.MyTiles.Add(0);
+                tempLayer.MyTiles = new Point[MapSize.Width, MapSize.Height];
+
+                /////////////////////////////////////////////////////////////
 
                 currMap.TheWorld.Add(tempLayer);
                 TotalLayers = currMap.TheWorld.Count;
             }
 
+
+            if (MapSize.Width != Convert.ToInt32(nudMapWidth.Value))
+            {
+                ///////////////////////////////////////////////////////
+            }
+            else if (MapSize.Height != Convert.ToInt32(nudMapWidth.Value))
+            {
+                ////////////////////////////////////////////////////////
+            }
         }
 
         public void Render()
@@ -106,13 +116,18 @@ namespace SGP_PoA_LevelEditor
 
             for (int nLayer = 0; nLayer < nudLayer.Value; nLayer++)
             {
-                for (int i = 0; i < TotalTiles; i++)
+                for (int y = 0; y < MapSize.Height; y++)
                 {
-                    TM.Draw(imageID, (i % MapSize.Width) * TileSize.Width, (i / MapSize.Height) * TileSize.Height, 1, 1, new Rectangle(((currMap.TheWorld[nLayer].MyTiles[i] % TileSet.Width) * TileSize.Width), ((currMap.TheWorld[nLayer].MyTiles[i] / TileSet.Width) * TileSize.Height), TileSize.Width, TileSize.Height), 0, 0, 0);
+                    for (int x = 0; x < MapSize.Width; x++)
+                    {
+                        TM.Draw(imageID, x * TileSize.Width, y * TileSize.Height, 1, 1,
+                            new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width,(currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
+                            TileSize.Width, TileSize.Height));
+                    }
                 }
             }
 
-            TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(((tileSelected % TileSet.Width) * TileSize.Width), ((tileSelected / TileSet.Width) * TileSize.Height), TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
+            TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width, tileSelected.Y * TileSize.Height, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
 
             if (ShowGrid)
             {
@@ -147,24 +162,12 @@ namespace SGP_PoA_LevelEditor
             DX.SpriteEnd();
             DX.DeviceEnd();
             DX.Present();
-
-            DX.Clear(panel3, Color.Black);
-            DX.DeviceBegin();
-            DX.SpriteBegin();
-
-            TM.Draw(imageID, 0, 0, (panel3.Size.Width / TileSize.Width), (panel3.Size.Height / TileSize.Height), new Rectangle(((tileSelected % TileSet.Width) * TileSize.Width), ((tileSelected / TileSet.Width) * TileSize.Height), TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 255, 255));
-
-            DX.SpriteEnd();
-            DX.DeviceEnd();
-            DX.Present();
-
         }
 
         public void Initialize()
         {
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
-            DX.AddRenderTarget(panel3);
 
             TM.Initialize(DX.Device, DX.Sprite);
             imageID = TM.LoadTexture("Assets/Graphics/ScA_WorldTileset.PNG", Color.Magenta);
@@ -173,10 +176,7 @@ namespace SGP_PoA_LevelEditor
             TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
 
             currMap.TheWorld = new List<myLayers>();
-            tempLayer.MyTiles = new List<int>();
-
-            for (int i = 0; i < TotalTiles; i++)
-                tempLayer.MyTiles.Add(0);
+            tempLayer.MyTiles = new Point[MapSize.Width, MapSize.Height];
 
             currMap.TheWorld.Add(tempLayer);
 
@@ -185,6 +185,9 @@ namespace SGP_PoA_LevelEditor
             nudTileHeight.Value = TileSize.Height;
             nudTileWidth.Value = TileSize.Width;
             nudLayer.Value = TotalLayers;
+
+            nudMapHeight.Value = MapSize.Height;
+            nudMapWidth.Value = MapSize.Width;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -199,7 +202,9 @@ namespace SGP_PoA_LevelEditor
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            tileSelected = ((e.Y - panel1.AutoScrollPosition.Y) / TileSize.Height) * TileSet.Width + ((e.X - panel1.AutoScrollPosition.X) / TileSize.Width);
+            int nTempX = (e.X - panel1.AutoScrollPosition.X) / TileSize.Width;
+            int nTempY = ((e.Y - panel1.AutoScrollPosition.Y) / TileSize.Height);
+            tileSelected = new Point(nTempX, nTempY);
         }
 
         private void loadTilesetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,9 +216,8 @@ namespace SGP_PoA_LevelEditor
         {
             if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height)
             {
-                int nTemp = ((e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height) * MapSize.Width + ((e.X - panel2.AutoScrollPosition.X) / TileSize.Width);
-                if (nTemp >= 0 && nTemp < TotalTiles)
-                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[nTemp] = tileSelected;
+                Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = tileSelected;
             }
         }
 
@@ -225,9 +229,11 @@ namespace SGP_PoA_LevelEditor
             {
                 if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height)
                 {
-                    int nTemp = ((e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height) * MapSize.Width + ((e.X - panel2.AutoScrollPosition.X) / TileSize.Width);
-                    if (nTemp >= 0 && nTemp < TotalTiles)
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[nTemp] = tileSelected;
+                    int nTempX = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
+                    int nTempY = ((e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+
+                    if (nTempX >= 0 && nTempY >= 0 && nTempX < MapSize.Width && nTempY < MapSize.Height)
+                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[nTempX, nTempY] = tileSelected;
                 }
             }
         }
