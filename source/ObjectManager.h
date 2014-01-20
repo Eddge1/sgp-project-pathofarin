@@ -25,7 +25,8 @@ public:
 	void Render(unsigned int nLayer);
 	void AddObject(CObjects* pObject, unsigned int unLayer);
 	void RemoveObject(CObjects* pObject);
-
+	void HandleCollision(unsigned int unLayer1, unsigned int unLayer2);
 	void RemoveAll();
+
 };
 
