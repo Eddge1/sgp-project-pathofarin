@@ -2,29 +2,8 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#include <string>
 
-class CBitmapFont
-{
-public:
-	CBitmapFont(void);
-	~CBitmapFont(void);
-
-	//Initialize and Shutdown
-	void Initialize(int nID);
-	void Shutdown();
-
-	//Parse XML to load font
-	bool FontParser();
-	//Draw Text
-	void Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWORD dwColor) const;
-
-private:
-
-	int m_nImageID;
-
-
-
-};
 
 struct CharDescriptor
 {
@@ -45,3 +24,27 @@ struct CharSet
 	int m_nPages;
 	CharDescriptor Chars[256];
 };
+
+class CBitmapFont
+{
+public:
+	CBitmapFont(void);
+	~CBitmapFont(void);
+
+	//Initialize and Shutdown
+	void Initialize(int nID);
+	void Shutdown();
+
+	//Parse XML to load font
+	CharSet FontParser(std::string fileName);
+	//Draw Text
+	void Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWORD dwColor) const;
+
+private:
+
+	int m_nImageID;
+
+
+
+};
+

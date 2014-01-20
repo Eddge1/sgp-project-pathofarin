@@ -37,17 +37,19 @@ void CBitmapFont::Shutdown()
 
 }
 
-bool CBitmapFont::FontParser()
+CharSet CBitmapFont::FontParser(std::string filePath)
 {
+	CharSet set;
+
 	TiXmlDocument doc;
-	if (doc.LoadFile("assets/Fonts/test.fnt") == false)
-		return false;
+	if (doc.LoadFile(filePath.c_str()) == false)
+		return set;
 
 	TiXmlElement *pRoot = doc.RootElement();
 	if (pRoot == nullptr)
-		return false;
+		return set;
 
-	CharSet set;
+	
 
 	TiXmlElement *pFont = pRoot->FirstChildElement("common");
 	if (pFont != nullptr)
@@ -81,5 +83,5 @@ bool CBitmapFont::FontParser()
 		pFont->Attribute("page", &set.Chars[charID].m_nPage);
 	}
 
-	return true;
+	return set;
 }
