@@ -13,19 +13,20 @@ public:
 	CObjects(void);
 	virtual ~CObjects(void);
 	
-	float GetPosX	(void)					{return m_fPosX;}
-	float GetPosY	(void)					{return m_fPosY;}
+	float GetPosX	(void)									{return m_fPosX;}
+	float GetPosY	(void)									{return m_fPosY;}
 
-	void SetPosX	(float fPos)			{m_fPosX = fPos;}
-	void SetPosY	(float fPos)			{m_fPosY = fPos;}
+	void SetPosX	(float fPos)							{m_fPosX = fPos;}
+	void SetPosY	(float fPos)							{m_fPosY = fPos;}
 
-	virtual ObjectType GetType(void) final	{return m_eType;}
-	virtual void AddRef() final				{m_unRef++;}
+	virtual ObjectType GetType(void)	final				{return m_eType;}
+	virtual void AddRef()				final				{m_unRef++;}
 
 
 	virtual void Release() final;
-	void SetType(ObjectType eType)					{m_eType = eType;}
+	void SetType(ObjectType eType)							{m_eType = eType;}
 
 	virtual void Update(float fElapsedTime);
+	virtual void HandleCollision(CObjects* col);
 };
 

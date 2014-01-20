@@ -26,3 +26,10 @@ void CObjects::Release()
 	if(m_unRef == 0)
 		delete this;
 }
+
+void CObjects::HandleCollision(CObjects* col)
+{
+
+
+}
+

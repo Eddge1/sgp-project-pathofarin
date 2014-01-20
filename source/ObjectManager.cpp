@@ -46,7 +46,7 @@ void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 {
 	if(unLayer > m_vObjects.size())
 		m_vObjects.resize(unLayer + 1);
-	
+
 	m_vObjects[unLayer].push_back( pObject );
 	pObject->AddRef();
 }
@@ -78,12 +78,43 @@ void CObjectManager::RemoveAll()
 		ObjectVector temp = m_vObjects[i];
 		for(int j = temp.size() - 1; j >= 0; j--)
 		{
-				temp[j]->Release();
-				temp.erase(temp.begin() + j);
+			temp[j]->Release();
+			temp.erase(temp.begin() + j);
 		}
 	}
 
 	m_vObjects.clear();
+
+	m_bIterating = false;
+
+}
+
+void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer2)
+{
+	if(unLayer1 > m_vObjects.size() -1 || unLayer2 > m_vObjects.size() - 1)
+		return;
+	m_bIterating = true;
+
+	ObjectVector Collision1 = m_vObjects[unLayer1];
+	ObjectVector Collision2 = m_vObjects[unLayer2];
+
+	for(unsigned int i = 0; i < Collision1.size(); i++)
+	{
+		for(unsigned int j = 0; j < Collision2.size(); j++)
+		{
+			/*Temp to show Collision works*/
+			RECT rTemp1 = {long(Collision1[i]->GetPosX()), long(Collision1[i]->GetPosY()),long( Collision1[i]->GetPosX()+ 10), long(Collision1[i]->GetPosY() + 10)};
+			RECT rTemp2 = {long(Collision2[j]->GetPosX()), long(Collision2[j]->GetPosY()),long( Collision2[j]->GetPosX()+ 10), long(Collision2[j]->GetPosY() + 10)};
+			RECT rTempReturn = {};
+			if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
+			{
+				return;
+
+			}
+			/*Temp to show Collision works*/
+		}
+	}
+
 
 	m_bIterating = false;
 

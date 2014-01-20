@@ -64,7 +64,6 @@ void CGamePlayState::Activate(void)
 	WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 	WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-
 	pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
 
 }
@@ -157,6 +156,7 @@ void CGamePlayState::Update( float fElapsedTime )
 		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 		pOM->Update(fElapsedTime);
+		pOM->HandleCollision(5,5);
 		m_pES->ProcessEvents();
 
 	}
@@ -169,11 +169,6 @@ void CGamePlayState::Render(void)
 	RECT temp = { 0, 0, WorldHeight, WorldWidth };
 	OffsetRect(&temp, -WorldCamX, -WorldCamY);
 	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
-
-	//RECT player = { m_pPlayer->GetPosX(), m_pPlayer->GetPosY(),  m_pPlayer->GetPosX() + 20, m_pPlayer->GetPosY() + 20};
-	//CSGD_Direct3D::GetInstance()->DrawRect( player, D3DCOLOR_XRGB( 0,0,0 ) );
-
-
 
 	m_pRM->Render();
 }

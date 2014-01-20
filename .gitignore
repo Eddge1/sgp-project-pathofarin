@@ -2,6 +2,13 @@
 *.opensdf
 *.suo
 *.user
+*.pdb
 /Debug
 /Release
 /ipch
+/Level Editor/*.exe
+/Level Editor/SGP_PoA_LevelEditor.exe.config
+/Level Editor/obj/Debug
+/Level Editor/Assets/SGP_PoA_LevelEditor.exe.config
+/Level Editor/Assets/SGP_PoA_LevelEditor.vshost.exe.config
+/Level Editor/*.manifest

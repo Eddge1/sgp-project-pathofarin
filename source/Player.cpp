@@ -13,7 +13,7 @@ CPlayer::~CPlayer(void)
 void CPlayer::Update(float fElapsedTime)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	
+
 	SetVelX(0);
 	SetVelY(0);
 
@@ -38,4 +38,14 @@ void CPlayer::Update(float fElapsedTime)
 		SetVelY(100);
 
 	CEntity::Update(fElapsedTime);
+}
+
+void CPlayer::HandleCollision(CObjects* col)
+{
+	if(col->GetType() == OBJ_UNDEFINE)
+	{
+
+
+
+	}
 }
