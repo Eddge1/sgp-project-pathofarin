@@ -48,10 +48,10 @@ void CMainMenuState::Update(float fElapsedTime)
 void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-
-	pD3D->DrawText(_T("This is the Main Menu"), 15,15, D3DCOLOR_XRGB(0,0,0));
-	pD3D->DrawText(_T("Hit 1 to change to a new State"), 15,35, D3DCOLOR_XRGB(0,0,0));
-
+	CBitmapFont* pFont = CGame::GetInstance()->GetFont();
+	//pD3D->DrawText(_T("This is the Main Menu"), 15,15, D3DCOLOR_XRGB(0,0,0));
+	//pD3D->DrawText(_T("Hit 1 to change to a new State"), 15,35, D3DCOLOR_XRGB(0,0,0));
+	pFont->Draw(_T("This is the Main Menu\nHit 1 to change to a new State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 }
 
 bool CMainMenuState::Input(void)

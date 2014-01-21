@@ -249,7 +249,7 @@
     <ClCompile Include="TinyXML\tinystr.cpp">
       <Filter>TinyXML</Filter>
     </ClCompile>
-    <ClCompile Include="BitmapFont.cpp">
+    <ClCompile Include="source\BitmapFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -422,7 +422,7 @@
     <ClInclude Include="TinyXML\tinystr.h">
       <Filter>TinyXML</Filter>
     </ClInclude>
-    <ClInclude Include="BitmapFont.h">
+    <ClInclude Include="source\BitmapFont.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

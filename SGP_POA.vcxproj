@@ -76,7 +76,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_Direct3D.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_DirectInput.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_EventSystem.cpp" />
@@ -90,6 +89,7 @@
     <ClCompile Include="source\Armor.cpp" />
     <ClCompile Include="source\BasicAttack.cpp" />
     <ClCompile Include="source\BattleState.cpp" />
+    <ClCompile Include="source\BitmapFont.cpp" />
     <ClCompile Include="source\CharacterMenuState.cpp" />
     <ClCompile Include="source\ChargeCrystal.cpp" />
     <ClCompile Include="source\ComboGame.cpp" />
@@ -134,7 +134,6 @@
     <ClCompile Include="TinyXML\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BitmapFont.h" />
     <ClInclude Include="SGD Wrappers\CEvent.h" />
     <ClInclude Include="SGD Wrappers\CSGD_Direct3D.h" />
     <ClInclude Include="SGD Wrappers\CSGD_DirectInput.h" />
@@ -151,6 +150,7 @@
     <ClInclude Include="source\Armor.h" />
     <ClInclude Include="source\BasicAttack.h" />
     <ClInclude Include="source\BattleState.h" />
+    <ClInclude Include="source\BitmapFont.h" />
     <ClInclude Include="source\CharacterMenuState.h" />
     <ClInclude Include="source\ChargeCrystal.h" />
     <ClInclude Include="source\ComboGame.h" />

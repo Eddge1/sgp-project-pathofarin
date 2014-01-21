@@ -18,6 +18,7 @@ struct CharDescriptor
 
 struct CharSet
 {
+	std::string m_szFileName; 
 	int m_nLineHeight;
 	int m_nBase;
 	int m_nWidth, m_nHeight;
@@ -27,12 +28,16 @@ struct CharSet
 
 class CBitmapFont
 {
+	int m_nImageID;
+	int m_nMaxCharWidth;
+	int m_nMaxCharHeight;
+	CharSet m_Font;
 public:
 	CBitmapFont(void);
 	~CBitmapFont(void);
 
 	//Initialize and Shutdown
-	void Initialize(int nID);
+	void Initialize(std::string filePath);
 	void Shutdown();
 
 	//Parse XML to load font
@@ -40,9 +45,6 @@ public:
 	//Draw Text
 	void Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWORD dwColor) const;
 
-private:
-
-	int m_nImageID;
 
 
 

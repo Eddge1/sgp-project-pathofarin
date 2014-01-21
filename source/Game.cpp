@@ -31,6 +31,8 @@ CGame::CGame(void)
 	m_pTM			= nullptr;
 	m_pXA			= nullptr;
 
+	m_pFont			= nullptr;
+
 	m_nScreenWidth	= 1;
 	m_nScreenHeight	= 1;
 	m_bIsWindowed	= true;
@@ -72,7 +74,8 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_pTM->Initialize( m_pD3D->GetDirect3DDevice(),	m_pD3D->GetSprite() );
 	m_pXA->Initialize();
 
-
+	m_pFont = new CBitmapFont;
+	m_pFont->Initialize("assets/Fonts/test2.fnt");
 
 	// Start in the Main Menu state
 	ChangeState( CMainMenuState::GetInstance() );
@@ -105,6 +108,7 @@ void CGame::Terminate(void)
 	m_pTM->Terminate();
 	m_pDI->Terminate();
 	m_pD3D->Terminate();
+	m_pFont->Shutdown();
 
 	// Reset the data members to null so they cant use them
 	m_pD3D			= nullptr;
@@ -116,6 +120,8 @@ void CGame::Terminate(void)
 	m_nScreenHeight	= 1;
 	m_bIsWindowed	= true;
 
+	delete m_pFont;
+	m_pFont = nullptr;
 }
 
 // Update
