@@ -141,19 +141,19 @@ void CGamePlayState::Update( float fElapsedTime )
 
 	if(bisPaused == false)
 	{
-		WorldCamX = int(m_pPlayer->GetPosX()) - int(CGame::GetInstance()->GetScreenWidth() / 2);
-		WorldCamY = int(m_pPlayer->GetPosY())- int(CGame::GetInstance()->GetScreenHeight() / 2);
-		
+		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-		if(WorldCamX < 0)
-			WorldCamX = 0;
-		else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
-			WorldCamX = CGame::GetInstance()->GetScreenWidth();
 
-		if(WorldCamY < 0)
-			WorldCamY = 0;
-		else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
-			WorldCamY = CGame::GetInstance()->GetScreenHeight();
+		//if(WorldCamX < 0)
+		//	WorldCamX = 0;
+		//else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
+		//	WorldCamX = CGame::GetInstance()->GetScreenWidth();
+
+		//if(WorldCamY < 0)
+		//	WorldCamY = 0;
+		//else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
+		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 		pOM->Update(fElapsedTime);
 		pOM->HandleCollision(5,5);
