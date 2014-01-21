@@ -145,15 +145,15 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 
-		//if(WorldCamX < 0)
-		//	WorldCamX = 0;
-		//else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
-		//	WorldCamX = CGame::GetInstance()->GetScreenWidth();
+		if(WorldCamX < 0)
+			WorldCamX = 0;
+		else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
+			WorldCamX = CGame::GetInstance()->GetScreenWidth();
 
-		//if(WorldCamY < 0)
-		//	WorldCamY = 0;
-		//else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
-		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
+		if(WorldCamY < 0)
+			WorldCamY = 0;
+		else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
+			WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 		pOM->Update(fElapsedTime);
 		pOM->HandleCollision(5,5);
