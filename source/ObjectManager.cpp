@@ -1,5 +1,6 @@
 #include "ObjectManager.h"
 #include "Objects.h"
+#include "GamePlayState.h"
 #include "../SGD Wrappers/CSGD_Direct3D.h"
 
 CObjectManager::CObjectManager(void)
@@ -34,11 +35,17 @@ void CObjectManager::Render(unsigned int nLayer)
 	if(nLayer > m_vObjects.size() - 1)
 		return;
 
+	int WorldCamX = CGamePlayState::GetInstance()->GetWorldCamX();
+	int WorldCamY = CGamePlayState::GetInstance()->GetWorldCamY();
+
+
 	ObjectVector temp = m_vObjects[nLayer];
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
-		RECT rTemp = {long(temp[i]->GetPosX()), long(temp[i]->GetPosY()), long(temp[i]->GetPosX() + 10), long(temp[i]->GetPosY() + 10)};
+		float PosX = temp[i]->GetPosX() - WorldCamX;
+		float PosY = temp[i]->GetPosY() - WorldCamY;
+		RECT rTemp = {long(PosX), long(PosY), long(PosX + 10), long(PosY + 10)};
 		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 	}
 }

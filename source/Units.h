@@ -1,5 +1,7 @@
 #pragma once
 #include "entity.h"
+#include <string>
+using namespace std;
 class CUnits :
 	public CEntity
 {
@@ -18,9 +20,17 @@ class CUnits :
 	//int m_nAvailStats;
 	//std::map<string, CItem> m_mInventory
 
+
+	string m_sName;
+
+
+
 public:
 	CUnits(void);
 	virtual ~CUnits(void);
+
+	string GetName() { return m_sName; }
+	void SetName( string input ) { m_sName = input; }
 
 	void ModifyHealth(int nAmount, bool isCrit);
 	void ModifyAP(int nAmount);
@@ -39,6 +49,7 @@ public:
 
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
+	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
 
 	/*
 	bool incrAttack();

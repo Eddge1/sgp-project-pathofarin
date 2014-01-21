@@ -7,6 +7,7 @@
 
 #include "ProfileMenuState.h"
 #include "GamePlayState.h"
+#include "BattleState.h" // <- TEMP needs to be deleted after testing.
 #include "Game.h"
 
 CMainMenuState* CMainMenuState::GetInstance( void )
@@ -49,13 +50,12 @@ void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	CBitmapFont* pFont = CGame::GetInstance()->GetFont();
-	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
+CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
 
 	//pD3D->DrawText(_T("This is the Main Menu"), 15,15, D3DCOLOR_XRGB(0,0,0));
 	//pD3D->DrawText(_T("Hit 1 to change to a new State"), 15,35, D3DCOLOR_XRGB(0,0,0));
 	pFont->Draw(_T("This is the Main Menu\nHit 1 to change to a new State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-	pFont2->Draw(_T("A quick brown fox jumps over the lazy Dog!?"), 15, 100, 1.0f, D3DCOLOR_XRGB(255, 0, 0));
-}
+	pFont2->Draw(_T("This is the Main Menu\nHit 1 to change to a new State"), 15,100, 1.0f, D3DCOLOR_XRGB(0, 0, 255));}
 
 bool CMainMenuState::Input(void)
 {
@@ -65,6 +65,6 @@ bool CMainMenuState::Input(void)
 		return false;
 
 	if(pDI->KeyPressed(DIK_1))
-		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+		CGame::GetInstance()->ChangeState(CBattleState::GetInstance()); // <-Should be going to gameplay state.
 	return true;
 }
