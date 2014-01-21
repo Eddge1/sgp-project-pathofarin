@@ -7,6 +7,7 @@
 
 #include "ProfileMenuState.h"
 #include "GamePlayState.h"
+#include "BattleState.h" // <- TEMP needs to be deleted after testing.
 #include "Game.h"
 
 CMainMenuState* CMainMenuState::GetInstance( void )
@@ -62,6 +63,6 @@ bool CMainMenuState::Input(void)
 		return false;
 
 	if(pDI->KeyPressed(DIK_1))
-		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+		CGame::GetInstance()->ChangeState(CBattleState::GetInstance()); // <-Should be going to gameplay state.
 	return true;
 }

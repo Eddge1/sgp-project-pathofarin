@@ -1,10 +1,13 @@
 #pragma once
 #include "gamestates.h"
 #include <vector>
+#include <string>
 using namespace std;
 
-
+class CBitmapFont;
 class CUnits;
+class CPlayerUnit;
+class CEnemyUnit;
 
 class CBattleState :
 	public CGameStates
@@ -14,7 +17,14 @@ public:
 
 	static CBattleState* GetInstance( void );
 
+	// Temp player.
 
+
+
+	CPlayerUnit* CreateTempPlayer(void);
+	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed);
+
+	void GetNextTarget(void);
 
 	void Initialize(void);
 	void Battle(void);
@@ -30,10 +40,12 @@ private:
 
 	enum PBattlephase {BP_INIT, BP_BATTLE, BP_END};
 
-	
+	CBitmapFont* m_pFont;
 
 	vector<CUnits*> m_vBattleUnits;
 	vector<CUnits*> m_vDeadUnits;
+
+
 
 
 	PBattlephase m_eCurrentPhase;
