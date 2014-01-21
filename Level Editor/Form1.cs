@@ -21,7 +21,7 @@ namespace SGP_PoA_LevelEditor
         bool ShowGrid = true;
         bool mouseDown = false;
         bool rmouseDown = false;
-        Color cTransparency;
+        Color cTransparency = Color.Magenta;
 
 
         Size MapSize = new Size(5, 5);
@@ -32,6 +32,52 @@ namespace SGP_PoA_LevelEditor
 
         int imageID = -1;
         int TotalLayers = 1;
+        struct myTile
+        {
+            int x;
+            int y;
+            bool isBlocked;
+            bool isEvent;
+            bool isNPC;
+            string szSpecial;
+
+            public int X
+            {
+                get { return x; }
+                set { x = value; }
+            }
+
+            public int Y
+            {
+                get { return y; }
+                set { y = value; }
+            }
+
+            public bool IsBlocked
+            {
+                get { return isBlocked; }
+                set { isBlocked = value; }
+            }
+
+            public bool IsEvent
+            {
+                get { return isEvent; }
+                set { isEvent = value; }
+            }
+
+            public bool IsNPC
+            {
+                get { return isNPC; }
+                set { isNPC = value; }
+            }
+
+            public string SzSpecial
+            {
+                get { return szSpecial; }
+                set { szSpecial = value; }
+            }
+
+        }
 
         struct myLayers
         {
@@ -99,6 +145,7 @@ namespace SGP_PoA_LevelEditor
 
                 currMap.TheWorld.Add(tempLayer);
                 TotalLayers = currMap.TheWorld.Count;
+                label1.Text = "of " + currMap.TheWorld.Count.ToString();
             }
 
 
@@ -123,6 +170,7 @@ namespace SGP_PoA_LevelEditor
                 }
                 MapSize.Width = Convert.ToInt32(nudMapWidth.Value);
                 MapSize.Height = Convert.ToInt32(nudMapHeight.Value);
+                panel2.AutoScrollMinSize = new Size(MapSize.Width * TileSize.Width, MapSize.Height * TileSize.Height);
             }
         }
 
@@ -138,14 +186,16 @@ namespace SGP_PoA_LevelEditor
                 {
                     for (int x = 0; x < MapSize.Width; x++)
                     {
-                        TM.Draw(imageID, x * TileSize.Width, y * TileSize.Height, 1, 1,
-                            new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width, (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
+                        TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
+                            new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width, 
+                                (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
                             TileSize.Width, TileSize.Height));
                     }
                 }
             }
 
-            TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width, tileSelected.Y * TileSize.Height, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
+            if (bMapEdit)
+                TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
 
             if (ShowGrid)
             {
@@ -190,7 +240,7 @@ namespace SGP_PoA_LevelEditor
             DX.AddRenderTarget(panel1);
 
             TM.Initialize(DX.Device, DX.Sprite);
-            imageID = TM.LoadTexture("Assets/Graphics/ScA_WorldTileset.PNG", Color.Magenta);
+            imageID = TM.LoadTexture("Assets/Graphics/ScA_WorldTileset.PNG", cTransparency);
             panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
             TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
             TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
@@ -202,6 +252,8 @@ namespace SGP_PoA_LevelEditor
             currMap.TheWorld.Add(tempLayer);
 
             TotalLayers = currMap.TheWorld.Count;
+
+            label1.Text = "of " + currMap.TheWorld.Count.ToString();
 
             nudTileHeight.Value = TileSize.Height;
             nudTileWidth.Value = TileSize.Width;
@@ -237,47 +289,66 @@ namespace SGP_PoA_LevelEditor
 
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (bMapEdit)
             {
-                if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
-                {
-                    Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = new Point(0, 0);
-                }
-            }
-            else
-                if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height)
+                if (e.Button == MouseButtons.Right)
                 {
                     if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
                     {
                         Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = tileSelected;
+                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = new Point(0, 0);
                     }
                 }
+                else
+                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height)
+                    {
+                        if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                        {
+                            Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+                            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = tileSelected;
+                        }
+                    }
+            }
+            else
+            {
+
+
+
+
+
+            }
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
             MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
             MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height;
-            if (mouseDown)
+            if (bMapEdit)
             {
-                if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                if (mouseDown)
                 {
-                    int nTempX = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
-                    int nTempY = ((e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    {
+                        int nTempX = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
+                        int nTempY = ((e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
 
-                    if (nTempX >= 0 && nTempY >= 0 && nTempX < MapSize.Width && nTempY < MapSize.Height)
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[nTempX, nTempY] = tileSelected;
+                        if (nTempX >= 0 && nTempY >= 0 && nTempX < MapSize.Width && nTempY < MapSize.Height)
+                            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[nTempX, nTempY] = tileSelected;
+                    }
+                }
+                else if (rmouseDown)
+                {
+                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    {
+                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = new Point(0, 0);
+                    }
                 }
             }
-            else if (rmouseDown)
+            else
             {
-                if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
-                {
-                    Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y] = new Point(0, 0);
-                }
+
+
             }
         }
 
@@ -429,7 +500,6 @@ namespace SGP_PoA_LevelEditor
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             Point temp = new Point(e.Location.X, e.Location.Y);
-            label6.Text = temp.ToString();
         }
 
         private void newMapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -460,7 +530,7 @@ namespace SGP_PoA_LevelEditor
                 {
                     IEnumerable<XElement> xTiles = Layers.Elements();
 
-                    foreach(XElement xTile in xTiles)
+                    foreach (XElement xTile in xTiles)
                     {
                         XAttribute xPosX = xTile.Attribute("posX");
                         XAttribute xPosY = xTile.Attribute("posY");
@@ -480,6 +550,13 @@ namespace SGP_PoA_LevelEditor
                 }
                 szFileName = dlg.FileName;
             }
+            label1.Text = "of " + currMap.TheWorld.Count.ToString();
+
+        }
+
+        private void panel1_Resize(object sender, EventArgs e)
+        {
+            DX.Resize(panel1, panel1.ClientSize.Width, panel1.ClientSize.Height, false);
         }
 
     }

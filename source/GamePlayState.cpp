@@ -141,9 +141,9 @@ void CGamePlayState::Update( float fElapsedTime )
 
 	if(bisPaused == false)
 	{
-		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
-		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
+		WorldCamX = int(m_pPlayer->GetPosX()) - int(CGame::GetInstance()->GetScreenWidth() / 2);
+		WorldCamY = int(m_pPlayer->GetPosY())- int(CGame::GetInstance()->GetScreenHeight() / 2);
+		
 
 		//if(WorldCamX < 0)
 		//	WorldCamX = 0;
