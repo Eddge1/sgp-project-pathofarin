@@ -29,7 +29,7 @@ CBattleState::CBattleState(void)
 
 CBattleState::~CBattleState(void)
 {
-	for(int i = 0; i < m_vBattleUnits.size(); i++)
+	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		m_vBattleUnits[i]->Release();
 	
 }
@@ -99,7 +99,7 @@ void CBattleState::Render(void)
 
 
 
-	for(int i = 0; i < m_vBattleUnits.size(); i++)
+	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 	{
 		if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 		{
@@ -111,7 +111,7 @@ void CBattleState::Render(void)
 		}
 
 
-		RECT Player = { m_vBattleUnits[i]->GetPosX(), m_vBattleUnits[i]->GetPosY(), m_vBattleUnits[i]->GetPosX() + 20, m_vBattleUnits[i]->GetPosY() + 20 };
+		RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
 		pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
 
 
@@ -204,7 +204,7 @@ void CBattleState::GetNextTarget(void)
 	do 
 	{
 		m_nTarget++;
-		if(m_nTarget >= m_vBattleUnits.size())
+		if(unsigned int(m_nTarget) >= m_vBattleUnits.size())
 			m_nTarget = 0;
 	}
 	while(m_vBattleUnits[m_nTarget]->GetType() == OBJ_PLAYER_UNIT);
