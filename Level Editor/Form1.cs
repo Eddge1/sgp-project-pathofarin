@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 using SGP;
 
@@ -17,12 +18,13 @@ namespace SGP_PoA_LevelEditor
     {
         bool bMapEdit = true;
         string szFileName;
+        string szRelativePath;
+        string szTileSetName;
         bool looping = true;
         bool ShowGrid = true;
         bool mouseDown = false;
         bool rmouseDown = false;
         Color cTransparency = Color.Magenta;
-
 
         Size MapSize = new Size(5, 5);
         Size TileSize = new Size(64, 64);
@@ -125,16 +127,17 @@ namespace SGP_PoA_LevelEditor
             if (nudTileWidth.Value == 1 && nudTileHeight.Value == 1)
                 nudTileHeight.Value = 8;
 
-            if (TileSet.Width != Convert.ToInt32(nudTileWidth.Value))
+
+            if (imageID != -1)
             {
-                TileSize.Width = Convert.ToInt32(nudTileWidth.Value);
-                TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
+                if (TileSet.Width != Convert.ToInt32(nudTileWidth.Value))
+                    TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
+                if (TileSet.Height != Convert.ToInt32(nudTileHeight.Value))
+                    TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
             }
-            if (TileSet.Height != Convert.ToInt32(nudTileHeight.Value))
-            {
-                TileSize.Height = Convert.ToInt32(nudTileHeight.Value);
-                TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
-            }
+
+            TileSize.Width = Convert.ToInt32(nudTileWidth.Value);
+            TileSize.Height = Convert.ToInt32(nudTileHeight.Value);
 
             if (nudLayer.Value < 1)
                 nudLayer.Value = 1;
@@ -180,23 +183,25 @@ namespace SGP_PoA_LevelEditor
             DX.DeviceBegin();
             DX.SpriteBegin();
 
-            for (int nLayer = 0; nLayer < nudLayer.Value; nLayer++)
+            if (imageID != -1)
             {
-                for (int y = 0; y < MapSize.Height; y++)
+                for (int nLayer = 0; nLayer < nudLayer.Value; nLayer++)
                 {
-                    for (int x = 0; x < MapSize.Width; x++)
+                    for (int y = 0; y < MapSize.Height; y++)
                     {
-                        TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
-                            new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width, 
-                                (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
-                            TileSize.Width, TileSize.Height));
+                        for (int x = 0; x < MapSize.Width; x++)
+                        {
+                            TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
+                                new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width,
+                                    (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
+                                TileSize.Width, TileSize.Height));
+                        }
                     }
                 }
+
+                if (bMapEdit)
+                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
             }
-
-            if (bMapEdit)
-                TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
-
             if (ShowGrid)
             {
                 for (int x = 0; x < MapSize.Width; x++)
@@ -215,8 +220,8 @@ namespace SGP_PoA_LevelEditor
             DX.Clear(panel1, Color.Black);
             DX.DeviceBegin();
             DX.SpriteBegin();
-
-            TM.Draw(imageID, panel1.AutoScrollPosition.X, panel1.AutoScrollPosition.Y, 1, 1, Rectangle.Empty, 0, 0, 0);
+            if (imageID != -1)
+                TM.Draw(imageID, panel1.AutoScrollPosition.X, panel1.AutoScrollPosition.Y, 1, 1, Rectangle.Empty, 0, 0, 0);
 
             if (ShowGrid)
             {
@@ -236,14 +241,21 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
+            szRelativePath = Environment.CurrentDirectory + "\\Assets\\Graphics\\Tilesets\\";
+            szTileSetName = "";
+            szFileName = "";
+
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
 
+            if (imageID != -1)
+                TM.UnloadTexture(imageID);
+
+            imageID = -1;
+
             TM.Initialize(DX.Device, DX.Sprite);
-            imageID = TM.LoadTexture("Assets/Graphics/ScA_WorldTileset.PNG", cTransparency);
-            panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
-            TileSet.Width = TM.GetTextureWidth(imageID) / TileSize.Width;
-            TileSet.Height = TM.GetTextureHeight(imageID) / TileSize.Height;
+
+
 
             currMap.TheWorld = new List<myLayers>();
             tempLayer.MyTiles = new Point[MapSize.Width, MapSize.Height];
@@ -255,13 +267,17 @@ namespace SGP_PoA_LevelEditor
 
             label1.Text = "of " + currMap.TheWorld.Count.ToString();
 
+            TileSize.Height = 32;
+            TileSize.Width = 32;
+
             nudTileHeight.Value = TileSize.Height;
             nudTileWidth.Value = TileSize.Width;
             nudLayer.Value = TotalLayers;
 
+            MapSize = new Size(5, 5);
+
             nudMapHeight.Value = MapSize.Height;
             nudMapWidth.Value = MapSize.Width;
-            szFileName = "";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -269,7 +285,7 @@ namespace SGP_PoA_LevelEditor
             isLooping = false;
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItfem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -279,13 +295,9 @@ namespace SGP_PoA_LevelEditor
             int nTempX = (e.Location.X - panel1.AutoScrollPosition.X) / TileSize.Width;
             int nTempY = (e.Location.Y - panel1.AutoScrollPosition.Y) / TileSize.Height;
             tileSelected = new Point(nTempX, nTempY);
-            label1.Text = tileSelected.ToString();
         }
 
-        private void loadTilesetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
@@ -376,26 +388,7 @@ namespace SGP_PoA_LevelEditor
 
         private void panel1_Scroll(object sender, ScrollEventArgs e)
         {
-            DX.Clear(panel1, Color.Black);
-            DX.DeviceBegin();
-            DX.SpriteBegin();
-
-            TM.Draw(imageID, panel1.AutoScrollPosition.X, panel1.AutoScrollPosition.Y);
-
-            if (ShowGrid)
-            {
-                for (int x = 0; x < TileSet.Width; x++)
-                {
-                    for (int y = 0; y < TileSet.Height; y++)
-                    {
-                        DX.DrawHollowRect(new Rectangle(x * TileSize.Width + panel1.AutoScrollPosition.X, y * TileSize.Height + panel1.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), Color.White, 1);
-                    }
-                }
-            }
-
-            DX.SpriteEnd();
-            DX.DeviceEnd();
-            DX.Present();
+            Render();
         }
 
         private void saveMapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -408,10 +401,16 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xWidth = new XAttribute("Width", MapSize.Width);
                 XAttribute xHeight = new XAttribute("Height", MapSize.Height);
                 XAttribute xTotalLayers = new XAttribute("Layers", currMap.TheWorld.Count);
+                XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
+                XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
+                XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
                 xRoot.Add(xTotalLayers);
+                xRoot.Add(xTileWidth);
+                xRoot.Add(xTileHeight);
+                xRoot.Add(xImageLocation);
 
                 for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
                 {
@@ -459,10 +458,16 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xWidth = new XAttribute("Width", MapSize.Width);
                 XAttribute xHeight = new XAttribute("Height", MapSize.Height);
                 XAttribute xTotalLayers = new XAttribute("Layers", currMap.TheWorld.Count);
+                XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
+                XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
+                XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
                 xRoot.Add(xTotalLayers);
+                xRoot.Add(xTileWidth);
+                xRoot.Add(xTileHeight);
+                xRoot.Add(xImageLocation);
 
                 for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
                 {
@@ -518,14 +523,39 @@ namespace SGP_PoA_LevelEditor
             {
                 XElement xRoot = XElement.Load(dlg.FileName);
                 IEnumerable<XElement> xLayers = xRoot.Elements();
+
                 XAttribute xWidth = xRoot.Attribute("Width");
                 XAttribute xHeight = xRoot.Attribute("Height");
                 XAttribute xTotalLayers = xRoot.Attribute("Layers");
+                XAttribute xTileWidth = xRoot.Attribute("TileWidth");
+                XAttribute xTileHeight = xRoot.Attribute("TileHeight");
+                XAttribute xTileImage = xRoot.Attribute("Image");
+
+                if (xTileImage.Value.ToString() != "")
+                {
+                    szTileSetName = xTileImage.Value.ToString();
+                    imageID = TM.LoadTexture(szRelativePath + szTileSetName);
+                    panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
+                }
+                else
+                {
+                    imageID = -1;
+                    panel1.AutoScrollMinSize = new Size(panel1.ClientSize.Width, panel1.ClientSize.Height);
+                }
 
                 MapSize = new Size(Convert.ToInt32(xWidth.Value), Convert.ToInt32(xHeight.Value));
+                TileSize = new Size(Convert.ToInt32(xTileWidth.Value), Convert.ToInt32(xTileHeight.Value));
+
                 myLayers lTemp = new myLayers();
                 lTemp.MyTiles = new Point[MapSize.Width, MapSize.Height];
                 currMap.TheWorld = new List<myLayers>();
+
+                nudLayer.Value = 1;
+                nudMapHeight.Value = MapSize.Height;
+                nudMapWidth.Value = MapSize.Width;
+                nudTileHeight.Value = TileSize.Height;
+                nudTileWidth.Value = TileSize.Width;
+
                 foreach (XElement Layers in xLayers)
                 {
                     IEnumerable<XElement> xTiles = Layers.Elements();
@@ -551,12 +581,47 @@ namespace SGP_PoA_LevelEditor
                 szFileName = dlg.FileName;
             }
             label1.Text = "of " + currMap.TheWorld.Count.ToString();
-
+            panel2.AutoScrollMinSize = new Size(MapSize.Width * TileSize.Width, MapSize.Height * TileSize.Height);
         }
 
         private void panel1_Resize(object sender, EventArgs e)
         {
             DX.Resize(panel1, panel1.ClientSize.Width, panel1.ClientSize.Height, false);
+        }
+
+        private void panel2_Resize(object sender, EventArgs e)
+        {
+            DX.Resize(panel2, panel2.ClientSize.Width, panel2.ClientSize.Height, false);
+        }
+
+        private void panel2_Scroll(object sender, ScrollEventArgs e)
+        {
+            Render();
+        }
+
+        private void loadTilesetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (imageID != -1)
+                TM.UnloadTexture(imageID);
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "All Files|*.*";
+            dlg.FilterIndex = 2;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+
+                szTileSetName = Path.GetFileName(dlg.FileName);
+                if (!File.Exists(szRelativePath + szTileSetName))
+                    File.Copy(dlg.FileName, szRelativePath + szTileSetName);
+
+                imageID = TM.LoadTexture(szRelativePath + szTileSetName);
+                panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
     }
