@@ -1,7 +1,6 @@
 #pragma once
 #include "minigames.h"
-class CBasicAttack :
-	public CMiniGames
+class CBasicAttack : public CMiniGames
 {
 public:
 	CBasicAttack(void);

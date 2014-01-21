@@ -241,7 +241,7 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
-            szRelativePath = Environment.CurrentDirectory + "\\Assets\\Graphics\\Tilesets\\";
+            szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
 
