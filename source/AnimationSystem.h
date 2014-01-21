@@ -18,6 +18,6 @@ public:
 	//Mutator: 
 	void LoadAnimations(std::string filePath);
 
-	void Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY);
+	void Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
 };
 

@@ -15,5 +15,7 @@ public:
 	std::string GetCurrentAnimation() { return m_szCurrentAnimation; }
 	int GetCurrentFrame() { return m_nCurrFrame; }
 	float GetTimeOnStamp() { return m_fTimeOnStamp; }
+
+	
 };
 

@@ -19,12 +19,16 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 
 }
 
-void CAnimationSystem::Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY)
+void CAnimationSystem::Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor)
 {
-	//Need ImageID
-	//Need Position
-	//Need RenderRect
-	
-	CSGD_TextureManager::GetInstance()->Draw(loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetImageID(), fPosX, fPosY, 1.0f, 1.0f, 
-		&loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetRenderRect());
+	RECT rFrame = loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetRenderRect();
+	int nAnchorX = loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetAnchorX();
+	int nAnchorY = loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetAnchorY();
+
+	CSGD_TextureManager::GetInstance()->Draw(
+		loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetImageID(), 
+		fPosX - (nAnchorX * fScale),
+		fPosY - (nAnchorY * fScale), 
+		fScale, fScale, &rFrame, 
+		0.0f, 0.0f, 0.0f, dwColor);
 }

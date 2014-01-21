@@ -10,3 +10,4 @@ CAnimationTimeStamp::CAnimationTimeStamp(void)
 CAnimationTimeStamp::~CAnimationTimeStamp(void)
 {
 }
+
