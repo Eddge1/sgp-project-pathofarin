@@ -25,13 +25,14 @@ CBattleState* CBattleState::GetInstance( void )
 CBattleState::CBattleState(void)
 {
 	m_nTarget = 0;
+	m_nTurn = 0;
 }
 
 CBattleState::~CBattleState(void)
 {
 	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		m_vBattleUnits[i]->Release();
-	
+
 }
 
 void CBattleState::Activate(void)
@@ -40,7 +41,7 @@ void CBattleState::Activate(void)
 
 	// TEMP ENEMIES/Player
 
-
+	m_eCurrentPhase = BP_INIT;
 
 
 }
@@ -52,6 +53,11 @@ void CBattleState::Sleep(void)
 
 bool CBattleState::Input(void)
 {
+	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
+		GetNextTarget();
+	else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
+		GetPreviousTarget();
+
 	return true;
 }
 
@@ -131,21 +137,28 @@ void CBattleState::Render(void)
 	woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
 	m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 
-
+	RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+	pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 
 
 }
+
+bool SortSpeed(CUnits *l, CUnits *r)
+{
+	return l->GetSpeed() > r->GetSpeed();
+}
+
 
 void CBattleState::Initialize(void)
 {
 	m_vBattleUnits.push_back(CreateTempPlayer());
 
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 3));
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5));
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9));
+	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 50, 20));
+	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
+	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
 
 
-	//sort(m_vBattleUnits.begin(), m_vBattleUnits.end()); 
+	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
 
 	GetNextTarget();
 
@@ -174,17 +187,17 @@ CPlayerUnit* CBattleState::CreateTempPlayer(void)
 	temp->SetPosY(250);
 	temp->SetVelX(0);
 	temp->SetVelY(0);
-	temp->SetSpeed(4);
+	temp->SetSpeed(1);
 	temp->SetTurn();
 	temp->SetType(OBJ_PLAYER_UNIT);
 	return temp;
 }
 
-CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int speed)
+CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
 {
 	CEnemyUnit* temp = new CEnemyUnit;
-	temp->SetMaxHealth(100);
-	temp->SetMaxAP(100);
+	temp->SetMaxHealth(hp);
+	temp->SetMaxAP(mp);
 	temp->SetPosX(X);
 	temp->SetPosY(Y);
 	temp->SetVelX(0);
@@ -210,4 +223,22 @@ void CBattleState::GetNextTarget(void)
 	while(m_vBattleUnits[m_nTarget]->GetType() == OBJ_PLAYER_UNIT);
 
 }
+
+void CBattleState::GetPreviousTarget(void)
+{
+	if(m_vBattleUnits.size() <= 1)
+		return;
+
+	do 
+	{
+		m_nTarget--;
+		if(m_nTarget < 0)
+			m_nTarget = m_vBattleUnits.size() - 1;
+	}
+	while(m_vBattleUnits[m_nTarget]->GetType() == OBJ_PLAYER_UNIT);
+
+}
+
+
+
 
