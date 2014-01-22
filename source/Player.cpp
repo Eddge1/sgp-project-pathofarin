@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 CPlayer::CPlayer(void)
 {
@@ -18,22 +19,15 @@ void CPlayer::Update(float fElapsedTime)
 	SetVelY(0);
 
 	if(pDI->KeyDown( DIK_A ) == true )
-	{
 		SetVelX(-100);
-	}
 	else if(pDI->KeyDown( DIK_D ) == true )
-	{
 		SetVelX(100);
-	}
 	else
 		SetVelX( GetVelX() - (GetVelX() * 0.005f));
 
 
 	if(pDI->KeyDown( DIK_W ) == true)
-	{
 		SetVelY(-100);
-	}
-
 	else if(pDI->KeyDown( DIK_S ) == true )
 		SetVelY(100);
 

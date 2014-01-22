@@ -13,6 +13,8 @@
 #include "RenderManager.h"
 #include "Game.h"
 #include "MainMenuState.h"
+#include "CharacterMenuState.h"
+#include "BattleState.h"
 
 
 
@@ -35,6 +37,8 @@ CGamePlayState::CGamePlayState(void)
 	bisPaused = false;
 
 	m_nCursor = 0;
+
+	m_eCurrPhase = GP_START;
 }
 
 
@@ -46,54 +50,91 @@ CGamePlayState::~CGamePlayState(void)
 
 void CGamePlayState::Activate(void)
 {
-	// SGD Wrapper singletons initialized in CGame
-	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
-	CSGD_XAudio2*			pXA	= CSGD_XAudio2::GetInstance();
-	CObjectManager*			pOM = CObjectManager::GetInstance();
+	switch (m_eCurrPhase)
+	{
+	case CGamePlayState::GP_NAV:
+		break;
+	case CGamePlayState::GP_BATTLE:
+		break;
+	case CGamePlayState::GP_MENU:
+		break;
+	case CGamePlayState::GP_START:
+		{
+			CObjectManager*			pOM = CObjectManager::GetInstance();
+
+			m_pES = CSGD_EventSystem::GetInstance();
+			m_pRM = new CRenderManager;
+
+			WorldHeight = CGame::GetInstance()->GetScreenHeight();
+			WorldWidth = CGame::GetInstance()->GetScreenWidth();
+
+			m_pPlayer = CreatePlayer();
 
 
-	m_pES = CSGD_EventSystem::GetInstance();
-	m_pRM = new CRenderManager;
+			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-	WorldHeight = CGame::GetInstance()->GetScreenHeight();
-	WorldWidth = CGame::GetInstance()->GetScreenWidth();
+			pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
 
-	m_pPlayer = CreatePlayer();
+			m_pES->RegisterClient("INIT_BATTLE", this);
+			m_pES->RegisterClient("GAME_OVER", this);
+			m_pES->RegisterClient("PLAYER_MENU", this);
+			m_eCurrPhase = GP_NAV;
+		}
+		break;
+	default:
+		break;
+	}
 
-
-	WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
-	WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
-	pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
 
 }
 
 void CGamePlayState::Sleep(void)
 {
-	CObjectManager* pOM = CObjectManager::GetInstance();
-	// Clear the event system
-	if( m_pES != nullptr )
+
+	switch (m_eCurrPhase)
 	{
-		m_pES->Terminate();
-		m_pES = nullptr;
+	case CGamePlayState::GP_BATTLE:
+		break;
+	case CGamePlayState::GP_MENU:
+		break;
+	case CGamePlayState::GP_START:
+		break;
+	case CGamePlayState::GP_NAV:
+	case GamePhase::GP_END:
+		{
+			m_pES->UnregisterClientAll(this);
+			CObjectManager* pOM = CObjectManager::GetInstance();
+			// Clear the event system
+			if( m_pES != nullptr )
+			{
+				m_pES->Terminate();
+				m_pES = nullptr;
+			}
+
+			delete m_pRM;
+			m_pRM = nullptr;
+			m_pPlayer->Release();
+
+			pOM->RemoveAll();
+
+			m_eCurrPhase = GP_START;
+		}
+		break;
+	default:
+		break;
 	}
 
-	delete m_pRM;
-	m_pRM = nullptr;
-	m_pPlayer->Release();
-
-	pOM->RemoveAll();
 }
 
 bool CGamePlayState::Input(void)
 {
-	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_ESCAPE ) == true )
+	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_ESCAPE ) == true)
 	{
 		bisPaused = !bisPaused;
 		return true;
 	}
-
-	if(bisPaused)
+	else if(bisPaused)
 	{
 		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
 			SetCursorSelection(GetCursorSelection() - 1);
@@ -138,12 +179,11 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CObjectManager* pOM = CObjectManager::GetInstance();
-
+	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
 
 		//if(WorldCamX < 0)
 		//	WorldCamX = 0;
@@ -162,18 +202,26 @@ void CGamePlayState::Update( float fElapsedTime )
 
 		m_pES->ProcessEvents();
 	}
-	else
-		return;
 }
 
 void CGamePlayState::Render(void)
 {
+	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	RECT temp = { 0, 0, WorldHeight, WorldWidth };
 	OffsetRect(&temp, -WorldCamX, -WorldCamY);
-	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
+	pD3D->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
 
 	m_pRM->Render();
 	m_temp.Render();
+
+	if(bisPaused)
+	{
+		RECT rTemp = {336, 236, 464,364};
+		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
+		
+		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+	}
 }
 
 CPlayer* CGamePlayState::CreatePlayer()
@@ -186,4 +234,20 @@ CPlayer* CGamePlayState::CreatePlayer()
 	return temp;
 }
 
+void CGamePlayState::HandleEvent( const CEvent* pEvent )
+{
+	if(pEvent->GetEventID() == "INIT_BATTLE")
+	{
+		m_eCurrPhase = GP_BATTLE;
+		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
+	}
+	else if(pEvent->GetEventID() == "GAME_OVER")
+	{
+		m_eCurrPhase = GP_END;
+		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+	}
+	else if(pEvent->GetEventID() == "PLAYER_MENU")
+	{
 
+	}
+}

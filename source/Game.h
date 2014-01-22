@@ -35,6 +35,11 @@ public:
 	// Window Accessors:
 	int GetScreenWidth ( void ) const	{	return m_nScreenWidth;	}
 	int GetScreenHeight( void ) const	{	return m_nScreenHeight;	}
+	bool GetMemory     ( void ) const	{   return m_bMemory;		}
+	bool GetIsWindow   ( void ) const	{   return m_bIsWindowed;	}
+
+	void SetWindow ( bool bIsWindow )	{   m_bIsWindowed = bIsWindow;}
+	void SetMemory ( bool bIsMemory )	{   m_bMemory = bIsMemory;}
 
 	//BitmapFont Accessor
 	CBitmapFont* GetFont() const { return m_pFont; }
@@ -57,6 +62,7 @@ private:
 	bool Update( void );
 	void Render( void );
 	bool Load( void );
+	void CreateConfig(int nMusic = 100, int nSFX = 100, bool bFullscreen = false, bool bMemory = false);
 	void GetFM( void );
 
 
@@ -74,6 +80,7 @@ private:
 	int						m_nScreenWidth;
 	int						m_nScreenHeight;
 	bool					m_bIsWindowed;
+	bool					m_bMemory;
 
 	// Current Game State TODO:
 	CGameStates*				m_pCurrState;

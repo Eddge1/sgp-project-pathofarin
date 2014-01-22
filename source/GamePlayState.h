@@ -2,7 +2,7 @@
 #include "gamestates.h"
 #include <Windows.h>
 #include "Minigames.h"
-
+#include "../SGD Wrappers/IListener.h"
 // Forward Class Declarations
 
 class CSGD_EventSystem;
@@ -11,9 +11,7 @@ class CObjectManager;
 class CPlayer;
 class CRenderManager;
 
-
-class CGamePlayState :
-	public CGameStates
+class CGamePlayState :	public CGameStates, public IListener
 {
 
 public:
@@ -37,11 +35,10 @@ public:
 	virtual void Render( void )	override;					// render entities
 
 	CPlayer* CreatePlayer();
-
-	
+	virtual void HandleEvent( const CEvent* pEvent ) override;
 
 private:
-
+	enum GamePhase {GP_NAV, GP_BATTLE, GP_MENU, GP_START, GP_END};
 	// Singleton (but not dynamically allocated)
 	CGamePlayState( void );
 	virtual ~CGamePlayState( void );
@@ -65,11 +62,10 @@ private:
 	int WorldCamX;
 	int WorldCamY;
 
-
 	bool bisPaused;
 	int m_nCursor;
 	int m_nConversationID;
-
+	GamePhase m_eCurrPhase;
 
 };
 

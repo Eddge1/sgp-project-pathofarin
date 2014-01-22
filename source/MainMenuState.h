@@ -14,8 +14,6 @@ public:
 	virtual void Render( void )	override;	
 	virtual bool Input( void )	override;	
 
-
-
 private:
 
 	CMainMenuState(void);

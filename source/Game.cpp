@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "GameStates.h"
 #include "MainMenuState.h"
+#include "..\TinyXML\tinyxml.h"
 
 CGame* CGame::s_pInstance = nullptr;
 
@@ -36,6 +37,7 @@ CGame::CGame(void)
 	m_nScreenWidth	= 1;
 	m_nScreenHeight	= 1;
 	m_bIsWindowed	= true;
+	m_bMemory		= false;
 
 	m_pCurrState	= nullptr;
 
@@ -85,6 +87,10 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 
 	// Store the current time
 	m_dwCurrTime	= GetTickCount();
+
+	if(Load() == false)
+		CreateConfig();
+
 }
 
 // Run
@@ -196,4 +202,85 @@ void CGame::ChangeState( CGameStates* pState )
 	// Enter the new state (if any)
 	if( m_pCurrState != nullptr )
 		m_pCurrState->Activate();
+}
+
+bool CGame::Load()
+{
+	TiXmlDocument doc;
+	if(doc.LoadFile("Assets/Data/Config/Options.xml") == false)
+		return false;
+
+	TiXmlElement *pRoot = doc.RootElement();
+	if(	pRoot == nullptr )
+		return false;
+
+	int nMusicVolume = -1;
+	int nSFXVolume = -1;
+	m_bIsWindowed = true;
+	m_bMemory = false;
+
+	TiXmlElement* pConfig = pRoot->FirstChildElement("Sound_Settings");
+	if(pConfig != nullptr)
+	{
+		pConfig->Attribute("Music", &nMusicVolume);
+		pConfig->Attribute("SFX", &nSFXVolume);
+		pConfig = pRoot->FirstChildElement("Cursor_Memory");
+		if(pConfig != nullptr)
+		{
+			std::string szTemp = pConfig->Attribute("Enabled");
+			if(szTemp == "true")
+				m_bMemory = true;
+			szTemp = "";
+			pConfig = pRoot->FirstChildElement("Fullscreen_Mode");
+			if(pConfig != nullptr)
+			{
+				szTemp = pConfig->Attribute("Enabled");
+				if(szTemp == "true")
+					m_bIsWindowed = false;
+			}
+		}
+		if(nSFXVolume > 0 && nSFXVolume <= 100)
+			m_pXA->SFXSetMasterVolume(nSFXVolume * 0.01f);
+		if(nMusicVolume > 0 && nMusicVolume <= 100)
+			m_pXA->MusicSetMasterVolume(nMusicVolume * 0.01f);
+		if(m_bIsWindowed == false)
+			m_pD3D->Resize(m_nScreenHeight, m_nScreenHeight, m_bIsWindowed);
+	}
+	return true;
+}
+
+void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscreen/* = false*/, bool bMemory/* = false*/)
+{
+	TiXmlDocument doc;
+	TiXmlDeclaration* pDecl = new TiXmlDeclaration("1.0", "utf-8", "");
+	
+	doc.LinkEndChild(pDecl);	
+	TiXmlElement* pRoot = new TiXmlElement("Config");
+	doc.LinkEndChild(pRoot);
+
+	TiXmlElement* pConfig = new TiXmlElement("Sound_Settings");
+	pConfig->SetAttribute("Music", nMusic);
+	pConfig->SetAttribute("SFX", nSFX);
+	pRoot->LinkEndChild(pConfig);
+
+	pConfig = new TiXmlElement("Cursor_Memory");
+	std::string szTemp = "";
+	if(bMemory = false)
+		szTemp = "false";
+	else
+		szTemp = "true";
+
+	pConfig->SetAttribute("Enabled", szTemp.c_str());
+	pRoot->LinkEndChild(pConfig);
+
+	if(bFullscreen = true)
+		szTemp = "false";
+	else
+		szTemp = "true";
+
+	pConfig = new TiXmlElement("Fullscreen_Mode");
+	pConfig->SetAttribute("Enabled",  szTemp.c_str());
+	pRoot->LinkEndChild(pConfig);
+
+	doc.SaveFile("Assets/Data/Config/Options.xml");
 }
