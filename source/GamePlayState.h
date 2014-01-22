@@ -1,6 +1,7 @@
 #pragma once
 #include "gamestates.h"
 #include <Windows.h>
+#include "Minigames.h"
 
 // Forward Class Declarations
 
@@ -52,6 +53,7 @@ private:
 	// Systems initialized by CGamePlayState
 	CSGD_EventSystem*		m_pES;
 	CRenderManager*			m_pRM;
+	CMiniGames m_temp;
 
 	// Game Entities
 

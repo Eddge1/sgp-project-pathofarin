@@ -158,7 +158,7 @@ void CGamePlayState::Update( float fElapsedTime )
 		pOM->Update(fElapsedTime);
 		pOM->HandleCollision(5,5);
 		m_pES->ProcessEvents();
-
+		m_temp.Update(fElapsedTime);
 	}
 	else
 		return;
@@ -171,6 +171,7 @@ void CGamePlayState::Render(void)
 	CSGD_Direct3D::GetInstance()->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
 
 	m_pRM->Render();
+	m_temp.Render();
 }
 
 CPlayer* CGamePlayState::CreatePlayer()
