@@ -19,5 +19,7 @@ public:
 	void LoadAnimations(std::string filePath);
 
 	void Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
+
+	void Update(CAnimationTimeStamp &aTimeStamp, float fElapsedTime);
 };
 

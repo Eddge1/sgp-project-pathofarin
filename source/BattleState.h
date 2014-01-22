@@ -22,9 +22,11 @@ public:
 
 
 	CPlayerUnit* CreateTempPlayer(void);
-	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed);
+	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
 
 	void GetNextTarget(void);
+	void GetPreviousTarget(void);
+
 
 	void Initialize(void);
 	void Battle(void);
@@ -35,6 +37,7 @@ public:
 	virtual bool Input( void )	override;					// handle user input
 	virtual void Update( float fElapsedTime )	override;	// update entities
 	virtual void Render( void )	override;	
+
 
 private:
 

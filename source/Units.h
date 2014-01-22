@@ -26,6 +26,12 @@ class CUnits :
 
 
 public:
+
+
+
+
+
+
 	CUnits(void);
 	virtual ~CUnits(void);
 
@@ -59,5 +65,19 @@ public:
 	bool incrHealth();
 	bool incrAbility();
 	*/
+
+
+
+	friend bool operator <(CUnits &l, CUnits  &r)
+	{
+		return l.GetSpeed() < r.GetSpeed();
+	}
+
+	friend bool operator >(CUnits &l, CUnits  &r)
+	{
+		return l.GetSpeed() > r.GetSpeed();
+	}
+
+
 };
 

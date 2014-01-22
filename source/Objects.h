@@ -4,6 +4,7 @@
 enum ObjectType {OBJ_UNDEFINE, OBJ_ENTITY, OBJ_PLAYER, OBJ_NPC, OBJ_SKILL, OBJ_PLAYER_UNIT, OBJ_ENEMY_UNIT, OBJECT_UNIT};
 class CObjects : public IListener
 {
+
 	ObjectType m_eType; 
 	float m_fPosX;
 	float m_fPosY;
@@ -12,9 +13,12 @@ class CObjects : public IListener
 	unsigned int m_unRef;
 
 public:
+
+
+
 	CObjects(void);
 	virtual ~CObjects(void);
-	
+
 	float GetPosX	(void)									{return m_fPosX;}
 	float GetPosY	(void)									{return m_fPosY;}
 

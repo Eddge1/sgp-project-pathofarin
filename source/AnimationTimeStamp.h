@@ -16,6 +16,7 @@ public:
 	int GetCurrentFrame() { return m_nCurrFrame; }
 	float GetTimeOnStamp() { return m_fTimeOnStamp; }
 
-	
+	//Mutator:
+	void AdvanceCurrentFrame() { m_nCurrFrame++; }
 };
 
