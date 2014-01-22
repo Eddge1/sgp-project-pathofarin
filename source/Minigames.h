@@ -10,6 +10,7 @@ class CMiniGames
 {
 	CUnits* m_pMaster;
 	bool m_bFailed;
+	bool m_bRight;
 	int m_nChances;
 	int m_nSuccess;
 	float m_fDamageMultiplier;

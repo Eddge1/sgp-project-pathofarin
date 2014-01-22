@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<World Width="5" Height="5" Layers="1" TileWidth="16" TileHeight="16" Image="ScA_WorldTileset.PNG">
+  <Layer ID="0">
+    <Tile ID="0" posX="0" posY="0">
+      <Tile_Data xTileID="6" yTileID="0" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="1" posX="1" posY="0">
+      <Tile_Data xTileID="9" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="2" posX="2" posY="0">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="3" posX="3" posY="0">
+      <Tile_Data xTileID="11" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="4" posX="4" posY="0">
+      <Tile_Data xTileID="3" yTileID="0" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="5" posX="0" posY="1">
+      <Tile_Data xTileID="10" yTileID="1" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="6" posX="1" posY="1">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="7" posX="2" posY="1">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="8" posX="3" posY="1">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="9" posX="4" posY="1">
+      <Tile_Data xTileID="10" yTileID="1" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="10" posX="0" posY="2">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="11" posX="1" posY="2">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="12" posX="2" posY="2">
+      <Tile_Data xTileID="15" yTileID="0" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="13" posX="3" posY="2">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="14" posX="4" posY="2">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="15" posX="0" posY="3">
+      <Tile_Data xTileID="10" yTileID="3" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="16" posX="1" posY="3">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="17" posX="2" posY="3">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="18" posX="3" posY="3">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="19" posX="4" posY="3">
+      <Tile_Data xTileID="10" yTileID="3" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="20" posX="0" posY="4">
+      <Tile_Data xTileID="3" yTileID="0" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="21" posX="1" posY="4">
+      <Tile_Data xTileID="9" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="22" posX="2" posY="4">
+      <Tile_Data xTileID="10" yTileID="2" isBlocked="true" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="23" posX="3" posY="4">
+      <Tile_Data xTileID="11" yTileID="2" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+    <Tile ID="24" posX="4" posY="4">
+      <Tile_Data xTileID="6" yTileID="0" isBlocked="false" isNPC="false" isEvent="false" />
+    </Tile>
+  </Layer>
+</World>
