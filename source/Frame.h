@@ -24,5 +24,8 @@ public:
 	RECT GetRenderRect() { return m_rRender; }
 	RECT GetCollisionRect() { return m_rCollision; }
 	std::string GetEventID() { return m_szEvent; }
+
+	//Mutators:
+	RECT SetRenderRect(RECT rRect) { m_rRender = rRect; }
 };
 
