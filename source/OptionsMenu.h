@@ -24,5 +24,6 @@ private:
 
 	int m_nMusicVolume;
 	int m_nSFXVolume;
+	int m_nSubCursor;
 };
 

@@ -46,6 +46,7 @@ public:
 	CBitmapFont* GetFont2() const { return m_pFont2; }
 
 	void ChangeState( CGameStates* pState );
+	void CreateConfig(int nMusic = 100, int nSFX = 100, bool bFullscreen = false, bool bMemory = false);
 
 private:
 
@@ -62,7 +63,6 @@ private:
 	bool Update( void );
 	void Render( void );
 	bool Load( void );
-	void CreateConfig(int nMusic = 100, int nSFX = 100, bool bFullscreen = false, bool bMemory = false);
 	void GetFM( void );
 
 

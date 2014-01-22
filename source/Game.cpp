@@ -274,9 +274,9 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 	pRoot->LinkEndChild(pConfig);
 
 	if(bFullscreen = true)
-		szTemp = "false";
-	else
 		szTemp = "true";
+	else
+		szTemp = "false";
 
 	pConfig = new TiXmlElement("Fullscreen_Mode");
 	pConfig->SetAttribute("Enabled",  szTemp.c_str());
