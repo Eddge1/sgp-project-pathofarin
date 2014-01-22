@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Config>
-    <Sound_Settings Music="85" SFX="70" />
+    <Sound_Settings Music="14" SFX="70" />
     <Cursor_Memory Enabled="true" />
     <Fullscreen_Mode Enabled="true" />
 </Config>

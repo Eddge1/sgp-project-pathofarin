@@ -23,7 +23,8 @@ CMainMenuState* CMainMenuState::GetInstance( void )
 
 CMainMenuState::CMainMenuState(void)
 {
-
+	SetBackgroundMusic(-1);
+	SetSFXID(-1);
 }
 
 
@@ -36,7 +37,12 @@ CMainMenuState::~CMainMenuState(void)
 
 void CMainMenuState::Activate(void)
 {
-
+	if(GetBackgroundMusic() == -1)
+	{
+		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/JB_Overworld.xwm")));
+		SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+	}
 }
 
 void CMainMenuState::Sleep(void)

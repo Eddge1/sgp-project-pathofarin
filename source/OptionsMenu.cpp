@@ -42,6 +42,13 @@ void COptionsMenu::Activate( void )
 void COptionsMenu::Sleep( void )
 {
 	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
+	if(m_bIsWindow != CGame::GetInstance()->GetIsWindow())
+	{
+		CGame::GetInstance()->SetWindow(m_bIsWindow);
+		CSGD_Direct3D::GetInstance()->Resize(CGame::GetInstance()->GetScreenWidth(),CGame::GetInstance()->GetScreenHeight(),CGame::GetInstance()->GetIsWindow());
+	}
+	if(m_bIsMemory != CGame::GetInstance()->GetMemory())
+		CGame::GetInstance()->SetMemory(m_bIsMemory);
 }
 
 void COptionsMenu::Update( float fElapsedTime )
@@ -83,7 +90,7 @@ void COptionsMenu::Render( void )
 	}
 
 	pFont2->Draw(_T("\t-"), 10,150 + (m_nSubCursor * 28),1.0f, D3DCOLOR_XRGB(0, 0, 0));
-	
+
 	if(m_bIsWindow)
 		pFont2->Draw(_T("\n\t-"), 10, 240,1.0f, D3DCOLOR_XRGB(0, 0, 0));
 	else
