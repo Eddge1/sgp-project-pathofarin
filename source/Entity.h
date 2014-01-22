@@ -15,5 +15,8 @@ public:
 
 	float GetVelX	( void )		{return m_fVelX;}
 	float GetVelY	( void )		{return m_fVelY;}
+
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 

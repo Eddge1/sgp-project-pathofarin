@@ -159,6 +159,8 @@ void CGamePlayState::Update( float fElapsedTime )
 		pOM->HandleCollision(5,5);
 		m_pES->ProcessEvents();
 		m_temp.Update(fElapsedTime);
+
+		m_pES->ProcessEvents();
 	}
 	else
 		return;

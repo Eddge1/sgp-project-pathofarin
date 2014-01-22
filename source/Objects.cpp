@@ -1,4 +1,5 @@
 #include "Objects.h"
+#include "../SGD Wrappers/IListener.h"
 
 CObjects::CObjects(void)
 {
@@ -28,6 +29,12 @@ void CObjects::Release()
 }
 
 void CObjects::HandleCollision(CObjects* col)
+{
+
+
+}
+
+void CObjects::HandleEvent( const CEvent* pEvent )
 {
 
 

@@ -6,5 +6,8 @@ class CNpcs :
 public:
 	CNpcs(void);
 	virtual ~CNpcs(void);
+
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 

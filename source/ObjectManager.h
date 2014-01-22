@@ -28,5 +28,6 @@ public:
 	void HandleCollision(unsigned int unLayer1, unsigned int unLayer2);
 	void RemoveAll();
 
+
 };
 

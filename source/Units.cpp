@@ -43,3 +43,9 @@ void CUnits::ModifyAP(int nAmount)
 
 void CUnits::Update(float fElapsedTime)
 { }
+
+void CUnits::HandleEvent( const CEvent* pEvent )
+{
+
+
+}

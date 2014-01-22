@@ -51,6 +51,9 @@ public:
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
 
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
+
 	/*
 	bool incrAttack();
 	bool incrHealth();

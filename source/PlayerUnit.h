@@ -11,6 +11,8 @@ public:
 
 	CPlayerUnit(void);
 	virtual ~CPlayerUnit(void);
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 
 private:
 

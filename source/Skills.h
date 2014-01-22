@@ -6,5 +6,7 @@ class CSkills :
 public:
 	CSkills(void);
 	virtual ~CSkills(void);
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 

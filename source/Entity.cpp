@@ -17,3 +17,9 @@ void CEntity::Update(float fElapsedTime)
 	SetPosX(GetPosX() + m_fVelX * fElapsedTime);
 	SetPosY(GetPosY() + m_fVelY * fElapsedTime);
 }
+
+void CEntity::HandleEvent( const CEvent* pEvent )
+{
+
+
+}

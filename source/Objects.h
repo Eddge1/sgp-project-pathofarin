@@ -1,6 +1,8 @@
 #pragma once
+#include "../SGD Wrappers/IListener.h"
+
 enum ObjectType {OBJ_UNDEFINE, OBJ_ENTITY, OBJ_PLAYER, OBJ_NPC, OBJ_SKILL, OBJ_PLAYER_UNIT, OBJ_ENEMY_UNIT, OBJECT_UNIT};
-class CObjects
+class CObjects : public IListener
 {
 	ObjectType m_eType; 
 	float m_fPosX;
@@ -28,5 +30,7 @@ public:
 
 	virtual void Update(float fElapsedTime);
 	virtual void HandleCollision(CObjects* col);
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 

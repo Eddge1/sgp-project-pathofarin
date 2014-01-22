@@ -17,5 +17,7 @@ public:
 
 	CEnemyUnit(void);
 	virtual ~CEnemyUnit(void);
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 

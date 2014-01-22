@@ -49,3 +49,9 @@ void CPlayer::HandleCollision(CObjects* col)
 
 	}
 }
+
+void CPlayer::HandleEvent( const CEvent* pEvent )
+{
+
+
+}
