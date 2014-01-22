@@ -38,6 +38,7 @@ public:
 
 	//BitmapFont Accessor
 	CBitmapFont* GetFont() const { return m_pFont; }
+	CBitmapFont* GetFont2() const { return m_pFont2; }
 
 	void ChangeState( CGameStates* pState );
 
@@ -67,6 +68,8 @@ private:
 
 	//TODO: Bitmap font.
 	CBitmapFont*			m_pFont;
+	CBitmapFont*			m_pFont2;
+
 	// Window Attributes
 	int						m_nScreenWidth;
 	int						m_nScreenHeight;
