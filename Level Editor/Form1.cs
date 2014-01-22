@@ -97,6 +97,7 @@ namespace SGP_PoA_LevelEditor
         bool rmouseDown = false;
         bool bMapEdit = true;
         bool bBlockMode = false;
+        bool bSelectColor = false;
         Color cTransparency = Color.Magenta;
 
         Size MapSize = new Size(5, 5);
@@ -487,7 +488,7 @@ namespace SGP_PoA_LevelEditor
                             xTileData.Add(xTileBlock);
                             xTileData.Add(xTileNpc);
                             xTileData.Add(xTileEvent);
-                           //xTileData.Add(xEventId);
+                            //xTileData.Add(xEventId);
 
                             xTile.Add(xTileData);
                         }
@@ -547,7 +548,7 @@ namespace SGP_PoA_LevelEditor
                             XAttribute xTileBlock = new XAttribute("isBlocked", currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked);
                             XAttribute xTileNpc = new XAttribute("isNPC", currMap.TheWorld[nLayer].MyTiles[x, y].IsNPC);
                             XAttribute xTileEvent = new XAttribute("isEvent", currMap.TheWorld[nLayer].MyTiles[x, y].IsEvent);
-                           // XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
+                            // XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
@@ -710,6 +711,31 @@ namespace SGP_PoA_LevelEditor
                 bMapEdit = true;
                 bBlockMode = false;
             }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (bSelectColor)
+            {
+                if (e.X > 0 && e.X < panel1.Width && e.Y > 0 && e.Y < panel1.Height)
+                {
+                    if (imageID != -1)
+                    {
+                        Bitmap b = new Bitmap(szRelativePath + szTileSetName);
+                        cTransparency = b.GetPixel(e.X - panel1.AutoScrollPosition.X, e.Y - panel1.AutoScrollPosition.Y);
+                        TM.UnloadTexture(imageID);
+                        imageID = TM.LoadTexture(szRelativePath + szTileSetName, cTransparency);
+                    }
+                    bSelectColor = false;
+                    label6.Text = "";
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bSelectColor = true;
+            label6.Text = "Choose a Color";
         }
 
     }

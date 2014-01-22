@@ -41,7 +41,6 @@ void COptionsMenu::Activate( void )
 }
 void COptionsMenu::Sleep( void )
 {
-	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
 	if(m_bIsWindow != CGame::GetInstance()->GetIsWindow())
 	{
 		CGame::GetInstance()->SetWindow(m_bIsWindow);
@@ -49,6 +48,8 @@ void COptionsMenu::Sleep( void )
 	}
 	if(m_bIsMemory != CGame::GetInstance()->GetMemory())
 		CGame::GetInstance()->SetMemory(m_bIsMemory);
+	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
+
 }
 
 void COptionsMenu::Update( float fElapsedTime )

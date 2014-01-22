@@ -39,7 +39,7 @@ void CMainMenuState::Activate(void)
 {
 	if(GetBackgroundMusic() == -1)
 	{
-		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/JB_Overworld.xwm")));
+		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/JB_Test.xwm")));
 		SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
@@ -62,9 +62,10 @@ void CMainMenuState::Render(void)
 
 	pFont2->Draw(_T("Path of Arin"), 200,100, 3.0f, D3DCOLOR_XRGB(0, 0, 255));
 	RECT rTemp = {336, 408, 464,536};
+	pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(200,0,0,0));
 	pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
-	pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 352,416, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-	pFont2->Draw(_T("-"), 344,416 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+	pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 352,416, 1.0f, D3DCOLOR_XRGB(0, 255, 255));
+	pFont2->Draw(_T("-"), 344,416 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 255, 255));
 
 }
 

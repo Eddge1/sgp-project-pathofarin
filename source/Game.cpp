@@ -265,7 +265,7 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 
 	pConfig = new TiXmlElement("Cursor_Memory");
 	std::string szTemp = "";
-	if(bMemory = false)
+	if(bMemory == false)
 		szTemp = "false";
 	else
 		szTemp = "true";
@@ -273,10 +273,10 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 	pConfig->SetAttribute("Enabled", szTemp.c_str());
 	pRoot->LinkEndChild(pConfig);
 
-	if(bFullscreen = true)
-		szTemp = "true";
-	else
+	if(bFullscreen == true)
 		szTemp = "false";
+	else
+		szTemp = "true";
 
 	pConfig = new TiXmlElement("Fullscreen_Mode");
 	pConfig->SetAttribute("Enabled",  szTemp.c_str());
