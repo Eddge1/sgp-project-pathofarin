@@ -240,9 +240,9 @@ bool CGame::Load()
 			}
 		}
 		if(nSFXVolume > 0 && nSFXVolume <= 100)
-			m_pXA->SFXSetMasterVolume(nSFXVolume * 0.01f);
+			m_pXA->SFXSetMasterVolume(nSFXVolume /100.0f);
 		if(nMusicVolume > 0 && nMusicVolume <= 100)
-			m_pXA->MusicSetMasterVolume(nMusicVolume * 0.01f);
+			m_pXA->MusicSetMasterVolume(nMusicVolume /100.0f);
 		if(m_bIsWindowed == false)
 			m_pD3D->Resize(m_nScreenHeight, m_nScreenHeight, m_bIsWindowed);
 	}

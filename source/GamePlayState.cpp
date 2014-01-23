@@ -15,6 +15,7 @@
 #include "MainMenuState.h"
 #include "CharacterMenuState.h"
 #include "BattleState.h"
+#include "Npcs.h"
 
 
 
@@ -30,6 +31,7 @@ CGamePlayState* CGamePlayState::GetInstance( void )
 
 CGamePlayState::CGamePlayState(void)
 {
+	CBattleState::GetInstance();
 	m_pES = nullptr;
 	m_pRM = nullptr;
 
@@ -79,7 +81,20 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
 			m_pES->RegisterClient("PLAYER_MENU", this);
+			m_pES->RegisterClient("VICTORY", this);
+
 			m_eCurrPhase = GP_NAV;
+
+			CNpcs* pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetVelX(0);
+			pTemp->SetVelY(0);
+			pTemp->SetPosX(100);
+			pTemp->SetPosY(100);
+			pOM->AddObject(pTemp, 5);
+			pTemp->Release();
+			pTemp = nullptr;
 		}
 		break;
 	case CGamePlayState::GP_END:
@@ -104,7 +119,7 @@ void CGamePlayState::Sleep(void)
 	case CGamePlayState::GP_START:
 		break;
 	case CGamePlayState::GP_NAV:
-	case GamePhase::GP_END:
+	case CGamePlayState::GP_END:
 		{
 			m_pES->UnregisterClientAll(this);
 			CObjectManager* pOM = CObjectManager::GetInstance();
@@ -122,6 +137,9 @@ void CGamePlayState::Sleep(void)
 			pOM->RemoveAll();
 
 			m_eCurrPhase = GP_START;
+
+			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
+
 		}
 		break;
 	default:
@@ -242,6 +260,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	if(pEvent->GetEventID() == "INIT_BATTLE")
 	{
 		m_eCurrPhase = GP_BATTLE;
+		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
@@ -252,5 +271,9 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	else if(pEvent->GetEventID() == "PLAYER_MENU")
 	{
 
+	}
+	else if(pEvent->GetEventID() == "VICTORY")
+	{
+		m_eCurrPhase = GP_NAV;
 	}
 }

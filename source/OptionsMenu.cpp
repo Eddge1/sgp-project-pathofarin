@@ -3,8 +3,6 @@
 #include "Game.h"
 #include <sstream>
 
-
-
 COptionsMenu::COptionsMenu(void)
 {
 	m_bSubMenu = false;
@@ -16,16 +14,11 @@ COptionsMenu::COptionsMenu(void)
 	m_nSubCursor = 0;
 }
 
+COptionsMenu::~COptionsMenu(void){}
 
-
-COptionsMenu::~COptionsMenu(void)
-{
-
-}
 COptionsMenu* COptionsMenu::GetInstance( void )
 {
 	static COptionsMenu s_Instance;
-
 	return &s_Instance;
 }
 
@@ -38,7 +31,10 @@ void COptionsMenu::Activate( void )
 
 	m_nMusicVolume = int(CSGD_XAudio2::GetInstance()->MusicGetMasterVolume() * 100);
 	m_nSFXVolume = int(CSGD_XAudio2::GetInstance()->SFXGetMasterVolume() * 100);
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
+
 }
+
 void COptionsMenu::Sleep( void )
 {
 	if(m_bIsWindow != CGame::GetInstance()->GetIsWindow())
@@ -49,13 +45,11 @@ void COptionsMenu::Sleep( void )
 	if(m_bIsMemory != CGame::GetInstance()->GetMemory())
 		CGame::GetInstance()->SetMemory(m_bIsMemory);
 	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
-
+	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
+	SetSFXID(-1);
 }
 
-void COptionsMenu::Update( float fElapsedTime )
-{
-
-}
+void COptionsMenu::Update( float fElapsedTime ){}
 
 void COptionsMenu::Render( void )
 {
@@ -77,15 +71,12 @@ void COptionsMenu::Render( void )
 	case 1:
 		pFont2->Draw(_T("-"), 10,240,1.0f, D3DCOLOR_XRGB(0, 0, 0));
 		break;
-
 	case 2:
 		pFont2->Draw(_T("-"), 10,300,1.0f, D3DCOLOR_XRGB(0, 0, 0));
 		break;
-
 	case 3:
 		pFont2->Draw(_T("-"), 10,540,1.0f, D3DCOLOR_XRGB(0, 0, 0));
 		break;
-
 	default:
 		break;
 	}
@@ -100,9 +91,8 @@ void COptionsMenu::Render( void )
 		pFont2->Draw(_T("\n\t-"), 10, 300,1.0f, D3DCOLOR_XRGB(0, 0, 0));
 	else
 		pFont2->Draw(_T("\n\t\t\t-"), 10, 300,1.0f, D3DCOLOR_XRGB(0, 0, 0));
-
-
 }
+
 bool COptionsMenu::Input( void )	
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
@@ -117,6 +107,7 @@ bool COptionsMenu::Input( void )
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 			else
 				m_bSubMenu = true;
+
 		}
 		else if(pDI->KeyPressed(DIK_UPARROW))
 		{
@@ -124,6 +115,8 @@ bool COptionsMenu::Input( void )
 				SetCursorSelection(3);
 			else
 				SetCursorSelection(GetCursorSelection()  - 1);
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
 		else if(pDI->KeyPressed(DIK_DOWNARROW))
 		{
@@ -131,6 +124,8 @@ bool COptionsMenu::Input( void )
 				SetCursorSelection(0);
 			else
 				SetCursorSelection(GetCursorSelection()  + 1);
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
 	}
 	else
@@ -138,6 +133,8 @@ bool COptionsMenu::Input( void )
 		if(pDI->KeyPressed(DIK_ESCAPE) || pDI->KeyPressed(DIK_RETURN))
 		{
 			m_bSubMenu = false;
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
 		else if(pDI->KeyPressed(DIK_LEFTARROW))
 		{
@@ -149,31 +146,29 @@ bool COptionsMenu::Input( void )
 					m_nMusicVolume -= 5;
 					if(m_nMusicVolume < 0)
 						m_nMusicVolume = 100;
+					CSGD_XAudio2::GetInstance()->MusicSetMasterVolume(m_nMusicVolume /100.0f);
 
-					CSGD_XAudio2::GetInstance()->MusicSetMasterVolume(m_nMusicVolume * 0.01f);
 				}
 				else
 				{
 					m_nSFXVolume -= 5;
 					if(m_nSFXVolume < 0)
 						m_nSFXVolume = 100;
-					CSGD_XAudio2::GetInstance()->SFXSetMasterVolume(m_nSFXVolume * 0.01f);
+					CSGD_XAudio2::GetInstance()->SFXSetMasterVolume(m_nSFXVolume /100.0f);
+
 				}
 				break;
-
 			case 1:
 				m_bIsWindow = true;
 				break;
-
-
 			case 2:
 				m_bIsMemory = false;
 				break;
-
 			default:
 				break;
-
 			}
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
 		else if(pDI->KeyPressed(DIK_RIGHTARROW))
 		{
@@ -185,31 +180,32 @@ bool COptionsMenu::Input( void )
 					m_nMusicVolume += 5;
 					if(m_nMusicVolume > 100)
 						m_nMusicVolume = 0;
-					CSGD_XAudio2::GetInstance()->MusicSetMasterVolume(m_nMusicVolume * 0.01f);
+					CSGD_XAudio2::GetInstance()->MusicSetMasterVolume(m_nMusicVolume /100.0f);
+					if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 				}
 				else
 				{
 					m_nSFXVolume += 5;
 					if(m_nSFXVolume > 100)
 						m_nSFXVolume = 0;
-
-					CSGD_XAudio2::GetInstance()->SFXSetMasterVolume(m_nSFXVolume * 0.01f);
+					CSGD_XAudio2::GetInstance()->SFXSetMasterVolume(m_nSFXVolume /100.0f);
+					if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 				}
 				break;
-
 			case 1:
 				m_bIsWindow = false;
+
 				break;
-
-
 			case 2:
 				m_bIsMemory = true;
 				break;
-
 			default:
 				break;
-
 			}
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
 		else if(GetCursorSelection() == 0)
 		{

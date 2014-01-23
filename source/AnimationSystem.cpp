@@ -74,7 +74,7 @@ void CAnimationSystem::Render(CAnimationTimeStamp &aTimeStamp, float fPosX, floa
 
 void CAnimationSystem::Update(CAnimationTimeStamp &aTimeStamp, float fElapsedTime)
 {
-	//if elapsed time is greater than or equal to the duration of the frame, advance the animation by one frame
+	//if elapsed time is greater than the duration of the frame, advance the animation by one frame
 	float fDuration = loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetDuration();
 
 	if (fElapsedTime > fDuration)

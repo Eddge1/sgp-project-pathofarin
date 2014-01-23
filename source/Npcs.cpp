@@ -1,8 +1,10 @@
 #include "Npcs.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 
 CNpcs::CNpcs(void)
 {
+	CSGD_EventSystem::GetInstance()->RegisterClient("VICTORY", this);
 }
 
 
@@ -10,8 +12,37 @@ CNpcs::~CNpcs(void)
 {
 }
 
-void CNpcs::HandleEvent( const CEvent* pEvent )
+void CNpcs::SetUnits(std::string szName)
+{
+	m_vUnitList.push_back(szName);
+}
+
+void CNpcs::AddConversation(std::string szConvo)
+{
+	m_szConversation.push_back(szConvo);
+}
+
+
+void CNpcs::Update(float fElapsedTime)
 {
 
+}
+
+void CNpcs::HandleEvent( const CEvent* pEvent )
+{
+	if(pEvent->GetEventID() == "VICTORY" && pEvent->GetDestination() == this)
+	{
+		if(m_bIsHostile)
+			SetActive(false);
+	}
+}
+
+void CNpcs::HandleCollision(CObjects* col)
+{
+	if(col->GetType() == OBJ_PLAYER)
+	{
+		if(m_bIsHostile && GetActive())
+			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", &m_vUnitList, nullptr, this);
+	}
 
 }
