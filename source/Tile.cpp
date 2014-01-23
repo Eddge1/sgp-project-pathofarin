@@ -8,4 +8,5 @@ CTile::CTile(void)
 
 CTile::~CTile(void)
 {
+
 }

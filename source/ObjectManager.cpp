@@ -51,7 +51,7 @@ void CObjectManager::Render(unsigned int nLayer)
 }
 void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 {
-	if(unLayer > m_vObjects.size())
+	if(unLayer >= m_vObjects.size())
 		m_vObjects.resize(unLayer + 1);
 
 	m_vObjects[unLayer].push_back( pObject );

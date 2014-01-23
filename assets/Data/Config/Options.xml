@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Config>
-<<<<<<< HEAD
-    <Sound_Settings Music="100" SFX="69" />
+    <Sound_Settings Music="100" SFX="100" />
     <Cursor_Memory Enabled="true" />
-=======
-    <Sound_Settings Music="0" SFX="0" />
-    <Cursor_Memory Enabled="false" />
->>>>>>> c6cd127719c84f702b4e87257f823270b3a64587
     <Fullscreen_Mode Enabled="false" />
 </Config>

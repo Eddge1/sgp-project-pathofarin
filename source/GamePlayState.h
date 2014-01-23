@@ -2,7 +2,11 @@
 #include "gamestates.h"
 #include <Windows.h>
 #include "Minigames.h"
+#include <map>
+#include "World.h"
 #include "../SGD Wrappers/IListener.h"
+using namespace std;
+
 // Forward Class Declarations
 
 class CSGD_EventSystem;
@@ -37,7 +41,12 @@ public:
 	CPlayer* CreatePlayer();
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 
+	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }
+
+	void LoadWorld(string input);
+
 private:
+
 	enum GamePhase {GP_NAV, GP_BATTLE, GP_MENU, GP_START, GP_END};
 	// Singleton (but not dynamically allocated)
 	CGamePlayState( void );
@@ -46,6 +55,8 @@ private:
 	CGamePlayState& operator= ( const CGamePlayState& );
 
 
+	map<string, CWorld*> m_mWorldManager;
+	string m_sCurrWorld;
 
 	// Systems initialized by CGamePlayState
 	CSGD_EventSystem*		m_pES;

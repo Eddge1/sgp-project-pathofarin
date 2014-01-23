@@ -59,7 +59,7 @@ void CMiniGames::Update(float fElapsedTime)
 void CMiniGames::Render()
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-	for(int i = 0; i < m_rCollisionZones.size(); i++)
+	for(unsigned int i = 0; i < m_rCollisionZones.size(); i++)
 	{
 		pD3D->DrawHollowRect(m_rCollisionZones[i], D3DCOLOR_XRGB(0,0,0));
 	}
