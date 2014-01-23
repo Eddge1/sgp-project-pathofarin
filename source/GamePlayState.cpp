@@ -98,7 +98,7 @@ void CGamePlayState::Activate(void)
 			pTemp->Release();
 			pTemp = nullptr;
 
-			LoadWorld("hereisthetest.xml");
+			LoadWorld("Testmeme.xml");
 
 		}
 		break;
