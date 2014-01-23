@@ -160,16 +160,17 @@ void CGamePlayState::Sleep(void)
 
 bool CGamePlayState::Input(void)
 {
-	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_ESCAPE ) == true)
+	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9) || pDI->JoystickButtonPressed(2))
 	{
 		bisPaused = !bisPaused;
 		return true;
 	}
 	else if(bisPaused)
 	{
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
+		if( pDI->KeyPressed( DIK_UP ) == true || pDI->JoystickDPadPressed(DIR_UP))
 			SetCursorSelection(GetCursorSelection() - 1);
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
+		if( pDI->KeyPressed( DIK_DOWN ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
 		if(GetCursorSelection() > 1)
@@ -178,7 +179,7 @@ bool CGamePlayState::Input(void)
 			SetCursorSelection(1);
 
 
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true )
+		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
 		{
 			switch( GetCursorSelection() )
 			{

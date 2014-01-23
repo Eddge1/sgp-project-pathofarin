@@ -19,17 +19,17 @@ void CPlayer::Update(float fElapsedTime)
 	SetVelX(0);
 	SetVelY(0);
 
-	if(pDI->KeyDown( DIK_A ) == true )
+	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT))
 		SetVelX(-100);
-	else if(pDI->KeyDown( DIK_D ) == true )
+	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT))
 		SetVelX(100);
 	else
 		SetVelX( GetVelX() - (GetVelX() * 0.005f));
 
 
-	if(pDI->KeyDown( DIK_W ) == true)
+	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP))
 		SetVelY(-100);
-	else if(pDI->KeyDown( DIK_S ) == true )
+	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN))
 		SetVelY(100);
 
 	CEntity::Update(fElapsedTime);
