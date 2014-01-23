@@ -1,16 +1,17 @@
 #pragma once
 #include "gamestates.h"
+#include "../SGD Wrappers/IListener.h"
 #include <vector>
 #include <string>
 using namespace std;
 
 class CBitmapFont;
 class CUnits;
+class CObjects;
 class CPlayerUnit;
 class CEnemyUnit;
 
-class CBattleState :
-	public CGameStates
+class CBattleState : public CGameStates
 {
 public:
 
@@ -18,9 +19,7 @@ public:
 	static CBattleState* GetInstance( void );
 
 	// Temp player.
-
-
-
+	CObjects* m_pSender;
 	CPlayerUnit* CreateTempPlayer(void);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
 
@@ -30,14 +29,15 @@ public:
 
 	void Initialize(void);
 	void Battle(void);
-	void End(void);
+	void EndBattle(void);
 
-	virtual void Activate( void )	override;					// load resources
+	virtual void Activate( void )	override;				// load resources
 	virtual void Sleep( void )	override;					// unload resources
 	virtual bool Input( void )	override;					// handle user input
 	virtual void Update( float fElapsedTime )	override;	// update entities
 	virtual void Render( void )	override;	
 
+	void SetSender(CObjects* pSender);
 
 private:
 

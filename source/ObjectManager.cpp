@@ -115,8 +115,7 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 			RECT rTempReturn = {};
 			if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
 			{
-				return;
-
+				Collision1[i]->HandleCollision(Collision2[j]);
 			}
 			/*Temp to show Collision works*/
 		}

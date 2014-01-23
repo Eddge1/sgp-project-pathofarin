@@ -40,14 +40,15 @@ void CMainMenuState::Activate(void)
 	if(GetBackgroundMusic() == -1)
 	{
 		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/JB_Test.xwm")));
-		SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
 }
 
 void CMainMenuState::Sleep(void)
 {
-
+	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
+	SetSFXID(-1);
 }
 
 void CMainMenuState::Update(float fElapsedTime)
@@ -82,6 +83,8 @@ bool CMainMenuState::Input(void)
 			SetCursorSelection(3);
 		else
 			SetCursorSelection(GetCursorSelection() - 1);
+		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
 	else if(pDI->KeyPressed(DIK_DOWNARROW))
 	{
@@ -89,7 +92,8 @@ bool CMainMenuState::Input(void)
 			SetCursorSelection(0);
 		else
 			SetCursorSelection(GetCursorSelection() + 1);
-
+		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
 	else if(pDI->KeyPressed(DIK_RETURN))
 	{

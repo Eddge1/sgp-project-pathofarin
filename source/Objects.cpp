@@ -1,5 +1,6 @@
 #include "Objects.h"
 #include "../SGD Wrappers/IListener.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 CObjects::CObjects(void)
 {
@@ -13,6 +14,7 @@ CObjects::CObjects(void)
 
 CObjects::~CObjects(void)
 {
+	CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
 }
 
 void CObjects::Update(float fElapsedTime)
