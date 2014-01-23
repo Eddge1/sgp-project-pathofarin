@@ -75,7 +75,6 @@ namespace SGP_PoA_LevelEditor
 
         };
 
-
         struct myWorld
         {
             List<myLayers> theWorld;
@@ -98,6 +97,9 @@ namespace SGP_PoA_LevelEditor
         bool bMapEdit = true;
         bool bBlockMode = false;
         bool bSelectColor = false;
+        bool bPlaceNPC = false;
+        bool bPlaceEvent = false;
+        bool bPlaceWaypoints = false;
         Color cTransparency = Color.Magenta;
 
         Size MapSize = new Size(5, 5);
@@ -251,6 +253,7 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
+            cTransparency = Color.Black;
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
@@ -264,8 +267,6 @@ namespace SGP_PoA_LevelEditor
             imageID = -1;
 
             TM.Initialize(DX.Device, DX.Sprite);
-
-
 
             currMap.TheWorld = new List<myLayers>();
             tempLayer.MyTiles = new myTile[MapSize.Width, MapSize.Height];
@@ -379,7 +380,6 @@ namespace SGP_PoA_LevelEditor
                 {
                     if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
                     {
-                        myTile tempTile = new myTile();
                         Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
                         currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].X = 0;
                         currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].Y = 0;
@@ -448,6 +448,7 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
+                XAttribute xColorTrans = new XAttribute("Transparency", cTransparency.ToArgb());
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
@@ -455,6 +456,7 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Add(xTileWidth);
                 xRoot.Add(xTileHeight);
                 xRoot.Add(xImageLocation);
+                xRoot.Add(xColorTrans);
 
                 for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
                 {
@@ -481,14 +483,16 @@ namespace SGP_PoA_LevelEditor
                             XAttribute xTileBlock = new XAttribute("isBlocked", currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked);
                             XAttribute xTileNpc = new XAttribute("isNPC", currMap.TheWorld[nLayer].MyTiles[x, y].IsNPC);
                             XAttribute xTileEvent = new XAttribute("isEvent", currMap.TheWorld[nLayer].MyTiles[x, y].IsEvent);
-                            //XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
+                            if (currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial == null)
+                                currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial = "";
+                            XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
                             xTileData.Add(xTileBlock);
                             xTileData.Add(xTileNpc);
                             xTileData.Add(xTileEvent);
-                            //xTileData.Add(xEventId);
+                            xTileData.Add(xEventId);
 
                             xTile.Add(xTileData);
                         }
@@ -515,6 +519,7 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
+                XAttribute xColorTrans = new XAttribute("Transparency", cTransparency.ToArgb());
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
@@ -522,6 +527,7 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Add(xTileWidth);
                 xRoot.Add(xTileHeight);
                 xRoot.Add(xImageLocation);
+                xRoot.Add(xColorTrans);
 
                 for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
                 {
@@ -548,14 +554,16 @@ namespace SGP_PoA_LevelEditor
                             XAttribute xTileBlock = new XAttribute("isBlocked", currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked);
                             XAttribute xTileNpc = new XAttribute("isNPC", currMap.TheWorld[nLayer].MyTiles[x, y].IsNPC);
                             XAttribute xTileEvent = new XAttribute("isEvent", currMap.TheWorld[nLayer].MyTiles[x, y].IsEvent);
-                            // XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
+                            if (currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial == null)
+                                currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial = "";
+                            XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
                             xTileData.Add(xTileBlock);
                             xTileData.Add(xTileNpc);
                             xTileData.Add(xTileEvent);
-                            //xTileData.Add(xEventId);
+                            xTileData.Add(xEventId);
 
                             xTile.Add(xTileData);
                         }
@@ -580,6 +588,7 @@ namespace SGP_PoA_LevelEditor
         {
             Initialize();
             OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = szRelativePath + "..\\..\\Data\\Levels";
             dlg.Filter = "All Files|*.*|XML Files|*.xml";
             dlg.FilterIndex = 2;
 
@@ -594,11 +603,14 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xTileWidth = xRoot.Attribute("TileWidth");
                 XAttribute xTileHeight = xRoot.Attribute("TileHeight");
                 XAttribute xTileImage = xRoot.Attribute("Image");
+                XAttribute xColorTrans = xRoot.Attribute("Transparency");
+
+                cTransparency = Color.FromArgb(Convert.ToInt32(xColorTrans.Value));
 
                 if (xTileImage.Value.ToString() != "")
                 {
                     szTileSetName = xTileImage.Value.ToString();
-                    imageID = TM.LoadTexture(szRelativePath + szTileSetName);
+                    imageID = TM.LoadTexture(szRelativePath + szTileSetName, cTransparency);
                     panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
                 }
                 else
@@ -638,12 +650,14 @@ namespace SGP_PoA_LevelEditor
                         XAttribute xTileBlock = xTileInfo.Attribute("isBlocked");
                         XAttribute xTileNpc = xTileInfo.Attribute("isNPC");
                         XAttribute xTileEvent = xTileInfo.Attribute("isEvent");
+                        XAttribute xTileEventID = xTileInfo.Attribute("EventID");
                         myTile pTile = new myTile();
                         pTile.X = Convert.ToInt32(xTileX.Value);
                         pTile.Y = Convert.ToInt32(xTileY.Value);
                         pTile.IsBlocked = Convert.ToBoolean(xTileBlock.Value);
                         pTile.IsEvent = Convert.ToBoolean(xTileEvent.Value);
                         pTile.IsNPC = Convert.ToBoolean(xTileNpc.Value);
+                        pTile.SzSpecial = xTileEventID.Value;
                         lTemp.MyTiles[nPosX, nPosY] = pTile;
                     }
                     currMap.TheWorld.Add(lTemp);
@@ -675,6 +689,7 @@ namespace SGP_PoA_LevelEditor
             if (imageID != -1)
                 TM.UnloadTexture(imageID);
             OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = szRelativePath;
             dlg.Filter = "All Files|*.*";
             dlg.FilterIndex = 2;
 
@@ -685,7 +700,7 @@ namespace SGP_PoA_LevelEditor
                 if (!File.Exists(szRelativePath + szTileSetName))
                     File.Copy(dlg.FileName, szRelativePath + szTileSetName);
 
-                imageID = TM.LoadTexture(szRelativePath + szTileSetName);
+                imageID = TM.LoadTexture(szRelativePath + szTileSetName, cTransparency);
                 panel1.AutoScrollMinSize = new Size(TM.GetTextureWidth(imageID), TM.GetTextureHeight(imageID));
             }
         }
@@ -728,6 +743,7 @@ namespace SGP_PoA_LevelEditor
                     }
                     bSelectColor = false;
                     label6.Text = "";
+                    label7.Text = cTransparency.ToArgb().ToString();
                 }
             }
         }

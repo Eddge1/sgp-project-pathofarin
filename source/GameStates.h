@@ -25,7 +25,7 @@ public:
 	int GetTotalOptions		( void )		{return m_nTotalOptions;}
 	int GetBackgroundImg	( void )		{return m_nBackgroundImg;}
 	int GetBackgroundMusic	( void )		{return m_nBackgroundMusic;}
-	int GetGetSFXID			( void )		{return m_nSFXID;}
+	int GetSFXID			( void )		{return m_nSFXID;}
 	int GetCursorIMG		( void )		{return m_nCursorIMG;}
 
 	// MUTATORS
