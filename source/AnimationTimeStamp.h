@@ -12,9 +12,9 @@ public:
 	virtual ~CAnimationTimeStamp(void);
 
 	//Accessors:
-	std::string GetCurrentAnimation() { return m_szCurrentAnimation; }
-	int GetCurrentFrame() { return m_nCurrFrame; }
-	float GetTimeOnStamp() { return m_fTimeOnStamp; }
+	std::string GetCurrentAnimation() const { return m_szCurrentAnimation; }
+	int GetCurrentFrame() const { return m_nCurrFrame; }
+	float GetTimeOnStamp() const { return m_fTimeOnStamp; }
 
 	//Mutator:
 	void AdvanceCurrentFrame() { m_nCurrFrame++; }

@@ -11,9 +11,16 @@ class CAnimationSystem
 {
 	std::map<std::string, CAnimation> loadedAnimation;
 
+	// Static pointer to the singleton object
+	static CAnimationSystem* s_pInstance;
+
 public:
 	CAnimationSystem(void);
 	virtual ~CAnimationSystem(void);
+
+	// Singleton accessors:
+	static CAnimationSystem* GetInstance( void );
+	static void DeleteInstance( void );
 
 	//Mutator: 
 	void LoadAnimations(std::string filePath);

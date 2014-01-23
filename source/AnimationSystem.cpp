@@ -5,10 +5,30 @@
 #include "Frame.h"
 #include "..\TinyXML\tinyxml.h"
 
+CAnimationSystem* CAnimationSystem::s_pInstance = nullptr;
+
+// GetInstance
+CAnimationSystem* CAnimationSystem::GetInstance( void ) // Remember these are static.
+{
+	// Allocate the static pointer if necessary
+	if( s_pInstance == nullptr )
+		s_pInstance = new CAnimationSystem;
+
+	// Return the singleton
+	return s_pInstance;
+}
+
+// DeleteInstance
+void CAnimationSystem::DeleteInstance( void )
+{
+	delete s_pInstance;
+	s_pInstance = nullptr;
+}
+
 
 CAnimationSystem::CAnimationSystem(void)
 {
-	
+
 }
 
 
@@ -28,6 +48,7 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 		return;
 
 	std::string szTempName;
+	int nFrames;
 
 	TiXmlElement* pAnim = pRoot->FirstChildElement("Animation_Data");
 	if (pAnim != nullptr)
@@ -36,21 +57,52 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 		if (pAnim != nullptr)
 		{
 			szTempName = pAnim->Attribute("Name");
-//			loadedAnimation[szTempName].SetLooping(pAnim->Attribute("repeat"));  // <- Needs to be fixed
-			
+			pAnim->Attribute("Frames", &nFrames);
+
+			int nRepeatValue;
+			pAnim->Attribute("repeat", &nRepeatValue);
+			if (nRepeatValue == 0)
+				loadedAnimation[szTempName].SetLooping(false);
+			else
+				loadedAnimation[szTempName].SetLooping(true);
+
+
 			pAnim = pAnim->FirstChildElement("Frame_Data");
 			if (pAnim != nullptr)
 			{
 				pAnim = pAnim->FirstChildElement("Render");
-				if (pAnim != nullptr)
+
+				for (int i = 0; i < nFrames; i++)
 				{
-					RECT rTempRect = { };
-					pAnim->Attribute("posX", (int*)rTempRect.left);
-					pAnim->Attribute("posY", (int*)rTempRect.top);
-					pAnim->Attribute("anchorX"); //Make sure to Finish this thing
-					pAnim->Attribute("anchorY");
-					pAnim->Attribute("Width", (int*)rTempRect.right);
-					pAnim->Attribute("Height", (int*)rTempRect.bottom);
+					if (pAnim != nullptr)
+					{
+						RECT rTempRenderRect = { };
+						int nAnchorX, nAnchorY;
+						pAnim->Attribute("posX", (int*)rTempRenderRect.left);
+						pAnim->Attribute("posY", (int*)rTempRenderRect.top);
+						pAnim->Attribute("Width", (int*)rTempRenderRect.right);
+						pAnim->Attribute("Height", (int*)rTempRenderRect.bottom);
+						pAnim->Attribute("anchorX", &nAnchorX);
+						pAnim->Attribute("anchorY", &nAnchorY);
+
+						pAnim = pAnim->NextSiblingElement("ActiveCollision");
+						RECT rTempCollisionRect = { };
+						if (pAnim != nullptr)
+						{
+							
+							pAnim->Attribute("posX", (int*)rTempCollisionRect.left);
+							pAnim->Attribute("posY", (int*)rTempCollisionRect.top);
+							pAnim->Attribute("Width", (int*)rTempCollisionRect.right);
+							pAnim->Attribute("height", (int*)rTempCollisionRect.bottom);
+						}
+						CFrame temp;
+						temp.SetRenderRect(rTempRenderRect);
+						temp.SetAnchor(nAnchorX, nAnchorY);
+						temp.SetCollisionRect(rTempCollisionRect);
+						loadedAnimation[szTempName].GetFrames().push_back(temp);
+
+						pAnim = pAnim->NextSiblingElement("Render");
+					}
 				}
 			}
 		}
@@ -74,7 +126,6 @@ void CAnimationSystem::Render(CAnimationTimeStamp &aTimeStamp, float fPosX, floa
 
 void CAnimationSystem::Update(CAnimationTimeStamp &aTimeStamp, float fElapsedTime)
 {
-	//if elapsed time is greater than the duration of the frame, advance the animation by one frame
 	float fDuration = loadedAnimation[aTimeStamp.GetCurrentAnimation()].GetFrames()[aTimeStamp.GetCurrentFrame()].GetDuration();
 
 	if (fElapsedTime > fDuration)

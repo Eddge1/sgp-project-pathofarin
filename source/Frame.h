@@ -18,14 +18,17 @@ public:
 	virtual ~CFrame(void);
 
 	//Accessors:
-	int GetAnchorX() { return m_nAnchorX; }
-	int GetAnchorY() { return m_nAnchorY; }
-	float GetDuration() { return m_fDuration; }
-	RECT GetRenderRect() { return m_rRender; }
-	RECT GetCollisionRect() { return m_rCollision; }
-	std::string GetEventID() { return m_szEvent; }
+	int GetAnchorX() const { return m_nAnchorX; }
+	int GetAnchorY() const { return m_nAnchorY; }
+	float GetDuration() const { return m_fDuration; }
+	RECT GetRenderRect() const { return m_rRender; }
+	RECT GetCollisionRect() const { return m_rCollision; }
+	std::string GetEventID() const { return m_szEvent; }
 
 	//Mutators:
-	RECT SetRenderRect(RECT rRect) { m_rRender = rRect; }
+	void SetRenderRect(RECT rRect) { m_rRender = rRect; }
+	void SetCollisionRect(RECT rRect) { m_rCollision = rRect; }
+	void SetAnchor(int anchorX, int anchorY) { m_nAnchorX = anchorX;
+											   m_nAnchorY = anchorY;}
 };
 

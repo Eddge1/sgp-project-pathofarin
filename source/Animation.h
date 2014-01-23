@@ -15,10 +15,10 @@ public:
 	CAnimation(void);
 	virtual ~CAnimation(void);
 
-	int GetImageID() { return m_nImageID; }
-	std::vector<CFrame> GetFrames() { return m_vFrames; }
-	std::string GetAnimationName() { return m_szAnimationName; }
-	bool isLooping() { return m_bLooping; }
+	int GetImageID() const { return m_nImageID; }
+	std::vector<CFrame> GetFrames() const { return m_vFrames; }
+	std::string GetAnimationName() const { return m_szAnimationName; }
+	bool isLooping() const { return m_bLooping; }
 
 	void SetImageID(int nID) { m_nImageID = nID; }
 	void SetFrames(std::vector<CFrame> vFrames) { m_vFrames = vFrames; }
