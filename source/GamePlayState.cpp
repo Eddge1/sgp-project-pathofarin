@@ -97,9 +97,12 @@ void CGamePlayState::Activate(void)
 			pTemp = nullptr;
 		}
 		break;
+	case CGamePlayState::GP_END:
+		break;
 	default:
 		break;
 	}
+
 
 
 }
