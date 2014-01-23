@@ -23,6 +23,7 @@ CMainMenuState* CMainMenuState::GetInstance( void )
 
 CMainMenuState::CMainMenuState(void)
 {
+	SetBackgroundImg(-1);
 	SetBackgroundMusic(-1);
 	SetSFXID(-1);
 }
@@ -43,12 +44,14 @@ void CMainMenuState::Activate(void)
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
+	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
 }
 
 void CMainMenuState::Sleep(void)
 {
 	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
+	SetBackgroundImg(-1);
 }
 
 void CMainMenuState::Update(float fElapsedTime)
@@ -60,6 +63,8 @@ void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
+
+	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	pFont2->Draw(_T("Path of Arin"), 200,100, 3.0f, D3DCOLOR_XRGB(0, 0, 255));
 	RECT rTemp = {336, 408, 464,536};
@@ -77,7 +82,7 @@ bool CMainMenuState::Input(void)
 	if(pDI->KeyPressed(DIK_ESCAPE))
 		return false;
 
-	if(pDI->KeyPressed(DIK_UPARROW))
+	if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
 	{
 		if(GetCursorSelection() <= 0)
 			SetCursorSelection(3);
@@ -86,7 +91,7 @@ bool CMainMenuState::Input(void)
 		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
-	else if(pDI->KeyPressed(DIK_DOWNARROW))
+	else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
 	{
 		if(GetCursorSelection() >= 3)
 			SetCursorSelection(0);
@@ -95,7 +100,7 @@ bool CMainMenuState::Input(void)
 		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
-	else if(pDI->KeyPressed(DIK_RETURN))
+	else if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
 	{
 		switch (GetCursorSelection())
 		{

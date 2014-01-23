@@ -12,6 +12,7 @@ COptionsMenu::COptionsMenu(void)
 	m_nMusicVolume = -1;
 	m_nSFXVolume = -1;
 	m_nSubCursor = 0;
+	SetBackgroundImg(-1);
 }
 
 COptionsMenu::~COptionsMenu(void){}
@@ -32,6 +33,8 @@ void COptionsMenu::Activate( void )
 	m_nMusicVolume = int(CSGD_XAudio2::GetInstance()->MusicGetMasterVolume() * 100);
 	m_nSFXVolume = int(CSGD_XAudio2::GetInstance()->SFXGetMasterVolume() * 100);
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
+	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
+
 
 }
 
@@ -47,12 +50,16 @@ void COptionsMenu::Sleep( void )
 	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
 	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
+	SetBackgroundImg(-1);
+
 }
 
 void COptionsMenu::Update( float fElapsedTime ){}
 
 void COptionsMenu::Render( void )
 {
+	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
+
 	std::wostringstream woss;
 	woss << "\n\t\t" <<  m_nMusicVolume << "\n\t\t" << m_nSFXVolume;
 	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
