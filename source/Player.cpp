@@ -4,6 +4,7 @@
 
 CPlayer::CPlayer(void)
 {
+	SetType(OBJ_PLAYER);
 }
 
 

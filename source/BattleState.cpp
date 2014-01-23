@@ -8,6 +8,7 @@
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "RenderManager.h"
 #include "Game.h"
+#include "Objects.h"
 #include "PlayerUnit.h"
 #include "EnemyUnit.h"
 #include <sstream>
@@ -26,6 +27,7 @@ CBattleState::CBattleState(void)
 {
 	m_nTarget = 0;
 	m_nTurn = 0;
+	m_pSender = nullptr;
 }
 
 CBattleState::~CBattleState(void)
@@ -40,15 +42,20 @@ void CBattleState::Activate(void)
 	m_pFont = CGame::GetInstance()->GetFont();
 
 	// TEMP ENEMIES/Player
-
 	m_eCurrentPhase = BP_INIT;
-
-
 }
 
 void CBattleState::Sleep(void)
 {
+	m_eCurrentPhase = BP_INIT;
 
+	for(int i = int(m_vBattleUnits.size() - 1); i >= 0; i--)
+	{
+		m_vBattleUnits[i]->Release();
+		m_vBattleUnits.pop_back();
+	}
+
+	SetSender(nullptr);
 }
 
 bool CBattleState::Input(void)
@@ -57,6 +64,10 @@ bool CBattleState::Input(void)
 		GetNextTarget();
 	else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
 		GetPreviousTarget();
+	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+	{
+		m_eCurrentPhase = BP_END;
+	}
 
 	return true;
 }
@@ -71,6 +82,7 @@ void CBattleState::Update(float fElapsedTime)
 	case CBattleState::BP_BATTLE:
 		break;
 	case CBattleState::BP_END:
+		EndBattle();
 		break;
 	default:
 		break;
@@ -79,8 +91,6 @@ void CBattleState::Update(float fElapsedTime)
 
 void CBattleState::Render(void)
 {
-
-
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D*			pD3D = CSGD_Direct3D::GetInstance();
 
@@ -104,42 +114,43 @@ void CBattleState::Render(void)
 	m_pFont->Draw(_T("This is the Battle State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 
 
-
-	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+	if(m_vBattleUnits.size() > 0)
 	{
-		if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			woss << m_vBattleUnits[i]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 700, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[i]->GetAbilityPoints();
-			m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				woss << m_vBattleUnits[i]->GetHealth();
+				m_pFont->Draw( woss.str().c_str(), 700, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+				woss << m_vBattleUnits[i]->GetAbilityPoints();
+				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			}
+
+
+			RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
+			pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
+
+
 		}
 
 
-		RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
-		pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
+		m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+		m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
+		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+		woss << m_vBattleUnits[m_nTarget]->GetHealth();
+		m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+		woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
+		m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+		woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
+		m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 
+		RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 	}
-
-
-	m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-	m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-
-	woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-	woss << m_vBattleUnits[m_nTarget]->GetHealth();
-	m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-	woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-	woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
-	m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-	woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-	woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-	m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-
-	RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
-	pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
-
 
 }
 
@@ -157,13 +168,9 @@ void CBattleState::Initialize(void)
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
 
-
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
 
 	GetNextTarget();
-
-
-
 
 	m_eCurrentPhase = BP_BATTLE;
 }
@@ -173,9 +180,17 @@ void CBattleState::Battle(void)
 
 }
 
-void CBattleState::End(void)
+void CBattleState::EndBattle(void)
 {
-
+	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+	{
+		if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+		{
+			CSGD_EventSystem::GetInstance()->SendEventNow("VICTORY", nullptr, m_pSender, nullptr);
+			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+			return;
+		}
+	}
 }
 
 CPlayerUnit* CBattleState::CreateTempPlayer(void)
@@ -237,8 +252,17 @@ void CBattleState::GetPreviousTarget(void)
 	}
 	while(m_vBattleUnits[m_nTarget]->GetType() == OBJ_PLAYER_UNIT);
 
+
+
 }
 
+void CBattleState::SetSender(CObjects* pSender)
+{
+	if(m_pSender != nullptr)
+		m_pSender->Release();
 
+	m_pSender = pSender;
 
-
+	if(m_pSender != nullptr)
+		m_pSender->AddRef();
+}

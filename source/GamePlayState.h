@@ -6,7 +6,7 @@
 // Forward Class Declarations
 
 class CSGD_EventSystem;
-class CObject;
+class CObjects;
 class CObjectManager;
 class CPlayer;
 class CRenderManager;
