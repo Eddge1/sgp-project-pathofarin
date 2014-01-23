@@ -82,9 +82,12 @@ void CGamePlayState::Activate(void)
 			m_eCurrPhase = GP_NAV;
 		}
 		break;
+	case CGamePlayState::GP_END:
+		break;
 	default:
 		break;
 	}
+
 
 
 }
@@ -218,7 +221,7 @@ void CGamePlayState::Render(void)
 	{
 		RECT rTemp = {336, 236, 464,364};
 		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
-		
+
 		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 	}

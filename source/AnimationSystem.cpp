@@ -36,7 +36,7 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 		if (pAnim != nullptr)
 		{
 			szTempName = pAnim->Attribute("Name");
-			loadedAnimation[szTempName].SetLooping(pAnim->Attribute("repeat"));
+//			loadedAnimation[szTempName].SetLooping(pAnim->Attribute("repeat"));  // <- Needs to be fixed
 			
 			pAnim = pAnim->FirstChildElement("Frame_Data");
 			if (pAnim != nullptr)
