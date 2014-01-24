@@ -1,6 +1,7 @@
 #include "Objects.h"
 #include "../SGD Wrappers/IListener.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
+#include "GamePlayState.h"
 
 CObjects::CObjects(void)
 {
@@ -32,6 +33,14 @@ void CObjects::Release()
 
 	if(m_unRef == 0)
 		delete this;
+}
+
+RECT CObjects::GetCollisionRect()
+{
+	int nX = CGamePlayState::GetInstance()->GetWorldCamX();
+	int nY = CGamePlayState::GetInstance()->GetWorldCamY();
+	RECT rTemp = {long(m_fPosX - nX), long(m_fPosY - nY), long(m_fPosX + m_nWidth - nX), long(m_fPosY + m_nHeight - nY)};
+	return rTemp;
 }
 
 void CObjects::HandleCollision(CObjects* col)

@@ -1,7 +1,6 @@
 #pragma once
 #include "objects.h"
-class CEntity :
-	public CObjects
+class CEntity :	public CObjects
 {
 	float m_fVelX;
 	float m_fVelY;
@@ -17,6 +16,7 @@ public:
 	float GetVelY	( void )		{return m_fVelY;}
 
 	virtual void HandleEvent( const CEvent* pEvent ) override;
+	virtual RECT GetCollisionRect() final;
 
 };
 

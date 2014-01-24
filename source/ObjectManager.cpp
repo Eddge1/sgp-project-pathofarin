@@ -42,7 +42,7 @@ void CObjectManager::Render(unsigned int nLayer)
 
 	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-
+	RECT rTemp = {};
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
 		if (temp[i]->GetType() != OBJ_UNDEFINE)
@@ -56,8 +56,8 @@ void CObjectManager::Render(unsigned int nLayer)
 		}
 		float PosX = temp[i]->GetPosX() - WorldCamX;
 		float PosY = temp[i]->GetPosY() - WorldCamY;
-		RECT rTemp = {long(PosX), long(PosY), long(PosX + temp[i]->GetWidth()), long(PosY + temp[i]->GetHeight())};
-		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,0,0));
+		rTemp = temp[i]->GetCollisionRect();
+		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(255,0,0));
 		if (nImageID != -1)
 		{
 			CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
@@ -121,14 +121,17 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 	ObjectVector Collision1 = m_vObjects[unLayer1];
 	ObjectVector Collision2 = m_vObjects[unLayer2];
 
+
+	RECT rTemp1 = {};
+	RECT rTemp2 = {};
+	RECT rTempReturn = {};
 	for(unsigned int i = 0; i < Collision1.size(); i++)
 	{
 		for(unsigned int j = 0; j < Collision2.size(); j++)
 		{
 			/*Temp to show Collision works*/
-			RECT rTemp1 = {long(Collision1[i]->GetPosX()), long(Collision1[i]->GetPosY()),long( Collision1[i]->GetPosX()+ Collision1[i]->GetWidth() ), long(Collision1[i]->GetPosY() + Collision1[i]->GetHeight())};
-			RECT rTemp2 = {long(Collision2[j]->GetPosX()), long(Collision2[j]->GetPosY()),long( Collision2[j]->GetPosX()+ Collision2[j]->GetWidth() ), long(Collision2[j]->GetPosY() + Collision2[j]->GetHeight())};
-			RECT rTempReturn = {};
+			rTemp1 = Collision1[i]->GetCollisionRect();
+			rTemp2 = Collision2[j]->GetCollisionRect();
 			if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
 			{
 				Collision1[i]->HandleCollision(Collision2[j]);

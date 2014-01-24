@@ -2,7 +2,7 @@
 #include "../SGD Wrappers/IListener.h"
 #include <string>
 #include "AnimationTimeStamp.h"
-
+#include "../SGD Wrappers/CSGD_Direct3D.h"
 enum ObjectType {OBJ_UNDEFINE, OBJ_ENTITY, OBJ_PLAYER, OBJ_NPC, OBJ_SKILL, OBJ_PLAYER_UNIT, OBJ_ENEMY_UNIT, OBJECT_UNIT};
 class CObjects : public IListener
 {
@@ -29,7 +29,7 @@ public:
 	void SetHeight(int t) { m_nHeight = t; }
 	int GetWidth(void) { return m_nWidth; }
 	void SetWidth(int t) { m_nWidth = t; }
-
+	virtual RECT GetCollisionRect();
 
 	float GetPosX	(void)									{return m_fPosX;}
 	float GetPosY	(void)									{return m_fPosY;}
