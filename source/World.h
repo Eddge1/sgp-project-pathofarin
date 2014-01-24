@@ -26,6 +26,7 @@ public:
 	void Render(int layer);
 	void Update(float fElapsedTime);
 	void AddObject(CObjects* pObject, unsigned int nLayer);
+	void RemoveObject(CObjects* pObject);
 
 	int GetTileHeight( void) { return m_nTileHeight; }
 	void SetTileHeight(int t) { m_nTileHeight = t; }

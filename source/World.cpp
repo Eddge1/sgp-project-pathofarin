@@ -68,3 +68,8 @@ void CWorld::AddObject(CObjects* pObject, unsigned int nLayer)
 {
 	m_pOM->AddObject(pObject, nLayer);
 }
+
+void CWorld::RemoveObject(CObjects* pObject)
+{
+	m_pOM->RemoveObject(pObject);
+}

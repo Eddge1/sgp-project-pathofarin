@@ -43,6 +43,7 @@ public:
 	CPlayerUnit* CreateTempPlayer(void);
 	CUnits* GetPlayerUnit();
 	virtual void HandleEvent( const CEvent* pEvent ) override;
+	void TransitionWorld(std::string szNewWorld);
 
 	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }
 

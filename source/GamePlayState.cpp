@@ -21,6 +21,7 @@
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
+#include "Warp.h"
 
 
 // GetInstance
@@ -84,6 +85,8 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("GAME_OVER", this);
 			m_pES->RegisterClient("PLAYER_MENU", this);
 			m_pES->RegisterClient("VICTORY", this);
+			m_pES->RegisterClient("WARP", this);
+
 
 			m_eCurrPhase = GP_NAV;
 
@@ -283,6 +286,13 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	{
 		m_eCurrPhase = GP_NAV;
 	}
+	else if(pEvent->GetEventID() == "WARP")
+	{
+		CWarp* pWarp = reinterpret_cast<CWarp*>(pEvent->GetSender());
+		m_pPlayer->SetPosX(pWarp->GetWarpX());
+		m_pPlayer->SetPosY(pWarp->GetWarpY());
+		TransitionWorld(pWarp->GetMapName());
+	}
 }
 
 void CGamePlayState::LoadWorld(string input)
@@ -387,6 +397,28 @@ void CGamePlayState::LoadWorld(string input)
 							//pTempTile->SetEvent(true);
 							//pTempTile->SetEventID(pLoad->Attribute("EventID")); TODO;
 						}
+						ReadIn = pTileData->Attribute("isWARP");
+						if(ReadIn == "true")
+						{
+							CWarp* warp = new CWarp;
+							warp->SetPosX(float(tileID % layerWidth * tileWidth));
+							warp->SetPosY(float(tileID / layerWidth * tileHeight));
+							warp->SetHeight(tileHeight);
+							warp->SetWidth(tileWidth);
+							int nX = 0;
+							int nY = 0;
+
+							pLoad->Attribute("WarpX", &nX);
+							pLoad->Attribute("WarpY", &nY);
+
+							warp->SetWarpX(nX);
+							warp->SetWarpY(nY);
+
+							warp->SetMapName(pLoad->Attribute("EventID"));
+							Worldtemp->AddObject(warp, 4);
+							warp->Release();
+
+						}
 						tempLayer->AddTile(pTempTile);
 						pTile = pTile->NextSiblingElement();
 						if(pTile != nullptr)
@@ -421,4 +453,16 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 CUnits* CGamePlayState::GetPlayerUnit()
 {
 	return m_pPlayer->GetUnit();
+}
+
+void CGamePlayState::TransitionWorld(std::string szNewWorld)
+{
+	if(m_sCurrWorld == szNewWorld || szNewWorld == "")
+		return;
+
+
+	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
+
+	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 4);
+	m_sCurrWorld = szNewWorld;
 }

@@ -197,13 +197,15 @@ namespace SGP_PoA_LevelEditor
                     {
                         for (int x = 0; x < MapSize.Width; x++)
                         {
+                            int nX = x * TileSize.Width;
+                            int nY = y * TileSize.Height;
                             if (currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked)
-                                TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
+                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                 new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
                                  currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
                                  TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
                             else
-                                TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
+                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                     new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
                                         currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
                                     TileSize.Width, TileSize.Height));

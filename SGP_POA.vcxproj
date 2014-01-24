@@ -125,6 +125,7 @@
     <ClCompile Include="source\Units.cpp" />
     <ClCompile Include="source\UseItem.cpp" />
     <ClCompile Include="source\VictoryState.cpp" />
+    <ClCompile Include="source\Warp.cpp" />
     <ClCompile Include="source\Weapon.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
     <ClCompile Include="source\World.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="source\Units.h" />
     <ClInclude Include="source\UseItem.h" />
     <ClInclude Include="source\VictoryState.h" />
+    <ClInclude Include="source\Warp.h" />
     <ClInclude Include="source\Weapon.h" />
     <ClInclude Include="source\World.h" />
     <ClInclude Include="TinyXML\tinystr.h" />

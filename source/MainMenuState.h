@@ -4,6 +4,7 @@
 class CMainMenuState :
 	public CGameStates
 {
+	int m_nLogoID;
 public:
 
 	static CMainMenuState* GetInstance( void );
