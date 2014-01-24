@@ -106,10 +106,15 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 					if (pAnim != nullptr)
 					{
 
-						pAnim->Attribute("posX", (int*)rTempCollisionRect.left);
-						pAnim->Attribute("posY", (int*)rTempCollisionRect.top);
-						pAnim->Attribute("Width", (int*)rTempCollisionRect.right);
-						pAnim->Attribute("height", (int*)rTempCollisionRect.bottom);
+						pAnim->Attribute("posX", &left);
+						pAnim->Attribute("posY", &top);
+						pAnim->Attribute("Width", &right);
+						pAnim->Attribute("height", &bottom);
+
+						rTempCollisionRect.left = left;
+						rTempCollisionRect.top = top;
+						rTempCollisionRect.right = right;
+						rTempCollisionRect.bottom = bottom;
 					}
 					CFrame* temp = new CFrame;
 					temp->SetRenderRect(rTempRenderRect);
