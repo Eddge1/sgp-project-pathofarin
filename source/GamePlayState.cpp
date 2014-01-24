@@ -67,7 +67,9 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			LoadWorld("hereisthetest.xml");
 			LoadWorld("TestingCollide.xml");
+
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -414,10 +416,9 @@ void CGamePlayState::LoadWorld(string input)
 							warp->SetWarpX(nX);
 							warp->SetWarpY(nY);
 
-							warp->SetMapName(pLoad->Attribute("EventID"));
+							warp->SetMapName(pTileData->Attribute("EventID"));
 							Worldtemp->AddObject(warp, 4);
 							warp->Release();
-
 						}
 						tempLayer->AddTile(pTempTile);
 						pTile = pTile->NextSiblingElement();
