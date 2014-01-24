@@ -45,7 +45,7 @@ void CObjectManager::Render(unsigned int nLayer)
 	{
 		float PosX = temp[i]->GetPosX() - WorldCamX;
 		float PosY = temp[i]->GetPosY() - WorldCamY;
-		RECT rTemp = {long(PosX), long(PosY), long(PosX + 10), long(PosY + 10)};
+		RECT rTemp = {long(PosX), long(PosY), long(PosX + temp[i]->GetWidth()), long(PosY + temp[i]->GetHeight())};
 		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 	}
 }
@@ -110,8 +110,8 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 		for(unsigned int j = 0; j < Collision2.size(); j++)
 		{
 			/*Temp to show Collision works*/
-			RECT rTemp1 = {long(Collision1[i]->GetPosX()), long(Collision1[i]->GetPosY()),long( Collision1[i]->GetPosX()+ 10), long(Collision1[i]->GetPosY() + 10)};
-			RECT rTemp2 = {long(Collision2[j]->GetPosX()), long(Collision2[j]->GetPosY()),long( Collision2[j]->GetPosX()+ 10), long(Collision2[j]->GetPosY() + 10)};
+			RECT rTemp1 = {long(Collision1[i]->GetPosX()), long(Collision1[i]->GetPosY()),long( Collision1[i]->GetPosX()+ Collision1[i]->GetWidth() ), long(Collision1[i]->GetPosY() + Collision1[i]->GetHeight())};
+			RECT rTemp2 = {long(Collision2[j]->GetPosX()), long(Collision2[j]->GetPosY()),long( Collision2[j]->GetPosX()+ Collision2[j]->GetWidth() ), long(Collision2[j]->GetPosY() + Collision2[j]->GetHeight())};
 			RECT rTempReturn = {};
 			if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
 			{
