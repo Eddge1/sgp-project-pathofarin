@@ -3,13 +3,13 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <map>
+#include "Animation.h"
 
-class CAnimation;
 class CAnimationTimeStamp;
 
 class CAnimationSystem
 {
-	std::map<std::string, CAnimation> loadedAnimation;
+	std::map<std::string, CAnimation*> loadedAnimation;
 
 	// Static pointer to the singleton object
 	static CAnimationSystem* s_pInstance;
@@ -22,11 +22,13 @@ public:
 	static CAnimationSystem* GetInstance( void );
 	static void DeleteInstance( void );
 
+	CAnimation* GetAnimation(std::string szName) { return loadedAnimation[szName]; }
+
 	//Mutator: 
 	void LoadAnimations(std::string filePath);
 
-	void Render(CAnimationTimeStamp &aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
+	void Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
 
-	void Update(CAnimationTimeStamp &aTimeStamp, float fElapsedTime);
+	void Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTime);
 };
 

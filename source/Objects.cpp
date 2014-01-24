@@ -10,11 +10,13 @@ CObjects::CObjects(void)
 	m_bActive = false;
 	m_bRender = false;
 	m_unRef = 1;
+	m_aAnimationTimeInfo = new CAnimationTimeStamp;
 }
 
 CObjects::~CObjects(void)
 {
 	CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
+	delete m_aAnimationTimeInfo;
 }
 
 void CObjects::Update(float fElapsedTime)

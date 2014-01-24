@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Animation_Data>
+	<Animation_Info Name="TestAnimation" Frames="2" repeat="1" Texture="Fireball.png">
+		<Frame_Data>
+			<Render posX="0" posY="0" Width="64" Height="15" anchorX="7" anchorY="7" Duration=".2"/>
+			<ActiveCollision posX="0" posY="0" Width="64" Height="15"/>
+			<Render posX="448" posY="0" Width="0" Height="15" anchorX="457" anchorY="7" Duration=".2"/>
+			<ActiveCollision posX="448" posY="0" Width="64" Height="15"/>
+		</Frame_Data>
+	</Animation_Info>
+</Animation_Data>

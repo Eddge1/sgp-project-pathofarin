@@ -17,6 +17,10 @@ public:
 	float GetTimeOnStamp() const { return m_fTimeOnStamp; }
 
 	//Mutator:
-	void AdvanceCurrentFrame() { m_nCurrFrame++; }
+	void AdvanceCurrentFrame();
+	void SetAnimation(std::string szAnimName) { m_szCurrentAnimation = szAnimName; }
+	void SetCurrentFrame(int nCurrFrame) { m_nCurrFrame = nCurrFrame; }
+	void SetTimeOnStamp(float fTime) { m_fTimeOnStamp = fTime; }
+
 };
 

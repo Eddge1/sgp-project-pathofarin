@@ -161,7 +161,7 @@ void CBitmapFont::Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWOR
 			rChar.right = rChar.left + m_Font.Chars[szOutput[i]].m_nWidth;
 			rChar.bottom = rChar.top + m_Font.Chars[szOutput[i]].m_nHeight;
 
-			CSGD_TextureManager::GetInstance()->Draw(m_nImageID, nX + m_Font.Chars[szOutput[i]].m_nXOffset, nY + m_Font.Chars[szOutput[i]].m_nYOffset, fScale, fScale, &rChar, 0.0f, 0.0f, 0.0f, dwColor);
+			CSGD_TextureManager::GetInstance()->Draw(m_nImageID, nX + (int)(m_Font.Chars[szOutput[i]].m_nXOffset * fScale), nY + (int)(m_Font.Chars[szOutput[i]].m_nYOffset * fScale), fScale, fScale, &rChar, 0.0f, 0.0f, 0.0f, dwColor);
 
 
 			nX += (int)(m_Font.Chars[szOutput[i]].m_nXAdvance * fScale);

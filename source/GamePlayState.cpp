@@ -16,7 +16,9 @@
 #include "CharacterMenuState.h"
 #include "BattleState.h"
 #include "Npcs.h"
-
+#include "AnimationSystem.h"
+#include "Animation.h"
+#include "AnimationTimeStamp.h"
 
 
 // GetInstance
@@ -71,6 +73,7 @@ void CGamePlayState::Activate(void)
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
 			m_pPlayer = CreatePlayer();
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -92,6 +95,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetVelY(0);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation");
 			pOM->AddObject(pTemp, 5);
 			pTemp->Release();
 			pTemp = nullptr;
@@ -249,6 +253,10 @@ CPlayer* CGamePlayState::CreatePlayer()
 	temp->SetPosY(50.0f);
 	temp->SetVelX(0.0f);
 	temp->SetVelY(0.0f);
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("TestAnimation");
+	pTemp->SetCurrentFrame(0);
 	return temp;
 }
 
