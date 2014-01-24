@@ -4,16 +4,11 @@
 using namespace std;
 
 
-class CEnemyUnit :
-	public CUnits
+class CEnemyUnit :	public CUnits
 {
-
-
+	CObjects* m_pTarget;
 
 public:
-	
-
-
 
 	CEnemyUnit(void);
 	virtual ~CEnemyUnit(void);

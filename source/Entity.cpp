@@ -4,6 +4,8 @@
 CEntity::CEntity(void)
 {
 	SetType(OBJ_ENTITY);
+	SetVelX(0);
+	SetVelY(0);
 }
 
 
@@ -22,6 +24,5 @@ void CEntity::Update(float fElapsedTime)
 
 void CEntity::HandleEvent( const CEvent* pEvent )
 {
-
 
 }

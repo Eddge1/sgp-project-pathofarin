@@ -14,13 +14,9 @@ class CEnemyUnit;
 class CBattleState : public CGameStates
 {
 public:
-
-
 	static CBattleState* GetInstance( void );
 
 	// Temp player.
-	CObjects* m_pSender;
-	CPlayerUnit* CreateTempPlayer(void);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
 
 	void GetNextTarget(void);
@@ -38,18 +34,18 @@ public:
 	virtual void Render( void )	override;	
 
 	void SetSender(CObjects* pSender);
+	void SetPlayer(CUnits* pPlayer);
+
 
 private:
-
 	enum PBattlephase {BP_INIT, BP_BATTLE, BP_END};
 
 	CBitmapFont* m_pFont;
 
 	vector<CUnits*> m_vBattleUnits;
 	vector<CUnits*> m_vDeadUnits;
-
-
-
+	CObjects* m_pSender;
+	CUnits* m_pPlayerUnit;
 
 	PBattlephase m_eCurrentPhase;
 
@@ -60,7 +56,6 @@ private:
 	int m_nTarget;
 	int m_nGoldObtained;
 	int m_nExperience;
-
 
 	CBattleState(void);
 	virtual ~CBattleState(void);

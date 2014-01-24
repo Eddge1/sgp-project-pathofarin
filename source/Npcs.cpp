@@ -4,6 +4,10 @@
 
 CNpcs::CNpcs(void)
 {
+	SetType(OBJ_NPC);
+	m_bContainsUnits = false;
+	m_bIsHostile = false;
+
 	CSGD_EventSystem::GetInstance()->RegisterClient("VICTORY", this);
 }
 
@@ -22,10 +26,17 @@ void CNpcs::AddConversation(std::string szConvo)
 	m_szConversation.push_back(szConvo);
 }
 
+std::string CNpcs::GetUnit(int nI)
+{
+	if(nI < int(m_vUnitList.size()))
+		return m_vUnitList[nI];
+	return "";
+}
 
 void CNpcs::Update(float fElapsedTime)
 {
 
+	CEntity::Update(fElapsedTime);
 }
 
 void CNpcs::HandleEvent( const CEvent* pEvent )

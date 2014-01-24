@@ -199,13 +199,13 @@ namespace SGP_PoA_LevelEditor
                         {
                             if (currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked)
                                 TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
-                                new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width,
-                                 (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
+                                new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
+                                 currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
                                  TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
                             else
                                 TM.Draw(imageID, x * TileSize.Width + panel2.AutoScrollPosition.X, y * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1,
-                                    new Rectangle((currMap.TheWorld[nLayer].MyTiles[x, y].X % TileSize.Width) * TileSize.Width,
-                                        (currMap.TheWorld[nLayer].MyTiles[x, y].Y % TileSize.Height) * TileSize.Height,
+                                    new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
+                                        currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
                                     TileSize.Width, TileSize.Height));
                         }
                     }
@@ -306,6 +306,7 @@ namespace SGP_PoA_LevelEditor
             int nTempX = (e.Location.X - panel1.AutoScrollPosition.X) / TileSize.Width;
             int nTempY = (e.Location.Y - panel1.AutoScrollPosition.Y) / TileSize.Height;
             tileSelected = new Point(nTempX, nTempY);
+            label8.Text = tileSelected.ToString();
         }
 
 
@@ -754,5 +755,17 @@ namespace SGP_PoA_LevelEditor
             label6.Text = "Choose a Color";
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            for (int x = 0; x < MapSize.Width; x++)
+            {
+                for (int y = 0; y < MapSize.Height; y++)
+                {
+                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[x, y].X = tileSelected.X;
+                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[x, y].Y = tileSelected.Y;
+                }
+            }
+        }
     }
+
 }

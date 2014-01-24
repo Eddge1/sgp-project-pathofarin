@@ -12,13 +12,24 @@ class CObjects : public IListener
 	float m_fPosY;
 	bool m_bActive;
 	bool m_bRender;
+
 	unsigned int m_unRef;
 	CAnimationTimeStamp* m_aAnimationTimeInfo;
+
+	int m_nHeight;
+	int m_nWidth;
+
 
 public:
 
 	CObjects(void);
 	virtual ~CObjects(void);
+
+	int GetHeight(void) { return m_nHeight; }
+	void SetHeight(int t) { m_nHeight = t; }
+	int GetWidth(void) { return m_nWidth; }
+	void SetWidth(int t) { m_nWidth = t; }
+
 
 	float GetPosX	(void)									{return m_fPosX;}
 	float GetPosY	(void)									{return m_fPosY;}

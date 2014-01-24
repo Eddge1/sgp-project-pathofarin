@@ -1,8 +1,11 @@
 #pragma once
 #include "gamestates.h"
-class CCreditState :
-	public CGameStates
+#include <string>
+class CCreditState : public CGameStates
 {
+	std::string m_szCredits;
+	float m_fDrawY;
+
 	CCreditState(void);
 	virtual ~CCreditState(void);
 	CCreditState( const CCreditState& );

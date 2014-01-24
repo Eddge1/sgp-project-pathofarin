@@ -15,5 +15,4 @@ public:
 	void SetUnit	(CPlayerUnit* pUnit)	{ m_cBattle = pUnit; }
 	virtual void HandleCollision(CObjects* col) override;
 	virtual void HandleEvent( const CEvent* pEvent ) override;
-
 };

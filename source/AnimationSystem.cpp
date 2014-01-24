@@ -23,7 +23,8 @@ CAnimationSystem* CAnimationSystem::GetInstance( void ) // Remember these are st
 // DeleteInstance
 void CAnimationSystem::DeleteInstance( void )
 {
-
+	delete s_pInstance;
+	s_pInstance = nullptr;
 }
 
 
@@ -35,7 +36,10 @@ CAnimationSystem::CAnimationSystem(void)
 
 CAnimationSystem::~CAnimationSystem(void)
 {
-
+	for (auto i = loadedAnimation.begin(); i != loadedAnimation.end(); ++i)
+	{
+		delete i->second;
+	}
 }
 
 void CAnimationSystem::LoadAnimations(std::string filePath)

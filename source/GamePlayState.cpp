@@ -16,6 +16,8 @@
 #include "CharacterMenuState.h"
 #include "BattleState.h"
 #include "Npcs.h"
+#include "../TinyXML/tinyxml.h"
+#include <sstream>
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
@@ -79,7 +81,7 @@ void CGamePlayState::Activate(void)
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-			pOM->AddObject(m_pPlayer, 5); // Player goes on layer 5
+			pOM->AddObject(m_pPlayer, 4); // Player goes on layer 5
 
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
@@ -95,15 +97,22 @@ void CGamePlayState::Activate(void)
 			pTemp->SetVelY(0);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
+			pOM->AddObject(pTemp, 4);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation");
 			pOM->AddObject(pTemp, 5);
 			pTemp->Release();
 			pTemp = nullptr;
+
+			LoadWorld("TestingCollide.xml");
+
 		}
+		break;
+	case CGamePlayState::GP_END:
 		break;
 	default:
 		break;
 	}
+
 
 
 }
@@ -141,6 +150,12 @@ void CGamePlayState::Sleep(void)
 
 			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
 
+			for(auto Iter = m_mWorldManager.begin(); Iter != m_mWorldManager.end(); ++Iter)
+			{
+				delete Iter->second;
+			}
+
+			CAnimationSystem::GetInstance()->DeleteInstance();
 		}
 		break;
 	default:
@@ -151,16 +166,17 @@ void CGamePlayState::Sleep(void)
 
 bool CGamePlayState::Input(void)
 {
-	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_ESCAPE ) == true)
+	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9) || pDI->JoystickButtonPressed(2))
 	{
 		bisPaused = !bisPaused;
 		return true;
 	}
 	else if(bisPaused)
 	{
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
+		if( pDI->KeyPressed( DIK_UP ) == true || pDI->JoystickDPadPressed(DIR_UP))
 			SetCursorSelection(GetCursorSelection() - 1);
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
+		if( pDI->KeyPressed( DIK_DOWN ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
 		if(GetCursorSelection() > 1)
@@ -169,7 +185,7 @@ bool CGamePlayState::Input(void)
 			SetCursorSelection(1);
 
 
-		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true )
+		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
 		{
 			switch( GetCursorSelection() )
 			{
@@ -207,18 +223,9 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-		//if(WorldCamX < 0)
-		//	WorldCamX = 0;
-		//else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
-		//	WorldCamX = CGame::GetInstance()->GetScreenWidth();
-
-		//if(WorldCamY < 0)
-		//	WorldCamY = 0;
-		//else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
-		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 		pOM->Update(fElapsedTime);
-		pOM->HandleCollision(5,5);
+		pOM->HandleCollision(4,4);
 		m_pES->ProcessEvents();
 		m_temp.Update(fElapsedTime);
 
@@ -257,7 +264,9 @@ CPlayer* CGamePlayState::CreatePlayer()
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("TestAnimation");
 	pTemp->SetCurrentFrame(0);
-	return temp;
+	temp->SetUnit(CreateTempPlayer());
+	temp->SetHeight(10);
+	temp->SetWidth(10);	return temp;
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -281,4 +290,142 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	{
 		m_eCurrPhase = GP_NAV;
 	}
+}
+
+void CGamePlayState::LoadWorld(string input)
+{
+
+	string temp = "Assets/Data/Levels/"; 
+	temp += input;
+
+	CWorld* Worldtemp = new CWorld;
+
+	TiXmlDocument doc;
+	if(doc.LoadFile(temp.c_str()) == false)
+		return;
+
+	TiXmlElement *pRoot = doc.RootElement();
+	if(pRoot == nullptr)
+		return;
+
+	temp = pRoot->Attribute("Image");
+	wostringstream texture;
+	texture << "Assets/Graphics/Tilesets/" << temp.c_str();
+	int transparency = 0;
+
+	pRoot->Attribute("Transparency", &transparency);
+	Worldtemp->SetID(CSGD_TextureManager::GetInstance()->LoadTexture(texture.str().c_str(), transparency));
+
+	int tileWidth = 0;
+	int tileHeight = 0;
+	int layerWidth = 0;
+	int layerHeight = 0;
+	int TotalLayers = 0;
+
+	pRoot->Attribute("Layers", &TotalLayers);
+	pRoot->Attribute("TileHeight", &tileHeight);
+	pRoot->Attribute("TileWidth", &tileWidth);
+	pRoot->Attribute("Height", &layerHeight);
+	pRoot->Attribute("Width", &layerWidth);
+
+	Worldtemp->SetHeight(layerHeight);
+	Worldtemp->SetWidth(layerWidth);
+	Worldtemp->SetTileHeight(tileHeight);
+	Worldtemp->SetTileWidth(tileWidth);
+
+
+
+	TiXmlElement* pLoad = pRoot->FirstChildElement("Layer");
+	if(pLoad != nullptr)
+	{
+		TiXmlElement* pTile;
+		TiXmlElement* pTileData;
+
+
+		string ReadIn = "";
+		int TileXID = 0;
+		int TileYID = 0;
+		CLayer* tempLayer;
+		CTile* pTempTile;
+
+		for(int i = 0; i < TotalLayers; i++)
+		{
+			tempLayer =  new CLayer;
+			pTile = pLoad->FirstChildElement("Tile");
+			if(pTile != nullptr)
+				pTileData = pTile->FirstChildElement("Tile_Data");
+			if(pLoad != nullptr)
+			{
+				for(int tileID = 0; tileID < layerWidth * layerHeight; tileID++)
+				{
+
+					if(pTileData != nullptr)
+					{
+
+
+						pTempTile = new CTile;
+						pTileData->Attribute("yTileID", &TileYID);
+						pTileData->Attribute("xTileID", &TileXID);
+
+						pTempTile->SetTileX(TileXID);
+						pTempTile->SetTileY(TileYID);
+
+
+						ReadIn = pTileData->Attribute("isEvent");
+						if(ReadIn == "true")
+						{
+							pTempTile->SetEvent(true);
+							pTempTile->SetEventID(pLoad->Attribute("EventID"));
+						}
+						ReadIn = pTileData->Attribute("isBlocked");
+						if(ReadIn == "true")
+						{
+							CObjects* block = new CObjects;
+							block->SetPosX(float(tileID % layerWidth * tileWidth));
+							block->SetPosY(float(tileID / layerWidth * tileHeight));
+							block->SetHeight(tileHeight);
+							block->SetWidth(tileWidth);
+							CObjectManager::GetInstance()->AddObject(block, 4);
+							block->Release();
+						}
+						ReadIn = pTileData->Attribute("isNPC");
+						if(ReadIn == "true")
+						{
+							//pTempTile->SetEvent(true);
+							//pTempTile->SetEventID(pLoad->Attribute("EventID")); TODO;
+						}
+						tempLayer->AddTile(pTempTile);
+						pTile = pTile->NextSiblingElement();
+						if(pTile != nullptr)
+							pTileData = pTile->FirstChildElement("Tile_Data");
+					}
+				}
+
+				Worldtemp->AddLayers(tempLayer);
+				pLoad = pLoad->NextSiblingElement();
+			}
+		}
+	}
+
+	m_mWorldManager[input] = Worldtemp;
+	m_sCurrWorld = input;
+
+}
+
+CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
+{
+	CPlayerUnit* temp = new CPlayerUnit;
+	temp->SetMaxHealth(80);
+	temp->SetMaxAP(50);
+	temp->SetPosX(600);
+	temp->SetPosY(250);
+	temp->SetVelX(0);
+	temp->SetVelY(0);
+	temp->SetSpeed(1);
+	temp->SetType(OBJ_PLAYER_UNIT);
+	return temp;
+}
+CUnits* CGamePlayState::GetPlayerUnit()
+{
+	return m_pPlayer->GetUnit();
 }
