@@ -66,7 +66,7 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
-			CObjectManager*			pOM = CObjectManager::GetInstance();
+			LoadWorld("TestingCollide.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -79,8 +79,6 @@ void CGamePlayState::Activate(void)
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
-			pOM->AddObject(m_pPlayer, 4); // Player goes on layer 5
 
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
@@ -99,13 +97,13 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(0,200);
 			pTemp->AddWaypoint(0,100);
 			pTemp->AddWaypoint(-100,100);
-			pOM->AddObject(pTemp, 4);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation");
-			pOM->AddObject(pTemp, 5);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 4);
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 4);
+
 			pTemp->Release();
 			pTemp = nullptr;
 
-			LoadWorld("TestingCollide.xml");
 
 		}
 		break;
@@ -134,7 +132,6 @@ void CGamePlayState::Sleep(void)
 	case CGamePlayState::GP_END:
 		{
 			m_pES->UnregisterClientAll(this);
-			CObjectManager* pOM = CObjectManager::GetInstance();
 			// Clear the event system
 			if( m_pES != nullptr )
 			{
@@ -145,8 +142,6 @@ void CGamePlayState::Sleep(void)
 			delete m_pRM;
 			m_pRM = nullptr;
 			m_pPlayer->Release();
-
-			pOM->RemoveAll();
 
 			m_eCurrPhase = GP_START;
 
@@ -216,7 +211,6 @@ bool CGamePlayState::Input(void)
 
 void CGamePlayState::Update( float fElapsedTime )
 {
-	CObjectManager* pOM = CObjectManager::GetInstance();
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(bisPaused == false)
 	{
@@ -224,8 +218,7 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 
-		pOM->Update(fElapsedTime);
-		pOM->HandleCollision(4,4);
+		m_mWorldManager[m_sCurrWorld]->Update(fElapsedTime);
 		m_pES->ProcessEvents();
 		m_temp.Update(fElapsedTime);
 
@@ -385,7 +378,7 @@ void CGamePlayState::LoadWorld(string input)
 							block->SetPosY(float(tileID / layerWidth * tileHeight));
 							block->SetHeight(tileHeight);
 							block->SetWidth(tileWidth);
-							CObjectManager::GetInstance()->AddObject(block, 4);
+							Worldtemp->AddObject(block, 4);
 							block->Release();
 						}
 						ReadIn = pTileData->Attribute("isNPC");

@@ -2,13 +2,13 @@
 #include "Game.h"
 #include "GamePlayState.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
-
-
+#include "ObjectManager.h"
+#include "Objects.h"
 
 CWorld::CWorld(void)
 {
+	m_pOM = new CObjectManager();
 }
-
 
 CWorld::~CWorld(void)
 {
@@ -16,12 +16,15 @@ CWorld::~CWorld(void)
 	{
 		delete m_vMyLayers[i];
 	}
+	m_pOM->RemoveAll();
+	delete m_pOM;
+	m_pOM = nullptr;
 }
-
 
 void CWorld::Render(int layer)
 {
 	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
+	m_pOM->Render(layer);
 
 
 	if(GetID() == -1 || layer >= int(m_vMyLayers.size()))
@@ -53,5 +56,15 @@ void CWorld::Render(int layer)
 		}
 	}
 
+}
 
+void CWorld::Update(float fElapsedTime)
+{
+	m_pOM->Update(fElapsedTime);
+	m_pOM->HandleCollision(4,4);
+}
+
+void CWorld::AddObject(CObjects* pObject, unsigned int nLayer)
+{
+	m_pOM->AddObject(pObject, nLayer);
 }

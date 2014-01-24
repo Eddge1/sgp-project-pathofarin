@@ -6,7 +6,6 @@ class CAnimationSystem;
 
 class CObjectManager
 {
-	CObjectManager(void);
 
 	typedef std::vector< CObjects* >	ObjectVector;
 	typedef ObjectVector::iterator		ObjIterator;
@@ -17,9 +16,8 @@ class CObjectManager
 	CAnimationSystem* m_pDraw;
 
 public:
-
+	CObjectManager(void);
 	~CObjectManager(void);
-	static CObjectManager* GetInstance();
 
 	void Update(float fElapsedTime);
 	void Render(unsigned int nLayer);
@@ -27,7 +25,5 @@ public:
 	void RemoveObject(CObjects* pObject);
 	void HandleCollision(unsigned int unLayer1, unsigned int unLayer2);
 	void RemoveAll();
-
-
 };
 

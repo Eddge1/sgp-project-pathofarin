@@ -4,8 +4,10 @@
 #include "Layer.h"
 #include <vector>
 #include <string>
-using namespace std;
+class CObjectManager;
+class CObjects;
 
+using namespace std;
 
 class CWorld
 {
@@ -18,13 +20,12 @@ class CWorld
 
 	vector<CLayer*> m_vMyLayers;
 	string m_sMapName;
-
+	CObjectManager* m_pOM;
 public:
 
 	void Render(int layer);
-
-
-
+	void Update(float fElapsedTime);
+	void AddObject(CObjects* pObject, unsigned int nLayer);
 
 	int GetTileHeight( void) { return m_nTileHeight; }
 	void SetTileHeight(int t) { m_nTileHeight = t; }

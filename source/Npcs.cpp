@@ -69,7 +69,6 @@ void CNpcs::Update(float fElapsedTime)
 
 		CEntity::Update(fElapsedTime);
 	}
-
 }
 
 void CNpcs::HandleEvent( const CEvent* pEvent )

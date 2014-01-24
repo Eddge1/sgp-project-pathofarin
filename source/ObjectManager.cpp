@@ -7,15 +7,10 @@
 #include "Animation.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 #include "AnimationSystem.h"
+
 CObjectManager::CObjectManager(void)
 {
 	m_bIterating = false;
-}
-
-CObjectManager* CObjectManager::GetInstance()
-{
-	static CObjectManager s_Instance;
-	return &s_Instance;
 }
 
 CObjectManager::~CObjectManager(void)
@@ -66,7 +61,6 @@ void CObjectManager::Render(unsigned int nLayer)
 		if (nImageID != -1)
 		{
 			CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
-			//pTM->Draw(nImageID, PosX, PosY, 2.0f, 2.0f, &(pAnim->GetIndividualFrame(temp[i]->GetAnimInfo()->GetCurrentFrame())->GetRenderRect()));
 		}
 	}
 
