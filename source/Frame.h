@@ -28,6 +28,7 @@ public:
 	//Mutators:
 	void SetRenderRect(RECT rRect) { m_rRender = rRect; }
 	void SetCollisionRect(RECT rRect) { m_rCollision = rRect; }
+	void SetDuration(float fDuration) { m_fDuration = fDuration; }
 	void SetAnchor(int anchorX, int anchorY) { m_nAnchorX = anchorX;
 											   m_nAnchorY = anchorY;}
 };

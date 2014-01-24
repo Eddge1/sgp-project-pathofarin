@@ -2,7 +2,11 @@
 #include "Objects.h"
 #include "GamePlayState.h"
 #include "../SGD Wrappers/CSGD_Direct3D.h"
-
+#include "AnimationSystem.h"
+#include "AnimationTimeStamp.h"
+#include "Animation.h"
+#include "../SGD Wrappers/CSGD_TextureManager.h"
+#include "AnimationSystem.h"
 CObjectManager::CObjectManager(void)
 {
 	m_bIterating = false;
@@ -37,17 +41,35 @@ void CObjectManager::Render(unsigned int nLayer)
 
 	int WorldCamX = CGamePlayState::GetInstance()->GetWorldCamX();
 	int WorldCamY = CGamePlayState::GetInstance()->GetWorldCamY();
-
-
+	int nImageID = -1;
 	ObjectVector temp = m_vObjects[nLayer];
+	CAnimation* pAnim; 
+
+	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
+
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
+		if (temp[i]->GetType() != OBJ_UNDEFINE)
+		{
+			pAnim = CAnimationSystem::GetInstance()->GetAnimation(temp[i]->GetAnimInfo()->GetCurrentAnimation());
+			nImageID = pAnim->GetImageID();
+		}
+		else
+		{
+			nImageID = -1;
+		}
 		float PosX = temp[i]->GetPosX() - WorldCamX;
 		float PosY = temp[i]->GetPosY() - WorldCamY;
 		RECT rTemp = {long(PosX), long(PosY), long(PosX + temp[i]->GetWidth()), long(PosY + temp[i]->GetHeight())};
 		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,0,0));
+		if (nImageID != -1)
+		{
+			CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
+			//pTM->Draw(nImageID, PosX, PosY, 2.0f, 2.0f, &(pAnim->GetIndividualFrame(temp[i]->GetAnimInfo()->GetCurrentFrame())->GetRenderRect()));
+		}
 	}
+
 }
 void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 {

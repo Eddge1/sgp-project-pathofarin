@@ -10,4 +10,9 @@ CAnimation::CAnimation(void)
 
 CAnimation::~CAnimation(void)
 {
+	for (unsigned int i = 0; i < m_vFrames.size(); i++)
+	{
+		delete m_vFrames[i];
+	}
+	m_vFrames.clear();
 }
