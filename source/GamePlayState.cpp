@@ -256,7 +256,7 @@ CPlayer* CGamePlayState::CreatePlayer()
 	temp->SetVelY(0.0f);
 	temp->SetUnit(CreateTempPlayer());
 	temp->SetHeight(10);
-	temp->setWidth(10);	return temp;
+	temp->SetWidth(10);	return temp;
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -371,11 +371,12 @@ void CGamePlayState::LoadWorld(string input)
 						if(ReadIn == "true")
 						{
 							CObjects* block = new CObjects;
-							block->SetPosX(tileID % layerWidth * tileWidth);
-							block->SetPosY(tileID / layerWidth * tileHeight);
+							block->SetPosX(float(tileID % layerWidth * tileWidth));
+							block->SetPosY(float(tileID / layerWidth * tileHeight));
 							block->SetHeight(tileHeight);
 							block->SetWidth(tileWidth);
 							CObjectManager::GetInstance()->AddObject(block, 4);
+							block->Release();
 						}
 						ReadIn = pTileData->Attribute("isNPC");
 						if(ReadIn == "true")
