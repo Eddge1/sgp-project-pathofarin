@@ -112,6 +112,7 @@ void CBattleState::Render(void)
 	m_pFont->Draw(_T("HP:"), 660, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 	m_pFont->Draw(_T("AP:"), 660, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
+
 	m_pFont->Draw(_T("This is the Battle State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 
 
@@ -126,6 +127,10 @@ void CBattleState::Render(void)
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 				woss << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+
+
+
 			}
 
 
@@ -155,7 +160,7 @@ void CBattleState::Render(void)
 
 }
 
-bool SortSpeed(CUnits *l, CUnits *r)
+bool SortSpeed(CUnits *l, CUnits *r) // holy hell
 {
 	return l->GetSpeed() > r->GetSpeed();
 }
@@ -180,6 +185,8 @@ void CBattleState::Initialize(void)
 
 void CBattleState::Battle(void)
 {
+
+
 
 }
 

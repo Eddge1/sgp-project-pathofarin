@@ -98,7 +98,7 @@ void CGamePlayState::Activate(void)
 			pTemp->Release();
 			pTemp = nullptr;
 
-			LoadWorld("Testmeme.xml");
+			LoadWorld("TestingCollide.xml");
 
 		}
 		break;
@@ -217,15 +217,6 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-		//if(WorldCamX < 0)
-		//	WorldCamX = 0;
-		//else if(WorldCamX > CGame::GetInstance()->GetScreenWidth() )
-		//	WorldCamX = CGame::GetInstance()->GetScreenWidth();
-
-		//if(WorldCamY < 0)
-		//	WorldCamY = 0;
-		//else if(WorldCamY > CGame::GetInstance()->GetScreenHeight() )
-		//	WorldCamY = CGame::GetInstance()->GetScreenHeight();
 
 		pOM->Update(fElapsedTime);
 		pOM->HandleCollision(4,4);
@@ -264,7 +255,8 @@ CPlayer* CGamePlayState::CreatePlayer()
 	temp->SetVelX(0.0f);
 	temp->SetVelY(0.0f);
 	temp->SetUnit(CreateTempPlayer());
-	return temp;
+	temp->SetHeight(10);
+	temp->setWidth(10);	return temp;
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -378,8 +370,12 @@ void CGamePlayState::LoadWorld(string input)
 						ReadIn = pTileData->Attribute("isBlocked");
 						if(ReadIn == "true")
 						{
-							//pTempTile->SetEvent(true);
-							//pTempTile->SetEventID(pLoad->Attribute("EventID")); TODO;
+							CObjects* block = new CObjects;
+							block->SetPosX(tileID % layerWidth * tileWidth);
+							block->SetPosY(tileID / layerWidth * tileHeight);
+							block->SetHeight(tileHeight);
+							block->SetWidth(tileWidth);
+							CObjectManager::GetInstance()->AddObject(block, 4);
 						}
 						ReadIn = pTileData->Attribute("isNPC");
 						if(ReadIn == "true")
