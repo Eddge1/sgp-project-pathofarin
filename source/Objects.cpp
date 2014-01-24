@@ -10,8 +10,8 @@ CObjects::CObjects(void)
 	m_bActive = false;
 	m_bRender = false;
 	m_unRef = 1;
-	m_nHeight = 0;
-	m_nWidth = 0;
+	m_nHeight = 10;
+	m_nWidth = 10;
 }
 
 CObjects::~CObjects(void)

@@ -40,17 +40,30 @@ void CPlayer::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_UNDEFINE)
 	{
-		
+
 		if(GetVelX() > 0)
 			SetPosX(GetPosX() -1);
 		else if(GetVelX() < 0)
 			SetPosX(GetPosX() + 1);
-		
+
 		if(GetVelY() > 0)
 			SetPosY(GetPosY() -1);
 		else if(GetVelY() < 0)
 			SetPosY(GetPosY() + 1);
-	
+
+	}
+	else if(col->GetType() == OBJ_NPC)
+	{
+		if(GetVelX() > 0 && col->GetPosX() >= GetPosX())
+			SetPosX(GetPosX() -1);
+		else if(GetVelX() < 0 && col->GetPosX() <= GetPosX())
+			SetPosX(GetPosX() + 1);
+
+		if(GetVelY() > 0 && col->GetPosY() >= GetPosY())
+			SetPosY(GetPosY() -1);
+		else if(GetVelY() < 0 && col->GetPosY() <= GetPosY())
+			SetPosY(GetPosY() + 1);
+
 	}
 }
 

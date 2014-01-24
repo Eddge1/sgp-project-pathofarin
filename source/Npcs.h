@@ -4,11 +4,18 @@
 
 class CNpcs : public CEntity
 {
+	struct SWaypoint
+	{
+		float locX;
+		float locY;
+	};
 	std::vector<std::string> m_vUnitList;
 	std::vector<std::string> m_szConversation;
+	std::vector<SWaypoint*> m_vWaypoints;
 	std::string m_szEventThrow; 
 	bool m_bContainsUnits;
 	bool m_bIsHostile;
+	int m_nWaypoint;
 
 public:
 	CNpcs(void);
@@ -19,6 +26,7 @@ public:
 
 	void SetUnits(std::string szName);
 	void AddConversation(std::string szConvo);
+	void AddWaypoint(float fX, float fY);
 	std::string GetUnit(int nI);
 	unsigned int GetUnitSize() {return m_vUnitList.size();}
 	unsigned int GetConvoSize() {return m_szConversation.size();}

@@ -24,7 +24,7 @@ void CWorld::Render(int layer)
 	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
 
 
-	if(GetID() == -1 || layer >= m_vMyLayers.size())
+	if(GetID() == -1 || layer >= int(m_vMyLayers.size()))
 		return;
 
 	int WorldCamX = CGamePlayState::GetInstance()->GetWorldCamX();

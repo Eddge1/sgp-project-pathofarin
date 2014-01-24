@@ -74,7 +74,6 @@ void CGamePlayState::Activate(void)
 
 			m_pPlayer = CreatePlayer();
 
-
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
@@ -89,11 +88,14 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetVelX(0);
-			pTemp->SetVelY(0);
+			//pTemp->SetHostile(true);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
+			pTemp->AddWaypoint(100,100);
+			pTemp->AddWaypoint(0,100);
+			pTemp->AddWaypoint(0,200);
+			pTemp->AddWaypoint(0,100);
+			pTemp->AddWaypoint(-100,100);
 			pOM->AddObject(pTemp, 4);
 			pTemp->Release();
 			pTemp = nullptr;
@@ -200,8 +202,6 @@ bool CGamePlayState::Input(void)
 				}
 				break;
 			}
-
-
 		}
 	}
 
