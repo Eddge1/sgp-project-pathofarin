@@ -263,6 +263,7 @@ CPlayer* CGamePlayState::CreatePlayer()
 	temp->SetPosY(50.0f);
 	temp->SetVelX(0.0f);
 	temp->SetVelY(0.0f);
+	temp->SetUnit(CreateTempPlayer());
 	return temp;
 }
 
@@ -404,3 +405,20 @@ void CGamePlayState::LoadWorld(string input)
 
 }
 
+CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
+{
+	CPlayerUnit* temp = new CPlayerUnit;
+	temp->SetMaxHealth(80);
+	temp->SetMaxAP(50);
+	temp->SetPosX(600);
+	temp->SetPosY(250);
+	temp->SetVelX(0);
+	temp->SetVelY(0);
+	temp->SetSpeed(1);
+	temp->SetType(OBJ_PLAYER_UNIT);
+	return temp;
+}
+CUnits* CGamePlayState::GetPlayerUnit()
+{
+	return m_pPlayer->GetUnit();
+}

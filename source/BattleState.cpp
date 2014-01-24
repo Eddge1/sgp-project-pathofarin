@@ -56,6 +56,7 @@ void CBattleState::Sleep(void)
 	}
 
 	SetSender(nullptr);
+	SetPlayer(nullptr);
 }
 
 bool CBattleState::Input(void)
@@ -162,7 +163,9 @@ bool SortSpeed(CUnits *l, CUnits *r)
 
 void CBattleState::Initialize(void)
 {
-	m_vBattleUnits.push_back(CreateTempPlayer());
+	SetPlayer(CGamePlayState::GetInstance()->GetPlayerUnit());
+	m_vBattleUnits.push_back(m_pPlayerUnit);
+	m_pPlayerUnit->AddRef();
 
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 50, 20));
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
@@ -191,21 +194,6 @@ void CBattleState::EndBattle(void)
 			return;
 		}
 	}
-}
-
-CPlayerUnit* CBattleState::CreateTempPlayer(void)
-{
-	CPlayerUnit* temp = new CPlayerUnit;
-	temp->SetMaxHealth(80);
-	temp->SetMaxAP(50);
-	temp->SetPosX(600);
-	temp->SetPosY(250);
-	temp->SetVelX(0);
-	temp->SetVelY(0);
-	temp->SetSpeed(1);
-	temp->SetTurn();
-	temp->SetType(OBJ_PLAYER_UNIT);
-	return temp;
 }
 
 CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
@@ -265,4 +253,15 @@ void CBattleState::SetSender(CObjects* pSender)
 
 	if(m_pSender != nullptr)
 		m_pSender->AddRef();
+}
+
+void CBattleState::SetPlayer(CUnits* pPlayer)
+{
+	if(m_pPlayerUnit != nullptr)
+		m_pPlayerUnit->Release();
+
+	m_pPlayerUnit = pPlayer;
+
+	if(m_pPlayerUnit != nullptr)
+		m_pPlayerUnit->AddRef();
 }

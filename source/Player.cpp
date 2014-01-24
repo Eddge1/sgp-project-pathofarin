@@ -10,6 +10,7 @@ CPlayer::CPlayer(void)
 
 CPlayer::~CPlayer(void)
 {
+	m_cBattle->Release();
 }
 
 void CPlayer::Update(float fElapsedTime)

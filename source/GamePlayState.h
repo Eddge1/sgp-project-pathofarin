@@ -14,6 +14,7 @@ class CObjects;
 class CObjectManager;
 class CPlayer;
 class CRenderManager;
+class CPlayerUnit;
 
 class CGamePlayState :	public CGameStates, public IListener
 {
@@ -39,6 +40,8 @@ public:
 	virtual void Render( void )	override;					// render entities
 
 	CPlayer* CreatePlayer();
+	CPlayerUnit* CreateTempPlayer(void);
+	CUnits* GetPlayerUnit();
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 
 	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }

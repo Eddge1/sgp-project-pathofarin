@@ -3,6 +3,8 @@
 
 CEnemyUnit::CEnemyUnit(void)
 {
+	SetType(OBJ_ENEMY_UNIT);
+	m_pTarget = nullptr;
 }
 
 

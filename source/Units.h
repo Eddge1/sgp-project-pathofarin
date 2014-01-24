@@ -15,16 +15,13 @@ class CUnits :
 
 	bool m_bTurn;
 	int m_nSkillSelection;
+
 	//int m_nExperience;
 	//int m_nGold;
 	//int m_nAvailStats;
 	//std::map<string, CItem> m_mInventory
 
-
 	string m_sName;
-
-
-
 public:
 
 

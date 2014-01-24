@@ -3,6 +3,7 @@
 
 CPlayerUnit::CPlayerUnit(void)
 {
+	SetType(OBJ_PLAYER_UNIT);
 }
 
 
