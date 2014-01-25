@@ -78,7 +78,13 @@ void CGamePlayState::Activate(void)
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
 			m_pPlayer = CreatePlayer();
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");
+
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
+			
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
@@ -102,13 +108,29 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(0,200);
 			pTemp->AddWaypoint(0,100);
 			pTemp->AddWaypoint(-100,100);
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation");
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 4);
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 4);
 
+			CNpcs* pTemp2 = new CNpcs();
+			pTemp2->SetActive(true);
+			//pTemp->SetHostile(true);
+			pTemp2->SetPosX(200);
+			pTemp2->SetPosY(100);
+			pTemp2->AddWaypoint(200,100);
+			pTemp2->AddWaypoint(300,100);
+			pTemp2->AddWaypoint(200,200);
+			pTemp2->AddWaypoint(300,100);
+			pTemp2->AddWaypoint(200,100);
+			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
+			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 4);
+
+
 			pTemp->Release();
 			pTemp = nullptr;
-
+			pTemp2->Release();
+			pTemp2 = nullptr;
 
 		}
 		break;
@@ -260,7 +282,7 @@ CPlayer* CGamePlayState::CreatePlayer()
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("TestAnimation");
+	pTemp->SetAnimation("TEMP_Player_Walk_Right");
 	pTemp->SetCurrentFrame(0);
 	temp->SetUnit(CreateTempPlayer());
 	temp->SetHeight(10);
