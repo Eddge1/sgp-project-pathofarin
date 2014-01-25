@@ -82,19 +82,53 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 
 void CNpcs::HandleCollision(CObjects* col)
 {
-	if(col->GetType() == OBJ_PLAYER)
+	if(col->GetType() == OBJ_PLAYER || col->GetType() ==OBJ_UNDEFINE)
 	{
 		if(m_bIsHostile && GetActive())
 			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", &m_vUnitList, nullptr, this);
-		if(GetVelX() > 0)
+		RECT rTemp = col->GetCollisionRect();
+		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
+		if(GetCollisionRect().left > rTemp.right - 10 && GetCollisionRect().left < rTemp.right)
+		{
+			SetPosX(GetPosX() +1);
+			SetVelX(0);
+		}
+		else if(GetCollisionRect().right < rTemp.left + 10 && GetCollisionRect().right > rTemp.left)
+		{
 			SetPosX(GetPosX() -1);
-		else if(GetVelX() < 0)
-			SetPosX(GetPosX() + 1);
-
-		if(GetVelY() > 0)
-			SetPosY(GetPosY() -1);
-		else if(GetVelY() < 0)
+			SetVelX(0);
+		}
+		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
+		{
+			if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+			{
+				if(GetVelY() > 0)
+				{
+					SetPosY(GetPosY() - 1);
+					SetVelY(0);
+				}
+			}
+			else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+			{
+				SetPosY(GetPosY() + 1);
+				SetVelY(0);
+			}
+		}
+		else if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+		{
+			if(GetVelY() > 0)
+			{
+				SetPosY(GetPosY() - 1);
+				SetVelY(0);
+			}
+		}
+		else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+		{
 			SetPosY(GetPosY() + 1);
+
+			SetVelY(0);
+		}
+
 	}
 
 }
