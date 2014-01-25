@@ -16,97 +16,7 @@ namespace SGP_PoA_LevelEditor
 {
     public partial class Form1 : Form
     {
-        struct myTile
-        {
-            int x;
-            int y;
-            bool isBlocked;
-            bool isEvent;
-            bool isNPC;
-            bool isWarp;
-            int warpX;
-            int warpY;
-            string szSpecial;
-
-            public int WarpY
-            {
-                get { return warpY; }
-                set { warpY = value; }
-            }
-
-            public int WarpX
-            {
-                get { return warpX; }
-                set { warpX = value; }
-            }
-
-            public bool IsWarp
-            {
-                get { return isWarp; }
-                set { isWarp = value; }
-            }
-
-            public int X
-            {
-                get { return x; }
-                set { x = value; }
-            }
-
-            public int Y
-            {
-                get { return y; }
-                set { y = value; }
-            }
-
-            public bool IsBlocked
-            {
-                get { return isBlocked; }
-                set { isBlocked = value; }
-            }
-
-            public bool IsEvent
-            {
-                get { return isEvent; }
-                set { isEvent = value; }
-            }
-
-            public bool IsNPC
-            {
-                get { return isNPC; }
-                set { isNPC = value; }
-            }
-
-            public string SzSpecial
-            {
-                get { return szSpecial; }
-                set { szSpecial = value; }
-            }
-
-        }
-
-        struct myLayers
-        {
-            myTile[,] myTiles;
-
-            public myTile[,] MyTiles
-            {
-                get { return myTiles; }
-                set { myTiles = value; }
-            }
-
-        };
-
-        struct myWorld
-        {
-            List<myLayers> theWorld;
-
-            public List<myLayers> TheWorld
-            {
-                get { return theWorld; }
-                set { theWorld = value; }
-            }
-
-        };
+        
 
         string szFileName;
         string szRelativePath;
@@ -289,6 +199,13 @@ namespace SGP_PoA_LevelEditor
             {
                 lstMaps.Items.Add(szMapID);
             }
+            lstNpcs.Items.Clear();
+            //foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCs\\", "*.xml").Select(Path.GetFileName))
+            //{
+            //    myNPC cTemp = new myNPC();
+            //    cTemp.Name 
+
+            //}
 
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
@@ -618,16 +535,14 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Save(szFileName);
 
             }
-            lstMaps.Items.Clear();
-            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
-            {
-                lstMaps.Items.Add(szMapID);
-            }
+
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*|XML Files|*.xml";
             dlg.FilterIndex = 2;
             dlg.DefaultExt = "xml";
@@ -700,11 +615,7 @@ namespace SGP_PoA_LevelEditor
                 szFileName = dlg.FileName;
                 xRoot.Save(dlg.FileName);
             }
-            lstMaps.Items.Clear();
-            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
-            {
-                lstMaps.Items.Add(szMapID);
-            }
+
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
@@ -720,8 +631,9 @@ namespace SGP_PoA_LevelEditor
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Initialize();
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = szRelativePath + "..\\..\\Data\\Levels";
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*|XML Files|*.xml";
             dlg.FilterIndex = 2;
 
@@ -829,7 +741,8 @@ namespace SGP_PoA_LevelEditor
             if (imageID != -1)
                 TM.UnloadTexture(imageID);
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = szRelativePath;
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Tilesets");
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*";
             dlg.FilterIndex = 2;
 
