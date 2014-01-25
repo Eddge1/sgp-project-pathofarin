@@ -45,7 +45,7 @@ void CObjectManager::Render(unsigned int nLayer)
 	RECT rTemp = {};
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
-		if (temp[i]->GetType() != OBJ_UNDEFINE)
+		if (temp[i]->GetType() != OBJ_UNDEFINE && temp[i]->GetType() != OBJ_WARP)
 		{
 			pAnim = CAnimationSystem::GetInstance()->GetAnimation(temp[i]->GetAnimInfo()->GetCurrentAnimation());
 			nImageID = pAnim->GetImageID();
@@ -73,11 +73,12 @@ void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 	m_vObjects[unLayer].push_back( pObject );
 	pObject->AddRef();
 }
+
 void CObjectManager::RemoveObject(CObjects* pObject)
 {
 	for(unsigned int i = 0; i < m_vObjects.size(); i++)
 	{
-		ObjectVector temp = m_vObjects[i];
+		ObjectVector& temp = m_vObjects[i];
 		for(unsigned int j = 0; j < temp.size(); j++)
 		{
 			if(temp[j] == pObject)
@@ -98,11 +99,10 @@ void CObjectManager::RemoveAll()
 
 	for(unsigned int i = 0; i < m_vObjects.size(); i++)
 	{
-		ObjectVector temp = m_vObjects[i];
+		ObjectVector& temp = m_vObjects[i];
 		for(int j = temp.size() - 1; j >= 0; j--)
 		{
 			temp[j]->Release();
-			temp.erase(temp.begin() + j);
 		}
 	}
 
