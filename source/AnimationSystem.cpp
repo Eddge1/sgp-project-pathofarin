@@ -5,6 +5,7 @@
 #include "Frame.h"
 #include "..\TinyXML\tinyxml.h"
 #include <sstream>
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 CAnimationSystem* CAnimationSystem::s_pInstance = nullptr;
 
@@ -30,6 +31,7 @@ void CAnimationSystem::DeleteInstance( void )
 
 CAnimationSystem::CAnimationSystem(void)
 {
+	m_bEventThrown = false;
 
 }
 
@@ -54,6 +56,7 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 		return;
 
 	std::string szTempName;
+	std::string szEvent;
 	int nFrames;
 
 	TiXmlElement* pAnim = pRoot->FirstChildElement("Animation_Info");
@@ -95,6 +98,8 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 					pAnim->Attribute("anchorX", &nAnchorX);
 					pAnim->Attribute("anchorY", &nAnchorY);
 					pAnim->Attribute("Duration", &dDuration);
+					szEvent = pAnim->Attribute("Event");
+
 
 					rTempRenderRect.left = left;
 					rTempRenderRect.top = top;
@@ -123,7 +128,8 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 					temp->SetRenderRect(rTempRenderRect);
 					temp->SetAnchor(nAnchorX, nAnchorY);
 					temp->SetCollisionRect(rTempCollisionRect);
-					temp->SetDuration(dDuration);
+					temp->SetDuration((float)dDuration);
+					temp->SetEventID(szEvent);
 					pTempAnim->AddAnimation(temp);
 					pAnim = pAnim->NextSiblingElement("Render");
 				}
@@ -159,5 +165,11 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 	{
 		aTimeStamp->AdvanceCurrentFrame();
 		aTimeStamp->SetTimeOnStamp(0.0f);
+	}
+	
+	if (pFrame->GetEventID() != "" && m_bEventThrown == false)
+	{
+		m_bEventThrown = true;
+		CSGD_EventSystem::GetInstance()->QueueEvent(pFrame->GetEventID());
 	}
 }

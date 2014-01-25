@@ -13,7 +13,8 @@ class CAnimationSystem
 
 	// Static pointer to the singleton object
 	static CAnimationSystem* s_pInstance;
-
+	bool m_bEventThrown;
+	
 public:
 	CAnimationSystem(void);
 	virtual ~CAnimationSystem(void);
@@ -23,12 +24,13 @@ public:
 	static void DeleteInstance( void );
 
 	CAnimation* GetAnimation(std::string szName) { return loadedAnimation[szName]; }
-
+	bool IsEventThrown() { return m_bEventThrown; }
 	//Mutator: 
 	void LoadAnimations(std::string filePath);
+	void EventIsThrown(bool bEventThrow) { m_bEventThrown = bEventThrow; }
+
 
 	void Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
-
 	void Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTime);
 };
 
