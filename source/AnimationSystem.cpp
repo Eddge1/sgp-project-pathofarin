@@ -112,7 +112,7 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 						pAnim->Attribute("Height", &bottom);
 
 						rTempCollisionRect.left = left - nAnchorX;
-						rTempCollisionRect.top = top- nAnchorY;
+						rTempCollisionRect.top = top - nAnchorY;
 						rTempCollisionRect.right = right - nAnchorX;
 						rTempCollisionRect.bottom = bottom - nAnchorY;
 

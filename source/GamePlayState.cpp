@@ -79,6 +79,7 @@ void CGamePlayState::Activate(void)
 
 			m_pPlayer = CreatePlayer();
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
@@ -102,7 +103,7 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(0,200);
 			pTemp->AddWaypoint(0,100);
 			pTemp->AddWaypoint(-100,100);
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation");
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 4);
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 4);
 
