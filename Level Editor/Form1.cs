@@ -16,76 +16,7 @@ namespace SGP_PoA_LevelEditor
 {
     public partial class Form1 : Form
     {
-        struct myTile
-        {
-            int x;
-            int y;
-            bool isBlocked;
-            bool isEvent;
-            bool isNPC;
-            string szSpecial;
 
-            public int X
-            {
-                get { return x; }
-                set { x = value; }
-            }
-
-            public int Y
-            {
-                get { return y; }
-                set { y = value; }
-            }
-
-            public bool IsBlocked
-            {
-                get { return isBlocked; }
-                set { isBlocked = value; }
-            }
-
-            public bool IsEvent
-            {
-                get { return isEvent; }
-                set { isEvent = value; }
-            }
-
-            public bool IsNPC
-            {
-                get { return isNPC; }
-                set { isNPC = value; }
-            }
-
-            public string SzSpecial
-            {
-                get { return szSpecial; }
-                set { szSpecial = value; }
-            }
-
-        }
-
-        struct myLayers
-        {
-            myTile[,] myTiles;
-
-            public myTile[,] MyTiles
-            {
-                get { return myTiles; }
-                set { myTiles = value; }
-            }
-
-        };
-
-        struct myWorld
-        {
-            List<myLayers> theWorld;
-
-            public List<myLayers> TheWorld
-            {
-                get { return theWorld; }
-                set { theWorld = value; }
-            }
-
-        };
 
         string szFileName;
         string szRelativePath;
@@ -94,12 +25,7 @@ namespace SGP_PoA_LevelEditor
         bool ShowGrid = true;
         bool mouseDown = false;
         bool rmouseDown = false;
-        bool bMapEdit = true;
-        bool bBlockMode = false;
         bool bSelectColor = false;
-        bool bPlaceNPC = false;
-        bool bPlaceEvent = false;
-        bool bPlaceWaypoints = false;
         Color cTransparency = Color.Magenta;
 
         Size MapSize = new Size(5, 5);
@@ -107,13 +33,10 @@ namespace SGP_PoA_LevelEditor
         Size TileSet = new Size(4, 4);
         Size MouseLoc = new Size(0, 0);
         Point tileSelected = new Point(0, 0);
+        Point mapTile = new Point(0, 0);
 
         int imageID = -1;
-        int TotalLayers = 1;
 
-
-        myWorld currMap = new myWorld();
-        myLayers tempLayer = new myLayers();
         CSGP_Direct3D DX = CSGP_Direct3D.GetInstance();
         CSGP_TextureManager TM = CSGP_TextureManager.GetInstance();
 
@@ -145,25 +68,13 @@ namespace SGP_PoA_LevelEditor
             TileSize.Width = Convert.ToInt32(nudTileWidth.Value);
             TileSize.Height = Convert.ToInt32(nudTileHeight.Value);
 
-            if (nudLayer.Value < 1)
-                nudLayer.Value = 1;
-
-            if (nudLayer.Value > TotalLayers)
-            {
-                tempLayer.MyTiles = new myTile[MapSize.Width, MapSize.Height];
-
-                currMap.TheWorld.Add(tempLayer);
-                TotalLayers = currMap.TheWorld.Count;
-                label1.Text = "of " + currMap.TheWorld.Count.ToString();
-            }
-
-
             if (MapSize.Width != Convert.ToInt32(nudMapWidth.Value) || MapSize.Height != Convert.ToInt32(nudMapHeight.Value))
             {
-                for (int nLayer = 0; nLayer < currMap.TheWorld.Count(); nLayer++)
+                for (int nLayer = 0; nLayer < lstLayers.Items.Count; nLayer++)
                 {
                     myLayers tLayer = new myLayers();
                     tLayer.MyTiles = new myTile[Convert.ToInt32(nudMapWidth.Value), Convert.ToInt32(nudMapHeight.Value)];
+                    myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
                     for (int x = 0; x < MapSize.Width; x++)
                     {
                         if (x < nudMapWidth.Value)
@@ -171,11 +82,11 @@ namespace SGP_PoA_LevelEditor
                             for (int y = 0; y < MapSize.Height; y++)
                             {
                                 if (y < nudMapHeight.Value)
-                                    tLayer.MyTiles[x, y] = currMap.TheWorld[nLayer].MyTiles[x, y];
+                                    tLayer.MyTiles[x, y] = L.MyTiles[x, y];
                             }
                         }
                     }
-                    currMap.TheWorld[nLayer] = tLayer;
+                    lstLayers.Items[lstLayers.SelectedIndex] = tLayer;
                 }
                 MapSize.Width = Convert.ToInt32(nudMapWidth.Value);
                 MapSize.Height = Convert.ToInt32(nudMapHeight.Value);
@@ -191,30 +102,37 @@ namespace SGP_PoA_LevelEditor
 
             if (imageID != -1)
             {
-                for (int nLayer = 0; nLayer < nudLayer.Value; nLayer++)
+                for (int nLayer = lstLayers.SelectedIndex - 1; nLayer <= lstLayers.SelectedIndex; nLayer++)
                 {
+                    if (nLayer < 0)
+                        continue;
+                    myLayers L = (myLayers)lstLayers.Items[nLayer];
                     for (int y = 0; y < MapSize.Height; y++)
                     {
                         for (int x = 0; x < MapSize.Width; x++)
                         {
                             int nX = x * TileSize.Width;
                             int nY = y * TileSize.Height;
-                            if (currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked)
+                            if (L.MyTiles[x, y].IsBlocked)
                                 TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
-                                 currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
+                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                  TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
+                            else if (L.MyTiles[x, y].IsWarp)
+                            {
+                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                 TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
+                            }
                             else
                                 TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                    new Rectangle(currMap.TheWorld[nLayer].MyTiles[x, y].X * TileSize.Width,
-                                        currMap.TheWorld[nLayer].MyTiles[x, y].Y * TileSize.Height,
+                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                     TileSize.Width, TileSize.Height));
                         }
                     }
                 }
 
-                if (bMapEdit)
-                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
+                if (radMap.Checked)
+                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width + panel2.AutoScrollPosition.X, MouseLoc.Height * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
             }
             if (ShowGrid)
             {
@@ -226,6 +144,7 @@ namespace SGP_PoA_LevelEditor
                     }
                 }
             }
+
 
             DX.SpriteEnd();
             DX.DeviceEnd();
@@ -248,6 +167,8 @@ namespace SGP_PoA_LevelEditor
                 }
             }
 
+            DX.DrawHollowRect(new Rectangle(tileSelected.X * TileSize.Width + panel1.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel1.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), Color.Red, 3);
+
             DX.SpriteEnd();
             DX.DeviceEnd();
             DX.Present();
@@ -255,10 +176,17 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
+
             cTransparency = Color.Black;
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
+            lstMaps.Items.Clear();
+            lstLayers.Items.Clear();
+            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
+            {
+                lstMaps.Items.Add(szMapID);
+            }
 
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
@@ -270,22 +198,17 @@ namespace SGP_PoA_LevelEditor
 
             TM.Initialize(DX.Device, DX.Sprite);
 
-            currMap.TheWorld = new List<myLayers>();
+            myLayers tempLayer = new myLayers();
             tempLayer.MyTiles = new myTile[MapSize.Width, MapSize.Height];
 
-            currMap.TheWorld.Clear();
-            currMap.TheWorld.Add(tempLayer);
-
-            TotalLayers = currMap.TheWorld.Count;
-
-            label1.Text = "of " + currMap.TheWorld.Count.ToString();
+            lstLayers.Items.Add(tempLayer);
+            lstLayers.SelectedIndex = 0;
 
             TileSize.Height = 32;
             TileSize.Width = 32;
 
             nudTileHeight.Value = TileSize.Height;
             nudTileWidth.Value = TileSize.Width;
-            nudLayer.Value = TotalLayers;
 
             MapSize = new Size(5, 5);
 
@@ -308,106 +231,178 @@ namespace SGP_PoA_LevelEditor
             int nTempX = (e.Location.X - panel1.AutoScrollPosition.X) / TileSize.Width;
             int nTempY = (e.Location.Y - panel1.AutoScrollPosition.Y) / TileSize.Height;
             tileSelected = new Point(nTempX, nTempY);
-            label8.Text = tileSelected.ToString();
         }
 
 
 
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (bMapEdit)
+            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width &&
+                e.Y - panel2.AutoScrollPosition.Y < MapSize.Height * TileSize.Height && e.X - panel2.AutoScrollPosition.X > 0 && e.Y - panel2.AutoScrollPosition.Y > 0)
             {
-                if (e.Button == MouseButtons.Right)
+                Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
+                myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+
+                if (radMap.Checked)
                 {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    if (e.Button == MouseButtons.Right)
                     {
-
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].X = 0;
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].Y = 0;
-
+                        L.MyTiles[Temp.X, Temp.Y].X = 0;
+                        L.MyTiles[Temp.X, Temp.Y].Y = 0;
+                    }
+                    else
+                    {
+                        L.MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
+                        L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
                     }
                 }
-                else
+
+                if (radBlock.Checked)
                 {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height)
+                    if (e.Button == MouseButtons.Left)
                     {
-                        if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = true;
+                    }
+                    else
+                    {
+                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                    }
+
+                }
+
+                if (radWarp.Checked)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (L.MyTiles[Temp.X, Temp.Y].IsWarp == false)
                         {
-                            Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
-                            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
+                            mapTile = Temp;
+                            if (L.MyTiles[Temp.X, Temp.Y].IsBlocked)
+                                L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                            else if (L.MyTiles[Temp.X, Temp.Y].IsNPC)
+                                L.MyTiles[Temp.X, Temp.Y].IsNPC = false;
+
+                            L.MyTiles[Temp.X, Temp.Y].IsWarp = true;
+                            if (lstMaps.SelectedIndex >= 0 && lstMaps.Items.Count > 0)
+                                L.MyTiles[Temp.X, Temp.Y].SzSpecial = lstMaps.Items[lstMaps.SelectedIndex].ToString();
+                            else
+                                L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                            L.MyTiles[Temp.X, Temp.Y].WarpX = Convert.ToInt32(nudWarpX.Value);
+                            L.MyTiles[Temp.X, Temp.Y].WarpY = Convert.ToInt32(nudWarpY.Value);
+                        }
+                        else
+                        {
+                            mapTile = Temp;
+                            nudWarpX.Value = L.MyTiles[Temp.X, Temp.Y].WarpX;
+                            nudWarpY.Value = L.MyTiles[Temp.X, Temp.Y].WarpY;
+                            for (int i = 0; i < lstMaps.Items.Count; i++)
+                            {
+                                if (lstMaps.Items[i].ToString() == L.MyTiles[mapTile.X, mapTile.Y].SzSpecial)
+                                {
+                                    lstMaps.SelectedIndex = i;
+                                    break;
+                                }
+                            }
+
+                            btnWarp.Enabled = false;
+                            btnWarpCancel.Enabled = false;
                         }
                     }
-                }
-            }
-            if (bBlockMode)
-            {
-                if (mouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    else
                     {
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = true;
-                    }
-                }
-                else if (rmouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
-                    {
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                        L.MyTiles[Temp.X, Temp.Y].IsWarp = false;
+                        L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].WarpX = 0;
+                        L.MyTiles[Temp.X, Temp.Y].WarpY = 0;
                     }
                 }
 
+                if (radNPC.Checked)
+                {
+                    if (grpWayPoints.Visible)
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            if (radWPAdd.Checked)
+                            {
+
+
+                            }
+                            else if (radWPMove.Checked)
+                            {
+
+
+                            }
+                        }
+                        else
+                        {
+                            //Delete
+                        }
+                    }
+                    else
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            if (L.MyTiles[Temp.X, Temp.Y].IsNPC == false)
+                            {
+                                mapTile = Temp;
+                                if (L.MyTiles[Temp.X, Temp.Y].IsBlocked)
+                                    L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                                else if (L.MyTiles[Temp.X, Temp.Y].IsWarp)
+                                    L.MyTiles[Temp.X, Temp.Y].IsWarp = false;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            //Delete
+                        }
+
+                    }
+                }
+                lstLayers.Items[lstLayers.SelectedIndex] = L;
             }
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
-            MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height;
-            if (bMapEdit)
+            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width && 
+                e.Y - panel2.AutoScrollPosition.Y < MapSize.Height * TileSize.Height && e.X - panel2.AutoScrollPosition.X > 0 && e.Y - panel2.AutoScrollPosition.Y > 0)
             {
-                if (mouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
-                    {
+                MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
+                MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height;
+                myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+                Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
 
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
-                    }
-                }
-                else if (rmouseDown)
+                if (radMap.Checked)
                 {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    if (mouseDown)
                     {
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].X = 0;
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].Y = 0;
+                        L.MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
+                        L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
+                    }
+                    else if (rmouseDown)
+                    {
+                        L.MyTiles[Temp.X, Temp.Y].X = 0;
+                        L.MyTiles[Temp.X, Temp.Y].Y = 0;
                     }
                 }
-            }
-            else if (bBlockMode)
-            {
-                if (mouseDown)
+                else if (radBlock.Checked)
                 {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    if (mouseDown)
                     {
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = true;
+                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = true;
                     }
-                }
-                else if (rmouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    else if (rmouseDown)
                     {
-                        Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-                        currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
                     }
-                }
 
+                }
+                lstLayers.Items[lstLayers.SelectedIndex] = L;
             }
         }
 
@@ -447,7 +442,7 @@ namespace SGP_PoA_LevelEditor
                 XElement xRoot = new XElement("World");
                 XAttribute xWidth = new XAttribute("Width", MapSize.Width);
                 XAttribute xHeight = new XAttribute("Height", MapSize.Height);
-                XAttribute xTotalLayers = new XAttribute("Layers", currMap.TheWorld.Count);
+                XAttribute xTotalLayers = new XAttribute("Layers", lstLayers.Items.Count);
                 XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
@@ -461,12 +456,14 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Add(xImageLocation);
                 xRoot.Add(xColorTrans);
 
-                for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
+                for (int nLayer = 0; nLayer < lstLayers.Items.Count; nLayer++)
                 {
                     XElement xLayer = new XElement("Layer");
                     XAttribute xID = new XAttribute("ID", nLayer);
                     xLayer.Add(xID);
                     xRoot.Add(xLayer);
+                    myLayers L = (myLayers)lstLayers.Items[nLayer];
+
                     for (int y = 0; y < MapSize.Height; y++)
                     {
 
@@ -481,14 +478,17 @@ namespace SGP_PoA_LevelEditor
                             xTile.Add(xPosX);
                             xTile.Add(xPosY);
                             XElement xTileData = new XElement("Tile_Data");
-                            XAttribute xTileX = new XAttribute("xTileID", currMap.TheWorld[nLayer].MyTiles[x, y].X);
-                            XAttribute xTileY = new XAttribute("yTileID", currMap.TheWorld[nLayer].MyTiles[x, y].Y);
-                            XAttribute xTileBlock = new XAttribute("isBlocked", currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked);
-                            XAttribute xTileNpc = new XAttribute("isNPC", currMap.TheWorld[nLayer].MyTiles[x, y].IsNPC);
-                            XAttribute xTileEvent = new XAttribute("isEvent", currMap.TheWorld[nLayer].MyTiles[x, y].IsEvent);
-                            if (currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial == null)
-                                currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial = "";
-                            XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
+                            XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
+                            XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
+                            XAttribute xTileBlock = new XAttribute("isBlocked", L.MyTiles[x, y].IsBlocked);
+                            XAttribute xTileNpc = new XAttribute("isNPC", L.MyTiles[x, y].IsNPC);
+                            XAttribute xTileEvent = new XAttribute("isEvent", L.MyTiles[x, y].IsEvent);
+                            XAttribute xTileWarp = new XAttribute("isWARP", L.MyTiles[x, y].IsWarp);
+                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
+                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
+                            if (L.MyTiles[x, y].SzSpecial == null)
+                                L.MyTiles[x, y].SzSpecial = "";
+                            XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
@@ -496,6 +496,9 @@ namespace SGP_PoA_LevelEditor
                             xTileData.Add(xTileNpc);
                             xTileData.Add(xTileEvent);
                             xTileData.Add(xEventId);
+                            xTileData.Add(xTileWarp);
+                            xTileData.Add(xTileWarpX);
+                            xTileData.Add(xTileWarpY);
 
                             xTile.Add(xTileData);
                         }
@@ -504,11 +507,14 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Save(szFileName);
 
             }
+
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*|XML Files|*.xml";
             dlg.FilterIndex = 2;
             dlg.DefaultExt = "xml";
@@ -518,7 +524,7 @@ namespace SGP_PoA_LevelEditor
                 XElement xRoot = new XElement("World");
                 XAttribute xWidth = new XAttribute("Width", MapSize.Width);
                 XAttribute xHeight = new XAttribute("Height", MapSize.Height);
-                XAttribute xTotalLayers = new XAttribute("Layers", currMap.TheWorld.Count);
+                XAttribute xTotalLayers = new XAttribute("Layers", lstLayers.Items.Count);
                 XAttribute xTileWidth = new XAttribute("TileWidth", TileSize.Width);
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
@@ -532,15 +538,16 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Add(xImageLocation);
                 xRoot.Add(xColorTrans);
 
-                for (int nLayer = 0; nLayer < currMap.TheWorld.Count; nLayer++)
+                for (int nLayer = 0; nLayer < lstLayers.Items.Count; nLayer++)
                 {
                     XElement xLayer = new XElement("Layer");
                     XAttribute xID = new XAttribute("ID", nLayer);
                     xLayer.Add(xID);
                     xRoot.Add(xLayer);
+                    myLayers L = (myLayers)lstLayers.Items[nLayer];
+
                     for (int y = 0; y < MapSize.Height; y++)
                     {
-
                         for (int x = 0; x < MapSize.Width; x++)
                         {
                             XElement xTile = new XElement("Tile");
@@ -552,14 +559,17 @@ namespace SGP_PoA_LevelEditor
                             xTile.Add(xPosX);
                             xTile.Add(xPosY);
                             XElement xTileData = new XElement("Tile_Data");
-                            XAttribute xTileX = new XAttribute("xTileID", currMap.TheWorld[nLayer].MyTiles[x, y].X);
-                            XAttribute xTileY = new XAttribute("yTileID", currMap.TheWorld[nLayer].MyTiles[x, y].Y);
-                            XAttribute xTileBlock = new XAttribute("isBlocked", currMap.TheWorld[nLayer].MyTiles[x, y].IsBlocked);
-                            XAttribute xTileNpc = new XAttribute("isNPC", currMap.TheWorld[nLayer].MyTiles[x, y].IsNPC);
-                            XAttribute xTileEvent = new XAttribute("isEvent", currMap.TheWorld[nLayer].MyTiles[x, y].IsEvent);
-                            if (currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial == null)
-                                currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial = "";
-                            XAttribute xEventId = new XAttribute("EventID", currMap.TheWorld[nLayer].MyTiles[x, y].SzSpecial);
+                            XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
+                            XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
+                            XAttribute xTileBlock = new XAttribute("isBlocked", L.MyTiles[x, y].IsBlocked);
+                            XAttribute xTileNpc = new XAttribute("isNPC", L.MyTiles[x, y].IsNPC);
+                            XAttribute xTileEvent = new XAttribute("isEvent", L.MyTiles[x, y].IsEvent);
+                            XAttribute xTileWarp = new XAttribute("isWARP", L.MyTiles[x, y].IsWarp);
+                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
+                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
+                            if (L.MyTiles[x, y].SzSpecial == null)
+                                L.MyTiles[x, y].SzSpecial = "";
+                            XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
@@ -567,6 +577,9 @@ namespace SGP_PoA_LevelEditor
                             xTileData.Add(xTileNpc);
                             xTileData.Add(xTileEvent);
                             xTileData.Add(xEventId);
+                            xTileData.Add(xTileWarp);
+                            xTileData.Add(xTileWarpX);
+                            xTileData.Add(xTileWarpY);
 
                             xTile.Add(xTileData);
                         }
@@ -575,6 +588,7 @@ namespace SGP_PoA_LevelEditor
                 szFileName = dlg.FileName;
                 xRoot.Save(dlg.FileName);
             }
+
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
@@ -590,8 +604,9 @@ namespace SGP_PoA_LevelEditor
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Initialize();
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = szRelativePath + "..\\..\\Data\\Levels";
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*|XML Files|*.xml";
             dlg.FilterIndex = 2;
 
@@ -624,12 +639,10 @@ namespace SGP_PoA_LevelEditor
 
                 MapSize = new Size(Convert.ToInt32(xWidth.Value), Convert.ToInt32(xHeight.Value));
                 TileSize = new Size(Convert.ToInt32(xTileWidth.Value), Convert.ToInt32(xTileHeight.Value));
-
+                lstLayers.Items.Clear();
                 myLayers lTemp = new myLayers();
                 lTemp.MyTiles = new myTile[MapSize.Width, MapSize.Height];
-                currMap.TheWorld = new List<myLayers>();
 
-                nudLayer.Value = 1;
                 nudMapHeight.Value = MapSize.Height;
                 nudMapWidth.Value = MapSize.Width;
                 nudTileHeight.Value = TileSize.Height;
@@ -654,22 +667,31 @@ namespace SGP_PoA_LevelEditor
                         XAttribute xTileNpc = xTileInfo.Attribute("isNPC");
                         XAttribute xTileEvent = xTileInfo.Attribute("isEvent");
                         XAttribute xTileEventID = xTileInfo.Attribute("EventID");
+                        XAttribute xTileWarp = xTileInfo.Attribute("isWARP");
+                        XAttribute xTileWarpX = xTileInfo.Attribute("WarpX");
+                        XAttribute xTileWarpY = xTileInfo.Attribute("WarpY");
+
                         myTile pTile = new myTile();
                         pTile.X = Convert.ToInt32(xTileX.Value);
                         pTile.Y = Convert.ToInt32(xTileY.Value);
                         pTile.IsBlocked = Convert.ToBoolean(xTileBlock.Value);
                         pTile.IsEvent = Convert.ToBoolean(xTileEvent.Value);
                         pTile.IsNPC = Convert.ToBoolean(xTileNpc.Value);
+                        pTile.IsWarp = Convert.ToBoolean(xTileWarp.Value);
+                        pTile.WarpX = Convert.ToInt32(xTileWarpX.Value);
+                        pTile.WarpY = Convert.ToInt32(xTileWarpY.Value);
                         pTile.SzSpecial = xTileEventID.Value;
                         lTemp.MyTiles[nPosX, nPosY] = pTile;
                     }
-                    currMap.TheWorld.Add(lTemp);
+                    lstLayers.Items.Add(lTemp);
                     lTemp.MyTiles = new myTile[MapSize.Width, MapSize.Height];
                 }
                 szFileName = dlg.FileName;
             }
-            label1.Text = "of " + currMap.TheWorld.Count.ToString();
+            lstLayers.SelectedIndex = lstLayers.Items.Count - 1;
             panel2.AutoScrollMinSize = new Size(MapSize.Width * TileSize.Width, MapSize.Height * TileSize.Height);
+            if (lstLayers.Items.Count > 1)
+                btnDelete.Enabled = true;
         }
 
         private void panel1_Resize(object sender, EventArgs e)
@@ -692,7 +714,8 @@ namespace SGP_PoA_LevelEditor
             if (imageID != -1)
                 TM.UnloadTexture(imageID);
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = szRelativePath;
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Tilesets");
+            dlg.InitialDirectory = temp;
             dlg.Filter = "All Files|*.*";
             dlg.FilterIndex = 2;
 
@@ -713,24 +736,6 @@ namespace SGP_PoA_LevelEditor
             Close();
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked)
-            {
-                bMapEdit = false;
-                bBlockMode = true;
-            }
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-            {
-                bMapEdit = true;
-                bBlockMode = false;
-            }
-        }
-
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             if (bSelectColor)
@@ -746,7 +751,6 @@ namespace SGP_PoA_LevelEditor
                     }
                     bSelectColor = false;
                     label6.Text = "";
-                    label7.Text = cTransparency.ToArgb().ToString();
                 }
             }
         }
@@ -759,15 +763,164 @@ namespace SGP_PoA_LevelEditor
 
         private void button3_Click(object sender, EventArgs e)
         {
+            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
             for (int x = 0; x < MapSize.Width; x++)
             {
                 for (int y = 0; y < MapSize.Height; y++)
                 {
-                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[x, y].X = tileSelected.X;
-                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[x, y].Y = tileSelected.Y;
+                    L.MyTiles[x, y].X = tileSelected.X;
+                    L.MyTiles[x, y].Y = tileSelected.Y;
                 }
             }
+            lstLayers.Items[lstLayers.SelectedIndex] = L;
         }
+
+        private void radWarp_CheckedChanged(object sender, EventArgs e)
+        {
+            grpWarp.Visible = radWarp.Checked;
+            if (radWarp.Checked == false)
+            {
+                btnWarp.Enabled = false;
+                btnWarpCancel.Enabled = false;
+            }
+        }
+
+        private void txtWarp_TextChanged(object sender, EventArgs e)
+        {
+            if (btnWarp.Enabled == false)
+            {
+                btnWarp.Enabled = true;
+                btnWarpCancel.Enabled = true;
+            }
+        }
+
+        private void btnWarp_Click(object sender, EventArgs e)
+        {
+            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+            if (lstMaps.SelectedIndex >= 0 && lstMaps.Items.Count > 0)
+                L.MyTiles[mapTile.X, mapTile.Y].SzSpecial = lstMaps.Items[lstMaps.SelectedIndex].ToString();
+            else
+                L.MyTiles[mapTile.X, mapTile.Y].SzSpecial = "";
+            L.MyTiles[mapTile.X, mapTile.Y].WarpX = Convert.ToInt32(nudWarpX.Value);
+            L.MyTiles[mapTile.X, mapTile.Y].WarpY = Convert.ToInt32(nudWarpY.Value);
+
+            lstLayers.Items[lstLayers.SelectedIndex] = L;
+            btnWarp.Enabled = false;
+            btnWarpCancel.Enabled = false;
+        }
+
+        private void btnWarpCancel_Click(object sender, EventArgs e)
+        {
+            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+
+            nudWarpX.Value = L.MyTiles[mapTile.X, mapTile.Y].WarpX;
+            nudWarpY.Value = L.MyTiles[mapTile.X, mapTile.Y].WarpY;
+            for (int i = 0; i < lstMaps.Items.Count; i++)
+            {
+                if (lstMaps.Items[i].ToString() == L.MyTiles[mapTile.X, mapTile.Y].SzSpecial)
+                {
+                    lstMaps.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            btnWarp.Enabled = false;
+            btnWarpCancel.Enabled = false;
+        }
+
+        private void radNPC_CheckedChanged(object sender, EventArgs e)
+        {
+            grpNPC.Visible = radNPC.Checked;
+        }
+
+        private void chkMoves_CheckedChanged(object sender, EventArgs e)
+        {
+            btnNPCMove.Enabled = chkMoves.Checked;
+            if (grpWayPoints.Visible && !chkMoves.Checked)
+                grpWayPoints.Visible = false;
+        }
+
+        private void chkHostile_CheckedChanged(object sender, EventArgs e)
+        {
+            btnNPCUnits.Enabled = chkHostile.Checked;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            btnNpcAdd.Enabled = true;
+            btnNpcApply.Enabled = true;
+            btnNpcCancel.Enabled = true;
+        }
+
+        private void btnNpcAdd_Click(object sender, EventArgs e)
+        {
+
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNpcCancel_Click(object sender, EventArgs e)
+        {
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNpcApply_Click(object sender, EventArgs e)
+        {
+
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNPCMove_Click(object sender, EventArgs e)
+        {
+            grpWayPoints.Visible = !grpWayPoints.Visible;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstLayers.Items.Count > 1)
+            {
+                int nTemp = lstLayers.SelectedIndex - 1;
+                if (nTemp < 0)
+                    nTemp = 0;
+                lstLayers.Items.Remove(lstLayers.Items[lstLayers.SelectedIndex]);
+                lstLayers.SelectedIndex = nTemp;
+                if (lstLayers.Items.Count < 2)
+                    btnDelete.Enabled = false;
+            }
+        }
+
+        private void btnNewLayer_Click(object sender, EventArgs e)
+        {
+            myLayers lTemp = new myLayers();
+            lTemp.MyTiles = new myTile[MapSize.Width, MapSize.Height];
+            lstLayers.Items.Add(lTemp);
+            lstLayers.SelectedIndex = lstLayers.Items.Count - 1;
+            btnDelete.Enabled = true;
+        }
+
+        private void btnShiftDown_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstLayers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstLayers.SelectedIndex > 0)
+                btnShiftUp.Enabled = true;
+            else
+                btnShiftUp.Enabled = false;
+
+            if (lstLayers.SelectedIndex < lstLayers.Items.Count - 1)
+                btnShiftDown.Enabled = true;
+            else
+                btnShiftDown.Enabled = false;
+        }
+
     }
 
 }

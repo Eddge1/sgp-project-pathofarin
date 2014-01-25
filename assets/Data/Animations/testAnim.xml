@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Animation_Data>
-	<Animation_Info Name="TestAnimation" Frames="2" repeat="1" Texture="Fireball.png">
+	<Animation_Info Name="TestAnimation" Frames="6" repeat="1" Texture="TestIdleHopefully.png">
 		<Frame_Data>
-			<Render posX="-5" posY="-5" Width="64" Height="15" anchorX="5" anchorY="5" Duration=".2"/>
-			<ActiveCollision posX="0" posY="0" Width="64" Height="20"/>
-			<Render posX="59" posY="-5" Width="128" Height="15" anchorX="5" anchorY="5" Duration=".2"/>
-			<ActiveCollision posX="0" posY="0" Width="64" Height="20"/>
+			<Render posX="0" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="96" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="192" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="288" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="374" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="470" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="566" posY="0" Width="95" Height="85" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
 		</Frame_Data>
 	</Animation_Info>
-</Animation_Data>
+</Animation_Data>	

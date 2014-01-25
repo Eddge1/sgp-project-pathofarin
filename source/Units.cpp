@@ -7,6 +7,10 @@ CUnits::CUnits(void)
 	m_nLevel = 0;
 	m_nHealth = m_nMaxHealth = 100;
 	m_nAbilityPoints = m_nMaxAbilityPoints = 100;
+	m_nAttackPower	= 5;
+	m_nSpeed = 0;;
+
+	m_bTurn = false;
 }
 
 
@@ -45,7 +49,4 @@ void CUnits::Update(float fElapsedTime)
 { }
 
 void CUnits::HandleEvent( const CEvent* pEvent )
-{
-
-
-}
+{ }

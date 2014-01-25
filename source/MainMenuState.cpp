@@ -45,7 +45,6 @@ void CMainMenuState::Activate(void)
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
-	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
 	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png"));
 }
 
@@ -53,9 +52,7 @@ void CMainMenuState::Sleep(void)
 {
 	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nLogoID);
-	SetBackgroundImg(-1);
 	m_nLogoID = -1;
 }
 
@@ -70,7 +67,6 @@ void CMainMenuState::Render(void)
 	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
 
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172);
-	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	RECT rTemp = {336, 408, 464,536};
 	pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(200,0,0,0));
