@@ -2,10 +2,10 @@
 <Animation_Data>
 	<Animation_Info Name="TestAnimation" Frames="2" repeat="1" Texture="Fireball.png">
 		<Frame_Data>
-			<Render posX="0" posY="0" Width="64" Height="15" anchorX="5" anchorY="5" Duration=".2"/>
-			<ActiveCollision posX="0" posY="0" Width="64" Height="15"/>
-			<Render posX="64" posY="0" Width="128" Height="15" anchorX="5" anchorY="5" Duration=".2"/>
-			<ActiveCollision posX="0" posY="0" Width="64" Height="15"/>
+			<Render posX="0" posY="0" Width="64" Height="15" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
+			<Render posX="64" posY="0" Width="128" Height="15" anchorX="5" anchorY="5" Duration="0.2"/>
+			<ActiveCollision posX="2" posY="2" Width="32" Height="15"/>
 		</Frame_Data>
 	</Animation_Info>
 </Animation_Data>
