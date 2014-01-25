@@ -83,6 +83,7 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");
 
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 			
 
@@ -94,7 +95,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("PLAYER_MENU", this);
 			m_pES->RegisterClient("VICTORY", this);
 			m_pES->RegisterClient("WARP", this);
-
+			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 
 			m_eCurrPhase = GP_NAV;
 
@@ -119,9 +120,7 @@ void CGamePlayState::Activate(void)
 			pTemp2->SetPosY(100);
 			pTemp2->AddWaypoint(200,100);
 			pTemp2->AddWaypoint(300,100);
-			pTemp2->AddWaypoint(200,200);
-			pTemp2->AddWaypoint(300,100);
-			pTemp2->AddWaypoint(200,100);
+
 			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 4);
@@ -313,9 +312,23 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	else if(pEvent->GetEventID() == "WARP")
 	{
 		CWarp* pWarp = reinterpret_cast<CWarp*>(pEvent->GetSender());
-		m_pPlayer->SetPosX(pWarp->GetWarpX());
-		m_pPlayer->SetPosY(pWarp->GetWarpY());
+		m_pPlayer->SetPosX((float)pWarp->GetWarpX());
+		m_pPlayer->SetPosY((float)pWarp->GetWarpY());
 		TransitionWorld(pWarp->GetMapName());
+	}
+	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
+	{
+			CEntity* pTempFire = new CEntity();
+			pTempFire->SetActive(true);
+			//pTemp->SetHostile(true);
+			pTempFire->SetPosX(200);
+			pTempFire->SetPosY(0);
+			pTempFire->SetVelX(200);
+			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
+
+			pTempFire->Release();
+			pTempFire = nullptr;
 	}
 }
 
