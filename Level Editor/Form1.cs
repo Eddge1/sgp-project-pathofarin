@@ -77,14 +77,19 @@ namespace SGP_PoA_LevelEditor
                     myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
                     for (int x = 0; x < MapSize.Width; x++)
                     {
-                        if (x < nudMapWidth.Value)
-                        {
                             for (int y = 0; y < MapSize.Height; y++)
                             {
-                                if (y < nudMapHeight.Value)
+                                if (y < nudMapHeight.Value && x < nudMapWidth.Value)
                                     tLayer.MyTiles[x, y] = L.MyTiles[x, y];
+                                else
+                                {
+                                    if (x < Convert.ToInt32(nudMapWidth.Value) && y < Convert.ToInt32(nudMapHeight.Value))
+                                    {
+                                        tLayer.MyTiles[x, y].X = -1;
+                                        tLayer.MyTiles[x, y].Y = -1;
+                                    }
+                                }
                             }
-                        }
                     }
                     lstLayers.Items[lstLayers.SelectedIndex] = tLayer;
                 }
@@ -113,20 +118,23 @@ namespace SGP_PoA_LevelEditor
                         {
                             int nX = x * TileSize.Width;
                             int nY = y * TileSize.Height;
-                            if (L.MyTiles[x, y].IsBlocked)
-                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                 TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
-                            else if (L.MyTiles[x, y].IsWarp)
+                            if (L.MyTiles[x, y].X != -1)
                             {
-                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                 TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
-                            }
-                            else
-                                TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                if (L.MyTiles[x, y].IsBlocked)
+                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                    TileSize.Width, TileSize.Height));
+                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
+                                else if (L.MyTiles[x, y].IsWarp)
+                                {
+                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
+                                }
+                                else
+                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                        new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                        TileSize.Width, TileSize.Height));
+                            }
                         }
                     }
                 }
@@ -201,6 +209,14 @@ namespace SGP_PoA_LevelEditor
             myLayers tempLayer = new myLayers();
             tempLayer.MyTiles = new myTile[MapSize.Width, MapSize.Height];
 
+            for (int y = 0; y < MapSize.Height; y++)
+            {
+                for (int x = 0; x < MapSize.Width; x++)
+                {
+                    tempLayer.MyTiles[x, y].X = -1;
+                    tempLayer.MyTiles[x, y].Y = -1;
+                }
+            }
             lstLayers.Items.Add(tempLayer);
             lstLayers.SelectedIndex = 0;
 
@@ -247,8 +263,8 @@ namespace SGP_PoA_LevelEditor
                 {
                     if (e.Button == MouseButtons.Right)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].X = 0;
-                        L.MyTiles[Temp.X, Temp.Y].Y = 0;
+                        L.MyTiles[Temp.X, Temp.Y].X = -1;
+                        L.MyTiles[Temp.X, Temp.Y].Y = -1;
                     }
                     else
                     {
@@ -369,7 +385,7 @@ namespace SGP_PoA_LevelEditor
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width && 
+            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width &&
                 e.Y - panel2.AutoScrollPosition.Y < MapSize.Height * TileSize.Height && e.X - panel2.AutoScrollPosition.X > 0 && e.Y - panel2.AutoScrollPosition.Y > 0)
             {
                 MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
@@ -386,8 +402,8 @@ namespace SGP_PoA_LevelEditor
                     }
                     else if (rmouseDown)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].X = 0;
-                        L.MyTiles[Temp.X, Temp.Y].Y = 0;
+                        L.MyTiles[Temp.X, Temp.Y].X = -1;
+                        L.MyTiles[Temp.X, Temp.Y].Y = -1;
                     }
                 }
                 else if (radBlock.Checked)
@@ -898,6 +914,14 @@ namespace SGP_PoA_LevelEditor
         {
             myLayers lTemp = new myLayers();
             lTemp.MyTiles = new myTile[MapSize.Width, MapSize.Height];
+            for (int y = 0; y < MapSize.Height; y++)
+            {
+                for (int x = 0; x < MapSize.Width; x++)
+                {
+                    lTemp.MyTiles[x, y].X = -1;
+                    lTemp.MyTiles[x, y].Y = -1;
+                }
+            }
             lstLayers.Items.Add(lTemp);
             lstLayers.SelectedIndex = lstLayers.Items.Count - 1;
             btnDelete.Enabled = true;
@@ -919,6 +943,21 @@ namespace SGP_PoA_LevelEditor
                 btnShiftDown.Enabled = true;
             else
                 btnShiftDown.Enabled = false;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+
+            for (int y = 0; y < MapSize.Height; y++)
+            {
+                for (int x = 0; x < MapSize.Width; x++)
+                {
+                    L.MyTiles[x, y].X = -1;
+                    L.MyTiles[x, y].Y = -1;
+                }
+            }
+            lstLayers.Items[lstLayers.SelectedIndex] = L;
         }
 
     }

@@ -90,6 +90,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnShiftUp = new System.Windows.Forms.Button();
             this.btnShiftDown = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).BeginInit();
@@ -132,50 +133,50 @@
             // newMapToolStripMenuItem
             // 
             this.newMapToolStripMenuItem.Name = "newMapToolStripMenuItem";
-            this.newMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newMapToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.newMapToolStripMenuItem.Text = "&New Map";
             this.newMapToolStripMenuItem.Click += new System.EventHandler(this.newMapToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
             // 
             // saveMapToolStripMenuItem
             // 
             this.saveMapToolStripMenuItem.Name = "saveMapToolStripMenuItem";
-            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveMapToolStripMenuItem.Text = "&Save Map";
             this.saveMapToolStripMenuItem.Click += new System.EventHandler(this.saveMapToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(122, 6);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -223,9 +224,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 120);
+            this.button1.Location = new System.Drawing.Point(198, 416);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 23);
+            this.button1.Size = new System.Drawing.Size(90, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "ShowGrid";
             this.button1.UseVisualStyleBackColor = true;
@@ -339,8 +340,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClear);
             this.groupBox1.Controls.Add(this.radWarp);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button2);
@@ -744,9 +745,9 @@
             // btnShiftUp
             // 
             this.btnShiftUp.Enabled = false;
-            this.btnShiftUp.Location = new System.Drawing.Point(197, 416);
+            this.btnShiftUp.Location = new System.Drawing.Point(198, 464);
             this.btnShiftUp.Name = "btnShiftUp";
-            this.btnShiftUp.Size = new System.Drawing.Size(75, 23);
+            this.btnShiftUp.Size = new System.Drawing.Size(90, 23);
             this.btnShiftUp.TabIndex = 26;
             this.btnShiftUp.Text = "Move Up";
             this.btnShiftUp.UseVisualStyleBackColor = true;
@@ -756,11 +757,21 @@
             this.btnShiftDown.Enabled = false;
             this.btnShiftDown.Location = new System.Drawing.Point(198, 493);
             this.btnShiftDown.Name = "btnShiftDown";
-            this.btnShiftDown.Size = new System.Drawing.Size(75, 23);
+            this.btnShiftDown.Size = new System.Drawing.Size(90, 23);
             this.btnShiftDown.TabIndex = 27;
             this.btnShiftDown.Text = "Move Down";
             this.btnShiftDown.UseVisualStyleBackColor = true;
             this.btnShiftDown.Click += new System.EventHandler(this.btnShiftDown_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(8, 119);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(57, 23);
+            this.btnClear.TabIndex = 23;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // Form1
             // 
@@ -769,6 +780,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1153, 564);
             this.Controls.Add(this.btnShiftDown);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShiftUp);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnNewLayer);
@@ -869,6 +881,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnShiftUp;
         private System.Windows.Forms.Button btnShiftDown;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
