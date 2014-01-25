@@ -25,6 +25,7 @@ public:
 	CObjects(void);
 	virtual ~CObjects(void);
 
+
 	int GetHeight(void) { return m_nHeight; }
 	void SetHeight(int t) { m_nHeight = t; }
 	int GetWidth(void) { return m_nWidth; }
