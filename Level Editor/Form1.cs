@@ -132,7 +132,7 @@ namespace SGP_PoA_LevelEditor
                 }
 
                 if (radMap.Checked)
-                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width, MouseLoc.Height * TileSize.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
+                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width + panel2.AutoScrollPosition.X, MouseLoc.Height * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
             }
             if (ShowGrid)
             {
@@ -144,6 +144,7 @@ namespace SGP_PoA_LevelEditor
                     }
                 }
             }
+
 
             DX.SpriteEnd();
             DX.DeviceEnd();
@@ -165,6 +166,8 @@ namespace SGP_PoA_LevelEditor
                     }
                 }
             }
+
+            DX.DrawHollowRect(new Rectangle(tileSelected.X * TileSize.Width + panel1.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel1.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), Color.Red, 3);
 
             DX.SpriteEnd();
             DX.DeviceEnd();
@@ -234,7 +237,8 @@ namespace SGP_PoA_LevelEditor
 
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width &&
+                e.Y - panel2.AutoScrollPosition.Y < MapSize.Height * TileSize.Height && e.X - panel2.AutoScrollPosition.X > 0 && e.Y - panel2.AutoScrollPosition.Y > 0)
             {
                 Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
                 myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
@@ -365,50 +369,41 @@ namespace SGP_PoA_LevelEditor
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
-            MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height;
-            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
-            Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
-
-            if (radMap.Checked)
+            if (e.X - panel2.AutoScrollPosition.X < MapSize.Width * TileSize.Width && 
+                e.Y - panel2.AutoScrollPosition.Y < MapSize.Height * TileSize.Height && e.X - panel2.AutoScrollPosition.X > 0 && e.Y - panel2.AutoScrollPosition.Y > 0)
             {
-                if (mouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
-                    {
+                MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X) / TileSize.Width;
+                MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height;
+                myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+                Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
 
+                if (radMap.Checked)
+                {
+                    if (mouseDown)
+                    {
                         L.MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
                         L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
                     }
-                }
-                else if (rmouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    else if (rmouseDown)
                     {
                         L.MyTiles[Temp.X, Temp.Y].X = 0;
                         L.MyTiles[Temp.X, Temp.Y].Y = 0;
                     }
                 }
-            }
-            else if (radBlock.Checked)
-            {
-                if (mouseDown)
+                else if (radBlock.Checked)
                 {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    if (mouseDown)
                     {
                         L.MyTiles[Temp.X, Temp.Y].IsBlocked = true;
                     }
-                }
-                else if (rmouseDown)
-                {
-                    if (e.X < MapSize.Width * TileSize.Width && e.Y < MapSize.Height * TileSize.Height && e.X > 0 && e.Y > 0)
+                    else if (rmouseDown)
                     {
                         L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
                     }
-                }
 
+                }
+                lstLayers.Items[lstLayers.SelectedIndex] = L;
             }
-            lstLayers.Items[lstLayers.SelectedIndex] = L;
         }
 
         private void button1_MouseClick(object sender, MouseEventArgs e)
@@ -486,14 +481,14 @@ namespace SGP_PoA_LevelEditor
                             XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
                             XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
                             XAttribute xTileBlock = new XAttribute("isBlocked", L.MyTiles[x, y].IsBlocked);
-                            XAttribute xTileNpc = new XAttribute("isNPC",       L.MyTiles[x, y].IsNPC);
-                            XAttribute xTileEvent = new XAttribute("isEvent",   L.MyTiles[x, y].IsEvent);
-                            XAttribute xTileWarp = new XAttribute("isWARP",     L.MyTiles[x, y].IsWarp);
-                            XAttribute xTileWarpX = new XAttribute("WarpX",     L.MyTiles[x, y].WarpX);
-                            XAttribute xTileWarpY = new XAttribute("WarpY",     L.MyTiles[x, y].WarpY);
+                            XAttribute xTileNpc = new XAttribute("isNPC", L.MyTiles[x, y].IsNPC);
+                            XAttribute xTileEvent = new XAttribute("isEvent", L.MyTiles[x, y].IsEvent);
+                            XAttribute xTileWarp = new XAttribute("isWARP", L.MyTiles[x, y].IsWarp);
+                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
+                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
                             if (L.MyTiles[x, y].SzSpecial == null)
-                               L.MyTiles[x, y].SzSpecial = "";
-                            XAttribute xEventId = new XAttribute("EventID",L.MyTiles[x, y].SzSpecial);
+                                L.MyTiles[x, y].SzSpecial = "";
+                            XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
