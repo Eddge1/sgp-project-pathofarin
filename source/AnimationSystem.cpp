@@ -116,6 +116,7 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 						rTempCollisionRect.right = right;
 						rTempCollisionRect.bottom = bottom;
 
+
 					}
 					CFrame* temp = new CFrame;
 					temp->SetRenderRect(rTempRenderRect);
