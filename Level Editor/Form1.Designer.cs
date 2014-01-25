@@ -47,13 +47,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nudTileWidth = new System.Windows.Forms.NumericUpDown();
             this.nudTileHeight = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nudLayer = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.nudMapWidth = new System.Windows.Forms.NumericUpDown();
             this.nudMapHeight = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radWarp = new System.Windows.Forms.RadioButton();
             this.button3 = new System.Windows.Forms.Button();
@@ -72,26 +69,30 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
-            this.lstNpcs = new System.Windows.Forms.ListBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.chkHostile = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.chkMoves = new System.Windows.Forms.CheckBox();
-            this.btnNpcCancel = new System.Windows.Forms.Button();
-            this.btnNpcApply = new System.Windows.Forms.Button();
-            this.btnNpcAdd = new System.Windows.Forms.Button();
-            this.grpWayPoints = new System.Windows.Forms.GroupBox();
-            this.lstWaypoints = new System.Windows.Forms.ListBox();
-            this.radWPAdd = new System.Windows.Forms.RadioButton();
-            this.radWPMove = new System.Windows.Forms.RadioButton();
-            this.btnNPCUnits = new System.Windows.Forms.Button();
             this.btnNPCMove = new System.Windows.Forms.Button();
+            this.btnNPCUnits = new System.Windows.Forms.Button();
+            this.btnNpcAdd = new System.Windows.Forms.Button();
+            this.btnNpcApply = new System.Windows.Forms.Button();
+            this.btnNpcCancel = new System.Windows.Forms.Button();
+            this.chkMoves = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chkHostile = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lstNpcs = new System.Windows.Forms.ListBox();
+            this.grpWayPoints = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.radWPMove = new System.Windows.Forms.RadioButton();
+            this.radWPAdd = new System.Windows.Forms.RadioButton();
+            this.lstWaypoints = new System.Windows.Forms.ListBox();
+            this.lstLayers = new System.Windows.Forms.ListBox();
+            this.btnNewLayer = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnShiftUp = new System.Windows.Forms.Button();
+            this.btnShiftDown = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapHeight)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -131,50 +132,50 @@
             // newMapToolStripMenuItem
             // 
             this.newMapToolStripMenuItem.Name = "newMapToolStripMenuItem";
-            this.newMapToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.newMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newMapToolStripMenuItem.Text = "&New Map";
             this.newMapToolStripMenuItem.Click += new System.EventHandler(this.newMapToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // saveMapToolStripMenuItem
             // 
             this.saveMapToolStripMenuItem.Name = "saveMapToolStripMenuItem";
-            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.saveMapToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMapToolStripMenuItem.Text = "&Save Map";
             this.saveMapToolStripMenuItem.Click += new System.EventHandler(this.saveMapToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -198,7 +199,7 @@
             this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(288, 532);
+            this.panel1.Size = new System.Drawing.Size(288, 376);
             this.panel1.TabIndex = 1;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
@@ -222,7 +223,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 141);
+            this.button1.Location = new System.Drawing.Point(8, 120);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 23);
             this.button1.TabIndex = 4;
@@ -284,23 +285,6 @@
             0,
             0});
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 117);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Layer Editing";
-            // 
-            // nudLayer
-            // 
-            this.nudLayer.Location = new System.Drawing.Point(76, 115);
-            this.nudLayer.Name = "nudLayer";
-            this.nudLayer.ReadOnly = true;
-            this.nudLayer.Size = new System.Drawing.Size(26, 20);
-            this.nudLayer.TabIndex = 12;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -353,24 +337,13 @@
             0,
             0});
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(105, 117);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = " of 1";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radWarp);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.nudLayer);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.radNPC);
             this.groupBox1.Controls.Add(this.radBlock);
             this.groupBox1.Controls.Add(this.radMap);
@@ -382,10 +355,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.nudTileHeight);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(918, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(223, 170);
+            this.groupBox1.Size = new System.Drawing.Size(223, 149);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Data";
@@ -404,7 +376,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(80, 141);
+            this.button3.Location = new System.Drawing.Point(80, 120);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(36, 23);
             this.button3.TabIndex = 21;
@@ -422,7 +394,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(122, 141);
+            this.button2.Location = new System.Drawing.Point(122, 120);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 23);
             this.button2.TabIndex = 19;
@@ -473,7 +445,7 @@
             this.grpWarp.Controls.Add(this.label11);
             this.grpWarp.Controls.Add(this.label10);
             this.grpWarp.Controls.Add(this.label9);
-            this.grpWarp.Location = new System.Drawing.Point(918, 200);
+            this.grpWarp.Location = new System.Drawing.Point(919, 179);
             this.grpWarp.Name = "grpWarp";
             this.grpWarp.Size = new System.Drawing.Size(223, 201);
             this.grpWarp.TabIndex = 21;
@@ -568,7 +540,7 @@
             this.grpNPC.Controls.Add(this.chkHostile);
             this.grpNPC.Controls.Add(this.label7);
             this.grpNPC.Controls.Add(this.lstNpcs);
-            this.grpNPC.Location = new System.Drawing.Point(918, 200);
+            this.grpNPC.Location = new System.Drawing.Point(918, 179);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 212);
             this.grpNPC.TabIndex = 22;
@@ -576,83 +548,26 @@
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
             // 
-            // lstNpcs
+            // btnNPCMove
             // 
-            this.lstNpcs.FormattingEnabled = true;
-            this.lstNpcs.Location = new System.Drawing.Point(10, 32);
-            this.lstNpcs.Name = "lstNpcs";
-            this.lstNpcs.Size = new System.Drawing.Size(199, 95);
-            this.lstNpcs.TabIndex = 0;
+            this.btnNPCMove.Enabled = false;
+            this.btnNPCMove.Location = new System.Drawing.Point(122, 182);
+            this.btnNPCMove.Name = "btnNPCMove";
+            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
+            this.btnNPCMove.TabIndex = 11;
+            this.btnNPCMove.Text = "Move";
+            this.btnNPCMove.UseVisualStyleBackColor = true;
+            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
             // 
-            // label7
+            // btnNPCUnits
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Created";
-            // 
-            // chkHostile
-            // 
-            this.chkHostile.AutoSize = true;
-            this.chkHostile.Location = new System.Drawing.Point(37, 158);
-            this.chkHostile.Name = "chkHostile";
-            this.chkHostile.Size = new System.Drawing.Size(65, 17);
-            this.chkHostile.TabIndex = 2;
-            this.chkHostile.Text = "isHostile";
-            this.chkHostile.UseVisualStyleBackColor = true;
-            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(57, 128);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(152, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 131);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Name";
-            // 
-            // chkMoves
-            // 
-            this.chkMoves.AutoSize = true;
-            this.chkMoves.Location = new System.Drawing.Point(109, 158);
-            this.chkMoves.Name = "chkMoves";
-            this.chkMoves.Size = new System.Drawing.Size(58, 17);
-            this.chkMoves.TabIndex = 5;
-            this.chkMoves.Text = "Moves";
-            this.chkMoves.UseVisualStyleBackColor = true;
-            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged);
-            // 
-            // btnNpcCancel
-            // 
-            this.btnNpcCancel.Enabled = false;
-            this.btnNpcCancel.Location = new System.Drawing.Point(8, 181);
-            this.btnNpcCancel.Name = "btnNpcCancel";
-            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
-            this.btnNpcCancel.TabIndex = 7;
-            this.btnNpcCancel.Text = "Cancel";
-            this.btnNpcCancel.UseVisualStyleBackColor = true;
-            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
-            // 
-            // btnNpcApply
-            // 
-            this.btnNpcApply.Enabled = false;
-            this.btnNpcApply.Location = new System.Drawing.Point(173, 181);
-            this.btnNpcApply.Name = "btnNpcApply";
-            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
-            this.btnNpcApply.TabIndex = 8;
-            this.btnNpcApply.Text = "Apply";
-            this.btnNpcApply.UseVisualStyleBackColor = true;
-            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
+            this.btnNPCUnits.Enabled = false;
+            this.btnNPCUnits.Location = new System.Drawing.Point(67, 181);
+            this.btnNPCUnits.Name = "btnNPCUnits";
+            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
+            this.btnNPCUnits.TabIndex = 10;
+            this.btnNPCUnits.Text = "Units";
+            this.btnNPCUnits.UseVisualStyleBackColor = true;
             // 
             // btnNpcAdd
             // 
@@ -665,13 +580,91 @@
             this.btnNpcAdd.UseVisualStyleBackColor = true;
             this.btnNpcAdd.Click += new System.EventHandler(this.btnNpcAdd_Click);
             // 
+            // btnNpcApply
+            // 
+            this.btnNpcApply.Enabled = false;
+            this.btnNpcApply.Location = new System.Drawing.Point(173, 181);
+            this.btnNpcApply.Name = "btnNpcApply";
+            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
+            this.btnNpcApply.TabIndex = 8;
+            this.btnNpcApply.Text = "Apply";
+            this.btnNpcApply.UseVisualStyleBackColor = true;
+            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
+            // 
+            // btnNpcCancel
+            // 
+            this.btnNpcCancel.Enabled = false;
+            this.btnNpcCancel.Location = new System.Drawing.Point(8, 181);
+            this.btnNpcCancel.Name = "btnNpcCancel";
+            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
+            this.btnNpcCancel.TabIndex = 7;
+            this.btnNpcCancel.Text = "Cancel";
+            this.btnNpcCancel.UseVisualStyleBackColor = true;
+            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
+            // 
+            // chkMoves
+            // 
+            this.chkMoves.AutoSize = true;
+            this.chkMoves.Location = new System.Drawing.Point(109, 158);
+            this.chkMoves.Name = "chkMoves";
+            this.chkMoves.Size = new System.Drawing.Size(58, 17);
+            this.chkMoves.TabIndex = 5;
+            this.chkMoves.Text = "Moves";
+            this.chkMoves.UseVisualStyleBackColor = true;
+            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 131);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Name";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(57, 128);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(152, 20);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // chkHostile
+            // 
+            this.chkHostile.AutoSize = true;
+            this.chkHostile.Location = new System.Drawing.Point(37, 158);
+            this.chkHostile.Name = "chkHostile";
+            this.chkHostile.Size = new System.Drawing.Size(65, 17);
+            this.chkHostile.TabIndex = 2;
+            this.chkHostile.Text = "isHostile";
+            this.chkHostile.UseVisualStyleBackColor = true;
+            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Created";
+            // 
+            // lstNpcs
+            // 
+            this.lstNpcs.FormattingEnabled = true;
+            this.lstNpcs.Location = new System.Drawing.Point(10, 32);
+            this.lstNpcs.Name = "lstNpcs";
+            this.lstNpcs.Size = new System.Drawing.Size(199, 95);
+            this.lstNpcs.TabIndex = 0;
+            // 
             // grpWayPoints
             // 
             this.grpWayPoints.Controls.Add(this.label12);
             this.grpWayPoints.Controls.Add(this.radWPMove);
             this.grpWayPoints.Controls.Add(this.radWPAdd);
             this.grpWayPoints.Controls.Add(this.lstWaypoints);
-            this.grpWayPoints.Location = new System.Drawing.Point(919, 413);
+            this.grpWayPoints.Location = new System.Drawing.Point(918, 397);
             this.grpWayPoints.Name = "grpWayPoints";
             this.grpWayPoints.Size = new System.Drawing.Size(222, 146);
             this.grpWayPoints.TabIndex = 23;
@@ -679,13 +672,24 @@
             this.grpWayPoints.Text = "Waypoints";
             this.grpWayPoints.Visible = false;
             // 
-            // lstWaypoints
+            // label12
             // 
-            this.lstWaypoints.FormattingEnabled = true;
-            this.lstWaypoints.Location = new System.Drawing.Point(9, 19);
-            this.lstWaypoints.Name = "lstWaypoints";
-            this.lstWaypoints.Size = new System.Drawing.Size(204, 82);
-            this.lstWaypoints.TabIndex = 11;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(59, 117);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(157, 13);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Right click on the map to delete";
+            // 
+            // radWPMove
+            // 
+            this.radWPMove.AutoSize = true;
+            this.radWPMove.Location = new System.Drawing.Point(8, 123);
+            this.radWPMove.Name = "radWPMove";
+            this.radWPMove.Size = new System.Drawing.Size(52, 17);
+            this.radWPMove.TabIndex = 14;
+            this.radWPMove.Text = "Move";
+            this.radWPMove.UseVisualStyleBackColor = true;
             // 
             // radWPAdd
             // 
@@ -699,45 +703,64 @@
             this.radWPAdd.Text = "Add";
             this.radWPAdd.UseVisualStyleBackColor = true;
             // 
-            // radWPMove
+            // lstWaypoints
             // 
-            this.radWPMove.AutoSize = true;
-            this.radWPMove.Location = new System.Drawing.Point(8, 123);
-            this.radWPMove.Name = "radWPMove";
-            this.radWPMove.Size = new System.Drawing.Size(52, 17);
-            this.radWPMove.TabIndex = 14;
-            this.radWPMove.Text = "Move";
-            this.radWPMove.UseVisualStyleBackColor = true;
+            this.lstWaypoints.FormattingEnabled = true;
+            this.lstWaypoints.Location = new System.Drawing.Point(9, 19);
+            this.lstWaypoints.Name = "lstWaypoints";
+            this.lstWaypoints.Size = new System.Drawing.Size(204, 82);
+            this.lstWaypoints.TabIndex = 11;
             // 
-            // btnNPCUnits
+            // lstLayers
             // 
-            this.btnNPCUnits.Enabled = false;
-            this.btnNPCUnits.Location = new System.Drawing.Point(67, 181);
-            this.btnNPCUnits.Name = "btnNPCUnits";
-            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
-            this.btnNPCUnits.TabIndex = 10;
-            this.btnNPCUnits.Text = "Units";
-            this.btnNPCUnits.UseVisualStyleBackColor = true;
+            this.lstLayers.FormattingEnabled = true;
+            this.lstLayers.Location = new System.Drawing.Point(12, 409);
+            this.lstLayers.Name = "lstLayers";
+            this.lstLayers.Size = new System.Drawing.Size(179, 108);
+            this.lstLayers.TabIndex = 0;
+            this.lstLayers.SelectedIndexChanged += new System.EventHandler(this.lstLayers_SelectedIndexChanged);
             // 
-            // btnNPCMove
+            // btnNewLayer
             // 
-            this.btnNPCMove.Enabled = false;
-            this.btnNPCMove.Location = new System.Drawing.Point(122, 182);
-            this.btnNPCMove.Name = "btnNPCMove";
-            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
-            this.btnNPCMove.TabIndex = 11;
-            this.btnNPCMove.Text = "Move";
-            this.btnNPCMove.UseVisualStyleBackColor = true;
-            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
+            this.btnNewLayer.Location = new System.Drawing.Point(120, 520);
+            this.btnNewLayer.Name = "btnNewLayer";
+            this.btnNewLayer.Size = new System.Drawing.Size(71, 23);
+            this.btnNewLayer.TabIndex = 24;
+            this.btnNewLayer.Text = "New Layer";
+            this.btnNewLayer.UseVisualStyleBackColor = true;
+            this.btnNewLayer.Click += new System.EventHandler(this.btnNewLayer_Click);
             // 
-            // label12
+            // btnDelete
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(59, 117);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(157, 13);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "Right click on the map to delete";
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(12, 520);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(56, 23);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnShiftUp
+            // 
+            this.btnShiftUp.Enabled = false;
+            this.btnShiftUp.Location = new System.Drawing.Point(197, 416);
+            this.btnShiftUp.Name = "btnShiftUp";
+            this.btnShiftUp.Size = new System.Drawing.Size(75, 23);
+            this.btnShiftUp.TabIndex = 26;
+            this.btnShiftUp.Text = "Move Up";
+            this.btnShiftUp.UseVisualStyleBackColor = true;
+            // 
+            // btnShiftDown
+            // 
+            this.btnShiftDown.Enabled = false;
+            this.btnShiftDown.Location = new System.Drawing.Point(198, 493);
+            this.btnShiftDown.Name = "btnShiftDown";
+            this.btnShiftDown.Size = new System.Drawing.Size(75, 23);
+            this.btnShiftDown.TabIndex = 27;
+            this.btnShiftDown.Text = "Move Down";
+            this.btnShiftDown.UseVisualStyleBackColor = true;
+            this.btnShiftDown.Click += new System.EventHandler(this.btnShiftDown_Click);
             // 
             // Form1
             // 
@@ -745,6 +768,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1153, 564);
+            this.Controls.Add(this.btnShiftDown);
+            this.Controls.Add(this.btnShiftUp);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnNewLayer);
+            this.Controls.Add(this.lstLayers);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpNPC);
             this.Controls.Add(this.grpWarp);
@@ -760,7 +788,6 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapHeight)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -799,13 +826,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nudTileWidth;
         private System.Windows.Forms.NumericUpDown nudTileHeight;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nudLayer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nudMapWidth;
         private System.Windows.Forms.NumericUpDown nudMapHeight;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radNPC;
         private System.Windows.Forms.RadioButton radBlock;
@@ -840,6 +864,11 @@
         private System.Windows.Forms.RadioButton radWPAdd;
         private System.Windows.Forms.ListBox lstWaypoints;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox lstLayers;
+        private System.Windows.Forms.Button btnNewLayer;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnShiftUp;
+        private System.Windows.Forms.Button btnShiftDown;
     }
 }
 

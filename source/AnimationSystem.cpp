@@ -98,8 +98,8 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 
 					rTempRenderRect.left = left;
 					rTempRenderRect.top = top;
-					rTempRenderRect.right = right;
-					rTempRenderRect.bottom = bottom;
+					rTempRenderRect.right = left + right;
+					rTempRenderRect.bottom = top + bottom;
 
 					pAnim = pAnim->NextSiblingElement("ActiveCollision");
 					RECT rTempCollisionRect = { };
