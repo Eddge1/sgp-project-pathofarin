@@ -41,17 +41,20 @@ void CWorld::Render(int layer)
 	{
 		int foo = i % GetWidth() * GetTileWidth();
 		int fee = i / GetHeight() * GetTileHeight();
-		if(foo > WorldCamX + GetTileWidth() && foo < WorldCamX + GetTileWidth() + CGame::GetInstance()->GetScreenWidth()) 
+		if(foo > WorldCamX - GetTileWidth() && foo < WorldCamX + GetTileWidth() + CGame::GetInstance()->GetScreenWidth()) 
 		{
 			if( fee > WorldCamY - GetTileHeight() && fee < WorldCamY + GetTileHeight() + CGame::GetInstance()->GetScreenHeight())
 			{
-				temp.left = TempLayer->GetTile(i)->GetTileX() * GetTileWidth();
-				temp.top = TempLayer->GetTile(i)->GetTileY() * GetTileHeight();
-				temp.right = temp.left + GetTileWidth();
-				temp.bottom = temp.top + GetTileHeight();
+				if(TempLayer->GetTile(i)->GetTileX() != -1 && TempLayer->GetTile(i)->GetTileY() != -1)
+				{
+					temp.left = TempLayer->GetTile(i)->GetTileX() * GetTileWidth();
+					temp.top = TempLayer->GetTile(i)->GetTileY() * GetTileHeight();
+					temp.right = temp.left + GetTileWidth();
+					temp.bottom = temp.top + GetTileHeight();
 
 
-				pTM->Draw(GetID(), (i % GetWidth() ) * GetTileWidth() - WorldCamX, ( i / GetWidth() ) * GetTileHeight() - WorldCamY, 1.0f, 1.0f, &temp); 
+					pTM->Draw(GetID(), (i % GetWidth() ) * GetTileWidth() - WorldCamX, ( i / GetWidth() ) * GetTileHeight() - WorldCamY, 1.0f, 1.0f, &temp); 
+				}
 			}
 		}
 	}
