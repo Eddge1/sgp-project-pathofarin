@@ -279,10 +279,16 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
+
             cTransparency = Color.Black;
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
+            lstMaps.Items.Clear();
+            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
+            {
+                lstMaps.Items.Add(szMapID);
+            }
 
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
@@ -332,7 +338,6 @@ namespace SGP_PoA_LevelEditor
             int nTempX = (e.Location.X - panel1.AutoScrollPosition.X) / TileSize.Width;
             int nTempY = (e.Location.Y - panel1.AutoScrollPosition.Y) / TileSize.Height;
             tileSelected = new Point(nTempX, nTempY);
-            label8.Text = tileSelected.ToString();
         }
 
 
@@ -379,9 +384,14 @@ namespace SGP_PoA_LevelEditor
                             mapTile = Temp;
                             if (currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked)
                                 currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                            else if (currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsNPC)
+                                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsNPC = false;
 
                             currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsWarp = true;
-                            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].SzSpecial = txtWarp.Text;
+                            if (lstMaps.SelectedIndex >= 0 && lstMaps.Items.Count > 0)
+                                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].SzSpecial = lstMaps.Items[lstMaps.SelectedIndex].ToString();
+                            else
+                                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].SzSpecial = "";
                             currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpX = Convert.ToInt32(nudWarpX.Value);
                             currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpY = Convert.ToInt32(nudWarpY.Value);
                         }
@@ -390,7 +400,14 @@ namespace SGP_PoA_LevelEditor
                             mapTile = Temp;
                             nudWarpX.Value = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpX;
                             nudWarpY.Value = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpY;
-                            txtWarp.Text = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].SzSpecial;
+                            for (int i = 0; i < lstMaps.Items.Count; i++)
+                            {
+                                if (lstMaps.Items[i].ToString() == currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial)
+                                {
+                                    lstMaps.SelectedIndex = i;
+                                    break;
+                                }
+                            }
 
                             btnWarp.Enabled = false;
                             btnWarpCancel.Enabled = false;
@@ -402,6 +419,53 @@ namespace SGP_PoA_LevelEditor
                         currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].SzSpecial = "";
                         currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpX = 0;
                         currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].WarpY = 0;
+                    }
+                }
+
+                if (radNPC.Checked)
+                {
+                    if (grpWayPoints.Visible)
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            if (radWPAdd.Checked)
+                            {
+
+
+                            }
+                            else if (radWPMove.Checked)
+                            {
+
+
+                            }
+                        }
+                        else
+                        {
+                            //Delete
+                        }
+                    }
+                    else
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            if (currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsNPC == false)
+                            {
+                                mapTile = Temp;
+                                if (currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked)
+                                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                                else if (currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsWarp)
+                                    currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[Temp.X, Temp.Y].IsWarp = false;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            //Delete
+                        }
+
                     }
                 }
             }
@@ -554,6 +618,11 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Save(szFileName);
 
             }
+            lstMaps.Items.Clear();
+            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
+            {
+                lstMaps.Items.Add(szMapID);
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -630,6 +699,11 @@ namespace SGP_PoA_LevelEditor
                 }
                 szFileName = dlg.FileName;
                 xRoot.Save(dlg.FileName);
+            }
+            lstMaps.Items.Clear();
+            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
+            {
+                lstMaps.Items.Add(szMapID);
             }
         }
 
@@ -791,7 +865,6 @@ namespace SGP_PoA_LevelEditor
                     }
                     bSelectColor = false;
                     label6.Text = "";
-                    label7.Text = cTransparency.ToArgb().ToString();
                 }
             }
         }
@@ -835,7 +908,10 @@ namespace SGP_PoA_LevelEditor
 
         private void btnWarp_Click(object sender, EventArgs e)
         {
-            currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial = txtWarp.Text;
+            if (lstMaps.SelectedIndex >= 0 && lstMaps.Items.Count > 0)
+                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial = lstMaps.Items[lstMaps.SelectedIndex].ToString();
+            else
+                currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial = "";
             currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].WarpX = Convert.ToInt32(nudWarpX.Value);
             currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].WarpY = Convert.ToInt32(nudWarpY.Value);
 
@@ -847,10 +923,69 @@ namespace SGP_PoA_LevelEditor
         {
             nudWarpX.Value = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].WarpX;
             nudWarpY.Value = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].WarpY;
-            txtWarp.Text = currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial;
+            for (int i = 0; i < lstMaps.Items.Count; i++)
+            {
+                if (lstMaps.Items[i].ToString() == currMap.TheWorld[Convert.ToInt32(nudLayer.Value) - 1].MyTiles[mapTile.X, mapTile.Y].SzSpecial)
+                {
+                    lstMaps.SelectedIndex = i;
+                    break;
+                }
+            }
 
             btnWarp.Enabled = false;
             btnWarpCancel.Enabled = false;
+        }
+
+        private void radNPC_CheckedChanged(object sender, EventArgs e)
+        {
+            grpNPC.Visible = radNPC.Checked;
+        }
+
+        private void chkMoves_CheckedChanged(object sender, EventArgs e)
+        {
+            btnNPCMove.Enabled = chkMoves.Checked;
+            if (grpWayPoints.Visible && !chkMoves.Checked)
+                grpWayPoints.Visible = false;
+        }
+
+        private void chkHostile_CheckedChanged(object sender, EventArgs e)
+        {
+            btnNPCUnits.Enabled = chkHostile.Checked;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            btnNpcAdd.Enabled = true;
+            btnNpcApply.Enabled = true;
+            btnNpcCancel.Enabled = true;
+        }
+
+        private void btnNpcAdd_Click(object sender, EventArgs e)
+        {
+
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNpcCancel_Click(object sender, EventArgs e)
+        {
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNpcApply_Click(object sender, EventArgs e)
+        {
+
+            btnNpcAdd.Enabled = false;
+            btnNpcApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
+        }
+
+        private void btnNPCMove_Click(object sender, EventArgs e)
+        {
+            grpWayPoints.Visible = !grpWayPoints.Visible;
         }
 
     }
