@@ -31,5 +31,6 @@ public:
 	void SetDuration(float fDuration) { m_fDuration = fDuration; }
 	void SetAnchor(int anchorX, int anchorY) { m_nAnchorX = anchorX;
 											   m_nAnchorY = anchorY;}
+	void SetEventID(std::string szEvent) { m_szEvent = szEvent; }
 };
 
