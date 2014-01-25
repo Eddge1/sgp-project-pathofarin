@@ -6,6 +6,7 @@
 #include <string>
 
 class CUnits;
+class CSkills;
 class CMiniGames
 {
 	CUnits* m_pMaster;
@@ -15,13 +16,9 @@ class CMiniGames
 	int m_nSuccess;
 	float m_fDamageMultiplier;
 	
-	std::string m_szAbilityName;
 	std::vector<RECT> m_rCollisionZones;
-	std::vector<CMiniGames*> m_vSubSkills;
-
+	CSkills* m_pSkill;
 public:
-
-	CMiniGames* GetSubMenu(int nID);
 	virtual void SetOwner(CUnits* pOwner) final;
 
 	CMiniGames(void);
@@ -30,11 +27,10 @@ public:
 	void Update(float fElapsedTime);
 	void Render();
 
-	void SetAbilityName(std::string szName)	{m_szAbilityName = szName;}
 	void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
 	void SetChances( int nAttempts ) {m_nChances = nAttempts;}
-	
-	std::string GetAbilityName( void )	{return m_szAbilityName;}
+	void SetSkill(CSkills* pSkill);
+
 	float GetDamage( void )	{return m_fDamageMultiplier;}
 	int GetChances( void ) {return m_nChances;}
 

@@ -3,7 +3,6 @@
 #include <vector>
 using namespace std;
 #include "Commands.h"
-#include "Minigames.h"
 
 class CPlayerUnit :	public CUnits
 {
@@ -11,7 +10,7 @@ class CPlayerUnit :	public CUnits
 	bool m_bSkillSelected;
 	int m_nMenuSelect;
 	int m_nSkillSelect;
-	vector<CMiniGames*> m_vCommands;
+	vector<CCommands*> m_vCommands;
 
 public:
 	CPlayerUnit(void);
@@ -27,8 +26,8 @@ public:
 	void GetReady		(bool bValue)	{m_bSkillSelected = bValue;}
 	void GetMenuID		(int nID)		{m_nMenuSelect = nID;}
 	void GetSkillID		(int nID)		{m_nSkillSelect = nID;}
-	void AddSkill		(CMiniGames* nSkill)	{m_vCommands.push_back(nSkill);}
-	CMiniGames* GetSkill(int nID);
+	void AddSkill		(CCommands* nSkill)	{m_vCommands.push_back(nSkill);}
+	CCommands* GetSkill(int nID);
 	virtual void Update(float fElapsedTime) override;
 
 };

@@ -26,7 +26,7 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 
 }
 
-CMiniGames* CPlayerUnit::GetSkill(int nID)
+CCommands* CPlayerUnit::GetSkill(int nID)
 {
 	if(nID >= (int)m_vCommands.size())
 		return nullptr;
@@ -40,7 +40,6 @@ void CPlayerUnit::Update(float fElapsedTime)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(GetTurn())
 	{
-		
 
 
 

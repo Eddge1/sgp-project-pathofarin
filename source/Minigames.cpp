@@ -7,18 +7,11 @@ CMiniGames::CMiniGames(void)
 {
 	m_pMaster = nullptr;
 	m_bRight = true;
-	m_szAbilityName = "Undefined";
 }
-
 
 CMiniGames::~CMiniGames(void)
 {
 	SetOwner(nullptr);
-}
-
-CMiniGames* CMiniGames::GetSubMenu(int nID)
-{
-	return m_vSubSkills[nID];
 }
 
 void CMiniGames::Update(float fElapsedTime)
