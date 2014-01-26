@@ -14,8 +14,7 @@ public:
 
 	CUnits* GetTarget(void) { return m_pTarget; }
 	void SetTarget(CUnits* l) { m_pTarget = l; }
-	int GetDamage(void) { return m_nDamage; }
-	void SetDamage(int l) { m_nDamage = l; }
+
 
 	CBasicAttack(void);
 	virtual ~CBasicAttack(void);
