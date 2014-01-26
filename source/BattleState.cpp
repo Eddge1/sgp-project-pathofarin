@@ -81,6 +81,7 @@ void CBattleState::Update(float fElapsedTime)
 		Initialize();
 		break;
 	case CBattleState::BP_BATTLE:
+		Battle(fElapsedTime);
 		break;
 	case CBattleState::BP_END:
 		EndBattle();
@@ -98,11 +99,6 @@ void CBattleState::Render(void)
 
 	//Temp drawing the UI
 	RECT Overlay = { 0, 478, 800, 600 };
-	pD3D->DrawHollowRect(Overlay, D3DCOLOR_XRGB( 0,0,0 ));
-
-	Overlay.left = 400 - 64;
-	Overlay.right = Overlay.left + 128;
-
 	pD3D->DrawHollowRect(Overlay, D3DCOLOR_XRGB( 0,0,0 ));
 
 	// Printing out variables
@@ -128,35 +124,56 @@ void CBattleState::Render(void)
 				woss << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-
-
-
 			}
-
 
 			RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
 			pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
 
-
 		}
 
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+		{
+			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
-		m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-		m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTarget]->GetHealth();
+			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
+			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
+			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+		}
+		else
+		{
+			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
-		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-		woss << m_vBattleUnits[m_nTarget]->GetHealth();
-		m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-		woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
-		m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-		woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-		woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-		m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTurn]->GetHealth();
+			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTurn]->GetAbilityPoints();
+			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
+			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+		}
 
 		RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
 		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+		{
+			RECT rTemp = {336,472,464,600};
+			pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
+
+		}
 	}
+
+
 
 }
 
@@ -183,9 +200,35 @@ void CBattleState::Initialize(void)
 	m_eCurrentPhase = BP_BATTLE;
 }
 
-void CBattleState::Battle(void)
+void CBattleState::Battle(float fElapsedTime)
 {
+	m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
+	if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
+	{
+		if(m_vBattleUnits.size() == 1)
+		{
+			if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+				m_eCurrentPhase = BP_END;
+		}
 
+		m_nTurn++;
+		for(unsigned int i = 0; i < m_vBattleUnits.size();)
+		{
+			if(m_vBattleUnits[i]->GetHealth() < 1)
+			{
+				if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					m_eCurrentPhase = BP_END;
+				m_vBattleUnits[i]->Release();
+				m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
+			}
+			else
+				i++;
+		}
+		if(m_nTurn >= (int)m_vBattleUnits.size())
+			m_nTurn = 0;
+
+		m_vBattleUnits[m_nTurn]->SetTurn();
+	}
 
 
 }
@@ -246,8 +289,6 @@ void CBattleState::GetPreviousTarget(void)
 			m_nTarget = m_vBattleUnits.size() - 1;
 	}
 	while(m_vBattleUnits[m_nTarget]->GetType() == OBJ_PLAYER_UNIT);
-
-
 
 }
 

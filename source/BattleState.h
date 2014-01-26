@@ -24,7 +24,7 @@ public:
 
 
 	void Initialize(void);
-	void Battle(void);
+	void Battle(float fElapsedTime);
 	void EndBattle(void);
 
 	virtual void Activate( void )	override;				// load resources
