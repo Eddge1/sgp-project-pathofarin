@@ -488,7 +488,7 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 	temp->SetVelY(0);
 	temp->SetSpeed(1);
 	temp->SetType(OBJ_PLAYER_UNIT);
-	
+
 
 	return temp;
 }

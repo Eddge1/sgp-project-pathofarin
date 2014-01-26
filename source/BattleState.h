@@ -21,7 +21,7 @@ public:
 
 	void GetNextTarget(void);
 	void GetPreviousTarget(void);
-
+	CUnits* GetCurrentTarget(void);
 
 	void Initialize(void);
 	void Battle(float fElapsedTime);

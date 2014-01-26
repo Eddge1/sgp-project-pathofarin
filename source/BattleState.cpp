@@ -332,3 +332,8 @@ void CBattleState::SetPlayer(CUnits* pPlayer)
 	if(m_pPlayerUnit != nullptr)
 		m_pPlayerUnit->AddRef();
 }
+
+CUnits* CBattleState::GetCurrentTarget(void)
+{
+	return m_vBattleUnits[m_nTarget];
+}
