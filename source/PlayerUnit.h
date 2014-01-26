@@ -27,6 +27,7 @@ public:
 	void GetMenuID		(int nID)		{m_nMenuSelect = nID;}
 	void GetSkillID		(int nID)		{m_nSkillSelect = nID;}
 	void AddSkill		(CCommands* nSkill)	{m_vCommands.push_back(nSkill);}
+	vector<CCommands*>* GetCommands(void) {return &m_vCommands;}
 	CCommands* GetSkill(int nID);
 	virtual void Update(float fElapsedTime) override;
 

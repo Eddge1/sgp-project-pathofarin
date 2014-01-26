@@ -101,7 +101,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			pTemp->SetActive(true);
-			//pTemp->SetHostile(true);
+			pTemp->SetHostile(true);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
 			pTemp->AddWaypoint(100,100);

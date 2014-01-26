@@ -61,15 +61,25 @@ void CBattleState::Sleep(void)
 
 bool CBattleState::Input(void)
 {
-	if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
-		GetNextTarget();
-	else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
-		GetPreviousTarget();
-	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+	if(m_vBattleUnits.size() > 0)
 	{
-		m_eCurrentPhase = BP_END;
-	}
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+		{
+			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+			if(pTemp != nullptr)
+			{
 
+				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
+					GetNextTarget();
+				else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
+					GetPreviousTarget();
+			}
+		}
+		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+		{
+			m_eCurrentPhase = BP_END;
+		}
+	}
 	return true;
 }
 
@@ -110,7 +120,6 @@ void CBattleState::Render(void)
 
 
 	m_pFont->Draw(_T("This is the Battle State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-
 
 	if(m_vBattleUnits.size() > 0)
 	{
@@ -162,19 +171,31 @@ void CBattleState::Render(void)
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
-		RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
-		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
-
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
-			RECT rTemp = {336,472,464,600};
-			pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
+			RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+		}
 
+		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
+		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+		{
+			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+			if(pTemp != nullptr)
+			{
+				RECT rTemp = {336,472,464,600};
+				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
+				vector<CCommands*> vTemp = *(pTemp->GetCommands());
+				for(unsigned int i = 0; i < vTemp.size(); i++)
+				{
+					woss.str(_T(""));
+					woss << vTemp[i]->GetName().c_str();
+					m_pFont->Draw(woss.str().c_str(), 344, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
+				}
+			}
 		}
 	}
-
-
-
 }
 
 bool SortSpeed(CUnits *l, CUnits *r) // holy hell
