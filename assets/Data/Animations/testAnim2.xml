@@ -2,11 +2,11 @@
 <Animation_Data>
 	<Animation_Info Name="TestAnimation2" Frames="3" repeat="1" Texture="PlantAttack.png">
 		<Frame_Data>
-			<Render posX="0" posY="0" Width="84" Height="70" anchorX="26" anchorY="68" Duration="1.0" Event=""/>
+			<Render posX="0" posY="0" Width="84" Height="70" anchorX="26" anchorY="68" Duration="3.0" Event=""/>
 			<ActiveCollision posX="0" posY="10" Width="83" Height="70"/>
-			<Render posX="88" posY="0" Width="92" Height="70" anchorX="26" anchorY="68" Duration="1.0" Event="TEMP_SPAWN_FIREBALL"/>
+			<Render posX="88" posY="0" Width="92" Height="70" anchorX="26" anchorY="68" Duration=".2" Event="TEMP_SPAWN_FIREBALL"/>
 			<ActiveCollision posX="0" posY="1" Width="91" Height="70"/>
-			<Render posX="180" posY="0" Width="84" Height="70" anchorX="26" anchorY="68" Duration="1.0" Event=""/>
+			<Render posX="180" posY="0" Width="84" Height="70" anchorX="26" anchorY="68" Duration="3.0" Event=""/>
 			<ActiveCollision posX="0" posY="10" Width="83" Height="70"/>
 		</Frame_Data>
 	</Animation_Info>

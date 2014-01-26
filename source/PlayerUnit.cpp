@@ -40,9 +40,12 @@ void CPlayerUnit::Update(float fElapsedTime)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(GetTurn())
 	{
+		if(pDI->KeyPressed(DIK_RETURN))
+		{
+			EndTurn();
 
 
-
+		}
 	}
 }
 
