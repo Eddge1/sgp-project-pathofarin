@@ -1,6 +1,7 @@
 #pragma once
 #include "gamestates.h"
 #include "../SGD Wrappers/IListener.h"
+#include "Minigames.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -36,6 +37,7 @@ public:
 	void SetSender(CObjects* pSender);
 	void SetPlayer(CUnits* pPlayer);
 
+	void SetMiniGame(CMiniGames* l) { m_pCurrMiniGame = l; }
 
 private:
 	enum PBattlephase {BP_INIT, BP_BATTLE, BP_END};
@@ -48,6 +50,8 @@ private:
 	CUnits* m_pPlayerUnit;
 
 	PBattlephase m_eCurrentPhase;
+
+	CMiniGames* m_pCurrMiniGame;
 
 	int m_nTurn;
 	int m_nMenuImage;

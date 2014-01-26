@@ -1,5 +1,6 @@
 #include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
+#include "BattleState.h"
 
 CPlayerUnit::CPlayerUnit(void)
 {
@@ -94,7 +95,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 		{
 			if(pDI->KeyPressed(DIK_RETURN))
 			{
-				EndTurn();
+
 			}
 			else if(pDI->KeyPressed(DIK_ESCAPE))
 				m_bSkillSelected = false;
