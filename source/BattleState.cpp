@@ -120,9 +120,6 @@ void CBattleState::Render(void)
 	m_pFont->Draw(_T("HP:"), 660, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 	m_pFont->Draw(_T("AP:"), 660, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
-
-	m_pFont->Draw(_T("This is the Battle State"), 15, 15, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-
 	if(m_vBattleUnits.size() > 0)
 	{
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
@@ -195,7 +192,12 @@ void CBattleState::Render(void)
 			{
 				RECT rTemp = {336,472,464,600};
 				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
-				vector<CCommands*> vTemp = *(pTemp->GetCommands());
+				
+				vector<CCommands*> vTemp;
+				if(!pTemp->GetInSubMenu())
+					vTemp = *(pTemp->GetCommands());
+				else
+					vTemp = *(pTemp->GetSkill(pTemp->GetMenuID())->GetCommands());
 				for(unsigned int i = 0; i < vTemp.size(); i++)
 				{
 					woss.str(_T(""));
