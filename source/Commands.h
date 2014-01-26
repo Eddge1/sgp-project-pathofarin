@@ -17,12 +17,10 @@ class CCommands
 
 public:
 
-
-	//void SetSkill(CSkills* l) { m_pMiniGame->SetSkill(l) }; TODO;
+	void SetSkill(CSkills* l) { m_pMiniGame->SetSkill(l);}
 
 	vector<CCommands*>* GetCommands(void) { return &m_vCommands; }
 	void AddCommands(CCommands* l) { m_vCommands.push_back(l); }
-
 
 	string GetName(void) { return m_sName; }
 	void SetName(string l) { m_sName = l; }

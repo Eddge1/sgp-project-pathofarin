@@ -68,9 +68,7 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
-			LoadWorld("hereisthetest.xml");
-			LoadWorld("TestingCollide.xml");
-
+			LoadWorld("SimpleMap.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -111,8 +109,8 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(0,100);
 			pTemp->AddWaypoint(-100,100);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 4);
-			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 4);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 
 			CNpcs* pTemp2 = new CNpcs();
 			pTemp2->SetActive(true);
@@ -124,7 +122,7 @@ void CGamePlayState::Activate(void)
 
 			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 4);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 2);
 
 
 			pTemp->Release();
@@ -412,31 +410,27 @@ void CGamePlayState::LoadWorld(string input)
 						pTempTile->SetTileY(TileYID);
 
 
-						ReadIn = pTileData->Attribute("isEvent");
-						if(ReadIn == "true")
+						ReadIn = pTileData->Attribute("EventType");
+						if(ReadIn == "EVENT")
 						{
 							pTempTile->SetEvent(true);
 							pTempTile->SetEventID(pLoad->Attribute("EventID"));
 						}
-						ReadIn = pTileData->Attribute("isBlocked");
-						if(ReadIn == "true")
+						else if(ReadIn == "BLOCK")
 						{
 							CObjects* block = new CObjects;
 							block->SetPosX(float(tileID % layerWidth * tileWidth));
 							block->SetPosY(float(tileID / layerWidth * tileHeight));
 							block->SetHeight(tileHeight);
 							block->SetWidth(tileWidth);
-							Worldtemp->AddObject(block, 4);
+							Worldtemp->AddObject(block, 2);
 							block->Release();
 						}
-						ReadIn = pTileData->Attribute("isNPC");
-						if(ReadIn == "true")
+						else if(ReadIn == "NPCS")
 						{
-							//pTempTile->SetEvent(true);
-							//pTempTile->SetEventID(pLoad->Attribute("EventID")); TODO;
+
 						}
-						ReadIn = pTileData->Attribute("isWARP");
-						if(ReadIn == "true")
+						else if(ReadIn == "WARP")
 						{
 							CWarp* warp = new CWarp;
 							warp->SetPosX(float(tileID % layerWidth * tileWidth));
@@ -453,7 +447,7 @@ void CGamePlayState::LoadWorld(string input)
 							warp->SetWarpY(nY);
 
 							warp->SetMapName(pTileData->Attribute("EventID"));
-							Worldtemp->AddObject(warp, 4);
+							Worldtemp->AddObject(warp, 2);
 							warp->Release();
 						}
 						tempLayer->AddTile(pTempTile);
@@ -516,6 +510,6 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 
-	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 4);
+	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld;
 }

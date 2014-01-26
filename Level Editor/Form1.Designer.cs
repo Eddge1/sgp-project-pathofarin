@@ -52,13 +52,10 @@
             this.nudMapWidth = new System.Windows.Forms.NumericUpDown();
             this.nudMapHeight = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radWarp = new System.Windows.Forms.RadioButton();
+            this.btnClear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.radNPC = new System.Windows.Forms.RadioButton();
-            this.radBlock = new System.Windows.Forms.RadioButton();
-            this.radMap = new System.Windows.Forms.RadioButton();
             this.grpWarp = new System.Windows.Forms.GroupBox();
             this.lstMaps = new System.Windows.Forms.ListBox();
             this.btnWarpCancel = new System.Windows.Forms.Button();
@@ -90,7 +87,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnShiftUp = new System.Windows.Forms.Button();
             this.btnShiftDown = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.cmbMode = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).BeginInit();
@@ -235,7 +233,7 @@
             // lblTileWidth
             // 
             this.lblTileWidth.AutoSize = true;
-            this.lblTileWidth.Location = new System.Drawing.Point(6, 21);
+            this.lblTileWidth.Location = new System.Drawing.Point(3, 16);
             this.lblTileWidth.Name = "lblTileWidth";
             this.lblTileWidth.Size = new System.Drawing.Size(55, 13);
             this.lblTileWidth.TabIndex = 7;
@@ -244,7 +242,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 42);
+            this.label2.Location = new System.Drawing.Point(3, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 8;
@@ -253,7 +251,7 @@
             // nudTileWidth
             // 
             this.nudTileWidth.InterceptArrowKeys = false;
-            this.nudTileWidth.Location = new System.Drawing.Point(76, 14);
+            this.nudTileWidth.Location = new System.Drawing.Point(59, 14);
             this.nudTileWidth.Minimum = new decimal(new int[] {
             1,
             0,
@@ -271,7 +269,7 @@
             // nudTileHeight
             // 
             this.nudTileHeight.InterceptArrowKeys = false;
-            this.nudTileHeight.Location = new System.Drawing.Point(76, 40);
+            this.nudTileHeight.Location = new System.Drawing.Point(59, 40);
             this.nudTileHeight.Minimum = new decimal(new int[] {
             1,
             0,
@@ -289,7 +287,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 68);
+            this.label4.Location = new System.Drawing.Point(110, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 13;
@@ -298,7 +296,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 94);
+            this.label5.Location = new System.Drawing.Point(110, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 13);
             this.label5.TabIndex = 14;
@@ -306,7 +304,7 @@
             // 
             // nudMapWidth
             // 
-            this.nudMapWidth.Location = new System.Drawing.Point(76, 66);
+            this.nudMapWidth.Location = new System.Drawing.Point(170, 14);
             this.nudMapWidth.Minimum = new decimal(new int[] {
             1,
             0,
@@ -323,7 +321,7 @@
             // 
             // nudMapHeight
             // 
-            this.nudMapHeight.Location = new System.Drawing.Point(76, 92);
+            this.nudMapHeight.Location = new System.Drawing.Point(170, 40);
             this.nudMapHeight.Minimum = new decimal(new int[] {
             1,
             0,
@@ -340,14 +338,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbMode);
             this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.radWarp);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.radNPC);
-            this.groupBox1.Controls.Add(this.radBlock);
-            this.groupBox1.Controls.Add(this.radMap);
             this.groupBox1.Controls.Add(this.lblTileWidth);
             this.groupBox1.Controls.Add(this.nudMapHeight);
             this.groupBox1.Controls.Add(this.label2);
@@ -363,17 +359,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Data";
             // 
-            // radWarp
+            // btnClear
             // 
-            this.radWarp.AutoSize = true;
-            this.radWarp.Location = new System.Drawing.Point(139, 83);
-            this.radWarp.Name = "radWarp";
-            this.radWarp.Size = new System.Drawing.Size(51, 17);
-            this.radWarp.TabIndex = 22;
-            this.radWarp.TabStop = true;
-            this.radWarp.Text = "Warp";
-            this.radWarp.UseVisualStyleBackColor = true;
-            this.radWarp.CheckedChanged += new System.EventHandler(this.radWarp_CheckedChanged);
+            this.btnClear.Location = new System.Drawing.Point(8, 119);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(57, 23);
+            this.btnClear.TabIndex = 23;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // button3
             // 
@@ -402,39 +396,6 @@
             this.button2.Text = "Transparency";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // radNPC
-            // 
-            this.radNPC.AutoSize = true;
-            this.radNPC.Location = new System.Drawing.Point(139, 60);
-            this.radNPC.Name = "radNPC";
-            this.radNPC.Size = new System.Drawing.Size(47, 17);
-            this.radNPC.TabIndex = 20;
-            this.radNPC.Text = "NPC";
-            this.radNPC.UseVisualStyleBackColor = true;
-            this.radNPC.CheckedChanged += new System.EventHandler(this.radNPC_CheckedChanged);
-            // 
-            // radBlock
-            // 
-            this.radBlock.AutoSize = true;
-            this.radBlock.Location = new System.Drawing.Point(139, 37);
-            this.radBlock.Name = "radBlock";
-            this.radBlock.Size = new System.Drawing.Size(52, 17);
-            this.radBlock.TabIndex = 18;
-            this.radBlock.Text = "Block";
-            this.radBlock.UseVisualStyleBackColor = true;
-            // 
-            // radMap
-            // 
-            this.radMap.AutoSize = true;
-            this.radMap.Checked = true;
-            this.radMap.Location = new System.Drawing.Point(139, 14);
-            this.radMap.Name = "radMap";
-            this.radMap.Size = new System.Drawing.Size(67, 17);
-            this.radMap.TabIndex = 17;
-            this.radMap.TabStop = true;
-            this.radMap.Text = "Edit Map";
-            this.radMap.UseVisualStyleBackColor = true;
             // 
             // grpWarp
             // 
@@ -763,15 +724,23 @@
             this.btnShiftDown.UseVisualStyleBackColor = true;
             this.btnShiftDown.Click += new System.EventHandler(this.btnShiftDown_Click);
             // 
-            // btnClear
+            // cmbMode
             // 
-            this.btnClear.Location = new System.Drawing.Point(8, 119);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(57, 23);
-            this.btnClear.TabIndex = 23;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.cmbMode.FormattingEnabled = true;
+            this.cmbMode.Location = new System.Drawing.Point(67, 66);
+            this.cmbMode.Name = "cmbMode";
+            this.cmbMode.Size = new System.Drawing.Size(150, 21);
+            this.cmbMode.TabIndex = 24;
+            this.cmbMode.SelectedIndexChanged += new System.EventHandler(this.cmbMode_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Edit Mode";
             // 
             // Form1
             // 
@@ -843,13 +812,9 @@
         private System.Windows.Forms.NumericUpDown nudMapWidth;
         private System.Windows.Forms.NumericUpDown nudMapHeight;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radNPC;
-        private System.Windows.Forms.RadioButton radBlock;
-        private System.Windows.Forms.RadioButton radMap;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RadioButton radWarp;
         private System.Windows.Forms.GroupBox grpWarp;
         private System.Windows.Forms.NumericUpDown nudWarpY;
         private System.Windows.Forms.NumericUpDown nudWarpX;
@@ -882,6 +847,8 @@
         private System.Windows.Forms.Button btnShiftUp;
         private System.Windows.Forms.Button btnShiftDown;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ComboBox cmbMode;
+        private System.Windows.Forms.Label label1;
     }
 }
 
