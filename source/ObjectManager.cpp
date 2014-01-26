@@ -57,7 +57,7 @@ void CObjectManager::Render(unsigned int nLayer)
 		float PosX = temp[i]->GetPosX() - WorldCamX;
 		float PosY = temp[i]->GetPosY() - WorldCamY;
 		rTemp = temp[i]->GetCollisionRect();
-		pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(255,0,0));
+		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 		if (nImageID != -1)
 		{
 			CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
