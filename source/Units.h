@@ -34,8 +34,8 @@ public:
 
 	virtual void Update(float fElapsedTime) override;
 
-	void SetTurn() {m_bTurn = true;}
-	void EndTurn() {m_bTurn = false;}
+	void SetTurn(bool bTurn) {m_bTurn = bTurn;}
+	virtual void EndTurn() {m_bTurn = false;}
 
 	int GetSpeed			( void ) const			{return m_nSpeed;};
 	int GetLevel			( void ) const			{return m_nLevel;}

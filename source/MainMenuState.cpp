@@ -20,7 +20,6 @@ CMainMenuState* CMainMenuState::GetInstance( void )
 	return &s_Instance;
 }
 
-
 CMainMenuState::CMainMenuState(void)
 {
 	SetBackgroundImg(-1);
@@ -28,8 +27,6 @@ CMainMenuState::CMainMenuState(void)
 	SetSFXID(-1);
 	m_nLogoID = -1;
 }
-
-
 
 CMainMenuState::~CMainMenuState(void)
 {

@@ -480,6 +480,15 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	tempC->SetName("Attack");
 	temp->AddSkill(tempC);
+	tempC = new CCommands;
+	tempC->SetName("RAWR");
+	temp->AddSkill(tempC);
+	tempC = new CCommands;
+	tempC->SetName("Beef!");
+	temp->AddSkill(tempC);
+	tempC = new CCommands;
+	tempC->SetName("Desu~");
+	temp->AddSkill(tempC);
 	temp->SetMaxHealth(80);
 	temp->SetMaxAP(50);
 	temp->SetPosX(600);

@@ -38,14 +38,74 @@ CCommands* CPlayerUnit::GetSkill(int nID)
 void CPlayerUnit::Update(float fElapsedTime)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(GetTurn())
+	if(GetTurn() )
 	{
-		if(pDI->KeyPressed(DIK_RETURN))
+		if(m_bSkillSelected == false)
 		{
-			EndTurn();
-
-
+			if(m_bInSubMenu)
+			{
+				if(pDI->KeyPressed(DIK_W))
+				{
+					m_nSkillSelect--;
+					if(m_nSkillSelect < 0)
+						m_nSkillSelect = (int)m_vCommands[m_nMenuSelect]->GetCommands()->size() - 1;
+				}
+				else if(pDI->KeyPressed(DIK_S))
+				{
+					m_nSkillSelect++;
+					if(m_nSkillSelect >= (int)m_vCommands[m_nMenuSelect]->GetCommands()->size())
+						m_nSkillSelect = 0;
+				}
+			}
+			else
+			{
+				if(pDI->KeyPressed(DIK_W))
+				{
+					m_nMenuSelect--;
+					if(m_nMenuSelect < 0)
+						m_nMenuSelect = (int)m_vCommands.size() - 1;
+				}
+				else if(pDI->KeyPressed(DIK_S))
+				{
+					m_nMenuSelect++;
+					if(m_nMenuSelect >= (int)m_vCommands.size())
+						m_nMenuSelect = 0;
+				}
+			}
+			if(pDI->KeyPressed(DIK_RETURN))
+			{
+				if(m_bInSubMenu)
+					m_bSkillSelected = true;
+				else
+				{
+					if(m_vCommands[m_nMenuSelect]->GetIsGame())
+						m_bSkillSelected = true;
+					else
+						m_bInSubMenu = true;
+				}
+			}
+			else if(pDI->KeyPressed(DIK_ESCAPE))
+			{
+				if(m_bInSubMenu == true)
+					m_bInSubMenu = false;
+			}
+		}
+		else
+		{
+			if(pDI->KeyPressed(DIK_RETURN))
+			{
+				EndTurn();
+			}
+			else if(pDI->KeyPressed(DIK_ESCAPE))
+				m_bSkillSelected = false;
 		}
 	}
+}
+
+void CPlayerUnit::EndTurn()
+{
+	SetTurn(false);
+	m_bSkillSelected = false;
+	m_bInSubMenu = false;
 }
 
