@@ -191,7 +191,7 @@ void CBattleState::Render(void)
 				{
 					woss.str(_T(""));
 					woss << vTemp[i]->GetName().c_str();
-					m_pFont->Draw(woss.str().c_str(), 344, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
+					m_pFont->Draw(woss.str().c_str(), 360, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
 				}
 			}
 		}
@@ -250,8 +250,6 @@ void CBattleState::Battle(float fElapsedTime)
 
 		m_vBattleUnits[m_nTurn]->SetTurn();
 	}
-
-
 }
 
 void CBattleState::EndBattle(void)
