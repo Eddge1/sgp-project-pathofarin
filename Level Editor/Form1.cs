@@ -619,7 +619,6 @@ namespace SGP_PoA_LevelEditor
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Initialize();
             string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.InitialDirectory = temp;
@@ -628,6 +627,7 @@ namespace SGP_PoA_LevelEditor
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                Initialize();
                 XElement xRoot = XElement.Load(dlg.FileName);
                 IEnumerable<XElement> xLayers = xRoot.Elements();
 
@@ -727,8 +727,7 @@ namespace SGP_PoA_LevelEditor
 
         private void loadTilesetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (imageID != -1)
-                TM.UnloadTexture(imageID);
+
             OpenFileDialog dlg = new OpenFileDialog();
             string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Tilesets");
             dlg.InitialDirectory = temp;
@@ -737,7 +736,8 @@ namespace SGP_PoA_LevelEditor
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-
+                if (imageID != -1)
+                    TM.UnloadTexture(imageID);
                 szTileSetName = Path.GetFileName(dlg.FileName);
                 if (!File.Exists(szRelativePath + szTileSetName))
                     File.Copy(dlg.FileName, szRelativePath + szTileSetName);
