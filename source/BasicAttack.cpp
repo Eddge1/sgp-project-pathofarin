@@ -18,3 +18,8 @@ void CBasicAttack::DoAttack(void)
 	tempP->ModifyHealth(-temp, false);
 	GetOwner()->EndTurn();
 }
+
+void CBasicAttack::Update(float fElapsedTime)
+{
+	DoAttack();
+}

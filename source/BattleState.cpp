@@ -28,6 +28,7 @@ CBattleState::CBattleState(void)
 	m_nTarget = 0;
 	m_nTurn = 0;
 	m_pSender = nullptr;
+	m_pCurrMiniGame = nullptr;
 }
 
 CBattleState::~CBattleState(void)
@@ -241,6 +242,11 @@ void CBattleState::Initialize(void)
 void CBattleState::Battle(float fElapsedTime)
 {
 	m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
+	if(m_pCurrMiniGame != nullptr)
+	{
+		m_pCurrMiniGame->Update(fElapsedTime);
+	}
+
 	if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 	{
 		if(m_vBattleUnits.size() == 1)
@@ -266,6 +272,7 @@ void CBattleState::Battle(float fElapsedTime)
 			m_nTurn = 0;
 
 		m_vBattleUnits[m_nTurn]->SetTurn(true);
+		m_pCurrMiniGame = nullptr;
 	}
 }
 

@@ -23,6 +23,7 @@
 #include "AnimationTimeStamp.h"
 #include "Commands.h"
 #include "Warp.h"
+#include "BasicAttack.h"
 
 
 // GetInstance
@@ -478,7 +479,9 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 {
 	CPlayerUnit* temp = new CPlayerUnit;
 	CCommands* tempC = new CCommands;
+	CBasicAttack* tempM = new CBasicAttack;
 	tempC->SetName("Attack");
+	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
 	tempC->SetName("Spells");

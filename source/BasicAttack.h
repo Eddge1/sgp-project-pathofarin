@@ -10,6 +10,8 @@ class CBasicAttack : public CMiniGames
 
 public:
 
+	virtual void Update(float fElapsedTime) override;
+
 	void DoAttack(void);
 
 	CUnits* GetTarget(void) { return m_pTarget; }

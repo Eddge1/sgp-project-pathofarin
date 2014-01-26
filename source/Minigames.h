@@ -26,7 +26,7 @@ public:
 	CMiniGames(void);
 	virtual ~CMiniGames(void);
 
-	void Update(float fElapsedTime);
+	virtual void Update(float fElapsedTime);
 	void Render();
 
 	void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
