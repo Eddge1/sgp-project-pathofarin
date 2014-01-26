@@ -22,7 +22,6 @@ public:
 	void GetNextTarget(void);
 	void GetPreviousTarget(void);
 
-
 	void Initialize(void);
 	void Battle(float fElapsedTime);
 	void EndBattle(void);

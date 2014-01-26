@@ -19,8 +19,11 @@ public:
 
 	bool GetInSubMenu	(void) const	{return m_bInSubMenu;}
 	bool GetReady		(void) const	{return m_bSkillSelected;}
+	virtual void EndTurn() override;
+
 	int  GetMenuID		(void) const	{return m_nMenuSelect;}
-	int  GetSkillID		(void) const	{return m_nSkillSelect;}
+	int  GetSkillID		(void) const	{if(m_bInSubMenu) return m_nSkillSelect;
+										else return m_nMenuSelect;}
 
 	void GetInSubMenu	(bool bValue)	{m_bInSubMenu = bValue;}
 	void GetReady		(bool bValue)	{m_bSkillSelected = bValue;}

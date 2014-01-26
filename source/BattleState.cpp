@@ -68,11 +68,13 @@ bool CBattleState::Input(void)
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 			if(pTemp != nullptr)
 			{
-
-				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UP ) == true )
-					GetNextTarget();
-				else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWN ) == true )
-					GetPreviousTarget();
+				if(pTemp->GetReady())
+				{
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
+						GetNextTarget();
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) == true )
+						GetPreviousTarget();
+				}
 			}
 		}
 		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
@@ -173,8 +175,15 @@ void CBattleState::Render(void)
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
-			RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
-			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+			if(pTemp != nullptr)
+			{
+				if(pTemp->GetReady())
+				{
+					RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+				}
+			}
 		}
 
 		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
@@ -193,6 +202,12 @@ void CBattleState::Render(void)
 					woss << vTemp[i]->GetName().c_str();
 					m_pFont->Draw(woss.str().c_str(), 360, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
 				}
+				rTemp.top = 490 + (pTemp->GetSkillID() * 28);
+				rTemp.bottom = rTemp.top + 10;
+				rTemp.left = 348;
+				rTemp.right = 358;
+				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+
 			}
 		}
 	}
@@ -248,7 +263,7 @@ void CBattleState::Battle(float fElapsedTime)
 		if(m_nTurn >= (int)m_vBattleUnits.size())
 			m_nTurn = 0;
 
-		m_vBattleUnits[m_nTurn]->SetTurn();
+		m_vBattleUnits[m_nTurn]->SetTurn(true);
 	}
 }
 
@@ -275,7 +290,7 @@ CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int sp
 	temp->SetVelX(0);
 	temp->SetVelY(0);
 	temp->SetSpeed(speed);
-	temp->SetTurn();
+	temp->SetTurn(false);
 	temp->SetName(input);
 
 	return temp;
