@@ -21,6 +21,7 @@
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
+#include "Commands.h"
 #include "Warp.h"
 
 
@@ -85,7 +86,7 @@ void CGamePlayState::Activate(void)
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
-			
+
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
@@ -318,17 +319,17 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
 	{
-			CEntity* pTempFire = new CEntity();
-			pTempFire->SetActive(true);
-			//pTemp->SetHostile(true);
-			pTempFire->SetPosX(200);
-			pTempFire->SetPosY(0);
-			pTempFire->SetVelX(200);
-			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
+		CEntity* pTempFire = new CEntity();
+		pTempFire->SetActive(true);
+		//pTemp->SetHostile(true);
+		pTempFire->SetPosX(200);
+		pTempFire->SetPosY(0);
+		pTempFire->SetVelX(200);
+		pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
+		m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-			pTempFire->Release();
-			pTempFire = nullptr;
+		pTempFire->Release();
+		pTempFire = nullptr;
 	}
 }
 
@@ -476,6 +477,9 @@ void CGamePlayState::LoadWorld(string input)
 CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 {
 	CPlayerUnit* temp = new CPlayerUnit;
+	CCommands* tempC = new CCommands;
+	tempC->SetName("Attack");
+	temp->AddSkill(tempC);
 	temp->SetMaxHealth(80);
 	temp->SetMaxAP(50);
 	temp->SetPosX(600);
@@ -484,6 +488,8 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 	temp->SetVelY(0);
 	temp->SetSpeed(1);
 	temp->SetType(OBJ_PLAYER_UNIT);
+	
+
 	return temp;
 }
 CUnits* CGamePlayState::GetPlayerUnit()
