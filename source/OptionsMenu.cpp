@@ -32,8 +32,8 @@ void COptionsMenu::Activate( void )
 
 	m_nMusicVolume = int(CSGD_XAudio2::GetInstance()->MusicGetMasterVolume() * 100);
 	m_nSFXVolume = int(CSGD_XAudio2::GetInstance()->SFXGetMasterVolume() * 100);
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
-	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
+	//SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_MainMenu.png")));
 
 
 }
@@ -58,7 +58,7 @@ void COptionsMenu::Update( float fElapsedTime ){}
 
 void COptionsMenu::Render( void )
 {
-	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
+	//CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	std::wostringstream woss;
 	woss << "\n\t\t" <<  m_nMusicVolume << "\n\t\t" << m_nSFXVolume;

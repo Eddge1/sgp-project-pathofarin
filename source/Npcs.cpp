@@ -9,7 +9,8 @@ CNpcs::CNpcs(void)
 	m_bIsHostile = false;
 	m_nWaypoint = 0;
 
-	CSGD_EventSystem::GetInstance()->RegisterClient("VICTORY", this);
+	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
+
 }
 
 
@@ -21,6 +22,7 @@ CNpcs::~CNpcs(void)
 	}
 
 	m_vWaypoints.clear();
+
 }
 
 void CNpcs::SetUnits(std::string szName)
@@ -73,7 +75,7 @@ void CNpcs::Update(float fElapsedTime)
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
 {
-	if(pEvent->GetEventID() == "VICTORY" && pEvent->GetDestination() == this)
+	if(pEvent->GetEventID() == "BATTLE_END" && pEvent->GetDestination() == this)
 	{
 		if(m_bIsHostile)
 		{

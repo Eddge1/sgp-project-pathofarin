@@ -70,6 +70,12 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
+			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
+			{
+				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
+
+			}
 			 LoadWorld("RealSimple.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
@@ -238,6 +244,11 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+	if(m_eCurrPhase == GP_END)
+	{
+		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+		return;
+	}
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -297,10 +308,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
-	{
 		m_eCurrPhase = GP_END;
-		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
-	}
 	else if(pEvent->GetEventID() == "PLAYER_MENU")
 	{
 

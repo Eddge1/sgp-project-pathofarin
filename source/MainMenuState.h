@@ -4,7 +4,6 @@
 class CMainMenuState :
 	public CGameStates
 {
-	int m_nLogoID;
 public:
 
 	static CMainMenuState* GetInstance( void );
@@ -16,6 +15,13 @@ public:
 	virtual bool Input( void )	override;	
 
 private:
+	float m_fRotation;
+	int m_nLogoID;
+	int m_nSelectionMenuID;
+	int m_nRangerID;
+	int m_nWarriorID;
+	int m_nMageID;
+
 
 	CMainMenuState(void);
 	virtual ~CMainMenuState(void);

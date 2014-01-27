@@ -11,7 +11,6 @@
 #include "Objects.h"
 #include "PlayerUnit.h"
 #include "EnemyUnit.h"
-#include <sstream>
 #include <algorithm>
 using namespace std;
 
@@ -31,6 +30,7 @@ CBattleState::CBattleState(void)
 	m_bDefeat = false;
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
+	m_fCancelTimer = 2.0f;
 }
 
 CBattleState::~CBattleState(void)
@@ -42,10 +42,23 @@ CBattleState::~CBattleState(void)
 
 void CBattleState::Activate(void)
 {
+	if(GetBackgroundMusic() != -1)
+	{
+		int nTemp = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm"));
+		SetBackgroundMusic(nTemp);
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(nTemp);
+		m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
+		m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
+	}
+
+	m_nMenuImage =			CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+
 	m_pFont = CGame::GetInstance()->GetFont();
 	m_bDefeat = false;
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
+	m_fCancelTimer = 2.0f;
 
 	// TEMP ENEMIES/Player
 	m_eCurrentPhase = BP_INIT;
@@ -60,9 +73,18 @@ void CBattleState::Sleep(void)
 		m_vBattleUnits[i]->Release();
 		m_vBattleUnits.pop_back();
 	}
+	for(int i = 0; i < int(m_vText.size()); i++)
+		delete m_vText[i];
+
+	m_vText.clear();
 
 	SetSender(nullptr);
 	SetPlayer(nullptr);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuSelectionImage);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuImage);
+
+	m_nMenuImage = -1;
+	m_nMenuSelectionImage = -1;
 }
 
 bool CBattleState::Input(void)
@@ -71,6 +93,18 @@ bool CBattleState::Input(void)
 	{
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
+			if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_P ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(30,true);
+			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_L ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(20,false);
+			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_K ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(-20,false);
+			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_O ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(-30,true);
+			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_I ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(0,true);
+			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_J ) == true)
+				m_vBattleUnits[m_nTurn]->ModifyHealth(0,false);
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 			if(pTemp != nullptr)
 			{
@@ -93,6 +127,20 @@ bool CBattleState::Input(void)
 
 void CBattleState::Update(float fElapsedTime)
 {
+
+	for(int i = 0; i < m_vText.size(); )
+	{
+		m_vText[i]->m_fTimer -= fElapsedTime;
+		m_vText[i]->m_fLocY -= (20 * fElapsedTime);
+		if(m_vText[i]->m_fTimer <= 0.0f)
+		{
+			delete m_vText[i];
+			m_vText.erase(m_vText.begin() + i);
+		}
+		else
+			i++;
+	}
+
 	if(m_bVictory || m_bDefeat)
 		m_fEndBatleTimer -= fElapsedTime;
 	switch (m_eCurrentPhase)
@@ -118,12 +166,11 @@ void CBattleState::Render(void)
 
 
 	//Temp drawing the UI
-	RECT Overlay = { 0, 478, 800, 600 };
-	pD3D->DrawHollowRect(Overlay, D3DCOLOR_XRGB( 0,0,0 ));
+	pTM->Draw(m_nMenuImage, 0,472);
+	pTM->Draw(m_nMenuSelectionImage, 336,472);
 
 	// Printing out variables
 	std::wostringstream woss;
-
 
 	m_pFont->Draw(_T("HP:"), 660, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 	m_pFont->Draw(_T("AP:"), 660, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
@@ -178,6 +225,8 @@ void CBattleState::Render(void)
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
+		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
+		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
@@ -188,18 +237,6 @@ void CBattleState::Render(void)
 					RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
 					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 				}
-			}
-		}
-
-		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
-		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
-		{
-			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
-			if(pTemp != nullptr)
-			{
-				RECT rTemp = {336,472,464,600};
-				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
 
 				vector<CCommands*> vTemp;
 				if(!pTemp->GetInSubMenu())
@@ -212,6 +249,7 @@ void CBattleState::Render(void)
 					woss << vTemp[i]->GetName().c_str();
 					m_pFont->Draw(woss.str().c_str(), 360, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
 				}
+				RECT rTemp = {};
 				rTemp.top = 490 + (pTemp->GetSkillID() * 28);
 				rTemp.bottom = rTemp.top + 10;
 				rTemp.left = 348;
@@ -220,6 +258,10 @@ void CBattleState::Render(void)
 
 			}
 		}
+
+		for(int i = 0; i < m_vText.size(); i++)
+			m_pFont->Draw(m_vText[i]->szText.str().c_str(), m_vText[i]->m_fLocX, m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
+
 		if(m_bVictory)
 		{
 			woss.str(_T(""));
@@ -235,7 +277,7 @@ void CBattleState::Render(void)
 	}
 }
 
-bool SortSpeed(CUnits *l, CUnits *r) // holy hell
+bool SortSpeed(CUnits *l, CUnits *r)
 {
 	return l->GetSpeed() > r->GetSpeed();
 }
@@ -263,7 +305,14 @@ void CBattleState::Battle(float fElapsedTime)
 	if(m_eCurrentPhase == BP_BATTLE)
 	{
 		m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
+		CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+		if(pTemp != nullptr)
+		{
+			if(pTemp->GetReady())
+			{
 
+			}
+		}
 		if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 		{
 			if(m_vBattleUnits.size() == 1)
@@ -302,21 +351,34 @@ void CBattleState::EndBattle(void)
 		{
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
-				CSGD_EventSystem::GetInstance()->SendEventNow("VICTORY", nullptr, m_pSender, nullptr);
 				m_fEndBatleTimer = 5.0f;
 				m_bVictory = true;
+				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
 				return;
 			}
 			else if(i == m_vBattleUnits.size() - 1)
 			{
 				m_fEndBatleTimer = 5.0f;
 				m_bDefeat = true;
+				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nDefeatMusic);
 				return;
 			}
 		}
 	}
 	if(m_fEndBatleTimer <= 0.0f)
 	{
+		if(m_bDefeat)
+		{
+			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nDefeatMusic);
+			CSGD_EventSystem::GetInstance()->SendEventNow("GAME_OVER", nullptr, m_pSender, nullptr);
+		}
+		else
+		{
+			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
+		}
+		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 	}
 
@@ -400,4 +462,16 @@ void CBattleState::SetPlayer(CUnits* pPlayer)
 CUnits* CBattleState::GetCurrentTarget(void)
 {
 	return m_vBattleUnits[m_nTarget];
+}
+
+void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText)
+{
+	FloatingText* ftTemp = new FloatingText;
+
+	ftTemp->m_fLocX = posX;
+	ftTemp->m_fLocY = posY;
+	ftTemp->Color = dColor;
+	ftTemp->szText << szText.str();
+	ftTemp->m_fTimer = 1.5f;
+	m_vText.push_back(ftTemp);
 }
