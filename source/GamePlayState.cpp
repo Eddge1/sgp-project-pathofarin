@@ -44,7 +44,7 @@ CGamePlayState::CGamePlayState(void)
 	bisPaused = false;
 
 	m_nCursor = 0;
-
+	m_fFireBallTimer = 0.0f;
 	m_eCurrPhase = GP_START;
 }
 
@@ -85,7 +85,7 @@ void CGamePlayState::Activate(void)
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
-			
+
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
@@ -243,6 +243,7 @@ void CGamePlayState::Update( float fElapsedTime )
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
+		m_fFireBallTimer += fElapsedTime;
 
 		m_mWorldManager[m_sCurrWorld]->Update(fElapsedTime);
 		m_pES->ProcessEvents();
@@ -318,6 +319,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
 	{
+		if (m_fFireBallTimer > 1.0f)
+		{
 			CEntity* pTempFire = new CEntity();
 			pTempFire->SetActive(true);
 			//pTemp->SetHostile(true);
@@ -329,6 +332,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 
 			pTempFire->Release();
 			pTempFire = nullptr;
+			m_fFireBallTimer = 0.0f;
+		}
 	}
 }
 

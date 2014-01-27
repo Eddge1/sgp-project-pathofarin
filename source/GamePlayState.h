@@ -80,6 +80,7 @@ private:
 	bool bisPaused;
 	int m_nCursor;
 	int m_nConversationID;
+	float m_fFireBallTimer;
 	GamePhase m_eCurrPhase;
 
 };
