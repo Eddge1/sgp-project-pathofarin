@@ -64,12 +64,13 @@ void CGamePlayState::Activate(void)
 	case CGamePlayState::GP_NAV:
 		break;
 	case CGamePlayState::GP_BATTLE:
+		m_eCurrPhase = GP_NAV;
 		break;
 	case CGamePlayState::GP_MENU:
 		break;
 	case CGamePlayState::GP_START:
 		{
-			LoadWorld("SimpleMap.xml");
+			 LoadWorld("RealSimple.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -168,7 +169,6 @@ void CGamePlayState::Sleep(void)
 			delete m_pRM;
 			m_pRM = nullptr;
 			m_pPlayer->Release();
-
 			m_eCurrPhase = GP_START;
 
 			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
@@ -472,22 +472,22 @@ void CGamePlayState::LoadWorld(string input)
 CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 {
 	CPlayerUnit* temp = new CPlayerUnit;
-	CCommands* tempC = new CCommands;
-	CBasicAttack* tempM = new CBasicAttack;
-	tempC->SetName("Attack");
-	tempC->SetMiniGame(tempM);
-	temp->AddSkill(tempC);
-	tempC = new CCommands;
-	tempC->SetName("Spells");
-	tempC->SetIsGame(false);
+	CCommands* pCommands = new CCommands;
+	CBasicAttack* pBasicAttack = new CBasicAttack;
+	pCommands->SetName("Attack");
+	pCommands->SetMiniGame(pBasicAttack);
+	temp->AddSkill(pCommands);
+	pCommands = new CCommands;
+	pCommands->SetName("Spells");
+	pCommands->SetIsGame(false);
 	CCommands* pTest = new CCommands;
 	pTest->SetName("SwordSlash");
 	pTest->SetIsGame(true);
-	tempC->AddCommands(pTest);
-	temp->AddSkill(tempC);
-	tempC = new CCommands;
-	tempC->SetName("Items");
-	temp->AddSkill(tempC);
+	pCommands->AddCommands(pTest);
+	temp->AddSkill(pCommands);
+	pCommands = new CCommands;
+	pCommands->SetName("Items");
+	temp->AddSkill(pCommands);
 	temp->SetMaxHealth(80);
 	temp->SetMaxAP(50);
 	temp->SetPosX(600);
@@ -496,7 +496,7 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 	temp->SetVelY(0);
 	temp->SetSpeed(1);
 	temp->SetType(OBJ_PLAYER_UNIT);
-
+	temp->SetAttack(100);
 
 	return temp;
 }

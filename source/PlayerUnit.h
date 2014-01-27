@@ -8,6 +8,7 @@ class CPlayerUnit :	public CUnits
 {
 	bool m_bInSubMenu;
 	bool m_bSkillSelected;
+	bool m_bCasting;
 	int m_nMenuSelect;
 	int m_nSkillSelect;
 	vector<CCommands*> m_vCommands;

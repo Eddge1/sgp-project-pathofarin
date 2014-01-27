@@ -6,5 +6,7 @@ class CComboGame :
 public:
 	CComboGame(void);
 	virtual ~CComboGame(void);
+	virtual void ResetSkill() override { }
+
 };
 

@@ -14,9 +14,12 @@ CBasicAttack::~CBasicAttack(void)
 void CBasicAttack::DoAttack(void)
 {
 	CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
-	int temp = GetOwner()->GetAttack();
-	tempP->ModifyHealth(-temp, false);
-	GetOwner()->EndTurn();
+	if(GetOwner() != nullptr)
+	{
+		int temp = GetOwner()->GetAttack();
+		tempP->ModifyHealth(temp, false);
+		GetOwner()->EndTurn();
+	}
 }
 
 void CBasicAttack::Update(float fElapsedTime)

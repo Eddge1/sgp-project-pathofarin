@@ -28,7 +28,9 @@ CBattleState::CBattleState(void)
 	m_nTarget = 0;
 	m_nTurn = 0;
 	m_pSender = nullptr;
-	m_pCurrMiniGame = nullptr;
+	m_bDefeat = false;
+	m_bVictory = false;
+	m_fEndBatleTimer = 0.0f;
 }
 
 CBattleState::~CBattleState(void)
@@ -41,6 +43,9 @@ CBattleState::~CBattleState(void)
 void CBattleState::Activate(void)
 {
 	m_pFont = CGame::GetInstance()->GetFont();
+	m_bDefeat = false;
+	m_bVictory = false;
+	m_fEndBatleTimer = 0.0f;
 
 	// TEMP ENEMIES/Player
 	m_eCurrentPhase = BP_INIT;
@@ -88,6 +93,8 @@ bool CBattleState::Input(void)
 
 void CBattleState::Update(float fElapsedTime)
 {
+	if(m_bVictory || m_bDefeat)
+		m_fEndBatleTimer -= fElapsedTime;
 	switch (m_eCurrentPhase)
 	{
 	case CBattleState::BP_INIT:
@@ -193,7 +200,7 @@ void CBattleState::Render(void)
 			{
 				RECT rTemp = {336,472,464,600};
 				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,0 ));
-				
+
 				vector<CCommands*> vTemp;
 				if(!pTemp->GetInSubMenu())
 					vTemp = *(pTemp->GetCommands());
@@ -212,6 +219,18 @@ void CBattleState::Render(void)
 				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
 
 			}
+		}
+		if(m_bVictory)
+		{
+			woss.str(_T(""));
+			woss << "Victory!";
+			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
+		}
+		else if(m_bDefeat)
+		{
+			woss.str(_T(""));
+			woss << "Defeated!";
+			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
 		}
 	}
 }
@@ -241,52 +260,66 @@ void CBattleState::Initialize(void)
 
 void CBattleState::Battle(float fElapsedTime)
 {
-	m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
-	if(m_pCurrMiniGame != nullptr)
+	if(m_eCurrentPhase == BP_BATTLE)
 	{
-		m_pCurrMiniGame->Update(fElapsedTime);
-	}
+		m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
 
-	if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
-	{
-		if(m_vBattleUnits.size() == 1)
+		if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 		{
-			if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
-				m_eCurrentPhase = BP_END;
-		}
-
-		m_nTurn++;
-		for(unsigned int i = 0; i < m_vBattleUnits.size();)
-		{
-			if(m_vBattleUnits[i]->GetHealth() < 1)
+			if(m_vBattleUnits.size() == 1)
 			{
-				if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+				if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 					m_eCurrentPhase = BP_END;
-				m_vBattleUnits[i]->Release();
-				m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
 			}
-			else
-				i++;
-		}
-		if(m_nTurn >= (int)m_vBattleUnits.size())
-			m_nTurn = 0;
 
-		m_vBattleUnits[m_nTurn]->SetTurn(true);
-		m_pCurrMiniGame = nullptr;
+			m_nTurn++;
+			for(unsigned int i = 0; i < m_vBattleUnits.size();)
+			{
+				if(m_vBattleUnits[i]->GetHealth() < 1)
+				{
+					if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+						m_eCurrentPhase = BP_END;
+					m_vBattleUnits[i]->Release();
+					m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
+					GetNextTarget();
+				}
+				else
+					i++;
+			}
+			if(m_nTurn >= (int)m_vBattleUnits.size())
+				m_nTurn = 0;
+			if(m_eCurrentPhase != BP_END)
+				m_vBattleUnits[m_nTurn]->SetTurn(true);
+		}
 	}
 }
 
 void CBattleState::EndBattle(void)
 {
-	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+	if(!m_bVictory && !m_bDefeat)
 	{
-		if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			CSGD_EventSystem::GetInstance()->SendEventNow("VICTORY", nullptr, m_pSender, nullptr);
-			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
-			return;
+			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				CSGD_EventSystem::GetInstance()->SendEventNow("VICTORY", nullptr, m_pSender, nullptr);
+				m_fEndBatleTimer = 5.0f;
+				m_bVictory = true;
+				return;
+			}
+			else if(i == m_vBattleUnits.size() - 1)
+			{
+				m_fEndBatleTimer = 5.0f;
+				m_bDefeat = true;
+				return;
+			}
 		}
 	}
+	if(m_fEndBatleTimer <= 0.0f)
+	{
+		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+	}
+
 }
 
 CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
@@ -307,8 +340,12 @@ CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int sp
 
 void CBattleState::GetNextTarget(void)
 {
-	if(m_vBattleUnits.size() <= 1)
+	if(m_vBattleUnits.size() < 2)
+	{
+		if(m_eCurrentPhase != BP_INIT)
+			m_eCurrentPhase = BP_END;
 		return;
+	}
 
 	do 
 	{
@@ -322,9 +359,12 @@ void CBattleState::GetNextTarget(void)
 
 void CBattleState::GetPreviousTarget(void)
 {
-	if(m_vBattleUnits.size() <= 1)
+	if(m_vBattleUnits.size() < 2)
+	{
+		if(m_eCurrentPhase != BP_INIT)
+			m_eCurrentPhase = BP_END;
 		return;
-
+	}
 	do 
 	{
 		m_nTarget--;

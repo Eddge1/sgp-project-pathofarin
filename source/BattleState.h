@@ -37,8 +37,6 @@ public:
 	void SetSender(CObjects* pSender);
 	void SetPlayer(CUnits* pPlayer);
 
-	void SetMiniGame(CMiniGames* l) { m_pCurrMiniGame = l; }
-
 private:
 	enum PBattlephase {BP_INIT, BP_BATTLE, BP_END};
 
@@ -51,15 +49,18 @@ private:
 
 	PBattlephase m_eCurrentPhase;
 
-	CMiniGames* m_pCurrMiniGame;
-
 	int m_nTurn;
 	int m_nMenuImage;
+	int m_nVictoryMusic;
+	int m_nDefeatMusic;
 	int m_nHealthBar;
 	int m_nAPBar;
 	int m_nTarget;
 	int m_nGoldObtained;
 	int m_nExperience;
+	bool m_bVictory;
+	bool m_bDefeat;
+	float m_fEndBatleTimer;
 
 	CBattleState(void);
 	virtual ~CBattleState(void);

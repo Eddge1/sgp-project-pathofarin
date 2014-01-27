@@ -76,7 +76,10 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 	if(pEvent->GetEventID() == "VICTORY" && pEvent->GetDestination() == this)
 	{
 		if(m_bIsHostile)
+		{
 			SetActive(false);
+			SetRender(false);
+		}
 	}
 }
 

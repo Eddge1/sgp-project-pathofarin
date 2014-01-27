@@ -27,11 +27,12 @@ public:
 	virtual ~CMiniGames(void);
 
 	virtual void Update(float fElapsedTime);
-	void Render();
+	virtual void Render();
 
-	void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
-	void SetChances( int nAttempts ) {m_nChances = nAttempts;}
+	virtual void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
+	virtual void SetChances( int nAttempts ) {m_nChances = nAttempts;}
 	void SetSkill(CSkills* pSkill);
+	virtual void ResetSkill( void ) { }
 
 	float GetDamage( void )	{return m_fDamageMultiplier;}
 	int GetChances( void ) {return m_nChances;}

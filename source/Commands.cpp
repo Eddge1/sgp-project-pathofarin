@@ -3,6 +3,7 @@
 
 CCommands::CCommands(void)
 {
+	m_pMiniGame = nullptr;
 }
 
 
@@ -15,4 +16,9 @@ CCommands::~CCommands(void)
 	}
 
 	m_vCommands.clear();
+	if(m_pMiniGame != nullptr)
+	{
+		delete m_pMiniGame;
+		m_pMiniGame = nullptr;
+	}
 }

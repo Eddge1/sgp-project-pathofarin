@@ -6,5 +6,7 @@ class CChargeCrystal :
 public:
 	CChargeCrystal(void);
 	virtual ~CChargeCrystal(void);
+	virtual void ResetSkill() override { }
+
 };
 

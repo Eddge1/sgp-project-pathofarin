@@ -6,5 +6,7 @@ class CTriggerSpree :
 public:
 	CTriggerSpree(void);
 	virtual ~CTriggerSpree(void);
+	virtual void ResetSkill() override { }
+
 };
 
