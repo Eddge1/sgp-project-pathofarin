@@ -28,6 +28,7 @@ CMainMenuState::CMainMenuState(void)
 	m_nLogoID = -1;
 	m_nSelectionMenuID = -1;
 	m_fRotation = 0.0f;
+	m_bLeft = false;
 }
 
 CMainMenuState::~CMainMenuState(void)
@@ -49,8 +50,9 @@ void CMainMenuState::Activate(void)
 	m_nWarriorID	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Warrior.png"));
 	m_nRangerID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Ranger.png"));
 	m_nMageID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Mage.png"));
-
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	m_fRotation = 0.0f;
+	m_fPosX = 360.0f;
 }
 
 void CMainMenuState::Sleep(void)
@@ -65,7 +67,9 @@ void CMainMenuState::Sleep(void)
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
 
+	SetCursorIMG(-1);
 	m_nWarriorID	= -1;
 	m_nRangerID		= -1;
 	m_nMageID		= -1;
@@ -75,6 +79,15 @@ void CMainMenuState::Sleep(void)
 void CMainMenuState::Update(float fElapsedTime)
 {
 	m_fRotation += (1.0f * fElapsedTime);
+	if(m_bLeft)
+		m_fPosX -= (10 * fElapsedTime);
+	else
+		m_fPosX += (10 * fElapsedTime);
+
+		if(m_fPosX <= 360)
+		m_bLeft = false;
+	else if(m_fPosX >= 370)
+		m_bLeft = true;
 }
 
 void CMainMenuState::Render(void)
@@ -98,12 +111,13 @@ void CMainMenuState::Render(void)
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,336,424);
 
-
-
 	RECT rTemp = {336, 408, 464,536};
 	pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
-	pFont2->Draw(_T("-"), 360,438 + (GetCursorSelection() * 21), 0.75f, D3DCOLOR_XRGB(0, 255, 255));
-
+	rTemp.left = 0;
+	rTemp.top = 0;
+	rTemp.right = 16;
+	rTemp.bottom = 32;
+	CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), m_fPosX, 442 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 }
 
 bool CMainMenuState::Input(void)

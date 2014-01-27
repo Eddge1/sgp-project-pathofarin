@@ -21,6 +21,8 @@ private:
 	int m_nRangerID;
 	int m_nWarriorID;
 	int m_nMageID;
+	float m_fPosX;
+	bool m_bLeft;
 
 
 	CMainMenuState(void);
