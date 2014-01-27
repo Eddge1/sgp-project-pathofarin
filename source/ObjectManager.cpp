@@ -45,22 +45,25 @@ void CObjectManager::Render(unsigned int nLayer)
 	RECT rTemp = {};
 	for(unsigned int i = 0; i < temp.size(); i++)
 	{
-		if (temp[i]->GetType() != OBJ_UNDEFINE && temp[i]->GetType() != OBJ_WARP)
+		if(temp[i]->GetRender())
 		{
-			pAnim = CAnimationSystem::GetInstance()->GetAnimation(temp[i]->GetAnimInfo()->GetCurrentAnimation());
-			nImageID = pAnim->GetImageID();
-		}
-		else
-		{
-			nImageID = -1;
-		}
-		float PosX = temp[i]->GetPosX() - WorldCamX;
-		float PosY = temp[i]->GetPosY() - WorldCamY;
-		rTemp = temp[i]->GetCollisionRect();
-		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
-		if (nImageID != -1)
-		{
-			CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+			if (temp[i]->GetType() != OBJ_UNDEFINE && temp[i]->GetType() != OBJ_WARP)
+			{
+				pAnim = CAnimationSystem::GetInstance()->GetAnimation(temp[i]->GetAnimInfo()->GetCurrentAnimation());
+				nImageID = pAnim->GetImageID();
+			}
+			else
+			{
+				nImageID = -1;
+			}
+			float PosX = temp[i]->GetPosX() - WorldCamX;
+			float PosY = temp[i]->GetPosY() - WorldCamY;
+			rTemp = temp[i]->GetCollisionRect();
+			pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
+			if (nImageID != -1)
+			{
+				CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+			}
 		}
 	}
 
@@ -129,12 +132,15 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 	{
 		for(unsigned int j = 0; j < Collision2.size(); j++)
 		{
-			/*Temp to show Collision works*/
-			rTemp1 = Collision1[i]->GetCollisionRect();
-			rTemp2 = Collision2[j]->GetCollisionRect();
-			if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
+			if(Collision1[i]->GetActive() && Collision2[j]->GetActive())
 			{
-				Collision1[i]->HandleCollision(Collision2[j]);
+				/*Temp to show Collision works*/
+				rTemp1 = Collision1[i]->GetCollisionRect();
+				rTemp2 = Collision2[j]->GetCollisionRect();
+				if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
+				{
+					Collision1[i]->HandleCollision(Collision2[j]);
+				}
 			}
 			/*Temp to show Collision works*/
 		}

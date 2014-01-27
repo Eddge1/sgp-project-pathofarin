@@ -52,19 +52,17 @@ void CWorld::Render(int layer)
 					temp.right = temp.left + GetTileWidth();
 					temp.bottom = temp.top + GetTileHeight();
 
-
 					pTM->Draw(GetID(), (i % GetWidth() ) * GetTileWidth() - WorldCamX, ( i / GetWidth() ) * GetTileHeight() - WorldCamY, 1.0f, 1.0f, &temp); 
 				}
 			}
 		}
 	}
-
 }
 
 void CWorld::Update(float fElapsedTime)
 {
 	m_pOM->Update(fElapsedTime);
-	m_pOM->HandleCollision(4,4);
+	m_pOM->HandleCollision(2,2);
 }
 
 void CWorld::AddObject(CObjects* pObject, unsigned int nLayer)

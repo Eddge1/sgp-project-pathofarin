@@ -7,6 +7,8 @@ CEntity::CEntity(void)
 	SetType(OBJ_ENTITY);
 	SetVelX(0);
 	SetVelY(0);
+	SetRender(true);
+	SetActive(true);
 }
 
 

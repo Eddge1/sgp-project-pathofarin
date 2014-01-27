@@ -77,19 +77,19 @@ namespace SGP_PoA_LevelEditor
                     myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
                     for (int x = 0; x < MapSize.Width; x++)
                     {
-                            for (int y = 0; y < MapSize.Height; y++)
+                        for (int y = 0; y < MapSize.Height; y++)
+                        {
+                            if (y < nudMapHeight.Value && x < nudMapWidth.Value)
+                                tLayer.MyTiles[x, y] = L.MyTiles[x, y];
+                            else
                             {
-                                if (y < nudMapHeight.Value && x < nudMapWidth.Value)
-                                    tLayer.MyTiles[x, y] = L.MyTiles[x, y];
-                                else
+                                if (x < Convert.ToInt32(nudMapWidth.Value) && y < Convert.ToInt32(nudMapHeight.Value))
                                 {
-                                    if (x < Convert.ToInt32(nudMapWidth.Value) && y < Convert.ToInt32(nudMapHeight.Value))
-                                    {
-                                        tLayer.MyTiles[x, y].X = -1;
-                                        tLayer.MyTiles[x, y].Y = -1;
-                                    }
+                                    tLayer.MyTiles[x, y].X = -1;
+                                    tLayer.MyTiles[x, y].Y = -1;
                                 }
                             }
+                        }
                     }
                     lstLayers.Items[lstLayers.SelectedIndex] = tLayer;
                 }
@@ -120,11 +120,11 @@ namespace SGP_PoA_LevelEditor
                             int nY = y * TileSize.Height;
                             if (L.MyTiles[x, y].X != -1)
                             {
-                                if (L.MyTiles[x, y].IsBlocked)
+                                if (L.MyTiles[x, y].EventType == "BLOCK")
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                      TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 255, 127, 127));
-                                else if (L.MyTiles[x, y].IsWarp)
+                                else if (L.MyTiles[x, y].EventType == "WARP")
                                 {
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
@@ -139,7 +139,7 @@ namespace SGP_PoA_LevelEditor
                     }
                 }
 
-                if (radMap.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                     TM.Draw(imageID, MouseLoc.Width * TileSize.Width + panel2.AutoScrollPosition.X, MouseLoc.Height * TileSize.Height + panel2.AutoScrollPosition.Y, 1, 1, new Rectangle(tileSelected.X * TileSize.Width + panel2.AutoScrollPosition.X, tileSelected.Y * TileSize.Height + panel2.AutoScrollPosition.Y, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
             }
             if (ShowGrid)
@@ -195,6 +195,14 @@ namespace SGP_PoA_LevelEditor
             {
                 lstMaps.Items.Add(szMapID);
             }
+            cmbMode.Items.Clear();
+            cmbMode.Items.Add("MAP_EDIT");
+            cmbMode.Items.Add("BLOCK");
+            cmbMode.Items.Add("EVENT");
+            cmbMode.Items.Add("NPCS");
+            cmbMode.Items.Add("WARP");
+
+            cmbMode.SelectedIndex = 0;
 
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
@@ -259,7 +267,7 @@ namespace SGP_PoA_LevelEditor
                 Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
                 myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
 
-                if (radMap.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                 {
                     if (e.Button == MouseButtons.Right)
                     {
@@ -273,32 +281,27 @@ namespace SGP_PoA_LevelEditor
                     }
                 }
 
-                if (radBlock.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = true;
+                        L.MyTiles[Temp.X, Temp.Y].EventType = cmbMode.Items[cmbMode.SelectedIndex].ToString();
                     }
                     else
                     {
-                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                     }
 
                 }
 
-                if (radWarp.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "WARP")
                 {
                     if (e.Button == MouseButtons.Left)
                     {
-                        if (L.MyTiles[Temp.X, Temp.Y].IsWarp == false)
+                        if (L.MyTiles[Temp.X, Temp.Y].EventType != "WARP")
                         {
                             mapTile = Temp;
-                            if (L.MyTiles[Temp.X, Temp.Y].IsBlocked)
-                                L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
-                            else if (L.MyTiles[Temp.X, Temp.Y].IsNPC)
-                                L.MyTiles[Temp.X, Temp.Y].IsNPC = false;
-
-                            L.MyTiles[Temp.X, Temp.Y].IsWarp = true;
+                            L.MyTiles[Temp.X, Temp.Y].EventType = cmbMode.Items[cmbMode.SelectedIndex].ToString();
                             if (lstMaps.SelectedIndex >= 0 && lstMaps.Items.Count > 0)
                                 L.MyTiles[Temp.X, Temp.Y].SzSpecial = lstMaps.Items[lstMaps.SelectedIndex].ToString();
                             else
@@ -326,14 +329,14 @@ namespace SGP_PoA_LevelEditor
                     }
                     else
                     {
-                        L.MyTiles[Temp.X, Temp.Y].IsWarp = false;
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                         L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
                         L.MyTiles[Temp.X, Temp.Y].WarpX = 0;
                         L.MyTiles[Temp.X, Temp.Y].WarpY = 0;
                     }
                 }
 
-                if (radNPC.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "NPCS")
                 {
                     if (grpWayPoints.Visible)
                     {
@@ -359,18 +362,7 @@ namespace SGP_PoA_LevelEditor
                     {
                         if (e.Button == MouseButtons.Left)
                         {
-                            if (L.MyTiles[Temp.X, Temp.Y].IsNPC == false)
-                            {
-                                mapTile = Temp;
-                                if (L.MyTiles[Temp.X, Temp.Y].IsBlocked)
-                                    L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
-                                else if (L.MyTiles[Temp.X, Temp.Y].IsWarp)
-                                    L.MyTiles[Temp.X, Temp.Y].IsWarp = false;
-                            }
-                            else
-                            {
 
-                            }
                         }
                         else
                         {
@@ -393,7 +385,7 @@ namespace SGP_PoA_LevelEditor
                 myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
                 Point Temp = new Point((e.X - panel2.AutoScrollPosition.X) / TileSize.Width, (e.Y - panel2.AutoScrollPosition.Y) / TileSize.Height);
 
-                if (radMap.Checked)
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                 {
                     if (mouseDown)
                     {
@@ -406,15 +398,15 @@ namespace SGP_PoA_LevelEditor
                         L.MyTiles[Temp.X, Temp.Y].Y = -1;
                     }
                 }
-                else if (radBlock.Checked)
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
                 {
                     if (mouseDown)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = true;
+                        L.MyTiles[Temp.X, Temp.Y].EventType = cmbMode.Items[cmbMode.SelectedIndex].ToString();
                     }
                     else if (rmouseDown)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].IsBlocked = false;
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                     }
 
                 }
@@ -496,10 +488,9 @@ namespace SGP_PoA_LevelEditor
                             XElement xTileData = new XElement("Tile_Data");
                             XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
                             XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
-                            XAttribute xTileBlock = new XAttribute("isBlocked", L.MyTiles[x, y].IsBlocked);
-                            XAttribute xTileNpc = new XAttribute("isNPC", L.MyTiles[x, y].IsNPC);
-                            XAttribute xTileEvent = new XAttribute("isEvent", L.MyTiles[x, y].IsEvent);
-                            XAttribute xTileWarp = new XAttribute("isWARP", L.MyTiles[x, y].IsWarp);
+                            if (L.MyTiles[x, y].EventType == null)
+                                L.MyTiles[x, y].EventType = "MAP_EDIT";
+                            XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
                             XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
                             XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
                             if (L.MyTiles[x, y].SzSpecial == null)
@@ -508,11 +499,8 @@ namespace SGP_PoA_LevelEditor
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
-                            xTileData.Add(xTileBlock);
-                            xTileData.Add(xTileNpc);
-                            xTileData.Add(xTileEvent);
                             xTileData.Add(xEventId);
-                            xTileData.Add(xTileWarp);
+                            xTileData.Add(xTileEventType);
                             xTileData.Add(xTileWarpX);
                             xTileData.Add(xTileWarpY);
 
@@ -577,10 +565,9 @@ namespace SGP_PoA_LevelEditor
                             XElement xTileData = new XElement("Tile_Data");
                             XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
                             XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
-                            XAttribute xTileBlock = new XAttribute("isBlocked", L.MyTiles[x, y].IsBlocked);
-                            XAttribute xTileNpc = new XAttribute("isNPC", L.MyTiles[x, y].IsNPC);
-                            XAttribute xTileEvent = new XAttribute("isEvent", L.MyTiles[x, y].IsEvent);
-                            XAttribute xTileWarp = new XAttribute("isWARP", L.MyTiles[x, y].IsWarp);
+                            if (L.MyTiles[x, y].EventType == null)
+                                L.MyTiles[x, y].EventType = "MAP_EDIT";
+                            XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
                             XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
                             XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
                             if (L.MyTiles[x, y].SzSpecial == null)
@@ -589,11 +576,8 @@ namespace SGP_PoA_LevelEditor
 
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
-                            xTileData.Add(xTileBlock);
-                            xTileData.Add(xTileNpc);
-                            xTileData.Add(xTileEvent);
                             xTileData.Add(xEventId);
-                            xTileData.Add(xTileWarp);
+                            xTileData.Add(xTileEventType);
                             xTileData.Add(xTileWarpX);
                             xTileData.Add(xTileWarpY);
 
@@ -619,7 +603,6 @@ namespace SGP_PoA_LevelEditor
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Initialize();
             string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.InitialDirectory = temp;
@@ -628,6 +611,7 @@ namespace SGP_PoA_LevelEditor
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                Initialize();
                 XElement xRoot = XElement.Load(dlg.FileName);
                 IEnumerable<XElement> xLayers = xRoot.Elements();
 
@@ -679,24 +663,18 @@ namespace SGP_PoA_LevelEditor
                         XElement xTileInfo = xTile.Element("Tile_Data");
                         XAttribute xTileX = xTileInfo.Attribute("xTileID");
                         XAttribute xTileY = xTileInfo.Attribute("yTileID");
-                        XAttribute xTileBlock = xTileInfo.Attribute("isBlocked");
-                        XAttribute xTileNpc = xTileInfo.Attribute("isNPC");
-                        XAttribute xTileEvent = xTileInfo.Attribute("isEvent");
                         XAttribute xTileEventID = xTileInfo.Attribute("EventID");
-                        XAttribute xTileWarp = xTileInfo.Attribute("isWARP");
+                        XAttribute xTileEventType = xTileInfo.Attribute("EventType");
                         XAttribute xTileWarpX = xTileInfo.Attribute("WarpX");
                         XAttribute xTileWarpY = xTileInfo.Attribute("WarpY");
 
                         myTile pTile = new myTile();
                         pTile.X = Convert.ToInt32(xTileX.Value);
                         pTile.Y = Convert.ToInt32(xTileY.Value);
-                        pTile.IsBlocked = Convert.ToBoolean(xTileBlock.Value);
-                        pTile.IsEvent = Convert.ToBoolean(xTileEvent.Value);
-                        pTile.IsNPC = Convert.ToBoolean(xTileNpc.Value);
-                        pTile.IsWarp = Convert.ToBoolean(xTileWarp.Value);
                         pTile.WarpX = Convert.ToInt32(xTileWarpX.Value);
                         pTile.WarpY = Convert.ToInt32(xTileWarpY.Value);
                         pTile.SzSpecial = xTileEventID.Value;
+                        pTile.EventType = xTileEventType.Value;
                         lTemp.MyTiles[nPosX, nPosY] = pTile;
                     }
                     lstLayers.Items.Add(lTemp);
@@ -727,8 +705,7 @@ namespace SGP_PoA_LevelEditor
 
         private void loadTilesetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (imageID != -1)
-                TM.UnloadTexture(imageID);
+
             OpenFileDialog dlg = new OpenFileDialog();
             string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Tilesets");
             dlg.InitialDirectory = temp;
@@ -737,7 +714,8 @@ namespace SGP_PoA_LevelEditor
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-
+                if (imageID != -1)
+                    TM.UnloadTexture(imageID);
                 szTileSetName = Path.GetFileName(dlg.FileName);
                 if (!File.Exists(szRelativePath + szTileSetName))
                     File.Copy(dlg.FileName, szRelativePath + szTileSetName);
@@ -791,15 +769,7 @@ namespace SGP_PoA_LevelEditor
             lstLayers.Items[lstLayers.SelectedIndex] = L;
         }
 
-        private void radWarp_CheckedChanged(object sender, EventArgs e)
-        {
-            grpWarp.Visible = radWarp.Checked;
-            if (radWarp.Checked == false)
-            {
-                btnWarp.Enabled = false;
-                btnWarpCancel.Enabled = false;
-            }
-        }
+
 
         private void txtWarp_TextChanged(object sender, EventArgs e)
         {
@@ -842,11 +812,6 @@ namespace SGP_PoA_LevelEditor
 
             btnWarp.Enabled = false;
             btnWarpCancel.Enabled = false;
-        }
-
-        private void radNPC_CheckedChanged(object sender, EventArgs e)
-        {
-            grpNPC.Visible = radNPC.Checked;
         }
 
         private void chkMoves_CheckedChanged(object sender, EventArgs e)
@@ -958,6 +923,25 @@ namespace SGP_PoA_LevelEditor
                 }
             }
             lstLayers.Items[lstLayers.SelectedIndex] = L;
+        }
+
+        private void cmbMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grpWarp.Visible = false;
+            grpNPC.Visible = false;
+            grpWayPoints.Visible = false;
+            if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "WARP")
+            {
+                grpWarp.Visible = true;
+
+            }
+            if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "NPCS")
+            {
+                grpNPC.Visible = true;
+                if (chkMoves.Checked)
+                    grpWayPoints.Visible = true;
+            }
+
         }
 
     }

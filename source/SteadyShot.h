@@ -6,5 +6,7 @@ class CSteadyShot :
 public:
 	CSteadyShot(void);
 	virtual ~CSteadyShot(void);
+	virtual void ResetSkill() override { }
+
 };
 

@@ -26,13 +26,13 @@ CCreditState* CCreditState::GetInstance( void )
 void CCreditState::Activate( void )	
 {
 	m_fDrawY = 600.0f;
-	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
+	//SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_MainMenu.png")));
 
 }
 
 void CCreditState::Sleep( void )	
 {
-	SetBackgroundImg(-1);
+	//SetBackgroundImg(-1);
 }
 
 void CCreditState::Update( float fElapsedTime )	
@@ -47,7 +47,7 @@ void CCreditState::Update( float fElapsedTime )
 void CCreditState::Render( void )
 {
 	CBitmapFont *pFont = CGame::GetInstance()->GetFont2();
-	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
+	//CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	std::wostringstream woss;
 	woss << m_szCredits.c_str();

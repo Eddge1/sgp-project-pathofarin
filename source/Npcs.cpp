@@ -9,7 +9,8 @@ CNpcs::CNpcs(void)
 	m_bIsHostile = false;
 	m_nWaypoint = 0;
 
-	CSGD_EventSystem::GetInstance()->RegisterClient("VICTORY", this);
+	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
+
 }
 
 
@@ -21,6 +22,7 @@ CNpcs::~CNpcs(void)
 	}
 
 	m_vWaypoints.clear();
+
 }
 
 void CNpcs::SetUnits(std::string szName)
@@ -73,10 +75,13 @@ void CNpcs::Update(float fElapsedTime)
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
 {
-	if(pEvent->GetEventID() == "VICTORY" && pEvent->GetDestination() == this)
+	if(pEvent->GetEventID() == "BATTLE_END" && pEvent->GetDestination() == this)
 	{
 		if(m_bIsHostile)
+		{
 			SetActive(false);
+			SetRender(false);
+		}
 	}
 }
 
@@ -88,19 +93,19 @@ void CNpcs::HandleCollision(CObjects* col)
 			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", &m_vUnitList, nullptr, this);
 		RECT rTemp = col->GetCollisionRect();
 		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
-		if(GetCollisionRect().left > rTemp.right - 10 && GetCollisionRect().left < rTemp.right)
+		if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)
 		{
 			SetPosX(GetPosX() +1);
 			SetVelX(0);
 		}
-		else if(GetCollisionRect().right < rTemp.left + 10 && GetCollisionRect().right > rTemp.left)
+		else if(GetCollisionRect().right < rTemp.left + 20 && GetCollisionRect().right > rTemp.left)
 		{
 			SetPosX(GetPosX() -1);
 			SetVelX(0);
 		}
 		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
 		{
-			if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+			if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
 			{
 				if(GetVelY() > 0)
 				{
@@ -108,13 +113,13 @@ void CNpcs::HandleCollision(CObjects* col)
 					SetVelY(0);
 				}
 			}
-			else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+			else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
 			{
 				SetPosY(GetPosY() + 1);
 				SetVelY(0);
 			}
 		}
-		else if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+		else if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
 		{
 			if(GetVelY() > 0)
 			{
@@ -122,7 +127,7 @@ void CNpcs::HandleCollision(CObjects* col)
 				SetVelY(0);
 			}
 		}
-		else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+		else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
 		{
 			SetPosY(GetPosY() + 1);
 

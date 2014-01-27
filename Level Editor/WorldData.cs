@@ -10,10 +10,7 @@ namespace SGP_PoA_LevelEditor
     {
         int x;
         int y;
-        bool isBlocked;
-        bool isEvent;
-        bool isNPC;
-        bool isWarp;
+        string szEventType;
         int warpX;
         int warpY;
         string szSpecial;
@@ -30,10 +27,10 @@ namespace SGP_PoA_LevelEditor
             set { warpX = value; }
         }
 
-        public bool IsWarp
+        public string EventType
         {
-            get { return isWarp; }
-            set { isWarp = value; }
+            get { return szEventType; }
+            set { szEventType = value; }
         }
 
         public int X
@@ -46,24 +43,6 @@ namespace SGP_PoA_LevelEditor
         {
             get { return y; }
             set { y = value; }
-        }
-
-        public bool IsBlocked
-        {
-            get { return isBlocked; }
-            set { isBlocked = value; }
-        }
-
-        public bool IsEvent
-        {
-            get { return isEvent; }
-            set { isEvent = value; }
-        }
-
-        public bool IsNPC
-        {
-            get { return isNPC; }
-            set { isNPC = value; }
         }
 
         public string SzSpecial

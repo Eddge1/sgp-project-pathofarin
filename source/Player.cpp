@@ -68,7 +68,7 @@ void CPlayer::HandleCollision(CObjects* col)
 		}
 		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
 		{
-			if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+			if(GetCollisionRect().bottom < rTemp.top + 10 && GetCollisionRect().bottom > rTemp.top)
 			{
 				if(GetVelY() > 0)
 				{
@@ -76,13 +76,13 @@ void CPlayer::HandleCollision(CObjects* col)
 					SetVelY(0);
 				}
 			}
-			else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+			else if(GetCollisionRect().top > rTemp.bottom - 10 && GetCollisionRect().top < rTemp.bottom)
 			{
 				SetPosY(GetPosY() + 1);
 				SetVelY(0);
 			}
 		}
-		else if(GetCollisionRect().bottom < rTemp.top + 4 && GetCollisionRect().bottom > rTemp.top)
+		else if(GetCollisionRect().bottom < rTemp.top + 10 && GetCollisionRect().bottom > rTemp.top)
 		{
 			if(GetVelY() > 0)
 			{
@@ -90,7 +90,7 @@ void CPlayer::HandleCollision(CObjects* col)
 				SetVelY(0);
 			}
 		}
-		else if(GetCollisionRect().top > rTemp.bottom - 4 && GetCollisionRect().top < rTemp.bottom)
+		else if(GetCollisionRect().top > rTemp.bottom - 10 && GetCollisionRect().top < rTemp.bottom)
 		{
 			SetPosY(GetPosY() + 1);
 

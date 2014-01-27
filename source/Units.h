@@ -34,8 +34,8 @@ public:
 
 	virtual void Update(float fElapsedTime) override;
 
-	void SetTurn() {m_bTurn = true;}
-	void EndTurn() {m_bTurn = false;}
+	void SetTurn(bool bTurn) {m_bTurn = bTurn;}
+	virtual void EndTurn() {m_bTurn = false;}
 
 	int GetSpeed			( void ) const			{return m_nSpeed;};
 	int GetLevel			( void ) const			{return m_nLevel;}
@@ -47,6 +47,7 @@ public:
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
+	void SetAttack			( int nAmount )		{m_nAttackPower = nAmount; }
 
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 

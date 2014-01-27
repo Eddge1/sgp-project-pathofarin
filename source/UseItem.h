@@ -6,5 +6,7 @@ class CUseItem :
 public:
 	CUseItem(void);
 	virtual ~CUseItem(void);
+	virtual void ResetSkill() override { }
+
 };
 

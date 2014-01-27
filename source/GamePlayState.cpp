@@ -21,7 +21,9 @@
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
+#include "Commands.h"
 #include "Warp.h"
+#include "BasicAttack.h"
 
 
 // GetInstance
@@ -62,14 +64,19 @@ void CGamePlayState::Activate(void)
 	case CGamePlayState::GP_NAV:
 		break;
 	case CGamePlayState::GP_BATTLE:
+		m_eCurrPhase = GP_NAV;
 		break;
 	case CGamePlayState::GP_MENU:
 		break;
 	case CGamePlayState::GP_START:
 		{
-			LoadWorld("hereisthetest.xml");
-			LoadWorld("TestingCollide.xml");
+			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
+			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
+			{
+				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
+			}
+			 LoadWorld("RealSimple.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -101,7 +108,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			pTemp->SetActive(true);
-			//pTemp->SetHostile(true);
+			pTemp->SetHostile(true);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
 			pTemp->AddWaypoint(100,100);
@@ -110,8 +117,8 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(0,100);
 			pTemp->AddWaypoint(-100,100);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 4);
-			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 4);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 
 			CNpcs* pTemp2 = new CNpcs();
 			pTemp2->SetActive(true);
@@ -123,7 +130,7 @@ void CGamePlayState::Activate(void)
 
 			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 4);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 2);
 
 
 			pTemp->Release();
@@ -168,7 +175,6 @@ void CGamePlayState::Sleep(void)
 			delete m_pRM;
 			m_pRM = nullptr;
 			m_pPlayer->Release();
-
 			m_eCurrPhase = GP_START;
 
 			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
@@ -238,6 +244,11 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+	if(m_eCurrPhase == GP_END)
+	{
+		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+		return;
+	}
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -298,10 +309,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
-	{
 		m_eCurrPhase = GP_END;
-		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
-	}
 	else if(pEvent->GetEventID() == "PLAYER_MENU")
 	{
 
@@ -330,8 +338,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-			pTempFire->Release();
-			pTempFire = nullptr;
+
 			m_fFireBallTimer = 0.0f;
 		}
 	}
@@ -416,31 +423,27 @@ void CGamePlayState::LoadWorld(string input)
 						pTempTile->SetTileY(TileYID);
 
 
-						ReadIn = pTileData->Attribute("isEvent");
-						if(ReadIn == "true")
+						ReadIn = pTileData->Attribute("EventType");
+						if(ReadIn == "EVENT")
 						{
 							pTempTile->SetEvent(true);
 							pTempTile->SetEventID(pLoad->Attribute("EventID"));
 						}
-						ReadIn = pTileData->Attribute("isBlocked");
-						if(ReadIn == "true")
+						else if(ReadIn == "BLOCK")
 						{
 							CObjects* block = new CObjects;
 							block->SetPosX(float(tileID % layerWidth * tileWidth));
 							block->SetPosY(float(tileID / layerWidth * tileHeight));
 							block->SetHeight(tileHeight);
 							block->SetWidth(tileWidth);
-							Worldtemp->AddObject(block, 4);
+							Worldtemp->AddObject(block, 2);
 							block->Release();
 						}
-						ReadIn = pTileData->Attribute("isNPC");
-						if(ReadIn == "true")
+						else if(ReadIn == "NPCS")
 						{
-							//pTempTile->SetEvent(true);
-							//pTempTile->SetEventID(pLoad->Attribute("EventID")); TODO;
+
 						}
-						ReadIn = pTileData->Attribute("isWARP");
-						if(ReadIn == "true")
+						else if(ReadIn == "WARP")
 						{
 							CWarp* warp = new CWarp;
 							warp->SetPosX(float(tileID % layerWidth * tileWidth));
@@ -457,7 +460,7 @@ void CGamePlayState::LoadWorld(string input)
 							warp->SetWarpY(nY);
 
 							warp->SetMapName(pTileData->Attribute("EventID"));
-							Worldtemp->AddObject(warp, 4);
+							Worldtemp->AddObject(warp, 2);
 							warp->Release();
 						}
 						tempLayer->AddTile(pTempTile);
@@ -481,6 +484,22 @@ void CGamePlayState::LoadWorld(string input)
 CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 {
 	CPlayerUnit* temp = new CPlayerUnit;
+	CCommands* pCommands = new CCommands;
+	CBasicAttack* pBasicAttack = new CBasicAttack;
+	pCommands->SetName("Attack");
+	pCommands->SetMiniGame(pBasicAttack);
+	temp->AddSkill(pCommands);
+	pCommands = new CCommands;
+	pCommands->SetName("Spells");
+	pCommands->SetIsGame(false);
+	CCommands* pTest = new CCommands;
+	pTest->SetName("SwordSlash");
+	pTest->SetIsGame(true);
+	pCommands->AddCommands(pTest);
+	temp->AddSkill(pCommands);
+	pCommands = new CCommands;
+	pCommands->SetName("Items");
+	temp->AddSkill(pCommands);
 	temp->SetMaxHealth(80);
 	temp->SetMaxAP(50);
 	temp->SetPosX(600);
@@ -489,6 +508,8 @@ CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
 	temp->SetVelY(0);
 	temp->SetSpeed(1);
 	temp->SetType(OBJ_PLAYER_UNIT);
+	temp->SetAttack(100);
+
 	return temp;
 }
 CUnits* CGamePlayState::GetPlayerUnit()
@@ -504,6 +525,6 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 
-	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 4);
+	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld;
 }

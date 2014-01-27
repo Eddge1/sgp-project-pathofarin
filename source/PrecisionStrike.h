@@ -6,5 +6,7 @@ class CPrecisionStrike :
 public:
 	CPrecisionStrike(void);
 	virtual ~CPrecisionStrike(void);
+	virtual void ResetSkill() override { }
+
 };
 
