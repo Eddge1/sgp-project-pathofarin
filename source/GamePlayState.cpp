@@ -338,7 +338,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-
+			pTempFire->Release();
+			pTempFire = nullptr;
 			m_fFireBallTimer = 0.0f;
 		}
 	}
