@@ -62,6 +62,14 @@ void CMainMenuState::Sleep(void)
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nSelectionMenuID);
 	m_nSelectionMenuID = -1;
 
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
+
+	m_nWarriorID	= -1;
+	m_nRangerID		= -1;
+	m_nMageID		= -1;
+
 }
 
 void CMainMenuState::Update(float fElapsedTime)
@@ -84,9 +92,7 @@ void CMainMenuState::Render(void)
 
 	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,1.0f,1.0f,&rtemp,92,79,-m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
-	rtemp.bottom += 45;
-	rtemp.top -= 45;
-	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,275,1.0f,1.0f,&rtemp,92,124,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
+	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,275,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
 
 	RECT rLogo = {0,0,512,256};
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
