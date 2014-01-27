@@ -24,6 +24,11 @@ private:
 	float m_fPosX;
 	bool m_bLeft;
 
+	int m_nMenu1;
+	int m_nMenu2;
+	int m_nMenu3;
+
+
 
 	CMainMenuState(void);
 	virtual ~CMainMenuState(void);
