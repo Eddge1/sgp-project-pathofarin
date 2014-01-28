@@ -146,7 +146,7 @@ bool CMainMenuState::Input(void)
 	if(pDI->KeyPressed(DIK_ESCAPE))
 		return false;
 
-	if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+	if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 	{
 		if(GetCursorSelection() <= 0)
 			SetCursorSelection(3);
@@ -155,7 +155,7 @@ bool CMainMenuState::Input(void)
 		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
-	else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+	else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 	{
 		if(GetCursorSelection() >= 3)
 			SetCursorSelection(0);

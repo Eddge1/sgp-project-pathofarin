@@ -7,6 +7,7 @@
 
 #include "Commands.h"
 #include "BasicAttack.h"
+#include "TriggerSpree.h"
 #include "UseItem.h"
 
 #include "MainMenuState.h"
@@ -70,7 +71,7 @@ bool CProfileMenuState::Input()
 	{
 		if(pDI->KeyPressed(DIK_ESCAPE))
 			CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
-		if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
 				SetCursorSelection(5);
@@ -79,7 +80,7 @@ bool CProfileMenuState::Input()
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 		{
 			if(GetCursorSelection() >= 5)
 				SetCursorSelection(0);
@@ -387,7 +388,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("TEMP_Player_Walk_Right");
 	pTemp->SetCurrentFrame(0);
-	CPlayerUnit * pUnit = CreateTempPlayer();
+	CPlayerUnit* pUnit = CreateTempPlayer();
 	temp->SetUnit(pUnit);
 	pUnit->Release();
 	temp->SetHeight(10);
@@ -407,7 +408,9 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->SetName("Spells");
 	tempC->SetIsGame(false);
 	CCommands* pTest = new CCommands;
+	CTriggerSpree *pSpree = new CTriggerSpree;
 	pTest->SetName("SwordSlash");
+	pTest->SetMiniGame(pSpree);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);

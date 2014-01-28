@@ -105,10 +105,6 @@ void CPlayer::HandleCollision(CObjects* col)
 
 			SetVelY(0);
 		}
-
-
-
-
 	}
 	else if(col->GetType() == OBJ_NPC)
 	{
@@ -121,7 +117,6 @@ void CPlayer::HandleCollision(CObjects* col)
 			SetPosY(GetPosY() -1);
 		else if(GetVelY() < 0 && col->GetPosY() <= GetPosY())
 			SetPosY(GetPosY() + 1);
-
 	}
 }
 

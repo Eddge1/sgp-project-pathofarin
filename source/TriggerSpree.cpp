@@ -1,13 +1,15 @@
 #include "TriggerSpree.h"
+#include "../SGD Wrappers/CSGD_Direct3D.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "PlayerUnit.h"
 #include "BattleState.h"
+
 
 CTriggerSpree::CTriggerSpree(void)
 {
 	m_bSuccess = false;
 	m_bFailed = false;
-	m_fTimer = 3.0f;
+	m_fTimer = 0.5f;
 	m_nSuccess = 0;
 	SetChances(10);
 	SetDamage(0.6f);
@@ -32,6 +34,7 @@ CTriggerSpree::CTriggerSpree(void)
 	pRect->left = 600;
 	pRect->right = 600;
 	pRect->bottom = 96;	
+	m_vTriggers.push_back(pRect);
 }
 
 
@@ -50,16 +53,25 @@ CTriggerSpree::~CTriggerSpree(void)
 
 void CTriggerSpree::Render() 
 {
+	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
+	RECT rTemp = {};
 	for(unsigned int i = 0; i < m_vGameElements.size(); i++)
 	{
-
+		rTemp.left =m_vGameElements[i]->left;
+		rTemp.right = m_vGameElements[i]->right;
+		rTemp.bottom =m_vGameElements[i]->bottom;
+		rTemp.top = m_vGameElements[i]->top;
+		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 
 	}
 
 	for(unsigned int i = 0; i < m_vTriggers.size(); i++)
 	{
-
-
+		rTemp.left =m_vTriggers[i]->left;
+		rTemp.right = m_vTriggers[i]->right;
+		rTemp.bottom =m_vTriggers[i]->bottom;
+		rTemp.top = m_vTriggers[i]->top;
+		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 	}
 }
 
@@ -69,7 +81,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 
 	if(m_fTimer < 0.0f)
 	{
-		m_fTimer = 2.0f;
+		m_fTimer = 0.5f;
 
 		RECT* pRect = new RECT;
 		pRect->top = 64;
@@ -82,9 +94,9 @@ void CTriggerSpree::Update(float fElpasedTime)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	for(int i = 0; i < m_vTriggers.size();)
 	{
-		m_vTriggers[i]->left -= (100 * fElpasedTime);
+		m_vTriggers[i]->left -= (200 * fElpasedTime);
 		if(m_vTriggers[i]->left <= 584)
-			m_vTriggers[i]->right -= (100 * fElpasedTime);
+			m_vTriggers[i]->right -= (200 * fElpasedTime);
 
 		if(m_vTriggers[i]->left <= 200)
 			m_vTriggers[i]->left = 200;
@@ -93,6 +105,8 @@ void CTriggerSpree::Update(float fElpasedTime)
 		{
 			delete m_vTriggers[i];
 			m_vTriggers.erase(m_vTriggers.begin() + i);
+			m_bFailed = true;
+			return;
 		}
 		else i++;
 	}
@@ -103,7 +117,11 @@ void CTriggerSpree::Update(float fElpasedTime)
 		if(m_vTriggers.size() > 0)
 		{
 			if(IntersectRect(&rTemp, m_vTriggers[0], m_vGameElements[1]))
+			{
 				m_bSuccess = true;
+				delete m_vTriggers[0];
+				m_vTriggers.erase(m_vTriggers.begin());
+			}
 			else
 				m_bFailed = true;
 		}
@@ -140,7 +158,7 @@ void CTriggerSpree::ResetSkill()
 { 
 	m_bSuccess = false;
 	m_bFailed = false;
-	m_fTimer = 3.0f;
+	m_fTimer = 0.5f;
 	m_nSuccess = 0;
 
 

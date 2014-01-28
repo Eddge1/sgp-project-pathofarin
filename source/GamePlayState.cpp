@@ -198,9 +198,9 @@ bool CGamePlayState::Input(void)
 	}
 	else if(bisPaused)
 	{
-		if( pDI->KeyPressed( DIK_UP ) == true || pDI->JoystickDPadPressed(DIR_UP))
+		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
 			SetCursorSelection(GetCursorSelection() - 1);
-		if( pDI->KeyPressed( DIK_DOWN ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
+		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
 		if(GetCursorSelection() > 2)

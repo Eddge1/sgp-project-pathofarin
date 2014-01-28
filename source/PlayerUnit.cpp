@@ -114,7 +114,8 @@ void CPlayerUnit::Update(float fElapsedTime)
 		{
 			if(m_bInSubMenu)
 			{
-
+				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(this);
+				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->Update(fElapsedTime);
 			}
 			else
 			{
@@ -130,8 +131,8 @@ void CPlayerUnit::EndTurn()
 {
 	if(m_bInSubMenu)
 	{
-
-
+		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(nullptr);
+		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
 	}
 	else
 	{
