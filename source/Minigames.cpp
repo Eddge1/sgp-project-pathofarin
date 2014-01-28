@@ -6,7 +6,7 @@
 CMiniGames::CMiniGames(void)
 {
 	m_pMaster = nullptr;
-	m_bRight = true;
+	m_nCost = 0;
 }
 
 CMiniGames::~CMiniGames(void)

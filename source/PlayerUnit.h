@@ -30,10 +30,10 @@ public:
 	void SetOwner(CPlayer* pPlayer);
 	CPlayer* GetOwner(void) {return m_pPlayer;}
 
-	void GetInSubMenu	(bool bValue)	{m_bInSubMenu = bValue;}
-	void GetReady		(bool bValue)	{m_bSkillSelected = bValue;}
-	void GetMenuID		(int nID)		{m_nMenuSelect = nID;}
-	void GetSkillID		(int nID)		{m_nSkillSelect = nID;}
+	void SetInSubMenu	(bool bValue)	{m_bInSubMenu = bValue;}
+	void SetReady		(bool bValue)	{m_bSkillSelected = bValue;}
+	void SetMenuID		(int nID)		{m_nMenuSelect = nID;}
+	void SetSkillID		(int nID)		{m_nSkillSelect = nID;}
 	void AddSkill		(CCommands* nSkill)	{m_vCommands.push_back(nSkill);}
 	vector<CCommands*>* GetCommands(void) {return &m_vCommands;}
 	CCommands* GetSkill(int nID);

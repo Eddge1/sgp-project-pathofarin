@@ -58,7 +58,7 @@ void CProfileMenuState::Sleep()
 
 	for(unsigned int i = 0; i < m_vCharacterList.size(); i++)
 		m_vCharacterList[i]->Release();
-	
+
 	m_vCharacterList.clear();
 }
 
@@ -100,24 +100,27 @@ bool CProfileMenuState::Input()
 			case 1:
 				if(m_eCurrState == PS_DELETE)
 				{
-					delete m_vCharacterList[0];
+					m_vCharacterList[0]->Release();
+					m_vCharacterList[0] = nullptr;
 					m_vCharacterList[0] = CreatePlayer();
-					m_vCharacterList[0]->SetName("Empty");
+					m_vCharacterList[0]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 					SaveGame("assets/Data/Saves/Player1.xml");
+
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					delete m_vCharacterList[0];
+					m_vCharacterList[0]->Release();
+					m_vCharacterList[0] = nullptr;
 					m_vCharacterList[0] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 					SaveGame("assets/Data/Saves/Player1.xml");
 				}
 				else
 				{
-					if(m_vCharacterList[0]->GetName() == "Empty")
+					if(m_vCharacterList[0]->GetUnit()->GetName() == "Empty")
 					{
-						m_vCharacterList[0]->SetName("Arin");
+						m_vCharacterList[0]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 						SaveGame("assets/Data/Saves/Player1.xml");
 					}
@@ -125,20 +128,24 @@ bool CProfileMenuState::Input()
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
+				m_eCurrState = PS_SELECT;
+
 				break;
 			case 2:
 				if(m_eCurrState == PS_DELETE)
 				{
-					delete m_vCharacterList[1];
+					m_vCharacterList[1]->Release();
+					m_vCharacterList[1] = nullptr;
 					m_vCharacterList[1] = CreatePlayer();
-					m_vCharacterList[1]->SetName("Empty");
+					m_vCharacterList[1]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 					SaveGame("assets/Data/Saves/Player2.xml");
 
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					delete m_vCharacterList[1];
+					m_vCharacterList[1]->Release();
+					m_vCharacterList[1] = nullptr;
 					m_vCharacterList[1] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 					SaveGame("assets/Data/Saves/Player2.xml");
@@ -146,9 +153,9 @@ bool CProfileMenuState::Input()
 				}
 				else
 				{
-					if(m_vCharacterList[1]->GetName() == "Empty")
+					if(m_vCharacterList[1]->GetUnit()->GetName() == "Empty")
 					{
-						m_vCharacterList[1]->SetName("Arin");
+						m_vCharacterList[1]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 						SaveGame("assets/Data/Saves/Player2.xml");
 
@@ -158,13 +165,16 @@ bool CProfileMenuState::Input()
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 
 				}
+				m_eCurrState = PS_SELECT;
+
 				break;
 			case 3:
 				if(m_eCurrState == PS_DELETE)
 				{
-					delete m_vCharacterList[2];
+					m_vCharacterList[2]->Release();
+					m_vCharacterList[2] = nullptr;
 					m_vCharacterList[2] = CreatePlayer();
-					m_vCharacterList[2]->SetName("Empty");
+					m_vCharacterList[2]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 					SaveGame("assets/Data/Saves/Player3.xml");
 
@@ -172,7 +182,7 @@ bool CProfileMenuState::Input()
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					delete m_vCharacterList[2];
+					m_vCharacterList[2];
 					m_vCharacterList[2] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 					SaveGame("assets/Data/Saves/Player3.xml");
@@ -180,9 +190,9 @@ bool CProfileMenuState::Input()
 				}
 				else
 				{
-					if(m_vCharacterList[2]->GetName() == "Empty")
+					if(m_vCharacterList[2]->GetUnit()->GetName() == "Empty")
 					{
-						m_vCharacterList[2]->SetName("Arin");
+						m_vCharacterList[2]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 						SaveGame("assets/Data/Saves/Player3.xml");
 
@@ -191,6 +201,7 @@ bool CProfileMenuState::Input()
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
+				m_eCurrState = PS_SELECT;
 				break;
 			case 4:
 				if(m_eCurrState != PS_DELETE)
@@ -239,7 +250,7 @@ void CProfileMenuState::Render()
 	if(m_fPosY <= 0.0f)
 	{
 		std::wostringstream woss;
-		woss << "New Game\n\n\tSlot 1: " << m_vCharacterList[0]->GetName().c_str() << "\n\n\tSlot 2: " << m_vCharacterList[1]->GetName().c_str() << "\n\n\tSlot 3: " << m_vCharacterList[2]->GetName().c_str() << "\n\nDelete\nMain Menu";
+		woss << "New Game\n\n\tSlot 1: " << m_vCharacterList[0]->GetUnit()->GetName().c_str() << "\n\n\tSlot 2: " << m_vCharacterList[1]->GetUnit()->GetName().c_str() << "\n\n\tSlot 3: " << m_vCharacterList[2]->GetUnit()->GetName().c_str() << "\n\nDelete\nMain Menu";
 		CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 64, 272,1.0f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		RECT rTemp = {0,0,16,32};
@@ -247,7 +258,6 @@ void CProfileMenuState::Render()
 		{
 		case 0:
 			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + (int)m_fOffSetX, 278, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
-
 			break;
 
 		case 1:
@@ -281,13 +291,13 @@ void CProfileMenuState::Render()
 		{
 		case CProfileMenuState::PS_NEWGAME:
 			woss << "Which Slot would you like to use?";
-			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 100, 256,1.0f,D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
 			break;
 		case CProfileMenuState::PS_SELECT:
 			break;
 		case CProfileMenuState::PS_DELETE:
 			woss << "Which Slot would you like to delete?";
-			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 100, 256,1.0f,D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
 
 			break;
 		default:
@@ -331,12 +341,12 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		CPlayer* pPlayer;
 		int nTemp = 0;
 		pPlayer = CreatePlayer();
-		pPlayer->SetName(pSlot->Attribute("Name"));
+		pPlayer->GetUnit()->SetName(pSlot->Attribute("Name"));
 		pSlot->Attribute("posX", &nTemp);
 		pPlayer->SetPosX(float(nTemp));
 		pSlot->Attribute("posY", &nTemp);
 		pPlayer->SetPosY(float(nTemp));
-
+		pPlayer->SetName(szFileName);
 		m_vCharacterList.push_back(pPlayer);
 	}
 }
@@ -350,19 +360,17 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 	TiXmlElement* pRoot = new TiXmlElement("Saves");
 
 	doc.LinkEndChild(pRoot);
-	std::string szTemp = "";
 	TiXmlElement* pSlot = new TiXmlElement("Slot");
 	CPlayer* pTemp = reinterpret_cast<CPlayer*>(CGamePlayState::GetInstance()->GetPlayer());
 	if(pTemp != nullptr)
 	{
-		szTemp = pTemp->GetName();
 		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
 		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
 		pSlot->SetAttribute("Class", 0);
 		pSlot->SetAttribute("posX", pTemp->GetPosX());
 		pSlot->SetAttribute("posY", pTemp->GetPosY());
+		pTemp->SetName(szFileName);
 	}
-
 	pRoot->LinkEndChild(pSlot);
 	doc.SaveFile(szFileName.c_str());
 }
@@ -382,7 +390,8 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	temp->SetUnit(pUnit);
 	pUnit->Release();
 	temp->SetHeight(10);
-	temp->SetWidth(10);	return temp;
+	temp->SetWidth(10);	
+	return temp;
 }
 
 CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
@@ -412,6 +421,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	temp->SetVelY(0);
 	temp->SetSpeed(1);
 	temp->SetType(OBJ_PLAYER_UNIT);
+	temp->SetName("Arin");
 
 	return temp;
 }

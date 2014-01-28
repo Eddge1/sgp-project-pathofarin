@@ -11,6 +11,7 @@
 #include "ObjectManager.h"
 #include "Player.h"
 #include "RenderManager.h"
+#include "ProfileMenuState.h"
 #include "Game.h"
 #include "MainMenuState.h"
 #include "CharacterMenuState.h"
@@ -202,10 +203,10 @@ bool CGamePlayState::Input(void)
 		if( pDI->KeyPressed( DIK_DOWN ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
-		if(GetCursorSelection() > 1)
+		if(GetCursorSelection() > 2)
 			SetCursorSelection(0);
 		else if(GetCursorSelection() < 0)
-			SetCursorSelection(1);
+			SetCursorSelection(2);
 
 
 		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
@@ -218,9 +219,14 @@ bool CGamePlayState::Input(void)
 					return true;
 				}
 				break;
+			case 1:			// PLAY
+				{
+					CProfileMenuState::GetInstance()->SaveGame(m_pPlayer->GetName());
+					return true;
+				}
+				break;
 
-
-			case 1:			
+			case 2:			
 				{
 					bisPaused = !bisPaused;
 					CGame::GetInstance()->ChangeState( CMainMenuState::GetInstance() ); // Will return you to the main menu
@@ -273,7 +279,7 @@ void CGamePlayState::Render(void)
 		RECT rTemp = {336, 236, 464,364};
 		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
 
-		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nSave\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 	}
 }
@@ -325,7 +331,6 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 
 void CGamePlayState::LoadWorld(string input)
 {
-
 	string temp = "Assets/Data/Levels/"; 
 	temp += input;
 
