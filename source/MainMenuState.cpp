@@ -10,6 +10,7 @@
 #include "CreditState.h"
 
 #include "GamePlayState.h"
+#include "ProfileMenuState.h"
 #include "BattleState.h" // <- TEMP needs to be deleted after testing.
 #include "Game.h"
 
@@ -53,6 +54,7 @@ void CMainMenuState::Activate(void)
 	m_nMenu1		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu3.png"));
 	m_nMenu2		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu4.png"));
 	m_nMenu3		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu5.png"));
+
 	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	m_fRotation = 0.0f;
 	m_fPosX = 360.0f;
@@ -115,7 +117,7 @@ void CMainMenuState::Render(void)
 	RECT rLogo = {0,0,512,256};
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,336,424);
-	CSGD_TextureManager::GetInstance()->Draw(m_nMenu2,336,424);
+	CSGD_TextureManager::GetInstance()->Draw(m_nMenu3,336,424);
 
 
 	RECT rTemp = {336, 408, 464,536};
@@ -157,7 +159,7 @@ bool CMainMenuState::Input(void)
 		switch (GetCursorSelection())
 		{
 		case 0:
-			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance()); // <-Should be going to profile state.
+			CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance()); // <-Should be going to profile state.
 			break;
 		case 1:
 			CGame::GetInstance()->ChangeState(COptionsMenu::GetInstance());
