@@ -30,6 +30,9 @@ public:
 	void SetOwner(CPlayer* pPlayer);
 	CPlayer* GetOwner(void) {return m_pPlayer;}
 
+	void SetCasting(bool l) { m_bCasting = l; }
+	bool GetCasting(void) { return m_bCasting; }
+
 	void SetInSubMenu	(bool bValue)	{m_bInSubMenu = bValue;}
 	void SetReady		(bool bValue)	{m_bSkillSelected = bValue;}
 	void SetMenuID		(int nID)		{m_nMenuSelect = nID;}

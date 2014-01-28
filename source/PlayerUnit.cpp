@@ -84,7 +84,12 @@ void CPlayerUnit::Update(float fElapsedTime)
 					else
 					{
 						if(m_vCommands[m_nMenuSelect]->GetIsGame())
+						{
+							if(m_nMenuSelect == 2)
+								m_bCasting = true;
+
 							m_bSkillSelected = true;
+						}
 						else
 							m_bInSubMenu = true;
 					}
@@ -115,7 +120,6 @@ void CPlayerUnit::Update(float fElapsedTime)
 			{
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(this);
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->Update(fElapsedTime);
-				m_vCommands[m_nMenuSelect]->GetMiniGame()->Render();
 			}
 
 		}

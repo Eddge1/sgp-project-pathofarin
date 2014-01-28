@@ -15,6 +15,7 @@ public:
 	virtual bool Input( void )	override;	
 
 private:
+
 	float m_fRotation;
 	int m_nLogoID;
 	int m_nSelectionMenuID;

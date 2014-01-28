@@ -108,7 +108,7 @@ bool CBattleState::Input(void)
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 			if(pTemp != nullptr)
 			{
-				if(pTemp->GetReady())
+				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
 					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
 						GetNextTarget();
@@ -236,6 +236,18 @@ void CBattleState::Render(void)
 				{
 					RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
 					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+					if(pTemp->GetCasting())
+					{
+						if(pTemp->GetInSubMenu())
+						{
+							pTemp->GetSkill(pTemp->GetMenuID())->GetCommand(pTemp->GetSkillID())->GetMiniGame()->Render();
+						}
+						else
+						{
+							pTemp->GetSkill(pTemp->GetMenuID())->GetMiniGame()->Render();
+
+						}
+					}
 				}
 
 				vector<CCommands*> vTemp;
