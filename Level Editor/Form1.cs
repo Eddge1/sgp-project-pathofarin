@@ -130,6 +130,12 @@ namespace SGP_PoA_LevelEditor
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                      TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
                                 }
+                                else if (L.MyTiles[x, y].EventType == "EVENT")
+                                {
+                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
+                                }
                                 else
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                         new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
@@ -280,8 +286,24 @@ namespace SGP_PoA_LevelEditor
                         L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
                     }
                 }
-
-                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "EVENT")
+                {
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
+                    }
+                    else
+                    {
+                        if (L.MyTiles[Temp.X, Temp.Y].EventType == "EVENT")
+                            txtEventBroadCast.Text = L.MyTiles[Temp.X, Temp.Y].SzSpecial;
+                        else
+                        {
+                            L.MyTiles[Temp.X, Temp.Y].EventType = "EVENT";
+                            L.MyTiles[Temp.X, Temp.Y].SzSpecial = txtEventBroadCast.Text;
+                        }
+                    }
+                }
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -293,8 +315,7 @@ namespace SGP_PoA_LevelEditor
                     }
 
                 }
-
-                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "WARP")
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "WARP")
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -335,8 +356,7 @@ namespace SGP_PoA_LevelEditor
                         L.MyTiles[Temp.X, Temp.Y].WarpY = 0;
                     }
                 }
-
-                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "NPCS")
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "NPCS")
                 {
                     if (grpWayPoints.Visible)
                     {
@@ -894,7 +914,10 @@ namespace SGP_PoA_LevelEditor
 
         private void btnShiftDown_Click(object sender, EventArgs e)
         {
-
+            myLayers l = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+            lstLayers.Items[lstLayers.SelectedIndex] = lstLayers.Items[lstLayers.SelectedIndex + 1];
+            lstLayers.Items[lstLayers.SelectedIndex + 1] = l;
+            lstLayers.SelectedIndex++;
         }
 
         private void lstLayers_SelectedIndexChanged(object sender, EventArgs e)
@@ -942,6 +965,14 @@ namespace SGP_PoA_LevelEditor
                     grpWayPoints.Visible = true;
             }
 
+        }
+
+        private void btnShiftUp_Click(object sender, EventArgs e)
+        {
+            myLayers l = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+            lstLayers.Items[lstLayers.SelectedIndex] = lstLayers.Items[lstLayers.SelectedIndex - 1];
+            lstLayers.Items[lstLayers.SelectedIndex - 1] = l;
+            lstLayers.SelectedIndex--;
         }
 
     }
