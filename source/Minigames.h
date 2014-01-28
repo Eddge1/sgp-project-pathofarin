@@ -19,6 +19,7 @@ public:
 
 	CUnits* GetOwner(void) { return m_pMaster; }
 
+
 	CMiniGames(void);
 	virtual ~CMiniGames(void);
 
