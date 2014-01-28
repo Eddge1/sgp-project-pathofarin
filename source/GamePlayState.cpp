@@ -21,9 +21,8 @@
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
-#include "Commands.h"
 #include "Warp.h"
-#include "BasicAttack.h"
+
 
 
 // GetInstance
@@ -33,8 +32,6 @@ CGamePlayState* CGamePlayState::GetInstance( void )
 
 	return &s_Instance;
 }
-
-
 
 CGamePlayState::CGamePlayState(void)
 {
@@ -49,13 +46,11 @@ CGamePlayState::CGamePlayState(void)
 	m_fFireBallTimer = 0.0f;
 	m_eCurrPhase = GP_START;
 }
-
-
 // Destructor
 CGamePlayState::~CGamePlayState(void)
 {
+	SetPlayer(nullptr);
 }
-
 
 void CGamePlayState::Activate(void)
 {
@@ -76,7 +71,7 @@ void CGamePlayState::Activate(void)
 				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
 			}
-			 LoadWorld("RealSimple.xml");
+			LoadWorld("RealSimple.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -84,7 +79,6 @@ void CGamePlayState::Activate(void)
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
-			m_pPlayer = CreatePlayer();
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
@@ -174,7 +168,7 @@ void CGamePlayState::Sleep(void)
 
 			delete m_pRM;
 			m_pRM = nullptr;
-			m_pPlayer->Release();
+			SetPlayer(nullptr);
 			m_eCurrPhase = GP_START;
 
 			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
@@ -282,22 +276,6 @@ void CGamePlayState::Render(void)
 		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
 	}
-}
-
-CPlayer* CGamePlayState::CreatePlayer()
-{
-	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
-	temp->SetPosX(50.0f);
-	temp->SetPosY(50.0f);
-	temp->SetVelX(0.0f);
-	temp->SetVelY(0.0f);
-	CAnimationTimeStamp* pTemp;
-	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("TEMP_Player_Walk_Right");
-	pTemp->SetCurrentFrame(0);
-	temp->SetUnit(CreateTempPlayer());
-	temp->SetHeight(10);
-	temp->SetWidth(10);	return temp;
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -482,37 +460,6 @@ void CGamePlayState::LoadWorld(string input)
 
 }
 
-CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
-{
-	CPlayerUnit* temp = new CPlayerUnit;
-	CCommands* pCommands = new CCommands;
-	CBasicAttack* pBasicAttack = new CBasicAttack;
-	pCommands->SetName("Attack");
-	pCommands->SetMiniGame(pBasicAttack);
-	temp->AddSkill(pCommands);
-	pCommands = new CCommands;
-	pCommands->SetName("Spells");
-	pCommands->SetIsGame(false);
-	CCommands* pTest = new CCommands;
-	pTest->SetName("SwordSlash");
-	pTest->SetIsGame(true);
-	pCommands->AddCommands(pTest);
-	temp->AddSkill(pCommands);
-	pCommands = new CCommands;
-	pCommands->SetName("Items");
-	temp->AddSkill(pCommands);
-	temp->SetMaxHealth(80);
-	temp->SetMaxAP(50);
-	temp->SetPosX(600);
-	temp->SetPosY(250);
-	temp->SetVelX(0);
-	temp->SetVelY(0);
-	temp->SetSpeed(1);
-	temp->SetType(OBJ_PLAYER_UNIT);
-	temp->SetAttack(100);
-
-	return temp;
-}
 CUnits* CGamePlayState::GetPlayerUnit()
 {
 	return m_pPlayer->GetUnit();
@@ -528,4 +475,15 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 
 	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld;
+}
+
+void CGamePlayState::SetPlayer(CPlayer* pPlayer)
+{
+	if(m_pPlayer != nullptr)
+		m_pPlayer->Release();
+
+	m_pPlayer = pPlayer;
+
+	if(m_pPlayer != nullptr)
+		m_pPlayer->AddRef();
 }

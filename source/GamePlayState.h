@@ -39,13 +39,13 @@ public:
 	virtual void Update( float fElapsedTime )	override;	// update entities
 	virtual void Render( void )	override;					// render entities
 
-	CPlayer* CreatePlayer();
-	CPlayerUnit* CreateTempPlayer(void);
+	void SetPlayer(CPlayer* pPlayer);
 	CUnits* GetPlayerUnit();
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 	void TransitionWorld(std::string szNewWorld);
 
 	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }
+	CPlayer* GetPlayer() {return m_pPlayer;}
 
 	void LoadWorld(string input);
 
@@ -57,7 +57,6 @@ private:
 	virtual ~CGamePlayState( void );
 	CGamePlayState( const CGamePlayState& );
 	CGamePlayState& operator= ( const CGamePlayState& );
-
 
 	map<string, CWorld*> m_mWorldManager;
 	string m_sCurrWorld;

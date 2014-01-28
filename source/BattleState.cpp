@@ -128,7 +128,7 @@ bool CBattleState::Input(void)
 void CBattleState::Update(float fElapsedTime)
 {
 
-	for(int i = 0; i < m_vText.size(); )
+	for(int i = 0; i < (int)m_vText.size(); )
 	{
 		m_vText[i]->m_fTimer -= fElapsedTime;
 		m_vText[i]->m_fLocY -= (20 * fElapsedTime);
@@ -259,8 +259,8 @@ void CBattleState::Render(void)
 			}
 		}
 
-		for(int i = 0; i < m_vText.size(); i++)
-			m_pFont->Draw(m_vText[i]->szText.str().c_str(), m_vText[i]->m_fLocX, m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
+		for(int i = 0; i < (int)m_vText.size(); i++)
+			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
 
 		if(m_bVictory)
 		{

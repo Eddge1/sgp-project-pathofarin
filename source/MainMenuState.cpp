@@ -29,6 +29,7 @@ CMainMenuState::CMainMenuState(void)
 	m_nLogoID = -1;
 	m_nSelectionMenuID = -1;
 	m_fRotation = 0.0f;
+	m_fPosY = 0.0f;
 	m_bLeft = false;
 }
 
@@ -58,6 +59,7 @@ void CMainMenuState::Activate(void)
 	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	m_fRotation = 0.0f;
 	m_fPosX = 360.0f;
+	m_fPosY = 0.0f;
 }
 
 void CMainMenuState::Sleep(void)
@@ -92,15 +94,22 @@ void CMainMenuState::Sleep(void)
 void CMainMenuState::Update(float fElapsedTime)
 {
 	m_fRotation += (1.0f * fElapsedTime);
-	if(m_bLeft)
-		m_fPosX -= (20 * fElapsedTime);
-	else
-		m_fPosX += (20 * fElapsedTime);
+
+	if(m_fPosY >= 172.0f)
+	{
+		if(m_bLeft)
+			m_fPosX -= (20 * fElapsedTime);
+		else
+			m_fPosX += (20 * fElapsedTime);
 
 		if(m_fPosX <= 360)
-		m_bLeft = false;
-	else if(m_fPosX >= 370)
-		m_bLeft = true;
+			m_bLeft = false;
+		else if(m_fPosX >= 370)
+			m_bLeft = true;
+	}
+	else{
+		m_fPosY += 200 * fElapsedTime;
+	}
 }
 
 void CMainMenuState::Render(void)
@@ -109,24 +118,25 @@ void CMainMenuState::Render(void)
 	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
 
 	RECT rtemp = {36, 48, 220, 206};
-
 	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,1.0f,1.0f,&rtemp,92,79,-m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
-
 	RECT rLogo = {0,0,512,256};
-	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
-	CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,336,424);
-	CSGD_TextureManager::GetInstance()->Draw(m_nMenu3,336,424);
+	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
+	if(m_fPosY >= 172.0f)
+	{
+		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,336,424);
+		CSGD_TextureManager::GetInstance()->Draw(m_nMenu3,336,424);
 
 
-	RECT rTemp = {336, 408, 464,536};
-	pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
-	rTemp.left = 0;
-	rTemp.top = 0;
-	rTemp.right = 16;
-	rTemp.bottom = 32;
-	CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), m_fPosX, 442 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+		RECT rTemp = {336, 408, 464,536};
+		pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		rTemp.left = 0;
+		rTemp.top = 0;
+		rTemp.right = 16;
+		rTemp.bottom = 32;
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), (int)m_fPosX, 442 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+	}
 }
 
 bool CMainMenuState::Input(void)

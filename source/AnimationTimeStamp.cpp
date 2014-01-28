@@ -15,7 +15,7 @@ void CAnimationTimeStamp::AdvanceCurrentFrame()
 {
 	m_nCurrFrame++;
 
-	if (m_nCurrFrame >= CAnimationSystem::GetInstance()->GetAnimation(m_szCurrentAnimation)->GetSize())
+	if (m_nCurrFrame >= (int)CAnimationSystem::GetInstance()->GetAnimation(m_szCurrentAnimation)->GetSize())
 	{
 		if (CAnimationSystem::GetInstance()->GetAnimation(m_szCurrentAnimation)->isLooping())
 			m_nCurrFrame = 0;

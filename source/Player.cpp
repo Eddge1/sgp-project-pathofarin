@@ -5,13 +5,22 @@
 
 CPlayer::CPlayer(void)
 {
+
 	SetType(OBJ_PLAYER);
+	m_szName = "Arin";
+	m_cBattle = nullptr;
 }
 
 
 CPlayer::~CPlayer(void)
 {
-	m_cBattle->Release();
+	SetUnit(nullptr);
+}
+
+void CPlayer::SetName(std::string szName) 
+{
+	if(szName != "")
+		m_szName = szName;
 }
 
 void CPlayer::Update(float fElapsedTime)
@@ -121,3 +130,15 @@ void CPlayer::HandleEvent( const CEvent* pEvent )
 
 
 }
+
+void CPlayer::SetUnit	(CPlayerUnit* pUnit)
+{
+	if(m_cBattle != nullptr)
+		m_cBattle->Release();
+
+	m_cBattle = pUnit;
+
+	if(m_cBattle != nullptr)
+		m_cBattle->AddRef();
+}
+

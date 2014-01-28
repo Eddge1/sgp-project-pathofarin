@@ -3,8 +3,13 @@
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
+#include "../TinyXML/tinyxml.h"
+
+#include "Commands.h"
+#include "BasicAttack.h"
 
 #include "MainMenuState.h"
+#include "GamePlayState.h"
 #include "Game.h"
 #include <sstream>
 CProfileMenuState::CProfileMenuState(void)
@@ -27,10 +32,11 @@ CProfileMenuState* CProfileMenuState::GetInstance( void )
 
 void CProfileMenuState::Activate()
 {
-	if(LoadSaves() == false)
-	{
+	LoadSave("assets/Data/Saves/Player1.xml");
+	LoadSave("assets/Data/Saves/Player2.xml");
+	LoadSave("assets/Data/Saves/Player3.xml");
 
-	}
+	m_eCurrState = PS_SELECT;
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
 	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png")));
 	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
@@ -49,6 +55,11 @@ void CProfileMenuState::Sleep()
 	SetSFXID(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
+
+	for(unsigned int i = 0; i < m_vCharacterList.size(); i++)
+		m_vCharacterList[i]->Release();
+	
+	m_vCharacterList.clear();
 }
 
 bool CProfileMenuState::Input()
@@ -87,16 +98,106 @@ bool CProfileMenuState::Input()
 					m_eCurrState = PS_SELECT;
 				break;
 			case 1:
+				if(m_eCurrState == PS_DELETE)
+				{
+					delete m_vCharacterList[0];
+					m_vCharacterList[0] = CreatePlayer();
+					m_vCharacterList[0]->SetName("Empty");
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+					SaveGame("assets/Data/Saves/Player1.xml");
+				}
+				else if(m_eCurrState == PS_NEWGAME)
+				{
+					delete m_vCharacterList[0];
+					m_vCharacterList[0] = CreatePlayer();
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+					SaveGame("assets/Data/Saves/Player1.xml");
+				}
+				else
+				{
+					if(m_vCharacterList[0]->GetName() == "Empty")
+					{
+						m_vCharacterList[0]->SetName("Arin");
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+						SaveGame("assets/Data/Saves/Player1.xml");
+					}
+					else
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+				}
 				break;
 			case 2:
+				if(m_eCurrState == PS_DELETE)
+				{
+					delete m_vCharacterList[1];
+					m_vCharacterList[1] = CreatePlayer();
+					m_vCharacterList[1]->SetName("Empty");
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+					SaveGame("assets/Data/Saves/Player2.xml");
+
+				}
+				else if(m_eCurrState == PS_NEWGAME)
+				{
+					delete m_vCharacterList[1];
+					m_vCharacterList[1] = CreatePlayer();
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+					SaveGame("assets/Data/Saves/Player2.xml");
+
+				}
+				else
+				{
+					if(m_vCharacterList[1]->GetName() == "Empty")
+					{
+						m_vCharacterList[1]->SetName("Arin");
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+						SaveGame("assets/Data/Saves/Player2.xml");
+
+					}
+					else
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+
+				}
 				break;
 			case 3:
-				return false;
+				if(m_eCurrState == PS_DELETE)
+				{
+					delete m_vCharacterList[2];
+					m_vCharacterList[2] = CreatePlayer();
+					m_vCharacterList[2]->SetName("Empty");
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+					SaveGame("assets/Data/Saves/Player3.xml");
+
+					m_eCurrState = PS_SELECT;
+				}
+				else if(m_eCurrState == PS_NEWGAME)
+				{
+					delete m_vCharacterList[2];
+					m_vCharacterList[2] = CreatePlayer();
+					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+					SaveGame("assets/Data/Saves/Player3.xml");
+
+				}
+				else
+				{
+					if(m_vCharacterList[2]->GetName() == "Empty")
+					{
+						m_vCharacterList[2]->SetName("Arin");
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+						SaveGame("assets/Data/Saves/Player3.xml");
+
+					}
+					else
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+				}
+				break;
 			case 4:
 				if(m_eCurrState != PS_DELETE)
 					m_eCurrState = PS_DELETE;
 				else
 					m_eCurrState = PS_SELECT;
+				break;
 			case 5:
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 			default:
@@ -134,43 +235,40 @@ void CProfileMenuState::Render()
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	RECT rLogo = {0,0,512,256};
-	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),144,m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
+	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	if(m_fPosY <= 0.0f)
 	{
 		std::wostringstream woss;
-		woss << "New Game\n\n\tSlot 1: " << " " << "\n\n\tSlot 2: " << " " << "\n\n\tSlot 3: " << " " << "\n\nDelete\nMain Menu";
+		woss << "New Game\n\n\tSlot 1: " << m_vCharacterList[0]->GetName().c_str() << "\n\n\tSlot 2: " << m_vCharacterList[1]->GetName().c_str() << "\n\n\tSlot 3: " << m_vCharacterList[2]->GetName().c_str() << "\n\nDelete\nMain Menu";
 		CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 64, 272,1.0f, D3DCOLOR_XRGB(0,0,0));
-
+		woss.str(_T(""));
 		RECT rTemp = {0,0,16,32};
 		switch(GetCursorSelection())
 		{
 		case 0:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + m_fOffSetX, 278, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + (int)m_fOffSetX, 278, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 
 			break;
 
 		case 1:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + m_fOffSetX, 339, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
-
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 339, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 2:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + m_fOffSetX, 400, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
-
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 400, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 3:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + m_fOffSetX, 461, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
-
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 461, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 4:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 +m_fOffSetX, 522, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + (int)m_fOffSetX, 522, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 
 			break;
 
 		case 5:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + m_fOffSetX, 552, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 48 + (int)m_fOffSetX, 552, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 
 			break;
 
@@ -179,11 +277,141 @@ void CProfileMenuState::Render()
 
 
 		}
+		switch (m_eCurrState)
+		{
+		case CProfileMenuState::PS_NEWGAME:
+			woss << "Which Slot would you like to use?";
+			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 100, 256,1.0f,D3DCOLOR_XRGB(0,0,0));
+			break;
+		case CProfileMenuState::PS_SELECT:
+			break;
+		case CProfileMenuState::PS_DELETE:
+			woss << "Which Slot would you like to delete?";
+			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 100, 256,1.0f,D3DCOLOR_XRGB(0,0,0));
+
+			break;
+		default:
+			break;
+		}
 	}
 }
 
-bool CProfileMenuState::LoadSaves( void )
+void CProfileMenuState::LoadSave(std::string szFileName)
 {
+	TiXmlDocument doc;
+	if(doc.LoadFile(szFileName.c_str()) == false)
+	{
+		TiXmlDeclaration* pDecl = new TiXmlDeclaration("1.0", "utf-8", "");
+		doc.LinkEndChild(pDecl);	
+		TiXmlElement* pRoot = new TiXmlElement("Saves");
+		doc.LinkEndChild(pRoot);
+		std::string szTemp = "";
+		TiXmlElement* pSlot = new TiXmlElement("Slot");
+		szTemp = "Empty";
 
-	return true;
+		pSlot->SetAttribute("Name", szTemp.c_str());
+		pSlot->SetAttribute("Level", 1);
+		pSlot->SetAttribute("Class", 0);
+		pSlot->SetAttribute("posX", 0);
+		pSlot->SetAttribute("posY", 0);
+
+		pRoot->LinkEndChild(pSlot);
+		doc.SaveFile(szFileName.c_str());
+	}
+
+	if(doc.LoadFile(szFileName.c_str()) == false)
+		return;
+	TiXmlElement *pRoot = doc.RootElement();
+	if(	pRoot == nullptr )
+		return;
+
+	TiXmlElement* pSlot = pRoot->FirstChildElement("Slot");
+	if(pSlot != nullptr)
+	{
+		CPlayer* pPlayer;
+		int nTemp = 0;
+		pPlayer = CreatePlayer();
+		pPlayer->SetName(pSlot->Attribute("Name"));
+		pSlot->Attribute("posX", &nTemp);
+		pPlayer->SetPosX(float(nTemp));
+		pSlot->Attribute("posY", &nTemp);
+		pPlayer->SetPosY(float(nTemp));
+
+		m_vCharacterList.push_back(pPlayer);
+	}
+}
+
+void CProfileMenuState::SaveGame(std::string szFileName)
+{
+	TiXmlDocument doc;
+	TiXmlDeclaration* pDecl = new TiXmlDeclaration("1.0", "utf-8", "");
+
+	doc.LinkEndChild(pDecl);	
+	TiXmlElement* pRoot = new TiXmlElement("Saves");
+
+	doc.LinkEndChild(pRoot);
+	std::string szTemp = "";
+	TiXmlElement* pSlot = new TiXmlElement("Slot");
+	CPlayer* pTemp = reinterpret_cast<CPlayer*>(CGamePlayState::GetInstance()->GetPlayer());
+	if(pTemp != nullptr)
+	{
+		szTemp = pTemp->GetName();
+		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
+		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
+		pSlot->SetAttribute("Class", 0);
+		pSlot->SetAttribute("posX", pTemp->GetPosX());
+		pSlot->SetAttribute("posY", pTemp->GetPosY());
+	}
+
+	pRoot->LinkEndChild(pSlot);
+	doc.SaveFile(szFileName.c_str());
+}
+
+CPlayer* CProfileMenuState::CreatePlayer()
+{
+	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
+	temp->SetPosX(50.0f);
+	temp->SetPosY(50.0f);
+	temp->SetVelX(0.0f);
+	temp->SetVelY(0.0f);
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("TEMP_Player_Walk_Right");
+	pTemp->SetCurrentFrame(0);
+	CPlayerUnit * pUnit = CreateTempPlayer();
+	temp->SetUnit(pUnit);
+	pUnit->Release();
+	temp->SetHeight(10);
+	temp->SetWidth(10);	return temp;
+}
+
+CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
+{
+	CPlayerUnit* temp = new CPlayerUnit;
+	CCommands* tempC = new CCommands;
+	CBasicAttack* tempM = new CBasicAttack;
+	tempC->SetName("Attack");
+	tempC->SetMiniGame(tempM);
+	temp->AddSkill(tempC);
+	tempC = new CCommands;
+	tempC->SetName("Spells");
+	tempC->SetIsGame(false);
+	CCommands* pTest = new CCommands;
+	pTest->SetName("SwordSlash");
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+	temp->AddSkill(tempC);
+	tempC = new CCommands;
+	tempC->SetName("Items");
+	temp->AddSkill(tempC);
+	temp->SetMaxHealth(80);
+	temp->SetMaxAP(50);
+	temp->SetPosX(600);
+	temp->SetPosY(250);
+	temp->SetVelX(0);
+	temp->SetVelY(0);
+	temp->SetSpeed(1);
+	temp->SetType(OBJ_PLAYER_UNIT);
+
+	return temp;
 }

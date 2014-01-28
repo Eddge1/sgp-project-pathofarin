@@ -1,6 +1,7 @@
 #include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "BattleState.h"
+#include "Player.h"
 
 CPlayerUnit::CPlayerUnit(void)
 {
@@ -10,6 +11,7 @@ CPlayerUnit::CPlayerUnit(void)
 	m_bCasting = false;
 	m_nMenuSelect = 0;
 	m_nSkillSelect = 0;
+	m_pPlayer = nullptr;
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -20,11 +22,11 @@ CPlayerUnit::~CPlayerUnit(void)
 		m_vCommands[i] = nullptr;
 	}
 	m_vCommands.clear();
+	SetOwner(nullptr);
 }
 
 void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 {
-
 
 }
 
@@ -34,7 +36,6 @@ CCommands* CPlayerUnit::GetSkill(int nID)
 		return nullptr;
 
 	return m_vCommands[nID];
-
 }
 
 void CPlayerUnit::Update(float fElapsedTime)
@@ -138,5 +139,10 @@ void CPlayerUnit::EndTurn()
 	m_bSkillSelected = false;
 	m_bInSubMenu = false;
 	m_bCasting = false;
+}
+
+void CPlayerUnit::SetOwner(CPlayer* pPlayer)
+{
+	m_pPlayer = pPlayer;
 }
 
