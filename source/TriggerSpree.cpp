@@ -3,6 +3,10 @@
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "PlayerUnit.h"
 #include "BattleState.h"
+#include "Game.h"
+#include "BitmapFont.h"
+#include <sstream>
+using namespace std;
 
 
 CTriggerSpree::CTriggerSpree(void)
@@ -53,6 +57,8 @@ CTriggerSpree::~CTriggerSpree(void)
 
 void CTriggerSpree::Render() 
 {
+
+	CBitmapFont* pFont = CGame::GetInstance()->GetFont();
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	RECT rTemp = {};
 	for(unsigned int i = 0; i < m_vGameElements.size(); i++)
@@ -61,6 +67,21 @@ void CTriggerSpree::Render()
 		rTemp.right = m_vGameElements[i]->right;
 		rTemp.bottom =m_vGameElements[i]->bottom;
 		rTemp.top = m_vGameElements[i]->top;
+
+		RECT temp1;
+		temp1.top = 64;
+		temp1.left = 200;
+		temp1.right = 600;
+		temp1.bottom = 96;
+		pD3D->DrawRect(temp1, D3DCOLOR_ARGB(120, 255, 0, 0 ));
+
+		RECT temp;
+		temp.top = 64;
+		temp.left = 264;
+		temp.right = 296;
+		temp.bottom = 96;
+		pD3D->DrawRect(temp, D3DCOLOR_ARGB(255, 0, 200, 0 ));
+
 		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 
 	}
@@ -71,8 +92,22 @@ void CTriggerSpree::Render()
 		rTemp.right = m_vTriggers[i]->right;
 		rTemp.bottom =m_vTriggers[i]->bottom;
 		rTemp.top = m_vTriggers[i]->top;
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(255, 0, 0, 255 ));
 		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 	}
+
+	wostringstream woss;
+	wostringstream coss;
+
+
+	woss << m_nSuccess;
+	coss << GetChances();
+
+	pFont->Draw(woss.str().c_str(), 264, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
+	pFont->Draw(_T(" out of "), 300, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
+	pFont->Draw(coss.str().c_str(), 400, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
+
+
 }
 
 void CTriggerSpree::Update(float fElpasedTime)
