@@ -167,7 +167,7 @@ void CBattleState::Render(void)
 
 	//Temp drawing the UI
 	pTM->Draw(m_nMenuImage, 0,472);
-	pTM->Draw(m_nMenuSelectionImage, 336,472);
+	pTM->Draw(m_nMenuSelectionImage, 272,408);
 
 	// Printing out variables
 	std::wostringstream woss;

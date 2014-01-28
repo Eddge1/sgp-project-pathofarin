@@ -52,6 +52,8 @@
             this.nudMapWidth = new System.Windows.Forms.NumericUpDown();
             this.nudMapHeight = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbMode = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -87,8 +89,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnShiftUp = new System.Windows.Forms.Button();
             this.btnShiftDown = new System.Windows.Forms.Button();
-            this.cmbMode = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtEventBroadCast = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).BeginInit();
@@ -338,6 +340,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtEventBroadCast);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbMode);
             this.groupBox1.Controls.Add(this.btnClear);
@@ -358,6 +362,24 @@
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Data";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Edit Mode";
+            // 
+            // cmbMode
+            // 
+            this.cmbMode.FormattingEnabled = true;
+            this.cmbMode.Location = new System.Drawing.Point(67, 66);
+            this.cmbMode.Name = "cmbMode";
+            this.cmbMode.Size = new System.Drawing.Size(150, 21);
+            this.cmbMode.TabIndex = 24;
+            this.cmbMode.SelectedIndexChanged += new System.EventHandler(this.cmbMode_SelectedIndexChanged);
             // 
             // btnClear
             // 
@@ -712,6 +734,7 @@
             this.btnShiftUp.TabIndex = 26;
             this.btnShiftUp.Text = "Move Up";
             this.btnShiftUp.UseVisualStyleBackColor = true;
+            this.btnShiftUp.Click += new System.EventHandler(this.btnShiftUp_Click);
             // 
             // btnShiftDown
             // 
@@ -724,23 +747,21 @@
             this.btnShiftDown.UseVisualStyleBackColor = true;
             this.btnShiftDown.Click += new System.EventHandler(this.btnShiftDown_Click);
             // 
-            // cmbMode
+            // txtEventBroadCast
             // 
-            this.cmbMode.FormattingEnabled = true;
-            this.cmbMode.Location = new System.Drawing.Point(67, 66);
-            this.cmbMode.Name = "cmbMode";
-            this.cmbMode.Size = new System.Drawing.Size(150, 21);
-            this.cmbMode.TabIndex = 24;
-            this.cmbMode.SelectedIndexChanged += new System.EventHandler(this.cmbMode_SelectedIndexChanged);
+            this.txtEventBroadCast.Location = new System.Drawing.Point(67, 93);
+            this.txtEventBroadCast.Name = "txtEventBroadCast";
+            this.txtEventBroadCast.Size = new System.Drawing.Size(149, 20);
+            this.txtEventBroadCast.TabIndex = 26;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Edit Mode";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 96);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Event ID:";
             // 
             // Form1
             // 
@@ -849,6 +870,8 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.ComboBox cmbMode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtEventBroadCast;
     }
 }
 

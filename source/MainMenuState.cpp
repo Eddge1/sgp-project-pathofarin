@@ -52,9 +52,6 @@ void CMainMenuState::Activate(void)
 	m_nWarriorID	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Warrior.png"));
 	m_nRangerID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Ranger.png"));
 	m_nMageID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Mage.png"));
-	m_nMenu1		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu3.png"));
-	m_nMenu2		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu4.png"));
-	m_nMenu3		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Menu5.png"));
 
 	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	m_fRotation = 0.0f;
@@ -74,9 +71,6 @@ void CMainMenuState::Sleep(void)
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenu1);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenu2);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenu3);
 
 	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
 
@@ -84,11 +78,6 @@ void CMainMenuState::Sleep(void)
 	m_nWarriorID	= -1;
 	m_nRangerID		= -1;
 	m_nMageID		= -1;
-	m_nMenu1		= -1;
-	m_nMenu2		= -1;
-	m_nMenu3		= -1;
-
-
 }
 
 void CMainMenuState::Update(float fElapsedTime)
@@ -125,9 +114,7 @@ void CMainMenuState::Render(void)
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	if(m_fPosY >= 172.0f)
 	{
-		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,336,424);
-		CSGD_TextureManager::GetInstance()->Draw(m_nMenu3,336,424);
-
+		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
 
 		RECT rTemp = {336, 408, 464,536};
 		pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));

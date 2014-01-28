@@ -27,12 +27,6 @@ private:
 	bool m_bLeft;
 	char m_cTrans;
 
-	int m_nMenu1;
-	int m_nMenu2;
-	int m_nMenu3;
-
-
-
 	CMainMenuState(void);
 	virtual ~CMainMenuState(void);
 	CMainMenuState( const CMainMenuState& );
