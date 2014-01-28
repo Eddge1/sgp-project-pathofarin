@@ -7,6 +7,7 @@
 
 #include "Commands.h"
 #include "BasicAttack.h"
+#include "UseItem.h"
 
 #include "MainMenuState.h"
 #include "GamePlayState.h"
@@ -58,7 +59,7 @@ void CProfileMenuState::Sleep()
 
 	for(unsigned int i = 0; i < m_vCharacterList.size(); i++)
 		m_vCharacterList[i]->Release();
-	
+
 	m_vCharacterList.clear();
 }
 
@@ -402,7 +403,9 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
+	CUseItem* tempL = new CUseItem;
 	tempC->SetName("Items");
+	tempC->SetMiniGame(tempL);
 	temp->AddSkill(tempC);
 	temp->SetMaxHealth(80);
 	temp->SetMaxAP(50);
