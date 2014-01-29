@@ -29,7 +29,7 @@ public:
 	string GetName() { return m_sName; }
 	void SetName( string input ) { m_sName = input; }
 
-	void ModifyHealth(int nAmount, bool isCrit);
+	virtual void ModifyHealth(int nAmount, bool isCrit);
 	void ModifyAP(int nAmount);
 
 	virtual void Update(float fElapsedTime) override;

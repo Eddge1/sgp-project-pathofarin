@@ -1,6 +1,7 @@
 #include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "BattleState.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "Player.h"
 
 CPlayerUnit::CPlayerUnit(void)
@@ -12,6 +13,9 @@ CPlayerUnit::CPlayerUnit(void)
 	m_nMenuSelect = 0;
 	m_nSkillSelect = 0;
 	m_pPlayer = nullptr;
+	m_bDodge = false;
+	timer = 1.0f;
+	CSGD_EventSystem::GetInstance()->RegisterClient("DODGE", this);
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -27,7 +31,14 @@ CPlayerUnit::~CPlayerUnit(void)
 
 void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 {
+	if(pEvent->GetEventID() == "DODGE")
+	{
+		timer = 1.0f;
+		std::wostringstream woss;
+		woss << "Attempt ";
+		CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
 
+	}
 }
 
 CCommands* CPlayerUnit::GetSkill(int nID)
@@ -124,7 +135,20 @@ void CPlayerUnit::Update(float fElapsedTime)
 			}
 
 		}
+
 	}
+
+	timer -= fElapsedTime;
+
+	if(timer > 0)
+	{
+		if(pDI->KeyPressed(DIK_RETURN))
+		{
+			m_bDodge = true;
+		}
+
+	}
+
 }
 
 void CPlayerUnit::EndTurn()
@@ -149,5 +173,19 @@ void CPlayerUnit::EndTurn()
 void CPlayerUnit::SetOwner(CPlayer* pPlayer)
 {
 	m_pPlayer = pPlayer;
+}
+
+void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
+{
+	if(m_bDodge == true)
+	{
+		CUnits::ModifyHealth(0, false);
+		m_bDodge = false;
+	}
+	else
+	{
+		CUnits::ModifyHealth(nAmount, isCrit);
+		timer = 0.0f;
+	}
 }
 

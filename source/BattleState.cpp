@@ -11,6 +11,8 @@
 #include "Objects.h"
 #include "PlayerUnit.h"
 #include "EnemyUnit.h"
+#include "AIController.h"
+#include "BasicAttack.h"
 #include <algorithm>
 using namespace std;
 
@@ -301,7 +303,7 @@ void CBattleState::Initialize(void)
 	m_vBattleUnits.push_back(m_pPlayerUnit);
 	m_pPlayerUnit->AddRef();
 
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 50, 20));
+	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 5, 20));
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
 	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
 
@@ -316,7 +318,11 @@ void CBattleState::Battle(float fElapsedTime)
 {
 	if(m_eCurrentPhase == BP_BATTLE)
 	{
-		m_vBattleUnits[m_nTurn]->Update(fElapsedTime);
+		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			m_vBattleUnits[i]->Update(fElapsedTime);
+
+		}
 		CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 		if(pTemp != nullptr)
 		{
@@ -399,6 +405,11 @@ void CBattleState::EndBattle(void)
 CEnemyUnit* CBattleState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
 {
 	CEnemyUnit* temp = new CEnemyUnit;
+	CAIController* tempAI = new CAIController;
+	CBasicAttack* tempAtk = new CBasicAttack;
+	tempAI->AddMinigame(tempAtk);
+	tempAI->MakeOwner(temp);
+	temp->SetAIController(tempAI);
 	temp->SetMaxHealth(hp);
 	temp->SetMaxAP(mp);
 	temp->SetPosX(X);
