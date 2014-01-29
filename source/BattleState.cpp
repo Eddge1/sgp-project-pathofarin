@@ -13,6 +13,7 @@
 #include "EnemyUnit.h"
 #include "AIController.h"
 #include "BasicAttack.h"
+#include "Npcs.h"
 #include <algorithm>
 using namespace std;
 
@@ -145,6 +146,8 @@ void CBattleState::Update(float fElapsedTime)
 
 	if(m_bVictory || m_bDefeat)
 		m_fEndBatleTimer -= fElapsedTime;
+
+
 	switch (m_eCurrentPhase)
 	{
 	case CBattleState::BP_INIT:
@@ -281,6 +284,18 @@ void CBattleState::Render(void)
 			woss.str(_T(""));
 			woss << "Victory!";
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
+			// Display what they've won. TODO; come back later and fix.
+
+			RECT temp;
+			temp.left = 300;
+			temp.right = 500;
+			temp.top = 100;
+			temp.bottom = 300;
+			CSGD_Direct3D::GetInstance()->DrawHollowRect(temp,  D3DCOLOR_XRGB(0,0,0));
+			CBitmapFont* pFont = CGame::GetInstance()->GetFont();
+			pFont->Draw( _T("Items: 0"), 320, 120, 0.8f, D3DCOLOR_XRGB(0,0,255));
+			pFont->Draw( _T("Exp: 0"), 320, 150, 0.8f, D3DCOLOR_XRGB(0,0,255));
+
 		}
 		else if(m_bDefeat)
 		{
@@ -303,9 +318,20 @@ void CBattleState::Initialize(void)
 	m_vBattleUnits.push_back(m_pPlayerUnit);
 	m_pPlayerUnit->AddRef();
 
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 5, 20));
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
-	m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
+	CNpcs* temp = reinterpret_cast<CNpcs*>(m_pSender);
+	if(temp != nullptr)
+	{
+		for (unsigned int i = 0; i < temp->GetUnits().size(); i++)
+		{
+			m_vBattleUnits.push_back(temp->GetUnit(i));
+			temp->GetUnit(i)->AddRef();
+		}
+	}
+
+
+	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 5, 20));
+	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
+	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
 
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
 
@@ -373,6 +399,7 @@ void CBattleState::EndBattle(void)
 				m_bVictory = true;
 				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
 				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
+
 				return;
 			}
 			else if(i == m_vBattleUnits.size() - 1)

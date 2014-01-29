@@ -4,6 +4,7 @@
 #include "Minigames.h"
 #include <map>
 #include "World.h"
+#include "EnemyUnit.h"
 #include "../SGD Wrappers/IListener.h"
 using namespace std;
 
@@ -48,6 +49,9 @@ public:
 	CPlayer* GetPlayer() {return m_pPlayer;}
 
 	void LoadWorld(string input);
+
+	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
+
 
 private:
 
