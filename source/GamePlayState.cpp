@@ -68,6 +68,9 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
+			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
 			{
@@ -188,7 +191,10 @@ void CGamePlayState::Sleep(void)
 			{
 				delete Iter->second;
 			}
-
+			CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
+			CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+			SetBackgroundImg(-1);
+			SetCursorIMG(-1);
 			CAnimationSystem::GetInstance()->DeleteInstance();
 		}
 		break;
@@ -295,10 +301,14 @@ void CGamePlayState::Render(void)
 	if(bisPaused)
 	{
 		RECT rTemp = {336, 236, 464,364};
-		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
-
-		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nSave\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
+		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
+		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+		rTemp.left = 0;
+		rTemp.top = 0;
+		rTemp.right = 16;
+		rTemp.bottom = 32;
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 	}
 }
 
