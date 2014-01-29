@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "EnemyUnit.h"
 #include <vector>
 
 class CNpcs : public CEntity
@@ -9,7 +10,7 @@ class CNpcs : public CEntity
 		float locX;
 		float locY;
 	};
-	std::vector<std::string> m_vUnitList;
+	std::vector<CEnemyUnit*> m_vUnitList;
 	std::vector<std::string> m_szConversation;
 	std::vector<SWaypoint*> m_vWaypoints;
 	std::string m_szEventThrow; 
@@ -20,14 +21,14 @@ class CNpcs : public CEntity
 public:
 	CNpcs(void);
 	virtual ~CNpcs(void);
-	std::vector<std::string> GetUnits(void) {return m_vUnitList;}
+	std::vector<CEnemyUnit*>& GetUnits(void) {return m_vUnitList;}
 	void SetEvent(std::string szEvent) {m_szEventThrow = szEvent;}
 	void SetHostile(bool bHostile)		{m_bIsHostile = bHostile;}
 
-	void SetUnits(std::string szName);
+	void SetUnits(CEnemyUnit* l);
 	void AddConversation(std::string szConvo);
 	void AddWaypoint(float fX, float fY);
-	std::string GetUnit(int nI);
+	CEnemyUnit* GetUnit(int nI);
 	unsigned int GetUnitSize() {return m_vUnitList.size();}
 	unsigned int GetConvoSize() {return m_szConversation.size();}
 

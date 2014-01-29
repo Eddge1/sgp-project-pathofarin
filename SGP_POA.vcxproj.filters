@@ -144,9 +144,6 @@
     <ClCompile Include="source\ShopState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\VictoryState.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\AIController.cpp">
       <Filter>AIControllers\cpp</Filter>
     </ClCompile>
@@ -254,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="source\Warp.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\VictoryState.cpp">
+      <Filter>GameStates\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

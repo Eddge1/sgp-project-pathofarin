@@ -23,6 +23,8 @@
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
 #include "Warp.h"
+#include "GameOverState.h"
+#include "BasicAttack.h"
 
 
 
@@ -114,18 +116,26 @@ void CGamePlayState::Activate(void)
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
+			pTemp->SetUnits(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 75, 20));
+
 
 			CNpcs* pTemp2 = new CNpcs();
 			pTemp2->SetActive(true);
-			//pTemp->SetHostile(true);
+			pTemp2->SetHostile(true);
 			pTemp2->SetPosX(200);
 			pTemp2->SetPosY(100);
 			pTemp2->AddWaypoint(200,100);
 			pTemp2->AddWaypoint(300,100);
-
+			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp2->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
 			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 2);
+
+
 
 
 			pTemp->Release();
@@ -246,13 +256,21 @@ void CGamePlayState::Update( float fElapsedTime )
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(m_eCurrPhase == GP_END)
 	{
-		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+		CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
 		return;
 	}
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+
+		if(WorldCamX < 0)
+			WorldCamX = 0;
+		else if(WorldCamX > m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800)
+			WorldCamX = m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800;
+
+		if(WorldCamY < 0)
+			WorldCamY = 0;
 
 		m_fFireBallTimer += fElapsedTime;
 
@@ -491,4 +509,25 @@ void CGamePlayState::SetPlayer(CPlayer* pPlayer)
 
 	if(m_pPlayer != nullptr)
 		m_pPlayer->AddRef();
+}
+
+CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
+{
+	CEnemyUnit* temp = new CEnemyUnit;
+	CAIController* tempAI = new CAIController;
+	CBasicAttack* tempAtk = new CBasicAttack;
+	tempAI->AddMinigame(tempAtk);
+	tempAI->MakeOwner(temp);
+	temp->SetAIController(tempAI);
+	temp->SetMaxHealth(hp);
+	temp->SetMaxAP(mp);
+	temp->SetPosX(X);
+	temp->SetPosY(Y);
+	temp->SetVelX(0);
+	temp->SetVelY(0);
+	temp->SetSpeed(speed);
+	temp->SetTurn(false);
+	temp->SetName(input);
+
+	return temp;
 }
