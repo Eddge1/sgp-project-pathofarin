@@ -95,7 +95,7 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 
 void CNpcs::HandleCollision(CObjects* col)
 {
-	if(col->GetType() == OBJ_PLAYER || col->GetType() ==OBJ_UNDEFINE)
+	if(col->GetType() == OBJ_PLAYER)
 	{
 		if(m_bIsHostile && GetActive())
 			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);

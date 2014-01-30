@@ -50,4 +50,5 @@ void CEnemyUnit::Update(float fElapsedTime)
 			}
 		}
 	}
+	CEntity::Update(fElapsedTime);
 }
