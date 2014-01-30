@@ -9,7 +9,7 @@ class CProfileMenuState : public CGameStates
 	float m_fPosY;
 	bool m_bLeft;
 	float m_fOffSetX;
-	std::vector<CPlayer *> m_vCharacterList;
+	std::vector<CPlayer*> m_vCharacterList;
 
 public:
 
@@ -17,13 +17,18 @@ public:
 	virtual ~CProfileMenuState(void);
 
 	static CProfileMenuState* GetInstance( void );
+	void SaveGame(std::string szFileName);
+
+	CPlayerUnit* CreateTempPlayer(void);
+	CPlayer* CreatePlayer();
+
 
 	virtual void Activate	( void )	override;				// load resources
 	virtual void Sleep		( void )	override;					// unload resources
 	virtual void Update		( float fElapsedTime )	override;	// update the state
 	virtual void Render		( void )	override;	
 	virtual bool Input		( void )	override;	
-	bool LoadSaves			( void );
+	void LoadSave			( std::string szFileName );
 
 };
 

@@ -15,6 +15,7 @@ public:
 	virtual bool Input( void )	override;	
 
 private:
+
 	float m_fRotation;
 	int m_nLogoID;
 	int m_nSelectionMenuID;
@@ -22,13 +23,9 @@ private:
 	int m_nWarriorID;
 	int m_nMageID;
 	float m_fPosX;
+	float m_fPosY;
 	bool m_bLeft;
-
-	int m_nMenu1;
-	int m_nMenu2;
-	int m_nMenu3;
-
-
+	char m_cTrans;
 
 	CMainMenuState(void);
 	virtual ~CMainMenuState(void);

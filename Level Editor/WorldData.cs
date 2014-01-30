@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,13 @@ namespace SGP_PoA_LevelEditor
         int warpX;
         int warpY;
         string szSpecial;
+        myNPC npc;
+
+        internal myNPC Npc
+        {
+            get { return npc; }
+            set { npc = value; }
+        }
 
         public int WarpY
         {
@@ -56,6 +64,20 @@ namespace SGP_PoA_LevelEditor
     struct myLayers
     {
         myTile[,] myTiles;
+        Size layerSize;
+        Size offSet;
+
+        public Size OffSet
+        {
+            get { return offSet; }
+            set { offSet = value; }
+        }
+
+        public Size LayerSize
+        {
+            get { return layerSize; }
+            set { layerSize = value; }
+        }
 
         public myTile[,] MyTiles
         {

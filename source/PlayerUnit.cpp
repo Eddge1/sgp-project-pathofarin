@@ -1,6 +1,8 @@
 #include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "BattleState.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
+#include "Player.h"
 
 CPlayerUnit::CPlayerUnit(void)
 {
@@ -10,6 +12,10 @@ CPlayerUnit::CPlayerUnit(void)
 	m_bCasting = false;
 	m_nMenuSelect = 0;
 	m_nSkillSelect = 0;
+	m_pPlayer = nullptr;
+	m_bDodge = false;
+	timer = 1.0f;
+	CSGD_EventSystem::GetInstance()->RegisterClient("DODGE", this);
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -20,12 +26,19 @@ CPlayerUnit::~CPlayerUnit(void)
 		m_vCommands[i] = nullptr;
 	}
 	m_vCommands.clear();
+	SetOwner(nullptr);
 }
 
 void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 {
+	if(pEvent->GetEventID() == "DODGE")
+	{
+		timer = 1.0f;
+		std::wostringstream woss;
+		woss << "Attempt ";
+		CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
 
-
+	}
 }
 
 CCommands* CPlayerUnit::GetSkill(int nID)
@@ -34,7 +47,6 @@ CCommands* CPlayerUnit::GetSkill(int nID)
 		return nullptr;
 
 	return m_vCommands[nID];
-
 }
 
 void CPlayerUnit::Update(float fElapsedTime)
@@ -83,7 +95,12 @@ void CPlayerUnit::Update(float fElapsedTime)
 					else
 					{
 						if(m_vCommands[m_nMenuSelect]->GetIsGame())
+						{
+							if(m_nMenuSelect == 2)
+								m_bCasting = true;
+
 							m_bSkillSelected = true;
+						}
 						else
 							m_bInSubMenu = true;
 					}
@@ -108,25 +125,38 @@ void CPlayerUnit::Update(float fElapsedTime)
 		{
 			if(m_bInSubMenu)
 			{
-
+				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(this);
+				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->Update(fElapsedTime);
 			}
 			else
 			{
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(this);
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->Update(fElapsedTime);
-				m_vCommands[m_nMenuSelect]->GetMiniGame()->Render();
 			}
 
 		}
+
 	}
+
+	timer -= fElapsedTime;
+
+	if(timer > 0)
+	{
+		if(pDI->KeyPressed(DIK_RETURN))
+		{
+			m_bDodge = true;
+		}
+
+	}
+	CEntity::Update(fElapsedTime);
 }
 
 void CPlayerUnit::EndTurn()
 {
 	if(m_bInSubMenu)
 	{
-
-
+		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(nullptr);
+		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
 	}
 	else
 	{
@@ -138,5 +168,24 @@ void CPlayerUnit::EndTurn()
 	m_bSkillSelected = false;
 	m_bInSubMenu = false;
 	m_bCasting = false;
+}
+
+void CPlayerUnit::SetOwner(CPlayer* pPlayer)
+{
+	m_pPlayer = pPlayer;
+}
+
+void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
+{
+	if(m_bDodge == true)
+	{
+		CUnits::ModifyHealth(0, false);
+		m_bDodge = false;
+	}
+	else
+	{
+		CUnits::ModifyHealth(nAmount, isCrit);
+		timer = 0.0f;
+	}
 }
 

@@ -144,9 +144,6 @@
     <ClCompile Include="source\ShopState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\VictoryState.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\AIController.cpp">
       <Filter>AIControllers\cpp</Filter>
     </ClCompile>
@@ -255,8 +252,8 @@
     <ClCompile Include="source\Warp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\ItemCommand.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="source\VictoryState.cpp">
+      <Filter>GameStates\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,9 +429,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Warp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ItemCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

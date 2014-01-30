@@ -11,6 +11,7 @@
 #include "ObjectManager.h"
 #include "Player.h"
 #include "RenderManager.h"
+#include "ProfileMenuState.h"
 #include "Game.h"
 #include "MainMenuState.h"
 #include "CharacterMenuState.h"
@@ -21,9 +22,10 @@
 #include "AnimationSystem.h"
 #include "Animation.h"
 #include "AnimationTimeStamp.h"
-#include "Commands.h"
 #include "Warp.h"
+#include "GameOverState.h"
 #include "BasicAttack.h"
+
 
 
 // GetInstance
@@ -33,8 +35,6 @@ CGamePlayState* CGamePlayState::GetInstance( void )
 
 	return &s_Instance;
 }
-
-
 
 CGamePlayState::CGamePlayState(void)
 {
@@ -49,13 +49,11 @@ CGamePlayState::CGamePlayState(void)
 	m_fFireBallTimer = 0.0f;
 	m_eCurrPhase = GP_START;
 }
-
-
 // Destructor
 CGamePlayState::~CGamePlayState(void)
 {
+	SetPlayer(nullptr);
 }
-
 
 void CGamePlayState::Activate(void)
 {
@@ -70,13 +68,103 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
+			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
 			{
 				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
 			}
-			 LoadWorld("RealSimple.xml");
+			CNpcs* pTemp = new CNpcs();
+
+			LoadWorld("Level2.xml");
+
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(1778);
+			pTemp->SetPosY(162);
+			pTemp->AddWaypoint(1778,162);
+			pTemp->AddWaypoint(1778,273);
+			pTemp->AddWaypoint(1581,273);
+			pTemp->AddWaypoint(1581,162);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(355);
+			pTemp->SetPosY(410);
+			pTemp->AddWaypoint(355,410);
+			pTemp->AddWaypoint(355,555);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(1376);
+			pTemp->SetPosY(468);
+			pTemp->AddWaypoint(1376,468);
+			pTemp->AddWaypoint(975,405);
+			pTemp->AddWaypoint(1162,206);
+			pTemp->AddWaypoint(1358,139);
+			pTemp->AddWaypoint(1162,206);
+			pTemp->AddWaypoint(975,405);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+
+
+			LoadWorld("testing.xml");
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(200);
+			pTemp->SetPosY(420);
+			pTemp->AddWaypoint(200,420);
+			pTemp->AddWaypoint(200,260);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(557);
+			pTemp->SetPosY(535);
+			pTemp->AddWaypoint(557,535);
+			pTemp->AddWaypoint(203,535);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			pTemp->GetAnimInfo()->SetCurrentFrame(1);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+
+			pTemp->Release();
+			pTemp = nullptr;
+
+			TransitionWorld(m_pPlayer->GetZone());
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -84,7 +172,6 @@ void CGamePlayState::Activate(void)
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
-			m_pPlayer = CreatePlayer();
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
@@ -92,6 +179,8 @@ void CGamePlayState::Activate(void)
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Plantdude.xml");
 
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -106,37 +195,6 @@ void CGamePlayState::Activate(void)
 
 			m_eCurrPhase = GP_NAV;
 
-			CNpcs* pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(100);
-			pTemp->SetPosY(100);
-			pTemp->AddWaypoint(100,100);
-			pTemp->AddWaypoint(0,100);
-			pTemp->AddWaypoint(0,200);
-			pTemp->AddWaypoint(0,100);
-			pTemp->AddWaypoint(-100,100);
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
-
-			CNpcs* pTemp2 = new CNpcs();
-			pTemp2->SetActive(true);
-			//pTemp->SetHostile(true);
-			pTemp2->SetPosX(200);
-			pTemp2->SetPosY(100);
-			pTemp2->AddWaypoint(200,100);
-			pTemp2->AddWaypoint(300,100);
-
-			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
-			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 2);
-
-
-			pTemp->Release();
-			pTemp = nullptr;
-			pTemp2->Release();
-			pTemp2 = nullptr;
 
 		}
 		break;
@@ -174,7 +232,7 @@ void CGamePlayState::Sleep(void)
 
 			delete m_pRM;
 			m_pRM = nullptr;
-			m_pPlayer->Release();
+			SetPlayer(nullptr);
 			m_eCurrPhase = GP_START;
 
 			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
@@ -183,7 +241,10 @@ void CGamePlayState::Sleep(void)
 			{
 				delete Iter->second;
 			}
-
+			CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
+			CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+			SetBackgroundImg(-1);
+			SetCursorIMG(-1);
 			CAnimationSystem::GetInstance()->DeleteInstance();
 		}
 		break;
@@ -203,15 +264,15 @@ bool CGamePlayState::Input(void)
 	}
 	else if(bisPaused)
 	{
-		if( pDI->KeyPressed( DIK_UP ) == true || pDI->JoystickDPadPressed(DIR_UP))
+		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
 			SetCursorSelection(GetCursorSelection() - 1);
-		if( pDI->KeyPressed( DIK_DOWN ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
+		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
-		if(GetCursorSelection() > 1)
+		if(GetCursorSelection() > 2)
 			SetCursorSelection(0);
 		else if(GetCursorSelection() < 0)
-			SetCursorSelection(1);
+			SetCursorSelection(2);
 
 
 		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
@@ -224,9 +285,14 @@ bool CGamePlayState::Input(void)
 					return true;
 				}
 				break;
+			case 1:			// PLAY
+				{
+					CProfileMenuState::GetInstance()->SaveGame(m_pPlayer->GetName());
+					return true;
+				}
+				break;
 
-
-			case 1:			
+			case 2:			
 				{
 					bisPaused = !bisPaused;
 					CGame::GetInstance()->ChangeState( CMainMenuState::GetInstance() ); // Will return you to the main menu
@@ -246,13 +312,23 @@ void CGamePlayState::Update( float fElapsedTime )
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(m_eCurrPhase == GP_END)
 	{
-		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+		CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
 		return;
 	}
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+
+		if(WorldCamX < 0)
+			WorldCamX = 0;
+		else if(WorldCamX > m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800)
+			WorldCamX = m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800;
+
+		if(WorldCamY < 0)
+			WorldCamY = 0;
+		else if(WorldCamY > m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600)
+			WorldCamY = m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600;
 
 		m_fFireBallTimer += fElapsedTime;
 
@@ -277,27 +353,18 @@ void CGamePlayState::Render(void)
 	if(bisPaused)
 	{
 		RECT rTemp = {336, 236, 464,364};
-		pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
-
-		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nQuit"), 352,244, 1.0f, D3DCOLOR_XRGB(0, 0, 255));
-		CGame::GetInstance()->GetFont2()->Draw(_T("-"), 344,244 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 0, 255));
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
+		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
+		CGame::GetInstance()->GetFont2()->Draw(_T("Resume\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+		rTemp.left = 0;
+		rTemp.top = 0;
+		rTemp.right = 16;
+		rTemp.bottom = 32;
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 	}
-}
-
-CPlayer* CGamePlayState::CreatePlayer()
-{
-	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
-	temp->SetPosX(50.0f);
-	temp->SetPosY(50.0f);
-	temp->SetVelX(0.0f);
-	temp->SetVelY(0.0f);
-	CAnimationTimeStamp* pTemp;
-	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("TEMP_Player_Walk_Right");
-	pTemp->SetCurrentFrame(0);
-	temp->SetUnit(CreateTempPlayer());
-	temp->SetHeight(10);
-	temp->SetWidth(10);	return temp;
+	wostringstream woss;
+	woss << m_pPlayer->GetPosX() << "\n" << m_pPlayer->GetPosY();
+	CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 5, 5, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -307,6 +374,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_eCurrPhase = GP_BATTLE;
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
+		m_eCurrPhase = GP_NAV;
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
 		m_eCurrPhase = GP_END;
@@ -321,6 +389,9 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	else if(pEvent->GetEventID() == "WARP")
 	{
 		CWarp* pWarp = reinterpret_cast<CWarp*>(pEvent->GetSender());
+		m_pPlayer->SetLastPositionX((float)pWarp->GetWarpX());
+		m_pPlayer->SetLastPositionY((float)pWarp->GetWarpY());
+
 		m_pPlayer->SetPosX((float)pWarp->GetWarpX());
 		m_pPlayer->SetPosY((float)pWarp->GetWarpY());
 		TransitionWorld(pWarp->GetMapName());
@@ -347,7 +418,6 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 
 void CGamePlayState::LoadWorld(string input)
 {
-
 	string temp = "Assets/Data/Levels/"; 
 	temp += input;
 
@@ -401,20 +471,35 @@ void CGamePlayState::LoadWorld(string input)
 		CLayer* tempLayer;
 		CTile* pTempTile;
 
+		int nLayerWidth = 0;
+		int nLayerHeight = 0;
+		int nLayerXOffset = 0;
+		int nLayerYOffset = 0;
+
 		for(int i = 0; i < TotalLayers; i++)
 		{
 			tempLayer =  new CLayer;
+
+			pLoad->Attribute("Width", &nLayerWidth);
+			pLoad->Attribute("Height", &nLayerHeight);
+			pLoad->Attribute("Xoffset", &nLayerXOffset);
+			pLoad->Attribute("Yoffset", &nLayerYOffset);
+
+			tempLayer->SetOffsetX(nLayerXOffset);
+			tempLayer->SetOffsetY(nLayerYOffset);
+			tempLayer->SetSizeX(nLayerWidth);
+			tempLayer->SetSizeY(nLayerHeight);
+
 			pTile = pLoad->FirstChildElement("Tile");
 			if(pTile != nullptr)
 				pTileData = pTile->FirstChildElement("Tile_Data");
 			if(pLoad != nullptr)
 			{
-				for(int tileID = 0; tileID < layerWidth * layerHeight; tileID++)
+				for(int tileID = 0; tileID < nLayerWidth * nLayerHeight; tileID++)
 				{
 
 					if(pTileData != nullptr)
 					{
-
 
 						pTempTile = new CTile;
 						pTileData->Attribute("yTileID", &TileYID);
@@ -430,16 +515,6 @@ void CGamePlayState::LoadWorld(string input)
 							pTempTile->SetEvent(true);
 							pTempTile->SetEventID(pLoad->Attribute("EventID"));
 						}
-						else if(ReadIn == "BLOCK")
-						{
-							CObjects* block = new CObjects;
-							block->SetPosX(float(tileID % layerWidth * tileWidth));
-							block->SetPosY(float(tileID / layerWidth * tileHeight));
-							block->SetHeight(tileHeight);
-							block->SetWidth(tileWidth);
-							Worldtemp->AddObject(block, 2);
-							block->Release();
-						}
 						else if(ReadIn == "NPCS")
 						{
 
@@ -454,8 +529,8 @@ void CGamePlayState::LoadWorld(string input)
 							int nX = 0;
 							int nY = 0;
 
-							pLoad->Attribute("WarpX", &nX);
-							pLoad->Attribute("WarpY", &nY);
+							pTileData->Attribute("WarpX", &nX);
+							pTileData->Attribute("WarpY", &nY);
 
 							warp->SetWarpX(nX);
 							warp->SetWarpY(nY);
@@ -475,6 +550,36 @@ void CGamePlayState::LoadWorld(string input)
 				pLoad = pLoad->NextSiblingElement();
 			}
 		}
+		pLoad = pRoot->FirstChildElement("Block_Data");
+		int nObjects = 0;
+		pLoad->Attribute("Total",&nObjects);
+		TiXmlElement* pBlockData = pLoad->FirstChildElement("Block");
+		if(pBlockData != nullptr)
+		{
+			for(int i = 0; i < nObjects; i++)
+			{
+				if(pBlockData != nullptr)
+				{
+					CObjects* block = new CObjects;
+					int nPosX = 0;
+					int nPosY = 0;
+					int nWidth = 0;
+					int nHeight = 0;
+					pBlockData->Attribute("PosX", &nPosX);
+					pBlockData->Attribute("PosY", &nPosY);
+					pBlockData->Attribute("Width",&nWidth);
+					pBlockData->Attribute("Height",&nHeight);
+
+					block->SetPosX(float(nPosX));
+					block->SetPosY(float(nPosY));
+					block->SetHeight(nHeight);
+					block->SetWidth(nWidth);
+					Worldtemp->AddObject(block, 2);
+					block->Release();
+					pBlockData = pBlockData->NextSiblingElement();
+				}
+			}
+		}
 	}
 
 	m_mWorldManager[input] = Worldtemp;
@@ -482,37 +587,6 @@ void CGamePlayState::LoadWorld(string input)
 
 }
 
-CPlayerUnit* CGamePlayState::CreateTempPlayer(void)
-{
-	CPlayerUnit* temp = new CPlayerUnit;
-	CCommands* pCommands = new CCommands;
-	CBasicAttack* pBasicAttack = new CBasicAttack;
-	pCommands->SetName("Attack");
-	pCommands->SetMiniGame(pBasicAttack);
-	temp->AddSkill(pCommands);
-	pCommands = new CCommands;
-	pCommands->SetName("Spells");
-	pCommands->SetIsGame(false);
-	CCommands* pTest = new CCommands;
-	pTest->SetName("SwordSlash");
-	pTest->SetIsGame(true);
-	pCommands->AddCommands(pTest);
-	temp->AddSkill(pCommands);
-	pCommands = new CCommands;
-	pCommands->SetName("Items");
-	temp->AddSkill(pCommands);
-	temp->SetMaxHealth(80);
-	temp->SetMaxAP(50);
-	temp->SetPosX(600);
-	temp->SetPosY(250);
-	temp->SetVelX(0);
-	temp->SetVelY(0);
-	temp->SetSpeed(1);
-	temp->SetType(OBJ_PLAYER_UNIT);
-	temp->SetAttack(100);
-
-	return temp;
-}
 CUnits* CGamePlayState::GetPlayerUnit()
 {
 	return m_pPlayer->GetUnit();
@@ -522,10 +596,45 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 {
 	if(m_sCurrWorld == szNewWorld || szNewWorld == "")
 		return;
-
-
+	m_pPlayer->SetZone(szNewWorld);
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 
-	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 2);
-	m_sCurrWorld = szNewWorld;
+	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
+	m_sCurrWorld = szNewWorld + ".xml";
+}
+
+void CGamePlayState::SetPlayer(CPlayer* pPlayer)
+{
+	if(m_pPlayer != nullptr)
+		m_pPlayer->Release();
+
+	m_pPlayer = pPlayer;
+
+	if(m_pPlayer != nullptr)
+		m_pPlayer->AddRef();
+}
+
+CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
+{
+	CEnemyUnit* temp = new CEnemyUnit;
+	CAIController* tempAI = new CAIController;
+	CBasicAttack* tempAtk = new CBasicAttack;
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("Plant_dude_Battle");
+	pTemp->SetCurrentFrame(0);
+	tempAI->AddMinigame(tempAtk);
+	tempAI->MakeOwner(temp);
+	temp->SetAIController(tempAI);
+	temp->SetMaxHealth(hp);
+	temp->SetMaxAP(mp);
+	temp->SetPosX(X);
+	temp->SetPosY(Y);
+	temp->SetVelX(0);
+	temp->SetVelY(0);
+	temp->SetSpeed(speed);
+	temp->SetTurn(false);
+	temp->SetName(input);
+
+	return temp;
 }

@@ -21,13 +21,21 @@ CNpcs::~CNpcs(void)
 		delete m_vWaypoints[i];
 	}
 
+	for(unsigned int i = 0; i < m_vUnitList.size(); i++)
+		m_vUnitList[i]->Release();
+
+	m_vUnitList.clear();
+
 	m_vWaypoints.clear();
 
 }
 
-void CNpcs::SetUnits(std::string szName)
+void CNpcs::SetUnits(CEnemyUnit* l)
 {
-	m_vUnitList.push_back(szName);
+	if(l != nullptr)
+	{
+		m_vUnitList.push_back(l);
+	}
 }
 
 void CNpcs::AddConversation(std::string szConvo)
@@ -35,11 +43,11 @@ void CNpcs::AddConversation(std::string szConvo)
 	m_szConversation.push_back(szConvo);
 }
 
-std::string CNpcs::GetUnit(int nI)
+CEnemyUnit* CNpcs::GetUnit(int nI)
 {
 	if(nI < int(m_vUnitList.size()))
 		return m_vUnitList[nI];
-	return "";
+	return nullptr;
 }
 
 void CNpcs::Update(float fElapsedTime)
@@ -87,10 +95,10 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 
 void CNpcs::HandleCollision(CObjects* col)
 {
-	if(col->GetType() == OBJ_PLAYER || col->GetType() ==OBJ_UNDEFINE)
+	if(col->GetType() == OBJ_PLAYER)
 	{
 		if(m_bIsHostile && GetActive())
-			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", &m_vUnitList, nullptr, this);
+			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);
 		RECT rTemp = col->GetCollisionRect();
 		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
 		if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)

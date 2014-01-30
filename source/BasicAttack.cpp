@@ -1,4 +1,7 @@
 #include "BasicAttack.h"
+#include "Game.h"
+#include "BitmapFont.h"
+#include "GamePlayState.h"
 
 
 CBasicAttack::CBasicAttack(void)
@@ -13,12 +16,27 @@ CBasicAttack::~CBasicAttack(void)
 
 void CBasicAttack::DoAttack(void)
 {
-	CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
-	if(GetOwner() != nullptr)
+	if(GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
-		int temp = GetOwner()->GetAttack();
-		tempP->ModifyHealth(temp, false);
-		GetOwner()->EndTurn();
+
+		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		if(GetOwner() != nullptr)
+		{
+
+			int temp = GetOwner()->GetAttack();
+			tempP->ModifyHealth(temp, false);
+			GetOwner()->EndTurn();
+		}
+	}
+	else
+	{
+		CUnits* tempP = CGamePlayState::GetInstance()->GetPlayerUnit();
+		if(tempP != nullptr)
+		{
+			int temp = GetOwner()->GetAttack();
+			tempP->ModifyHealth(temp, false);
+			GetOwner()->EndTurn();
+		}
 	}
 }
 
