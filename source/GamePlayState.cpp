@@ -77,7 +77,7 @@ void CGamePlayState::Activate(void)
 				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
 			}
-			LoadWorld("RealSimple.xml");
+			LoadWorld("FirstMap.xml");
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -110,7 +110,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
+			//pTemp->SetHostile(true);
 			pTemp->SetPosX(100);
 			pTemp->SetPosY(100);
 			pTemp->AddWaypoint(100,100);
