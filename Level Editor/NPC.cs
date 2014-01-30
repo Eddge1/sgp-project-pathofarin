@@ -22,8 +22,15 @@ namespace SGP_PoA_LevelEditor
         string name;
         bool moves;
         bool isHostile;
+        string animation;
         List<myUnits> units;
         List<Point> waypoints;
+
+        public string Animation
+        {
+            get { return animation; }
+            set { animation = value; }
+        }
 
         public bool IsHostile
         {

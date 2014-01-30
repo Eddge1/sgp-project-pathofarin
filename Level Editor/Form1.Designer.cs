@@ -70,6 +70,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lstAnimations = new System.Windows.Forms.ListBox();
             this.btnNPCMove = new System.Windows.Forms.Button();
             this.btnNPCUnits = new System.Windows.Forms.Button();
             this.btnNpcApply = new System.Windows.Forms.Button();
@@ -98,29 +100,28 @@
             this.label18 = new System.Windows.Forms.Label();
             this.nudXOffset = new System.Windows.Forms.NumericUpDown();
             this.nudYOffset = new System.Windows.Forms.NumericUpDown();
-            this.lstAnimations = new System.Windows.Forms.ListBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.grpUnits = new System.Windows.Forms.GroupBox();
-            this.lstUnits = new System.Windows.Forms.ListBox();
-            this.lstUnitAnimation = new System.Windows.Forms.ListBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtUnitName = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.nudHealth = new System.Windows.Forms.NumericUpDown();
-            this.nudAP = new System.Windows.Forms.NumericUpDown();
-            this.btnApply = new System.Windows.Forms.Button();
-            this.btnDeleteUnit = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.nudAttack = new System.Windows.Forms.NumericUpDown();
-            this.label25 = new System.Windows.Forms.Label();
-            this.nudSpeed = new System.Windows.Forms.NumericUpDown();
-            this.cmbAI = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
             this.btnAddUnit = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.cmbAI = new System.Windows.Forms.ComboBox();
+            this.nudSpeed = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.nudAttack = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
+            this.btnDeleteUnit = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.nudAP = new System.Windows.Forms.NumericUpDown();
+            this.nudHealth = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtUnitName = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lstUnitAnimation = new System.Windows.Forms.ListBox();
+            this.lstUnits = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapWidth)).BeginInit();
@@ -139,10 +140,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYOffset)).BeginInit();
             this.grpUnits.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -239,6 +240,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(288, 519);
@@ -399,7 +401,6 @@
             this.groupBox1.Controls.Add(this.cmbMode);
             this.groupBox1.Controls.Add(this.btnClear);
             this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.lblTileWidth);
             this.groupBox1.Controls.Add(this.nudMapHeight);
@@ -424,6 +425,7 @@
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 27;
             this.label3.Text = "Event ID:";
+            this.label3.Visible = false;
             // 
             // txtEventBroadCast
             // 
@@ -431,6 +433,7 @@
             this.txtEventBroadCast.Name = "txtEventBroadCast";
             this.txtEventBroadCast.Size = new System.Drawing.Size(149, 20);
             this.txtEventBroadCast.TabIndex = 26;
+            this.txtEventBroadCast.Visible = false;
             // 
             // label1
             // 
@@ -473,7 +476,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(95, -2);
+            this.label6.Location = new System.Drawing.Point(68, 1);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 20;
@@ -582,6 +585,7 @@
             // 
             // grpNPC
             // 
+            this.grpNPC.Controls.Add(this.grpBlock);
             this.grpNPC.Controls.Add(this.label8);
             this.grpNPC.Controls.Add(this.lstAnimations);
             this.grpNPC.Controls.Add(this.btnNPCMove);
@@ -597,6 +601,24 @@
             this.grpNPC.TabStop = false;
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Animation";
+            // 
+            // lstAnimations
+            // 
+            this.lstAnimations.FormattingEnabled = true;
+            this.lstAnimations.Location = new System.Drawing.Point(13, 36);
+            this.lstAnimations.Name = "lstAnimations";
+            this.lstAnimations.Size = new System.Drawing.Size(199, 108);
+            this.lstAnimations.TabIndex = 12;
+            this.lstAnimations.SelectedIndexChanged += new System.EventHandler(this.lstAnimations_SelectedIndexChanged);
             // 
             // btnNPCMove
             // 
@@ -651,7 +673,7 @@
             this.chkMoves.TabIndex = 5;
             this.chkMoves.Text = "Moves";
             this.chkMoves.UseVisualStyleBackColor = true;
-            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged);
+            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
             // 
             // chkHostile
             // 
@@ -662,7 +684,7 @@
             this.chkHostile.TabIndex = 2;
             this.chkHostile.Text = "isHostile";
             this.chkHostile.UseVisualStyleBackColor = true;
-            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged);
+            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged_1);
             // 
             // grpBlock
             // 
@@ -675,7 +697,7 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(1147, 756);
+            this.grpBlock.Location = new System.Drawing.Point(0, 0);
             this.grpBlock.Name = "grpBlock";
             this.grpBlock.Size = new System.Drawing.Size(223, 212);
             this.grpBlock.TabIndex = 12;
@@ -789,7 +811,7 @@
             this.grpWayPoints.Controls.Add(this.radWPMove);
             this.grpWayPoints.Controls.Add(this.radWPAdd);
             this.grpWayPoints.Controls.Add(this.lstWaypoints);
-            this.grpWayPoints.Location = new System.Drawing.Point(1030, 668);
+            this.grpWayPoints.Location = new System.Drawing.Point(1034, 388);
             this.grpWayPoints.Name = "grpWayPoints";
             this.grpWayPoints.Size = new System.Drawing.Size(222, 146);
             this.grpWayPoints.TabIndex = 23;
@@ -874,7 +896,6 @@
             this.label17.Size = new System.Drawing.Size(74, 13);
             this.label17.TabIndex = 28;
             this.label17.Text = "Layer X Offset";
-            this.btnShiftUp.Click += new System.EventHandler(this.btnShiftUp_Click);
             // 
             // label18
             // 
@@ -911,23 +932,6 @@
             this.nudYOffset.TabIndex = 31;
             this.nudYOffset.ValueChanged += new System.EventHandler(this.nudXOffset_ValueChanged);
             // 
-            // lstAnimations
-            // 
-            this.lstAnimations.FormattingEnabled = true;
-            this.lstAnimations.Location = new System.Drawing.Point(13, 36);
-            this.lstAnimations.Name = "lstAnimations";
-            this.lstAnimations.Size = new System.Drawing.Size(199, 108);
-            this.lstAnimations.TabIndex = 12;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Animation";
-            // 
             // grpUnits
             // 
             this.grpUnits.Controls.Add(this.btnAddUnit);
@@ -957,86 +961,86 @@
             this.grpUnits.Text = "Units";
             this.grpUnits.Visible = false;
             // 
-            // lstUnits
+            // btnAddUnit
             // 
-            this.lstUnits.FormattingEnabled = true;
-            this.lstUnits.Location = new System.Drawing.Point(9, 35);
-            this.lstUnits.Name = "lstUnits";
-            this.lstUnits.Size = new System.Drawing.Size(92, 95);
-            this.lstUnits.TabIndex = 0;
-            this.lstUnits.SelectedIndexChanged += new System.EventHandler(this.lstUnits_SelectedIndexChanged);
+            this.btnAddUnit.Location = new System.Drawing.Point(155, 187);
+            this.btnAddUnit.Name = "btnAddUnit";
+            this.btnAddUnit.Size = new System.Drawing.Size(61, 23);
+            this.btnAddUnit.TabIndex = 19;
+            this.btnAddUnit.Text = "Add";
+            this.btnAddUnit.UseVisualStyleBackColor = true;
+            this.btnAddUnit.Click += new System.EventHandler(this.btnAddUnit_Click);
             // 
-            // lstUnitAnimation
+            // label26
             // 
-            this.lstUnitAnimation.FormattingEnabled = true;
-            this.lstUnitAnimation.Location = new System.Drawing.Point(107, 35);
-            this.lstUnitAnimation.Name = "lstUnitAnimation";
-            this.lstUnitAnimation.Size = new System.Drawing.Size(107, 95);
-            this.lstUnitAnimation.TabIndex = 1;
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(12, 163);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(17, 13);
+            this.label26.TabIndex = 18;
+            this.label26.Text = "AI";
             // 
-            // label19
+            // cmbAI
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(9, 20);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(26, 13);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "Unit";
+            this.cmbAI.FormattingEnabled = true;
+            this.cmbAI.Location = new System.Drawing.Point(53, 160);
+            this.cmbAI.Name = "cmbAI";
+            this.cmbAI.Size = new System.Drawing.Size(162, 21);
+            this.cmbAI.TabIndex = 17;
             // 
-            // label20
+            // nudSpeed
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(110, 19);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(53, 13);
-            this.label20.TabIndex = 4;
-            this.label20.Text = "Animation";
+            this.nudSpeed.Location = new System.Drawing.Point(80, 250);
+            this.nudSpeed.Name = "nudSpeed";
+            this.nudSpeed.Size = new System.Drawing.Size(63, 20);
+            this.nudSpeed.TabIndex = 16;
             // 
-            // label21
+            // label25
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(12, 137);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(35, 13);
-            this.label21.TabIndex = 5;
-            this.label21.Text = "Name";
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(12, 252);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(38, 13);
+            this.label25.TabIndex = 15;
+            this.label25.Text = "Speed";
             // 
-            // txtUnitName
+            // nudAttack
             // 
-            this.txtUnitName.Location = new System.Drawing.Point(53, 134);
-            this.txtUnitName.Name = "txtUnitName";
-            this.txtUnitName.Size = new System.Drawing.Size(161, 20);
-            this.txtUnitName.TabIndex = 6;
+            this.nudAttack.Location = new System.Drawing.Point(80, 230);
+            this.nudAttack.Name = "nudAttack";
+            this.nudAttack.Size = new System.Drawing.Size(63, 20);
+            this.nudAttack.TabIndex = 14;
             // 
-            // label22
+            // label24
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 192);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(38, 13);
-            this.label22.TabIndex = 7;
-            this.label22.Text = "Health";
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(12, 232);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(38, 13);
+            this.label24.TabIndex = 13;
+            this.label24.Text = "Attack";
             // 
-            // label23
+            // btnDeleteUnit
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(10, 212);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(66, 13);
-            this.label23.TabIndex = 8;
-            this.label23.Text = "Ability Points";
+            this.btnDeleteUnit.Enabled = false;
+            this.btnDeleteUnit.Location = new System.Drawing.Point(155, 240);
+            this.btnDeleteUnit.Name = "btnDeleteUnit";
+            this.btnDeleteUnit.Size = new System.Drawing.Size(60, 23);
+            this.btnDeleteUnit.TabIndex = 12;
+            this.btnDeleteUnit.Text = "Delete";
+            this.btnDeleteUnit.UseVisualStyleBackColor = true;
+            this.btnDeleteUnit.Click += new System.EventHandler(this.btnDeleteUnit_Click);
             // 
-            // nudHealth
+            // btnApply
             // 
-            this.nudHealth.Location = new System.Drawing.Point(80, 190);
-            this.nudHealth.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudHealth.Name = "nudHealth";
-            this.nudHealth.Size = new System.Drawing.Size(63, 20);
-            this.nudHealth.TabIndex = 9;
+            this.btnApply.Enabled = false;
+            this.btnApply.Location = new System.Drawing.Point(155, 215);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(61, 23);
+            this.btnApply.TabIndex = 11;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // nudAP
             // 
@@ -1050,86 +1054,86 @@
             this.nudAP.Size = new System.Drawing.Size(63, 20);
             this.nudAP.TabIndex = 10;
             // 
-            // btnApply
+            // nudHealth
             // 
-            this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(155, 215);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(61, 23);
-            this.btnApply.TabIndex = 11;
-            this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            this.nudHealth.Location = new System.Drawing.Point(80, 190);
+            this.nudHealth.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudHealth.Name = "nudHealth";
+            this.nudHealth.Size = new System.Drawing.Size(63, 20);
+            this.nudHealth.TabIndex = 9;
             // 
-            // btnDeleteUnit
+            // label23
             // 
-            this.btnDeleteUnit.Enabled = false;
-            this.btnDeleteUnit.Location = new System.Drawing.Point(155, 240);
-            this.btnDeleteUnit.Name = "btnDeleteUnit";
-            this.btnDeleteUnit.Size = new System.Drawing.Size(60, 23);
-            this.btnDeleteUnit.TabIndex = 12;
-            this.btnDeleteUnit.Text = "Delete";
-            this.btnDeleteUnit.UseVisualStyleBackColor = true;
-            this.btnDeleteUnit.Click += new System.EventHandler(this.btnDeleteUnit_Click);
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(10, 212);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(66, 13);
+            this.label23.TabIndex = 8;
+            this.label23.Text = "Ability Points";
             // 
-            // label24
+            // label22
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(12, 232);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(38, 13);
-            this.label24.TabIndex = 13;
-            this.label24.Text = "Attack";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(10, 192);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(38, 13);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "Health";
             // 
-            // nudAttack
+            // txtUnitName
             // 
-            this.nudAttack.Location = new System.Drawing.Point(80, 230);
-            this.nudAttack.Name = "nudAttack";
-            this.nudAttack.Size = new System.Drawing.Size(63, 20);
-            this.nudAttack.TabIndex = 14;
+            this.txtUnitName.Location = new System.Drawing.Point(53, 134);
+            this.txtUnitName.Name = "txtUnitName";
+            this.txtUnitName.Size = new System.Drawing.Size(161, 20);
+            this.txtUnitName.TabIndex = 6;
             // 
-            // label25
+            // label21
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(12, 252);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(38, 13);
-            this.label25.TabIndex = 15;
-            this.label25.Text = "Speed";
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(12, 137);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(35, 13);
+            this.label21.TabIndex = 5;
+            this.label21.Text = "Name";
             // 
-            // nudSpeed
+            // label20
             // 
-            this.nudSpeed.Location = new System.Drawing.Point(80, 250);
-            this.nudSpeed.Name = "nudSpeed";
-            this.nudSpeed.Size = new System.Drawing.Size(63, 20);
-            this.nudSpeed.TabIndex = 16;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(110, 19);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 13);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "Animation";
             // 
-            // cmbAI
+            // label19
             // 
-            this.cmbAI.FormattingEnabled = true;
-            this.cmbAI.Location = new System.Drawing.Point(53, 160);
-            this.cmbAI.Name = "cmbAI";
-            this.cmbAI.Size = new System.Drawing.Size(162, 21);
-            this.cmbAI.TabIndex = 17;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(9, 20);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(26, 13);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Unit";
             // 
-            // label26
+            // lstUnitAnimation
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(12, 163);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(17, 13);
-            this.label26.TabIndex = 18;
-            this.label26.Text = "AI";
+            this.lstUnitAnimation.FormattingEnabled = true;
+            this.lstUnitAnimation.Location = new System.Drawing.Point(107, 35);
+            this.lstUnitAnimation.Name = "lstUnitAnimation";
+            this.lstUnitAnimation.Size = new System.Drawing.Size(107, 95);
+            this.lstUnitAnimation.TabIndex = 1;
             // 
-            // btnAddUnit
+            // lstUnits
             // 
-            this.btnAddUnit.Location = new System.Drawing.Point(155, 187);
-            this.btnAddUnit.Name = "btnAddUnit";
-            this.btnAddUnit.Size = new System.Drawing.Size(61, 23);
-            this.btnAddUnit.TabIndex = 19;
-            this.btnAddUnit.Text = "Add";
-            this.btnAddUnit.UseVisualStyleBackColor = true;
-            this.btnAddUnit.Click += new System.EventHandler(this.btnAddUnit_Click);
+            this.lstUnits.FormattingEnabled = true;
+            this.lstUnits.Location = new System.Drawing.Point(9, 35);
+            this.lstUnits.Name = "lstUnits";
+            this.lstUnits.Size = new System.Drawing.Size(92, 95);
+            this.lstUnits.TabIndex = 0;
+            this.lstUnits.SelectedIndexChanged += new System.EventHandler(this.lstUnits_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -1137,7 +1141,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1264, 762);
-            this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpUnits);
             this.Controls.Add(this.nudYOffset);
@@ -1161,6 +1164,8 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMapWidth)).EndInit();
@@ -1185,10 +1190,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudYOffset)).EndInit();
             this.grpUnits.ResumeLayout(false);
             this.grpUnits.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -104,11 +104,11 @@ namespace SGP_PoA_LevelEditor
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                      TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
                                 }
-                                else if (L.MyTiles[x, y].EventType == "EVENT")
+                                else if (L.MyTiles[x, y].EventType == "NPCS")
                                 {
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
+                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 255, 0));
                                 }
                                 else
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
@@ -192,6 +192,9 @@ namespace SGP_PoA_LevelEditor
 
             cTransparency = Color.Black;
 
+            selectedNPC = new myNPC();
+            selectedNPC.Units = new List<myUnits>();
+
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
@@ -206,8 +209,8 @@ namespace SGP_PoA_LevelEditor
             cmbMode.Items.Clear();
             cmbMode.Items.Add("MAP_EDIT");
             cmbMode.Items.Add("BLOCK");
-            cmbMode.Items.Add("EVENT");
-            cmbMode.Items.Add("NPCS");
+            //cmbMode.Items.Add("EVENT");
+            //cmbMode.Items.Add("NPCS");
             cmbMode.Items.Add("WARP");
             cmbAI.Items.Clear();
             cmbAI.Items.Add("BASIC");
@@ -472,18 +475,60 @@ namespace SGP_PoA_LevelEditor
                         if (e.Button == MouseButtons.Right)
                         {
                             L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
+                            L.MyTiles[Temp.X, Temp.Y].Npc = new myNPC();
                         }
                         else
                         {
                             if (L.MyTiles[Temp.X, Temp.Y].EventType == "NPCS")
                             {
                                 selectedNPC = L.MyTiles[Temp.X, Temp.Y].Npc;
+                                lstUnits.Items.Clear();
+                                lstWaypoints.Items.Clear();
+                                lstUnitAnimation.SelectedIndex = -1;
+                                if (selectedNPC.Animation != "")
+                                {
+                                    bool bSuccess = false;
+                                    for (int i = 0; i < lstAnimations.Items.Count; i++)
+                                    {
+                                        string szTemp = (string)lstAnimations.Items[i];
+                                        if (selectedNPC.Animation == szTemp)
+                                        {
+                                            lstAnimations.SelectedIndex = i;
+                                            bSuccess = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!bSuccess)
+                                        lstAnimations.SelectedIndex = -1;
+                                }
+                                else
+                                    lstAnimations.SelectedIndex = -1;
+                                if (selectedNPC.Units.Count > 0)
+                                {
+                                    foreach (myUnits u in selectedNPC.Units)
+                                    {
+                                        lstUnits.Items.Add(u);
+                                    }
+                                }
+                                if (selectedNPC.Waypoints.Count > 0)
+                                {
+                                    foreach (Point p in selectedNPC.Waypoints)
+                                    {
+                                        lstWaypoints.Items.Add(p);
+                                    }
+                                }
+
+                                chkHostile.Checked = selectedNPC.IsHostile;
+                                chkMoves.Checked = selectedNPC.Moves;
                             }
                             else
                             {
                                 selectedNPC = new myNPC();
+                                selectedNPC.Units = new List<myUnits>();
+                                selectedNPC.Waypoints = new List<Point>();
                                 L.MyTiles[Temp.X, Temp.Y].EventType = "NPCS";
                                 L.MyTiles[Temp.X, Temp.Y].Npc = selectedNPC;
+                                selectedNPC.Animation = "";
                             }
                         }
                     }
@@ -1065,7 +1110,6 @@ namespace SGP_PoA_LevelEditor
 
         private void btnNpcApply_Click(object sender, EventArgs e)
         {
-
             btnNpcApply.Enabled = false;
             btnNpcCancel.Enabled = false;
         }
@@ -1147,10 +1191,16 @@ namespace SGP_PoA_LevelEditor
 
         private void cmbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            selectedNPC = new myNPC();
+            selectedNPC.Units = new List<myUnits>();
+            selectedNPC.Waypoints = new List<Point>();
+
             grpWarp.Visible = false;
             grpNPC.Visible = false;
             grpWayPoints.Visible = false;
             grpBlock.Visible = false;
+            lstUnits.Items.Clear();
+            lstWaypoints.Items.Clear();
             bCreateRect = false;
             rTemp = new Rectangle();
             if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "WARP")
@@ -1328,20 +1378,35 @@ namespace SGP_PoA_LevelEditor
         private void btnApply_Click(object sender, EventArgs e)
         {
             btnApply.Enabled = false;
+            btnNpcCancel.Enabled = false;
         }
 
         private void btnDeleteUnit_Click(object sender, EventArgs e)
         {
-
+            if (lstUnits.SelectedIndex != -1)
+                lstUnits.Items.RemoveAt(lstUnits.SelectedIndex);
         }
 
-        private void btnShiftUp_Click(object sender, EventArgs e)
+        private void lstAnimations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            myLayers l = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
-            lstLayers.Items[lstLayers.SelectedIndex] = lstLayers.Items[lstLayers.SelectedIndex - 1];
-            lstLayers.Items[lstLayers.SelectedIndex - 1] = l;
-            lstLayers.SelectedIndex--;
+            btnApply.Enabled = true;
+            btnNpcCancel.Enabled = true;
         }
+
+        private void chkMoves_CheckedChanged_1(object sender, EventArgs e)
+        {
+            btnNPCMove.Enabled = chkMoves.Checked;
+            if (!chkMoves.Checked)
+                lstWaypoints.Items.Clear();
+        }
+
+        private void chkHostile_CheckedChanged_1(object sender, EventArgs e)
+        {
+            btnNPCUnits.Enabled = chkHostile.Checked;
+            if (!chkHostile.Checked)
+                lstUnits.Items.Clear();
+        }
+
 
     }
 
