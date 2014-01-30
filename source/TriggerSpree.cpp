@@ -127,11 +127,11 @@ void CTriggerSpree::Update(float fElpasedTime)
 	}
 
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	for(int i = 0; i < m_vTriggers.size();)
+	for(unsigned int i = 0; i < m_vTriggers.size();)
 	{
-		m_vTriggers[i]->left -= (200 * fElpasedTime);
+		m_vTriggers[i]->left -= long(200 * fElpasedTime);
 		if(m_vTriggers[i]->left <= 584)
-			m_vTriggers[i]->right -= (200 * fElpasedTime);
+			m_vTriggers[i]->right -= long(200 * fElpasedTime);
 
 		if(m_vTriggers[i]->left <= 200)
 			m_vTriggers[i]->left = 200;
@@ -171,7 +171,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
-			tempP->ModifyHealth(temp * GetDamage(), false);
+			tempP->ModifyHealth(int(temp * GetDamage()), false);
 		}
 
 		if(m_nSuccess >= GetChances())

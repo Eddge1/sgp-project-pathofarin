@@ -324,9 +324,9 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("Name", szTemp.c_str());
 		pSlot->SetAttribute("Level", 1);
 		pSlot->SetAttribute("Class", 0);
-		pSlot->SetAttribute("posX", 0);
-		pSlot->SetAttribute("posY", 0);
-
+		pSlot->SetAttribute("posX", 488);
+		pSlot->SetAttribute("posY", 420);
+		pSlot->SetAttribute("Zone", "testing");
 		pRoot->LinkEndChild(pSlot);
 		doc.SaveFile(szFileName.c_str());
 	}
@@ -349,6 +349,7 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->Attribute("posY", &nTemp);
 		pPlayer->SetPosY(float(nTemp));
 		pPlayer->SetName(szFileName);
+		pPlayer->SetZone(pSlot->Attribute("Zone"));
 		m_vCharacterList.push_back(pPlayer);
 	}
 }
@@ -369,8 +370,10 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
 		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
 		pSlot->SetAttribute("Class", 0);
-		pSlot->SetAttribute("posX", pTemp->GetPosX());
-		pSlot->SetAttribute("posY", pTemp->GetPosY());
+		pSlot->SetAttribute("posX", int(pTemp->GetPosX()));
+		pSlot->SetAttribute("posY", int(pTemp->GetPosY()));
+		pSlot->SetAttribute("Zone", pTemp->GetZone().c_str());
+
 		pTemp->SetName(szFileName);
 	}
 	pRoot->LinkEndChild(pSlot);

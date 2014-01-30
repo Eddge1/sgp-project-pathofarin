@@ -41,6 +41,7 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.lblTileWidth = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.cmbMode = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.grpWarp = new System.Windows.Forms.GroupBox();
             this.lstMaps = new System.Windows.Forms.ListBox();
@@ -70,14 +70,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lstAnimations = new System.Windows.Forms.ListBox();
-            this.btnNPCMove = new System.Windows.Forms.Button();
-            this.btnNPCUnits = new System.Windows.Forms.Button();
-            this.btnNpcApply = new System.Windows.Forms.Button();
-            this.btnNpcCancel = new System.Windows.Forms.Button();
-            this.chkMoves = new System.Windows.Forms.CheckBox();
-            this.chkHostile = new System.Windows.Forms.CheckBox();
             this.grpBlock = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -88,6 +80,14 @@
             this.nudBlockY = new System.Windows.Forms.NumericUpDown();
             this.nudBlockX = new System.Windows.Forms.NumericUpDown();
             this.lstBlock = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lstAnimations = new System.Windows.Forms.ListBox();
+            this.btnNPCMove = new System.Windows.Forms.Button();
+            this.btnNPCUnits = new System.Windows.Forms.Button();
+            this.btnNpcApply = new System.Windows.Forms.Button();
+            this.btnNpcCancel = new System.Windows.Forms.Button();
+            this.chkMoves = new System.Windows.Forms.CheckBox();
+            this.chkHostile = new System.Windows.Forms.CheckBox();
             this.grpWayPoints = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.radWPMove = new System.Windows.Forms.RadioButton();
@@ -153,7 +153,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1264, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1347, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -250,6 +250,14 @@
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(68, 1);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.TabIndex = 20;
             // 
             // panel2
             // 
@@ -473,14 +481,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 1);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
-            this.label6.TabIndex = 20;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(122, 120);
@@ -501,7 +501,7 @@
             this.grpWarp.Controls.Add(this.label11);
             this.grpWarp.Controls.Add(this.label10);
             this.grpWarp.Controls.Add(this.label9);
-            this.grpWarp.Location = new System.Drawing.Point(1033, 182);
+            this.grpWarp.Location = new System.Drawing.Point(1033, 181);
             this.grpWarp.Name = "grpWarp";
             this.grpWarp.Size = new System.Drawing.Size(223, 201);
             this.grpWarp.TabIndex = 21;
@@ -532,6 +532,11 @@
             // nudWarpY
             // 
             this.nudWarpY.Location = new System.Drawing.Point(160, 149);
+            this.nudWarpY.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             this.nudWarpY.Name = "nudWarpY";
             this.nudWarpY.Size = new System.Drawing.Size(46, 20);
             this.nudWarpY.TabIndex = 6;
@@ -540,6 +545,11 @@
             // nudWarpX
             // 
             this.nudWarpX.Location = new System.Drawing.Point(56, 149);
+            this.nudWarpX.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             this.nudWarpX.Name = "nudWarpX";
             this.nudWarpX.Size = new System.Drawing.Size(46, 20);
             this.nudWarpX.TabIndex = 5;
@@ -585,7 +595,6 @@
             // 
             // grpNPC
             // 
-            this.grpNPC.Controls.Add(this.grpBlock);
             this.grpNPC.Controls.Add(this.label8);
             this.grpNPC.Controls.Add(this.lstAnimations);
             this.grpNPC.Controls.Add(this.btnNPCMove);
@@ -594,97 +603,13 @@
             this.grpNPC.Controls.Add(this.btnNpcCancel);
             this.grpNPC.Controls.Add(this.chkMoves);
             this.grpNPC.Controls.Add(this.chkHostile);
-            this.grpNPC.Location = new System.Drawing.Point(1033, 182);
+            this.grpNPC.Location = new System.Drawing.Point(1033, 193);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 201);
             this.grpNPC.TabIndex = 22;
             this.grpNPC.TabStop = false;
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Animation";
-            // 
-            // lstAnimations
-            // 
-            this.lstAnimations.FormattingEnabled = true;
-            this.lstAnimations.Location = new System.Drawing.Point(13, 36);
-            this.lstAnimations.Name = "lstAnimations";
-            this.lstAnimations.Size = new System.Drawing.Size(199, 108);
-            this.lstAnimations.TabIndex = 12;
-            this.lstAnimations.SelectedIndexChanged += new System.EventHandler(this.lstAnimations_SelectedIndexChanged);
-            // 
-            // btnNPCMove
-            // 
-            this.btnNPCMove.Enabled = false;
-            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
-            this.btnNPCMove.Name = "btnNPCMove";
-            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
-            this.btnNPCMove.TabIndex = 11;
-            this.btnNPCMove.Text = "Move";
-            this.btnNPCMove.UseVisualStyleBackColor = true;
-            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
-            // 
-            // btnNPCUnits
-            // 
-            this.btnNPCUnits.Enabled = false;
-            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
-            this.btnNPCUnits.Name = "btnNPCUnits";
-            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
-            this.btnNPCUnits.TabIndex = 10;
-            this.btnNPCUnits.Text = "Units";
-            this.btnNPCUnits.UseVisualStyleBackColor = true;
-            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
-            // 
-            // btnNpcApply
-            // 
-            this.btnNpcApply.Enabled = false;
-            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
-            this.btnNpcApply.Name = "btnNpcApply";
-            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
-            this.btnNpcApply.TabIndex = 8;
-            this.btnNpcApply.Text = "Apply";
-            this.btnNpcApply.UseVisualStyleBackColor = true;
-            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
-            // 
-            // btnNpcCancel
-            // 
-            this.btnNpcCancel.Enabled = false;
-            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
-            this.btnNpcCancel.Name = "btnNpcCancel";
-            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
-            this.btnNpcCancel.TabIndex = 7;
-            this.btnNpcCancel.Text = "Cancel";
-            this.btnNpcCancel.UseVisualStyleBackColor = true;
-            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
-            // 
-            // chkMoves
-            // 
-            this.chkMoves.AutoSize = true;
-            this.chkMoves.Location = new System.Drawing.Point(131, 147);
-            this.chkMoves.Name = "chkMoves";
-            this.chkMoves.Size = new System.Drawing.Size(58, 17);
-            this.chkMoves.TabIndex = 5;
-            this.chkMoves.Text = "Moves";
-            this.chkMoves.UseVisualStyleBackColor = true;
-            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
-            // 
-            // chkHostile
-            // 
-            this.chkHostile.AutoSize = true;
-            this.chkHostile.Location = new System.Drawing.Point(30, 147);
-            this.chkHostile.Name = "chkHostile";
-            this.chkHostile.Size = new System.Drawing.Size(65, 17);
-            this.chkHostile.TabIndex = 2;
-            this.chkHostile.Text = "isHostile";
-            this.chkHostile.UseVisualStyleBackColor = true;
-            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged_1);
             // 
             // grpBlock
             // 
@@ -697,9 +622,9 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(0, 0);
+            this.grpBlock.Location = new System.Drawing.Point(1033, 182);
             this.grpBlock.Name = "grpBlock";
-            this.grpBlock.Size = new System.Drawing.Size(223, 212);
+            this.grpBlock.Size = new System.Drawing.Size(221, 212);
             this.grpBlock.TabIndex = 12;
             this.grpBlock.TabStop = false;
             this.grpBlock.Text = "Block Editor";
@@ -804,6 +729,90 @@
             this.lstBlock.Size = new System.Drawing.Size(199, 134);
             this.lstBlock.TabIndex = 0;
             this.lstBlock.SelectedIndexChanged += new System.EventHandler(this.lstBlock_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Animation";
+            // 
+            // lstAnimations
+            // 
+            this.lstAnimations.FormattingEnabled = true;
+            this.lstAnimations.Location = new System.Drawing.Point(13, 36);
+            this.lstAnimations.Name = "lstAnimations";
+            this.lstAnimations.Size = new System.Drawing.Size(199, 108);
+            this.lstAnimations.TabIndex = 12;
+            this.lstAnimations.SelectedIndexChanged += new System.EventHandler(this.lstAnimations_SelectedIndexChanged);
+            // 
+            // btnNPCMove
+            // 
+            this.btnNPCMove.Enabled = false;
+            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
+            this.btnNPCMove.Name = "btnNPCMove";
+            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
+            this.btnNPCMove.TabIndex = 11;
+            this.btnNPCMove.Text = "Move";
+            this.btnNPCMove.UseVisualStyleBackColor = true;
+            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
+            // 
+            // btnNPCUnits
+            // 
+            this.btnNPCUnits.Enabled = false;
+            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
+            this.btnNPCUnits.Name = "btnNPCUnits";
+            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
+            this.btnNPCUnits.TabIndex = 10;
+            this.btnNPCUnits.Text = "Units";
+            this.btnNPCUnits.UseVisualStyleBackColor = true;
+            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
+            // 
+            // btnNpcApply
+            // 
+            this.btnNpcApply.Enabled = false;
+            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
+            this.btnNpcApply.Name = "btnNpcApply";
+            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
+            this.btnNpcApply.TabIndex = 8;
+            this.btnNpcApply.Text = "Apply";
+            this.btnNpcApply.UseVisualStyleBackColor = true;
+            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
+            // 
+            // btnNpcCancel
+            // 
+            this.btnNpcCancel.Enabled = false;
+            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
+            this.btnNpcCancel.Name = "btnNpcCancel";
+            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
+            this.btnNpcCancel.TabIndex = 7;
+            this.btnNpcCancel.Text = "Cancel";
+            this.btnNpcCancel.UseVisualStyleBackColor = true;
+            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
+            // 
+            // chkMoves
+            // 
+            this.chkMoves.AutoSize = true;
+            this.chkMoves.Location = new System.Drawing.Point(131, 147);
+            this.chkMoves.Name = "chkMoves";
+            this.chkMoves.Size = new System.Drawing.Size(58, 17);
+            this.chkMoves.TabIndex = 5;
+            this.chkMoves.Text = "Moves";
+            this.chkMoves.UseVisualStyleBackColor = true;
+            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
+            // 
+            // chkHostile
+            // 
+            this.chkHostile.AutoSize = true;
+            this.chkHostile.Location = new System.Drawing.Point(30, 147);
+            this.chkHostile.Name = "chkHostile";
+            this.chkHostile.Size = new System.Drawing.Size(65, 17);
+            this.chkHostile.TabIndex = 2;
+            this.chkHostile.Text = "isHostile";
+            this.chkHostile.UseVisualStyleBackColor = true;
+            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged_1);
             // 
             // grpWayPoints
             // 
@@ -1140,7 +1149,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1264, 762);
+            this.ClientSize = new System.Drawing.Size(1347, 762);
+            this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpUnits);
             this.Controls.Add(this.nudYOffset);

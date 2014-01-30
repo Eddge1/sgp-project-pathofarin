@@ -204,7 +204,8 @@ namespace SGP_PoA_LevelEditor
 
             foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
             {
-                lstMaps.Items.Add(szMapID);
+                string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
+                lstMaps.Items.Add(szTemp);
             }
             cmbMode.Items.Clear();
             cmbMode.Items.Add("MAP_EDIT");

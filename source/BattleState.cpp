@@ -183,10 +183,6 @@ void CBattleState::Render(void)
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			}
-
-			RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
-			pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
-
 		}
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
@@ -219,9 +215,16 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
-
-		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		{
+		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -30),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -25),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 20) };
 		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		}
+		else
+		{
+		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -20),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -15),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 30) };
+		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		}
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
@@ -229,7 +232,7 @@ void CBattleState::Render(void)
 			{
 				if(pTemp->GetReady())
 				{
-					RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
 					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 					if(pTemp->GetCasting())
 					{

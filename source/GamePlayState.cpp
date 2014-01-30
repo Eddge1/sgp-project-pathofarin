@@ -77,7 +77,94 @@ void CGamePlayState::Activate(void)
 				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
 			}
+			CNpcs* pTemp = new CNpcs();
+
+			LoadWorld("Level2.xml");
+
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(1778);
+			pTemp->SetPosY(162);
+			pTemp->AddWaypoint(1778,162);
+			pTemp->AddWaypoint(1778,273);
+			pTemp->AddWaypoint(1581,273);
+			pTemp->AddWaypoint(1581,162);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(355);
+			pTemp->SetPosY(410);
+			pTemp->AddWaypoint(355,410);
+			pTemp->AddWaypoint(355,555);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(1376);
+			pTemp->SetPosY(468);
+			pTemp->AddWaypoint(1376,468);
+			pTemp->AddWaypoint(975,405);
+			pTemp->AddWaypoint(1162,206);
+			pTemp->AddWaypoint(1358,139);
+			pTemp->AddWaypoint(1162,206);
+			pTemp->AddWaypoint(975,405);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+
+
 			LoadWorld("testing.xml");
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(200);
+			pTemp->SetPosY(420);
+			pTemp->AddWaypoint(200,420);
+			pTemp->AddWaypoint(200,260);
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->Release();
+
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(557);
+			pTemp->SetPosY(535);
+			pTemp->AddWaypoint(557,535);
+			pTemp->AddWaypoint(203,535);
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			pTemp->GetAnimInfo()->SetCurrentFrame(1);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+
+			pTemp->Release();
+			pTemp = nullptr;
+
+			TransitionWorld(m_pPlayer->GetZone());
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -108,42 +195,6 @@ void CGamePlayState::Activate(void)
 
 			m_eCurrPhase = GP_NAV;
 
-			CNpcs* pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(200);
-			pTemp->SetPosY(420);
-			pTemp->AddWaypoint(200,420);
-			pTemp->AddWaypoint(200,260);
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
-			pTemp->SetUnits(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 75, 20));
-
-
-			CNpcs* pTemp2 = new CNpcs();
-			pTemp2->SetActive(true);
-			pTemp2->SetHostile(true);
-			pTemp2->SetPosX(557);
-			pTemp2->SetPosY(535);
-			pTemp2->AddWaypoint(557,535);
-			pTemp2->AddWaypoint(203,535);
-			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
-			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp2->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
-			pTemp2->GetAnimInfo()->SetAnimation("TestAnimation2");
-			pTemp2->GetAnimInfo()->SetCurrentFrame(1);
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp2, 2);
-
-
-
-
-			pTemp->Release();
-			pTemp = nullptr;
-			pTemp2->Release();
-			pTemp2 = nullptr;
 
 		}
 		break;
@@ -276,6 +327,8 @@ void CGamePlayState::Update( float fElapsedTime )
 
 		if(WorldCamY < 0)
 			WorldCamY = 0;
+		else if(WorldCamY > m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600)
+			WorldCamY = m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600;
 
 		m_fFireBallTimer += fElapsedTime;
 
@@ -321,6 +374,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_eCurrPhase = GP_BATTLE;
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
+		m_eCurrPhase = GP_NAV;
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
 		m_eCurrPhase = GP_END;
@@ -335,28 +389,31 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	else if(pEvent->GetEventID() == "WARP")
 	{
 		CWarp* pWarp = reinterpret_cast<CWarp*>(pEvent->GetSender());
+		m_pPlayer->SetLastPositionX((float)pWarp->GetWarpX());
+		m_pPlayer->SetLastPositionY((float)pWarp->GetWarpY());
+
 		m_pPlayer->SetPosX((float)pWarp->GetWarpX());
 		m_pPlayer->SetPosY((float)pWarp->GetWarpY());
 		TransitionWorld(pWarp->GetMapName());
 	}
-	//else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
-	//{
-	//	if (m_fFireBallTimer > 1.0f)
-	//	{
-	//		CEntity* pTempFire = new CEntity();
-	//		pTempFire->SetActive(true);
-	//		//pTemp->SetHostile(true);
-	//		pTempFire->SetPosX(200);
-	//		pTempFire->SetPosY(0);
-	//		pTempFire->SetVelX(200);
-	//		pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
-	//		m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
+	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
+	{
+		if (m_fFireBallTimer > 1.0f)
+		{
+			CEntity* pTempFire = new CEntity();
+			pTempFire->SetActive(true);
+			//pTemp->SetHostile(true);
+			pTempFire->SetPosX(200);
+			pTempFire->SetPosY(0);
+			pTempFire->SetVelX(200);
+			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-	//		pTempFire->Release();
-	//		pTempFire = nullptr;
-	//		m_fFireBallTimer = 0.0f;
-	//	}
-	//}
+			pTempFire->Release();
+			pTempFire = nullptr;
+			m_fFireBallTimer = 0.0f;
+		}
+	}
 }
 
 void CGamePlayState::LoadWorld(string input)
@@ -472,8 +529,8 @@ void CGamePlayState::LoadWorld(string input)
 							int nX = 0;
 							int nY = 0;
 
-							pLoad->Attribute("WarpX", &nX);
-							pLoad->Attribute("WarpY", &nY);
+							pTileData->Attribute("WarpX", &nX);
+							pTileData->Attribute("WarpY", &nY);
 
 							warp->SetWarpX(nX);
 							warp->SetWarpY(nY);
@@ -539,12 +596,11 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 {
 	if(m_sCurrWorld == szNewWorld || szNewWorld == "")
 		return;
-
-
+	m_pPlayer->SetZone(szNewWorld);
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 
-	m_mWorldManager[szNewWorld]->AddObject(m_pPlayer, 2);
-	m_sCurrWorld = szNewWorld;
+	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
+	m_sCurrWorld = szNewWorld + ".xml";
 }
 
 void CGamePlayState::SetPlayer(CPlayer* pPlayer)

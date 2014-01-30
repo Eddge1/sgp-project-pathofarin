@@ -7,6 +7,8 @@ class CPlayer : public CEntity
 {
 	CPlayerUnit* m_cBattle;
 	std::string m_szName;
+	std::string m_szZone;
+
 
 	float m_fLastY;
 	float m_fLastX;
@@ -16,8 +18,12 @@ public:
 	void Update(float fElapsedTime) override;
 	
 	void SetName(std::string szName);
-	std::string GetName(void) const {return m_szName;}
+	void SetZone(std::string szZone) {m_szZone = szZone;}
+	void SetLastPositionX(float fPos) {m_fLastX = fPos;}
+	void SetLastPositionY(float fPos) {m_fLastY = fPos;}
 
+	std::string GetName(void) const {return m_szName;}
+	std::string GetZone(void) const {return m_szZone;}
 	CUnits* GetUnit	( void )				{ return m_cBattle; }
 	void SetUnit	(CPlayerUnit* pUnit);
 	virtual void HandleCollision(CObjects* col) override;
