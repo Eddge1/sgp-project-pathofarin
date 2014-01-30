@@ -380,8 +380,8 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 CPlayer* CProfileMenuState::CreatePlayer()
 {
 	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
-	temp->SetPosX(50.0f);
-	temp->SetPosY(50.0f);
+	temp->SetPosX(488.0f);
+	temp->SetPosY(420.0f);
 	temp->SetVelX(0.0f);
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;

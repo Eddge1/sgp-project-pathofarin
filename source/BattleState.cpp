@@ -101,18 +101,6 @@ bool CBattleState::Input(void)
 	{
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
-			if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_P ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(30,true);
-			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_L ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(20,false);
-			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_K ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(-20,false);
-			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_O ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(-30,true);
-			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_I ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(0,true);
-			else if(CSGD_DirectInput::GetInstance()->KeyPressed( DIK_J ) == true)
-				m_vBattleUnits[m_nTurn]->ModifyHealth(0,false);
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 			if(pTemp != nullptr)
 			{
@@ -124,10 +112,6 @@ bool CBattleState::Input(void)
 						GetPreviousTarget();
 				}
 			}
-		}
-		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
-		{
-			m_eCurrentPhase = BP_END;
 		}
 	}
 	return true;
@@ -285,7 +269,7 @@ void CBattleState::Render(void)
 		CAnimation* pAnim; 
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			if(m_vBattleUnits[i]->GetRender())
 			{
 				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
 				{

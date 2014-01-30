@@ -93,7 +93,7 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
-
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Plantdude.xml");
 
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -110,14 +110,11 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			pTemp->SetActive(true);
-			//pTemp->SetHostile(true);
-			pTemp->SetPosX(100);
-			pTemp->SetPosY(100);
-			pTemp->AddWaypoint(100,100);
-			pTemp->AddWaypoint(0,100);
-			pTemp->AddWaypoint(0,200);
-			pTemp->AddWaypoint(0,100);
-			pTemp->AddWaypoint(-100,100);
+			pTemp->SetHostile(true);
+			pTemp->SetPosX(200);
+			pTemp->SetPosY(420);
+			pTemp->AddWaypoint(200,420);
+			pTemp->AddWaypoint(200,260);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
@@ -129,10 +126,10 @@ void CGamePlayState::Activate(void)
 			CNpcs* pTemp2 = new CNpcs();
 			pTemp2->SetActive(true);
 			pTemp2->SetHostile(true);
-			pTemp2->SetPosX(200);
-			pTemp2->SetPosY(100);
-			pTemp2->AddWaypoint(200,100);
-			pTemp2->AddWaypoint(300,100);
+			pTemp2->SetPosX(557);
+			pTemp2->SetPosY(535);
+			pTemp2->AddWaypoint(557,535);
+			pTemp2->AddWaypoint(203,535);
 			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp2->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
 			pTemp2->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
@@ -312,6 +309,9 @@ void CGamePlayState::Render(void)
 		rTemp.bottom = 32;
 		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 	}
+	wostringstream woss;
+	woss << m_pPlayer->GetPosX() << "\n" << m_pPlayer->GetPosY();
+	CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 5, 5, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -339,24 +339,24 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_pPlayer->SetPosY((float)pWarp->GetWarpY());
 		TransitionWorld(pWarp->GetMapName());
 	}
-	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
-	{
-		if (m_fFireBallTimer > 1.0f)
-		{
-			CEntity* pTempFire = new CEntity();
-			pTempFire->SetActive(true);
-			//pTemp->SetHostile(true);
-			pTempFire->SetPosX(200);
-			pTempFire->SetPosY(0);
-			pTempFire->SetVelX(200);
-			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
+	//else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
+	//{
+	//	if (m_fFireBallTimer > 1.0f)
+	//	{
+	//		CEntity* pTempFire = new CEntity();
+	//		pTempFire->SetActive(true);
+	//		//pTemp->SetHostile(true);
+	//		pTempFire->SetPosX(200);
+	//		pTempFire->SetPosY(0);
+	//		pTempFire->SetVelX(200);
+	//		pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
+	//		m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-			pTempFire->Release();
-			pTempFire = nullptr;
-			m_fFireBallTimer = 0.0f;
-		}
-	}
+	//		pTempFire->Release();
+	//		pTempFire = nullptr;
+	//		m_fFireBallTimer = 0.0f;
+	//	}
+	//}
 }
 
 void CGamePlayState::LoadWorld(string input)
@@ -563,6 +563,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	CEnemyUnit* temp = new CEnemyUnit;
 	CAIController* tempAI = new CAIController;
 	CBasicAttack* tempAtk = new CBasicAttack;
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("Plant_dude_Battle");
+	pTemp->SetCurrentFrame(0);
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);
