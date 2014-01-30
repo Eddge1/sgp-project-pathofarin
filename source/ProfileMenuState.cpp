@@ -401,6 +401,10 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CPlayerUnit* temp = new CPlayerUnit;
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("Mage_Idle_Battle");
+	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);

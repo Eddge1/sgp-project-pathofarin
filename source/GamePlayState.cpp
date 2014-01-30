@@ -92,6 +92,8 @@ void CGamePlayState::Activate(void)
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
+
 
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));

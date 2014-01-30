@@ -62,6 +62,7 @@ private:
 
 	PBattlephase m_eCurrentPhase;
 
+	int m_nForestBattleID;
 	int m_nTurn;
 	int m_nMenuImage;
 	int m_nMenuSelectionImage;
