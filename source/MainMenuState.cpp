@@ -10,6 +10,7 @@
 #include "CreditState.h"
 
 #include "GamePlayState.h"
+#include "ProfileMenuState.h"
 #include "BattleState.h" // <- TEMP needs to be deleted after testing.
 #include "Game.h"
 
@@ -26,11 +27,14 @@ CMainMenuState::CMainMenuState(void)
 	SetBackgroundMusic(-1);
 	SetSFXID(-1);
 	m_nLogoID = -1;
+	m_nSelectionMenuID = -1;
+	m_fRotation = 0.0f;
+	m_fPosY = 0.0f;
+	m_bLeft = false;
 }
 
 CMainMenuState::~CMainMenuState(void)
 {
-
 }
 
 
@@ -38,11 +42,21 @@ void CMainMenuState::Activate(void)
 {
 	if(GetBackgroundMusic() == -1)
 	{
-		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/JB_Test.xwm")));
+		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_Test.xwm")));
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
+
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
 	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png"));
+	m_nSelectionMenuID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+	m_nWarriorID	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Warrior.png"));
+	m_nRangerID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Ranger.png"));
+	m_nMageID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Mage.png"));
+
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+	m_fRotation = 0.0f;
+	m_fPosX = 360.0f;
+	m_fPosY = 0.0f;
 }
 
 void CMainMenuState::Sleep(void)
@@ -51,11 +65,40 @@ void CMainMenuState::Sleep(void)
 	SetSFXID(-1);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nLogoID);
 	m_nLogoID = -1;
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nSelectionMenuID);
+	m_nSelectionMenuID = -1;
+
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
+
+	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+
+	SetCursorIMG(-1);
+	m_nWarriorID	= -1;
+	m_nRangerID		= -1;
+	m_nMageID		= -1;
 }
 
 void CMainMenuState::Update(float fElapsedTime)
 {
+	m_fRotation += (1.0f * fElapsedTime);
 
+	if(m_fPosY >= 172.0f)
+	{
+		if(m_bLeft)
+			m_fPosX -= (20 * fElapsedTime);
+		else
+			m_fPosX += (20 * fElapsedTime);
+
+		if(m_fPosX <= 360)
+			m_bLeft = false;
+		else if(m_fPosX >= 370)
+			m_bLeft = true;
+	}
+	else{
+		m_fPosY += 200 * fElapsedTime;
+	}
 }
 
 void CMainMenuState::Render(void)
@@ -63,14 +106,24 @@ void CMainMenuState::Render(void)
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
 
-	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,172);
+	RECT rtemp = {36, 48, 220, 206};
+	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
+	CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,1.0f,1.0f,&rtemp,92,79,-m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
+	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
+	RECT rLogo = {0,0,512,256};
+	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
+	if(m_fPosY >= 172.0f)
+	{
+		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
 
-	RECT rTemp = {336, 408, 464,536};
-	pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(200,0,0,0));
-	pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,127,255));
-	pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 352,416, 1.0f, D3DCOLOR_XRGB(0, 255, 255));
-	pFont2->Draw(_T("-"), 344,416 + (GetCursorSelection() * 28), 1.0f, D3DCOLOR_XRGB(0, 255, 255));
-
+		RECT rTemp = {336, 408, 464,536};
+		pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		rTemp.left = 0;
+		rTemp.top = 0;
+		rTemp.right = 16;
+		rTemp.bottom = 32;
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), (int)m_fPosX, 442 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+	}
 }
 
 bool CMainMenuState::Input(void)
@@ -80,7 +133,7 @@ bool CMainMenuState::Input(void)
 	if(pDI->KeyPressed(DIK_ESCAPE))
 		return false;
 
-	if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+	if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 	{
 		if(GetCursorSelection() <= 0)
 			SetCursorSelection(3);
@@ -89,7 +142,7 @@ bool CMainMenuState::Input(void)
 		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 	}
-	else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+	else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 	{
 		if(GetCursorSelection() >= 3)
 			SetCursorSelection(0);
@@ -103,7 +156,7 @@ bool CMainMenuState::Input(void)
 		switch (GetCursorSelection())
 		{
 		case 0:
-			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance()); // <-Should be going to profile state.
+			CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance()); // <-Should be going to profile state.
 			break;
 		case 1:
 			CGame::GetInstance()->ChangeState(COptionsMenu::GetInstance());

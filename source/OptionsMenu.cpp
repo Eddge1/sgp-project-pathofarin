@@ -32,8 +32,8 @@ void COptionsMenu::Activate( void )
 
 	m_nMusicVolume = int(CSGD_XAudio2::GetInstance()->MusicGetMasterVolume() * 100);
 	m_nSFXVolume = int(CSGD_XAudio2::GetInstance()->SFXGetMasterVolume() * 100);
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/JB_CursorSFX.wav")));
-	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/DNAS_MainMenu.png")));
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
+	//SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_MainMenu.png")));
 
 
 }
@@ -58,7 +58,7 @@ void COptionsMenu::Update( float fElapsedTime ){}
 
 void COptionsMenu::Render( void )
 {
-	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
+	//CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	std::wostringstream woss;
 	woss << "\n\t\t" <<  m_nMusicVolume << "\n\t\t" << m_nSFXVolume;
@@ -116,7 +116,7 @@ bool COptionsMenu::Input( void )
 				m_bSubMenu = true;
 
 		}
-		else if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+		else if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() == 0)
 				SetCursorSelection(3);
@@ -125,7 +125,7 @@ bool COptionsMenu::Input( void )
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 		{
 			if(GetCursorSelection() == 3)
 				SetCursorSelection(0);
@@ -143,7 +143,7 @@ bool COptionsMenu::Input( void )
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_LEFTARROW)|| pDI->JoystickDPadPressed(DIR_LEFT))
+		else if(pDI->KeyPressed(DIK_A)|| pDI->JoystickDPadPressed(DIR_LEFT))
 		{
 			switch(GetCursorSelection())
 			{
@@ -177,7 +177,7 @@ bool COptionsMenu::Input( void )
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->JoystickDPadPressed(DIR_RIGHT))
+		else if(pDI->KeyPressed(DIK_D) || pDI->JoystickDPadPressed(DIR_RIGHT))
 		{
 			switch(GetCursorSelection())
 			{
@@ -216,9 +216,9 @@ bool COptionsMenu::Input( void )
 		}
 		else if(GetCursorSelection() == 0)
 		{
-			if(pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+			if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 				m_nSubCursor = 0;
-			else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+			else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 				m_nSubCursor = 1;
 		}
 	}

@@ -7,12 +7,22 @@ using System.Drawing;
 
 namespace SGP_PoA_LevelEditor
 {
+    struct myUnits
+    {
+        int hp;
+        int ap;
+        int attack;
+        string name;
+        string ai;
+
+    };
+
     struct myNPC
     {
         string name;
         bool moves;
         bool isHostile;
-        List<string> units;
+        List<myUnits> units;
         List<Point> waypoints;
 
         public bool IsHostile
@@ -27,7 +37,7 @@ namespace SGP_PoA_LevelEditor
             set { moves = value; }
         }
 
-        public List<string> Units
+        public List<myUnits> Units
         {
             get { return units; }
             set { units = value; }

@@ -36,11 +36,13 @@ void CWorld::Render(int layer)
 	RECT temp = { };
 
 	CLayer* TempLayer = m_vMyLayers[layer];
+	int nXOffset = TempLayer->GetOffsetX();
+	int nYOffset = TempLayer->GetOffsetY();
 
 	for(unsigned int i = 0; i < m_vMyLayers[layer]->GetSize(); i++)
 	{
-		int foo = i % GetWidth() * GetTileWidth();
-		int fee = i / GetHeight() * GetTileHeight();
+		int foo = i % TempLayer->GetSizeX() * GetTileWidth() + nXOffset;
+		int fee = i / TempLayer->GetSizeX() * GetTileHeight() + nYOffset;
 		if(foo > WorldCamX - GetTileWidth() && foo < WorldCamX + GetTileWidth() + CGame::GetInstance()->GetScreenWidth()) 
 		{
 			if( fee > WorldCamY - GetTileHeight() && fee < WorldCamY + GetTileHeight() + CGame::GetInstance()->GetScreenHeight())
@@ -52,7 +54,7 @@ void CWorld::Render(int layer)
 					temp.right = temp.left + GetTileWidth();
 					temp.bottom = temp.top + GetTileHeight();
 
-					pTM->Draw(GetID(), (i % GetWidth() ) * GetTileWidth() - WorldCamX, ( i / GetWidth() ) * GetTileHeight() - WorldCamY, 1.0f, 1.0f, &temp); 
+					pTM->Draw(GetID(), (i % TempLayer->GetSizeX() ) * GetTileWidth() - (WorldCamX - nXOffset), ( i / TempLayer->GetSizeX() ) * GetTileHeight() - (WorldCamY - nYOffset), 1.0f, 1.0f, &temp); 
 				}
 			}
 		}

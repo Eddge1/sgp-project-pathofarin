@@ -6,5 +6,7 @@ class CTriggerMatch :
 public:
 	CTriggerMatch(void);
 	virtual ~CTriggerMatch(void);
+	virtual void ResetSkill() override { }
+
 };
 

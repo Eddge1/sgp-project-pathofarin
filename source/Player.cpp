@@ -5,18 +5,32 @@
 
 CPlayer::CPlayer(void)
 {
+
 	SetType(OBJ_PLAYER);
+	m_szName = "Arin";
+	m_cBattle = nullptr;
+
+	m_fLastY = -1;
+	m_fLastX = -1;
 }
 
 
 CPlayer::~CPlayer(void)
 {
-	m_cBattle->Release();
+	SetUnit(nullptr);
+}
+
+void CPlayer::SetName(std::string szName) 
+{
+	if(szName != "")
+		m_szName = szName;
 }
 
 void CPlayer::Update(float fElapsedTime)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+	m_fLastY = GetPosY();
+	m_fLastX = GetPosX();
 
 	SetVelX(0);
 	SetVelY(0);
@@ -50,69 +64,37 @@ void CPlayer::Update(float fElapsedTime)
 
 void CPlayer::HandleCollision(CObjects* col)
 {
-	if(col->GetType() == OBJ_UNDEFINE)
+	if(col->GetType() == OBJ_UNDEFINE || col->GetType() == OBJ_NPC)
 	{
-
-
 		RECT rTemp = col->GetCollisionRect();
-		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
-		if(GetCollisionRect().left > rTemp.right - 10 && GetCollisionRect().left < rTemp.right)
+		if(GetCollisionRect().left > rTemp.left && GetCollisionRect().left < rTemp.right)
 		{
-			SetPosX(GetPosX() +1);
-			SetVelX(0);
+			SetPosX(m_fLastX);
 		}
-		else if(GetCollisionRect().right < rTemp.left + 10 && GetCollisionRect().right > rTemp.left)
+		else if(GetCollisionRect().right < rTemp.right && GetCollisionRect().right > rTemp.left)
 		{
-			SetPosX(GetPosX() -1);
-			SetVelX(0);
+			SetPosX(m_fLastX);
 		}
 		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
 		{
-			if(GetCollisionRect().bottom < rTemp.top + 10 && GetCollisionRect().bottom > rTemp.top)
+			if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
 			{
-				if(GetVelY() > 0)
-				{
-					SetPosY(GetPosY() - 1);
-					SetVelY(0);
-				}
+				SetPosY(m_fLastY);
 			}
-			else if(GetCollisionRect().top > rTemp.bottom - 10 && GetCollisionRect().top < rTemp.bottom)
+			else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
 			{
-				SetPosY(GetPosY() + 1);
-				SetVelY(0);
+				SetPosY(m_fLastY);
 			}
 		}
-		else if(GetCollisionRect().bottom < rTemp.top + 10 && GetCollisionRect().bottom > rTemp.top)
+
+		if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
 		{
-			if(GetVelY() > 0)
-			{
-				SetPosY(GetPosY() - 1);
-				SetVelY(0);
-			}
+			SetPosY(m_fLastY);
 		}
-		else if(GetCollisionRect().top > rTemp.bottom - 10 && GetCollisionRect().top < rTemp.bottom)
+		else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
 		{
-			SetPosY(GetPosY() + 1);
-
-			SetVelY(0);
+			SetPosY(m_fLastY);
 		}
-
-
-
-
-	}
-	else if(col->GetType() == OBJ_NPC)
-	{
-		if(GetVelX() > 0 && col->GetPosX() >= GetPosX())
-			SetPosX(GetPosX() -1);
-		else if(GetVelX() < 0 && col->GetPosX() <= GetPosX())
-			SetPosX(GetPosX() + 1);
-
-		if(GetVelY() > 0 && col->GetPosY() >= GetPosY())
-			SetPosY(GetPosY() -1);
-		else if(GetVelY() < 0 && col->GetPosY() <= GetPosY())
-			SetPosY(GetPosY() + 1);
-
 	}
 }
 
@@ -121,3 +103,15 @@ void CPlayer::HandleEvent( const CEvent* pEvent )
 
 
 }
+
+void CPlayer::SetUnit	(CPlayerUnit* pUnit)
+{
+	if(m_cBattle != nullptr)
+		m_cBattle->Release();
+
+	m_cBattle = pUnit;
+
+	if(m_cBattle != nullptr)
+		m_cBattle->AddRef();
+}
+

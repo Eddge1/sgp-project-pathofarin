@@ -29,7 +29,7 @@ public:
 	string GetName() { return m_sName; }
 	void SetName( string input ) { m_sName = input; }
 
-	void ModifyHealth(int nAmount, bool isCrit);
+	virtual void ModifyHealth(int nAmount, bool isCrit);
 	void ModifyAP(int nAmount);
 
 	virtual void Update(float fElapsedTime) override;
@@ -47,6 +47,7 @@ public:
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
+	void SetAttack			( int nAmount )		{m_nAttackPower = nAmount; }
 
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 

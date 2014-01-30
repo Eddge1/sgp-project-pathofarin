@@ -167,7 +167,7 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 		aTimeStamp->SetTimeOnStamp(0.0f);
 	}
 	
-	if (pFrame->GetEventID() != "" && m_bEventThrown == false)
+	if (pFrame->GetEventID() != "" /*&& m_bEventThrown == false*/)
 	{
 		m_bEventThrown = true;
 		CSGD_EventSystem::GetInstance()->QueueEvent(pFrame->GetEventID());
