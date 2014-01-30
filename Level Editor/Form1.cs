@@ -104,6 +104,12 @@ namespace SGP_PoA_LevelEditor
                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                      TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
                                 }
+                                else if (L.MyTiles[x, y].EventType == "EVENT")
+                                {
+                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
+                                }
                                 else
                                     TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                         new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
@@ -1327,6 +1333,14 @@ namespace SGP_PoA_LevelEditor
         private void btnDeleteUnit_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnShiftUp_Click(object sender, EventArgs e)
+        {
+            myLayers l = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+            lstLayers.Items[lstLayers.SelectedIndex] = lstLayers.Items[lstLayers.SelectedIndex - 1];
+            lstLayers.Items[lstLayers.SelectedIndex - 1] = l;
+            lstLayers.SelectedIndex--;
         }
 
     }

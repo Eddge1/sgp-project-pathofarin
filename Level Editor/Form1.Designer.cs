@@ -874,6 +874,7 @@
             this.label17.Size = new System.Drawing.Size(74, 13);
             this.label17.TabIndex = 28;
             this.label17.Text = "Layer X Offset";
+            this.btnShiftUp.Click += new System.EventHandler(this.btnShiftUp_Click);
             // 
             // label18
             // 

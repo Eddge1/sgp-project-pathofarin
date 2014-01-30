@@ -92,6 +92,8 @@ void CGamePlayState::Activate(void)
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
+
 
 
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -126,7 +128,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp2 = new CNpcs();
 			pTemp2->SetActive(true);
-			//pTemp2->SetHostile(true);
+			pTemp2->SetHostile(true);
 			pTemp2->SetPosX(200);
 			pTemp2->SetPosY(100);
 			pTemp2->AddWaypoint(200,100);

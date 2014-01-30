@@ -9,7 +9,7 @@ CObjects::CObjects(void)
 	m_fPosX = 0.0f;
 	m_fPosY = 0.0f;
 	m_bActive = true;
-	m_bRender = true;
+	m_bRender = false;
 	m_unRef = 1;
 	m_nHeight = 10;
 	m_nWidth = 10;

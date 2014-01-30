@@ -148,7 +148,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 		}
 
 	}
-
+	CEntity::Update(fElapsedTime);
 }
 
 void CPlayerUnit::EndTurn()

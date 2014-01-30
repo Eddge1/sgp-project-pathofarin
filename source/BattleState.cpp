@@ -7,6 +7,7 @@
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "RenderManager.h"
+#include "AnimationSystem.h"
 #include "Game.h"
 #include "Objects.h"
 #include "PlayerUnit.h"
@@ -34,6 +35,7 @@ CBattleState::CBattleState(void)
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
+	m_nForestBattleID = -1;
 }
 
 CBattleState::~CBattleState(void)
@@ -56,7 +58,7 @@ void CBattleState::Activate(void)
 
 	m_nMenuImage =			CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
-
+	m_nForestBattleID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
 	m_pFont = CGame::GetInstance()->GetFont();
 	m_bDefeat = false;
 	m_bVictory = false;
@@ -85,9 +87,12 @@ void CBattleState::Sleep(void)
 	SetPlayer(nullptr);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuSelectionImage);
 	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuImage);
+	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nForestBattleID);
+
 
 	m_nMenuImage = -1;
 	m_nMenuSelectionImage = -1;
+	m_nForestBattleID = -1;
 }
 
 bool CBattleState::Input(void)
@@ -171,6 +176,7 @@ void CBattleState::Render(void)
 
 
 	//Temp drawing the UI
+	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
 	pTM->Draw(m_nMenuImage, 0,472);
 	pTM->Draw(m_nMenuSelectionImage, 272,408);
 
@@ -273,6 +279,26 @@ void CBattleState::Render(void)
 				rTemp.right = 358;
 				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
 
+			}
+		}
+		int nImageID = -1;
+		CAnimation* pAnim; 
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
+				{
+					pAnim = CAnimationSystem::GetInstance()->GetAnimation(m_vBattleUnits[i]->GetAnimInfo()->GetCurrentAnimation());
+					nImageID = pAnim->GetImageID();
+				}
+				float PosX = m_vBattleUnits[i]->GetPosX(); 
+				float PosY = m_vBattleUnits[i]->GetPosY();
+				if (nImageID != -1)
+				{
+					CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+				}
+				nImageID = -1;
 			}
 		}
 

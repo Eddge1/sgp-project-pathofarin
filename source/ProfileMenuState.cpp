@@ -380,8 +380,8 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 CPlayer* CProfileMenuState::CreatePlayer()
 {
 	CPlayer* temp = new CPlayer; // TODO: THIS IS A PLACE HOLDER
-	temp->SetPosX(300.0f);
-	temp->SetPosY(100.0f);
+	temp->SetPosX(50.0f);
+	temp->SetPosY(50.0f);
 	temp->SetVelX(0.0f);
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;
@@ -401,6 +401,10 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CPlayerUnit* temp = new CPlayerUnit;
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
+	CAnimationTimeStamp* pTemp;
+	pTemp = temp->GetAnimInfo();
+	pTemp->SetAnimation("Mage_Idle_Battle");
+	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
