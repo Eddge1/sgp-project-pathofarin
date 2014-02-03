@@ -62,6 +62,7 @@ namespace Animation_Editor
     public struct CAnimation
     {
         List<CFrame> lFrameList;
+
         string szAnimationName;
         bool bAnimationLooping;
 
@@ -195,13 +196,20 @@ namespace Animation_Editor
                 D3D.DrawRect(largePoint, Color.FromArgb(255, 0, 0, 255));
             }
 
+
+            Rectangle rStuff = workingFrame.RenderRect;
+            rStuff.X += splitContainer1.Panel2.AutoScrollPosition.X;
+            rStuff.Y += splitContainer1.Panel2.AutoScrollPosition.Y;
             Rectangle largeWorkingPoint = new Rectangle();
-            largeWorkingPoint.X = workingFrame.Anchor.X - 2;
-            largeWorkingPoint.Y = workingFrame.Anchor.Y - 2;
+            largeWorkingPoint.X = workingFrame.Anchor.X - 2 + rStuff.X;
+            largeWorkingPoint.Y = workingFrame.Anchor.Y - 2 + rStuff.Y;
             largeWorkingPoint.Width = 4;
             largeWorkingPoint.Height = 4;
-            D3D.DrawHollowRect(workingFrame.RenderRect, Color.FromArgb(255, 0, 0, 0), 1);
-            D3D.DrawHollowRect(workingFrame.CollisionRect, Color.FromArgb(255, 0, 255, 255), 1);
+            Rectangle rColl = workingFrame.CollisionRect;
+            rColl.X += splitContainer1.Panel2.AutoScrollPosition.X;
+            rColl.Y += splitContainer1.Panel2.AutoScrollPosition.Y;
+            D3D.DrawHollowRect(rStuff, Color.FromArgb(255, 0, 0, 0), 1);
+            D3D.DrawHollowRect(rColl, Color.FromArgb(255, 0, 255, 255), 1);
             D3D.DrawRect(largeWorkingPoint, Color.FromArgb(255, 0, 0, 255));
 
 
@@ -219,8 +227,8 @@ namespace Animation_Editor
                 if (listBox_FrameList.SelectedIndex > -1)
                 {
                     CFrame PreviewRect = (CFrame)listBox_FrameList.SelectedItem;
-                    TM.Draw(nImageID, pictureBox_AnimationPreview.ClientRectangle.Width / 2 - PreviewRect.RenderRect.Width / 2,
-                        pictureBox_AnimationPreview.ClientRectangle.Height / 2 - PreviewRect.RenderRect.Height / 2, 1.0f, 1.0f, PreviewRect.RenderRect);
+                    TM.Draw(nImageID, 128 - PreviewRect.Anchor.X,
+                       128 - PreviewRect.Anchor.Y, 1.0f, 1.0f, PreviewRect.RenderRect);
                 }
             }
 
@@ -256,7 +264,8 @@ namespace Animation_Editor
                     CAnimation cTemp = (CAnimation)listBox_AnimationList.Items[j];
                     XElement xInfo = new XElement("Animation_Info");
                     XAttribute xName = new XAttribute("Name", cTemp.AnimationName);
-                    XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);  //Change this to the actual size of the Frame vector later
+                    XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);
+                    XAttribute xTextureName = new XAttribute("Texture", szTextureName);
 
                     if (cTemp.AnimationLooping == true)
                     {
@@ -287,8 +296,8 @@ namespace Animation_Editor
                         XAttribute xPosY = new XAttribute("posY", cTemp.FrameList[i].RenderRect.Y);
                         XAttribute xWidth = new XAttribute("Width", cTemp.FrameList[i].RenderRect.Width);
                         XAttribute xHeight = new XAttribute("Height", cTemp.FrameList[i].RenderRect.Height);
-                        XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].RenderRect.X - cTemp.FrameList[i].Anchor.X);
-                        XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].RenderRect.Y - cTemp.FrameList[i].Anchor.Y);
+                        XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].Anchor.X);
+                        XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].Anchor.Y);
                         XAttribute xDuration = new XAttribute("Duration", cTemp.FrameList[i].Duration);
                         XAttribute xEvent = new XAttribute("Event", cTemp.FrameList[i].EventID);
 
@@ -342,7 +351,7 @@ namespace Animation_Editor
                     CAnimation cTemp = (CAnimation)listBox_AnimationList.Items[j];
                     XElement xInfo = new XElement("Animation_Info");
                     XAttribute xName = new XAttribute("Name", cTemp.AnimationName);
-                    XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);  //Change this to the actual size of the Frame vector later
+                    XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);
 
                     if (cTemp.AnimationLooping == true)
                     {
@@ -373,8 +382,8 @@ namespace Animation_Editor
                         XAttribute xPosY = new XAttribute("posY", cTemp.FrameList[i].RenderRect.Y);
                         XAttribute xWidth = new XAttribute("Width", cTemp.FrameList[i].RenderRect.Width);
                         XAttribute xHeight = new XAttribute("Height", cTemp.FrameList[i].RenderRect.Height);
-                        XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].RenderRect.X - cTemp.FrameList[i].Anchor.X);
-                        XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].RenderRect.Y - cTemp.FrameList[i].Anchor.Y);
+                        XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].Anchor.X);
+                        XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].Anchor.Y);
                         XAttribute xDuration = new XAttribute("Duration", cTemp.FrameList[i].Duration);
                         XAttribute xEvent = new XAttribute("Event", cTemp.FrameList[i].EventID);
 
@@ -429,6 +438,7 @@ namespace Animation_Editor
                 tempSize.Width = TM.GetTextureWidth(nImageID);
                 tempSize.Height = TM.GetTextureHeight(nImageID);
                 splitContainer1.Panel2.AutoScrollMinSize = tempSize;
+                szTextureName = Path.GetFileName(dlg.FileName);
 
             }
 
@@ -439,9 +449,7 @@ namespace Animation_Editor
             if (listBox_AnimationList.Items.Count > 0)
             {
                 CAnimation cAnim = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
-
-
-                //tempFrameList.Add(tempFrame);
+                workingFrame.EventID = textBox_EventString.Text;
                 listBox_FrameList.Items.Add(workingFrame);
                 cAnim.FrameList.Add(workingFrame);
                 listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex] = cAnim;
@@ -474,7 +482,6 @@ namespace Animation_Editor
             tempAnimation.AnimationLooping = checkBox_AnimationLooping.Checked;
             listBox_FrameList.Items.Clear();
 
-            //AnimationSet.Add(tempAnimation);
             listBox_AnimationList.Items.Add(tempAnimation);
             listBox_AnimationList.SelectedIndex = listBox_AnimationList.Items.Count - 1;
         }
@@ -541,8 +548,8 @@ namespace Animation_Editor
                                 tempRect.Height = Convert.ToInt32(xHeight.Value);
 
                                 Point tempPoint = new Point();
-                                tempPoint.X = Convert.ToInt32(xAnchorX.Value) + tempRect.X;
-                                tempPoint.Y = Convert.ToInt32(xAnchorY.Value) + tempRect.Y;
+                                tempPoint.X = Convert.ToInt32(xAnchorX.Value);
+                                tempPoint.Y = Convert.ToInt32(xAnchorY.Value);
 
                                 tempFrame.RenderRect = tempRect;
                                 tempFrame.Anchor = tempPoint;
@@ -567,25 +574,10 @@ namespace Animation_Editor
                             }
                         }
                     }
-                    //AnimationSet.Add(tempAnim);
                     listBox_AnimationList.Items.Add(tempAnim);
                     string tempTexturePath = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Sprites\\");
                     nImageID = TM.LoadTexture(tempTexturePath + szTextureName);
-
-                    //numericUpDown_AnchorX.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_AnchorY.Maximum = TM.GetTextureHeight(nImageID);
-                    //numericUpDown_RenderLeft.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_RenderTop.Maximum = TM.GetTextureHeight(nImageID);
-                    //numericUpDown_RenderRight.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_RenderBottom.Maximum = TM.GetTextureHeight(nImageID);
-
-                    //numericUpDown_CollisionLeft.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_CollisionTop.Maximum = TM.GetTextureHeight(nImageID);
-                    //numericUpDown_CollisionRight.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_CollisionBottom.Maximum = TM.GetTextureHeight(nImageID);
-
-                    //numericUpDown_AnchorX.Maximum = TM.GetTextureWidth(nImageID);
-                    //numericUpDown_AnchorY.Maximum = TM.GetTextureHeight(nImageID);
+                    splitContainer1.Panel2.AutoScrollMinSize = new Size(TM.GetTextureWidth(nImageID), TM.GetTextureHeight(nImageID));
                 }
             }
         }
@@ -673,15 +665,14 @@ namespace Animation_Editor
 
         private void splitContainer1_Panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            button_EditFrame.Enabled = true;
             if (!bMouseDown)
             {
                 bMouseDown = true;
                 if (button_RenderRectTool.Enabled == false)
                 {
                     Rectangle tempRect = new Rectangle();
-                    tempRect.X = e.X;
-                    tempRect.Y = e.Y;
+                    tempRect.X = e.X - splitContainer1.Panel2.AutoScrollPosition.X;
+                    tempRect.Y = e.Y - splitContainer1.Panel2.AutoScrollPosition.Y;
 
                     workingFrame.RenderRect = tempRect;
 
@@ -689,16 +680,16 @@ namespace Animation_Editor
                 else if (button_CollisionRectTool.Enabled == false)
                 {
                     Rectangle tempRect = new Rectangle();
-                    tempRect.X = e.X;
-                    tempRect.Y = e.Y;
+                    tempRect.X = e.X - splitContainer1.Panel2.AutoScrollPosition.X;
+                    tempRect.Y = e.Y - splitContainer1.Panel2.AutoScrollPosition.Y;
 
                     workingFrame.CollisionRect = tempRect;
                 }
                 else if (button_AnchorPointTool.Enabled == false)
                 {
                     Point tempPoint = new Point();
-                    tempPoint.X = e.X;
-                    tempPoint.Y = e.Y;
+                    tempPoint.X = (e.X - splitContainer1.Panel2.AutoScrollPosition.X) - workingFrame.RenderRect.X;
+                    tempPoint.Y = (e.Y - splitContainer1.Panel2.AutoScrollPosition.Y) - workingFrame.RenderRect.Y;
 
                     workingFrame.Anchor = tempPoint;
                 }
@@ -735,8 +726,8 @@ namespace Animation_Editor
                 if (button_RenderRectTool.Enabled == false)
                 {
                     Rectangle tempRect = workingFrame.RenderRect;
-                    tempRect.Width = e.X - tempRect.X;
-                    tempRect.Height = e.Y - tempRect.Y;
+                    tempRect.Width = e.X - tempRect.X - splitContainer1.Panel2.AutoScrollPosition.X;
+                    tempRect.Height = e.Y - tempRect.Y - splitContainer1.Panel2.AutoScrollPosition.Y;
 
                     workingFrame.RenderRect = tempRect;
 
@@ -744,8 +735,8 @@ namespace Animation_Editor
                 else if (button_CollisionRectTool.Enabled == false)
                 {
                     Rectangle tempRect = workingFrame.CollisionRect;
-                    tempRect.Width = e.X - tempRect.X;
-                    tempRect.Height = e.Y - tempRect.Y;
+                    tempRect.Width = e.X - tempRect.X - splitContainer1.Panel2.AutoScrollPosition.X;
+                    tempRect.Height = e.Y - tempRect.Y - splitContainer1.Panel2.AutoScrollPosition.Y;
 
                     workingFrame.CollisionRect = tempRect;
                 }
@@ -762,19 +753,10 @@ namespace Animation_Editor
             }
         }
 
-        private void button_EditFrame_Click(object sender, EventArgs e)
-        {
-            if (listBox_FrameList.SelectedIndex != -1)
-            {
-                button_EditFrame.Enabled = false;
-                button_DoneEdit.Enabled = true;
-            }
-
-        }
 
         private void numericUpDown_RenderLeft_ValueChanged(object sender, EventArgs e)
         {
-            if (button_EditFrame.Enabled == false)
+            if (listBox_FrameList.SelectedIndex != -1)
             {
                 workingFrame = (CFrame)listBox_FrameList.Items[listBox_FrameList.SelectedIndex];
                 Rectangle rTemp = workingFrame.RenderRect;
@@ -806,12 +788,6 @@ namespace Animation_Editor
 
 
             }
-        }
-
-        private void button_DoneEdit_Click(object sender, EventArgs e)
-        {
-            button_DoneEdit.Enabled = false;
-            button_EditFrame.Enabled = true;
         }
 
         private void button_PreviousFrame_Click(object sender, EventArgs e)

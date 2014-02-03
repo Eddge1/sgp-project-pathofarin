@@ -82,8 +82,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_DoneEdit = new System.Windows.Forms.Button();
-            this.button_EditFrame = new System.Windows.Forms.Button();
             this.button_DeleteAnimation = new System.Windows.Forms.Button();
             this.button_DeleteFrame = new System.Windows.Forms.Button();
             this.button_AddAnimation = new System.Windows.Forms.Button();
@@ -207,6 +205,7 @@
             this.newToolStripButton.Name = "newToolStripButton";
             this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Click += new System.EventHandler(this.newAnimationSetToolStripMenuItem_Click);
             // 
             // openToolStripButton
             // 
@@ -216,6 +215,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openAnimationSetToolStripMenuItem_Click);
             // 
             // saveToolStripButton
             // 
@@ -225,6 +225,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveAnimationSetToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -236,7 +237,6 @@
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 49);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -256,7 +256,7 @@
             this.splitContainer1.Panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.splitContainer1_Panel2_MouseUp);
             this.splitContainer1.Panel2.Resize += new System.EventHandler(this.splitContainer1_Panel2_Resize);
             this.splitContainer1.Size = new System.Drawing.Size(1306, 814);
-            this.splitContainer1.SplitterDistance = 419;
+            this.splitContainer1.SplitterDistance = 552;
             this.splitContainer1.TabIndex = 2;
             // 
             // groupBox7
@@ -309,16 +309,16 @@
             this.groupBox6.Controls.Add(this.button_NextFrame);
             this.groupBox6.Controls.Add(this.button_PreviousFrame);
             this.groupBox6.Controls.Add(this.pictureBox_AnimationPreview);
-            this.groupBox6.Location = new System.Drawing.Point(3, 569);
+            this.groupBox6.Location = new System.Drawing.Point(215, 446);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(191, 240);
+            this.groupBox6.Size = new System.Drawing.Size(331, 344);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Animation Preview";
             // 
             // button_Reset
             // 
-            this.button_Reset.Location = new System.Drawing.Point(53, 211);
+            this.button_Reset.Location = new System.Drawing.Point(165, 313);
             this.button_Reset.Name = "button_Reset";
             this.button_Reset.Size = new System.Drawing.Size(75, 23);
             this.button_Reset.TabIndex = 4;
@@ -328,7 +328,7 @@
             // 
             // button_PlayStopAnimation
             // 
-            this.button_PlayStopAnimation.Location = new System.Drawing.Point(53, 182);
+            this.button_PlayStopAnimation.Location = new System.Drawing.Point(80, 313);
             this.button_PlayStopAnimation.Name = "button_PlayStopAnimation";
             this.button_PlayStopAnimation.Size = new System.Drawing.Size(75, 23);
             this.button_PlayStopAnimation.TabIndex = 3;
@@ -338,7 +338,7 @@
             // 
             // button_NextFrame
             // 
-            this.button_NextFrame.Location = new System.Drawing.Point(102, 153);
+            this.button_NextFrame.Location = new System.Drawing.Point(165, 281);
             this.button_NextFrame.Name = "button_NextFrame";
             this.button_NextFrame.Size = new System.Drawing.Size(75, 23);
             this.button_NextFrame.TabIndex = 2;
@@ -348,7 +348,7 @@
             // 
             // button_PreviousFrame
             // 
-            this.button_PreviousFrame.Location = new System.Drawing.Point(21, 153);
+            this.button_PreviousFrame.Location = new System.Drawing.Point(80, 281);
             this.button_PreviousFrame.Name = "button_PreviousFrame";
             this.button_PreviousFrame.Size = new System.Drawing.Size(75, 23);
             this.button_PreviousFrame.TabIndex = 1;
@@ -360,7 +360,7 @@
             // 
             this.pictureBox_AnimationPreview.Location = new System.Drawing.Point(30, 19);
             this.pictureBox_AnimationPreview.Name = "pictureBox_AnimationPreview";
-            this.pictureBox_AnimationPreview.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox_AnimationPreview.Size = new System.Drawing.Size(256, 256);
             this.pictureBox_AnimationPreview.TabIndex = 0;
             this.pictureBox_AnimationPreview.TabStop = false;
             // 
@@ -370,20 +370,19 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.numericUpDown_FrameDuration);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.numericUpDown_AnchorX);
             this.groupBox2.Controls.Add(this.groupBox5);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(215, 186);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(190, 437);
+            this.groupBox2.Size = new System.Drawing.Size(331, 242);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Frame Data";
             // 
             // textBox_EventString
             // 
-            this.textBox_EventString.Location = new System.Drawing.Point(22, 408);
+            this.textBox_EventString.Location = new System.Drawing.Point(178, 209);
             this.textBox_EventString.Name = "textBox_EventString";
             this.textBox_EventString.Size = new System.Drawing.Size(124, 20);
             this.textBox_EventString.TabIndex = 7;
@@ -393,7 +392,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 392);
+            this.label12.Location = new System.Drawing.Point(175, 193);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 13);
             this.label12.TabIndex = 6;
@@ -407,7 +406,7 @@
             0,
             0,
             65536});
-            this.numericUpDown_FrameDuration.Location = new System.Drawing.Point(105, 361);
+            this.numericUpDown_FrameDuration.Location = new System.Drawing.Point(261, 161);
             this.numericUpDown_FrameDuration.Maximum = new decimal(new int[] {
             50,
             0,
@@ -426,7 +425,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 361);
+            this.label11.Location = new System.Drawing.Point(175, 161);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(79, 13);
             this.label11.TabIndex = 4;
@@ -434,9 +433,9 @@
             // 
             // numericUpDown_AnchorX
             // 
-            this.numericUpDown_AnchorX.Location = new System.Drawing.Point(80, 300);
+            this.numericUpDown_AnchorX.Location = new System.Drawing.Point(59, 14);
             this.numericUpDown_AnchorX.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -450,7 +449,8 @@
             this.groupBox5.Controls.Add(this.numericUpDown_AnchorY);
             this.groupBox5.Controls.Add(this.label10);
             this.groupBox5.Controls.Add(this.label9);
-            this.groupBox5.Location = new System.Drawing.Point(21, 284);
+            this.groupBox5.Controls.Add(this.numericUpDown_AnchorX);
+            this.groupBox5.Location = new System.Drawing.Point(21, 161);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(137, 71);
             this.groupBox5.TabIndex = 2;
@@ -461,7 +461,7 @@
             // 
             this.numericUpDown_AnchorY.Location = new System.Drawing.Point(59, 42);
             this.numericUpDown_AnchorY.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -498,7 +498,7 @@
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.numericUpDown_CollisionLeft);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(21, 150);
+            this.groupBox4.Location = new System.Drawing.Point(178, 19);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(137, 127);
             this.groupBox4.TabIndex = 1;
@@ -509,7 +509,7 @@
             // 
             this.numericUpDown_CollisionBottom.Location = new System.Drawing.Point(59, 92);
             this.numericUpDown_CollisionBottom.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -531,7 +531,7 @@
             // 
             this.numericUpDown_CollisionRight.Location = new System.Drawing.Point(59, 68);
             this.numericUpDown_CollisionRight.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -553,7 +553,7 @@
             // 
             this.numericUpDown_CollisionTop.Location = new System.Drawing.Point(59, 45);
             this.numericUpDown_CollisionTop.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -575,7 +575,7 @@
             // 
             this.numericUpDown_CollisionLeft.Location = new System.Drawing.Point(59, 23);
             this.numericUpDown_CollisionLeft.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -614,7 +614,7 @@
             // 
             this.numericUpDown_RenderBottom.Location = new System.Drawing.Point(59, 89);
             this.numericUpDown_RenderBottom.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -632,7 +632,7 @@
             // 
             this.numericUpDown_RenderRight.Location = new System.Drawing.Point(59, 65);
             this.numericUpDown_RenderRight.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -650,7 +650,7 @@
             // 
             this.numericUpDown_RenderTop.Location = new System.Drawing.Point(59, 42);
             this.numericUpDown_RenderTop.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -668,7 +668,7 @@
             // 
             this.numericUpDown_RenderLeft.Location = new System.Drawing.Point(59, 20);
             this.numericUpDown_RenderLeft.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -715,10 +715,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button_DoneEdit);
-            this.groupBox1.Controls.Add(this.button_EditFrame);
             this.groupBox1.Controls.Add(this.button_DeleteAnimation);
             this.groupBox1.Controls.Add(this.button_DeleteFrame);
+            this.groupBox1.Controls.Add(this.label_AnimationName);
+            this.groupBox1.Controls.Add(this.textBox_AnimationName);
             this.groupBox1.Controls.Add(this.button_AddAnimation);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
@@ -726,8 +726,6 @@
             this.groupBox1.Controls.Add(this.listBox_FrameList);
             this.groupBox1.Controls.Add(this.checkBox_AnimationLooping);
             this.groupBox1.Controls.Add(this.button_AddFrame);
-            this.groupBox1.Controls.Add(this.textBox_AnimationName);
-            this.groupBox1.Controls.Add(this.label_AnimationName);
             this.groupBox1.Location = new System.Drawing.Point(9, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(191, 564);
@@ -735,30 +733,9 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animation Info";
             // 
-            // button_DoneEdit
-            // 
-            this.button_DoneEdit.Enabled = false;
-            this.button_DoneEdit.Location = new System.Drawing.Point(96, 537);
-            this.button_DoneEdit.Name = "button_DoneEdit";
-            this.button_DoneEdit.Size = new System.Drawing.Size(85, 23);
-            this.button_DoneEdit.TabIndex = 10;
-            this.button_DoneEdit.Text = "Done Editing";
-            this.button_DoneEdit.UseVisualStyleBackColor = true;
-            this.button_DoneEdit.Click += new System.EventHandler(this.button_DoneEdit_Click);
-            // 
-            // button_EditFrame
-            // 
-            this.button_EditFrame.Location = new System.Drawing.Point(96, 506);
-            this.button_EditFrame.Name = "button_EditFrame";
-            this.button_EditFrame.Size = new System.Drawing.Size(85, 23);
-            this.button_EditFrame.TabIndex = 9;
-            this.button_EditFrame.Text = "Edit Frame";
-            this.button_EditFrame.UseVisualStyleBackColor = true;
-            this.button_EditFrame.Click += new System.EventHandler(this.button_EditFrame_Click);
-            // 
             // button_DeleteAnimation
             // 
-            this.button_DeleteAnimation.Location = new System.Drawing.Point(31, 190);
+            this.button_DeleteAnimation.Location = new System.Drawing.Point(19, 230);
             this.button_DeleteAnimation.Name = "button_DeleteAnimation";
             this.button_DeleteAnimation.Size = new System.Drawing.Size(128, 23);
             this.button_DeleteAnimation.TabIndex = 6;
@@ -777,7 +754,7 @@
             // 
             // button_AddAnimation
             // 
-            this.button_AddAnimation.Location = new System.Drawing.Point(31, 162);
+            this.button_AddAnimation.Location = new System.Drawing.Point(19, 202);
             this.button_AddAnimation.Name = "button_AddAnimation";
             this.button_AddAnimation.Size = new System.Drawing.Size(128, 23);
             this.button_AddAnimation.TabIndex = 4;
@@ -797,7 +774,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(18, 16);
+            this.label13.Location = new System.Drawing.Point(6, 56);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 13);
             this.label13.TabIndex = 3;
@@ -806,7 +783,7 @@
             // listBox_AnimationList
             // 
             this.listBox_AnimationList.FormattingEnabled = true;
-            this.listBox_AnimationList.Location = new System.Drawing.Point(18, 35);
+            this.listBox_AnimationList.Location = new System.Drawing.Point(6, 75);
             this.listBox_AnimationList.Name = "listBox_AnimationList";
             this.listBox_AnimationList.Size = new System.Drawing.Size(150, 121);
             this.listBox_AnimationList.TabIndex = 2;
@@ -843,7 +820,7 @@
             // 
             // textBox_AnimationName
             // 
-            this.textBox_AnimationName.Location = new System.Drawing.Point(9, 238);
+            this.textBox_AnimationName.Location = new System.Drawing.Point(19, 32);
             this.textBox_AnimationName.Name = "textBox_AnimationName";
             this.textBox_AnimationName.Size = new System.Drawing.Size(128, 20);
             this.textBox_AnimationName.TabIndex = 1;
@@ -851,7 +828,7 @@
             // label_AnimationName
             // 
             this.label_AnimationName.AutoSize = true;
-            this.label_AnimationName.Location = new System.Drawing.Point(6, 222);
+            this.label_AnimationName.Location = new System.Drawing.Point(16, 16);
             this.label_AnimationName.Name = "label_AnimationName";
             this.label_AnimationName.Size = new System.Drawing.Size(84, 13);
             this.label_AnimationName.TabIndex = 0;
@@ -972,8 +949,6 @@
         private System.Windows.Forms.Button button_RenderRectTool;
         private System.Windows.Forms.Button button_DeleteAnimation;
         private System.Windows.Forms.Button button_DeleteFrame;
-        private System.Windows.Forms.Button button_EditFrame;
-        private System.Windows.Forms.Button button_DoneEdit;
     }
 }
 
