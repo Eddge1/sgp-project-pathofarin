@@ -33,6 +33,7 @@ public:
 	void GetNextTarget(void);
 	void GetPreviousTarget(void);
 	CUnits* GetCurrentTarget(void);
+	vector<CUnits*>& GetBattleUnits(void) { return m_vBattleUnits; }
 
 	void Initialize(void);
 	void Battle(float fElapsedTime);

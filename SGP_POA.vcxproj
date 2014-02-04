@@ -82,7 +82,10 @@
     <ClCompile Include="SGD Wrappers\CSGD_TextureManager.cpp" />
     <ClCompile Include="SGD Wrappers\CSGD_XAudio2.cpp" />
     <ClCompile Include="SGD Wrappers\SGD_Math.cpp" />
+    <ClCompile Include="source\AIBasicHealer.cpp" />
+    <ClCompile Include="source\AIBrute.cpp" />
     <ClCompile Include="source\AIController.cpp" />
+    <ClCompile Include="source\AIOrcLeader.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\AnimationSystem.cpp" />
     <ClCompile Include="source\AnimationTimeStamp.cpp" />
@@ -144,7 +147,10 @@
     <ClInclude Include="SGD Wrappers\IListener.h" />
     <ClInclude Include="SGD Wrappers\SGD_Math.h" />
     <ClInclude Include="SGD Wrappers\SGD_Util.h" />
+    <ClInclude Include="source\AIBasicHealer.h" />
+    <ClInclude Include="source\AIBrute.h" />
     <ClInclude Include="source\AIController.h" />
+    <ClInclude Include="source\AIOrcLeader.h" />
     <ClInclude Include="source\Animation.h" />
     <ClInclude Include="source\AnimationSystem.h" />
     <ClInclude Include="source\AnimationTimeStamp.h" />

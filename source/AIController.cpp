@@ -3,6 +3,7 @@
 
 CAIController::CAIController(void)
 {
+	m_pMiniGame = nullptr;
 }
 
 
