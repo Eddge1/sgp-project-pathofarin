@@ -397,7 +397,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("TEMP_Player_Walk_Right");
+	pTemp->SetAnimation("Player_Idle");
 	pTemp->SetCurrentFrame(0);
 	CPlayerUnit* pUnit = CreateTempPlayer();
 	temp->SetUnit(pUnit);
