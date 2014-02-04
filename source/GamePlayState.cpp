@@ -163,7 +163,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
 			pTemp->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
-			pTemp->GetAnimInfo()->SetAnimation("test");
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 
