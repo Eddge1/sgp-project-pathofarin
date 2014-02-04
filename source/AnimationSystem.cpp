@@ -57,85 +57,87 @@ void CAnimationSystem::LoadAnimations(std::string filePath)
 
 	std::string szTempName;
 	std::string szEvent;
+	int nCount;
 	int nFrames;
-
 	TiXmlElement* pAnim = pRoot->FirstChildElement("Animation_Info");
+	TiXmlElement* pBacktoRoot = pRoot->FirstChildElement("Animation_Info");
 	if (pAnim != nullptr)
 	{
-		CAnimation* pTempAnim = new CAnimation;
-		szTempName = pAnim->Attribute("Name");
-		pAnim->Attribute("Frames", &nFrames);
-		pTempAnim->SetAnimationName(szTempName);
-
-		int nRepeatValue;
-		pAnim->Attribute("repeat", &nRepeatValue);
-		if (nRepeatValue == 0)
-			pTempAnim->SetLooping(false);
-		else
-			pTempAnim->SetLooping(true);
-		std::wostringstream woss;
-		std::string szFileName;
-		szFileName = pAnim->Attribute("Texture");
-		woss << "assets/graphics/sprites/" << szFileName.c_str();
-		pTempAnim->SetImageID(CSGD_TextureManager::GetInstance()->LoadTexture(woss.str().c_str()));
-		pAnim = pAnim->FirstChildElement("Frame_Data");
-		if (pAnim != nullptr)
+		pRoot->Attribute("Count", &nCount);
+		for (int i = 0; i < nCount; i++)
 		{
-			pAnim = pAnim->FirstChildElement("Render");
+
+			CAnimation* pTempAnim = new CAnimation;
+			szTempName = pAnim->Attribute("Name");
+			pAnim->Attribute("Frames", &nFrames);
+			pTempAnim->SetAnimationName(szTempName);
+
+			int nRepeatValue;
+			pAnim->Attribute("repeat", &nRepeatValue);
+			if (nRepeatValue == 0)
+				pTempAnim->SetLooping(false);
+			else
+				pTempAnim->SetLooping(true);
+			std::wostringstream woss;
+			std::string szFileName;
+			szFileName = pAnim->Attribute("Texture");
+			woss << "assets/graphics/sprites/" << szFileName.c_str();
+			pTempAnim->SetImageID(CSGD_TextureManager::GetInstance()->LoadTexture(woss.str().c_str()));
+			pAnim = pAnim->FirstChildElement("Frame_Data");
 			if (pAnim != nullptr)
 			{
-				for (int i = 0; i < nFrames; i++)
+				pAnim = pAnim->FirstChildElement("Render");
+				if (pAnim != nullptr)
 				{
-
-					RECT rTempRenderRect = { };
-					int left, top, right, bottom;
-					int nAnchorX, nAnchorY;
-					double dDuration;
-					pAnim->Attribute("posX", &left);
-					pAnim->Attribute("posY", &top);
-					pAnim->Attribute("Width", &right);
-					pAnim->Attribute("Height", &bottom);
-					pAnim->Attribute("anchorX", &nAnchorX);
-					pAnim->Attribute("anchorY", &nAnchorY);
-					pAnim->Attribute("Duration", &dDuration);
-					szEvent = pAnim->Attribute("Event");
-
-
-					rTempRenderRect.left = left;
-					rTempRenderRect.top = top;
-					rTempRenderRect.right = left + right;
-					rTempRenderRect.bottom = top + bottom;
-
-					pAnim = pAnim->NextSiblingElement("ActiveCollision");
-					RECT rTempCollisionRect = { };
-					if (pAnim != nullptr)
+					for (int i = 0; i < nFrames; i++)
 					{
-
+						RECT rTempRenderRect = { };
+						int left, top, right, bottom;
+						int nAnchorX, nAnchorY;
+						double dDuration;
 						pAnim->Attribute("posX", &left);
 						pAnim->Attribute("posY", &top);
 						pAnim->Attribute("Width", &right);
 						pAnim->Attribute("Height", &bottom);
+						pAnim->Attribute("anchorX", &nAnchorX);
+						pAnim->Attribute("anchorY", &nAnchorY);
+						pAnim->Attribute("Duration", &dDuration);
+						szEvent = pAnim->Attribute("Event");
 
-						rTempCollisionRect.left = left - nAnchorX;
-						rTempCollisionRect.top = top - nAnchorY;
-						rTempCollisionRect.right = right - nAnchorX;
-						rTempCollisionRect.bottom = bottom - nAnchorY;
+						rTempRenderRect.left = left;
+						rTempRenderRect.top = top;
+						rTempRenderRect.right = left + right;
+						rTempRenderRect.bottom = top + bottom;
 
+						pAnim = pAnim->NextSiblingElement("ActiveCollision");
+						RECT rTempCollisionRect = { };
+						if (pAnim != nullptr)
+						{
+							pAnim->Attribute("posX", &left);
+							pAnim->Attribute("posY", &top);
+							pAnim->Attribute("Width", &right);
+							pAnim->Attribute("Height", &bottom);
 
-
+							rTempCollisionRect.left = left - nAnchorX;
+							rTempCollisionRect.top = top - nAnchorY;
+							rTempCollisionRect.right = right - nAnchorX;
+							rTempCollisionRect.bottom = bottom - nAnchorY;
+						}
+						CFrame* temp = new CFrame;
+						temp->SetRenderRect(rTempRenderRect);
+						temp->SetAnchor(nAnchorX, nAnchorY);
+						temp->SetCollisionRect(rTempCollisionRect);
+						temp->SetDuration((float)dDuration);
+						temp->SetEventID(szEvent);
+						pTempAnim->AddAnimation(temp);
+						pAnim = pAnim->NextSiblingElement("Render");
 					}
-					CFrame* temp = new CFrame;
-					temp->SetRenderRect(rTempRenderRect);
-					temp->SetAnchor(nAnchorX, nAnchorY);
-					temp->SetCollisionRect(rTempCollisionRect);
-					temp->SetDuration((float)dDuration);
-					temp->SetEventID(szEvent);
-					pTempAnim->AddAnimation(temp);
-					pAnim = pAnim->NextSiblingElement("Render");
 				}
 			}
+			loadedAnimation[szTempName] = pTempAnim;
+			pBacktoRoot = pBacktoRoot->NextSiblingElement("Animation_Info");
+			pAnim = pBacktoRoot;
 		}
-		loadedAnimation[szTempName] = pTempAnim;
 
 	}
 
@@ -166,7 +168,7 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 		aTimeStamp->AdvanceCurrentFrame();
 		aTimeStamp->SetTimeOnStamp(0.0f);
 	}
-	
+
 	if (pFrame->GetEventID() != "" /*&& m_bEventThrown == false*/)
 	{
 		m_bEventThrown = true;

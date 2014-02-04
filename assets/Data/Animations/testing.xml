@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data>
+<Animation_Data Count="3">
   <Animation_Info Name="" Frames="0" repeat="0" Texture="Fireball.png">
     <Frame_Data />
   </Animation_Info>
