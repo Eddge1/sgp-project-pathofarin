@@ -27,8 +27,11 @@ void CEnemyUnit::Update(float fElapsedTime)
 	{
 		if(m_bEventSent == false && m_fTimerToSlow < 1)
 		{
-			CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
-			m_bEventSent = true;
+			if(GetType() ==  OBJ_ENEMY_UNIT)
+			{
+				CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
+				m_bEventSent = true;
+			}
 		}
 
 		m_fTimerToSlow -= fElapsedTime;

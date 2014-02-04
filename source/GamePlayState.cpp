@@ -25,6 +25,9 @@
 #include "Warp.h"
 #include "GameOverState.h"
 #include "BasicAttack.h"
+#include "AIOrcLeader.h"
+#include "AIBasicHealer.h"
+#include "AIBrute.h"
 
 
 
@@ -627,6 +630,36 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Plant_dude_Battle");
 	pTemp->SetCurrentFrame(0);
+	temp->SetType(OBJ_ENEMY_UNIT);
+	if(input == "ManDrake")
+	{
+		int debug = 2;
+		if(debug == 0)
+		{
+			delete tempAI;
+			CAIOrcLeader* OrcTemp = new CAIOrcLeader;
+			tempAI = reinterpret_cast<CAIController*>(OrcTemp);
+			OrcTemp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+		else if(debug == 1)
+		{
+			delete tempAI;
+			CAIBasicHealer* Temp = new CAIBasicHealer;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+		else if(debug == 2)
+		{
+			delete tempAI;
+			CAIBrute* Temp = new CAIBrute;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+
+	}
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);

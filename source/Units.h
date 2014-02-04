@@ -43,6 +43,7 @@ public:
 	int GetAbilityPoints	( void ) const			{return m_nAbilityPoints;}
 	int GetExperience       ( void ) const			{return m_nExperience;}
 	bool GetTurn			( void ) const			{return m_bTurn;}
+	int GetMaxHealth        ( void ) const			{return m_nMaxHealth;}
 
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
