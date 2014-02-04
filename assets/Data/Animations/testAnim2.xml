@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Animation_Data>
+<Animation_Data Count="1">
 	<Animation_Info Name="TestAnimation2" Frames="3" repeat="1" Texture="PlantAttack.png">
 		<Frame_Data>
 			<Render posX="0" posY="0" Width="84" Height="70" anchorX="26" anchorY="68" Duration="3.0" Event=""/>
