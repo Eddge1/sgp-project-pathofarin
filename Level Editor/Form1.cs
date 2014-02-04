@@ -26,7 +26,9 @@ namespace SGP_PoA_LevelEditor
         bool bSelectColor = false;
         bool bCreateRect = false;
         bool bChangedLayers = false;
+        bool bFill = false;
         Rectangle rTemp;
+        Rectangle rFill;
         Color cTransparency = Color.Magenta;
 
         Size TileSize = new Size(64, 64);
@@ -90,30 +92,37 @@ namespace SGP_PoA_LevelEditor
                         {
                             int nX = x * TileSize.Width + L.OffSet.Width;
                             int nY = y * TileSize.Height + L.OffSet.Height;
-                            if (L.MyTiles[x, y].X != -1)
+                            if (nX > (panel2.AutoScrollPosition.X * -1) - TileSize.Width && nX < (panel2.AutoScrollPosition.X * -1) + panel2.ClientSize.Width + TileSize.Width)
                             {
-                                if (L.MyTiles[x, y].EventType == "WARP")
+                                if (nY > (panel2.AutoScrollPosition.Y * -1) - TileSize.Height && nY < (panel2.AutoScrollPosition.Y * -1) + panel2.ClientSize.Height + TileSize.Height)
                                 {
-                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
+
+                                    if (L.MyTiles[x, y].X != -1)
+                                    {
+                                        if (L.MyTiles[x, y].EventType == "WARP")
+                                        {
+                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
+                                        }
+                                        else if (L.MyTiles[x, y].EventType == "EVENT")
+                                        {
+                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
+                                        }
+                                        else if (L.MyTiles[x, y].EventType == "NPCS")
+                                        {
+                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 255, 0));
+                                        }
+                                        else
+                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                                TileSize.Width, TileSize.Height));
+                                    }
                                 }
-                                else if (L.MyTiles[x, y].EventType == "EVENT")
-                                {
-                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
-                                }
-                                else if (L.MyTiles[x, y].EventType == "NPCS")
-                                {
-                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                    new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                     TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 255, 0));
-                                }
-                                else
-                                    TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                        new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                        TileSize.Width, TileSize.Height));
                             }
                         }
                     }
@@ -146,6 +155,7 @@ namespace SGP_PoA_LevelEditor
 
 
 
+
             if (ShowGrid)
             {
                 myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
@@ -158,6 +168,11 @@ namespace SGP_PoA_LevelEditor
                 }
             }
 
+            if (bFill)
+            {
+                Rectangle rTemp = new Rectangle(rFill.X * TileSize.Width, rFill.Y * TileSize.Height, (rFill.Width - rFill.X) * TileSize.Width, (rFill.Height - rFill.Y) * TileSize.Height);
+                DX.DrawHollowRect(rTemp, Color.Blue, 3);
+            }
 
             DX.SpriteEnd();
             DX.DeviceEnd();
@@ -189,7 +204,7 @@ namespace SGP_PoA_LevelEditor
 
         public void Initialize()
         {
-
+            rFill = new Rectangle(-1, -1, -1, -1);
             cTransparency = Color.Black;
 
             selectedNPC = new myNPC();
@@ -204,7 +219,8 @@ namespace SGP_PoA_LevelEditor
 
             foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
             {
-                lstMaps.Items.Add(szMapID);
+                string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
+                lstMaps.Items.Add(szTemp);
             }
             cmbMode.Items.Clear();
             cmbMode.Items.Add("MAP_EDIT");
@@ -294,15 +310,77 @@ namespace SGP_PoA_LevelEditor
 
                 if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                 {
+                    if (bFill)
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            if (rFill.X == -1)
+                            {
+                                rFill.X = Temp.X;
+                                rFill.Y = Temp.Y;
+                            }
+                            else if (rFill.Width == -1)
+                            {
+                                if (rFill.X > Temp.X)
+                                {
+                                    int nTemp = rFill.X;
+                                    rFill.X = Temp.X;
+                                    rFill.Width = nTemp + 1;
+                                }
+                                else
+                                    rFill.Width = Temp.X + 1;
+                                if (rFill.Y > Temp.Y)
+                                {
+                                    int nTemp = rFill.Y;
+                                    rFill.Y = Temp.Y;
+                                    rFill.Height = nTemp + 1;
+                                }
+                                else
+                                    rFill.Height = Temp.Y + 1;
+                            }
+                            else
+                            {
+                                rFill = new Rectangle();
+                                rFill.X = Temp.X;
+                                rFill.Y = Temp.Y;
+                            }
+                        }
+                        else
+                        {
+                            if (rFill.X != -1 && rFill.Width != -1)
+                            {
+                                myLayers Ls = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+                                for (int x = rFill.X; x < rFill.Width; x++)
+                                {
+                                    for (int y = rFill.Y; y < rFill.Height; y++)
+                                    {
+                                        Ls.MyTiles[x, y].X = tileSelected.X;
+                                        Ls.MyTiles[x, y].Y = tileSelected.Y;
+                                    }
+                                }
+                                lstLayers.Items[lstLayers.SelectedIndex] = L;
+
+                                rFill = new Rectangle(-1, -1, -1, -1);
+                            }
+
+                        }
+                    }
                     if (e.Button == MouseButtons.Right)
                     {
-                        L.MyTiles[Temp.X, Temp.Y].X = -1;
-                        L.MyTiles[Temp.X, Temp.Y].Y = -1;
+                        if (bFill == false)
+                        {
+
+                            L.MyTiles[Temp.X, Temp.Y].X = -1;
+                            L.MyTiles[Temp.X, Temp.Y].Y = -1;
+                        }
                     }
                     else
                     {
-                        L.MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
-                        L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
+                        if (bFill == false)
+                        {
+                            L.MyTiles[Temp.X, Temp.Y].X = tileSelected.X;
+                            L.MyTiles[Temp.X, Temp.Y].Y = tileSelected.Y;
+                        }
                     }
                 }
                 else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "EVENT")
@@ -1021,16 +1099,10 @@ namespace SGP_PoA_LevelEditor
 
         private void button3_Click(object sender, EventArgs e)
         {
-            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
-            for (int x = 0; x < L.LayerSize.Width; x++)
-            {
-                for (int y = 0; y < L.LayerSize.Height; y++)
-                {
-                    L.MyTiles[x, y].X = tileSelected.X;
-                    L.MyTiles[x, y].Y = tileSelected.Y;
-                }
-            }
-            lstLayers.Items[lstLayers.SelectedIndex] = L;
+            if (bFill)
+                bFill = false;
+            else
+                bFill = true;
         }
 
 

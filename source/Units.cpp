@@ -1,17 +1,18 @@
 #include "Units.h"
 #include "BattleState.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 #include <sstream>
 
 
 CUnits::CUnits(void)
 {
 	SetType(OBJECT_UNIT);
-	m_nLevel = 0;
+	m_nLevel = 1;
 	m_nHealth = m_nMaxHealth = 100;
 	m_nAbilityPoints = m_nMaxAbilityPoints = 100;
 	m_nAttackPower	= 5;
-	m_nSpeed = 0;;
-
+	m_nSpeed = 0;
+	m_nExperience = 0; 
 	m_bTurn = false;
 }
 
@@ -96,3 +97,24 @@ void CUnits::Update(float fElapsedTime)
 
 void CUnits::HandleEvent( const CEvent* pEvent )
 { }
+
+void CUnits::GiveExperience		( int nAmount )
+{
+	int nToLevel = m_nLevel * m_nLevel * 100;
+	int nExp = m_nExperience + nAmount;
+	int nLevels = 0;
+	while( nExp > nToLevel)
+	{
+		nLevels++;
+		nExp -= nToLevel;
+		nToLevel = (nLevels + m_nLevel) * (nLevels + m_nLevel) * 100;
+	}
+
+	if(nLevels > 0)
+	{
+		if(GetType() == OBJ_PLAYER_UNIT)
+			CSGD_EventSystem::GetInstance()->SendEventNow("LEVEL_UP", &nLevels, nullptr, this);
+	}
+
+	m_nExperience = nExp;
+}

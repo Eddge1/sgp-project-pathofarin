@@ -24,8 +24,6 @@ class CBattleState : public CGameStates
 		DWORD Color;
 	};
 
-	std::vector<FloatingText*> m_vText;
-
 public:
 	static CBattleState* GetInstance( void );
 
@@ -72,11 +70,13 @@ private:
 	int m_nAPBar;
 	int m_nTarget;
 	int m_nGoldObtained;
-	int m_nExperience;
 	bool m_bVictory;
 	bool m_bDefeat;
+	bool m_bLeveled;
 	float m_fEndBatleTimer;
 	float m_fCancelTimer;
+	std::vector<FloatingText*> m_vText;
+	int m_nExperienceGained;
 
 	CBattleState(void);
 	virtual ~CBattleState(void);

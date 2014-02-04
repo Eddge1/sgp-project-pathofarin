@@ -41,6 +41,7 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.lblTileWidth = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.cmbMode = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.grpWarp = new System.Windows.Forms.GroupBox();
             this.lstMaps = new System.Windows.Forms.ListBox();
@@ -153,7 +153,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1264, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1262, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -251,6 +251,14 @@
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(68, 1);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.TabIndex = 20;
+            // 
             // panel2
             // 
             this.panel2.AutoScroll = true;
@@ -267,9 +275,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(198, 552);
+            this.button1.Location = new System.Drawing.Point(198, 586);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.Size = new System.Drawing.Size(71, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "ShowGrid";
             this.button1.UseVisualStyleBackColor = true;
@@ -399,8 +407,6 @@
             this.groupBox1.Controls.Add(this.txtEventBroadCast);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbMode);
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.lblTileWidth);
             this.groupBox1.Controls.Add(this.nudMapHeight);
@@ -455,7 +461,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(8, 119);
+            this.btnClear.Location = new System.Drawing.Point(11, 557);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(57, 23);
             this.btnClear.TabIndex = 23;
@@ -465,21 +471,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(80, 120);
+            this.button3.Location = new System.Drawing.Point(74, 557);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(36, 23);
             this.button3.TabIndex = 21;
             this.button3.Text = "Fill";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 1);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
-            this.label6.TabIndex = 20;
             // 
             // button2
             // 
@@ -501,7 +499,7 @@
             this.grpWarp.Controls.Add(this.label11);
             this.grpWarp.Controls.Add(this.label10);
             this.grpWarp.Controls.Add(this.label9);
-            this.grpWarp.Location = new System.Drawing.Point(1033, 182);
+            this.grpWarp.Location = new System.Drawing.Point(1033, 181);
             this.grpWarp.Name = "grpWarp";
             this.grpWarp.Size = new System.Drawing.Size(223, 201);
             this.grpWarp.TabIndex = 21;
@@ -532,6 +530,11 @@
             // nudWarpY
             // 
             this.nudWarpY.Location = new System.Drawing.Point(160, 149);
+            this.nudWarpY.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             this.nudWarpY.Name = "nudWarpY";
             this.nudWarpY.Size = new System.Drawing.Size(46, 20);
             this.nudWarpY.TabIndex = 6;
@@ -540,6 +543,11 @@
             // nudWarpX
             // 
             this.nudWarpX.Location = new System.Drawing.Point(56, 149);
+            this.nudWarpX.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             this.nudWarpX.Name = "nudWarpX";
             this.nudWarpX.Size = new System.Drawing.Size(46, 20);
             this.nudWarpX.TabIndex = 5;
@@ -585,7 +593,6 @@
             // 
             // grpNPC
             // 
-            this.grpNPC.Controls.Add(this.grpBlock);
             this.grpNPC.Controls.Add(this.label8);
             this.grpNPC.Controls.Add(this.lstAnimations);
             this.grpNPC.Controls.Add(this.btnNPCMove);
@@ -594,7 +601,7 @@
             this.grpNPC.Controls.Add(this.btnNpcCancel);
             this.grpNPC.Controls.Add(this.chkMoves);
             this.grpNPC.Controls.Add(this.chkHostile);
-            this.grpNPC.Location = new System.Drawing.Point(1033, 182);
+            this.grpNPC.Location = new System.Drawing.Point(1033, 193);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 201);
             this.grpNPC.TabIndex = 22;
@@ -697,9 +704,9 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(0, 0);
+            this.grpBlock.Location = new System.Drawing.Point(1033, 182);
             this.grpBlock.Name = "grpBlock";
-            this.grpBlock.Size = new System.Drawing.Size(223, 212);
+            this.grpBlock.Size = new System.Drawing.Size(221, 212);
             this.grpBlock.TabIndex = 12;
             this.grpBlock.TabStop = false;
             this.grpBlock.Text = "Block Editor";
@@ -861,7 +868,7 @@
             // lstLayers
             // 
             this.lstLayers.FormattingEnabled = true;
-            this.lstLayers.Location = new System.Drawing.Point(12, 552);
+            this.lstLayers.Location = new System.Drawing.Point(13, 586);
             this.lstLayers.Name = "lstLayers";
             this.lstLayers.Size = new System.Drawing.Size(179, 108);
             this.lstLayers.TabIndex = 0;
@@ -869,7 +876,7 @@
             // 
             // btnNewLayer
             // 
-            this.btnNewLayer.Location = new System.Drawing.Point(120, 666);
+            this.btnNewLayer.Location = new System.Drawing.Point(198, 642);
             this.btnNewLayer.Name = "btnNewLayer";
             this.btnNewLayer.Size = new System.Drawing.Size(71, 23);
             this.btnNewLayer.TabIndex = 24;
@@ -880,9 +887,9 @@
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(12, 666);
+            this.btnDelete.Location = new System.Drawing.Point(198, 671);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(56, 23);
+            this.btnDelete.Size = new System.Drawing.Size(71, 23);
             this.btnDelete.TabIndex = 25;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -1140,10 +1147,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1264, 762);
+            this.ClientSize = new System.Drawing.Size(1262, 762);
+            this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpUnits);
             this.Controls.Add(this.nudYOffset);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.nudXOffset);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);

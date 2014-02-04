@@ -26,6 +26,7 @@ CMainMenuState::CMainMenuState(void)
 	SetBackgroundImg(-1);
 	SetBackgroundMusic(-1);
 	SetSFXID(-1);
+	SetCursorIMG(-1);
 	m_nLogoID = -1;
 	m_nSelectionMenuID = -1;
 	m_fRotation = 0.0f;
@@ -35,6 +36,7 @@ CMainMenuState::CMainMenuState(void)
 
 CMainMenuState::~CMainMenuState(void)
 {
+	Sleep();
 }
 
 
@@ -61,18 +63,23 @@ void CMainMenuState::Activate(void)
 
 void CMainMenuState::Sleep(void)
 {
-	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
+	if(GetSFXID() != -1)
+		CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nLogoID);
+	if(m_nLogoID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nLogoID);
 	m_nLogoID = -1;
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nSelectionMenuID);
+	if(m_nSelectionMenuID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nSelectionMenuID);
 	m_nSelectionMenuID = -1;
-
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
-
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+	if(m_nWarriorID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
+	if(m_nRangerID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
+	if(m_nMageID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
+	if(GetCursorIMG() != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
 
 	SetCursorIMG(-1);
 	m_nWarriorID	= -1;

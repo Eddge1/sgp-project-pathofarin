@@ -36,29 +36,32 @@ CBattleState::CBattleState(void)
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
 	m_nForestBattleID = -1;
+	m_nMenuImage = -1;
+	m_nMenuSelectionImage = -1;
+	m_nVictoryMusic = -1;
+	m_nDefeatMusic = -1;
+	SetBackgroundMusic(-1);
+	SetBackgroundImg(-1);
+	SetCursorIMG(-1);
+	SetSFXID(-1);
+	m_bLeveled = false;
 }
 
 CBattleState::~CBattleState(void)
 {
-	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		m_vBattleUnits[i]->Release();
-
+	Sleep();
 }
 
 void CBattleState::Activate(void)
 {
-	if(GetBackgroundMusic() != -1)
-	{
-		int nTemp = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm"));
-		SetBackgroundMusic(nTemp);
-		CSGD_XAudio2::GetInstance()->MusicPlaySong(nTemp);
-		m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
-		m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
-	}
+	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm")));
+	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
+	m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
+	m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 
-	m_nMenuImage =			CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuImage		  =	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
-	m_nForestBattleID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nForestBattleID	  = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
 	m_pFont = CGame::GetInstance()->GetFont();
 	m_bDefeat = false;
 	m_bVictory = false;
@@ -85,14 +88,27 @@ void CBattleState::Sleep(void)
 
 	SetSender(nullptr);
 	SetPlayer(nullptr);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuSelectionImage);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuImage);
-	CSGD_TextureManager::GetInstance()->UnloadTexture(m_nForestBattleID);
+	if(m_nMenuSelectionImage != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuSelectionImage);
+	if(m_nMenuImage != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMenuImage);
+	if(m_nForestBattleID != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nForestBattleID);
 
+	if(GetBackgroundMusic() != -1)
+		CSGD_XAudio2::GetInstance()->MusicUnloadSong(GetBackgroundMusic());
+	if(m_nDefeatMusic != -1)
+		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nDefeatMusic);
+	if(m_nVictoryMusic != -1)
+		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nVictoryMusic);
 
+	SetBackgroundMusic(-1);
+	m_nDefeatMusic = -1;
+	m_nVictoryMusic = -1;
 	m_nMenuImage = -1;
 	m_nMenuSelectionImage = -1;
 	m_nForestBattleID = -1;
+	m_bLeveled = false;
 }
 
 bool CBattleState::Input(void)
@@ -183,10 +199,6 @@ void CBattleState::Render(void)
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			}
-
-			RECT Player = { long(m_vBattleUnits[i]->GetPosX()), long(m_vBattleUnits[i]->GetPosY()), long(m_vBattleUnits[i]->GetPosX()) + 20, long(m_vBattleUnits[i]->GetPosY()) + 20 };
-			pD3D->DrawHollowRect(Player, D3DCOLOR_XRGB( 0,0,0 ));
-
 		}
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
@@ -219,9 +231,16 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
-
-		RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() + 5),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 10),  long(m_vBattleUnits[m_nTurn]->GetPosX() + 10),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 5) };
-		pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		{
+			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -30),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -25),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 20) };
+			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		}
+		else
+		{
+			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -20),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -15),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 30) };
+			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+		}
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
@@ -229,7 +248,7 @@ void CBattleState::Render(void)
 			{
 				if(pTemp->GetReady())
 				{
-					RECT temp = { long(m_vBattleUnits[m_nTarget]->GetPosX() + 5),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 10),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 10),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 5) };
+					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
 					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 					if(pTemp->GetCasting())
 					{
@@ -303,8 +322,14 @@ void CBattleState::Render(void)
 			temp.bottom = 300;
 			CSGD_Direct3D::GetInstance()->DrawHollowRect(temp,  D3DCOLOR_XRGB(0,0,0));
 			CBitmapFont* pFont = CGame::GetInstance()->GetFont();
-			pFont->Draw( _T("Items: 0"), 320, 120, 0.8f, D3DCOLOR_XRGB(0,0,255));
-			pFont->Draw( _T("Exp: 0"), 320, 150, 0.8f, D3DCOLOR_XRGB(0,0,255));
+
+			woss.str(_T(""));
+			woss << "Items: 0";
+			pFont->Draw(woss.str().c_str(), 320, 120, 0.8f, D3DCOLOR_XRGB(0,0,255));
+
+			woss.str(_T(""));
+			woss << "Exp: " << m_nExperienceGained;
+			pFont->Draw(woss.str().c_str(), 320, 150, 0.8f, D3DCOLOR_XRGB(0,0,255));
 
 		}
 		else if(m_bDefeat)
@@ -382,6 +407,7 @@ void CBattleState::Battle(float fElapsedTime)
 				{
 					if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 						m_eCurrentPhase = BP_END;
+					m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
 					m_vBattleUnits[i]->Release();
 					m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
 					GetNextTarget();
@@ -432,9 +458,11 @@ void CBattleState::EndBattle(void)
 		else
 		{
 			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
+			m_vBattleUnits[0]->GiveExperience(m_nExperienceGained);
 		}
 		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+		m_nExperienceGained = 0;
 	}
 
 }

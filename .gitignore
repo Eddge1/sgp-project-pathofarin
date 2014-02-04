@@ -12,3 +12,10 @@
 /Level Editor/Assets/SGP_PoA_LevelEditor.exe.config
 /Level Editor/Assets/SGP_PoA_LevelEditor.vshost.exe.config
 /Level Editor/*.manifest
+
+/Animation Editor/*.exe
+/Animation Editor/Animation Editor.exe.config
+/Animation Editor/obj/Debug
+/Animation Editor/Assets/Animation Editor.exe.config
+/Animation Editor/Assets/Animation Editor.vshost.exe.config
+/Animation Editor/*.manifest

@@ -14,8 +14,7 @@ class CUnits :
 	int m_nSpeed;
 
 	bool m_bTurn;
-
-	//int m_nExperience;
+	int m_nExperience;
 	//int m_nGold;
 	//int m_nAvailStats;
 	//std::map<string, CItem> m_mInventory
@@ -42,13 +41,14 @@ public:
 	int GetAttack			( void ) const			{return m_nAttackPower;}
 	int GetHealth			( void ) const			{return m_nHealth;}
 	int GetAbilityPoints	( void ) const			{return m_nAbilityPoints;}
+	int GetExperience       ( void ) const			{return m_nExperience;}
 	bool GetTurn			( void ) const			{return m_bTurn;}
 
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
 	void SetAttack			( int nAmount )		{m_nAttackPower = nAmount; }
-
+	void GiveExperience		( int nAmount );
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 
 	/*

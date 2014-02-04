@@ -25,11 +25,5 @@ void CMiniGames::Render()
 
 void CMiniGames::SetOwner(CUnits* pOwner)
 {
-	if(m_pMaster != nullptr)
-		m_pMaster->Release();
-	
 	m_pMaster = pOwner;
-
-	if(m_pMaster)
-		m_pMaster->AddRef();
 }

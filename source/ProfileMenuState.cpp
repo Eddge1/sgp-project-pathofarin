@@ -19,10 +19,15 @@ CProfileMenuState::CProfileMenuState(void)
 	m_eCurrState = PS_SELECT;
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
+	SetBackgroundImg(-1);
+	SetBackgroundMusic(-1);
+	SetSFXID(-1);
+	SetCursorIMG(-1);
 }
 
 CProfileMenuState::~CProfileMenuState(void)
 {
+	Sleep();
 }
 
 CProfileMenuState* CProfileMenuState::GetInstance( void )
@@ -51,9 +56,12 @@ void CProfileMenuState::Activate()
 
 void CProfileMenuState::Sleep()
 {
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
+	if(GetBackgroundImg() != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
+	if(GetCursorIMG() != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+	if(GetSFXID() != -1)
+		CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
@@ -324,9 +332,9 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("Name", szTemp.c_str());
 		pSlot->SetAttribute("Level", 1);
 		pSlot->SetAttribute("Class", 0);
-		pSlot->SetAttribute("posX", 0);
-		pSlot->SetAttribute("posY", 0);
-
+		pSlot->SetAttribute("posX", 488);
+		pSlot->SetAttribute("posY", 420);
+		pSlot->SetAttribute("Zone", "testing");
 		pRoot->LinkEndChild(pSlot);
 		doc.SaveFile(szFileName.c_str());
 	}
@@ -349,6 +357,7 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->Attribute("posY", &nTemp);
 		pPlayer->SetPosY(float(nTemp));
 		pPlayer->SetName(szFileName);
+		pPlayer->SetZone(pSlot->Attribute("Zone"));
 		m_vCharacterList.push_back(pPlayer);
 	}
 }
@@ -369,8 +378,10 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
 		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
 		pSlot->SetAttribute("Class", 0);
-		pSlot->SetAttribute("posX", pTemp->GetPosX());
-		pSlot->SetAttribute("posY", pTemp->GetPosY());
+		pSlot->SetAttribute("posX", int(pTemp->GetPosX()));
+		pSlot->SetAttribute("posY", int(pTemp->GetPosY()));
+		pSlot->SetAttribute("Zone", pTemp->GetZone().c_str());
+
 		pTemp->SetName(szFileName);
 	}
 	pRoot->LinkEndChild(pSlot);
