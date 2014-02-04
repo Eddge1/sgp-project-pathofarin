@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Player_Idle" Frames="2" repeat="1" Texture="5207.png">
+    <Frame_Data>
+      <Render posX="114" posY="7" Width="17" Height="18" anchorX="7" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="17" Height="18" />
+      <Render posX="132" posY="6" Width="17" Height="19" anchorX="7" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="17" Height="19" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Player_Walk_Up" Frames="2" repeat="1" Texture="5207.png">
+    <Frame_Data>
+      <Render posX="43" posY="30" Width="17" Height="18" anchorX="8" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="17" Height="18" />
+      <Render posX="61" posY="29" Width="16" Height="18" anchorX="8" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="16" Height="18" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Player_Walk_Down" Frames="2" repeat="1" Texture="5207.png">
+    <Frame_Data>
+      <Render posX="44" posY="6" Width="16" Height="19" anchorX="8" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="18" Height="20" />
+      <Render posX="61" posY="5" Width="17" Height="20" anchorX="7" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="19" Height="21" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Player_Walk_Left" Frames="2" repeat="1" Texture="5207.png">
+    <Frame_Data>
+      <Render posX="83" posY="30" Width="13" Height="18" anchorX="8" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="13" Height="18" />
+      <Render posX="98" posY="30" Width="13" Height="18" anchorX="8" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="13" Height="18" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Player_Walk_Right" Frames="2" repeat="1" Texture="5207.png">
+    <Frame_Data>
+      <Render posX="80" posY="6" Width="16" Height="19" anchorX="8" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="16" Height="19" />
+      <Render posX="97" posY="6" Width="15" Height="19" anchorX="8" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="16" Height="19" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
