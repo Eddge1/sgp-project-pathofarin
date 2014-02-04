@@ -10,6 +10,8 @@ class CProfileMenuState : public CGameStates
 	bool m_bLeft;
 	float m_fOffSetX;
 	std::vector<CPlayer*> m_vCharacterList;
+	std::vector<std::vector<int>> m_vWorldData;
+
 
 public:
 

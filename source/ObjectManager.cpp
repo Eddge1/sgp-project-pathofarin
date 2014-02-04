@@ -75,7 +75,8 @@ void CObjectManager::AddObject(CObjects* pObject, unsigned int unLayer)
 {
 	if(unLayer >= m_vObjects.size())
 		m_vObjects.resize(unLayer + 1);
-
+	if(FindItem(pObject) != -1)
+		return;
 	m_vObjects[unLayer].push_back( pObject );
 	pObject->AddRef();
 }
@@ -153,3 +154,51 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 	m_bIterating = false;
 
 }
+
+int CObjectManager::FindItem(CObjects* pObject)
+{
+	if(pObject == nullptr)
+		return -1;
+
+	for(unsigned int i = 0; i < m_vObjects.size(); i++)
+	{
+		ObjectVector& temp = m_vObjects[i];
+		for(unsigned int j = 0; j < temp.size(); j++)
+		{
+			if(temp[j] == pObject)
+			{
+				return j;
+			}
+		}
+	}
+	return -1;
+}
+
+void CObjectManager::DeactiveObject(int nID, unsigned int nLayer)
+{
+	if(nLayer >= m_vObjects.size())
+		return;
+	ObjectVector search = m_vObjects[nLayer];
+	if(nID >= search.size())
+		return;
+	search[nID]->SetActive(false);
+	search[nID]->SetRender(false);
+}
+
+void CObjectManager::ActivateAll(unsigned int nLayer)
+{
+	if(m_vObjects.size() >= nLayer)
+		return;
+	for(unsigned int i = 0; i < m_vObjects.size(); i++)
+	{
+		ObjectVector& temp = m_vObjects[i];
+		for(int j = temp.size() - 1; j >= 0; j--)
+		{
+			if(temp[j]->GetType() == OBJ_NPC)
+			{
+				temp[j]->SetActive(true);
+			}
+		}
+	}
+}
+

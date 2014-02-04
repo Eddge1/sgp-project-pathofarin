@@ -69,6 +69,13 @@ void CGamePlayState::Activate(void)
 	switch (m_eCurrPhase)
 	{
 	case CGamePlayState::GP_NAV:
+		if(m_pPlayer != nullptr)
+		{
+			TransitionWorld(m_pPlayer->GetZone());
+			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
+			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+		}
 		break;
 	case CGamePlayState::GP_BATTLE:
 		m_eCurrPhase = GP_NAV;
@@ -137,10 +144,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
 			pTemp->Release();
 
-
-
 			LoadWorld("testing.xml");
-			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 
 			pTemp = new CNpcs();
 			pTemp->SetActive(true);
@@ -173,7 +177,6 @@ void CGamePlayState::Activate(void)
 			pTemp->Release();
 			pTemp = nullptr;
 
-			TransitionWorld(m_pPlayer->GetZone());
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -192,10 +195,6 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Plantdude.xml");
-
-
-			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
-			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
@@ -383,7 +382,6 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_eCurrPhase = GP_BATTLE;
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
-		m_eCurrPhase = GP_NAV;
 	}
 	else if(pEvent->GetEventID() == "GAME_OVER")
 		m_eCurrPhase = GP_END;
@@ -603,10 +601,12 @@ CUnits* CGamePlayState::GetPlayerUnit()
 
 void CGamePlayState::TransitionWorld(std::string szNewWorld)
 {
-	if(m_sCurrWorld == szNewWorld || szNewWorld == "")
+	if(m_sCurrWorld == szNewWorld + ".xml" || szNewWorld == "")
 		return;
 	m_pPlayer->SetZone(szNewWorld);
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
+	m_mWorldManager[m_sCurrWorld]->ActivateNPCs();
+	m_mWorldManager[m_sCurrWorld]->ClearNPCList();
 
 	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld + ".xml";
@@ -677,4 +677,9 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->GiveExperience(90);
 
 	return temp;
+}
+
+CWorld* CGamePlayState::GetWorld(string szName) 
+{
+	return m_mWorldManager[szName];
 }
