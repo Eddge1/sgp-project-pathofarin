@@ -15,6 +15,7 @@
 #include "AIController.h"
 #include "BasicAttack.h"
 #include "Npcs.h"
+#include "VictoryState.h"
 #include <algorithm>
 using namespace std;
 
@@ -67,6 +68,7 @@ void CBattleState::Activate(void)
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
+	m_nExperienceGained = 0;
 
 	// TEMP ENEMIES/Player
 	m_eCurrentPhase = BP_INIT;
@@ -109,6 +111,7 @@ void CBattleState::Sleep(void)
 	m_nMenuSelectionImage = -1;
 	m_nForestBattleID = -1;
 	m_bLeveled = false;
+	m_nExperienceGained = 0;
 }
 
 bool CBattleState::Input(void)
@@ -313,24 +316,6 @@ void CBattleState::Render(void)
 			woss.str(_T(""));
 			woss << "Victory!";
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
-			// Display what they've won. TODO; come back later and fix.
-
-			RECT temp;
-			temp.left = 300;
-			temp.right = 500;
-			temp.top = 100;
-			temp.bottom = 300;
-			CSGD_Direct3D::GetInstance()->DrawHollowRect(temp,  D3DCOLOR_XRGB(0,0,0));
-			CBitmapFont* pFont = CGame::GetInstance()->GetFont();
-
-			woss.str(_T(""));
-			woss << "Items: 0";
-			pFont->Draw(woss.str().c_str(), 320, 120, 0.8f, D3DCOLOR_XRGB(0,0,255));
-
-			woss.str(_T(""));
-			woss << "Exp: " << m_nExperienceGained;
-			pFont->Draw(woss.str().c_str(), 320, 150, 0.8f, D3DCOLOR_XRGB(0,0,255));
-
 		}
 		else if(m_bDefeat)
 		{
@@ -362,11 +347,6 @@ void CBattleState::Initialize(void)
 			temp->GetUnit(i)->AddRef();
 		}
 	}
-
-
-	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 1", 100.0f, 100.0f, 12, 5, 20));
-	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 2", 200.0f, 200.0f, 5, 90, 15));
-	//m_vBattleUnits.push_back(CreateTempEnemy("Enemy 3", 100.0f, 300.0f, 9, 200, 150));
 
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
 
@@ -458,11 +438,15 @@ void CBattleState::EndBattle(void)
 		else
 		{
 			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
-			m_vBattleUnits[0]->GiveExperience(m_nExperienceGained);
 		}
 		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
-		CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
-		m_nExperienceGained = 0;
+		if(m_bVictory)
+		{
+			CVictoryState::GetInstance()->SetExperience(m_nExperienceGained);
+			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
+		}
+		else
+			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 	}
 
 }

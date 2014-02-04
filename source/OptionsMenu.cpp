@@ -16,11 +16,12 @@ COptionsMenu::COptionsMenu(void)
 	SetBackgroundMusic(-1);
 	SetSFXID(-1);
 	SetCursorIMG(-1);
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
 }
 
 COptionsMenu::~COptionsMenu(void)
 {
-	CGame::GetInstance()->ChangeState(nullptr);
+	Sleep();
 }
 
 COptionsMenu* COptionsMenu::GetInstance( void )
@@ -38,25 +39,11 @@ void COptionsMenu::Activate( void )
 
 	m_nMusicVolume = int(CSGD_XAudio2::GetInstance()->MusicGetMasterVolume() * 100);
 	m_nSFXVolume = int(CSGD_XAudio2::GetInstance()->SFXGetMasterVolume() * 100);
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
-	//SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_MainMenu.png")));
-
 
 }
 
 void COptionsMenu::Sleep( void )
 {
-	if(m_bIsWindow != CGame::GetInstance()->GetIsWindow())
-	{
-		CGame::GetInstance()->SetWindow(m_bIsWindow);
-		CSGD_Direct3D::GetInstance()->Resize(CGame::GetInstance()->GetScreenWidth(),CGame::GetInstance()->GetScreenHeight(),CGame::GetInstance()->GetIsWindow());
-	}
-	if(m_bIsMemory != CGame::GetInstance()->GetMemory())
-		CGame::GetInstance()->SetMemory(m_bIsMemory);
-	CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
-	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
-	SetSFXID(-1);
-	SetBackgroundImg(-1);
 
 }
 
@@ -113,11 +100,18 @@ bool COptionsMenu::Input( void )
 	if(!m_bSubMenu)
 	{
 		if(pDI->KeyPressed(DIK_ESCAPE) || pDI->JoystickButtonPressed(2))
+		{
 			CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+			CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
+
+		}
 		else if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
 		{
 			if(GetCursorSelection() ==3)
+			{
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+				CGame::GetInstance()->CreateConfig(m_nMusicVolume, m_nSFXVolume, m_bIsWindow, m_bIsMemory);
+			}
 			else
 				m_bSubMenu = true;
 
@@ -173,9 +167,13 @@ bool COptionsMenu::Input( void )
 				break;
 			case 1:
 				m_bIsWindow = true;
+				CGame::GetInstance()->SetWindow(m_bIsWindow);
+				CSGD_Direct3D::GetInstance()->Resize(CGame::GetInstance()->GetScreenWidth(),CGame::GetInstance()->GetScreenHeight(),CGame::GetInstance()->GetIsWindow());
 				break;
 			case 2:
 				m_bIsMemory = false;
+				CGame::GetInstance()->SetMemory(m_bIsMemory);
+
 				break;
 			default:
 				break;
@@ -209,10 +207,14 @@ bool COptionsMenu::Input( void )
 				break;
 			case 1:
 				m_bIsWindow = false;
+				CGame::GetInstance()->SetWindow(m_bIsWindow);
+				CSGD_Direct3D::GetInstance()->Resize(CGame::GetInstance()->GetScreenWidth(),CGame::GetInstance()->GetScreenHeight(),CGame::GetInstance()->GetIsWindow());
 
 				break;
 			case 2:
 				m_bIsMemory = true;
+				CGame::GetInstance()->SetMemory(m_bIsMemory);
+
 				break;
 			default:
 				break;

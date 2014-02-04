@@ -14,6 +14,7 @@ CUnits::CUnits(void)
 	m_nSpeed = 0;
 	m_nExperience = 0; 
 	m_bTurn = false;
+	m_nAvailStats = 0;
 }
 
 
@@ -110,11 +111,99 @@ void CUnits::GiveExperience		( int nAmount )
 		nToLevel = (nLevels + m_nLevel) * (nLevels + m_nLevel) * 100;
 	}
 
-	if(nLevels > 0)
-	{
-		if(GetType() == OBJ_PLAYER_UNIT)
-			CSGD_EventSystem::GetInstance()->SendEventNow("LEVEL_UP", &nLevels, nullptr, this);
-	}
+	m_nLevel += nLevels;
+	m_nAvailStats += (5 * nLevels);
 
 	m_nExperience = nExp;
+}
+
+bool CUnits::decrStat()
+{
+	if(m_nAvailStats > 0)
+	{
+		m_nAvailStats--;
+		return true;
+	}
+	return false;
+
+}
+
+bool CUnits::incrStat()
+{
+	if(m_nAvailStats + 1 <= (m_nLevel -1) * 5)
+	{
+		m_nAvailStats++;
+		return true;
+	}
+	return false;
+}
+
+bool CUnits::incrAttack()
+{
+	if(decrStat())
+	{
+		m_nAttackPower += 1;
+		return true;
+	}
+	else
+		return false;
+}
+
+bool CUnits::decrAttack()
+{
+	if(incrStat())
+	{
+		m_nAttackPower-= 1;
+		return true;
+	}
+	return false;
+}
+
+bool CUnits::incrHealth()
+{
+	if(decrStat())
+	{
+		m_nMaxHealth += 10;
+		m_nHealth = m_nMaxHealth;
+		return true;
+	}
+	else
+		return false;
+
+}
+
+bool CUnits::decrHealth()
+{
+	if(incrStat())
+	{
+		m_nMaxHealth -= 10;
+		m_nHealth = m_nMaxHealth;
+		return true;
+	}
+	return false;
+
+}
+
+bool CUnits::incrAbility()
+{
+	if(decrStat())
+	{
+		m_nMaxAbilityPoints += 10;
+		m_nAbilityPoints = m_nMaxAbilityPoints;
+		return true;
+	}
+	else
+		return false;
+
+}
+
+bool CUnits::decrAbility()
+{
+	if(incrStat())
+	{
+		m_nMaxAbilityPoints -= 10;
+		m_nAbilityPoints = m_nMaxAbilityPoints;
+		return true;
+	}
+	return false;
 }
