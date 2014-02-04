@@ -25,6 +25,9 @@
 #include "Warp.h"
 #include "GameOverState.h"
 #include "BasicAttack.h"
+#include "AIOrcLeader.h"
+#include "AIBasicHealer.h"
+#include "AIBrute.h"
 
 
 
@@ -146,7 +149,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(420);
 			pTemp->AddWaypoint(200,420);
 			pTemp->AddWaypoint(200,260);
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			pTemp->GetAnimInfo()->SetAnimation("Tree_Walk");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
@@ -178,10 +181,12 @@ void CGamePlayState::Activate(void)
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
+			/*CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");*/
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Overworld_Warrior.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
@@ -627,6 +632,36 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Plant_dude_Battle");
 	pTemp->SetCurrentFrame(0);
+	temp->SetType(OBJ_ENEMY_UNIT);
+	if(input == "ManDrake")
+	{
+		int debug = 1;
+		if(debug == 0)
+		{
+			delete tempAI;
+			CAIOrcLeader* OrcTemp = new CAIOrcLeader;
+			tempAI = reinterpret_cast<CAIController*>(OrcTemp);
+			OrcTemp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+		else if(debug == 1)
+		{
+			delete tempAI;
+			CAIBasicHealer* Temp = new CAIBasicHealer;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+		else if(debug == 2)
+		{
+			delete tempAI;
+			CAIBrute* Temp = new CAIBrute;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+			temp->SetType(OBJ_LEADER);
+		}
+
+	}
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);

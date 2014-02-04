@@ -71,6 +71,7 @@ namespace Animation_Editor
             lFrameList = new List<CFrame>();
             szAnimationName = "";
             bAnimationLooping = false;
+            lFrameList.Clear();
         }
 
         public bool AnimationLooping
@@ -135,8 +136,10 @@ namespace Animation_Editor
 
             listBox_AnimationList.Items.Clear();
             listBox_FrameList.Items.Clear();
-            AnimationSet.Clear();
-
+            AnimationSet = new List<CAnimation>();
+            tempFrameList = new List<CFrame>();
+            listBox_AnimationList.SelectedIndex = -1;
+            listBox_FrameList.SelectedIndex = -1;
 
             D3D.Initialize(splitContainer1.Panel2, false);
             D3D.AddRenderTarget(pictureBox_AnimationPreview);
@@ -155,13 +158,22 @@ namespace Animation_Editor
             if (bPlaying == true)
             {
                 sw.Start();
-                CFrame playFrame = (CFrame)listBox_FrameList.SelectedItem;
+                //CFrame playFrame = (CFrame)listBox_FrameList.SelectedItem;
+                CFrame playFrame = (CFrame)tempFrameList[listBox_FrameList.SelectedIndex];
+
                 if (sw.ElapsedMilliseconds > playFrame.Duration * 1000)
                 {
                     if (listBox_FrameList.SelectedIndex > -1)
                     {
                         if (listBox_FrameList.SelectedIndex == listBox_FrameList.Items.Count - 1)
-                            listBox_FrameList.SelectedIndex = 0;
+                        {
+                            //CAnimation loopCheck = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
+                            CAnimation loopCheck = (CAnimation)AnimationSet[listBox_AnimationList.SelectedIndex];
+                            if (checkBox_AnimationLooping.Checked)
+                                listBox_FrameList.SelectedIndex = 0;
+                            else
+                                bPlaying = false;
+                        }
                         else
                             listBox_FrameList.SelectedIndex++;
                         sw.Restart();
@@ -182,18 +194,21 @@ namespace Animation_Editor
                 TM.Draw(nImageID, splitContainer1.Panel2.AutoScrollPosition.X, splitContainer1.Panel2.AutoScrollPosition.Y);
             }
 
-
-            for (int i = 0; i < listBox_FrameList.Items.Count; i++)
+            if (listBox_AnimationList.SelectedIndex > 0)
             {
-                CFrame temp = (CFrame)listBox_FrameList.Items[i];
-                D3D.DrawHollowRect(temp.RenderRect, Color.FromArgb(255, 255, 255, 0), 1);
-                D3D.DrawHollowRect(temp.CollisionRect, Color.FromArgb(255, 0, 255, 255), 1);
-                Rectangle largePoint = new Rectangle();
-                largePoint.X = temp.Anchor.X - 2;
-                largePoint.Y = temp.Anchor.Y - 2;
-                largePoint.Width = 4;
-                largePoint.Height = 4;
-                D3D.DrawRect(largePoint, Color.FromArgb(255, 0, 0, 255));
+                for (int i = 0; i < AnimationSet[listBox_AnimationList.SelectedIndex].FrameList.Count; i++)
+                {
+                    tempFrameList = AnimationSet[listBox_AnimationList.SelectedIndex].FrameList;
+                    CFrame temp = (CFrame)tempFrameList[i];
+                    D3D.DrawHollowRect(temp.RenderRect, Color.FromArgb(255, 255, 255, 0), 1);
+                    D3D.DrawHollowRect(temp.CollisionRect, Color.FromArgb(255, 0, 255, 255), 1);
+                    Rectangle largePoint = new Rectangle();
+                    largePoint.X = temp.Anchor.X - 2;
+                    largePoint.Y = temp.Anchor.Y - 2;
+                    largePoint.Width = 4;
+                    largePoint.Height = 4;
+                    D3D.DrawRect(largePoint, Color.FromArgb(255, 0, 0, 255));
+                }
             }
 
 
@@ -226,7 +241,8 @@ namespace Animation_Editor
             {
                 if (listBox_FrameList.SelectedIndex > -1)
                 {
-                    CFrame PreviewRect = (CFrame)listBox_FrameList.SelectedItem;
+                    tempFrameList = AnimationSet[listBox_AnimationList.SelectedIndex].FrameList;
+                    CFrame PreviewRect = (CFrame)tempFrameList[listBox_FrameList.SelectedIndex];
                     TM.Draw(nImageID, 128 - PreviewRect.Anchor.X,
                        128 - PreviewRect.Anchor.Y, 1.0f, 1.0f, PreviewRect.RenderRect);
                 }
@@ -259,9 +275,11 @@ namespace Animation_Editor
             else
             {
                 XElement xRoot = new XElement("Animation_Data");
-                for (int j = 0; j < listBox_AnimationList.Items.Count; j++)
+                XAttribute xCount = new XAttribute("Count", AnimationSet.Count);
+                xRoot.Add(xCount);
+                for (int j = 0; j < AnimationSet.Count; j++)
                 {
-                    CAnimation cTemp = (CAnimation)listBox_AnimationList.Items[j];
+                    CAnimation cTemp = (CAnimation)AnimationSet[j];
                     XElement xInfo = new XElement("Animation_Info");
                     XAttribute xName = new XAttribute("Name", cTemp.AnimationName);
                     XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);
@@ -298,7 +316,7 @@ namespace Animation_Editor
                         XAttribute xHeight = new XAttribute("Height", cTemp.FrameList[i].RenderRect.Height);
                         XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].Anchor.X);
                         XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].Anchor.Y);
-                        XAttribute xDuration = new XAttribute("Duration", cTemp.FrameList[i].Duration);
+                        XAttribute xDuration = new XAttribute("Duration", cTemp.FrameList[i].Duration.ToString());
                         XAttribute xEvent = new XAttribute("Event", cTemp.FrameList[i].EventID);
 
                         xRender.Add(xPosX);
@@ -346,9 +364,11 @@ namespace Animation_Editor
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 XElement xRoot = new XElement("Animation_Data");
-                for (int j = 0; j < listBox_AnimationList.Items.Count; j++)
+                XAttribute xCount = new XAttribute("Count", AnimationSet.Count);
+                xRoot.Add(xCount);
+                for (int j = 0; j < AnimationSet.Count; j++)
                 {
-                    CAnimation cTemp = (CAnimation)listBox_AnimationList.Items[j];
+                    CAnimation cTemp = (CAnimation)AnimationSet[j];
                     XElement xInfo = new XElement("Animation_Info");
                     XAttribute xName = new XAttribute("Name", cTemp.AnimationName);
                     XAttribute xFrameCount = new XAttribute("Frames", cTemp.FrameList.Count);
@@ -377,15 +397,16 @@ namespace Animation_Editor
 
                     for (int i = 0; i < cTemp.FrameList.Count; i++)
                     {
+                        CFrame saveOut = cTemp.FrameList[i];
                         XElement xRender = new XElement("Render");
-                        XAttribute xPosX = new XAttribute("posX", cTemp.FrameList[i].RenderRect.X);
-                        XAttribute xPosY = new XAttribute("posY", cTemp.FrameList[i].RenderRect.Y);
-                        XAttribute xWidth = new XAttribute("Width", cTemp.FrameList[i].RenderRect.Width);
-                        XAttribute xHeight = new XAttribute("Height", cTemp.FrameList[i].RenderRect.Height);
-                        XAttribute xAnchorX = new XAttribute("anchorX", cTemp.FrameList[i].Anchor.X);
-                        XAttribute xAnchorY = new XAttribute("anchorY", cTemp.FrameList[i].Anchor.Y);
-                        XAttribute xDuration = new XAttribute("Duration", cTemp.FrameList[i].Duration);
-                        XAttribute xEvent = new XAttribute("Event", cTemp.FrameList[i].EventID);
+                        XAttribute xPosX = new XAttribute("posX", saveOut.RenderRect.X);
+                        XAttribute xPosY = new XAttribute("posY", saveOut.RenderRect.Y);
+                        XAttribute xWidth = new XAttribute("Width", saveOut.RenderRect.Width);
+                        XAttribute xHeight = new XAttribute("Height", saveOut.RenderRect.Height);
+                        XAttribute xAnchorX = new XAttribute("anchorX", saveOut.Anchor.X);
+                        XAttribute xAnchorY = new XAttribute("anchorY", saveOut.Anchor.Y);
+                        XAttribute xDuration = new XAttribute("Duration", saveOut.Duration);
+                        XAttribute xEvent = new XAttribute("Event", saveOut.EventID);
 
                         xRender.Add(xPosX);
                         xRender.Add(xPosY);
@@ -399,10 +420,10 @@ namespace Animation_Editor
                         xFrameData.Add(xRender);
 
                         XElement xCollision = new XElement("ActiveCollision");
-                        XAttribute xCPosX = new XAttribute("posX", cTemp.FrameList[i].RenderRect.X - cTemp.FrameList[i].CollisionRect.X);
-                        XAttribute xCPosY = new XAttribute("posY", cTemp.FrameList[i].RenderRect.Y - cTemp.FrameList[i].CollisionRect.Y);
-                        XAttribute xCWidth = new XAttribute("Width", cTemp.FrameList[i].CollisionRect.Width);
-                        XAttribute xCHeight = new XAttribute("Height", cTemp.FrameList[i].CollisionRect.Height);
+                        XAttribute xCPosX = new XAttribute("posX", saveOut.RenderRect.X - saveOut.CollisionRect.X);
+                        XAttribute xCPosY = new XAttribute("posY", saveOut.RenderRect.Y - saveOut.CollisionRect.Y);
+                        XAttribute xCWidth = new XAttribute("Width", saveOut.CollisionRect.Width);
+                        XAttribute xCHeight = new XAttribute("Height", saveOut.CollisionRect.Height);
 
                         xCollision.Add(xCPosX);
                         xCollision.Add(xCPosY);
@@ -448,11 +469,15 @@ namespace Animation_Editor
         {
             if (listBox_AnimationList.Items.Count > 0)
             {
-                CAnimation cAnim = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
+                CAnimation cAnim = (CAnimation)AnimationSet[listBox_AnimationList.SelectedIndex];
                 workingFrame.EventID = textBox_EventString.Text;
+                workingFrame.Duration = numericUpDown_FrameDuration.Value;
                 listBox_FrameList.Items.Add(workingFrame);
                 cAnim.FrameList.Add(workingFrame);
-                listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex] = cAnim;
+                //listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex] = cAnim;
+                AnimationSet[listBox_AnimationList.SelectedIndex] = cAnim;
+                listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex] = listBox_FrameList.Items.Count;
+                listBox_FrameList.SelectedIndex = listBox_FrameList.Items.Count - 1;
                 listBox_AnimationList.SelectedIndex = listBox_AnimationList.Items.Count - 1;
                 workingFrame = new CFrame();
 
@@ -482,7 +507,8 @@ namespace Animation_Editor
             tempAnimation.AnimationLooping = checkBox_AnimationLooping.Checked;
             listBox_FrameList.Items.Clear();
 
-            listBox_AnimationList.Items.Add(tempAnimation);
+            AnimationSet.Add(tempAnimation);
+            listBox_AnimationList.Items.Add(0);
             listBox_AnimationList.SelectedIndex = listBox_AnimationList.Items.Count - 1;
         }
 
@@ -506,6 +532,7 @@ namespace Animation_Editor
                 IEnumerable<XElement> xInfo = xRoot.Elements("Animation_Info");
                 foreach (XElement x in xInfo)
                 {
+                    listBox_FrameList.Items.Clear();
                     tempAnim = new CAnimation();
                     tempAnim.Initialize();
                     XAttribute xName = x.Attribute("Name");
@@ -571,10 +598,12 @@ namespace Animation_Editor
 
                                 tempFrame.CollisionRect = tempRect;
                                 tempAnim.FrameList.Add(tempFrame);
+                                listBox_FrameList.Items.Add(listBox_FrameList.Items.Count);
                             }
                         }
                     }
-                    listBox_AnimationList.Items.Add(tempAnim);
+                    AnimationSet.Add(tempAnim);
+                    listBox_AnimationList.Items.Add(listBox_FrameList.Items.Count);
                     string tempTexturePath = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Graphics\\Sprites\\");
                     nImageID = TM.LoadTexture(tempTexturePath + szTextureName);
                     splitContainer1.Panel2.AutoScrollMinSize = new Size(TM.GetTextureWidth(nImageID), TM.GetTextureHeight(nImageID));
@@ -586,9 +615,9 @@ namespace Animation_Editor
         {
             //button_EditFrame.Enabled = true;
 
-            if (listBox_FrameList.SelectedIndex > -1)
+            if (listBox_FrameList.SelectedIndex > -1 && tempFrameList.Count > 0)
             {
-                CFrame temp = (CFrame)listBox_FrameList.Items[listBox_FrameList.SelectedIndex];
+                CFrame temp = (CFrame)tempFrameList[listBox_FrameList.SelectedIndex];
                 numericUpDown_RenderLeft.Value = temp.RenderRect.X;
                 numericUpDown_RenderTop.Value = temp.RenderRect.Y;
                 numericUpDown_RenderRight.Value = temp.RenderRect.Width;
@@ -609,34 +638,42 @@ namespace Animation_Editor
         private void listBox_AnimationList_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox_FrameList.Items.Clear();
-            CAnimation temp = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
-            CFrame tFrame;
-            for (int i = 0; i < temp.FrameList.Count; i++)
+            if (listBox_AnimationList.SelectedIndex != -1)
             {
-                tFrame = temp.FrameList[i];
-                listBox_FrameList.Items.Add(tFrame);
-            }
-            if (listBox_AnimationList.SelectedIndex > -1)
-            {
-                textBox_AnimationName.Text = temp.AnimationName;
-                checkBox_AnimationLooping.Checked = temp.AnimationLooping;
-                if (listBox_FrameList.SelectedIndex > -1)
+                for (int i = 0; i < Convert.ToInt32(listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex].ToString()); i++)
                 {
-                    numericUpDown_RenderLeft.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.X;
-                    numericUpDown_RenderTop.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Y;
-                    numericUpDown_RenderRight.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Width;
-                    numericUpDown_RenderBottom.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Height;
+                    listBox_FrameList.Items.Add(i);
 
-                    numericUpDown_CollisionLeft.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.X;
-                    numericUpDown_CollisionTop.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Y;
-                    numericUpDown_CollisionRight.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Width;
-                    numericUpDown_CollisionBottom.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Height;
+                }
+                CAnimation temp = (CAnimation)AnimationSet[listBox_AnimationList.SelectedIndex];
+                //CFrame tFrame;
+                //for (int i = 0; i < temp.FrameList.Count; i++)
+                //{
+                //    tFrame = temp.FrameList[i];
+                //    tempFrameList.Add(tFrame);
+                //}
+                if (listBox_AnimationList.SelectedIndex > -1)
+                {
+                    textBox_AnimationName.Text = temp.AnimationName;
+                    checkBox_AnimationLooping.Checked = temp.AnimationLooping;
+                    if (listBox_FrameList.SelectedIndex > -1)
+                    {
+                        numericUpDown_RenderLeft.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.X;
+                        numericUpDown_RenderTop.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Y;
+                        numericUpDown_RenderRight.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Width;
+                        numericUpDown_RenderBottom.Value = temp.FrameList[listBox_FrameList.SelectedIndex].RenderRect.Height;
 
-                    numericUpDown_AnchorX.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Anchor.X;
-                    numericUpDown_AnchorY.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Anchor.Y;
-                    numericUpDown_FrameDuration.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Duration;
-                    textBox_EventString.Text = temp.FrameList[listBox_FrameList.SelectedIndex].EventID;
+                        numericUpDown_CollisionLeft.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.X;
+                        numericUpDown_CollisionTop.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Y;
+                        numericUpDown_CollisionRight.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Width;
+                        numericUpDown_CollisionBottom.Value = temp.FrameList[listBox_FrameList.SelectedIndex].CollisionRect.Height;
 
+                        numericUpDown_AnchorX.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Anchor.X;
+                        numericUpDown_AnchorY.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Anchor.Y;
+                        numericUpDown_FrameDuration.Value = temp.FrameList[listBox_FrameList.SelectedIndex].Duration;
+                        textBox_EventString.Text = temp.FrameList[listBox_FrameList.SelectedIndex].EventID;
+
+                    }
                 }
             }
 
@@ -747,7 +784,7 @@ namespace Animation_Editor
         {
             if (listBox_FrameList.Items.Count > 0)
             {
-                CAnimation temp = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
+                CAnimation temp = (CAnimation)AnimationSet[listBox_AnimationList.SelectedIndex];
                 listBox_FrameList.Items.RemoveAt(listBox_AnimationList.SelectedIndex);
                 temp.FrameList.RemoveAt(listBox_AnimationList.SelectedIndex);
             }
@@ -758,7 +795,8 @@ namespace Animation_Editor
         {
             if (listBox_FrameList.SelectedIndex != -1)
             {
-                workingFrame = (CFrame)listBox_FrameList.Items[listBox_FrameList.SelectedIndex];
+                //CAnimation aTemp = (CAnimation)listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex];
+                workingFrame = (CFrame)tempFrameList[listBox_FrameList.SelectedIndex];
                 Rectangle rTemp = workingFrame.RenderRect;
                 Point pTemp = workingFrame.Anchor;
                 Rectangle cTemp = workingFrame.RenderRect;
@@ -781,12 +819,12 @@ namespace Animation_Editor
                 workingFrame.RenderRect = rTemp;
                 workingFrame.CollisionRect = cTemp;
                 workingFrame.Anchor = pTemp;
-                workingFrame.Duration = Convert.ToDecimal(numericUpDown_FrameDuration.Value);
+                workingFrame.Duration = numericUpDown_FrameDuration.Value;
                 workingFrame.EventID = textBox_EventString.Text;
 
-                listBox_FrameList.Items[listBox_FrameList.SelectedIndex] = workingFrame;
-
-
+                tempFrameList[listBox_FrameList.SelectedIndex] = workingFrame;
+                /*aTemp.FrameList[listBox_FrameList.SelectedIndex] = workingFrame;
+                listBox_AnimationList.Items[listBox_AnimationList.SelectedIndex] = aTemp;*/
             }
         }
 
@@ -830,5 +868,6 @@ namespace Animation_Editor
                 sw.Reset();
             }
         }
+
     }
 }

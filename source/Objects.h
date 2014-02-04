@@ -3,7 +3,7 @@
 #include <string>
 #include "AnimationTimeStamp.h"
 #include "../SGD Wrappers/CSGD_Direct3D.h"
-enum ObjectType {OBJ_UNDEFINE, OBJ_ENTITY, OBJ_PLAYER, OBJ_NPC, OBJ_SKILL, OBJ_PLAYER_UNIT, OBJ_ENEMY_UNIT, OBJECT_UNIT, OBJ_WARP};
+enum ObjectType {OBJ_UNDEFINE, OBJ_ENTITY, OBJ_PLAYER, OBJ_NPC, OBJ_SKILL, OBJ_PLAYER_UNIT, OBJ_ENEMY_UNIT, OBJECT_UNIT, OBJ_WARP, OBJ_LEADER};
 class CObjects : public IListener
 {
 

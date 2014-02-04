@@ -255,6 +255,15 @@
     <ClCompile Include="source\VictoryState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\AIOrcLeader.cpp">
+      <Filter>AIControllers\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIBrute.cpp">
+      <Filter>AIControllers\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIBasicHealer.cpp">
+      <Filter>AIControllers\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -430,6 +439,15 @@
     </ClInclude>
     <ClInclude Include="source\Warp.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIOrcLeader.h">
+      <Filter>AIControllers\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIBrute.h">
+      <Filter>AIControllers\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AIBasicHealer.h">
+      <Filter>AIControllers\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

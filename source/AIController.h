@@ -10,8 +10,9 @@ class CAIController
 
 public:
 
-	virtual void MakeOwner(CUnits* l) { m_pOwner = l; }
-	void AddMinigame(CMiniGames* l) { m_pMiniGame = l; }
+	virtual void MakeOwner(CUnits* l) final { m_pOwner = l; }
+	virtual CUnits* GetOwner( void ) final { return m_pOwner; }
+	virtual void AddMinigame(CMiniGames* l) final { m_pMiniGame = l; }
 
 
 	virtual void Update(float fElapsedTime );

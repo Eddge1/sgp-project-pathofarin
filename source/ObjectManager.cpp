@@ -62,7 +62,10 @@ void CObjectManager::Render(unsigned int nLayer)
 			pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
 			if (nImageID != -1)
 			{
-				CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+				if (temp[i]->GetType() == OBJ_PLAYER)
+					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
+				else
+					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 			}
 		}
 	}

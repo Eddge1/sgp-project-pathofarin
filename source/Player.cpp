@@ -34,15 +34,16 @@ void CPlayer::Update(float fElapsedTime)
 
 	SetVelX(0);
 	SetVelY(0);
+	this->GetAnimInfo()->SetAnimation("Player_Idle");
 
 	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT))
 	{
-		this->GetAnimInfo()->SetAnimation("TEMP_Player_Walk_Left");
+		this->GetAnimInfo()->SetAnimation("Player_Walk_Left");
 		SetVelX(-100);
 	}
 	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT))
 	{
-		this->GetAnimInfo()->SetAnimation("TEMP_Player_Walk_Right");
+		this->GetAnimInfo()->SetAnimation("Player_Walk_Right");
 		SetVelX(100);
 	}
 	else
@@ -51,12 +52,12 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP))
 	{
-		this->GetAnimInfo()->SetAnimation("TEMP_Player_Walk_Up");
+		this->GetAnimInfo()->SetAnimation("Player_Walk_Up");
 		SetVelY(-100);
 	}
 	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN))
 	{
-		this->GetAnimInfo()->SetAnimation("TEMP_Player_Walk_Down");
+		this->GetAnimInfo()->SetAnimation("Player_Walk_Down");
 		SetVelY(100);
 	}
 	CEntity::Update(fElapsedTime);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Animation_Data Count="4">
+	<Animation_Info Name="TEMP_Player_Walk_Left" Frames="3" repeat="1" Texture="DBL_Mage.png">
+		<Frame_Data>
+			<Render posX="0" posY="110" Width="32" Height="34" anchorX="16" anchorY="33" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="34" posY="112" Width="30" Height="34" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="-1" Width="30" Height="34"/>
+			<Render posX="67" posY="110" Width="28" Height="34" anchorX="16" anchorY="33" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+		</Frame_Data>
+	</Animation_Info>
+	<Animation_Info Name="TEMP_Player_Walk_Right" Frames="3" repeat="1" Texture="DBL_Mage.png">
+		<Frame_Data>
+			<Render posX="0" posY="38" Width="32" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="34" posY="36" Width="30" Height="34" anchorX="16" anchorY="34" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="67" posY="38" Width="28" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+		</Frame_Data>
+	</Animation_Info>
+	<Animation_Info Name="TEMP_Player_Walk_Up" Frames="3" repeat="1" Texture="DBL_Mage.png">
+		<Frame_Data>
+			<Render posX="0" posY="2" Width="32" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="34" posY="0" Width="30" Height="34" anchorX="16" anchorY="34" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="67" posY="2" Width="28" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+		</Frame_Data>
+	</Animation_Info>
+	<Animation_Info Name="TEMP_Player_Walk_Down" Frames="3" repeat="1" Texture="DBL_Mage.png">
+		<Frame_Data>
+			<Render posX="0" posY="72" Width="32" Height="36" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="34" posY="72" Width="30" Height="34" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+			<Render posX="67" posY="72" Width="28" Height="36" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
+			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
+		</Frame_Data>
+	</Animation_Info>
+</Animation_Data>

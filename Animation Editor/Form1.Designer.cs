@@ -58,11 +58,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.numericUpDown_FrameDuration = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown_AnchorX = new System.Windows.Forms.NumericUpDown();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.numericUpDown_AnchorY = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown_AnchorX = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.numericUpDown_CollisionBottom = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -84,6 +84,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_DeleteAnimation = new System.Windows.Forms.Button();
             this.button_DeleteFrame = new System.Windows.Forms.Button();
+            this.label_AnimationName = new System.Windows.Forms.Label();
+            this.textBox_AnimationName = new System.Windows.Forms.TextBox();
             this.button_AddAnimation = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -91,8 +93,6 @@
             this.listBox_FrameList = new System.Windows.Forms.ListBox();
             this.checkBox_AnimationLooping = new System.Windows.Forms.CheckBox();
             this.button_AddFrame = new System.Windows.Forms.Button();
-            this.textBox_AnimationName = new System.Windows.Forms.TextBox();
-            this.label_AnimationName = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,9 +103,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_AnimationPreview)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_FrameDuration)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorX)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorX)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CollisionBottom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CollisionRight)).BeginInit();
@@ -431,19 +431,6 @@
             this.label11.TabIndex = 4;
             this.label11.Text = "Frame Duration";
             // 
-            // numericUpDown_AnchorX
-            // 
-            this.numericUpDown_AnchorX.Location = new System.Drawing.Point(59, 14);
-            this.numericUpDown_AnchorX.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown_AnchorX.Name = "numericUpDown_AnchorX";
-            this.numericUpDown_AnchorX.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown_AnchorX.TabIndex = 2;
-            this.numericUpDown_AnchorX.ValueChanged += new System.EventHandler(this.numericUpDown_RenderLeft_ValueChanged);
-            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.numericUpDown_AnchorY);
@@ -487,6 +474,19 @@
             this.label9.Size = new System.Drawing.Size(14, 13);
             this.label9.TabIndex = 0;
             this.label9.Text = "X";
+            // 
+            // numericUpDown_AnchorX
+            // 
+            this.numericUpDown_AnchorX.Location = new System.Drawing.Point(59, 14);
+            this.numericUpDown_AnchorX.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown_AnchorX.Name = "numericUpDown_AnchorX";
+            this.numericUpDown_AnchorX.Size = new System.Drawing.Size(69, 20);
+            this.numericUpDown_AnchorX.TabIndex = 2;
+            this.numericUpDown_AnchorX.ValueChanged += new System.EventHandler(this.numericUpDown_RenderLeft_ValueChanged);
             // 
             // groupBox4
             // 
@@ -735,7 +735,7 @@
             // 
             // button_DeleteAnimation
             // 
-            this.button_DeleteAnimation.Location = new System.Drawing.Point(19, 230);
+            this.button_DeleteAnimation.Location = new System.Drawing.Point(19, 251);
             this.button_DeleteAnimation.Name = "button_DeleteAnimation";
             this.button_DeleteAnimation.Size = new System.Drawing.Size(128, 23);
             this.button_DeleteAnimation.TabIndex = 6;
@@ -752,9 +752,25 @@
             this.button_DeleteFrame.UseVisualStyleBackColor = true;
             this.button_DeleteFrame.Click += new System.EventHandler(this.button_DeleteFrame_Click);
             // 
+            // label_AnimationName
+            // 
+            this.label_AnimationName.AutoSize = true;
+            this.label_AnimationName.Location = new System.Drawing.Point(16, 16);
+            this.label_AnimationName.Name = "label_AnimationName";
+            this.label_AnimationName.Size = new System.Drawing.Size(84, 13);
+            this.label_AnimationName.TabIndex = 0;
+            this.label_AnimationName.Text = "Animation Name";
+            // 
+            // textBox_AnimationName
+            // 
+            this.textBox_AnimationName.Location = new System.Drawing.Point(19, 32);
+            this.textBox_AnimationName.Name = "textBox_AnimationName";
+            this.textBox_AnimationName.Size = new System.Drawing.Size(128, 20);
+            this.textBox_AnimationName.TabIndex = 1;
+            // 
             // button_AddAnimation
             // 
-            this.button_AddAnimation.Location = new System.Drawing.Point(19, 202);
+            this.button_AddAnimation.Location = new System.Drawing.Point(19, 223);
             this.button_AddAnimation.Name = "button_AddAnimation";
             this.button_AddAnimation.Size = new System.Drawing.Size(128, 23);
             this.button_AddAnimation.TabIndex = 4;
@@ -774,7 +790,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 56);
+            this.label13.Location = new System.Drawing.Point(6, 77);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(72, 13);
             this.label13.TabIndex = 3;
@@ -783,7 +799,7 @@
             // listBox_AnimationList
             // 
             this.listBox_AnimationList.FormattingEnabled = true;
-            this.listBox_AnimationList.Location = new System.Drawing.Point(6, 75);
+            this.listBox_AnimationList.Location = new System.Drawing.Point(6, 96);
             this.listBox_AnimationList.Name = "listBox_AnimationList";
             this.listBox_AnimationList.Size = new System.Drawing.Size(150, 121);
             this.listBox_AnimationList.TabIndex = 2;
@@ -801,7 +817,7 @@
             // checkBox_AnimationLooping
             // 
             this.checkBox_AnimationLooping.AutoSize = true;
-            this.checkBox_AnimationLooping.Location = new System.Drawing.Point(30, 264);
+            this.checkBox_AnimationLooping.Location = new System.Drawing.Point(21, 57);
             this.checkBox_AnimationLooping.Name = "checkBox_AnimationLooping";
             this.checkBox_AnimationLooping.Size = new System.Drawing.Size(113, 17);
             this.checkBox_AnimationLooping.TabIndex = 2;
@@ -817,22 +833,6 @@
             this.button_AddFrame.Text = "Add Frame";
             this.button_AddFrame.UseVisualStyleBackColor = true;
             this.button_AddFrame.Click += new System.EventHandler(this.button_AddFrame_Click);
-            // 
-            // textBox_AnimationName
-            // 
-            this.textBox_AnimationName.Location = new System.Drawing.Point(19, 32);
-            this.textBox_AnimationName.Name = "textBox_AnimationName";
-            this.textBox_AnimationName.Size = new System.Drawing.Size(128, 20);
-            this.textBox_AnimationName.TabIndex = 1;
-            // 
-            // label_AnimationName
-            // 
-            this.label_AnimationName.AutoSize = true;
-            this.label_AnimationName.Location = new System.Drawing.Point(16, 16);
-            this.label_AnimationName.Name = "label_AnimationName";
-            this.label_AnimationName.Size = new System.Drawing.Size(84, 13);
-            this.label_AnimationName.TabIndex = 0;
-            this.label_AnimationName.Text = "Animation Name";
             // 
             // Form1
             // 
@@ -860,10 +860,10 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_FrameDuration)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorX)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_AnchorX)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_CollisionBottom)).EndInit();
