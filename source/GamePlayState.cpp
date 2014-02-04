@@ -634,7 +634,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
 	{
-		int debug = 2;
+		int debug = 1;
 		if(debug == 0)
 		{
 			delete tempAI;
