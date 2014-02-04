@@ -6,14 +6,17 @@
 CCreditState::CCreditState(void)
 {
 	m_szCredits = "\t            Path of Arin\n\t\tCredits\nExecutive Producer:\t John Oleske\nAssociate Producer:\t Robert Martinez\n\nProgrammer:\t\t James Bean\nProgrammer:\t\t David Lindley\nProgrammer:\t\t Daniel Tyree\n\nArtist:\t\t\tGregory Bey\nArtist:\t\t\tCaris Frasier";
+	SetBackgroundMusic(-1);
 	SetBackgroundImg(-1);
+	SetCursorIMG(-1);
+	SetSFXID(-1);
 }
 
 
 
 CCreditState::~CCreditState(void)
 {
-
+	CGame::GetInstance()->ChangeState(nullptr);
 }
 
 CCreditState* CCreditState::GetInstance( void )

@@ -13,9 +13,15 @@ COptionsMenu::COptionsMenu(void)
 	m_nSFXVolume = -1;
 	m_nSubCursor = 0;
 	SetBackgroundImg(-1);
+	SetBackgroundMusic(-1);
+	SetSFXID(-1);
+	SetCursorIMG(-1);
 }
 
-COptionsMenu::~COptionsMenu(void){}
+COptionsMenu::~COptionsMenu(void)
+{
+	CGame::GetInstance()->ChangeState(nullptr);
+}
 
 COptionsMenu* COptionsMenu::GetInstance( void )
 {
