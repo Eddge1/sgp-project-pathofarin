@@ -19,10 +19,15 @@ CProfileMenuState::CProfileMenuState(void)
 	m_eCurrState = PS_SELECT;
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
+	SetBackgroundImg(-1);
+	SetBackgroundMusic(-1);
+	SetSFXID(-1);
+	SetCursorIMG(-1);
 }
 
 CProfileMenuState::~CProfileMenuState(void)
 {
+	Sleep();
 }
 
 CProfileMenuState* CProfileMenuState::GetInstance( void )
@@ -51,9 +56,12 @@ void CProfileMenuState::Activate()
 
 void CProfileMenuState::Sleep()
 {
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
-	CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-	CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
+	if(GetBackgroundImg() != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
+	if(GetCursorIMG() != -1)
+		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
+	if(GetSFXID() != -1)
+		CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
 	SetSFXID(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);

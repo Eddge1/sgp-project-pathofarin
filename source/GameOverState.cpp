@@ -6,10 +6,15 @@ CGameOverState::CGameOverState(void)
 {
 	m_music = -1;
 	timer = 8.0f;
+	SetBackgroundMusic(-1);
+	SetBackgroundImg(-1);
+	SetCursorIMG(-1);
+	SetSFXID(-1);
 }
 
 CGameOverState::~CGameOverState(void)
 {
+	CGame::GetInstance()->ChangeState(nullptr);
 }
 
 CGameOverState* CGameOverState::GetInstance( void )

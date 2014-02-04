@@ -12,13 +12,13 @@ CBasicAttack::CBasicAttack(void)
 
 CBasicAttack::~CBasicAttack(void)
 {
+
 }
 
 void CBasicAttack::DoAttack(void)
 {
 	if(GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
-
 		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
 		if(GetOwner() != nullptr)
 		{

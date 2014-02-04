@@ -116,7 +116,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 
 	if(m_fTimer < 0.0f)
 	{
-		m_fTimer = 0.5f;
+		m_fTimer = (rand() % 5 + 1) * 0.1f;
 
 		RECT* pRect = new RECT;
 		pRect->top = 64;

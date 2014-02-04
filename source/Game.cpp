@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <ctime>
 #include "GameStates.h"
 #include "MainMenuState.h"
 #include "..\TinyXML\tinyxml.h"
@@ -68,7 +69,7 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_nScreenWidth	= nWidth;
 	m_nScreenHeight	= nHeight;
 	m_bIsWindowed	= bIsWindowed;
-
+	srand((unsigned int) time(0));
 
 	// Initialize the wrappers
 	m_pD3D->Initialize( hWnd, m_nScreenWidth, m_nScreenHeight, m_bIsWindowed, false );

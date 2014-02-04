@@ -48,11 +48,17 @@ CGamePlayState::CGamePlayState(void)
 	m_nCursor = 0;
 	m_fFireBallTimer = 0.0f;
 	m_eCurrPhase = GP_START;
+
+	SetBackgroundMusic(-1);
+	SetBackgroundImg(-1);
+	SetCursorIMG(-1);
+	SetSFXID(-1);
 }
 // Destructor
 CGamePlayState::~CGamePlayState(void)
 {
-	SetPlayer(nullptr);
+	m_eCurrPhase = GP_END;
+	Sleep();
 }
 
 void CGamePlayState::Activate(void)
@@ -192,6 +198,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("VICTORY", this);
 			m_pES->RegisterClient("WARP", this);
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
+			m_pES->RegisterClient("LEVEL_UP", this);
 
 			m_eCurrPhase = GP_NAV;
 
@@ -222,30 +229,27 @@ void CGamePlayState::Sleep(void)
 	case CGamePlayState::GP_NAV:
 	case CGamePlayState::GP_END:
 		{
-			m_pES->UnregisterClientAll(this);
-			// Clear the event system
-			if( m_pES != nullptr )
+			if(m_pES != nullptr)
 			{
-				m_pES->Terminate();
-				m_pES = nullptr;
+				m_pES->UnregisterClientAll(this);
+				// Clear the event system
+				if( m_pES != nullptr )
+				{
+					m_pES->Terminate();
+					m_pES = nullptr;
+				}
+
+				delete m_pRM;
+				m_pRM = nullptr;
+				SetPlayer(nullptr);
+				m_eCurrPhase = GP_START;
+
+				for(auto Iter = m_mWorldManager.begin(); Iter != m_mWorldManager.end(); ++Iter)
+				{
+					delete Iter->second;
+				}
+				CAnimationSystem::GetInstance()->DeleteInstance();
 			}
-
-			delete m_pRM;
-			m_pRM = nullptr;
-			SetPlayer(nullptr);
-			m_eCurrPhase = GP_START;
-
-			CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
-
-			for(auto Iter = m_mWorldManager.begin(); Iter != m_mWorldManager.end(); ++Iter)
-			{
-				delete Iter->second;
-			}
-			CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
-			CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-			SetBackgroundImg(-1);
-			SetCursorIMG(-1);
-			CAnimationSystem::GetInstance()->DeleteInstance();
 		}
 		break;
 	default:
@@ -635,6 +639,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetSpeed(speed);
 	temp->SetTurn(false);
 	temp->SetName(input);
+	temp->GiveExperience(90);
 
 	return temp;
 }
