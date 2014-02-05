@@ -127,32 +127,36 @@ namespace SGP_PoA_LevelEditor
                         }
                     }
                 }
-
-                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
+                if (cmbMode.SelectedIndex >= 0)
                 {
-                    myLayers Ls = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
-                    TM.Draw(imageID, MouseLoc.Width * TileSize.Width + panel2.AutoScrollPosition.X + Ls.OffSet.Width, MouseLoc.Height * TileSize.Height + panel2.AutoScrollPosition.Y + Ls.OffSet.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width, tileSelected.Y * TileSize.Height, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
-                }
-            }
-            if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
-            {
-                Rectangle r;
-                for (int i = 0; i < lstBlock.Items.Count; i++)
-                {
-                    r = (Rectangle)lstBlock.Items[i];
-                    r.X += panel2.AutoScrollPosition.X;
-                    r.Y += panel2.AutoScrollPosition.Y;
-                    DX.DrawRect(r, Color.FromArgb(127, 255, 0, 0));
-                    if (bCreateRect)
+                    if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                     {
-                        r = rTemp;
-                        r.X += panel2.AutoScrollPosition.X;
-                        r.Y += panel2.AutoScrollPosition.Y;
-                        DX.DrawHollowRect(r, Color.FromArgb(255, 0, 0, 0), 1);
+                        myLayers Ls = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+                        TM.Draw(imageID, MouseLoc.Width * TileSize.Width + panel2.AutoScrollPosition.X + Ls.OffSet.Width, MouseLoc.Height * TileSize.Height + panel2.AutoScrollPosition.Y + Ls.OffSet.Height, 1, 1, new Rectangle(tileSelected.X * TileSize.Width, tileSelected.Y * TileSize.Height, TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(127, 255, 255, 255));
                     }
                 }
             }
-
+            if (cmbMode.SelectedIndex >= 0)
+            {
+                if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
+                {
+                    Rectangle r;
+                    for (int i = 0; i < lstBlock.Items.Count; i++)
+                    {
+                        r = (Rectangle)lstBlock.Items[i];
+                        r.X += panel2.AutoScrollPosition.X;
+                        r.Y += panel2.AutoScrollPosition.Y;
+                        DX.DrawRect(r, Color.FromArgb(127, 255, 0, 0));
+                        if (bCreateRect)
+                        {
+                            r = rTemp;
+                            r.X += panel2.AutoScrollPosition.X;
+                            r.Y += panel2.AutoScrollPosition.Y;
+                            DX.DrawHollowRect(r, Color.FromArgb(255, 0, 0, 0), 1);
+                        }
+                    }
+                }
+            }
 
 
 
@@ -225,9 +229,10 @@ namespace SGP_PoA_LevelEditor
             cmbMode.Items.Clear();
             cmbMode.Items.Add("MAP_EDIT");
             cmbMode.Items.Add("BLOCK");
-            //cmbMode.Items.Add("EVENT");
-            //cmbMode.Items.Add("NPCS");
+            cmbMode.Items.Add("EVENT");
+            cmbMode.Items.Add("NPCS");
             cmbMode.Items.Add("WARP");
+            cmbMode.Items.Add("CHEST");
             cmbAI.Items.Clear();
             cmbAI.Items.Add("BASIC");
 
@@ -307,7 +312,21 @@ namespace SGP_PoA_LevelEditor
                 MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X - L.OffSet.Width) / TileSize.Width;
                 MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y - L.OffSet.Height) / TileSize.Height;
                 Point Temp = new Point(MouseLoc.Width, MouseLoc.Height);
-
+                if (cmbMode.SelectedIndex < 0)
+                {
+                    for (int i = 0; i < cmbMode.Items.Count; i++)
+                        if (i == cmbMode.Items.Count - 1 && cmbMode.Items[i].ToString() != cmbMode.Text)
+                        {
+                            cmbMode.Items.Add(cmbMode.Text);
+                            cmbMode.SelectedIndex = cmbMode.Items.Count - 1;
+                            break;
+                        }
+                        else if (cmbMode.Items[i].ToString() == cmbMode.Text)
+                        {
+                            cmbMode.SelectedIndex = i;
+                            break;
+                        }
+                }
                 if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                 {
                     if (bFill)
@@ -611,6 +630,26 @@ namespace SGP_PoA_LevelEditor
                         }
                     }
                 }
+                else
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (L.MyTiles[Temp.X, Temp.Y].EventType != cmbMode.Items[cmbMode.SelectedIndex].ToString())
+                        {
+                            mapTile = Temp;
+                            L.MyTiles[Temp.X, Temp.Y].EventType = cmbMode.Items[cmbMode.SelectedIndex].ToString();
+                            L.MyTiles[Temp.X, Temp.Y].SzSpecial = txtEventBroadCast.Text;
+                        }
+                    }
+                    else
+                    {
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
+                        L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].WarpX = 0;
+                        L.MyTiles[Temp.X, Temp.Y].WarpY = 0;
+                    }
+
+                }
                 lstLayers.Items[lstLayers.SelectedIndex] = L;
             }
         }
@@ -630,7 +669,21 @@ namespace SGP_PoA_LevelEditor
                 MouseLoc.Width = (e.X - panel2.AutoScrollPosition.X - L.OffSet.Width) / TileSize.Width;
                 MouseLoc.Height = (e.Y - panel2.AutoScrollPosition.Y - L.OffSet.Height) / TileSize.Height;
                 Point Temp = new Point(MouseLoc.Width, MouseLoc.Height);
-
+                if (cmbMode.SelectedIndex < 0)
+                {
+                    for (int i = 0; i < cmbMode.Items.Count; i++)
+                        if (i == cmbMode.Items.Count - 1 && cmbMode.Items[i].ToString() != cmbMode.Text)
+                        {
+                            cmbMode.Items.Add(cmbMode.Text);
+                            cmbMode.SelectedIndex = cmbMode.Items.Count - 1;
+                            break;
+                        }
+                        else if (cmbMode.Items[i].ToString() == cmbMode.Text)
+                        {
+                            cmbMode.SelectedIndex = i;
+                            break;
+                        }
+                }
                 if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "MAP_EDIT")
                 {
                     if (mouseDown)
@@ -985,6 +1038,16 @@ namespace SGP_PoA_LevelEditor
                         XAttribute xTileY = xTileInfo.Attribute("yTileID");
                         XAttribute xTileEventID = xTileInfo.Attribute("EventID");
                         XAttribute xTileEventType = xTileInfo.Attribute("EventType");
+                        for (int i = 0; i < cmbMode.Items.Count; i++)
+                        {
+                            if (i == cmbMode.Items.Count - 1 && cmbMode.Items[i].ToString() != xTileEventType.Value)
+                            {
+                                cmbMode.Items.Add(xTileEventType.Value);
+                                break;
+                            }
+                            else if (cmbMode.Items[i].ToString() == xTileEventType.Value)
+                                break;
+                        }
                         XAttribute xTileWarpX = xTileInfo.Attribute("WarpX");
                         XAttribute xTileWarpY = xTileInfo.Attribute("WarpY");
 
@@ -1263,6 +1326,10 @@ namespace SGP_PoA_LevelEditor
 
         private void cmbMode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbMode.SelectedIndex < 0)
+            {
+                cmbMode.Items.Add(cmbMode.SelectedText);
+            }
             selectedNPC = new myNPC();
             selectedNPC.Units = new List<myUnits>();
             selectedNPC.Waypoints = new List<Point>();
