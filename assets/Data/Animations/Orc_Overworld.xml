@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Orc_Walk_Down" Frames="4" repeat="1" Texture="Blank_Orc_Skeleton.png">
+    <Frame_Data>
+      <Render posX="5" posY="67" Width="20" Height="30" anchorX="11" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="19" Height="30" />
+      <Render posX="36" posY="66" Width="22" Height="31" anchorX="11" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="22" Height="32" />
+      <Render posX="7" posY="98" Width="17" Height="30" anchorX="9" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="17" Height="29" />
+      <Render posX="37" posY="97" Width="20" Height="32" anchorX="11" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="20" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Walk_Up" Frames="4" repeat="1" Texture="Blank_Orc_Skeleton.png">
+    <Frame_Data>
+      <Render posX="68" posY="66" Width="21" Height="30" anchorX="12" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="30" />
+      <Render posX="102" posY="65" Width="18" Height="30" anchorX="9" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="19" Height="30" />
+      <Render posX="70" posY="97" Width="19" Height="31" anchorX="9" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="19" Height="32" />
+      <Render posX="103" posY="97" Width="19" Height="31" anchorX="9" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="20" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Walk_Right" Frames="4" repeat="1" Texture="Blank_Orc_Skeleton.png">
+    <Frame_Data>
+      <Render posX="134" posY="66" Width="16" Height="30" anchorX="10" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="16" Height="30" />
+      <Render posX="164" posY="65" Width="20" Height="31" anchorX="13" anchorY="20" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="20" Height="32" />
+      <Render posX="135" posY="97" Width="16" Height="31" anchorX="10" anchorY="19" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="17" Height="32" />
+      <Render posX="164" posY="98" Width="22" Height="30" anchorX="13" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="25" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Walk_Left" Frames="4" repeat="1" Texture="Blank_Orc_Skeleton.png">
+    <Frame_Data>
+      <Render posX="199" posY="65" Width="19" Height="32" anchorX="7" anchorY="19" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="20" Height="32" />
+      <Render posX="228" posY="66" Width="22" Height="30" anchorX="9" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="22" Height="30" />
+      <Render posX="200" posY="97" Width="18" Height="31" anchorX="6" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="18" Height="30" />
+      <Render posX="229" posY="97" Width="21" Height="31" anchorX="8" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Idle" Frames="1" repeat="1" Texture="Blank_Orc_Skeleton.png">
+    <Frame_Data>
+      <Render posX="7" posY="66" Width="17" Height="31" anchorX="8" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="17" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
