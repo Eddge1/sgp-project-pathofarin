@@ -32,6 +32,7 @@ CGame::CGame(void)
 	m_pDI			= nullptr;
 	m_pTM			= nullptr;
 	m_pXA			= nullptr;
+	m_pES			= nullptr;
 
 	m_pFont			= nullptr;
 	m_pFont2		= nullptr;
@@ -64,6 +65,7 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_pDI			= CSGD_DirectInput::GetInstance();
 	m_pTM			= CSGD_TextureManager::GetInstance();
 	m_pXA			= CSGD_XAudio2::GetInstance();
+	m_pES			= CSGD_EventSystem::GetInstance();
 
 	// Store the parameters
 	m_nScreenWidth	= nWidth;
@@ -119,12 +121,14 @@ void CGame::Terminate(void)
 	m_pDI->Terminate();
 	m_pD3D->Terminate();
 	m_pFont->Shutdown();
+	m_pES->Terminate();
 
 	// Reset the data members to null so they cant use them
 	m_pD3D			= nullptr;
 	m_pDI			= nullptr;
 	m_pTM			= nullptr;
 	m_pXA			= nullptr;
+	m_pES			= nullptr;
 
 	m_nScreenWidth	= 1;
 	m_nScreenHeight	= 1;
