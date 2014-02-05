@@ -5,7 +5,7 @@
 CGameOverState::CGameOverState(void)
 {
 	m_music = -1;
-	timer = 8.0f;
+	timer = 10.0f;
 	SetBackgroundMusic(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
@@ -41,7 +41,7 @@ void CGameOverState::Update(float fElapsedTime)
 	timer -= fElapsedTime;
 	if(timer <= 0.0f)
 	{
-		timer = 8.0f;
+		timer = 10.0f;
 		CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
 		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 	}
