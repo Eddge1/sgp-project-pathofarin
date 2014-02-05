@@ -40,6 +40,8 @@ CProfileMenuState* CProfileMenuState::GetInstance( void )
 void CProfileMenuState::Activate()
 {
 	CGamePlayState::GetInstance()->Activate();
+	CGamePlayState::GetInstance()->Sleep();
+
 	LoadSave("assets/Data/Saves/Player1.xml");
 	LoadSave("assets/Data/Saves/Player2.xml");
 	LoadSave("assets/Data/Saves/Player3.xml");

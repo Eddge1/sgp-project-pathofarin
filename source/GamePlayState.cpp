@@ -184,10 +184,6 @@ void CGamePlayState::Activate(void)
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
-			/*CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");*/
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Overworld_Warrior.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Overworld.xml");
@@ -206,8 +202,6 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("LEVEL_UP", this);
 
 			m_eCurrPhase = GP_NAV;
-
-
 		}
 		break;
 	case CGamePlayState::GP_END:
@@ -232,11 +226,13 @@ void CGamePlayState::Sleep(void)
 	case CGamePlayState::GP_START:
 		break;
 	case CGamePlayState::GP_NAV:
+		break;
 	case CGamePlayState::GP_END:
 		{
 			if(m_pES != nullptr)
 			{
-				m_pES->UnregisterClientAll(this);
+					m_pES->UnregisterClientAll(this);
+
 				// Clear the event system
 				if( m_pES != nullptr )
 				{
@@ -255,6 +251,7 @@ void CGamePlayState::Sleep(void)
 				}
 				CAnimationSystem::GetInstance()->DeleteInstance();
 			}
+			
 		}
 		break;
 	default:
