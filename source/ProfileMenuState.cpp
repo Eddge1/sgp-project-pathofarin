@@ -413,7 +413,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
-	temp->SetAttack(1000);   // DEVELOPER PURPOSES!
+	temp->SetAttack(10);   // DEVELOPER PURPOSES!
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Mage_Idle_Battle");
 	pTemp->SetCurrentFrame(0);

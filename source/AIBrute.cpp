@@ -98,7 +98,7 @@ void CAIBrute::Update(float fElapsedTime)
 				wostringstream woss;
 				woss << "Raged";
 				CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
-				m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+				m_pTarget->ModifyHealth(GetOwner()->GetAttack() * 1.5, false);
 				m_pTarget = nullptr;
 				GetOwner()->EndTurn();
 			}

@@ -153,7 +153,7 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc Leader", 100.0f, 300.0f, 9, 75, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -165,7 +165,7 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(203,535);
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("ManDrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc Zerker", 100.0f, 300.0f, 9, 75, 20));
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
@@ -635,33 +635,31 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
 	{
-		int debug = 1;
-		if(debug == 0)
-		{
-			delete tempAI;
-			CAIOrcLeader* OrcTemp = new CAIOrcLeader;
-			tempAI = reinterpret_cast<CAIController*>(OrcTemp);
-			OrcTemp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
-		else if(debug == 1)
-		{
-			delete tempAI;
-			CAIBasicHealer* Temp = new CAIBasicHealer;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
-		else if(debug == 2)
-		{
-			delete tempAI;
-			CAIBrute* Temp = new CAIBrute;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
+		delete tempAI;
+		CAIBasicHealer* Temp = new CAIBasicHealer;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	}
+	else if(input == "Orc Zerker")
+	{
+		delete tempAI;
+		CAIBrute* Temp = new CAIBrute;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	
 
 	}
+	else if(input == "Orc Leader")
+	{
+		delete tempAI;
+		CAIOrcLeader* OrcTemp = new CAIOrcLeader;
+		tempAI = reinterpret_cast<CAIController*>(OrcTemp);
+		OrcTemp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	}
+
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);
