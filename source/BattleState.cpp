@@ -16,6 +16,7 @@
 #include "BasicAttack.h"
 #include "Npcs.h"
 #include "VictoryState.h"
+#include "GameOverState.h"
 #include <algorithm>
 using namespace std;
 
@@ -446,7 +447,7 @@ void CBattleState::EndBattle(void)
 			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
 		}
 		else
-			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+			CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
 	}
 
 }

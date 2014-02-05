@@ -319,11 +319,7 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(m_eCurrPhase == GP_END)
-	{
-		CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
-		return;
-	}
+
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
