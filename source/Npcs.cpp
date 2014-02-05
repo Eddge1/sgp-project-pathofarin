@@ -8,6 +8,8 @@ CNpcs::CNpcs(void)
 	m_bContainsUnits = false;
 	m_bIsHostile = false;
 	m_nWaypoint = 0;
+	m_szEventThrow = "";
+	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
 }
 
 
@@ -80,7 +82,13 @@ void CNpcs::Update(float fElapsedTime)
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
 {
-
+	if(pEvent->GetEventID() == "BATTLE_END" && this == pEvent->GetDestination())
+	{
+		if(m_szEventThrow != "")
+		{
+			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
+		}
+	}
 }
 
 void CNpcs::HandleCollision(CObjects* col)
