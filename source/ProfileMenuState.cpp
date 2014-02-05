@@ -511,3 +511,14 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 	return temp;
 }
+
+void CProfileMenuState::ContinueGame( int ID )
+{
+	string szZone = m_vCharacterList[ID-1]->GetZone() + ".xml";
+	CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
+	CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[ID-1]);
+	for(unsigned int i = 0; i < m_vWorldData[ID-1].size();i++)
+		pWorld->AddClear(m_vWorldData[ID-1][i]);
+
+	CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+}

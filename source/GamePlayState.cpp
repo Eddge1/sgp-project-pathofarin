@@ -28,7 +28,7 @@
 #include "AIOrcLeader.h"
 #include "AIBasicHealer.h"
 #include "AIBrute.h"
-#include "CreditState.h"
+
 
 
 // GetInstance
@@ -110,7 +110,6 @@ void CGamePlayState::Activate(void)
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
 			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
-			pTemp->SetEvent("VALRION_DEFEATED");
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -201,7 +200,6 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("WARP", this);
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 			m_pES->RegisterClient("LEVEL_UP", this);
-			m_pES->RegisterClient("VALRION_DEFEATED", this);
 
 			m_eCurrPhase = GP_NAV;
 		}
@@ -318,6 +316,7 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -415,11 +414,6 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			pTempFire = nullptr;
 			m_fFireBallTimer = 0.0f;
 		}
-	}
-	else if (pEvent->GetEventID() == "VALRION_DEFEATED")
-	{
-		m_eCurrPhase = GP_END;
-		CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
 	}
 }
 
