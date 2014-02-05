@@ -21,9 +21,12 @@ private:
 	bool m_bSubMenu;
 	bool m_bIsWindow;
 	bool m_bIsMemory;
-
+	bool m_bLeft;
 	int m_nMusicVolume;
 	int m_nSFXVolume;
 	int m_nSubCursor;
+	int m_nLogoID;
+	float m_fPosY;
+	float m_fOffSetX;
 };
 

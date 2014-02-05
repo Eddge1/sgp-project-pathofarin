@@ -8,9 +8,6 @@ CNpcs::CNpcs(void)
 	m_bContainsUnits = false;
 	m_bIsHostile = false;
 	m_nWaypoint = 0;
-
-	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
-
 }
 
 
@@ -83,14 +80,7 @@ void CNpcs::Update(float fElapsedTime)
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
 {
-	if(pEvent->GetEventID() == "BATTLE_END" && pEvent->GetDestination() == this)
-	{
-		if(m_bIsHostile)
-		{
-			SetActive(false);
-			SetRender(false);
-		}
-	}
+
 }
 
 void CNpcs::HandleCollision(CObjects* col)
@@ -98,7 +88,11 @@ void CNpcs::HandleCollision(CObjects* col)
 	if(col->GetType() == OBJ_PLAYER)
 	{
 		if(m_bIsHostile && GetActive())
+		{
 			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);
+			SetActive(false);
+			SetRender(false);
+		}
 		RECT rTemp = col->GetCollisionRect();
 		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
 		if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)

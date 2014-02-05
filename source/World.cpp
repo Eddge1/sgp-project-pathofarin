@@ -2,16 +2,19 @@
 #include "Game.h"
 #include "GamePlayState.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "ObjectManager.h"
 #include "Objects.h"
 
 CWorld::CWorld(void)
 {
 	m_pOM = new CObjectManager();
+	CSGD_EventSystem::GetInstance()->RegisterClient("INIT_BATTLE", this);
 }
 
 CWorld::~CWorld(void)
 {
+	CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
 	for(unsigned int i = 0; i < m_vMyLayers.size(); i++)
 	{
 		delete m_vMyLayers[i];
@@ -76,3 +79,33 @@ void CWorld::RemoveObject(CObjects* pObject)
 {
 	m_pOM->RemoveObject(pObject);
 }
+
+void CWorld::HandleEvent( const CEvent* pEvent )
+{
+	if(pEvent->GetEventID() == "INIT_BATTLE")
+	{
+		CObjects* pTemp = reinterpret_cast<CObjects*>(pEvent->GetSender());
+		if(pTemp != nullptr)
+		{
+			m_vClearNPC.push_back(m_pOM->FindItem(pTemp));
+
+		}
+	}
+}
+
+void CWorld::ClearNPCList()
+{
+	m_vClearNPC.clear();
+}
+
+void CWorld::ActivateNPCs()
+{
+	m_pOM->ActivateAll(2);
+}
+
+void CWorld::AddClear(int nID)
+{
+	m_pOM->DeactiveObject(nID, 2);
+	m_vClearNPC.push_back(nID);
+}
+

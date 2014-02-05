@@ -49,9 +49,8 @@ public:
 	CPlayer* GetPlayer() {return m_pPlayer;}
 
 	void LoadWorld(string input);
-
+	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
-
 
 private:
 

@@ -136,45 +136,47 @@ void CMainMenuState::Render(void)
 bool CMainMenuState::Input(void)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-
-	if(pDI->KeyPressed(DIK_ESCAPE))
-		return false;
-
-	if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
+	if(m_fPosY >= 172.0f)
 	{
-		if(GetCursorSelection() <= 0)
-			SetCursorSelection(3);
-		else
-			SetCursorSelection(GetCursorSelection() - 1);
-		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
-			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
-	}
-	else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
-	{
-		if(GetCursorSelection() >= 3)
-			SetCursorSelection(0);
-		else
-			SetCursorSelection(GetCursorSelection() + 1);
-		if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
-			CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
-	}
-	else if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
-	{
-		switch (GetCursorSelection())
-		{
-		case 0:
-			CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance()); // <-Should be going to profile state.
-			break;
-		case 1:
-			CGame::GetInstance()->ChangeState(COptionsMenu::GetInstance());
-			break;
-		case 2:
-			CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
-			break;
-		case 3:
+		if(pDI->KeyPressed(DIK_ESCAPE))
 			return false;
-		default:
-			break;
+
+		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
+		{
+			if(GetCursorSelection() <= 0)
+				SetCursorSelection(3);
+			else
+				SetCursorSelection(GetCursorSelection() - 1);
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
+		}
+		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
+		{
+			if(GetCursorSelection() >= 3)
+				SetCursorSelection(0);
+			else
+				SetCursorSelection(GetCursorSelection() + 1);
+			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
+		}
+		else if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
+		{
+			switch (GetCursorSelection())
+			{
+			case 0:
+				CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance()); // <-Should be going to profile state.
+				break;
+			case 1:
+				CGame::GetInstance()->ChangeState(COptionsMenu::GetInstance());
+				break;
+			case 2:
+				CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
+				break;
+			case 3:
+				return false;
+			default:
+				break;
+			}
 		}
 	}
 	return true;

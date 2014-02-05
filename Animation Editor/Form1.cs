@@ -200,8 +200,14 @@ namespace Animation_Editor
                 {
                     tempFrameList = AnimationSet[listBox_AnimationList.SelectedIndex].FrameList;
                     CFrame temp = (CFrame)tempFrameList[i];
-                    D3D.DrawHollowRect(temp.RenderRect, Color.FromArgb(255, 255, 255, 0), 1);
-                    D3D.DrawHollowRect(temp.CollisionRect, Color.FromArgb(255, 0, 255, 255), 1);
+                    Rectangle rShift = tempFrameList[i].RenderRect;
+                    rShift.X += splitContainer1.Panel2.AutoScrollPosition.X;
+                    rShift.Y += splitContainer1.Panel2.AutoScrollPosition.Y;
+                    D3D.DrawHollowRect(rShift, Color.FromArgb(255, 255, 255, 0), 1);
+                    Rectangle rCollShift = workingFrame.CollisionRect;
+                    rCollShift.X += splitContainer1.Panel2.AutoScrollPosition.X;
+                    rCollShift.Y += splitContainer1.Panel2.AutoScrollPosition.Y;
+                    D3D.DrawHollowRect(rCollShift, Color.FromArgb(255, 0, 255, 255), 1);
                     Rectangle largePoint = new Rectangle();
                     largePoint.X = temp.Anchor.X - 2;
                     largePoint.Y = temp.Anchor.Y - 2;

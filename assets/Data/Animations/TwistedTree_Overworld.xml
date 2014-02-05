@@ -3,14 +3,14 @@
   <Animation_Info Name="Tree_Idle" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
     <Frame_Data>
       <Render posX="4" posY="17" Width="185" Height="172" anchorX="63" anchorY="167" Duration="0.05" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="185" Height="172" />
+      <ActiveCollision posX="1" posY="0" Width="185" Height="172" />
       <Render posX="205" posY="14" Width="185" Height="175" anchorX="65" anchorY="170" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="185" Height="175" />
-      <Render posX="410" posY="13" Width="181" Height="176" anchorX="67" anchorY="171" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="185" Height="175" />
+      <Render posX="410" posY="13" Width="181" Height="176" anchorX="67" anchorY="171" Duration="0.1" Event="BATS" />
       <ActiveCollision posX="0" posY="0" Width="181" Height="176" />
       <Render posX="610" posY="12" Width="182" Height="178" anchorX="67" anchorY="171" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="182" Height="178" />
-      <Render posX="812" posY="13" Width="184" Height="177" anchorX="67" anchorY="170" Duration="0.1" Event="NULL" />
+      <Render posX="812" posY="13" Width="184" Height="177" anchorX="67" anchorY="170" Duration="0.1" Event="MORE_BATS" />
       <ActiveCollision posX="0" posY="0" Width="184" Height="177" />
       <Render posX="1009" posY="12" Width="184" Height="177" anchorX="66" anchorY="172" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="184" Height="177" />
@@ -23,9 +23,9 @@
       <Render posX="201" posY="234" Width="185" Height="179" anchorX="84" anchorY="151" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="185" Height="179" />
       <Render posX="398" posY="233" Width="187" Height="180" anchorX="88" anchorY="151" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="188" Height="181" />
+      <ActiveCollision posX="-1" posY="-1" Width="188" Height="181" />
       <Render posX="602" posY="231" Width="193" Height="183" anchorX="91" anchorY="153" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="194" Height="184" />
+      <ActiveCollision posX="-1" posY="-1" Width="194" Height="184" />
       <Render posX="807" posY="231" Width="185" Height="182" anchorX="87" anchorY="152" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="183" Height="182" />
       <Render posX="1008" posY="234" Width="180" Height="179" anchorX="85" anchorY="150" Duration="0.2" Event="NULL" />
