@@ -39,6 +39,7 @@ CProfileMenuState* CProfileMenuState::GetInstance( void )
 
 void CProfileMenuState::Activate()
 {
+	CGamePlayState::GetInstance()->Activate();
 	LoadSave("assets/Data/Saves/Player1.xml");
 	LoadSave("assets/Data/Saves/Player2.xml");
 	LoadSave("assets/Data/Saves/Player3.xml");
@@ -50,7 +51,6 @@ void CProfileMenuState::Activate()
 
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
-
 	m_fPosY = 172.0f;
 }
 
@@ -70,6 +70,7 @@ void CProfileMenuState::Sleep()
 		m_vCharacterList[i]->Release();
 
 	m_vCharacterList.clear();
+	m_vWorldData.clear();
 }
 
 bool CProfileMenuState::Input()
@@ -116,6 +117,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[0]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 					SaveGame("assets/Data/Saves/Player1.xml");
+					m_vWorldData[0].clear();
 
 				}
 				else if(m_eCurrState == PS_NEWGAME)
@@ -125,6 +127,8 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[0] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 					SaveGame("assets/Data/Saves/Player1.xml");
+					m_vWorldData[0].clear();
+
 				}
 				else
 				{
@@ -135,7 +139,13 @@ bool CProfileMenuState::Input()
 						SaveGame("assets/Data/Saves/Player1.xml");
 					}
 					else
+					{
+						string szZone = m_vCharacterList[0]->GetZone() + ".xml";
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+						for(unsigned int i = 0; i < m_vWorldData[0].size();i++)
+							pWorld->AddClear(m_vWorldData[0][i]);
+					}
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
 				m_eCurrState = PS_SELECT;
@@ -150,6 +160,8 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[1]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 					SaveGame("assets/Data/Saves/Player2.xml");
+					m_vWorldData[1].clear();
+					m_eCurrState = PS_SELECT;
 
 				}
 				else if(m_eCurrState == PS_NEWGAME)
@@ -159,6 +171,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[1] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 					SaveGame("assets/Data/Saves/Player2.xml");
+					m_vWorldData[1].clear();
 
 				}
 				else
@@ -171,7 +184,13 @@ bool CProfileMenuState::Input()
 
 					}
 					else
+					{
+						string szZone = m_vCharacterList[1]->GetZone() + ".xml";
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+						for(unsigned int i = 0; i < m_vWorldData[1].size();i++)
+							pWorld->AddClear(m_vWorldData[1][i]);
+					}
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 
 				}
@@ -187,6 +206,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[2]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 					SaveGame("assets/Data/Saves/Player3.xml");
+					m_vWorldData[2].clear();
 
 					m_eCurrState = PS_SELECT;
 				}
@@ -196,6 +216,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[2] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 					SaveGame("assets/Data/Saves/Player3.xml");
+					m_vWorldData[2].clear();
 
 				}
 				else
@@ -208,7 +229,13 @@ bool CProfileMenuState::Input()
 
 					}
 					else
+					{
+						string szZone = m_vCharacterList[2]->GetZone() + ".xml";
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+						for(unsigned int i = 0; i < m_vWorldData[2].size();i++)
+							pWorld->AddClear(m_vWorldData[2][i]);
+					}
 					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
 				m_eCurrState = PS_SELECT;
@@ -327,6 +354,7 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		doc.LinkEndChild(pRoot);
 		std::string szTemp = "";
 		TiXmlElement* pSlot = new TiXmlElement("Slot");
+		TiXmlElement* pWorldData = new TiXmlElement("Defeated");
 		szTemp = "Empty";
 
 		pSlot->SetAttribute("Name", szTemp.c_str());
@@ -335,7 +363,11 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("posX", 488);
 		pSlot->SetAttribute("posY", 420);
 		pSlot->SetAttribute("Zone", "testing");
+		string szZone = "testing.xml";
+		CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 		pRoot->LinkEndChild(pSlot);
+		pRoot->LinkEndChild(pWorldData);
+
 		doc.SaveFile(szFileName.c_str());
 	}
 
@@ -359,6 +391,21 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pPlayer->SetName(szFileName);
 		pPlayer->SetZone(pSlot->Attribute("Zone"));
 		m_vCharacterList.push_back(pPlayer);
+		TiXmlElement* pWorldData = pRoot->FirstChildElement("Defeated");
+		TiXmlElement* pNPCid = pWorldData->FirstChildElement("NPC");
+		nTemp = -1;
+		vector<int> vTemp;
+		for(;pNPCid != nullptr;)
+		{
+			pNPCid->Attribute("ID", &nTemp);
+			if(nTemp != -1)
+			{
+				vTemp.push_back(nTemp);
+			}
+			pNPCid = pNPCid->NextSiblingElement("NPC");
+		}
+		m_vWorldData.push_back(vTemp);
+
 	}
 }
 
@@ -372,6 +419,7 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 
 	doc.LinkEndChild(pRoot);
 	TiXmlElement* pSlot = new TiXmlElement("Slot");
+	TiXmlElement* pWorldData = new TiXmlElement("Defeated");
 	CPlayer* pTemp = reinterpret_cast<CPlayer*>(CGamePlayState::GetInstance()->GetPlayer());
 	if(pTemp != nullptr)
 	{
@@ -383,8 +431,21 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 		pSlot->SetAttribute("Zone", pTemp->GetZone().c_str());
 
 		pTemp->SetName(szFileName);
+		string szZone = pTemp->GetZone();
+		szZone += ".xml";
+		CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
+		vector<int>& vTemp = pWorld->GetClearedNpcs();
+		TiXmlElement* pNPCid;
+		for(unsigned int i = 0; i < vTemp.size(); i++)
+		{
+			pNPCid = new TiXmlElement("NPC");
+			pNPCid->SetAttribute("ID",vTemp[i]);
+			pWorldData->LinkEndChild(pNPCid);
+		}
+
 	}
 	pRoot->LinkEndChild(pSlot);
+	pRoot->LinkEndChild(pWorldData);
 	doc.SaveFile(szFileName.c_str());
 }
 
@@ -398,6 +459,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Player_Idle");
+	temp->SetZone("testing");
 	pTemp->SetCurrentFrame(0);
 	CPlayerUnit* pUnit = CreateTempPlayer();
 	temp->SetUnit(pUnit);
@@ -413,6 +475,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
+	temp->SetAttack(1000);   // DEVELOPER PURPOSES!
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Mage_Idle_Battle");
 	pTemp->SetCurrentFrame(0);

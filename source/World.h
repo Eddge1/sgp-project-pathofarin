@@ -4,12 +4,13 @@
 #include "Layer.h"
 #include <vector>
 #include <string>
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 class CObjectManager;
 class CObjects;
 
 using namespace std;
 
-class CWorld
+class CWorld : public IListener
 {
 	int m_nHeight;
 	int m_nWidth;
@@ -19,6 +20,7 @@ class CWorld
 	int m_nTileHeight;
 
 	vector<CLayer*> m_vMyLayers;
+	vector<int> m_vClearNPC;
 	string m_sMapName;
 	CObjectManager* m_pOM;
 public:
@@ -42,10 +44,16 @@ public:
 	void SetMapName(string t) { m_sMapName = t; }
 	string GetMapName(void) { return m_sMapName; }
 
-	void AddLayers(CLayer* t) { m_vMyLayers.push_back(t); }
+	void ClearNPCList();
+	void ActivateNPCs();
 
+	void AddClear(int nID);
+	vector<int>& GetClearedNpcs() {return m_vClearNPC;}
+
+	void AddLayers(CLayer* t) { m_vMyLayers.push_back(t); }
+	virtual void HandleEvent( const CEvent* pEvent ) override;
 
 	CWorld(void);
-	~CWorld(void);
+	virtual ~CWorld(void);
 };
 

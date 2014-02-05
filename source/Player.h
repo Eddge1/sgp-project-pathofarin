@@ -9,7 +9,6 @@ class CPlayer : public CEntity
 	std::string m_szName;
 	std::string m_szZone;
 
-
 	float m_fLastY;
 	float m_fLastX;
 public:
