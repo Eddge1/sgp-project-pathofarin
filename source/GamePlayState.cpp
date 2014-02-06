@@ -163,9 +163,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(200,260);
 			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc", 200.0f, 350.0f, 5, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc", 100.0f, 400.0f, 9, 150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -223,6 +223,7 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Battle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Overworld.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Battle.xml");
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/NPC_Male.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
@@ -752,6 +753,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		TigerTemp = nullptr;
 		temp->SetType(OBJ_LEADER);
 		pTemp->SetAnimation("Tree_Battle_Idle");
+	}
+	else if (input == "Orc")
+	{
+		pTemp->SetAnimation("Orc_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);
