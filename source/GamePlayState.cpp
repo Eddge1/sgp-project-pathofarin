@@ -718,6 +718,11 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	}
 	else if (input == "Tree")
 	{
+		delete tempAI;
+		CAIOrcLeader* OrcTemp = new CAIOrcLeader;
+		tempAI = reinterpret_cast<CAIController*>(OrcTemp);
+		OrcTemp = nullptr;
+		temp->SetType(OBJ_LEADER);
 		pTemp->SetAnimation("Tree_Battle_Idle");
 	}
 
