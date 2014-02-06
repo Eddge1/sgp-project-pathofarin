@@ -17,6 +17,7 @@ class CNpcs : public CEntity
 	bool m_bContainsUnits;
 	bool m_bIsHostile;
 	int m_nWaypoint;
+	float m_fDelayChat;
 
 public:
 	CNpcs(void);

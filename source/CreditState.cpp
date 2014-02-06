@@ -16,7 +16,7 @@ CCreditState::CCreditState(void)
 
 CCreditState::~CCreditState(void)
 {
-	CGame::GetInstance()->ChangeState(nullptr);
+	Sleep();
 }
 
 CCreditState* CCreditState::GetInstance( void )

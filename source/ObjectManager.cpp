@@ -136,7 +136,7 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 	{
 		for(unsigned int j = 0; j < Collision2.size(); j++)
 		{
-			if(Collision1[i]->GetActive() && Collision2[j]->GetActive())
+			if(Collision1[i]->GetActive() && Collision2[j]->GetActive() && Collision1[i] != Collision2[j])
 			{
 				/*Temp to show Collision works*/
 				rTemp1 = Collision1[i]->GetCollisionRect();

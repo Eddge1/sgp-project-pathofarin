@@ -28,6 +28,7 @@
 #include "AIOrcLeader.h"
 #include "AIBasicHealer.h"
 #include "AIBrute.h"
+#include "CreditState.h"
 
 
 
@@ -84,6 +85,7 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			m_bGameVictory = false;
 			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
 			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 
@@ -107,9 +109,10 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1581,162);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 1, 20));
+			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 1, 20));
+			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 1, 20));
+			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -178,6 +181,20 @@ void CGamePlayState::Activate(void)
 			pTemp = nullptr;
 
 
+			pTemp = new CNpcs();
+			pTemp->SetActive(true);
+			pTemp->SetHostile(false);
+			pTemp->SetPosX(557);
+			pTemp->SetPosY(300);
+			pTemp->AddConversation("Hello Mortal!");
+
+			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
+			pTemp->GetAnimInfo()->SetCurrentFrame(1);
+			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
+
+			pTemp->Release();
+			pTemp = nullptr;
+
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
 
@@ -200,6 +217,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("WARP", this);
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 			m_pES->RegisterClient("LEVEL_UP", this);
+			m_pES->RegisterClient("VALRION_DEFEAT", this);
 
 			m_eCurrPhase = GP_NAV;
 		}
@@ -231,14 +249,17 @@ void CGamePlayState::Sleep(void)
 		{
 			if(m_pES != nullptr)
 			{
-					m_pES->UnregisterClientAll(this);
+				m_pES->UnregisterClientAll(this);
+				m_pES = nullptr;
 
-				// Clear the event system
-				if( m_pES != nullptr )
+				for(unsigned int i = 0; i < m_vShowOnScreen.size();)
 				{
-					m_pES->Terminate();
-					m_pES = nullptr;
+					m_vShowOnScreen[i]->pOwner->Release();
+					m_vShowOnScreen[i]->pOwner = nullptr;
+					delete m_vShowOnScreen[i];
+					m_vShowOnScreen.erase(m_vShowOnScreen.begin() + i);
 				}
+				m_vShowOnScreen.clear();
 
 				delete m_pRM;
 				m_pRM = nullptr;
@@ -251,7 +272,7 @@ void CGamePlayState::Sleep(void)
 				}
 				CAnimationSystem::GetInstance()->DeleteInstance();
 			}
-			
+
 		}
 		break;
 	default:
@@ -301,6 +322,7 @@ bool CGamePlayState::Input(void)
 			case 2:			
 				{
 					bisPaused = !bisPaused;
+					m_eCurrPhase = GP_END;
 					CGame::GetInstance()->ChangeState( CMainMenuState::GetInstance() ); // Will return you to the main menu
 					SetCursorSelection(0);
 					return true;
@@ -316,9 +338,29 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-
+	if(m_eCurrPhase == GP_END)
+	{
+		if(m_bGameVictory)
+		{
+			CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
+			return;
+		}
+	}
 	if(bisPaused == false)
 	{
+		for(unsigned int i = 0; i < m_vShowOnScreen.size();)
+		{
+			m_vShowOnScreen[i]->m_fTimer -= fElapsedTime;
+			if(m_vShowOnScreen[i]->m_fTimer < 0)
+			{
+				m_vShowOnScreen[i]->pOwner->Release();
+				m_vShowOnScreen[i]->pOwner = nullptr;
+				delete m_vShowOnScreen[i];
+				m_vShowOnScreen.erase(m_vShowOnScreen.begin() + i);
+			}
+			else
+				i++;
+		}
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
@@ -351,6 +393,16 @@ void CGamePlayState::Render(void)
 
 	m_pRM->Render();
 	m_temp.Render();
+	wostringstream woss;
+
+	for(unsigned int i = 0; i < m_vShowOnScreen.size();i++)
+	{
+		woss << m_vShowOnScreen[i]->szText.str();
+
+		CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX - ( m_vShowOnScreen[i]->szText.str().length() * 8 * 0.5f), m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
+
+		woss.str(_T(""));
+	}
 
 	if(bisPaused)
 	{
@@ -364,7 +416,8 @@ void CGamePlayState::Render(void)
 		rTemp.bottom = 32;
 		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 	}
-	wostringstream woss;
+	woss.str(_T(""));
+
 	woss << m_pPlayer->GetPosX() << "\n" << m_pPlayer->GetPosY();
 	CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 5, 5, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 }
@@ -414,6 +467,11 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			pTempFire = nullptr;
 			m_fFireBallTimer = 0.0f;
 		}
+	}
+	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
+	{
+		m_eCurrPhase = GP_END;
+		m_bGameVictory = true;
 	}
 }
 
@@ -642,7 +700,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		tempAI = reinterpret_cast<CAIController*>(Temp);
 		Temp = nullptr;
 		temp->SetType(OBJ_LEADER);
-	
+
 
 	}
 	else if(input == "Orc Leader")
@@ -674,4 +732,24 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 CWorld* CGamePlayState::GetWorld(string szName) 
 {
 	return m_mWorldManager[szName];
+}
+
+void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstream &szText)
+{
+	NPCDialogue* ftTemp = new NPCDialogue;
+	for(unsigned int i = 0; i < m_vShowOnScreen.size(); i++)
+	{
+		if(m_vShowOnScreen[i]->szText.str() == szText.str())
+		{
+			delete ftTemp;
+			return;
+		}
+	}
+	ftTemp->pOwner = pOwner;
+	if(pOwner != nullptr)
+		pOwner->AddRef();
+	ftTemp->Color = dColor;
+	ftTemp->szText << szText.str();
+	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
+	m_vShowOnScreen.push_back(ftTemp);
 }
