@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Saves>
-    <Slot Name="Arin" Level="1" Class="0" posX="488" posY="420" Zone="testing" />
-    <Defeated />
+    <Slot Name="Arin" Level="2" Class="0" posX="271" posY="490" Zone="testing" />
+    <Defeated>
+        <NPC ID="14" />
+    </Defeated>
 </Saves>

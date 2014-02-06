@@ -2,15 +2,13 @@
 #include "item.h"
 #include <string>
 using namespace std;
-class CConsumable :
-	public CItem
+class CConsumable :	public CItem
 {
 
 	string m_sName;
 	string m_sDes;
 	string m_sType;
 	int m_nAmount;
-
 public:
 
 	void SetName(string input) { m_sName = input; }
@@ -23,10 +21,7 @@ public:
 	string GetType(void) { return m_sType;}
 	int GetAmount(void) { return m_nAmount;}
 
-
 	CConsumable(void);
-	~CConsumable(void);
-	CConsumable( const CConsumable& );
-	CConsumable& operator= ( const CConsumable& );
+	virtual ~CConsumable(void) { }
 };
 

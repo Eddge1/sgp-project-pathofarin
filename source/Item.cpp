@@ -3,6 +3,7 @@
 
 CItem::CItem(void)
 {
+	m_eType = IT_UNDEFINE;
 }
 
 
