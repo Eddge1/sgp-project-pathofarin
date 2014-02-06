@@ -95,6 +95,7 @@
     <ClCompile Include="source\BitmapFont.cpp" />
     <ClCompile Include="source\CharacterMenuState.cpp" />
     <ClCompile Include="source\ChargeCrystal.cpp" />
+    <ClCompile Include="source\Chest.cpp" />
     <ClCompile Include="source\ComboGame.cpp" />
     <ClCompile Include="source\Commands.cpp" />
     <ClCompile Include="source\Consumable.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="source\BitmapFont.h" />
     <ClInclude Include="source\CharacterMenuState.h" />
     <ClInclude Include="source\ChargeCrystal.h" />
+    <ClInclude Include="source\Chest.h" />
     <ClInclude Include="source\ComboGame.h" />
     <ClInclude Include="source\Commands.h" />
     <ClInclude Include="source\Consumable.h" />

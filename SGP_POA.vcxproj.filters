@@ -264,6 +264,9 @@
     <ClCompile Include="source\AIBasicHealer.cpp">
       <Filter>AIControllers\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\Chest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -448,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="source\AIBasicHealer.h">
       <Filter>AIControllers\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Chest.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

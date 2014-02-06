@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Animation_Data Count="1">
-	<Animation_Info Name="Plant_dude_Idle" Frames="3" repeat="1" Texture="Plantdude.png">
+	<Animation_Info Name="Thornbiter_Idle" Frames="3" repeat="1" Texture="Plantdude.png">
 		<Frame_Data>
 			<Render posX="0" posY="0" Width="42" Height="62" anchorX="24" anchorY="62" Duration="0.2" Event=""/>
 			<ActiveCollision posX="0" posY="0" Width="0" Height="0"/>

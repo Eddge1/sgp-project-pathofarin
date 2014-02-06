@@ -17,10 +17,9 @@ CUnits::CUnits(void)
 	m_nAvailStats = 0;
 }
 
-
 CUnits::~CUnits(void)
 {
-
+	m_mInventory.clear();
 }
 
 void CUnits::ModifyHealth(int nAmount, bool isCrit)
@@ -112,6 +111,24 @@ void CUnits::GiveExperience		( int nAmount )
 	}
 
 	m_nLevel += nLevels;
+	switch (m_eClass)
+	{
+	case UC_ENEMY:
+		break;
+	case UC_NONE:
+		break;
+	case UC_WARRIOR:
+		SetMaxHealth(GetMaxHealth() + (nLevels * 40));
+		SetAttack(GetAttack() + (nLevels * 3));
+		SetMaxAP(GetMaxAP() + (nLevels * 20));
+		break;
+	case UC_RANGER:
+		break;
+	case UC_MAGE:
+		break;
+	default:
+		break;
+	}
 	m_nAvailStats += (5 * nLevels);
 
 	m_nExperience = nExp;
@@ -206,4 +223,40 @@ bool CUnits::decrAbility()
 		return true;
 	}
 	return false;
+}
+
+void CUnits::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
+{
+	if(input == nullptr)
+		return;
+	if(m_mInventory[input->GetName()].Item != nullptr)
+	{
+		m_mInventory[input->GetName()].Owned += nAmount;
+		if(m_mInventory[input->GetName()].Owned > 9)
+			m_mInventory[input->GetName()].Owned = 9;
+		m_mInventory[input->GetName()].DropChance = fChance;
+	}
+	else
+	{
+		m_mInventory[input->GetName()].Item = input;
+		m_mInventory[input->GetName()].Owned += nAmount;
+		m_mInventory[input->GetName()].DropChance = fChance;
+	}
+}
+
+void CUnits::RemoveConsumableItem(CConsumable* input)
+{
+	if(input == nullptr)
+		return;
+
+	if(m_mInventory[input->GetName()].Item != nullptr)
+	{
+		m_mInventory[input->GetName()].Owned--;
+		if(m_mInventory[input->GetName()].Owned < 0)
+			m_mInventory[input->GetName()].Owned = 0;
+	}
+	else
+	{
+		return;
+	}
 }

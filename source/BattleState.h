@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <map>
 using namespace std;
 
 class CBitmapFont;
@@ -23,7 +24,6 @@ class CBattleState : public CGameStates
 		float m_fTimer;
 		DWORD Color;
 	};
-
 public:
 	static CBattleState* GetInstance( void );
 
@@ -48,6 +48,9 @@ public:
 
 	void SetSender(CObjects* pSender);
 	void SetPlayer(CUnits* pPlayer);
+	void SetItems(CUnits* pDead);
+	void ClearItems();
+	map<string,InventoryItems>* GetItems() {return &m_vItems;}
 
 private:
 	enum PBattlephase {BP_INIT, BP_BATTLE, BP_END};
@@ -76,8 +79,10 @@ private:
 	bool m_bLeveled;
 	float m_fEndBatleTimer;
 	float m_fCancelTimer;
-	std::vector<FloatingText*> m_vText;
+	vector<FloatingText*> m_vText;
+	map<string, InventoryItems> m_vItems;
 	int m_nExperienceGained;
+	int m_nSelectionChange;
 
 	CBattleState(void);
 	virtual ~CBattleState(void);

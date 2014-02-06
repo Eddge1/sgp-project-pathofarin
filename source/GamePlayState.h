@@ -5,6 +5,8 @@
 #include <map>
 #include "World.h"
 #include "EnemyUnit.h"
+#include "Item.h"
+#include "Consumable.h"
 #include "../SGD Wrappers/IListener.h"
 #include <sstream>
 using namespace std;
@@ -22,7 +24,6 @@ class CGamePlayState :	public CGameStates, public IListener
 {
 
 public:
-
 
 	void AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstream &szText);
 	int GetWorldWidth  () { return WorldWidth ; }
@@ -54,6 +55,8 @@ public:
 	void LoadWorld(string input);
 	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
+	CConsumable* CreatePotion(string input);
+
 
 private:
 	struct NPCDialogue
@@ -72,6 +75,7 @@ private:
 	CGamePlayState& operator= ( const CGamePlayState& );
 
 	map<string, CWorld*> m_mWorldManager;
+
 	vector<NPCDialogue*> m_vShowOnScreen;
 	string m_sCurrWorld;
 

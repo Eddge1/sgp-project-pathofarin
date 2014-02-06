@@ -2,43 +2,124 @@
 #include "BitmapFont.h"
 #include "PlayerUnit.h"
 #include "Game.h"
+#include <sstream>
+using namespace std;
 
 CUseItem::CUseItem(void)
 {
-	timer = 0.0f;
+	m_bGetInventory = false;
+	m_mTemp = nullptr;
+	m_nSelection = 0;
 }
 
 
 CUseItem::~CUseItem(void)
 {
+
 }
 
 
 void CUseItem::Update(float fElapsedTime)
 {
 	CPlayerUnit* tempP = reinterpret_cast<CPlayerUnit*>(GetOwner());
-
-	timer += fElapsedTime;
-
-
-	if(timer > 3.0f)
+	if(tempP != nullptr)
 	{
-		timer = 0.0f;
-		if(tempP != nullptr)
+		if(!m_bGetInventory)
 		{
+			m_mTemp = GetOwner()->GetInv();
+		}
+		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+		if(pDI->KeyPressed(DIK_ESCAPE))
+		{
+			ResetSkill();
 			tempP->SetReady(false);
 			tempP->SetCasting(false);
-			return;
+		}
+		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
+		{
+			m_nSelection--;
+			if(m_nSelection < 0)
+				m_nSelection = 0;
+
+		}
+		if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
+		{
+			m_nSelection++;
+			if(m_nSelection >= m_mTemp->size())
+				m_nSelection = m_mTemp->size() -1;
+		}
+		if(pDI->KeyPressed(DIK_RETURN))
+		{
+			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+			{
+				for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+				{
+					CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+					if(ItemTemp != nullptr)
+					{
+						if(i->second.Owned > 0)
+						{
+							GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+							ResetSkill();
+							if(i->second.Item != nullptr)
+							{
+								if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+								{
+									CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+									if(pTemp != nullptr)
+									{
+										GetOwner()->RemoveConsumableItem(pTemp);
+									}
+								}
+							}
+							tempP->SetReady(false);
+							tempP->SetCasting(false);
+							tempP->SetTurn(false);
+							return;
+						}
+					}
+				}
+
+			}
 		}
 	}
 
 }
-
-
 void CUseItem::Render(void)
 {
-	
 	CBitmapFont* m_pFont = CGame::GetInstance()->GetFont2();
-	m_pFont->Draw(_T("Out of Items!"), 320, 400, 1.0f, D3DCOLOR_XRGB(0, 0, 0) );
+	if(GetOwner() != nullptr)
+	{
+		wostringstream woss;
+		int m_nCount = 0;
+		if(m_mTemp != nullptr)
+		{
+			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+			{
+				CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+				if(ItemTemp != nullptr)
+				{
+					if(i->second.Owned > 0)
+					{
+						woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
+						m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
+					}
+				}
+				m_nCount++;
+			}
+			if(m_mTemp->size() > 0)
+			{
+				RECT rTemp = { };
+				rTemp.top = 498 + (m_nSelection * 16);
+				rTemp.bottom = rTemp.top + 10;
+				rTemp.left = 348;
+				rTemp.right = 358;
+				CSGD_Direct3D::GetInstance()->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+
+			}
+		}
+
+	}
+
 
 }

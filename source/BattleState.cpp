@@ -18,6 +18,7 @@
 #include "VictoryState.h"
 #include "GameOverState.h"
 #include <algorithm>
+#include "Consumable.h"
 using namespace std;
 
 // GetInstance
@@ -52,6 +53,8 @@ CBattleState::CBattleState(void)
 CBattleState::~CBattleState(void)
 {
 	Sleep();
+	if(m_vItems.size() > 0)
+		ClearItems();
 }
 
 void CBattleState::Activate(void)
@@ -60,6 +63,7 @@ void CBattleState::Activate(void)
 	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
 	m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
+	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 
 	m_nMenuImage		  =	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
@@ -104,6 +108,9 @@ void CBattleState::Sleep(void)
 		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nDefeatMusic);
 	if(m_nVictoryMusic != -1)
 		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nVictoryMusic);
+	if(m_nSelectionChange != -1)
+		CSGD_XAudio2::GetInstance()->SFXUnloadSound(m_nSelectionChange);
+
 
 	SetBackgroundMusic(-1);
 	m_nDefeatMusic = -1;
@@ -127,9 +134,15 @@ bool CBattleState::Input(void)
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
 					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
+					}
 					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) == true )
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetPreviousTarget();
+					}
 				}
 			}
 		}
@@ -177,7 +190,6 @@ void CBattleState::Render(void)
 {
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D*			pD3D = CSGD_Direct3D::GetInstance();
-
 
 	//Temp drawing the UI
 	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
@@ -253,7 +265,8 @@ void CBattleState::Render(void)
 				if(pTemp->GetReady())
 				{
 					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
-					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+					if(pTemp->GetCasting() == false)
+						pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 					if(pTemp->GetCasting())
 					{
 						if(pTemp->GetInSubMenu())
@@ -272,18 +285,23 @@ void CBattleState::Render(void)
 					vTemp = *(pTemp->GetCommands());
 				else
 					vTemp = *(pTemp->GetSkill(pTemp->GetMenuID())->GetCommands());
-				for(unsigned int i = 0; i < vTemp.size(); i++)
+				if(!pTemp->GetReady())
 				{
-					woss.str(_T(""));
-					woss << vTemp[i]->GetName().c_str();
-					m_pFont->Draw(woss.str().c_str(), 360, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
+					for(unsigned int i = 0; i < vTemp.size(); i++)
+					{
+						woss.str(_T(""));
+						woss << vTemp[i]->GetName().c_str();
+						m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+					}
 				}
 				RECT rTemp = {};
-				rTemp.top = 490 + (pTemp->GetSkillID() * 28);
+
+				rTemp.top = 498 + (pTemp->GetSkillID() * 16);
 				rTemp.bottom = rTemp.top + 10;
 				rTemp.left = 348;
 				rTemp.right = 358;
-				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+				if(!pTemp->GetReady())
+					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
 
 			}
 		}
@@ -379,7 +397,6 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 					m_eCurrentPhase = BP_END;
 			}
-
 			m_nTurn++;
 			for(unsigned int i = 0; i < m_vBattleUnits.size();)
 			{
@@ -394,6 +411,7 @@ void CBattleState::Battle(float fElapsedTime)
 					else
 					{
 						m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
+						SetItems(m_vBattleUnits[i]);
 						m_vBattleUnits[i]->Release();
 						m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
 						GetNextTarget();
@@ -432,9 +450,9 @@ void CBattleState::EndBattle(void)
 				m_fEndBatleTimer = 5.0f;
 				if (m_vBattleUnits[i]->GetHealth() > 0)
 				{
-				m_bVictory = true;
-				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
-				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
+					m_bVictory = true;
+					CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+					CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
 				}
 				else
 				{
@@ -574,4 +592,42 @@ void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wo
 	ftTemp->szText << szText.str();
 	ftTemp->m_fTimer = 1.5f;
 	m_vText.push_back(ftTemp);
+}
+
+void CBattleState::SetItems(CUnits* pDead)
+{
+	map<string, InventoryItems>* vTemp = pDead->GetInv();
+
+	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
+	{
+		if(i->second.Item != nullptr)
+		{
+			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			{
+				CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+				if(pTemp != nullptr)
+				{
+					if(rand() % 100 + 1 < int(i->second.DropChance * 100))
+					{
+						if(m_vItems[pTemp->GetName()].Item == nullptr)
+						{
+							m_vItems[pTemp->GetName()].Item = pTemp;
+							m_vItems[pTemp->GetName()].Owned = 1;
+							i->second.Item = nullptr;
+						}
+						else
+						{
+							m_vItems[pTemp->GetName()].Owned++;
+							i->second.Item = nullptr;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void CBattleState::ClearItems()
+{
+	m_vItems.clear();
 }

@@ -4,6 +4,8 @@
 class CVictoryState : public CGameStates
 {
 	bool m_bLeveled;
+	bool m_bDoOnce;
+	map<string, InventoryItems>* m_pItemDistro;
 	int m_nExperienceGained;
 	CPlayerUnit* m_pPlayer;
 	int m_nLevel;
@@ -16,7 +18,6 @@ class CVictoryState : public CGameStates
 	int m_nAPMod;
 	int m_nAttackMod;
 	int m_nMaxStat;
-
 	float 	m_fTimer;
 
 	CVictoryState( void );

@@ -30,8 +30,6 @@
 #include "AIBrute.h"
 #include "CreditState.h"
 
-
-
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
 {
@@ -76,6 +74,11 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+			CConsumable* temp = CreatePotion("Hi-Potion");
+			m_pPlayer->GetUnit()->AddConsumableItem(temp);
+			temp = CreatePotion("Hi-Potion");
+			m_pPlayer->GetUnit()->AddConsumableItem(temp);
+
 		}
 		break;
 	case CGamePlayState::GP_BATTLE:
@@ -158,9 +161,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(200,260);
 			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -170,9 +173,9 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
@@ -230,7 +233,6 @@ void CGamePlayState::Activate(void)
 	default:
 		break;
 	}
-
 
 
 }
@@ -685,7 +687,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Plant_dude_Idle");
+	pTemp->SetAnimation("Thornbiter_Idle");
 	pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
@@ -732,6 +734,8 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetTurn(false);
 	temp->SetName(input);
 	temp->GiveExperience(90);
+	CConsumable* piTemp = CreatePotion("Hi-Potion");
+	temp->AddConsumableItem(piTemp,1,1.0f);
 
 	return temp;
 }
@@ -760,3 +764,67 @@ void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstr
 	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
 	m_vShowOnScreen.push_back(ftTemp);
 }
+
+CConsumable* CGamePlayState::CreatePotion(string input)
+{
+	CConsumable* temp = nullptr;
+
+	if(input == "Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(200);
+		return temp;
+	}
+	else if(input == "Hi-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(500);
+		return temp;
+	}
+	else if(input == "Titan-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(1000);
+		return temp;
+	}
+	else if(input == "Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(50);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(100);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(300);
+		return temp;
+	}
+	else
+		return temp;
+
+}
+

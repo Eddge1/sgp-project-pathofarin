@@ -93,7 +93,6 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 
 	if(Load() == false)
 		CreateConfig();
-
 }
 
 // Run
