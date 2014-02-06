@@ -386,11 +386,17 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits[i]->GetHealth() < 1)
 				{
 					if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
 						m_eCurrentPhase = BP_END;
-					m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
-					m_vBattleUnits[i]->Release();
-					m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
-					GetNextTarget();
+					}
+					else
+					{
+						m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
+						m_vBattleUnits[i]->Release();
+						m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
+						GetNextTarget();
+					}
 				}
 				else
 				{
@@ -423,10 +429,20 @@ void CBattleState::EndBattle(void)
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				m_fEndBatleTimer = 5.0f;
+				if (m_vBattleUnits[i]->GetHealth() > 0)
+				{
 				m_bVictory = true;
 				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
 				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
-
+				}
+				else
+				{
+					m_fEndBatleTimer = 5.0f;
+					m_bDefeat = true;
+					CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+					CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nDefeatMusic);
+					return;
+				}
 				return;
 			}
 			else if(i == m_vBattleUnits.size() - 1)
