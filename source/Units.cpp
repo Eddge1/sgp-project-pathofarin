@@ -207,3 +207,17 @@ bool CUnits::decrAbility()
 	}
 	return false;
 }
+
+void CUnits::AddConsumableItem(CConsumable input)
+{
+	
+	m_mInventory[input.GetName()].Item = input;
+	m_mInventory[input.GetName()].Owned++;
+
+}
+
+void CUnits::RemoveConsumableItem(string input)
+{
+	//TODO:
+}
+

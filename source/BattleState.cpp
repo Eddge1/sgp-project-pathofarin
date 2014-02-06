@@ -60,6 +60,7 @@ void CBattleState::Activate(void)
 	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
 	m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
+	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 
 	m_nMenuImage		  =	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
@@ -104,6 +105,9 @@ void CBattleState::Sleep(void)
 		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nDefeatMusic);
 	if(m_nVictoryMusic != -1)
 		CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_nVictoryMusic);
+	if(m_nSelectionChange != -1)
+		CSGD_XAudio2::GetInstance()->SFXUnloadSound(m_nSelectionChange);
+
 
 	SetBackgroundMusic(-1);
 	m_nDefeatMusic = -1;
@@ -127,9 +131,15 @@ bool CBattleState::Input(void)
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
 					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
+					}
 					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) == true )
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetPreviousTarget();
+					}
 				}
 			}
 		}

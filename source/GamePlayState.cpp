@@ -76,6 +76,10 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+			CConsumable* temp = CreatePotion("Hi-Potion");
+			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
+			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
+
 		}
 		break;
 	case CGamePlayState::GP_BATTLE:
@@ -229,7 +233,6 @@ void CGamePlayState::Activate(void)
 	default:
 		break;
 	}
-
 
 
 }
@@ -755,3 +758,67 @@ void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstr
 	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
 	m_vShowOnScreen.push_back(ftTemp);
 }
+
+CConsumable* CGamePlayState::CreatePotion(string input)
+{
+	CConsumable* temp = nullptr;
+
+	if(input == "Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(200);
+		return temp;
+	}
+	else if(input == "Hi-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(500);
+		return temp;
+	}
+	else if(input == "Titan-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(1000);
+		return temp;
+	}
+	else if(input == "Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(50);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(100);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(300);
+		return temp;
+	}
+	else
+		return temp;
+
+}
+
