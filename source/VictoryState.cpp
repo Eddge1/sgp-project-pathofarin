@@ -268,13 +268,26 @@ void CVictoryState::Render( void )
 		CGame::GetInstance()->GetFont2()->Draw(_T("Items Obtained:"), 272, 300, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		if(m_pItemDistro->size() > 0)
 		{
-
-
+			int nCount = 0;
+			for(auto i = m_pItemDistro->begin(); i != m_pItemDistro->end(); i++)
+			{
+				if(i->second.Item != nullptr)
+				{
+					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					{
+						CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+						if(pTemp != nullptr)
+						{
+							woss.str(_T(""));
+							woss << pTemp->GetName().c_str() << "  x" << i->second.Owned;
+							CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 317 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
+						}
+					}
+				}
+				nCount++;
+			}
 		}
 		else
-		{
-			CGame::GetInstance()->GetFont2()->Draw(_T("Nothing"), 272, 316, 0.75f, D3DCOLOR_XRGB(0,0,0));
-
-		}
+			CGame::GetInstance()->GetFont2()->Draw(_T("Nothing"), 272, 317, 0.75f, D3DCOLOR_XRGB(0,0,0));
 	}
 }

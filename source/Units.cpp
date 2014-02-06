@@ -20,11 +20,7 @@ CUnits::CUnits(void)
 
 CUnits::~CUnits(void)
 {
-	for(auto i = m_mInventory.begin(); i != m_mInventory.end(); i++)
-	{
-		delete i->second.Item;
-		i->second.Item = nullptr;
-	}
+	m_mInventory.clear();
 }
 
 void CUnits::ModifyHealth(int nAmount, bool isCrit)
@@ -221,7 +217,7 @@ void CUnits::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
 		m_mInventory[input->GetName()].Owned += nAmount;
 		if(m_mInventory[input->GetName()].Owned > 9)
 			m_mInventory[input->GetName()].Owned = 9;
-		delete input;
+		m_mInventory[input->GetName()].DropChance = fChance;
 	}
 	else
 	{
@@ -241,11 +237,9 @@ void CUnits::RemoveConsumableItem(CConsumable* input)
 		m_mInventory[input->GetName()].Owned--;
 		if(m_mInventory[input->GetName()].Owned < 0)
 			m_mInventory[input->GetName()].Owned = 0;
-		delete input;
 	}
 	else
 	{
-		delete input;
 		return;
 	}
 }

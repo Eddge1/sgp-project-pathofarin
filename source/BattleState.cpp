@@ -618,6 +618,7 @@ void CBattleState::SetItems(CUnits* pDead)
 						else
 						{
 							m_vItems[pTemp->GetName()].Owned++;
+							i->second.Item = nullptr;
 						}
 					}
 				}
@@ -628,11 +629,5 @@ void CBattleState::SetItems(CUnits* pDead)
 
 void CBattleState::ClearItems()
 {
-	for(auto i = m_vItems.begin(); i != m_vItems.end(); i++)
-	{
-		delete i->second.Item;
-		i->second.Item = nullptr;
-		i->second.Owned = 0;
-	}
 	m_vItems.clear();
 }
