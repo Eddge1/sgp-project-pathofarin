@@ -9,12 +9,13 @@ using namespace std;
 
 struct InventoryItems
 {
-	CItem Item;
+	CItem* Item;
 	int Owned;
 	float DropChance;
 
 	InventoryItems()
 	{
+		Item = nullptr;
 		Owned = 0;
 		DropChance = 0.0f;
 	}
@@ -43,15 +44,12 @@ class CUnits :
 
 	//int m_nGold;
 	map<string, InventoryItems> m_mInventory;
-
 	string m_sName;
+
 public:
-
-
-
-	map<string, InventoryItems>& GetInv(void) { return m_mInventory; }
-	void AddConsumableItem(CConsumable input);
-	void RemoveConsumableItem(string input);
+	map<string, InventoryItems>* GetInv(void) { return &m_mInventory; }
+	void AddConsumableItem(CConsumable* input, int nAmount = 1);
+	void RemoveConsumableItem(CConsumable* input);
 	CUnits(void);
 	virtual ~CUnits(void);
 

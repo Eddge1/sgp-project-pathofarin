@@ -263,7 +263,8 @@ void CBattleState::Render(void)
 				if(pTemp->GetReady())
 				{
 					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
-					pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+					if(pTemp->GetCasting() == false)
+						pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
 					if(pTemp->GetCasting())
 					{
 						if(pTemp->GetInSubMenu())
@@ -282,18 +283,23 @@ void CBattleState::Render(void)
 					vTemp = *(pTemp->GetCommands());
 				else
 					vTemp = *(pTemp->GetSkill(pTemp->GetMenuID())->GetCommands());
-				for(unsigned int i = 0; i < vTemp.size(); i++)
+				if(!pTemp->GetReady())
 				{
-					woss.str(_T(""));
-					woss << vTemp[i]->GetName().c_str();
-					m_pFont->Draw(woss.str().c_str(), 360, 480 + (i * 28), 1.0f, D3DCOLOR_XRGB(0,0,0));
+					for(unsigned int i = 0; i < vTemp.size(); i++)
+					{
+						woss.str(_T(""));
+						woss << vTemp[i]->GetName().c_str();
+						m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+					}
 				}
 				RECT rTemp = {};
-				rTemp.top = 490 + (pTemp->GetSkillID() * 28);
+
+				rTemp.top = 498 + (pTemp->GetSkillID() * 16);
 				rTemp.bottom = rTemp.top + 10;
 				rTemp.left = 348;
 				rTemp.right = 358;
-				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+				if(!pTemp->GetReady())
+					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
 
 			}
 		}
@@ -442,9 +448,9 @@ void CBattleState::EndBattle(void)
 				m_fEndBatleTimer = 5.0f;
 				if (m_vBattleUnits[i]->GetHealth() > 0)
 				{
-				m_bVictory = true;
-				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
-				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
+					m_bVictory = true;
+					CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+					CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
 				}
 				else
 				{

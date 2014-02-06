@@ -20,7 +20,11 @@ CUnits::CUnits(void)
 
 CUnits::~CUnits(void)
 {
-
+	for(auto i = m_mInventory.begin(); i != m_mInventory.end(); i++)
+	{
+		delete i->second.Item;
+		i->second.Item = nullptr;
+	}
 }
 
 void CUnits::ModifyHealth(int nAmount, bool isCrit)
@@ -208,16 +212,40 @@ bool CUnits::decrAbility()
 	return false;
 }
 
-void CUnits::AddConsumableItem(CConsumable input)
+void CUnits::AddConsumableItem(CConsumable* input, int nAmount)
 {
-	
-	m_mInventory[input.GetName()].Item = input;
-	m_mInventory[input.GetName()].Owned++;
-
+	if(input == nullptr)
+		return;
+	if(m_mInventory[input->GetName()].Item != nullptr)
+	{
+		m_mInventory[input->GetName()].Owned += nAmount;
+		if(m_mInventory[input->GetName()].Owned > 9)
+			m_mInventory[input->GetName()].Owned = 9;
+		delete input;
+	}
+	else
+	{
+		m_mInventory[input->GetName()].Item = input;
+		m_mInventory[input->GetName()].Owned += nAmount;
+	}
 }
 
-void CUnits::RemoveConsumableItem(string input)
+void CUnits::RemoveConsumableItem(CConsumable* input)
 {
-	//TODO:
+	if(input == nullptr)
+		return;
+
+	if(m_mInventory[input->GetName()].Item != nullptr)
+	{
+		m_mInventory[input->GetName()].Owned--;
+		if(m_mInventory[input->GetName()].Owned < 0)
+			m_mInventory[input->GetName()].Owned = 0;
+		delete input;
+	}
+	else
+	{
+		delete input;
+		return;
+	}
 }
 

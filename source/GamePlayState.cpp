@@ -77,8 +77,9 @@ void CGamePlayState::Activate(void)
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 			CConsumable* temp = CreatePotion("Hi-Potion");
-			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
-			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
+			m_pPlayer->GetUnit()->AddConsumableItem(temp);
+			temp = CreatePotion("Hi-Potion");
+			m_pPlayer->GetUnit()->AddConsumableItem(temp);
 
 		}
 		break;
