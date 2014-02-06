@@ -800,8 +800,8 @@ namespace SGP_PoA_LevelEditor
                             if (L.MyTiles[x, y].EventType == null)
                                 L.MyTiles[x, y].EventType = "MAP_EDIT";
                             XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
-                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
-                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
+                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX * nudTileWidth.Value);
+                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY * nudTileHeight.Value);
                             if (L.MyTiles[x, y].SzSpecial == null)
                                 L.MyTiles[x, y].SzSpecial = "";
                             XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
@@ -911,8 +911,8 @@ namespace SGP_PoA_LevelEditor
                             if (L.MyTiles[x, y].EventType == null)
                                 L.MyTiles[x, y].EventType = "MAP_EDIT";
                             XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
-                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX);
-                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY);
+                            XAttribute xTileWarpX = new XAttribute("WarpX", L.MyTiles[x, y].WarpX * nudTileWidth.Value);
+                            XAttribute xTileWarpY = new XAttribute("WarpY", L.MyTiles[x, y].WarpY * nudTileHeight.Value);
                             if (L.MyTiles[x, y].SzSpecial == null)
                                 L.MyTiles[x, y].SzSpecial = "";
                             XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
@@ -1054,8 +1054,8 @@ namespace SGP_PoA_LevelEditor
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)] = new myTile();
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].X = Convert.ToInt32(xTileX.Value);
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].Y = Convert.ToInt32(xTileY.Value);
-                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].WarpX = Convert.ToInt32(xTileWarpX.Value);
-                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].WarpY = Convert.ToInt32(xTileWarpY.Value);
+                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].WarpX = Convert.ToInt32(xTileWarpX.Value) / TileSize.Width;
+                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].WarpY = Convert.ToInt32(xTileWarpY.Value) / TileSize.Height;
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].SzSpecial = xTileEventID.Value;
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].EventType = xTileEventType.Value;
 
