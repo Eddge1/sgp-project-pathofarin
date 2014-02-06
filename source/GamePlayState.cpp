@@ -77,11 +77,8 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-			CConsumable* temp = CreatePotion("Potion");
-			m_pPlayer->GetUnit()->AddConsumableItem(temp);
-			temp = CreatePotion("Potion");
-			m_pPlayer->GetUnit()->AddConsumableItem(temp);
 
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Potion"].Item, 2);
 		}
 		break;
 	case CGamePlayState::GP_BATTLE:
@@ -94,6 +91,12 @@ void CGamePlayState::Activate(void)
 			m_bGameVictory = false;
 			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
 			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+			m_mItemManager["Potion"].Item = CreatePotion("Potion");
+			m_mItemManager["Hi-Potion"].Item = CreatePotion("Hi-Potion");
+			m_mItemManager["Titan-Potion"].Item = CreatePotion("Titan-Potion");
+			m_mItemManager["Ether"].Item = CreatePotion("Ether");
+			m_mItemManager["Hi-Ether"].Item = CreatePotion("Hi-Ether");
+			m_mItemManager["Titan-Ether"].Item = CreatePotion("Titan-Ether");
 
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
@@ -161,7 +164,8 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(420);
 			pTemp->AddWaypoint(200,420);
 			pTemp->AddWaypoint(200,260);
-			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
+			pTemp->SetName("Orc");
+			pTemp->GetAnimInfo()->SetAnimation("Orc_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Orc", 200.0f, 350.0f, 5, 150, 20));
@@ -192,7 +196,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosX(557);
 			pTemp->SetPosY(300);
 			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
-
+			pTemp->SetName("OldMan");
 			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
 			pTemp->GetAnimInfo()->SetCurrentFrame(0);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
@@ -203,14 +207,12 @@ void CGamePlayState::Activate(void)
 			CChest* pChest = new CChest();
 			pChest->SetPosX(609);
 			pChest->SetPosY(161);
-			CConsumable* pItem = CreatePotion("Ether");
-			pChest->AddConsumableItem(pItem, 3);
+			pChest->AddConsumableItem(m_mItemManager["Ether"].Item, 3);
 			pChest->RegEvent("TEST_ITEM");
 			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pChest, 2);
 			pChest->Release();
 			pChest = nullptr;
-			pItem = nullptr;
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -293,7 +295,14 @@ void CGamePlayState::Sleep(void)
 				{
 					delete Iter->second;
 				}
+				m_mWorldManager.clear();
 				CAnimationSystem::GetInstance()->DeleteInstance();
+				for(auto Iter = m_mItemManager.begin(); Iter != m_mItemManager.end(); ++Iter)
+				{
+					delete Iter->second.Item;
+					Iter->second.Item = nullptr;
+				}
+				m_mItemManager.clear();
 			}
 
 		}
@@ -479,7 +488,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
-		m_eCurrPhase = GP_END;
+		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
 	}
 	else if(pEvent->GetEventID() == "TEST_ITEM")
@@ -786,11 +795,8 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetTurn(false);
 	temp->SetName(input);
 	temp->GiveExperience(90);
-	CConsumable* piTemp = CreatePotion("Potion");
-	temp->AddConsumableItem(piTemp,1,0.75f);
-	piTemp = CreatePotion("Hi-Potion");
-	temp->AddConsumableItem(piTemp,1,0.1f);
-
+	temp->AddConsumableItem(m_mItemManager["Potion"].Item,1,0.75f);
+	temp->AddConsumableItem(m_mItemManager["Hi-Potion"].Item,1,0.75f);
 
 	return temp;
 }

@@ -75,6 +75,7 @@ private:
 	CGamePlayState& operator= ( const CGamePlayState& );
 
 	map<string, CWorld*> m_mWorldManager;
+	map<string, InventoryItems> m_mItemManager;
 
 	vector<NPCDialogue*> m_vShowOnScreen;
 	string m_sCurrWorld;

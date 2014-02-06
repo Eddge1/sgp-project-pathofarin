@@ -32,7 +32,7 @@ void CChest::HandleEvent( const CEvent* pEvent )
 	}
 }
 
-void CChest::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
+void CChest::AddConsumableItem(CItem* input, int nAmount, float fChance)
 {
 	if(input == nullptr)
 		return;

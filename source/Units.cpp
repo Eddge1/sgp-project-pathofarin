@@ -229,7 +229,7 @@ bool CUnits::decrAbility()
 	return false;
 }
 
-void CUnits::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
+void CUnits::AddConsumableItem(CItem* input, int nAmount, float fChance)
 {
 	if(input == nullptr)
 		return;

@@ -10,6 +10,7 @@ CNpcs::CNpcs(void)
 	m_nWaypoint = 0;
 	m_szEventThrow = "";
 	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
+	CSGD_EventSystem::GetInstance()->RegisterClient("VALRION_DEFEAT", this);
 	m_fDelayChat = 0.0f;
 }
 
@@ -68,14 +69,45 @@ void CNpcs::Update(float fElapsedTime)
 		}
 
 		if(GetPosX() < m_vWaypoints[m_nWaypoint]->locX - 1)
+		{
 			SetVelX(100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Right");
+			}
+		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
+		{
 			SetVelX(-100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Left");
+			}
+		}
 
 		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
+		{
 			SetVelY(100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Down");
+			}
+		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
+		{
 			SetVelY(-100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Up");
+			}
+		}
+		else
+		{
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Idle");
+			}
+		}
 
 		CEntity::Update(fElapsedTime);
 	}
@@ -89,6 +121,12 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 		{
 			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 		}
+	}
+
+	if (pEvent->GetEventID() == "VALRION_DEFEAT")
+	{
+		m_szConversation.pop_back();
+		m_szConversation.push_back("Thank you for saving our Village!  We are forever in your debt!\n...You have Won the First Playable!\nCongratulations!");
 	}
 }
 

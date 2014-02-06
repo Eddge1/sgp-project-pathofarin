@@ -14,22 +14,22 @@
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="4" posX="4" posY="0">
-      <Tile_Data xTileID="2" yTileID="1" EventID="Level2" EventType="WARP" WarpX="384" WarpY="540" />
+      <Tile_Data xTileID="2" yTileID="1" EventID="Level2" EventType="WARP" WarpX="384" WarpY="512" />
     </Tile>
     <Tile ID="5" posX="5" posY="0">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="540" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="512" />
     </Tile>
     <Tile ID="6" posX="6" posY="0">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="540" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="512" />
     </Tile>
     <Tile ID="7" posX="7" posY="0">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="540" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Level2" EventType="WARP" WarpX="384" WarpY="512" />
     </Tile>
     <Tile ID="8" posX="8" posY="0">
-      <Tile_Data xTileID="0" yTileID="1" EventID="Level2" EventType="WARP" WarpX="384" WarpY="540" />
+      <Tile_Data xTileID="0" yTileID="1" EventID="Level2" EventType="WARP" WarpX="384" WarpY="512" />
     </Tile>
     <Tile ID="9" posX="9" posY="0">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="10" posX="10" posY="0">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />

@@ -13,7 +13,7 @@ class CChest : public CObjects
 	string m_szBroadCast;
 public:
 	void RegEvent(string szEvent) {m_szBroadCast = szEvent;}
-	void AddConsumableItem(CConsumable* input, int nAmount = 1, float fChance = 1.0f);
+	void AddConsumableItem(CItem* input, int nAmount = 1, float fChance = 1.0f);
 
 	CChest(void);
 	virtual ~CChest(void);
