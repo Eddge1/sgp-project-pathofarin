@@ -389,6 +389,7 @@ void CBattleState::Battle(float fElapsedTime)
 					{
 						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
 						m_eCurrentPhase = BP_END;
+						break;
 					}
 					else
 					{
