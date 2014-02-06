@@ -48,6 +48,8 @@ CBattleState::CBattleState(void)
 	SetCursorIMG(-1);
 	SetSFXID(-1);
 	m_bLeveled = false;
+	m_fDelayTurn = 0.0f;
+	m_bDelayed = false;
 }
 
 CBattleState::~CBattleState(void)
@@ -74,15 +76,18 @@ void CBattleState::Activate(void)
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
 	m_nExperienceGained = 0;
-
+	m_bDelayed = false;
 	// TEMP ENEMIES/Player
 	m_eCurrentPhase = BP_INIT;
+	m_fDelayTurn = 0.0f;
+
 }
 
 void CBattleState::Sleep(void)
 {
 	m_eCurrentPhase = BP_INIT;
-
+	m_fDelayTurn = 0.0f;
+	m_bDelayed = false;
 	for(int i = int(m_vBattleUnits.size() - 1); i >= 0; i--)
 	{
 		m_vBattleUnits[i]->Release();
@@ -152,7 +157,7 @@ bool CBattleState::Input(void)
 
 void CBattleState::Update(float fElapsedTime)
 {
-
+	m_fDelayTurn -= fElapsedTime;
 	for(int i = 0; i < (int)m_vText.size(); )
 	{
 		m_vText[i]->m_fTimer -= fElapsedTime;
@@ -375,67 +380,78 @@ void CBattleState::Initialize(void)
 
 void CBattleState::Battle(float fElapsedTime)
 {
-	if(m_eCurrentPhase == BP_BATTLE)
+	if(m_fDelayTurn <= 0.0f && m_bDelayed == false)
 	{
-		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		if(m_eCurrentPhase == BP_BATTLE)
 		{
-			m_vBattleUnits[i]->Update(fElapsedTime);
-
-		}
-		CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
-		if(pTemp != nullptr)
-		{
-			if(pTemp->GetReady())
+			for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 			{
+				m_vBattleUnits[i]->Update(fElapsedTime);
 
 			}
-		}
-		if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
-		{
-			if(m_vBattleUnits.size() == 1)
+			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+			if(pTemp != nullptr)
 			{
-				if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
-					m_eCurrentPhase = BP_END;
-			}
-			m_nTurn++;
-			for(unsigned int i = 0; i < m_vBattleUnits.size();)
-			{
-				if(m_vBattleUnits[i]->GetHealth() < 1)
+				if(pTemp->GetReady())
 				{
-					if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
-					{
-						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+
+				}
+			}
+			if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
+			{
+				if(m_vBattleUnits.size() == 1)
+				{
+					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 						m_eCurrentPhase = BP_END;
-						break;
-					}
-					else
-					{
-						m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
-						SetItems(m_vBattleUnits[i]);
-						m_vBattleUnits[i]->Release();
-						m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
-						GetNextTarget();
-					}
 				}
-				else
+				m_nTurn++;
+				m_fDelayTurn = 0.6f;
+				m_bDelayed = true;
+				for(unsigned int i = 0; i < m_vBattleUnits.size();)
 				{
-					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					if(m_vBattleUnits[i]->GetHealth() < 1)
 					{
-						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+						if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+						{
+							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+							m_eCurrentPhase = BP_END;
+							break;
+						}
+						else
+						{
+							m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
+							SetItems(m_vBattleUnits[i]);
+							m_vBattleUnits[i]->Release();
+							m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
+							GetNextTarget();
+						}
 					}
 					else
-					{
-						string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
-						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
-					}
-					i++;
+						i++;
+
 				}
+				if(m_nTurn >= (int)m_vBattleUnits.size())
+					m_nTurn = 0;
+				if(m_eCurrentPhase != BP_END)
+					m_vBattleUnits[m_nTurn]->SetTurn(true);
 			}
-			if(m_nTurn >= (int)m_vBattleUnits.size())
-				m_nTurn = 0;
-			if(m_eCurrentPhase != BP_END)
-				m_vBattleUnits[m_nTurn]->SetTurn(true);
 		}
+	}
+	else if(m_fDelayTurn <= 0.0f && m_bDelayed)
+	{
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+			}
+			else
+			{
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
+			}
+		}
+		m_bDelayed = false;
 	}
 }
 

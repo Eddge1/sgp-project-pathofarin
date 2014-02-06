@@ -77,8 +77,10 @@ private:
 	bool m_bVictory;
 	bool m_bDefeat;
 	bool m_bLeveled;
+	bool m_bDelayed;
 	float m_fEndBatleTimer;
 	float m_fCancelTimer;
+	float m_fDelayTurn;
 	vector<FloatingText*> m_vText;
 	map<string, InventoryItems> m_vItems;
 	int m_nExperienceGained;
