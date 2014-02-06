@@ -149,6 +149,8 @@ void CNpcs::HandleCollision(CObjects* col)
 				{
 					woss << m_szConversation[0].c_str();
 					CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
+					if(m_szConversation[0] == "Thank you for saving our Village!  We are forever in your debt!\n...You have Won the First Playable!\nCongratulations!")
+						CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 					m_fDelayChat = 1.0f;
 				}
 			}

@@ -57,6 +57,7 @@ CGamePlayState::CGamePlayState(void)
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
 	SetSFXID(-1);
+	m_fGameEndTimer = 0.0f;
 }
 // Destructor
 CGamePlayState::~CGamePlayState(void)
@@ -87,6 +88,7 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_START:
 		{
+			m_fGameEndTimer = 0.0f;
 			m_bGameVictory = false;
 			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
 			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
@@ -243,6 +245,9 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("LEVEL_UP", this);
 			m_pES->RegisterClient("VALRION_DEFEAT", this);
 			m_pES->RegisterClient("TEST_ITEM", this);
+			m_pES->RegisterClient("GAME_WON", this);
+
+			
 
 			m_eCurrPhase = GP_NAV;
 		}
@@ -371,7 +376,8 @@ void CGamePlayState::Update( float fElapsedTime )
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(m_eCurrPhase == GP_END)
 	{
-		if(m_bGameVictory)
+		m_fGameEndTimer -= fElapsedTime;
+		if(m_bGameVictory && m_fGameEndTimer < 0.0f)
 		{
 			CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
 			return;
@@ -514,6 +520,14 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			AddFloatingText(m_pPlayer, D3DCOLOR_XRGB(0,0,0), woss);
 		}
 	}
+	else if(pEvent->GetEventID() == "GAME_WON")
+	{
+		m_eCurrPhase = GP_END;
+		m_bGameVictory = true;
+		m_fGameEndTimer = 4.0f;
+	}
+
+	
 }
 
 void CGamePlayState::LoadWorld(void)

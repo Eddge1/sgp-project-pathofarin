@@ -100,6 +100,7 @@ private:
 	int m_nConversationID;
 	float m_fFireBallTimer;
 	float m_fGameText;
+	float m_fGameEndTimer;
 	GamePhase m_eCurrPhase;
 
 };
