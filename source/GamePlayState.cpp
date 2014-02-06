@@ -112,9 +112,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1581,162);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 1, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 1, 20));
 			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f, 200.0f, 5, 1, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 1, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 1, 20));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -127,9 +127,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(355,555);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 75, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -145,9 +145,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(975,405);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 20, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5, 50, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 75, 20));
 			pTemp->Release();
 
 			LoadWorld("testing.xml");
@@ -716,7 +716,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		OrcTemp = nullptr;
 		temp->SetType(OBJ_LEADER);
 	}
-	else if (input == "TwistedTree")
+	else if (input == "Tree")
 	{
 		pTemp->SetAnimation("Tree_Battle_Idle");
 	}
