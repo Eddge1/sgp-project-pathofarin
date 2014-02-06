@@ -85,7 +85,6 @@ void CAITigerlily::Update(float fElapsedTime)
 					GetMinigame()->SetOwner(GetOwner());
 					GetMinigame()->Update(fElapsedTime);
 					m_pTarget = nullptr;
-					//GetOwner()->EndTurn();
 					return;
 				}
 			}
@@ -107,7 +106,6 @@ void CAITigerlily::Update(float fElapsedTime)
 					GetMinigame()->SetOwner(GetOwner());
 					GetMinigame()->Update(fElapsedTime);
 					m_pTarget = nullptr;
-					//GetOwner()->EndTurn();
 					return;
 
 				}
@@ -163,7 +161,6 @@ void CAITigerlily::Update(float fElapsedTime)
 							GetMinigame()->SetOwner(GetOwner());
 							GetMinigame()->Update(fElapsedTime);
 							m_pTarget = nullptr;
-							//GetOwner()->EndTurn();
 							return;
 
 
@@ -199,7 +196,6 @@ void CAITigerlily::Update(float fElapsedTime)
 				GetMinigame()->SetOwner(GetOwner());
 				GetMinigame()->Update(fElapsedTime);
 				m_pTarget = nullptr;
-				//GetOwner()->EndTurn();
 			}
 		}
 	}
@@ -210,7 +206,6 @@ void CAITigerlily::Update(float fElapsedTime)
 		m_nAoeHeal++;
 		m_nTurns++;
 		m_pTarget = nullptr;
-		//GetOwner()->EndTurn();
 	}
 }
 
