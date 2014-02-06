@@ -2,13 +2,13 @@
 #include "Game.h"
 #include "BitmapFont.h"
 #include "GamePlayState.h"
-#include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 
 
 CBasicAttack::CBasicAttack(void)
 {
 	CSGD_EventSystem::GetInstance()->RegisterClient("BASIC_ATTACK", this);
+
 	bAttacked = false;
 }
 
@@ -27,9 +27,6 @@ void CBasicAttack::DoAttack(void)
 		{
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp * 2, false);
-			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(GetOwner());
-			if(pTemp != nullptr)
-				pTemp->ModifyAP(-(temp * 2) * 0.2f);
 			GetOwner()->EndTurn();
 		}
 	}
@@ -50,6 +47,12 @@ void CBasicAttack::Update(float fElapsedTime)
 	if (GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
+		bAttacked = true;
+	}
+	else if (GetOwner()->GetName() == "Tree")
+	{
+		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
+		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
 		bAttacked = true;
 	}
 	else
