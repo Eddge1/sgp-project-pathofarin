@@ -68,14 +68,45 @@ void CNpcs::Update(float fElapsedTime)
 		}
 
 		if(GetPosX() < m_vWaypoints[m_nWaypoint]->locX - 1)
+		{
 			SetVelX(100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Right");
+			}
+		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
+		{
 			SetVelX(-100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Left");
+			}
+		}
 
 		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
+		{
 			SetVelY(100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Down");
+			}
+		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
+		{
 			SetVelY(-100);
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Walk_Up");
+			}
+		}
+		else
+		{
+			if (GetName() == "Orc")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Idle");
+			}
+		}
 
 		CEntity::Update(fElapsedTime);
 	}
