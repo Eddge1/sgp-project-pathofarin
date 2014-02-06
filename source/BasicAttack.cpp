@@ -48,3 +48,8 @@ void CBasicAttack::Update(float fElapsedTime)
 void CBasicAttack::ResetSkill()
 {
 }
+
+	void CBasicAttack::HandleEvent( const CEvent* pEvent )
+	{
+
+	}

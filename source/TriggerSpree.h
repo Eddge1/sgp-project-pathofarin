@@ -18,5 +18,7 @@ public:
 	virtual void Update(float fElpasedTime) override;
 	virtual ~CTriggerSpree(void);
 	virtual void ResetSkill() override;
+	virtual void HandleEvent( const CEvent* pEvent ) override;
+
 };
 
