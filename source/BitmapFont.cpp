@@ -24,33 +24,49 @@ CBitmapFont::CBitmapFont(void)
 
 CBitmapFont::~CBitmapFont(void)
 {
+
 }
 
 
-void CBitmapFont::Initialize(std::string filePath)
+void CBitmapFont::Initialize(void)
 {
-	m_Font = FontParser(filePath);
-	TCHAR temp[32];
-	for(unsigned int i = 0; i <= m_Font.m_szFileName.size(); i++)
+	WIN32_FIND_DATA fileSearch;
+	HANDLE hFile;
+	WCHAR cDirectory[] = L"assets/Fonts/*.fnt";
+	hFile = FindFirstFile(cDirectory,&fileSearch);
+
+	do
 	{
-		if(i < m_Font.m_szFileName.size())
-			temp[i] = m_Font.m_szFileName[i];
-		else
-			temp[i] = '\0';
-	}
-	m_nImageID = CSGD_TextureManager::GetInstance()->LoadTexture(temp, D3DCOLOR_XRGB(0, 0, 0));
+		char cFile[128] = "assets/Fonts/";
+		for(int i = 0; i < 128; i++)
+		{
+			cFile[i + 13] = char(fileSearch.cFileName[i]);
+			if(fileSearch.cFileName[i] == '\0')
+				break;
+		}
+		std::string szTemp = FontParser(cFile);
+		TCHAR temp[32];
+		for(unsigned int i = 0; i <= m_mFonts[szTemp]->m_Font.m_szFileName.size(); i++)
+		{
+			if(i < m_mFonts[szTemp]->m_Font.m_szFileName.size())
+				temp[i] = m_mFonts[szTemp]->m_Font.m_szFileName[i];
+			else
+				temp[i] = '\0';
+		}
+		m_mFonts[szTemp]->m_nImageID = CSGD_TextureManager::GetInstance()->LoadTexture(temp, D3DCOLOR_XRGB(0, 0, 0));
 
-	m_nMaxCharWidth = 0;
-	m_nMaxCharHeight = 0;
+		m_mFonts[szTemp]->m_nMaxCharWidth = 0;
+		m_mFonts[szTemp]->m_nMaxCharHeight = 0;
 
-	for (int i = 0; i < 256; i++)
-	{
-		if (m_nMaxCharWidth < m_Font.Chars[i].m_nWidth)
-			m_nMaxCharWidth = m_Font.Chars[i].m_nWidth;
+		for (int i = 0; i < 256; i++)
+		{
+			if (m_mFonts[szTemp]->m_nMaxCharWidth < m_mFonts[szTemp]->m_Font.Chars[i].m_nWidth)
+				m_mFonts[szTemp]->m_nMaxCharWidth = m_mFonts[szTemp]->m_Font.Chars[i].m_nWidth;
 
-		if (m_nMaxCharHeight < m_Font.Chars[i].m_nHeight)
-			m_nMaxCharHeight = m_Font.Chars[i].m_nHeight;
-	}
+			if (m_mFonts[szTemp]->m_nMaxCharHeight < m_mFonts[szTemp]->m_Font.Chars[i].m_nHeight)
+				m_mFonts[szTemp]->m_nMaxCharHeight = m_mFonts[szTemp]->m_Font.Chars[i].m_nHeight;
+		}
+	}while(FindNextFile(hFile, &fileSearch));
 
 }
 
@@ -68,20 +84,22 @@ void CBitmapFont::Shutdown()
 	m_mFonts.clear();
 }
 
-CharSet CBitmapFont::FontParser(std::string filePath)
+std::string CBitmapFont::FontParser(char* filePath)
 {
 	CharSet set;
 
 	TiXmlDocument doc;
-	if (doc.LoadFile(filePath.c_str()) == false)
-		return set;
+	if (doc.LoadFile(filePath) == false)
+		return "";
 
 	TiXmlElement *pRoot = doc.RootElement();
 	if (pRoot == nullptr)
-		return set;
+		return "";
 
-
-
+	TiXmlElement *pData = pRoot->FirstChildElement("info");
+	std::string szFontName;
+	szFontName = pData->Attribute("face");
+	m_mFonts[szFontName] = new CBitmapFont();
 	TiXmlElement *pFont = pRoot->FirstChildElement("common");
 	if (pFont != nullptr)
 	{
@@ -130,8 +148,10 @@ CharSet CBitmapFont::FontParser(std::string filePath)
 			pFont = pFont->NextSiblingElement("char");
 		}
 	}
+	m_mFonts[szFontName]->m_Font = set;
+	m_mFonts[szFontName]->m_Font.m_szFontName = szFontName;
 
-	return set;
+	return szFontName;
 }
 
 void CBitmapFont::Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWORD dwColor) const
@@ -174,4 +194,18 @@ void CBitmapFont::Draw(const TCHAR* szOutput, int nX, int nY, float fScale, DWOR
 		}
 
 	}
+}
+
+CBitmapFont* CBitmapFont::GetFont(std::string szFont)
+{
+	if(szFont == "")
+		return nullptr;
+
+	for(auto i = m_mFonts.begin(); i != m_mFonts.end(); i++)
+	{
+		if(i->second->m_Font.m_szFontName == szFont)
+			return i->second;
+	}
+	return nullptr;
+
 }

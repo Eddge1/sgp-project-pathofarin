@@ -65,7 +65,7 @@ CBattleState::~CBattleState(void)
 void CBattleState::Activate(void)
 {
 	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
-	m_pFont = CGame::GetInstance()->GetFont();
+	m_pFont = CGame::GetInstance()->GetFont("Arial");
 	m_bDefeat = false;
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;

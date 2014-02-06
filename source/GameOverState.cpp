@@ -49,7 +49,7 @@ void CGameOverState::Update(float fElapsedTime)
 
 void CGameOverState::Render(void)
 {
-	CBitmapFont* temp = CGame::GetInstance()->GetFont();
+	CBitmapFont* temp = CGame::GetInstance()->GetFont("Arial");
 	temp->Draw(_T("Game Over"), 300, 300, 1.0f, D3DCOLOR_XRGB(0,0,0));
 
 

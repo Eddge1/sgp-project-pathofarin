@@ -52,7 +52,7 @@ public:
 	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }
 	CPlayer* GetPlayer() {return m_pPlayer;}
 
-	void LoadWorld(string input);
+	void LoadWorld(void);
 	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack = 5);
 	CConsumable* CreatePotion(string input);

@@ -49,7 +49,7 @@ void CCreditState::Update( float fElapsedTime )
 
 void CCreditState::Render( void )
 {
-	CBitmapFont *pFont = CGame::GetInstance()->GetFont2();
+	CBitmapFont *pFont = CGame::GetInstance()->GetFont("Arial");
 	//CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	std::wostringstream woss;

@@ -58,7 +58,7 @@ CTriggerSpree::~CTriggerSpree(void)
 void CTriggerSpree::Render() 
 {
 
-	CBitmapFont* pFont = CGame::GetInstance()->GetFont();
+	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Arial");
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	RECT rTemp = {};
 	for(unsigned int i = 0; i < m_vGameElements.size(); i++)
