@@ -263,7 +263,6 @@ void CBattleState::Render(void)
 						else
 						{
 							pTemp->GetSkill(pTemp->GetMenuID())->GetMiniGame()->Render();
-
 						}
 					}
 				}

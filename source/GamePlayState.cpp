@@ -188,8 +188,8 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(300);
 			pTemp->AddConversation("Hello Mortal!");
 
-			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
-			pTemp->GetAnimInfo()->SetCurrentFrame(1);
+			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
+			pTemp->GetAnimInfo()->SetCurrentFrame(0);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 
 			pTemp->Release();
@@ -206,6 +206,7 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Overworld.xml");
 
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/NPC_Male.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");

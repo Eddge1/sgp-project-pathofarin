@@ -148,6 +148,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 
 	if(pDI->KeyPressed(DIK_RETURN))
 	{
+		GetOwner()->GetAnimInfo()->SetCurrentFrame(0);
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");
 		RECT rTemp = {};
 		if(m_vTriggers.size() > 0)
