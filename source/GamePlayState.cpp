@@ -189,7 +189,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetHostile(false);
 			pTemp->SetPosX(557);
 			pTemp->SetPosY(300);
-			pTemp->AddConversation("Hello Mortal!");
+			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
 
 			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
 			pTemp->GetAnimInfo()->SetCurrentFrame(0);
@@ -457,21 +457,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if (pEvent->GetEventID() == "TEMP_SPAWN_FIREBALL")
 	{
-		if (m_fFireBallTimer > 1.0f)
-		{
-			CEntity* pTempFire = new CEntity();
-			pTempFire->SetActive(true);
-			//pTemp->SetHostile(true);
-			pTempFire->SetPosX(200);
-			pTempFire->SetPosY(0);
-			pTempFire->SetVelX(200);
-			pTempFire->GetAnimInfo()->SetAnimation("TestAnimation");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTempFire, 4);
 
-			pTempFire->Release();
-			pTempFire = nullptr;
-			m_fFireBallTimer = 0.0f;
-		}
 	}
 	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
