@@ -31,6 +31,7 @@
 #include "CreditState.h"
 #include "Chest.h"
 #include "AITigerlily.h"
+#include "AIValrion.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -782,9 +783,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	{
 		delete tempAI;
 		//CAIOrcLeader* OrcTemp = new CAIOrcLeader;
-		CAITigerlily* TigerTemp = new CAITigerlily;
-		tempAI = reinterpret_cast<CAIController*>(TigerTemp);
-		TigerTemp = nullptr;
+		//CAITigerlily* TigerTemp = new CAITigerlily;
+		CAIValrion* Inferno = new CAIValrion;
+		tempAI = reinterpret_cast<CAIController*>(Inferno);
+		Inferno = nullptr;
 		temp->SetType(OBJ_LEADER);
 		pTemp->SetAnimation("Tree_Battle_Idle");
 	}

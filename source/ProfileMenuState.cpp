@@ -499,8 +499,8 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
 	temp->AddSkill(tempC);
-	temp->SetMaxHealth(150);
-	temp->SetMaxAP(120);
+	temp->SetMaxHealth(350);
+	temp->SetMaxAP(100);
 	temp->SetPosX(600);
 	temp->SetPosY(250);
 	temp->SetVelX(0);
