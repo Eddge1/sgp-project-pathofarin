@@ -112,9 +112,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1581,162);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f, 200.0f, 25, 500, 20, 25));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f,		  350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -127,9 +127,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(355,555);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -145,9 +145,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(975,405);
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->Release();
 
 			LoadWorld("testing.xml");
@@ -161,9 +161,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(200,260);
 			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9, 150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -173,9 +173,9 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
