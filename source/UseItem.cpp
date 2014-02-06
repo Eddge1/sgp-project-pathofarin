@@ -50,12 +50,41 @@ void CUseItem::Update(float fElapsedTime)
 		}
 		if(pDI->KeyPressed(DIK_RETURN))
 		{
+			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+			{
+				for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+				{
+					CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+					if(ItemTemp != nullptr)
+					{
+						if(i->second.Owned > 0)
+						{
+							GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+							ResetSkill();
+							if(i->second.Item != nullptr)
+							{
+								if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+								{
+									CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+									if(pTemp != nullptr)
+									{
+										GetOwner()->RemoveConsumableItem(pTemp);
+									}
+								}
+							}
+							tempP->SetReady(false);
+							tempP->SetCasting(false);
+							tempP->SetTurn(false);
+							return;
+						}
+					}
+				}
 
+			}
 		}
 	}
+
 }
-
-
 void CUseItem::Render(void)
 {
 	CBitmapFont* m_pFont = CGame::GetInstance()->GetFont2();
