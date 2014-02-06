@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "BitmapFont.h"
 #include "GamePlayState.h"
-#include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 
 
@@ -28,9 +27,6 @@ void CBasicAttack::DoAttack(void)
 		{
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp * 2, false);
-			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(GetOwner());
-			if(pTemp != nullptr)
-				pTemp->ModifyAP(-(temp * 2) * 0.2f);
 			GetOwner()->EndTurn();
 		}
 	}
@@ -53,7 +49,7 @@ void CBasicAttack::Update(float fElapsedTime)
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
 		bAttacked = true;
 	}
-	else if (GetOwner()->GetType() == OBJ_LEADER)
+	else if (GetOwner()->GetName() == "Tree")
 	{
 		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
 		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
