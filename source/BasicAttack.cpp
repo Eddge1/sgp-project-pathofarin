@@ -2,11 +2,13 @@
 #include "Game.h"
 #include "BitmapFont.h"
 #include "GamePlayState.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 
 CBasicAttack::CBasicAttack(void)
 {
-
+	CSGD_EventSystem::GetInstance()->RegisterClient("BASIC_ATTACK", this);
+	bAttacked = false;
 }
 
 
@@ -22,7 +24,6 @@ void CBasicAttack::DoAttack(void)
 		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
 		if(GetOwner() != nullptr)
 		{
-
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp, false);
 			GetOwner()->EndTurn();
@@ -42,5 +43,24 @@ void CBasicAttack::DoAttack(void)
 
 void CBasicAttack::Update(float fElapsedTime)
 {
-	DoAttack();
+	if (GetOwner()->GetType() == OBJ_PLAYER_UNIT)
+	{
+		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
+		bAttacked = true;
+	}
+	else
+		DoAttack();
+}
+
+void CBasicAttack::ResetSkill()
+{
+	bAttacked = false;
+}
+
+void CBasicAttack::HandleEvent( const CEvent* pEvent )
+{
+	if (pEvent->GetEventID() == "BASIC_ATTACK" && bAttacked)
+	{
+		DoAttack();
+	}
 }

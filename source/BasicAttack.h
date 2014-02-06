@@ -7,7 +7,7 @@ class CBasicAttack : public CMiniGames
 {
 
 	CUnits* m_pTarget;
-
+	bool bAttacked;
 public:
 
 	virtual void Update(float fElapsedTime) override;
@@ -16,8 +16,8 @@ public:
 
 	CUnits* GetTarget(void) { return m_pTarget; }
 	void SetTarget(CUnits* l) { m_pTarget = l; }
-	virtual void ResetSkill() override { }
-
+	virtual void ResetSkill() override;
+	virtual void HandleEvent( const CEvent* pEvent ) override;
 
 	CBasicAttack(void);
 	virtual ~CBasicAttack(void);

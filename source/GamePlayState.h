@@ -8,6 +8,7 @@
 #include "Item.h"
 #include "Consumable.h"
 #include "../SGD Wrappers/IListener.h"
+#include <sstream>
 using namespace std;
 
 // Forward Class Declarations
@@ -24,6 +25,8 @@ class CGamePlayState :	public CGameStates, public IListener
 
 public:
 
+
+	void AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstream &szText);
 	int GetWorldWidth  () { return WorldWidth ; }
 	int GetWorldHeight () { return WorldHeight ; }
 	int GetWorldCamX   () { return WorldCamX ; }
@@ -57,6 +60,13 @@ public:
 
 
 private:
+	struct NPCDialogue
+	{
+		wostringstream szText;
+		CObjects* pOwner;
+		float m_fTimer;
+		DWORD Color;
+	};
 
 	enum GamePhase {GP_NAV, GP_BATTLE, GP_MENU, GP_START, GP_END};
 	// Singleton (but not dynamically allocated)
@@ -66,12 +76,13 @@ private:
 	CGamePlayState& operator= ( const CGamePlayState& );
 
 	map<string, CWorld*> m_mWorldManager;
+	vector<NPCDialogue*> m_vShowOnScreen;
 	string m_sCurrWorld;
 
 	// Systems initialized by CGamePlayState
 	CSGD_EventSystem*		m_pES;
 	CRenderManager*			m_pRM;
-	CMiniGames m_temp;
+	CMiniGames				m_temp;
 
 	// Game Entities
 
@@ -82,11 +93,12 @@ private:
 	int WorldHeight;
 	int WorldCamX;
 	int WorldCamY;
-
+	bool m_bGameVictory;
 	bool bisPaused;
 	int m_nCursor;
 	int m_nConversationID;
 	float m_fFireBallTimer;
+	float m_fGameText;
 	GamePhase m_eCurrPhase;
 
 };

@@ -63,7 +63,7 @@ void CObjectManager::Render(unsigned int nLayer)
 			if (nImageID != -1)
 			{
 				if (temp[i]->GetType() == OBJ_PLAYER)
-					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
+					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 				else
 					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 			}
@@ -136,7 +136,7 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 	{
 		for(unsigned int j = 0; j < Collision2.size(); j++)
 		{
-			if(Collision1[i]->GetActive() && Collision2[j]->GetActive())
+			if(Collision1[i]->GetActive() && Collision2[j]->GetActive() && Collision1[i] != Collision2[j])
 			{
 				/*Temp to show Collision works*/
 				rTemp1 = Collision1[i]->GetCollisionRect();

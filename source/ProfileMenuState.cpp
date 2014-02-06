@@ -460,7 +460,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Player_Idle");
+	pTemp->SetAnimation("Warrior_Idle_Down");
 	temp->SetZone("testing");
 	pTemp->SetCurrentFrame(0);
 	CPlayerUnit* pUnit = CreateTempPlayer();
@@ -479,7 +479,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CAnimationTimeStamp* pTemp;
 	temp->SetAttack(10);   // DEVELOPER PURPOSES!
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Mage_Idle_Battle");
+	pTemp->SetAnimation("Warrior_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempC->SetMiniGame(tempM);

@@ -1,6 +1,6 @@
 #include "Npcs.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
-
+#include "GamePlayState.h"
 
 CNpcs::CNpcs(void)
 {
@@ -8,6 +8,9 @@ CNpcs::CNpcs(void)
 	m_bContainsUnits = false;
 	m_bIsHostile = false;
 	m_nWaypoint = 0;
+	m_szEventThrow = "";
+	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
+	m_fDelayChat = 0.0f;
 }
 
 
@@ -51,7 +54,7 @@ void CNpcs::Update(float fElapsedTime)
 {
 	SetVelX(0);
 	SetVelY(0);
-
+	m_fDelayChat -= fElapsedTime;
 	if(m_vWaypoints.size() > 0 && GetActive())
 	{
 		if(GetPosX() <= m_vWaypoints[m_nWaypoint]->locX + 1 && GetPosX() >= m_vWaypoints[m_nWaypoint]->locX - 1)
@@ -80,18 +83,37 @@ void CNpcs::Update(float fElapsedTime)
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
 {
-
+	if(pEvent->GetEventID() == "BATTLE_END" && this == pEvent->GetDestination())
+	{
+		if(m_szEventThrow != "")
+		{
+			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
+		}
+	}
 }
 
 void CNpcs::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_PLAYER)
 	{
-		if(m_bIsHostile && GetActive())
+		if(m_bIsHostile)
 		{
 			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);
 			SetActive(false);
 			SetRender(false);
+		}
+		else
+		{
+			if(m_fDelayChat < 0)
+			{
+				wostringstream woss;
+				if(m_szConversation.size() > 0)
+				{
+					woss << m_szConversation[0].c_str();
+					CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
+					m_fDelayChat = 1.0f;
+				}
+			}
 		}
 		RECT rTemp = col->GetCollisionRect();
 		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;

@@ -273,7 +273,6 @@ void CBattleState::Render(void)
 						else
 						{
 							pTemp->GetSkill(pTemp->GetMenuID())->GetMiniGame()->Render();
-
 						}
 					}
 				}
@@ -397,14 +396,31 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits[i]->GetHealth() < 1)
 				{
 					if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
 						m_eCurrentPhase = BP_END;
-					m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
-					m_vBattleUnits[i]->Release();
-					m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
-					GetNextTarget();
+					}
+					else
+					{
+						m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
+						m_vBattleUnits[i]->Release();
+						m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
+						GetNextTarget();
+					}
 				}
 				else
+				{
+					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+					}
+					else
+					{
+						string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
+					}
 					i++;
+				}
 			}
 			if(m_nTurn >= (int)m_vBattleUnits.size())
 				m_nTurn = 0;
@@ -423,10 +439,20 @@ void CBattleState::EndBattle(void)
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				m_fEndBatleTimer = 5.0f;
+				if (m_vBattleUnits[i]->GetHealth() > 0)
+				{
 				m_bVictory = true;
 				CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
 				CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nVictoryMusic);
-
+				}
+				else
+				{
+					m_fEndBatleTimer = 5.0f;
+					m_bDefeat = true;
+					CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+					CSGD_XAudio2::GetInstance()->MusicPlaySong(m_nDefeatMusic);
+					return;
+				}
 				return;
 			}
 			else if(i == m_vBattleUnits.size() - 1)
@@ -450,9 +476,9 @@ void CBattleState::EndBattle(void)
 		{
 			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
 		}
-		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 		if(m_bVictory)
 		{
+			CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 			CVictoryState::GetInstance()->SetExperience(m_nExperienceGained);
 			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
 		}
