@@ -8,6 +8,7 @@
 CBasicAttack::CBasicAttack(void)
 {
 	CSGD_EventSystem::GetInstance()->RegisterClient("BASIC_ATTACK", this);
+
 	bAttacked = false;
 }
 
@@ -46,6 +47,12 @@ void CBasicAttack::Update(float fElapsedTime)
 	if (GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
+		bAttacked = true;
+	}
+	else if (GetOwner()->GetType() == OBJ_LEADER)
+	{
+		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
+		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
 		bAttacked = true;
 	}
 	else
