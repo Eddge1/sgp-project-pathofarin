@@ -223,9 +223,9 @@ void CVictoryState::Render( void )
 	std::wostringstream woss;
 	CSGD_Direct3D* pD3d = CSGD_Direct3D::GetInstance();
 
-	CGame::GetInstance()->GetFont2()->Draw(_T("Victory!"), 336, 15, 1.0f, D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Victory!"), 336, 15, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	woss << "Level: " << m_pPlayer->GetLevel() << "\nExperience: " << m_pPlayer->GetExperience();
-	CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
 
 	float fPercent = m_nCurrentExp / (m_nNeeded * 1.0f);
 
@@ -242,10 +242,10 @@ void CVictoryState::Render( void )
 
 		woss.str(_T(""));
 		woss << "HP: " << m_nCurrMaxHP << "  +" << m_pPlayer->GetMaxHealth() - m_nCurrMaxHP << "\nAP: " << m_nCurrMaxAP  << "  +" << m_pPlayer->GetMaxAP() - m_nCurrMaxAP << "\nAtk: " << m_nCurrAttack  << "  +" << m_pPlayer->GetAttack() - m_nCurrAttack << "\nStats: " << m_pPlayer->GetStats();
-		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		woss << "\t" << m_nHealthMod << "\n\t" << m_nAPMod << "\n\t" << m_nAttackMod;
-		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 336, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 336, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		RECT rTemp = {0,0,16,32};
 
 		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 386, 172 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
@@ -265,7 +265,7 @@ void CVictoryState::Render( void )
 
 	if(m_pItemDistro != nullptr)
 	{
-		CGame::GetInstance()->GetFont2()->Draw(_T("Items Obtained:"), 272, 300, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Items Obtained:"), 272, 300, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		if(m_pItemDistro->size() > 0)
 		{
 			int nCount = 0;
@@ -280,7 +280,7 @@ void CVictoryState::Render( void )
 						{
 							woss.str(_T(""));
 							woss << pTemp->GetName().c_str() << "  x" << i->second.Owned;
-							CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 317 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
+							CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 317 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
 						}
 					}
 				}
@@ -288,6 +288,6 @@ void CVictoryState::Render( void )
 			}
 		}
 		else
-			CGame::GetInstance()->GetFont2()->Draw(_T("Nothing"), 272, 317, 0.75f, D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont("Arial")->Draw(_T("Nothing"), 272, 317, 0.75f, D3DCOLOR_XRGB(0,0,0));
 	}
 }

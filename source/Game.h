@@ -43,8 +43,7 @@ public:
 	void SetMemory ( bool bIsMemory )	{   m_bMemory = bIsMemory;}
 
 	//BitmapFont Accessor
-	CBitmapFont* GetFont() const { return m_pFont; }
-	CBitmapFont* GetFont2() const { return m_pFont2; }
+	CBitmapFont* GetFont(std::string) const;
 
 	void ChangeState( CGameStates* pState );
 	void CreateConfig(int nMusic = 100, int nSFX = 100, bool bFullscreen = false, bool bMemory = false);
@@ -75,7 +74,6 @@ private:
 	CSGD_EventSystem*		m_pES;
 	//TODO: Bitmap font.
 	CBitmapFont*			m_pFont;
-	CBitmapFont*			m_pFont2;
 	HWND	m_hWnd;
 
 	// Window Attributes

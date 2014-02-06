@@ -26,7 +26,7 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 {
 	std::wostringstream woss;
 	m_nHealth -= nAmount;
-	if (GetName() == "Tree")
+	if (GetName() == "Tree" || GetName() == "Orc")
 	{
 		string szTemp = GetName() + "_Battle_Taking_Damage";
 		GetAnimInfo()->SetCurrentFrame(0);

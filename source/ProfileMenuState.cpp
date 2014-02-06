@@ -290,7 +290,7 @@ void CProfileMenuState::Render()
 	{
 		std::wostringstream woss;
 		woss << "New Game\n\n\tSlot 1: " << m_vCharacterList[0]->GetUnit()->GetName().c_str() << "\n\n\tSlot 2: " << m_vCharacterList[1]->GetUnit()->GetName().c_str() << "\n\n\tSlot 3: " << m_vCharacterList[2]->GetUnit()->GetName().c_str() << "\n\nDelete\nMain Menu";
-		CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 64, 272,1.0f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 64, 272,1.0f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		RECT rTemp = {0,0,16,32};
 		switch(GetCursorSelection())
@@ -330,13 +330,13 @@ void CProfileMenuState::Render()
 		{
 		case CProfileMenuState::PS_NEWGAME:
 			woss << "Which Slot would you like to use?";
-			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
 			break;
 		case CProfileMenuState::PS_SELECT:
 			break;
 		case CProfileMenuState::PS_DELETE:
 			woss << "Which Slot would you like to delete?";
-			CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 256, 272,1.0f,D3DCOLOR_XRGB(0,0,0));
 
 			break;
 		default:

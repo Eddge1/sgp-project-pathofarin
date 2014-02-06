@@ -65,7 +65,7 @@ CBattleState::~CBattleState(void)
 void CBattleState::Activate(void)
 {
 	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
-	m_pFont = CGame::GetInstance()->GetFont();
+	m_pFont = CGame::GetInstance()->GetFont("Arial");
 	m_bDefeat = false;
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
@@ -424,6 +424,11 @@ void CBattleState::Battle(float fElapsedTime)
 			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+			}
+			else if (m_vBattleUnits[i]->GetName() != "Thornbiter")
+			{
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 			else
 			{

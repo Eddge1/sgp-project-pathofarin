@@ -86,10 +86,10 @@ void COptionsMenu::Render( void )
 
 	std::wostringstream woss;
 	RECT rCursor = {0,0,16,32};
-	CGame::GetInstance()->GetFont()->Draw(_T("Sound:\n\n\nGraphics:\n\nSave Cursor Location:\n\nReturn"), 136,250,0.75f,D3DCOLOR_XRGB(0,0,0));
-	CGame::GetInstance()->GetFont()->Draw(_T("Music:\nSfx:"), 196,270,0.75f,D3DCOLOR_XRGB(0,0,0));
-	CGame::GetInstance()->GetFont()->Draw(_T("Windowed\t\tFullscreen"), 196,338,0.75f,D3DCOLOR_XRGB(0,0,0));
-	CGame::GetInstance()->GetFont()->Draw(_T("No\t\t\tYes"), 196,380,0.75f,D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Sound:\n\n\nGraphics:\n\nSave Cursor Location:\n\nReturn"), 136,250,0.75f,D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Music:\nSfx:"), 196,270,0.75f,D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Windowed\t\tFullscreen"), 196,338,0.75f,D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("No\t\t\tYes"), 196,380,0.75f,D3DCOLOR_XRGB(0,0,0));
 
 	switch (GetCursorSelection())
 	{
@@ -205,7 +205,7 @@ void COptionsMenu::Render( void )
 	CSGD_Direct3D::GetInstance()->DrawHollowRect(rMusic, D3DCOLOR_XRGB(0,0,0),3);
 	woss.str(_T(""));
 	woss << m_nMusicVolume;
-	CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 487,268,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 487,268,0.75f,D3DCOLOR_ARGB(255,0,0,0));
 
 	RECT rSFX = {273,297,273 + (213 * (m_nSFXVolume / 100.0f)),310};
 	CSGD_Direct3D::GetInstance()->DrawRect(rSFX, D3DCOLOR_XRGB(0,255,255));
@@ -218,7 +218,7 @@ void COptionsMenu::Render( void )
 	CSGD_Direct3D::GetInstance()->DrawHollowRect(rSFX, D3DCOLOR_XRGB(0,0,0),3);
 	woss.str(_T(""));
 	woss << m_nSFXVolume;
-	CGame::GetInstance()->GetFont()->Draw(woss.str().c_str(), 487,290,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 487,290,0.75f,D3DCOLOR_ARGB(255,0,0,0));
 }
 
 bool COptionsMenu::Input( void )	

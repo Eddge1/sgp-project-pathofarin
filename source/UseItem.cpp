@@ -92,7 +92,7 @@ void CUseItem::Update(float fElapsedTime)
 }
 void CUseItem::Render(void)
 {
-	CBitmapFont* m_pFont = CGame::GetInstance()->GetFont2();
+	CBitmapFont* m_pFont = CGame::GetInstance()->GetFont("Arial");
 	if(GetOwner() != nullptr)
 	{
 		wostringstream woss;

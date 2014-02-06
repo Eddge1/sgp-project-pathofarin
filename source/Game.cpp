@@ -35,7 +35,7 @@ CGame::CGame(void)
 	m_pES			= nullptr;
 
 	m_pFont			= nullptr;
-	m_pFont2		= nullptr;
+
 	m_nScreenWidth	= 1;
 	m_nScreenHeight	= 1;
 	m_bIsWindowed	= true;
@@ -81,10 +81,7 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_pXA->Initialize();
 
 	m_pFont = new CBitmapFont;
-	m_pFont->Initialize("assets/Fonts/test2.fnt");
-
-	m_pFont2 = new CBitmapFont;
-	m_pFont2->Initialize("assets/Fonts/test3.fnt");
+	m_pFont->Initialize();
 
 	// Start in the Main Menu state
 	ChangeState( CMainMenuState::GetInstance() );
@@ -135,9 +132,6 @@ void CGame::Terminate(void)
 	m_bIsWindowed	= true;
 
 	delete m_pFont;
-	m_pFont = nullptr;
-
-	delete m_pFont2;
 	m_pFont = nullptr;
 }
 
@@ -292,4 +286,13 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 	pRoot->LinkEndChild(pConfig);
 
 	doc.SaveFile("Assets/Data/Config/Options.xml");
+}
+
+CBitmapFont* CGame::GetFont(std::string szFont) const
+{
+	if(szFont == "")
+		return nullptr;
+
+	return m_pFont->GetFont(szFont);
+
 }
