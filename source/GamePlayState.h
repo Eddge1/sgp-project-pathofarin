@@ -54,7 +54,7 @@ public:
 
 	void LoadWorld(string input);
 	CWorld* GetWorld(string szName);
-	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
+	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack = 5);
 	CConsumable* CreatePotion(string input);
 
 

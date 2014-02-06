@@ -74,9 +74,9 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-			CConsumable* temp = CreatePotion("Hi-Potion");
+			CConsumable* temp = CreatePotion("Potion");
 			m_pPlayer->GetUnit()->AddConsumableItem(temp);
-			temp = CreatePotion("Hi-Potion");
+			temp = CreatePotion("Potion");
 			m_pPlayer->GetUnit()->AddConsumableItem(temp);
 
 		}
@@ -114,7 +114,7 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f, 200.0f, 25, 500, 20));
+			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f, 200.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -680,7 +680,7 @@ void CGamePlayState::SetPlayer(CPlayer* pPlayer)
 		m_pPlayer->AddRef();
 }
 
-CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp)
+CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack)
 {
 	CEnemyUnit* temp = new CEnemyUnit;
 	CAIController* tempAI = new CAIController;
@@ -735,11 +735,12 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetPosY(Y);
 	temp->SetVelX(0);
 	temp->SetVelY(0);
+	temp->SetAttack(attack);
 	temp->SetSpeed(speed);
 	temp->SetTurn(false);
 	temp->SetName(input);
 	temp->GiveExperience(90);
-	CConsumable* piTemp = CreatePotion("Hi-Potion");
+	CConsumable* piTemp = CreatePotion("Potion");
 	temp->AddConsumableItem(piTemp,1,1.0f);
 
 	return temp;
