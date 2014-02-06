@@ -43,6 +43,7 @@ CBattleState::CBattleState(void)
 	m_nMenuSelectionImage = -1;
 	m_nVictoryMusic = -1;
 	m_nDefeatMusic = -1;
+	m_nSelectionChange = -1;
 	SetBackgroundMusic(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);

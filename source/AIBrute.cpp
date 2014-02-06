@@ -68,7 +68,10 @@ void CAIBrute::Update(float fElapsedTime)
 				m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
 			}
 			else
-				m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+			{
+				GetMinigame()->SetOwner(GetOwner());
+				GetMinigame()->Update(fElapsedTime);
+			}
 
 			m_pTarget = nullptr;
 			GetOwner()->EndTurn();
@@ -104,7 +107,8 @@ void CAIBrute::Update(float fElapsedTime)
 			}
 			else
 			{
-				m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+				GetMinigame()->SetOwner(GetOwner());
+				GetMinigame()->Update(fElapsedTime);
 				m_pTarget = nullptr;
 				GetOwner()->EndTurn();
 			}

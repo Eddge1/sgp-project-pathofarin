@@ -33,7 +33,8 @@ void CAIBasicHealer::Update(float fElapsedTime)
 		}
 		if(m_pTarget != nullptr)
 		{
-			m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+			GetMinigame()->SetOwner(GetOwner());
+			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
 			GetOwner()->EndTurn();
