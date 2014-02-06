@@ -3,6 +3,7 @@
 #include "../SGD Wrappers/CSGD_Direct3D.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 
+
 CMiniGames::CMiniGames(void)
 {
 	m_pMaster = nullptr;
@@ -11,6 +12,7 @@ CMiniGames::CMiniGames(void)
 
 CMiniGames::~CMiniGames(void)
 {
+	CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
 	SetOwner(nullptr);
 }
 

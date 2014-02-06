@@ -4,9 +4,10 @@
 #include <Windows.h>
 #include <string>
 #include "Units.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 class CSkills;
-class CMiniGames
+class CMiniGames : public IListener
 {
 	CUnits* m_pMaster;
 	int m_nChances;
@@ -36,5 +37,7 @@ public:
 	float GetDamage( void )	{return m_fDamageMultiplier;}
 	int GetChances( void ) {return m_nChances;}
 	int GetCost( void ) {return m_nCost;}
+	virtual void HandleEvent( const CEvent* pEvent ) override {}
+
 };
 

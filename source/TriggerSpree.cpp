@@ -188,7 +188,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 		if(pTemp != nullptr)
 			GetOwner()->EndTurn();
 	}
-	
+
 }
 
 void CTriggerSpree::ResetSkill()
@@ -208,4 +208,9 @@ void CTriggerSpree::ResetSkill()
 	pRect->right = 600;
 	pRect->bottom = 96;	
 	m_vTriggers.push_back(pRect);
+}
+
+void CTriggerSpree::HandleEvent( const CEvent* pEvent )
+{
+
 }

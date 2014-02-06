@@ -15,6 +15,6 @@ public:
 	CUseItem(void);
 	virtual ~CUseItem(void);
 	virtual void ResetSkill() override { }
-
+	virtual void HandleEvent( const CEvent* pEvent ) override{ }
 };
 
