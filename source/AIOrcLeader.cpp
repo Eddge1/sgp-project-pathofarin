@@ -74,7 +74,8 @@ void CAIOrcLeader::Update(float fElapsedTime )
 					m_pTarget = m_vBattleUnits[i];
 			}
 
-			m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+			GetMinigame()->SetOwner(GetOwner());
+			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
 			GetOwner()->EndTurn();
@@ -111,7 +112,8 @@ void CAIOrcLeader::Update(float fElapsedTime )
 		}
 		else
 		{
-			m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+			GetMinigame()->SetOwner(GetOwner());
+			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
 			GetOwner()->EndTurn();
