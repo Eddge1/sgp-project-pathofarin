@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Tree_Battle_Idle" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="4" posY="17" Width="185" Height="172" anchorX="63" anchorY="167" Duration="0.05" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="185" Height="172" />
+      <Render posX="205" posY="14" Width="185" Height="175" anchorX="65" anchorY="170" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="185" Height="175" />
+      <Render posX="410" posY="13" Width="181" Height="176" anchorX="67" anchorY="171" Duration="0.1" Event="BATS" />
+      <ActiveCollision posX="0" posY="0" Width="181" Height="176" />
+      <Render posX="610" posY="12" Width="182" Height="178" anchorX="67" anchorY="171" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="182" Height="178" />
+      <Render posX="812" posY="13" Width="184" Height="177" anchorX="67" anchorY="170" Duration="0.1" Event="MORE_BATS" />
+      <ActiveCollision posX="0" posY="0" Width="184" Height="177" />
+      <Render posX="1009" posY="12" Width="184" Height="177" anchorX="66" anchorY="172" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="184" Height="177" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TwistedTree_Battle_Basic_Attack" Frames="18" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="6" posY="694" Width="185" Height="177" anchorX="89" anchorY="126" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="186" Height="178" />
+      <Render posX="210" posY="692" Width="186" Height="176" anchorX="92" anchorY="124" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="186" Height="176" />
+      <Render posX="421" posY="690" Width="182" Height="180" anchorX="90" anchorY="124" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="183" Height="180" />
+      <Render posX="625" posY="685" Width="184" Height="182" anchorX="93" anchorY="126" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="185" Height="181" />
+      <Render posX="826" posY="681" Width="191" Height="188" anchorX="99" anchorY="128" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="191" Height="187" />
+      <Render posX="1037" posY="654" Width="198" Height="219" anchorX="99" anchorY="166" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="198" Height="219" />
+      <Render posX="1256" posY="663" Width="198" Height="206" anchorX="99" anchorY="161" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="198" Height="206" />
+      <Render posX="1473" posY="663" Width="198" Height="206" anchorX="93" anchorY="150" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="198" Height="206" />
+      <Render posX="1685" posY="663" Width="190" Height="204" anchorX="93" anchorY="148" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="190" Height="204" />
+      <Render posX="1895" posY="679" Width="200" Height="193" anchorX="99" anchorY="140" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="199" Height="192" />
+      <Render posX="2104" posY="694" Width="184" Height="176" anchorX="94" anchorY="125" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="184" Height="176" />
+      <Render posX="2305" posY="690" Width="190" Height="180" anchorX="95" anchorY="126" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="190" Height="180" />
+      <Render posX="2508" posY="689" Width="185" Height="181" anchorX="92" anchorY="128" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="185" Height="180" />
+      <Render posX="2715" posY="689" Width="182" Height="181" anchorX="91" anchorY="130" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="183" Height="182" />
+      <Render posX="2917" posY="689" Width="184" Height="184" anchorX="93" anchorY="129" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="183" Height="184" />
+      <Render posX="3112" posY="695" Width="191" Height="175" anchorX="96" anchorY="124" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="191" Height="175" />
+      <Render posX="3317" posY="693" Width="182" Height="178" anchorX="91" anchorY="125" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="182" Height="178" />
+      <Render posX="3511" posY="692" Width="186" Height="181" anchorX="92" anchorY="127" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="186" Height="182" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TwistedTree_Battle_Taking_Damage" Frames="4" repeat="0" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="6" posY="1740" Width="184" Height="189" anchorX="87" anchorY="132" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="184" Height="190" />
+      <Render posX="196" posY="1741" Width="185" Height="188" anchorX="90" anchorY="131" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="185" Height="188" />
+      <Render posX="396" posY="1740" Width="178" Height="185" anchorX="85" anchorY="132" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="177" Height="184" />
+      <Render posX="587" posY="1737" Width="179" Height="188" anchorX="87" anchorY="135" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="179" Height="188" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

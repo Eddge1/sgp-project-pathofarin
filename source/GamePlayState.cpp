@@ -110,7 +110,7 @@ void CGamePlayState::Activate(void)
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("ThornBiter 1", 100.0f, 100.0f, 12, 1, 20));
-			pTemp->SetUnits(CreateTempEnemy("ThornBiter 2", 200.0f, 200.0f, 5, 1, 20));
+			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f, 200.0f, 5, 1, 20));
 			pTemp->SetUnits(CreateTempEnemy("Mandrake", 100.0f, 300.0f, 9, 1, 20));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
@@ -204,6 +204,7 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Warrior_Overworld.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Warrior_Battle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Battle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Overworld.xml");
 
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/NPC_Male.xml");
@@ -712,6 +713,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		tempAI = reinterpret_cast<CAIController*>(OrcTemp);
 		OrcTemp = nullptr;
 		temp->SetType(OBJ_LEADER);
+	}
+	else if (input == "TwistedTree")
+	{
+		pTemp->SetAnimation("Tree_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);
