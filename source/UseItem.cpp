@@ -50,6 +50,23 @@ void CUseItem::Update(float fElapsedTime)
 		}
 		if(pDI->KeyPressed(DIK_RETURN))
 		{
+			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+			{
+				CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+				if(ItemTemp != nullptr)
+				{
+					if(i->second.Owned > 0)
+					{
+						GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+						ResetSkill();
+						//GetOwner()->RemoveConsumableItem();
+						tempP->SetReady(false);
+						tempP->SetCasting(false);
+						tempP->SetTurn(false);
+						return;
+					}
+				}
+			}
 
 		}
 	}

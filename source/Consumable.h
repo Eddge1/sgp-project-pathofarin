@@ -27,6 +27,6 @@ public:
 	CConsumable(void);
 	~CConsumable(void);
 	CConsumable( const CConsumable& );
-	CConsumable& operator= ( const CConsumable& ); // TODO: do weird shit here lol.
+	CConsumable& operator= ( const CConsumable& );
 };
 
