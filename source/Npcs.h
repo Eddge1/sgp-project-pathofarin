@@ -22,6 +22,7 @@ class CNpcs : public CEntity
 	float m_fDelayChat;
 
 public:
+
 	CNpcs(void);
 	virtual ~CNpcs(void);
 	std::vector<CEnemyUnit*>& GetUnits(void) {return m_vUnitList;}
