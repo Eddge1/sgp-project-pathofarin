@@ -111,7 +111,7 @@ void CMainMenuState::Update(float fElapsedTime)
 void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-	CBitmapFont* pFont2 = CGame::GetInstance()->GetFont2();
+	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Comic Sans MS");
 
 	RECT rtemp = {36, 48, 220, 206};
 	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
@@ -124,7 +124,7 @@ void CMainMenuState::Render(void)
 		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
 
 		RECT rTemp = {336, 408, 464,536};
-		pFont2->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		pFont->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;

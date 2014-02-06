@@ -26,7 +26,7 @@ public:
 	CAnimation* GetAnimation(std::string szName) { return loadedAnimation[szName]; }
 	bool IsEventThrown() { return m_bEventThrown; }
 	//Mutator: 
-	void LoadAnimations(std::string filePath);
+	void LoadAnimations(void);
 	void EventIsThrown(bool bEventThrow) { m_bEventThrown = bEventThrow; }
 
 
