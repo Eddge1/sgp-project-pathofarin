@@ -66,6 +66,8 @@ void CAIBrute::Update(float fElapsedTime)
 				woss << "Raged";
 				CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 				m_pTarget->ModifyHealth(GetOwner()->GetAttack(), false);
+				m_pTarget = nullptr;
+				GetOwner()->EndTurn();
 			}
 			else
 			{
@@ -74,7 +76,7 @@ void CAIBrute::Update(float fElapsedTime)
 			}
 
 			m_pTarget = nullptr;
-			GetOwner()->EndTurn();
+
 		}
 		else if(m_pTarget->GetHealth() - GetOwner()->GetAttack() * 3 <= 5)
 		{
@@ -110,7 +112,6 @@ void CAIBrute::Update(float fElapsedTime)
 				GetMinigame()->SetOwner(GetOwner());
 				GetMinigame()->Update(fElapsedTime);
 				m_pTarget = nullptr;
-				GetOwner()->EndTurn();
 			}
 		}
 

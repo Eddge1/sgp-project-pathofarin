@@ -32,7 +32,6 @@ void CAIOrcLeader::Update(float fElapsedTime )
 		m_pTarget->ModifyHealth(GetOwner()->GetAttack() * 4, false);
 		m_pTarget = nullptr;
 		m_bPrepare = false;
-		GetOwner()->EndTurn();
 	}
 	else if(m_nTurns > 3)
 	{
@@ -42,7 +41,6 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			GetOwner()->ModifyHealth(-tempRestore, false);
 			m_pTarget = nullptr;
 			m_nTurns = 0;
-			GetOwner()->EndTurn();
 			return;
 		}
 
@@ -78,7 +76,6 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
-			GetOwner()->EndTurn();
 		}
 
 	}
@@ -116,7 +113,6 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
-			GetOwner()->EndTurn();
 		}
 
 
