@@ -1,7 +1,27 @@
 #pragma once
 #include "entity.h"
+#include "Item.h"
+#include "Consumable.h"
 #include <string>
+#include <map>
 using namespace std;
+
+
+struct InventoryItems
+{
+	CItem Item;
+	int Owned;
+	float DropChance;
+
+	InventoryItems()
+	{
+		Owned = 0;
+		DropChance = 0.0f;
+	}
+
+};
+
+
 class CUnits :
 	public CEntity
 {
@@ -20,11 +40,18 @@ class CUnits :
 	int m_nAvailStats;
 	UnitClass m_eClass;
 
+
 	//int m_nGold;
-	//std::map<string, CItem> m_mInventory
+	map<string, InventoryItems> m_mInventory;
 
 	string m_sName;
 public:
+
+
+
+	map<string, InventoryItems>& GetInv(void) { return m_mInventory; }
+	void AddConsumableItem(CConsumable input);
+	void RemoveConsumableItem(string input);
 	CUnits(void);
 	virtual ~CUnits(void);
 

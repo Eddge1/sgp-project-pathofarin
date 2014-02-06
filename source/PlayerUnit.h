@@ -17,6 +17,11 @@ class CPlayerUnit :	public CUnits
 	bool m_bDodge;
 	float timer;
 
+	//Audio
+	int m_nSelectionChange;
+	int m_nSelectionConfirm;
+	int m_nSelectionBack;
+
 public:
 	CPlayerUnit(void);
 	virtual ~CPlayerUnit(void);
@@ -28,7 +33,7 @@ public:
 
 	int  GetMenuID		(void) const	{return m_nMenuSelect;}
 	int  GetSkillID		(void) const	{if(m_bInSubMenu) return m_nSkillSelect;
-										else return m_nMenuSelect;}
+	else return m_nMenuSelect;}
 	void SetOwner(CPlayer* pPlayer);
 	CPlayer* GetOwner(void) {return m_pPlayer;}
 

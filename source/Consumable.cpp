@@ -3,6 +3,7 @@
 
 CConsumable::CConsumable(void)
 {
+	m_nAmount = 0;
 }
 
 

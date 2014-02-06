@@ -5,6 +5,8 @@
 #include <map>
 #include "World.h"
 #include "EnemyUnit.h"
+#include "Item.h"
+#include "Consumable.h"
 #include "../SGD Wrappers/IListener.h"
 using namespace std;
 
@@ -51,6 +53,8 @@ public:
 	void LoadWorld(string input);
 	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
+	CConsumable* CreatePotion(string input);
+
 
 private:
 

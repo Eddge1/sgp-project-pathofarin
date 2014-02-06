@@ -1,5 +1,6 @@
 #include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_DirectInput.h"
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "BattleState.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "Player.h"
@@ -16,6 +17,10 @@ CPlayerUnit::CPlayerUnit(void)
 	m_bDodge = false;
 	timer = 1.0f;
 	CSGD_EventSystem::GetInstance()->RegisterClient("DODGE", this);
+	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
+	m_nSelectionConfirm = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionConfirm.wav"));
+	m_nSelectionBack = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionBack.wav"));
+
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -62,12 +67,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 				{
 					if(pDI->KeyPressed(DIK_W))
 					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect--;
 						if(m_nSkillSelect < 0)
 							m_nSkillSelect = (int)m_vCommands[m_nMenuSelect]->GetCommands()->size() - 1;
 					}
 					else if(pDI->KeyPressed(DIK_S))
 					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect++;
 						if(m_nSkillSelect >= (int)m_vCommands[m_nMenuSelect]->GetCommands()->size())
 							m_nSkillSelect = 0;
@@ -77,12 +84,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 				{
 					if(pDI->KeyPressed(DIK_W))
 					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect--;
 						if(m_nMenuSelect < 0)
 							m_nMenuSelect = (int)m_vCommands.size() - 1;
 					}
 					else if(pDI->KeyPressed(DIK_S))
 					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect++;
 						if(m_nMenuSelect >= (int)m_vCommands.size())
 							m_nMenuSelect = 0;
@@ -90,6 +99,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 				}
 				if(pDI->KeyPressed(DIK_RETURN))
 				{
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
 					if(m_bInSubMenu)
 						m_bSkillSelected = true;
 					else
@@ -115,6 +125,8 @@ void CPlayerUnit::Update(float fElapsedTime)
 			{
 				if(pDI->KeyPressed(DIK_RETURN))
 				{
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
+
 					m_bCasting = true;
 				}
 				else if(pDI->KeyPressed(DIK_ESCAPE))

@@ -75,6 +75,10 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+			CConsumable* temp = CreatePotion("Hi-Potion");
+			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
+			m_pPlayer->GetUnit()->AddConsumableItem(*temp);
+
 		}
 		break;
 	case CGamePlayState::GP_BATTLE:
@@ -211,7 +215,6 @@ void CGamePlayState::Activate(void)
 	}
 
 
-
 }
 
 void CGamePlayState::Sleep(void)
@@ -231,7 +234,7 @@ void CGamePlayState::Sleep(void)
 		{
 			if(m_pES != nullptr)
 			{
-					m_pES->UnregisterClientAll(this);
+				m_pES->UnregisterClientAll(this);
 
 				// Clear the event system
 				if( m_pES != nullptr )
@@ -251,7 +254,7 @@ void CGamePlayState::Sleep(void)
 				}
 				CAnimationSystem::GetInstance()->DeleteInstance();
 			}
-			
+
 		}
 		break;
 	default:
@@ -642,7 +645,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		tempAI = reinterpret_cast<CAIController*>(Temp);
 		Temp = nullptr;
 		temp->SetType(OBJ_LEADER);
-	
+
 
 	}
 	else if(input == "Orc Leader")
@@ -675,3 +678,67 @@ CWorld* CGamePlayState::GetWorld(string szName)
 {
 	return m_mWorldManager[szName];
 }
+
+CConsumable* CGamePlayState::CreatePotion(string input)
+{
+	CConsumable* temp = nullptr;
+
+	if(input == "Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(200);
+		return temp;
+	}
+	else if(input == "Hi-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(500);
+		return temp;
+	}
+	else if(input == "Titan-Potion")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a liquid substance.");
+		temp->SetType("HP");
+		temp->SetAmount(1000);
+		return temp;
+	}
+	else if(input == "Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(50);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(100);
+		return temp;
+	}
+	else if(input == "Hi-Ether")
+	{
+		temp = new CConsumable;
+		temp->SetName(input);
+		temp->SetDes("Bottle with a magical liquid substance.");
+		temp->SetType("MP");
+		temp->SetAmount(300);
+		return temp;
+	}
+	else
+		return temp;
+
+}
+

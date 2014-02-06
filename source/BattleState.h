@@ -79,6 +79,8 @@ private:
 	std::vector<FloatingText*> m_vText;
 	int m_nExperienceGained;
 
+	int m_nSelectionChange;
+
 	CBattleState(void);
 	virtual ~CBattleState(void);
 	CBattleState( const CBattleState& );
