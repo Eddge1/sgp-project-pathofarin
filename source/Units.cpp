@@ -89,7 +89,6 @@ void CUnits::ModifyAP(int nAmount)
 		m_nAbilityPoints = m_nMaxAbilityPoints;
 
 	//Floating Text
-
 }
 
 void CUnits::Update(float fElapsedTime)

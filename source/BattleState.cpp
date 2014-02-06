@@ -296,7 +296,14 @@ void CBattleState::Render(void)
 					{
 						woss.str(_T(""));
 						woss << vTemp[i]->GetName().c_str();
-						m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() <= pTemp->GetAbilityPoints() && vTemp[i]->GetIsGame())
+							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+						else if(vTemp[i]->GetMiniGame() == nullptr)
+							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+						else
+							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(155,155,155));
+
+
 					}
 				}
 				RECT rTemp = {};

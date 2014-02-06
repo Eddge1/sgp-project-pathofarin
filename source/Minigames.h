@@ -17,9 +17,7 @@ class CMiniGames : public IListener
 	CSkills* m_pSkill;
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
-
 	CUnits* GetOwner(void) { return m_pMaster; }
-
 
 	CMiniGames(void);
 	virtual ~CMiniGames(void);

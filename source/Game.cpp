@@ -66,12 +66,13 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_pTM			= CSGD_TextureManager::GetInstance();
 	m_pXA			= CSGD_XAudio2::GetInstance();
 	m_pES			= CSGD_EventSystem::GetInstance();
-
+	m_bGamePaused	= false;
 	// Store the parameters
 	m_nScreenWidth	= nWidth;
 	m_nScreenHeight	= nHeight;
 	m_bIsWindowed	= bIsWindowed;
 	srand((unsigned int) time(0));
+	m_hWnd = hWnd;
 
 	// Initialize the wrappers
 	m_pD3D->Initialize( hWnd, m_nScreenWidth, m_nScreenHeight, m_bIsWindowed, false );
@@ -144,29 +145,33 @@ void CGame::Terminate(void)
 //	- update the game
 bool CGame::Update( void )
 {
-	// Update the audio
-	m_pXA->Update();
-
-
-	// Calculate the elapsed time between frames
+	if(GetFocus() != m_hWnd)
+		m_bGamePaused = true;
+	else
+		m_bGamePaused = false;
 	DWORD dwNow = GetTickCount();
 	float fElapsedTime = (dwNow - m_dwCurrTime) / 1000.0f;
 	m_dwCurrTime = dwNow;
-
 
 	// Cap the elapsed time to 1/8th
 	if( fElapsedTime > 0.125f )
 		fElapsedTime = 0.125f;
 
-	// Reading input here, before update.
+	if(!m_bGamePaused)
+	{
+		// Update the audio
+		m_pXA->Update();
 
-	m_pDI->ReadDevices();
+		// Reading input here, before update.
 
-	if(m_pCurrState->Input() == false)
-		return false;
+		m_pDI->ReadDevices();
 
-	// Current state updates
-	m_pCurrState->Update( fElapsedTime );
+		if(m_pCurrState->Input() == false)
+			return false;
+
+		// Current state updates
+		m_pCurrState->Update( fElapsedTime );
+	}
 	return true;
 }
 
@@ -257,7 +262,7 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 {
 	TiXmlDocument doc;
 	TiXmlDeclaration* pDecl = new TiXmlDeclaration("1.0", "utf-8", "");
-	
+
 	doc.LinkEndChild(pDecl);	
 	TiXmlElement* pRoot = new TiXmlElement("Config");
 	doc.LinkEndChild(pRoot);

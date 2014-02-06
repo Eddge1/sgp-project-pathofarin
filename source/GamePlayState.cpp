@@ -29,6 +29,7 @@
 #include "AIBasicHealer.h"
 #include "AIBrute.h"
 #include "CreditState.h"
+#include "Chest.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -198,6 +199,18 @@ void CGamePlayState::Activate(void)
 			pTemp->Release();
 			pTemp = nullptr;
 
+			CChest* pChest = new CChest();
+			pChest->SetPosX(609);
+			pChest->SetPosY(161);
+			CConsumable* pItem = CreatePotion("Potion");
+			pChest->AddConsumableItem(pItem, 3);
+			pChest->RegEvent("TEST_ITEM");
+			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
+			m_mWorldManager[m_sCurrWorld]->AddObject(pChest, 2);
+			pChest->Release();
+			pChest = nullptr;
+			pItem = nullptr;
+
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
 
@@ -215,6 +228,8 @@ void CGamePlayState::Activate(void)
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Plantdude.xml");
+			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/World_Chest.xml");
+
 
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
@@ -224,6 +239,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 			m_pES->RegisterClient("LEVEL_UP", this);
 			m_pES->RegisterClient("VALRION_DEFEAT", this);
+			m_pES->RegisterClient("TEST_ITEM", this);
 
 			m_eCurrPhase = GP_NAV;
 		}
@@ -463,6 +479,30 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	{
 		m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
+	}
+	else if(pEvent->GetEventID() == "TEST_ITEM")
+	{
+		map<string,InventoryItems>* mTemp = reinterpret_cast<map<string,InventoryItems>*>(pEvent->GetParam());
+		if(mTemp != nullptr)
+		{
+			wostringstream woss;
+			for(auto i = mTemp->begin(); i != mTemp->end(); i++)
+			{
+				if(i->second.Item != nullptr)
+				{
+					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					{
+						CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+						if(pTemp != nullptr)
+						{
+							woss << "Obtained " << pTemp->GetName().c_str() << " x" << i->second.Owned << "\n";
+							m_pPlayer->GetUnit()->AddConsumableItem(pTemp, i->second.Owned);
+						}
+					}
+				}
+			}
+			AddFloatingText(m_pPlayer, D3DCOLOR_XRGB(0,0,0), woss);
+		}
 	}
 }
 
@@ -727,7 +767,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetName(input);
 	temp->GiveExperience(90);
 	CConsumable* piTemp = CreatePotion("Potion");
-	temp->AddConsumableItem(piTemp,1,1.0f);
+	temp->AddConsumableItem(piTemp,1,0.75f);
+	piTemp = CreatePotion("Hi-Potion");
+	temp->AddConsumableItem(piTemp,1,0.1f);
+
 
 	return temp;
 }

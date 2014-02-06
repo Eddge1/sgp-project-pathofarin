@@ -85,7 +85,7 @@ void CPlayer::Update(float fElapsedTime)
 
 void CPlayer::HandleCollision(CObjects* col)
 {
-	if(col->GetType() == OBJ_UNDEFINE || col->GetType() == OBJ_NPC)
+	if(col->GetType() == OBJ_UNDEFINE || col->GetType() == OBJ_NPC || col->GetType() == OBJ_CHEST)
 	{
 		RECT rTemp = col->GetCollisionRect();
 		if(GetCollisionRect().left > rTemp.left && GetCollisionRect().left < rTemp.right)

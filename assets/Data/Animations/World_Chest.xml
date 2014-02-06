@@ -3,19 +3,19 @@
   <Animation_Info Name="Chest_Closed" Frames="1" repeat="0" Texture="PoA_Chest.png">
     <Frame_Data>
       <Render posX="0" posY="0" Width="56" Height="57" anchorX="27" anchorY="45" Duration="1.0" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="52" Height="54" />
+      <ActiveCollision posX="0" posY="0" Width="52" Height="54" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Chest_Opening" Frames="4" repeat="0" Texture="PoA_Chest.png">
     <Frame_Data>
       <Render posX="0" posY="0" Width="56" Height="57" anchorX="27" anchorY="45" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="52" Height="54" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="50" />
       <Render posX="1" posY="62" Width="55" Height="55" anchorX="26" anchorY="45" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="0" Width="54" Height="53" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="50" />
       <Render posX="61" posY="0" Width="57" Height="56" anchorX="28" anchorY="45" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-3" posY="0" Width="51" Height="56" />
-      <Render posX="62" posY="59" Width="57" Height="60" anchorX="27" anchorY="46" Duration="1" Event="GIVE_ITEM_01" />
-      <ActiveCollision posX="-1" posY="-1" Width="53" Height="58" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="50" />
+      <Render posX="62" posY="59" Width="57" Height="60" anchorX="27" anchorY="46" Duration="1" Event="GIVE_ITEM" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="50" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>

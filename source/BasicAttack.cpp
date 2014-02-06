@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "BitmapFont.h"
 #include "GamePlayState.h"
+#include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 
 
@@ -26,6 +27,9 @@ void CBasicAttack::DoAttack(void)
 		{
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp * 2, false);
+			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(GetOwner());
+			if(pTemp != nullptr)
+				pTemp->ModifyAP(-(temp * 2) * 0.2f);
 			GetOwner()->EndTurn();
 		}
 	}
