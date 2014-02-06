@@ -78,7 +78,7 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
-			GetOwner()->EndTurn();
+			//GetOwner()->EndTurn();
 		}
 
 	}
@@ -116,7 +116,7 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			GetMinigame()->Update(fElapsedTime);
 			m_pTarget = nullptr;
 			m_nTurns += 1;
-			GetOwner()->EndTurn();
+			//GetOwner()->EndTurn();
 		}
 
 

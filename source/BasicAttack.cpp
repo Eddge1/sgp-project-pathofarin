@@ -68,6 +68,7 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 {
 	if (pEvent->GetEventID() == "BASIC_ATTACK" && bAttacked)
 	{
+		bAttacked = false;
 		DoAttack();
 	}
 }
