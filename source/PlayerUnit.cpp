@@ -187,5 +187,9 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
 		CUnits::ModifyHealth(nAmount, isCrit);
 		timer = 0.0f;
 	}
+	if (this->GetHealth() <= 0)
+	{
+		this->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+	}
 }
 

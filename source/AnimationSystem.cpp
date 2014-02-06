@@ -172,7 +172,7 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 	if (pFrame->GetEventID() != "" /*&& m_bEventThrown == false*/)
 	{
 		m_bEventThrown = true;
-		CSGD_EventSystem::GetInstance()->QueueEvent(pFrame->GetEventID());
+		CSGD_EventSystem::GetInstance()->SendEventNow(pFrame->GetEventID());
 	}
 }
 

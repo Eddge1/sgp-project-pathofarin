@@ -452,7 +452,7 @@ void CBattleState::EndBattle(void)
 		}
 		if(m_bVictory)
 		{
-		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
+			CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 			CVictoryState::GetInstance()->SetExperience(m_nExperienceGained);
 			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
 		}

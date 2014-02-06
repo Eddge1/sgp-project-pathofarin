@@ -7,7 +7,7 @@ class CBasicAttack : public CMiniGames
 {
 
 	CUnits* m_pTarget;
-
+	bool bAttacked;
 public:
 
 	virtual void Update(float fElapsedTime) override;
