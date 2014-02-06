@@ -8,6 +8,7 @@
 CPlayerUnit::CPlayerUnit(void)
 {
 	SetType(OBJ_PLAYER_UNIT);
+	SetClass(UC_WARRIOR);
 	m_bInSubMenu = false;
 	m_bSkillSelected = false;
 	m_bCasting = false;

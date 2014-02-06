@@ -17,7 +17,6 @@ CUnits::CUnits(void)
 	m_nAvailStats = 0;
 }
 
-
 CUnits::~CUnits(void)
 {
 	m_mInventory.clear();
@@ -112,6 +111,24 @@ void CUnits::GiveExperience		( int nAmount )
 	}
 
 	m_nLevel += nLevels;
+	switch (m_eClass)
+	{
+	case UC_ENEMY:
+		break;
+	case UC_NONE:
+		break;
+	case UC_WARRIOR:
+		SetMaxHealth(GetMaxHealth() + (nLevels * 40));
+		SetAttack(GetAttack() + (nLevels * 3));
+		SetMaxAP(GetMaxAP() + (nLevels * 20));
+		break;
+	case UC_RANGER:
+		break;
+	case UC_MAGE:
+		break;
+	default:
+		break;
+	}
 	m_nAvailStats += (5 * nLevels);
 
 	m_nExperience = nExp;

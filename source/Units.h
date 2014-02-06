@@ -23,11 +23,11 @@ struct InventoryItems
 
 };
 
+enum UnitClass {UC_ENEMY, UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE};
 
 class CUnits : public CEntity
 {
 
-	enum UnitClass {UC_ENEMY, UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE};
 	int m_nHealth;
 	int m_nMaxHealth;
 	int m_nAbilityPoints;

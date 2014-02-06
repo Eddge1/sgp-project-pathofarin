@@ -161,9 +161,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(200,260);
 			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9, 150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -173,9 +173,9 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 100.0f, 12, 20, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 200.0f, 200.0f, 5, 50, 20));
-			pTemp->SetUnits(CreateTempEnemy("Plant_dude", 100.0f, 300.0f, 9, 75, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 100.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 200.0f, 200.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 300.0f, 9,  150, 20));
 			pTemp->GetAnimInfo()->SetAnimation("TestAnimation2");
 			pTemp->GetAnimInfo()->SetCurrentFrame(1);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
@@ -686,7 +686,7 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Plant_dude_Idle");
+	pTemp->SetAnimation("Thornbiter_Idle");
 	pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")

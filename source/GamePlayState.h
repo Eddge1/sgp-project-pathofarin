@@ -25,7 +25,6 @@ class CGamePlayState :	public CGameStates, public IListener
 
 public:
 
-
 	void AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstream &szText);
 	int GetWorldWidth  () { return WorldWidth ; }
 	int GetWorldHeight () { return WorldHeight ; }
@@ -76,6 +75,7 @@ private:
 	CGamePlayState& operator= ( const CGamePlayState& );
 
 	map<string, CWorld*> m_mWorldManager;
+
 	vector<NPCDialogue*> m_vShowOnScreen;
 	string m_sCurrWorld;
 

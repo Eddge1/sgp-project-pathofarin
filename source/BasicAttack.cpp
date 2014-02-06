@@ -25,7 +25,7 @@ void CBasicAttack::DoAttack(void)
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
-			tempP->ModifyHealth(temp, false);
+			tempP->ModifyHealth(temp * 2, false);
 			GetOwner()->EndTurn();
 		}
 	}
