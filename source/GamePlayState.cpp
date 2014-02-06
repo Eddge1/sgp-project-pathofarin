@@ -195,7 +195,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosX(557);
 			pTemp->SetPosY(300);
 			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
-
+			pTemp->SetName("OldMan");
 			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
 			pTemp->GetAnimInfo()->SetCurrentFrame(0);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
@@ -487,7 +487,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
-		m_eCurrPhase = GP_END;
+		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
 	}
 	else if(pEvent->GetEventID() == "TEST_ITEM")
