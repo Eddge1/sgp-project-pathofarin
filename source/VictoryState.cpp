@@ -1,4 +1,5 @@
 #include "VictoryState.h"
+#include "BattleState.h"
 #include "GamePlayState.h"
 #include "Game.h"
 #include "BitmapFont.h"
@@ -17,6 +18,8 @@ CVictoryState* CVictoryState::GetInstance( void )
 
 CVictoryState::CVictoryState(void)
 {
+	m_pItemDistro = nullptr;
+	m_bDoOnce = false;
 	CVictoryState::GetInstance();
 	m_pPlayer = nullptr;
 	m_bLeveled = false;
@@ -38,7 +41,7 @@ CVictoryState::CVictoryState(void)
 
 CVictoryState::~CVictoryState(void)
 {
-
+	Sleep();
 }
 
 void CVictoryState::Activate( void )				
@@ -58,6 +61,7 @@ void CVictoryState::Activate( void )
 		m_nAttackMod	= 0;
 	}
 	m_fTimer		= 0.1f;
+	m_pItemDistro = CBattleState::GetInstance()->GetItems();
 
 }
 void CVictoryState::Sleep( void )					
@@ -67,6 +71,10 @@ void CVictoryState::Sleep( void )
 
 	m_nLevel = 0;
 	m_nCurrentExp = 0;
+	m_pItemDistro = nullptr;
+	m_bDoOnce = false;
+
+	CBattleState::GetInstance()->ClearItems();
 }
 bool CVictoryState::Input( void )					
 { 
@@ -75,6 +83,24 @@ bool CVictoryState::Input( void )
 void CVictoryState::Update( float fElapsedTime )	
 {
 	m_fTimer -= fElapsedTime;
+	if(m_bDoOnce == false && m_pItemDistro != nullptr)
+	{
+		for(auto i = m_pItemDistro->begin(); i != m_pItemDistro->end(); i++)
+		{
+			if(i->second.Item != nullptr)
+			{
+				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+				{
+					CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+					if(pTemp != nullptr)
+					{
+						m_pPlayer->AddConsumableItem(pTemp, i->second.Owned);
+					}
+				}
+			}
+		}
+		m_bDoOnce = true;
+	}
 	if(m_nExperienceGained > 0)
 	{
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
@@ -198,56 +224,57 @@ void CVictoryState::Render( void )
 	CSGD_Direct3D* pD3d = CSGD_Direct3D::GetInstance();
 
 	CGame::GetInstance()->GetFont2()->Draw(_T("Victory!"), 336, 15, 1.0f, D3DCOLOR_XRGB(0,0,0));
-
-	woss << "Level: " << m_nLevel << "\nExperience: " << m_nCurrentExp;
-	CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 128, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
-	woss.str(_T(""));
 	woss << "Level: " << m_pPlayer->GetLevel() << "\nExperience: " << m_pPlayer->GetExperience();
-	CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 512, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
 
 	float fPercent = m_nCurrentExp / (m_nNeeded * 1.0f);
-	RECT rTemp = {128, 128, 128 + (128 * fPercent),160};
-	pD3d->DrawRect(rTemp, D3DCOLOR_XRGB(50,50,255));
-
-	rTemp.right = 256;
-	pD3d->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0), 3);
 
 	if(m_bLeveled)
 	{
 		fPercent = m_pPlayer->GetExperience() /  (m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100.0f);
-
-		RECT rCurrent = {512, 128, 640, 160};
+		RECT rCurrent = {272, 128, 528, 141};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
-		rCurrent.right = 512 + (128 * fPercent);
+		rCurrent.right = 272 + (256 * fPercent);
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,255,255));
 
-		rCurrent.right = 640;
+		rCurrent.right = 528;
 		pD3d->DrawHollowRect(rCurrent, D3DCOLOR_XRGB(0,0,0), 3);
 
 		woss.str(_T(""));
-		woss << "HP: " << m_nCurrMaxHP << "\nAP: " << m_nCurrMaxAP << "\nAtk: " << m_nCurrAttack;
-		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 128, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
-
-		woss.str(_T(""));
-		woss << "HP: " << m_pPlayer->GetMaxHealth() << "\nAP: " << m_pPlayer->GetMaxAP() << "\nAtk: " << m_pPlayer->GetAttack() << "\nStats: " << m_pPlayer->GetStats();
-		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 512, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		woss << "HP: " << m_nCurrMaxHP << "  +" << m_pPlayer->GetMaxHealth() - m_nCurrMaxHP << "\nAP: " << m_nCurrMaxAP  << "  +" << m_pPlayer->GetMaxAP() - m_nCurrMaxAP << "\nAtk: " << m_nCurrAttack  << "  +" << m_pPlayer->GetAttack() - m_nCurrAttack << "\nStats: " << m_pPlayer->GetStats();
+		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 272, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		woss << "\t" << m_nHealthMod << "\n\t" << m_nAPMod << "\n\t" << m_nAttackMod;
-		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 576, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont2()->Draw(woss.str().c_str(), 336, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		RECT rTemp = {0,0,16,32};
 
-		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 624, 172 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 386, 172 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
 	}
 	else
 	{
 		fPercent = m_pPlayer->GetExperience() /  (m_nNeeded * 1.0f);
 
-		RECT rCurrent = {512, 128, 512 + (128 * fPercent), 160};
+		RECT rCurrent = {272, 128, 272 + (256 * fPercent), 141};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
 
-		rCurrent.right = 640;
+		rCurrent.right = 528;
 		pD3d->DrawHollowRect(rCurrent, D3DCOLOR_XRGB(0,0,0), 3);
 	}
 
+	///////////////////// ITEMS OBTAINED SECTION //////////////////////////
 
+	if(m_pItemDistro != nullptr)
+	{
+		CGame::GetInstance()->GetFont2()->Draw(_T("Items Obtained:"), 272, 300, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		if(m_pItemDistro->size() > 0)
+		{
+
+
+		}
+		else
+		{
+			CGame::GetInstance()->GetFont2()->Draw(_T("Nothing"), 272, 316, 0.75f, D3DCOLOR_XRGB(0,0,0));
+
+		}
+	}
 }

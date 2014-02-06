@@ -18,6 +18,7 @@
 #include "VictoryState.h"
 #include "GameOverState.h"
 #include <algorithm>
+#include "Consumable.h"
 using namespace std;
 
 // GetInstance
@@ -52,6 +53,8 @@ CBattleState::CBattleState(void)
 CBattleState::~CBattleState(void)
 {
 	Sleep();
+	if(m_vItems.size() > 0)
+		ClearItems();
 }
 
 void CBattleState::Activate(void)
@@ -187,7 +190,6 @@ void CBattleState::Render(void)
 {
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D*			pD3D = CSGD_Direct3D::GetInstance();
-
 
 	//Temp drawing the UI
 	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
@@ -395,7 +397,6 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 					m_eCurrentPhase = BP_END;
 			}
-
 			m_nTurn++;
 			for(unsigned int i = 0; i < m_vBattleUnits.size();)
 			{
@@ -410,6 +411,7 @@ void CBattleState::Battle(float fElapsedTime)
 					else
 					{
 						m_nExperienceGained += m_vBattleUnits[i]->GetExperience();
+						SetItems(m_vBattleUnits[i]);
 						m_vBattleUnits[i]->Release();
 						m_vBattleUnits.erase(m_vBattleUnits.begin() + i);
 						GetNextTarget();
@@ -590,4 +592,47 @@ void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wo
 	ftTemp->szText << szText.str();
 	ftTemp->m_fTimer = 1.5f;
 	m_vText.push_back(ftTemp);
+}
+
+void CBattleState::SetItems(CUnits* pDead)
+{
+	map<string, InventoryItems>* vTemp = pDead->GetInv();
+
+	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
+	{
+		if(i->second.Item != nullptr)
+		{
+			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			{
+				CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+				if(pTemp != nullptr)
+				{
+					if(rand() % 100 + 1 < int(i->second.DropChance * 100))
+					{
+						if(m_vItems[pTemp->GetName()].Item == nullptr)
+						{
+							m_vItems[pTemp->GetName()].Item = pTemp;
+							m_vItems[pTemp->GetName()].Owned = 1;
+							i->second.Item = nullptr;
+						}
+						else
+						{
+							m_vItems[pTemp->GetName()].Owned++;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+void CBattleState::ClearItems()
+{
+	for(auto i = m_vItems.begin(); i != m_vItems.end(); i++)
+	{
+		delete i->second.Item;
+		i->second.Item = nullptr;
+		i->second.Owned = 0;
+	}
+	m_vItems.clear();
 }

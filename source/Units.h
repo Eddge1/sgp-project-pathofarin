@@ -4,6 +4,7 @@
 #include "Consumable.h"
 #include <string>
 #include <map>
+#include <vector>
 using namespace std;
 
 
@@ -23,8 +24,7 @@ struct InventoryItems
 };
 
 
-class CUnits :
-	public CEntity
+class CUnits : public CEntity
 {
 
 	enum UnitClass {UC_ENEMY, UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE};
@@ -48,7 +48,7 @@ class CUnits :
 
 public:
 	map<string, InventoryItems>* GetInv(void) { return &m_mInventory; }
-	void AddConsumableItem(CConsumable* input, int nAmount = 1);
+	void AddConsumableItem(CConsumable* input, int nAmount = 1, float fChance = 0.0f);
 	void RemoveConsumableItem(CConsumable* input);
 	CUnits(void);
 	virtual ~CUnits(void);
@@ -71,7 +71,7 @@ public:
 	int GetMaxHealth		( void ) const			{return m_nMaxHealth;}
 	int GetMaxAP			( void ) const			{return m_nMaxAbilityPoints;}
 	bool GetTurn			( void ) const			{return m_bTurn;}
-	string GetName			( void ) const			{ return m_sName; }
+	string GetName			( void ) const			{return m_sName; }
 
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}

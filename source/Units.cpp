@@ -212,7 +212,7 @@ bool CUnits::decrAbility()
 	return false;
 }
 
-void CUnits::AddConsumableItem(CConsumable* input, int nAmount)
+void CUnits::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
 {
 	if(input == nullptr)
 		return;
@@ -227,6 +227,7 @@ void CUnits::AddConsumableItem(CConsumable* input, int nAmount)
 	{
 		m_mInventory[input->GetName()].Item = input;
 		m_mInventory[input->GetName()].Owned += nAmount;
+		m_mInventory[input->GetName()].DropChance = fChance;
 	}
 }
 
@@ -248,4 +249,3 @@ void CUnits::RemoveConsumableItem(CConsumable* input)
 		return;
 	}
 }
-

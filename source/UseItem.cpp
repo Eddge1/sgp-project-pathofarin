@@ -15,6 +15,7 @@ CUseItem::CUseItem(void)
 
 CUseItem::~CUseItem(void)
 {
+
 }
 
 
@@ -26,7 +27,6 @@ void CUseItem::Update(float fElapsedTime)
 		if(!m_bGetInventory)
 		{
 			m_mTemp = GetOwner()->GetInv();
-
 		}
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		if(pDI->KeyPressed(DIK_ESCAPE))

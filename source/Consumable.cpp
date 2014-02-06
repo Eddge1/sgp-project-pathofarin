@@ -4,9 +4,5 @@
 CConsumable::CConsumable(void)
 {
 	m_nAmount = 0;
-}
-
-
-CConsumable::~CConsumable(void)
-{
+	SetItemType(IT_CONSUMABLE);
 }
