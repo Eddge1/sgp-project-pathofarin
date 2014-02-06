@@ -48,7 +48,7 @@ class CUnits : public CEntity
 
 public:
 	map<string, InventoryItems>* GetInv(void) { return &m_mInventory; }
-	void AddConsumableItem(CConsumable* input, int nAmount = 1, float fChance = 0.0f);
+	void AddConsumableItem(CConsumable* input, int nAmount = 1, float fChance = 1.0f);
 	void RemoveConsumableItem(CConsumable* input);
 	CUnits(void);
 	virtual ~CUnits(void);

@@ -76,12 +76,14 @@ private:
 	//TODO: Bitmap font.
 	CBitmapFont*			m_pFont;
 	CBitmapFont*			m_pFont2;
+	HWND	m_hWnd;
 
 	// Window Attributes
 	int						m_nScreenWidth;
 	int						m_nScreenHeight;
 	bool					m_bIsWindowed;
 	bool					m_bMemory;
+	bool					m_bGamePaused;
 
 	// Current Game State TODO:
 	CGameStates*				m_pCurrState;

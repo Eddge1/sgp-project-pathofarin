@@ -477,7 +477,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
-	temp->SetAttack(10);
+	temp->SetAttack(20);
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Warrior_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
@@ -500,7 +500,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->SetMiniGame(tempL);
 	temp->AddSkill(tempC);
 	temp->SetMaxHealth(150);
-	temp->SetMaxAP(100);
+	temp->SetMaxAP(10);
 	temp->SetPosX(600);
 	temp->SetPosY(250);
 	temp->SetVelX(0);

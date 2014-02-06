@@ -127,8 +127,22 @@ void CPlayerUnit::Update(float fElapsedTime)
 				if(pDI->KeyPressed(DIK_RETURN))
 				{
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
-
-					m_bCasting = true;
+					if(m_bInSubMenu)
+					{
+						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost())
+						{
+							m_bCasting = true;
+							ModifyAP(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost());
+						}
+					}
+					else
+					{
+						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost())
+						{
+							m_bCasting = true;
+							ModifyAP(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost());
+						}
+					}
 				}
 				else if(pDI->KeyPressed(DIK_ESCAPE))
 					m_bSkillSelected = false;
@@ -146,9 +160,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(this);
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->Update(fElapsedTime);
 			}
-
 		}
-
 	}
 
 	timer -= fElapsedTime;

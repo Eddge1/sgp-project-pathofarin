@@ -265,7 +265,10 @@
       <Filter>AIControllers\cpp</Filter>
     </ClCompile>
     <ClCompile Include="source\Chest.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AITigerlily.cpp">
+      <Filter>AIControllers\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -453,7 +456,10 @@
       <Filter>AIControllers\h</Filter>
     </ClInclude>
     <ClInclude Include="source\Chest.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AITigerlily.h">
+      <Filter>AIControllers\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
