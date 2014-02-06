@@ -40,6 +40,8 @@ CProfileMenuState* CProfileMenuState::GetInstance( void )
 void CProfileMenuState::Activate()
 {
 	CGamePlayState::GetInstance()->Activate();
+	CGamePlayState::GetInstance()->Sleep();
+
 	LoadSave("assets/Data/Saves/Player1.xml");
 	LoadSave("assets/Data/Saves/Player2.xml");
 	LoadSave("assets/Data/Saves/Player3.xml");
@@ -475,7 +477,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
-	temp->SetAttack(1000);   // DEVELOPER PURPOSES!
+	temp->SetAttack(10);   // DEVELOPER PURPOSES!
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Warrior_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
@@ -508,4 +510,15 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	temp->SetName("Arin");
 
 	return temp;
+}
+
+void CProfileMenuState::ContinueGame( int ID )
+{
+	string szZone = m_vCharacterList[ID-1]->GetZone() + ".xml";
+	CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
+	CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[ID-1]);
+	for(unsigned int i = 0; i < m_vWorldData[ID-1].size();i++)
+		pWorld->AddClear(m_vWorldData[ID-1][i]);
+
+	CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 }

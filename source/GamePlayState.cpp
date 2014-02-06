@@ -184,10 +184,6 @@ void CGamePlayState::Activate(void)
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
 
-			/*CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Right.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Up.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Down.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TEMP_Player_Walk_Left.xml");*/
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Warrior_Overworld.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Warrior_Battle.xml");
 			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
@@ -207,8 +203,6 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("LEVEL_UP", this);
 
 			m_eCurrPhase = GP_NAV;
-
-
 		}
 		break;
 	case CGamePlayState::GP_END:
@@ -233,11 +227,13 @@ void CGamePlayState::Sleep(void)
 	case CGamePlayState::GP_START:
 		break;
 	case CGamePlayState::GP_NAV:
+		break;
 	case CGamePlayState::GP_END:
 		{
 			if(m_pES != nullptr)
 			{
-				m_pES->UnregisterClientAll(this);
+					m_pES->UnregisterClientAll(this);
+
 				// Clear the event system
 				if( m_pES != nullptr )
 				{
@@ -256,6 +252,7 @@ void CGamePlayState::Sleep(void)
 				}
 				CAnimationSystem::GetInstance()->DeleteInstance();
 			}
+			
 		}
 		break;
 	default:
@@ -320,11 +317,7 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(m_eCurrPhase == GP_END)
-	{
-		CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
-		return;
-	}
+
 	if(bisPaused == false)
 	{
 		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
@@ -637,33 +630,31 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
 	{
-		int debug = 1;
-		if(debug == 0)
-		{
-			delete tempAI;
-			CAIOrcLeader* OrcTemp = new CAIOrcLeader;
-			tempAI = reinterpret_cast<CAIController*>(OrcTemp);
-			OrcTemp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
-		else if(debug == 1)
-		{
-			delete tempAI;
-			CAIBasicHealer* Temp = new CAIBasicHealer;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
-		else if(debug == 2)
-		{
-			delete tempAI;
-			CAIBrute* Temp = new CAIBrute;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-			temp->SetType(OBJ_LEADER);
-		}
+		delete tempAI;
+		CAIBasicHealer* Temp = new CAIBasicHealer;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	}
+	else if(input == "Orc Zerker")
+	{
+		delete tempAI;
+		CAIBrute* Temp = new CAIBrute;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	
 
 	}
+	else if(input == "Orc Leader")
+	{
+		delete tempAI;
+		CAIOrcLeader* OrcTemp = new CAIOrcLeader;
+		tempAI = reinterpret_cast<CAIController*>(OrcTemp);
+		OrcTemp = nullptr;
+		temp->SetType(OBJ_LEADER);
+	}
+
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);

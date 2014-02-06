@@ -16,6 +16,7 @@
 #include "BasicAttack.h"
 #include "Npcs.h"
 #include "VictoryState.h"
+#include "GameOverState.h"
 #include <algorithm>
 using namespace std;
 
@@ -450,14 +451,14 @@ void CBattleState::EndBattle(void)
 		{
 			CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
 		}
-		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 		if(m_bVictory)
 		{
+		CSGD_EventSystem::GetInstance()->SendEventNow("BATTLE_END", nullptr, m_pSender, nullptr);
 			CVictoryState::GetInstance()->SetExperience(m_nExperienceGained);
 			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
 		}
 		else
-			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+			CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
 	}
 
 }

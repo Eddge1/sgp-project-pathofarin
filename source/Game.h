@@ -7,6 +7,7 @@
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
+#include "../SGD Wrappers/CSGD_EventSystem.h"
 
 #include "BitmapFont.h"
 
@@ -71,7 +72,7 @@ private:
 	CSGD_DirectInput*		m_pDI;
 	CSGD_TextureManager*	m_pTM;
 	CSGD_XAudio2*			m_pXA;
-
+	CSGD_EventSystem*		m_pES;
 	//TODO: Bitmap font.
 	CBitmapFont*			m_pFont;
 	CBitmapFont*			m_pFont2;

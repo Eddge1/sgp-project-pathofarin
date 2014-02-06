@@ -4,6 +4,12 @@
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "Game.h"
 #include "BitmapFont.h"
+#include "ProfileMenuState.h"
+#include "Player.h"
+#include "GamePlayState.h"
+#include <string>
+using namespace std;
+
 class CGameOverState :
 	public CGameStates
 {
@@ -13,8 +19,11 @@ class CGameOverState :
 	CGameOverState( const CGameOverState& );
 	CGameOverState& operator= ( const CGameOverState& );
 
+	int selection;
 	int m_music;
 	float timer;
+	CPlayer* m_pPlayer;
+	
 
 public:
 	static CGameOverState* GetInstance( void );

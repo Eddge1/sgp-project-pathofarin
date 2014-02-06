@@ -31,6 +31,7 @@ public:
 	virtual void Render		( void )	override;	
 	virtual bool Input		( void )	override;	
 	void LoadSave			( std::string szFileName );
+	void ContinueGame		( int ID );
 
 };
 

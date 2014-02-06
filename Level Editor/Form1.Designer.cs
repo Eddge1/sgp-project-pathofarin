@@ -57,9 +57,9 @@
             this.txtEventBroadCast = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbMode = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.grpWarp = new System.Windows.Forms.GroupBox();
             this.lstMaps = new System.Windows.Forms.ListBox();
             this.btnWarpCancel = new System.Windows.Forms.Button();
@@ -153,7 +153,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1262, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1437, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -459,6 +459,16 @@
             this.cmbMode.TabIndex = 24;
             this.cmbMode.SelectedIndexChanged += new System.EventHandler(this.cmbMode_SelectedIndexChanged);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(122, 120);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 23);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Transparency";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(11, 557);
@@ -478,16 +488,6 @@
             this.button3.Text = "Fill";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(122, 120);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Transparency";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // grpWarp
             // 
@@ -601,7 +601,7 @@
             this.grpNPC.Controls.Add(this.btnNpcCancel);
             this.grpNPC.Controls.Add(this.chkMoves);
             this.grpNPC.Controls.Add(this.chkHostile);
-            this.grpNPC.Location = new System.Drawing.Point(1033, 193);
+            this.grpNPC.Location = new System.Drawing.Point(1033, 181);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 201);
             this.grpNPC.TabIndex = 22;
@@ -704,9 +704,9 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(1033, 182);
+            this.grpBlock.Location = new System.Drawing.Point(1033, 181);
             this.grpBlock.Name = "grpBlock";
-            this.grpBlock.Size = new System.Drawing.Size(221, 212);
+            this.grpBlock.Size = new System.Drawing.Size(223, 213);
             this.grpBlock.TabIndex = 12;
             this.grpBlock.TabStop = false;
             this.grpBlock.Text = "Block Editor";
@@ -818,7 +818,7 @@
             this.grpWayPoints.Controls.Add(this.radWPMove);
             this.grpWayPoints.Controls.Add(this.radWPAdd);
             this.grpWayPoints.Controls.Add(this.lstWaypoints);
-            this.grpWayPoints.Location = new System.Drawing.Point(1034, 388);
+            this.grpWayPoints.Location = new System.Drawing.Point(1033, 400);
             this.grpWayPoints.Name = "grpWayPoints";
             this.grpWayPoints.Size = new System.Drawing.Size(222, 146);
             this.grpWayPoints.TabIndex = 23;
@@ -960,7 +960,7 @@
             this.grpUnits.Controls.Add(this.label19);
             this.grpUnits.Controls.Add(this.lstUnitAnimation);
             this.grpUnits.Controls.Add(this.lstUnits);
-            this.grpUnits.Location = new System.Drawing.Point(1033, 389);
+            this.grpUnits.Location = new System.Drawing.Point(1033, 400);
             this.grpUnits.Name = "grpUnits";
             this.grpUnits.Size = new System.Drawing.Size(223, 273);
             this.grpUnits.TabIndex = 33;
@@ -1147,7 +1147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1262, 762);
+            this.ClientSize = new System.Drawing.Size(1437, 762);
             this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpUnits);
