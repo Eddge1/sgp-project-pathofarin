@@ -221,7 +221,6 @@ void CUnits::AddConsumableItem(CConsumable* input, int nAmount, float fChance)
 		m_mInventory[input->GetName()].Owned += nAmount;
 		if(m_mInventory[input->GetName()].Owned > 9)
 			m_mInventory[input->GetName()].Owned = 9;
-		delete input;
 	}
 	else
 	{
@@ -245,7 +244,6 @@ void CUnits::RemoveConsumableItem(CConsumable* input)
 	}
 	else
 	{
-		delete input;
 		return;
 	}
 }
