@@ -155,15 +155,14 @@ void CPlayerUnit::EndTurn()
 {
 	if(m_bInSubMenu)
 	{
-		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(nullptr);
 		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
+		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(nullptr);
 	}
 	else
 	{
-		m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(nullptr);
 		m_vCommands[m_nMenuSelect]->GetMiniGame()->ResetSkill();
+		m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(nullptr);
 	}
-
 	SetTurn(false);
 	m_bSkillSelected = false;
 	m_bInSubMenu = false;
@@ -184,6 +183,7 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
 	}
 	else
 	{
+		this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
 		CUnits::ModifyHealth(nAmount, isCrit);
 		timer = 0.0f;
 	}

@@ -393,7 +393,18 @@ void CBattleState::Battle(float fElapsedTime)
 					GetNextTarget();
 				}
 				else
+				{
+					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+					}
+					else
+					{
+						string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
+						m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
+					}
 					i++;
+				}
 			}
 			if(m_nTurn >= (int)m_vBattleUnits.size())
 				m_nTurn = 0;

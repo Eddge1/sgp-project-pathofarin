@@ -63,7 +63,7 @@ void CObjectManager::Render(unsigned int nLayer)
 			if (nImageID != -1)
 			{
 				if (temp[i]->GetType() == OBJ_PLAYER)
-					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 2.0f, D3DCOLOR_XRGB(255, 255, 255));
+					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 				else
 					CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 			}

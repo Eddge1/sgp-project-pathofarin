@@ -175,3 +175,5 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 		CSGD_EventSystem::GetInstance()->QueueEvent(pFrame->GetEventID());
 	}
 }
+
+

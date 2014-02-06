@@ -148,6 +148,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 
 	if(pDI->KeyPressed(DIK_RETURN))
 	{
+		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");
 		RECT rTemp = {};
 		if(m_vTriggers.size() > 0)
 		{
@@ -187,6 +188,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 		if(pTemp != nullptr)
 			GetOwner()->EndTurn();
 	}
+	
 }
 
 void CTriggerSpree::ResetSkill()
@@ -195,7 +197,6 @@ void CTriggerSpree::ResetSkill()
 	m_bFailed = false;
 	m_fTimer = 0.5f;
 	m_nSuccess = 0;
-
 
 	for(unsigned int i = 0; i < m_vTriggers.size(); i++)
 		delete m_vTriggers[i];

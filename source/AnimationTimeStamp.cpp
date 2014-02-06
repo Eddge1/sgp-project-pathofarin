@@ -23,3 +23,12 @@ void CAnimationTimeStamp::AdvanceCurrentFrame()
 			m_nCurrFrame = CAnimationSystem::GetInstance()->GetAnimation(m_szCurrentAnimation)->GetSize() - 1;
 	}
 }
+
+void CAnimationTimeStamp::SetAnimation(std::string szAnimName)
+{
+	if (m_szCurrentAnimation != szAnimName)
+	{
+		m_nCurrFrame = 0;
+		m_szCurrentAnimation = szAnimName; 
+	}
+}

@@ -3,8 +3,8 @@
 
 #include <Windows.h>
 #include <string>
+#include "Units.h"
 
-class CUnits;
 class CSkills;
 class CMiniGames
 {
@@ -31,7 +31,7 @@ public:
 	virtual void SetCost ( int nAmount ) {m_nCost = nAmount;}
 
 	void SetSkill(CSkills* pSkill);
-	virtual void ResetSkill( void ) { }
+	virtual void ResetSkill( void ) {  }
 
 	float GetDamage( void )	{return m_fDamageMultiplier;}
 	int GetChances( void ) {return m_nChances;}

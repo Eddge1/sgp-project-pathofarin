@@ -16,7 +16,7 @@ public:
 
 	CUnits* GetTarget(void) { return m_pTarget; }
 	void SetTarget(CUnits* l) { m_pTarget = l; }
-	virtual void ResetSkill() override { }
+	virtual void ResetSkill() override;
 
 
 	CBasicAttack(void);
