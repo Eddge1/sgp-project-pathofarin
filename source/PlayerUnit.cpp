@@ -119,7 +119,11 @@ void CPlayerUnit::Update(float fElapsedTime)
 				else if(pDI->KeyPressed(DIK_ESCAPE))
 				{
 					if(m_bInSubMenu == true)
+					{
 						m_bInSubMenu = false;
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionBack);
+
+					}
 				}
 			}
 			else
@@ -145,7 +149,11 @@ void CPlayerUnit::Update(float fElapsedTime)
 					}
 				}
 				else if(pDI->KeyPressed(DIK_ESCAPE))
+				{
 					m_bSkillSelected = false;
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionBack);
+
+				}
 			}
 		}
 		else

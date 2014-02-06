@@ -203,7 +203,7 @@ void CGamePlayState::Activate(void)
 			CChest* pChest = new CChest();
 			pChest->SetPosX(609);
 			pChest->SetPosY(161);
-			CConsumable* pItem = CreatePotion("Potion");
+			CConsumable* pItem = CreatePotion("Ether");
 			pChest->AddConsumableItem(pItem, 3);
 			pChest->RegEvent("TEST_ITEM");
 			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
