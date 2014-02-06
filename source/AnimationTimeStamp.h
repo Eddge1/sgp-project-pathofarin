@@ -18,7 +18,7 @@ public:
 
 	//Mutator:
 	void AdvanceCurrentFrame();
-	void SetAnimation(std::string szAnimName) { m_szCurrentAnimation = szAnimName; }
+	void SetAnimation(std::string szAnimName);
 	void SetCurrentFrame(int nCurrFrame) { m_nCurrFrame = nCurrFrame; }
 	void SetTimeOnStamp(float fTime) { m_fTimeOnStamp = fTime; }
 

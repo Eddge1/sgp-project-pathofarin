@@ -22,7 +22,7 @@ void CBasicAttack::DoAttack(void)
 		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
 		if(GetOwner() != nullptr)
 		{
-
+			GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp, false);
 			GetOwner()->EndTurn();
@@ -43,4 +43,8 @@ void CBasicAttack::DoAttack(void)
 void CBasicAttack::Update(float fElapsedTime)
 {
 	DoAttack();
+}
+
+void CBasicAttack::ResetSkill()
+{
 }
