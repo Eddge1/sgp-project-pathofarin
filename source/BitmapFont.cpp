@@ -60,6 +60,12 @@ void CBitmapFont::Shutdown()
 {
 	//CSGD_TextureManager::GetInstance()->UnloadTexture( m_nImageID );
 	//m_nImageID = -1;
+	for(auto i = m_mFonts.begin(); i != m_mFonts.end(); i++)
+	{
+		delete i->second;
+		i->second = nullptr;
+	}
+	m_mFonts.clear();
 }
 
 CharSet CBitmapFont::FontParser(std::string filePath)

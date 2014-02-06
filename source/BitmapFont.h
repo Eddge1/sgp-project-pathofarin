@@ -3,6 +3,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <string>
+#include <map>
+using namespace std;
 
 
 struct CharDescriptor
@@ -32,6 +34,7 @@ class CBitmapFont
 	int m_nMaxCharWidth;
 	int m_nMaxCharHeight;
 	CharSet m_Font;
+	map<string, CBitmapFont*> m_mFonts;
 public:
 	CBitmapFont(void);
 	~CBitmapFont(void);
