@@ -245,10 +245,10 @@ void CVictoryState::Render( void )
 		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		woss << "\t" << m_nHealthMod << "\n\t" << m_nAPMod << "\n\t" << m_nAttackMod;
-		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 336, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 352, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		RECT rTemp = {0,0,16,32};
 
-		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 386, 172 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 432, 172 + (GetCursorSelection() * 23), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
 	}
 	else
 	{
