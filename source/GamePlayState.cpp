@@ -163,7 +163,8 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(420);
 			pTemp->AddWaypoint(200,420);
 			pTemp->AddWaypoint(200,260);
-			pTemp->GetAnimInfo()->SetAnimation("Orc_Walk_Down");
+			pTemp->SetName("Orc");
+			pTemp->GetAnimInfo()->SetAnimation("Orc_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Orc", 200.0f, 350.0f, 5, 150, 20));
