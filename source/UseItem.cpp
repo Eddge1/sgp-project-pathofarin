@@ -59,7 +59,12 @@ void CUseItem::Update(float fElapsedTime)
 					{
 						if(i->second.Owned > 0)
 						{
-							GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+							if(ItemTemp->GetType() == "HP")
+								GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+							else if(ItemTemp->GetType() == "MP")
+								GetOwner()->ModifyAP(-ItemTemp->GetAmount());
+
+							
 							ResetSkill();
 							if(i->second.Item != nullptr)
 							{
@@ -103,6 +108,7 @@ void CUseItem::Render(void)
 					{
 						woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
 						m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
+						woss.str(_T(""));
 					}
 				}
 				m_nCount++;

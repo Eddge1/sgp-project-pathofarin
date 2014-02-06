@@ -88,6 +88,7 @@
     <ClCompile Include="source\AIController.cpp" />
     <ClCompile Include="source\AIOrcLeader.cpp" />
     <ClCompile Include="source\AITigerlily.cpp" />
+    <ClCompile Include="source\AIValrion.cpp" />
     <ClCompile Include="source\Animation.cpp" />
     <ClCompile Include="source\AnimationSystem.cpp" />
     <ClCompile Include="source\AnimationTimeStamp.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="source\AIController.h" />
     <ClInclude Include="source\AIOrcLeader.h" />
     <ClInclude Include="source\AITigerlily.h" />
+    <ClInclude Include="source\AIValrion.h" />
     <ClInclude Include="source\Animation.h" />
     <ClInclude Include="source\AnimationSystem.h" />
     <ClInclude Include="source\AnimationTimeStamp.h" />
