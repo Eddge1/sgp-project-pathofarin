@@ -50,7 +50,7 @@ void CBasicAttack::Update(float fElapsedTime)
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
 		bAttacked = true;
 	}
-	else if (GetOwner()->GetName() == "Tree" || GetOwner()->GetName() == "Orc")
+	else if (GetOwner()->GetName() == "Tree" || GetOwner()->GetName() == "Orc" || GetOwner()->GetName() == "Snail")
 	{
 		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
 		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());

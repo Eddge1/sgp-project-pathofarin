@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Snail_Battle_Idle" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Moss Snail.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="105" Height="97" anchorX="14" anchorY="90" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="104" Height="97" />
+      <Render posX="105" posY="2" Width="112" Height="97" anchorX="19" anchorY="90" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="113" Height="97" />
+      <Render posX="215" posY="6" Width="110" Height="94" anchorX="20" anchorY="86" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="110" Height="94" />
+      <Render posX="329" posY="4" Width="104" Height="96" anchorX="16" anchorY="88" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="104" Height="96" />
+      <Render posX="441" posY="1" Width="105" Height="96" anchorX="15" anchorY="91" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="106" Height="96" />
+      <Render posX="550" posY="2" Width="107" Height="96" anchorX="16" anchorY="91" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="108" Height="96" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Snail_Battle_Taking_Damage" Frames="1" repeat="1" Texture="PC Computer - Maple Story - Moss Snail.png">
+    <Frame_Data>
+      <Render posX="2" posY="226" Width="144" Height="120" anchorX="20" anchorY="115" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="145" Height="120" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Snail_Battle_Basic_Attack" Frames="12" repeat="1" Texture="PC Computer - Maple Story - Moss Snail.png">
+    <Frame_Data>
+      <Render posX="1" posY="114" Width="107" Height="97" anchorX="15" anchorY="91" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="107" Height="97" />
+      <Render posX="111" posY="114" Width="100" Height="96" anchorX="12" anchorY="91" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="102" Height="96" />
+      <Render posX="213" posY="114" Width="105" Height="96" anchorX="18" anchorY="91" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="106" Height="96" />
+      <Render posX="320" posY="114" Width="106" Height="97" anchorX="22" anchorY="92" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="106" Height="97" />
+      <Render posX="428" posY="114" Width="105" Height="98" anchorX="23" anchorY="93" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="105" Height="98" />
+      <Render posX="536" posY="123" Width="109" Height="90" anchorX="26" anchorY="85" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="1" posY="0" Width="110" Height="90" />
+      <Render posX="647" posY="126" Width="107" Height="87" anchorX="25" anchorY="82" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="108" Height="87" />
+      <Render posX="756" posY="126" Width="111" Height="88" anchorX="27" anchorY="84" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="110" Height="88" />
+      <Render posX="868" posY="126" Width="109" Height="89" anchorX="22" anchorY="85" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="109" Height="89" />
+      <Render posX="977" posY="128" Width="110" Height="88" anchorX="21" anchorY="82" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="110" Height="88" />
+      <Render posX="1090" posY="127" Width="108" Height="90" anchorX="19" anchorY="84" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="109" Height="91" />
+      <Render posX="1201" posY="125" Width="110" Height="93" anchorX="18" anchorY="86" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="111" Height="93" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
