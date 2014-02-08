@@ -23,12 +23,12 @@ class CGameOverState :
 	int m_music;
 	float timer;
 	CPlayer* m_pPlayer;
+	string m_szGameOverMsg;
 	
 
 public:
 	static CGameOverState* GetInstance( void );
-
-
+	void SetMessage(string szMessage) {m_szGameOverMsg = szMessage;}
 	virtual void Activate( void )	override;					// load resources
 	virtual void Sleep( void )	override;						// unload resources
 	virtual void Update( float fElapsedTime )	override;		// update the state

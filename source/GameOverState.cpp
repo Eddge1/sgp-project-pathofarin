@@ -6,7 +6,7 @@
 
 CGameOverState::CGameOverState(void)
 {
-	m_music = -1;
+	m_music = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_DEATH.xwm"));
 	timer = 10.0f;
 	SetBackgroundMusic(-1);
 	SetBackgroundImg(-1);
@@ -17,7 +17,7 @@ CGameOverState::CGameOverState(void)
 
 CGameOverState::~CGameOverState(void)
 {
-	CGame::GetInstance()->ChangeState(nullptr);
+	Sleep();
 }
 
 CGameOverState* CGameOverState::GetInstance( void )
@@ -29,7 +29,6 @@ CGameOverState* CGameOverState::GetInstance( void )
 
 void CGameOverState::Activate(void)
 {
-	m_music = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_DEATH.xwm"));
 	CSGD_XAudio2::GetInstance()->MusicPlaySong(m_music, true);
 	CGamePlayState::GetInstance()->Sleep();
 	CProfileMenuState::GetInstance()->Activate();
@@ -37,9 +36,8 @@ void CGameOverState::Activate(void)
 
 void CGameOverState::Sleep(void)
 {
-	CSGD_XAudio2::GetInstance()->MusicUnloadSong(m_music);
 	CProfileMenuState::GetInstance()->Sleep();
-
+	m_szGameOverMsg ="";
 }
 
 void CGameOverState::Update(float fElapsedTime)
@@ -49,10 +47,11 @@ void CGameOverState::Update(float fElapsedTime)
 
 void CGameOverState::Render(void)
 {
+	wostringstream woss;
+	woss << m_szGameOverMsg.c_str();
 	CBitmapFont* temp = CGame::GetInstance()->GetFont("Arial");
 	temp->Draw(_T("Game Over"), 300, 300, 1.0f, D3DCOLOR_XRGB(0,0,0));
-
-
+	temp->Draw(woss.str().c_str(), 400 - (m_szGameOverMsg.size() * 16 / 2 * 0.75), 272, 0.75, D3DCOLOR_XRGB(255,0,0));
 	RECT tempR = { 250, 300, 500, 400 };
 	CSGD_Direct3D::GetInstance()->DrawHollowRect(tempR, D3DCOLOR_XRGB(0,0,0));
 	temp->Draw(_T("Continue?"), 280, 320, 0.8f, D3DCOLOR_XRGB(0,0,0));

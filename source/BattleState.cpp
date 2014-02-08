@@ -367,7 +367,6 @@ void CBattleState::Battle(float fElapsedTime)
 			for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 			{
 				m_vBattleUnits[i]->Update(fElapsedTime);
-
 			}
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 			if(pTemp != nullptr)
@@ -393,6 +392,9 @@ void CBattleState::Battle(float fElapsedTime)
 					{
 						if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 						{
+							string szName = m_vBattleUnits[m_nTurn - 1]->GetName();
+							szName += " defeated you by dropping your health to 0.";
+							CGameOverState::GetInstance()->SetMessage(szName);
 							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
 							m_eCurrentPhase = BP_END;
 							break;
@@ -493,7 +495,9 @@ void CBattleState::EndBattle(void)
 			CGame::GetInstance()->ChangeState(CVictoryState::GetInstance());
 		}
 		else
+		{
 			CGame::GetInstance()->ChangeState(CGameOverState::GetInstance());
+		}
 	}
 
 }

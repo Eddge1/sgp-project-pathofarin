@@ -18,6 +18,7 @@ class CNpcs : public CEntity
 
 	bool m_bContainsUnits;
 	bool m_bIsHostile;
+	bool m_bGameVictory;
 	int m_nWaypoint;
 	float m_fDelayChat;
 
@@ -27,6 +28,7 @@ public:
 	virtual ~CNpcs(void);
 	std::vector<CEnemyUnit*>& GetUnits(void) {return m_vUnitList;}
 	std::string GetName() const {return m_szName;}
+	void RegEvent(std::string szEvent)  {CSGD_EventSystem::GetInstance()->RegisterClient(szEvent.c_str(), this);}
 	void SetEvent(std::string szEvent)	{m_szEventThrow = szEvent;}
 	void SetHostile(bool bHostile)		{m_bIsHostile = bHostile;}
 	void SetName(std::string szName)	{m_szName = szName;}

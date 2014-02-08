@@ -10,8 +10,8 @@ CNpcs::CNpcs(void)
 	m_nWaypoint = 0;
 	m_szEventThrow = "";
 	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
-	CSGD_EventSystem::GetInstance()->RegisterClient("VALRION_DEFEAT", this);
 	m_fDelayChat = 0.0f;
+	m_bGameVictory = false;
 }
 
 
@@ -122,11 +122,11 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 		}
 	}
-
 	if (pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
 		m_szConversation.pop_back();
 		m_szConversation.push_back("Thank you for saving our Village! We are forever in your debt!\n...You have Won the First Playable! Congratulations!");
+		m_bGameVictory = true;
 	}
 }
 
@@ -149,7 +149,7 @@ void CNpcs::HandleCollision(CObjects* col)
 				{
 					woss << m_szConversation[0].c_str();
 					CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
-					if(m_szConversation[0] == "Thank you for saving our Village!  We are forever in your debt!\n...You have Won the First Playable!\nCongratulations!")
+					if(m_bGameVictory)
 						CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 					m_fDelayChat = 1.0f;
 				}

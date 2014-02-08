@@ -197,6 +197,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetHostile(false);
 			pTemp->SetPosX(557);
 			pTemp->SetPosY(300);
+			pTemp->RegEvent("VALRION_DEFEAT");
 			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
 			pTemp->SetName("OldMan");
 			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
@@ -462,7 +463,7 @@ void CGamePlayState::Render(void)
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
 {
-	if(pEvent->GetEventID() == "INIT_BATTLE")
+	if(pEvent->GetEventID() == "INIT_BATTLE" && m_eCurrPhase != GP_END)
 	{
 		m_eCurrPhase = GP_BATTLE;
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
