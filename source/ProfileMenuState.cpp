@@ -8,6 +8,8 @@
 #include "Commands.h"
 #include "BasicAttack.h"
 #include "TriggerSpree.h"
+#include "TriggerMatch.h"
+#include "ComboGame.h"
 #include "UseItem.h"
 
 #include "MainMenuState.h"
@@ -493,6 +495,21 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	pTest->SetMiniGame(pSpree);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	CComboGame *pCombo = new CComboGame;
+	pTest->SetName("Blitz");
+	pTest->SetMiniGame(pCombo);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	CTriggerMatch *pTrig = new CTriggerMatch;
+	pTest->SetName("Trig Dash");
+	pTest->SetMiniGame(pTrig);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
 	CUseItem* tempL = new CUseItem;

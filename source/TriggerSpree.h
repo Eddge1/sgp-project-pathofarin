@@ -3,7 +3,6 @@
 #include <vector>
 class CTriggerSpree : public CMiniGames
 {
-
 	std::vector<RECT*> m_vGameElements;
 	std::vector<RECT*> m_vTriggers;
 
