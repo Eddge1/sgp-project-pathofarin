@@ -50,9 +50,10 @@ void CUseItem::Update(float fElapsedTime)
 		}
 		if(pDI->KeyPressed(DIK_RETURN))
 		{
+			int nID = 0;
 			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
 			{
-				for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+				if(nID == m_nSelection)
 				{
 					CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
 					if(ItemTemp != nullptr)
@@ -64,7 +65,7 @@ void CUseItem::Update(float fElapsedTime)
 							else if(ItemTemp->GetType() == "MP")
 								GetOwner()->ModifyAP(-ItemTemp->GetAmount());
 
-							
+
 							ResetSkill();
 							if(i->second.Item != nullptr)
 							{
@@ -84,7 +85,8 @@ void CUseItem::Update(float fElapsedTime)
 						}
 					}
 				}
-
+				else
+					nID++;
 			}
 		}
 	}
@@ -109,9 +111,9 @@ void CUseItem::Render(void)
 						woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
 						m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
 						woss.str(_T(""));
+						m_nCount++;
 					}
 				}
-				m_nCount++;
 			}
 			if(m_mTemp->size() > 0)
 			{
