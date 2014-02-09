@@ -216,7 +216,8 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
 	}
 	else
 	{
-		this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
+		if(nAmount > 0)
+			this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
 		CUnits::ModifyHealth(nAmount, isCrit);
 		timer = 0.0f;
 	}

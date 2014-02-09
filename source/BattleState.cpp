@@ -195,12 +195,12 @@ void CBattleState::Render(void)
 			}
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			
 			woss << m_vBattleUnits[m_nTarget]->GetHealth();
 			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
@@ -210,7 +210,7 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
-		else
+		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
@@ -225,6 +225,7 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
 			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
+
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
 		{
 			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -30),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -25),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 20) };
