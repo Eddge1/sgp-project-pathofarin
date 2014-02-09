@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Fireball_Left" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="2" posY="18" Width="53" Height="27" anchorX="5" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-5" Width="51" Height="16" />
+      <Render posX="65" posY="22" Width="57" Height="17" anchorX="5" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="48" Height="16" />
+      <Render posX="128" posY="21" Width="56" Height="21" anchorX="6" anchorY="11" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="45" Height="16" />
+      <Render posX="191" posY="22" Width="64" Height="19" anchorX="6" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="40" Height="18" />
+      <Render posX="258" posY="24" Width="53" Height="15" anchorX="3" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="1" Width="37" Height="16" />
+      <Render posX="320" posY="23" Width="59" Height="17" anchorX="5" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="37" Height="16" />
+      <Render posX="385" posY="22" Width="56" Height="18" anchorX="5" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-3" Width="33" Height="13" />
+      <Render posX="447" posY="23" Width="60" Height="17" anchorX="6" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="38" Height="16" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Left_Up" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="8" posY="79" Width="44" Height="31" anchorX="6" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="27" Height="22" />
+      <Render posX="71" posY="77" Width="47" Height="33" anchorX="7" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="30" Height="23" />
+      <Render posX="134" posY="77" Width="45" Height="33" anchorX="7" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="32" Height="24" />
+      <Render posX="195" posY="76" Width="52" Height="35" anchorX="10" anchorY="11" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-3" Width="33" Height="21" />
+      <Render posX="262" posY="79" Width="44" Height="29" anchorX="7" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="31" Height="21" />
+      <Render posX="325" posY="80" Width="49" Height="28" anchorX="7" anchorY="5" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="31" Height="22" />
+      <Render posX="390" posY="79" Width="47" Height="32" anchorX="6" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="29" Height="21" />
+      <Render posX="453" posY="77" Width="48" Height="34" anchorX="7" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="32" Height="22" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Up" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="21" posY="138" Width="23" Height="37" anchorX="11" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="19" Height="27" />
+      <Render posX="85" posY="138" Width="23" Height="39" anchorX="12" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-1" Width="16" Height="29" />
+      <Render posX="148" posY="139" Width="22" Height="37" anchorX="13" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="-2" Width="15" Height="24" />
+      <Render posX="213" posY="138" Width="24" Height="39" anchorX="12" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="18" Height="25" />
+      <Render posX="276" posY="139" Width="24" Height="37" anchorX="12" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="0" Width="18" Height="26" />
+      <Render posX="340" posY="137" Width="24" Height="38" anchorX="12" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-2" Width="17" Height="23" />
+      <Render posX="405" posY="138" Width="23" Height="39" anchorX="11" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-1" Width="16" Height="25" />
+      <Render posX="470" posY="139" Width="22" Height="39" anchorX="10" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="16" Height="23" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Right_Up" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="16" posY="205" Width="41" Height="32" anchorX="36" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-11" posY="-2" Width="28" Height="22" />
+      <Render posX="79" posY="205" Width="43" Height="33" anchorX="36" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-10" posY="-1" Width="30" Height="23" />
+      <Render posX="138" posY="204" Width="49" Height="32" anchorX="41" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-19" posY="-2" Width="26" Height="23" />
+      <Render posX="200" posY="206" Width="50" Height="32" anchorX="43" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-19" posY="-1" Width="27" Height="22" />
+      <Render posX="271" posY="204" Width="43" Height="36" anchorX="36" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-9" posY="-2" Width="32" Height="24" />
+      <Render posX="328" posY="205" Width="49" Height="34" anchorX="43" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-16" posY="-3" Width="31" Height="21" />
+      <Render posX="394" posY="207" Width="46" Height="32" anchorX="41" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-15" posY="0" Width="30" Height="22" />
+      <Render posX="458" posY="205" Width="47" Height="34" anchorX="41" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-14" posY="-1" Width="32" Height="22" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Right" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="10" posY="276" Width="55" Height="24" anchorX="49" anchorY="12" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-20" posY="-2" Width="32" Height="19" />
+      <Render posX="69" posY="274" Width="60" Height="26" anchorX="54" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-22" posY="-3" Width="35" Height="20" />
+      <Render posX="137" posY="273" Width="56" Height="27" anchorX="49" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-19" posY="-2" Width="34" Height="21" />
+      <Render posX="193" posY="276" Width="64" Height="22" anchorX="57" anchorY="12" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-25" posY="-1" Width="36" Height="17" />
+      <Render posX="265" posY="277" Width="55" Height="21" anchorX="48" anchorY="11" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-18" posY="-1" Width="35" Height="17" />
+      <Render posX="323" posY="275" Width="61" Height="24" anchorX="55" anchorY="13" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-23" posY="-2" Width="35" Height="19" />
+      <Render posX="391" posY="276" Width="57" Height="24" anchorX="51" anchorY="12" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-22" posY="-2" Width="33" Height="19" />
+      <Render posX="455" posY="277" Width="57" Height="23" anchorX="51" anchorY="11" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-20" posY="-1" Width="35" Height="17" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Right_Down" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="12" posY="340" Width="45" Height="31" anchorX="39" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-16" posY="-3" Width="26" Height="25" />
+      <Render posX="76" posY="338" Width="45" Height="31" anchorX="39" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-17" posY="-5" Width="26" Height="23" />
+      <Render posX="140" posY="338" Width="45" Height="33" anchorX="39" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-16" posY="-4" Width="26" Height="26" />
+      <Render posX="200" posY="336" Width="50" Height="36" anchorX="43" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-17" posY="-7" Width="31" Height="26" />
+      <Render posX="267" posY="335" Width="46" Height="38" anchorX="40" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-18" posY="-8" Width="26" Height="25" />
+      <Render posX="333" posY="335" Width="44" Height="36" anchorX="38" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-16" posY="-10" Width="27" Height="21" />
+      <Render posX="397" posY="338" Width="46" Height="33" anchorX="38" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-15" posY="-6" Width="28" Height="23" />
+      <Render posX="458" posY="336" Width="48" Height="35" anchorX="41" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-16" posY="-8" Width="30" Height="24" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Down" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="20" posY="400" Width="23" Height="37" anchorX="12" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-10" Width="21" Height="25" />
+      <Render posX="86" posY="401" Width="21" Height="36" anchorX="10" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-9" Width="17" Height="24" />
+      <Render posX="149" posY="399" Width="21" Height="37" anchorX="11" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-11" Width="19" Height="25" />
+      <Render posX="213" posY="398" Width="21" Height="37" anchorX="11" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-11" Width="17" Height="25" />
+      <Render posX="278" posY="402" Width="19" Height="33" anchorX="10" anchorY="29" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-7" Width="17" Height="25" />
+      <Render posX="342" posY="400" Width="19" Height="36" anchorX="10" anchorY="31" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-9" Width="18" Height="25" />
+      <Render posX="406" posY="401" Width="19" Height="35" anchorX="10" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-9" Width="19" Height="24" />
+      <Render posX="470" posY="401" Width="19" Height="36" anchorX="10" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-11" Width="18" Height="23" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fireball_Left_Down" Frames="8" repeat="1" Texture="DBL_FireBall.png">
+    <Frame_Data>
+      <Render posX="7" posY="467" Width="42" Height="33" anchorX="7" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-6" Width="30" Height="22" />
+      <Render posX="70" posY="467" Width="44" Height="30" anchorX="8" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-4" Width="29" Height="24" />
+      <Render posX="134" posY="469" Width="47" Height="27" anchorX="7" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-6" Width="30" Height="20" />
+      <Render posX="195" posY="465" Width="52" Height="33" anchorX="10" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-7" Width="37" Height="24" />
+      <Render posX="259" posY="465" Width="49" Height="34" anchorX="10" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="-9" Width="29" Height="22" />
+      <Render posX="326" posY="466" Width="50" Height="30" anchorX="7" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-7" Width="31" Height="21" />
+      <Render posX="388" posY="466" Width="47" Height="30" anchorX="8" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-7" Width="28" Height="21" />
+      <Render posX="453" posY="467" Width="47" Height="29" anchorX="7" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-6" Width="33" Height="22" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

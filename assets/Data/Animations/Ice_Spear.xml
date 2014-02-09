@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Ice_Spear_Left" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="1" posY="25" Width="60" Height="17" anchorX="4" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="60" Height="17" />
+      <Render posX="63" posY="27" Width="64" Height="14" anchorX="4" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="63" Height="15" />
+      <Render posX="128" posY="26" Width="62" Height="16" anchorX="4" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="15" />
+      <Render posX="190" posY="26" Width="66" Height="16" anchorX="3" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-2" Width="67" Height="13" />
+      <Render posX="257" posY="27" Width="63" Height="14" anchorX="2" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="63" Height="14" />
+      <Render posX="320" posY="26" Width="62" Height="15" anchorX="4" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="62" Height="12" />
+      <Render posX="383" posY="27" Width="64" Height="15" anchorX="4" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="65" Height="15" />
+      <Render posX="449" posY="28" Width="63" Height="13" anchorX="3" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="63" Height="13" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Left_Up" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="6" posY="82" Width="55" Height="36" anchorX="6" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="46" Height="26" />
+      <Render posX="68" posY="83" Width="57" Height="33" anchorX="7" anchorY="4" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="48" Height="27" />
+      <Render posX="131" posY="84" Width="56" Height="31" anchorX="8" anchorY="5" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="0" Width="48" Height="26" />
+      <Render posX="195" posY="83" Width="58" Height="33" anchorX="7" anchorY="5" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="50" Height="28" />
+      <Render posX="261" posY="83" Width="54" Height="33" anchorX="6" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="46" Height="27" />
+      <Render posX="326" posY="81" Width="51" Height="36" anchorX="7" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-2" Width="47" Height="28" />
+      <Render posX="390" posY="82" Width="51" Height="34" anchorX="5" anchorY="5" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="50" Height="29" />
+      <Render posX="452" posY="82" Width="55" Height="34" anchorX="7" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="44" Height="26" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Up" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="19" posY="143" Width="27" Height="39" anchorX="13" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="0" Width="20" Height="35" />
+      <Render posX="86" posY="141" Width="22" Height="40" anchorX="9" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="18" Height="33" />
+      <Render posX="149" posY="142" Width="23" Height="38" anchorX="10" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-2" Width="17" Height="34" />
+      <Render posX="214" posY="143" Width="20" Height="37" anchorX="10" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="17" Height="33" />
+      <Render posX="278" posY="142" Width="19" Height="39" anchorX="10" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="19" Height="33" />
+      <Render posX="340" posY="142" Width="24" Height="39" anchorX="12" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="21" Height="35" />
+      <Render posX="408" posY="144" Width="19" Height="38" anchorX="9" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="19" Height="36" />
+      <Render posX="469" posY="141" Width="21" Height="41" anchorX="11" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="17" Height="39" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Right_Up" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="8" posY="206" Width="50" Height="37" anchorX="44" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-7" posY="-3" Width="42" Height="31" />
+      <Render posX="70" posY="209" Width="51" Height="34" anchorX="45" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-6" posY="-2" Width="44" Height="31" />
+      <Render posX="137" posY="209" Width="48" Height="33" anchorX="42" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-3" Width="42" Height="24" />
+      <Render posX="199" posY="210" Width="51" Height="32" anchorX="43" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-6" posY="-2" Width="42" Height="27" />
+      <Render posX="259" posY="212" Width="56" Height="31" anchorX="48" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-7" posY="-1" Width="46" Height="26" />
+      <Render posX="322" posY="211" Width="56" Height="33" anchorX="49" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-2" Width="51" Height="28" />
+      <Render posX="389" posY="212" Width="53" Height="32" anchorX="45" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="-2" Width="45" Height="25" />
+      <Render posX="455" posY="211" Width="50" Height="33" anchorX="44" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-8" posY="0" Width="41" Height="26" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Right" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="0" posY="278" Width="68" Height="26" anchorX="61" anchorY="12" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-10" posY="-1" Width="55" Height="20" />
+      <Render posX="72" posY="280" Width="59" Height="21" anchorX="54" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-6" posY="0" Width="53" Height="19" />
+      <Render posX="133" posY="281" Width="61" Height="19" anchorX="55" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="62" Height="18" />
+      <Render posX="194" posY="281" Width="61" Height="21" anchorX="54" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-7" posY="0" Width="53" Height="20" />
+      <Render posX="256" posY="281" Width="63" Height="20" anchorX="60" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-8" posY="1" Width="55" Height="20" />
+      <Render posX="321" posY="281" Width="64" Height="19" anchorX="59" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="65" Height="20" />
+      <Render posX="386" posY="281" Width="64" Height="20" anchorX="58" anchorY="10" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-8" posY="-1" Width="56" Height="17" />
+      <Render posX="451" posY="281" Width="64" Height="19" anchorX="57" anchorY="9" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-12" posY="-1" Width="52" Height="16" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Right_Down" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="6" posY="338" Width="52" Height="33" anchorX="47" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-15" posY="-5" Width="37" Height="27" />
+      <Render posX="68" posY="337" Width="55" Height="34" anchorX="49" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-13" posY="-2" Width="39" Height="30" />
+      <Render posX="132" posY="336" Width="55" Height="36" anchorX="50" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-11" posY="-4" Width="42" Height="28" />
+      <Render posX="197" posY="336" Width="53" Height="33" anchorX="46" anchorY="29" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-9" posY="-4" Width="43" Height="28" />
+      <Render posX="255" posY="336" Width="60" Height="34" anchorX="53" anchorY="29" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-14" posY="-5" Width="46" Height="28" />
+      <Render posX="324" posY="338" Width="56" Height="33" anchorX="49" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-13" posY="-5" Width="38" Height="25" />
+      <Render posX="386" posY="337" Width="55" Height="34" anchorX="48" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-10" posY="-5" Width="43" Height="27" />
+      <Render posX="448" posY="337" Width="59" Height="33" anchorX="52" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-10" posY="-2" Width="48" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Down" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="18" posY="398" Width="27" Height="39" anchorX="14" anchorY="33" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-7" posY="-4" Width="14" Height="33" />
+      <Render posX="88" posY="400" Width="18" Height="40" anchorX="8" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-4" Width="18" Height="32" />
+      <Render posX="150" posY="402" Width="22" Height="38" anchorX="11" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-4" Width="16" Height="31" />
+      <Render posX="213" posY="399" Width="22" Height="40" anchorX="11" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-3" Width="17" Height="34" />
+      <Render posX="277" posY="396" Width="22" Height="42" anchorX="10" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="21" Height="40" />
+      <Render posX="342" posY="399" Width="19" Height="39" anchorX="9" anchorY="33" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-3" Width="19" Height="36" />
+      <Render posX="409" posY="400" Width="15" Height="37" anchorX="7" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="12" Height="34" />
+      <Render posX="468" posY="396" Width="22" Height="42" anchorX="12" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-1" Width="17" Height="40" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Spear_Left_Down" Frames="8" repeat="1" Texture="icicle_0.png">
+    <Frame_Data>
+      <Render posX="7" posY="465" Width="58" Height="34" anchorX="7" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-4" Width="49" Height="26" />
+      <Render posX="70" posY="467" Width="57" Height="32" anchorX="9" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="57" Height="30" />
+      <Render posX="133" posY="467" Width="51" Height="32" anchorX="8" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-2" Width="50" Height="29" />
+      <Render posX="198" posY="468" Width="55" Height="30" anchorX="6" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="49" Height="27" />
+      <Render posX="260" posY="467" Width="60" Height="30" anchorX="7" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-4" Width="50" Height="25" />
+      <Render posX="325" posY="469" Width="53" Height="28" anchorX="8" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="50" Height="24" />
+      <Render posX="387" posY="469" Width="55" Height="29" anchorX="9" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-3" Width="45" Height="23" />
+      <Render posX="452" posY="469" Width="53" Height="30" anchorX="7" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="49" Height="27" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
