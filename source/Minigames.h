@@ -32,6 +32,7 @@ public:
 	void SetSkill(CSkills* pSkill);
 	virtual void ResetSkill( void ) {  }
 
+	float ScalarDistance(float fx1, float fy1, float fx2, float fy2);
 	float GetDamage( void )	{return m_fDamageMultiplier;}
 	int GetChances( void ) {return m_nChances;}
 	int GetCost( void ) {return m_nCost;}

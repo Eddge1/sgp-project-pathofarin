@@ -29,3 +29,14 @@ void CMiniGames::SetOwner(CUnits* pOwner)
 {
 	m_pMaster = pOwner;
 }
+
+
+// fx1 and fy1 are the current targets, fx2 and fy2 is for the other.
+float ScalarDistance(float fx1, float fy1, float fx2, float fy2)
+{
+	float dx = fx2 - fx1;
+	dx *= dx;
+	float dy =  fy2 - fy1;
+	dy *= dy;
+	return float(abs(sqrtf(dx + dy)));
+}
