@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="2">
+  <Animation_Info Name="Orc_Leader_Idle" Frames="2" repeat="1" Texture="Arcade - King of Dragons - Orcs.png">
+    <Frame_Data>
+      <Render posX="3" posY="679" Width="70" Height="61" anchorX="32" anchorY="56" Duration="0.4" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="71" Height="61" />
+      <Render posX="76" posY="678" Width="74" Height="62" anchorX="42" anchorY="57" Duration="0.4" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="75" Height="62" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Leader_Walk_Right" Frames="6" repeat="1" Texture="Arcade - King of Dragons - Orcs.png">
+    <Frame_Data>
+      <Render posX="2" posY="741" Width="61" Height="63" anchorX="25" anchorY="58" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="62" Height="64" />
+      <Render posX="64" posY="742" Width="58" Height="62" anchorX="27" anchorY="57" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="59" Height="63" />
+      <Render posX="125" posY="741" Width="61" Height="62" anchorX="30" anchorY="58" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="61" Height="60" />
+      <Render posX="186" posY="742" Width="53" Height="61" anchorX="24" anchorY="57" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="52" Height="61" />
+      <Render posX="242" posY="739" Width="56" Height="64" anchorX="25" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="56" Height="64" />
+      <Render posX="298" posY="739" Width="67" Height="65" anchorX="31" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="67" Height="65" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

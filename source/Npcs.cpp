@@ -79,6 +79,10 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Right");
 			}
+			else if (GetName() == "Orc_Leader")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
+			}
 		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
 		{
@@ -90,6 +94,10 @@ void CNpcs::Update(float fElapsedTime)
 			else if (GetName() == "Pathetic_Orc")
 			{
 				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Left");
+			}
+			else if (GetName() == "Orc_Leader")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
 			}
 		}
 
@@ -104,6 +112,10 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Down");
 			}
+			else if (GetName() == "Orc_Leader")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
+			}
 		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
 		{
@@ -116,6 +128,10 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Up");
 			}
+			else if (GetName() == "Orc_Leader")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
+			}
 		}
 		else
 		{
@@ -126,6 +142,10 @@ void CNpcs::Update(float fElapsedTime)
 			else if (GetName() == "Pathetic_Orc")
 			{
 				GetAnimInfo()->SetAnimation("Pathetic_Orc_Idle");
+			}
+			else if (GetName() == "Orc_Leader")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Leader_Idle");
 			}
 		}
 
