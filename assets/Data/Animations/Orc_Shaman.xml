@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Orc_Shaman_Idle" Frames="12" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="1975" posY="985" Width="60" Height="65" anchorX="26" anchorY="36" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="61" Height="65" />
+      <Render posX="2070" posY="983" Width="56" Height="66" anchorX="24" anchorY="38" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="56" Height="65" />
+      <Render posX="2162" posY="987" Width="59" Height="62" anchorX="25" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="58" Height="63" />
+      <Render posX="2253" posY="987" Width="61" Height="63" anchorX="27" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="61" Height="63" />
+      <Render posX="2348" posY="985" Width="58" Height="66" anchorX="24" anchorY="37" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="58" Height="66" />
+      <Render posX="2439" posY="985" Width="64" Height="65" anchorX="27" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="65" />
+      <Render posX="2532" posY="985" Width="59" Height="64" anchorX="27" anchorY="37" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="64" />
+      <Render posX="2623" posY="986" Width="62" Height="65" anchorX="29" anchorY="36" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="65" />
+      <Render posX="2717" posY="987" Width="64" Height="63" anchorX="28" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="65" Height="63" />
+      <Render posX="2811" posY="986" Width="62" Height="63" anchorX="27" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="63" />
+      <Render posX="2903" posY="985" Width="63" Height="63" anchorX="28" anchorY="36" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="63" Height="63" />
+      <Render posX="2995" posY="984" Width="64" Height="66" anchorX="29" anchorY="37" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="66" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Walk_Down" Frames="14" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="35" posY="1760" Width="63" Height="75" anchorX="27" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="63" Height="75" />
+      <Render posX="161" posY="1755" Width="59" Height="80" anchorX="25" anchorY="53" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="80" />
+      <Render posX="286" posY="1746" Width="61" Height="88" anchorX="22" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="88" />
+      <Render posX="412" posY="1742" Width="56" Height="91" anchorX="20" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="57" Height="92" />
+      <Render posX="532" posY="1750" Width="58" Height="82" anchorX="23" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="58" Height="82" />
+      <Render posX="652" posY="1754" Width="66" Height="81" anchorX="26" anchorY="49" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="66" Height="81" />
+      <Render posX="774" posY="1764" Width="70" Height="81" anchorX="28" anchorY="41" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="71" Height="81" />
+      <Render posX="894" posY="1766" Width="81" Height="76" anchorX="30" anchorY="41" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="81" Height="76" />
+      <Render posX="1019" posY="1767" Width="77" Height="72" anchorX="28" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="78" Height="72" />
+      <Render posX="1144" posY="1772" Width="70" Height="65" anchorX="26" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="71" Height="65" />
+      <Render posX="1267" posY="1768" Width="64" Height="67" anchorX="27" anchorY="36" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="65" Height="67" />
+      <Render posX="1391" posY="1767" Width="62" Height="66" anchorX="26" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="66" />
+      <Render posX="1515" posY="1766" Width="58" Height="65" anchorX="23" anchorY="38" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="58" Height="65" />
+      <Render posX="1637" posY="1762" Width="60" Height="70" anchorX="24" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="61" Height="70" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Walk_Left" Frames="14" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="23" posY="1985" Width="59" Height="73" anchorX="39" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="60" Height="74" />
+      <Render posX="143" posY="1981" Width="63" Height="76" anchorX="43" anchorY="48" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="63" Height="76" />
+      <Render posX="266" posY="1976" Width="61" Height="79" anchorX="40" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="62" Height="79" />
+      <Render posX="387" posY="1973" Width="64" Height="81" anchorX="44" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="64" Height="82" />
+      <Render posX="511" posY="1971" Width="62" Height="84" anchorX="44" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="63" Height="85" />
+      <Render posX="635" posY="1973" Width="62" Height="83" anchorX="45" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="64" Height="82" />
+      <Render posX="758" posY="1982" Width="62" Height="78" anchorX="46" anchorY="45" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="2" Width="63" Height="76" />
+      <Render posX="872" posY="1982" Width="73" Height="78" anchorX="54" anchorY="45" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="74" Height="77" />
+      <Render posX="997" posY="1983" Width="66" Height="75" anchorX="52" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="66" Height="75" />
+      <Render posX="1122" posY="1984" Width="66" Height="75" anchorX="51" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="66" Height="75" />
+      <Render posX="1248" posY="1983" Width="62" Height="77" anchorX="45" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="63" Height="77" />
+      <Render posX="1375" posY="1983" Width="60" Height="76" anchorX="42" anchorY="41" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="61" Height="76" />
+      <Render posX="1497" posY="1984" Width="61" Height="75" anchorX="41" anchorY="40" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="62" Height="77" />
+      <Render posX="1622" posY="1982" Width="59" Height="77" anchorX="39" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="60" Height="76" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Walk_Up" Frames="14" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="26" posY="2198" Width="61" Height="79" anchorX="39" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="62" Height="80" />
+      <Render posX="152" posY="2194" Width="55" Height="83" anchorX="36" anchorY="54" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="56" Height="83" />
+      <Render posX="273" posY="2190" Width="58" Height="85" anchorX="38" anchorY="54" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="59" Height="85" />
+      <Render posX="391" posY="2186" Width="63" Height="87" anchorX="43" anchorY="58" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="65" Height="87" />
+      <Render posX="517" posY="2178" Width="61" Height="94" anchorX="41" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="61" Height="94" />
+      <Render posX="638" posY="2183" Width="64" Height="92" anchorX="42" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="91" />
+      <Render posX="763" posY="2187" Width="63" Height="90" anchorX="40" anchorY="57" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="64" Height="90" />
+      <Render posX="881" posY="2187" Width="68" Height="89" anchorX="45" anchorY="58" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="69" Height="89" />
+      <Render posX="1006" posY="2187" Width="65" Height="89" anchorX="43" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="66" Height="90" />
+      <Render posX="1136" posY="2190" Width="57" Height="84" anchorX="37" anchorY="53" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="57" Height="83" />
+      <Render posX="1259" posY="2192" Width="57" Height="79" anchorX="36" anchorY="49" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="58" Height="79" />
+      <Render posX="1385" posY="2194" Width="53" Height="78" anchorX="33" anchorY="45" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="54" Height="78" />
+      <Render posX="1507" posY="2193" Width="51" Height="81" anchorX="34" anchorY="47" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="52" Height="81" />
+      <Render posX="1628" posY="2197" Width="57" Height="80" anchorX="36" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="58" Height="80" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Walk_Right" Frames="14" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="46" posY="2414" Width="57" Height="84" anchorX="15" anchorY="55" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="58" Height="84" />
+      <Render posX="167" posY="2411" Width="60" Height="87" anchorX="17" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="60" Height="87" />
+      <Render posX="291" posY="2403" Width="60" Height="95" anchorX="15" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="60" Height="95" />
+      <Render posX="413" posY="2399" Width="62" Height="95" anchorX="18" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="63" Height="96" />
+      <Render posX="538" posY="2402" Width="58" Height="92" anchorX="13" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="59" Height="92" />
+      <Render posX="659" posY="2406" Width="61" Height="90" anchorX="15" anchorY="57" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="62" Height="90" />
+      <Render posX="778" posY="2410" Width="67" Height="87" anchorX="19" anchorY="56" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="68" Height="86" />
+      <Render posX="908" posY="2409" Width="59" Height="90" anchorX="12" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="61" Height="90" />
+      <Render posX="1031" posY="2411" Width="63" Height="88" anchorX="13" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="64" Height="87" />
+      <Render posX="1155" posY="2415" Width="59" Height="84" anchorX="14" anchorY="54" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="59" Height="82" />
+      <Render posX="1271" posY="2416" Width="63" Height="83" anchorX="21" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="64" Height="84" />
+      <Render posX="1400" posY="2415" Width="53" Height="83" anchorX="14" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="2" Width="52" Height="81" />
+      <Render posX="1521" posY="2416" Width="57" Height="83" anchorX="16" anchorY="48" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="59" Height="83" />
+      <Render posX="1645" posY="2416" Width="57" Height="82" anchorX="15" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="58" Height="82" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Battle_Idle" Frames="12" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="1981" posY="1620" Width="70" Height="74" anchorX="23" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="70" Height="74" />
+      <Render posX="2077" posY="1619" Width="68" Height="74" anchorX="20" anchorY="45" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="69" Height="75" />
+      <Render posX="2170" posY="1621" Width="65" Height="72" anchorX="20" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="66" Height="73" />
+      <Render posX="2262" posY="1621" Width="70" Height="72" anchorX="21" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="71" Height="72" />
+      <Render posX="2354" posY="1619" Width="69" Height="75" anchorX="23" anchorY="45" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="70" Height="75" />
+      <Render posX="2441" posY="1621" Width="73" Height="72" anchorX="28" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="74" Height="72" />
+      <Render posX="2540" posY="1623" Width="69" Height="71" anchorX="24" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="69" Height="71" />
+      <Render posX="2634" posY="1623" Width="67" Height="69" anchorX="22" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="68" Height="70" />
+      <Render posX="2725" posY="1623" Width="69" Height="69" anchorX="25" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="70" Height="69" />
+      <Render posX="2816" posY="1619" Width="73" Height="73" anchorX="25" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="74" Height="74" />
+      <Render posX="2913" posY="1621" Width="66" Height="72" anchorX="21" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="67" Height="72" />
+      <Render posX="3007" posY="1622" Width="64" Height="71" anchorX="20" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="64" Height="72" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Battle_Basic_Attack" Frames="17" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="36" posY="1640" Width="70" Height="75" anchorX="23" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="70" Height="76" />
+      <Render posX="151" posY="1642" Width="73" Height="75" anchorX="23" anchorY="44" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="74" Height="76" />
+      <Render posX="260" posY="1643" Width="81" Height="71" anchorX="29" anchorY="43" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="83" Height="72" />
+      <Render posX="373" posY="1649" Width="85" Height="66" anchorX="31" anchorY="38" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="86" Height="66" />
+      <Render posX="482" posY="1646" Width="92" Height="69" anchorX="36" anchorY="40" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="93" Height="70" />
+      <Render posX="599" posY="1635" Width="92" Height="81" anchorX="33" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="93" Height="81" />
+      <Render posX="717" posY="1635" Width="91" Height="81" anchorX="30" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-2" Width="92" Height="79" />
+      <Render posX="823" posY="1638" Width="95" Height="78" anchorX="41" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="96" Height="78" />
+      <Render posX="954" posY="1623" Width="64" Height="92" anchorX="28" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="92" />
+      <Render posX="1061" posY="1622" Width="94" Height="93" anchorX="38" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="95" Height="94" />
+      <Render posX="1185" posY="1624" Width="79" Height="90" anchorX="30" anchorY="58" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="1" posY="1" Width="80" Height="91" />
+      <Render posX="1308" posY="1622" Width="64" Height="92" anchorX="22" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="66" Height="92" />
+      <Render posX="1421" posY="1626" Width="57" Height="91" anchorX="25" anchorY="56" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="58" Height="92" />
+      <Render posX="1536" posY="1626" Width="58" Height="92" anchorX="23" anchorY="58" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="58" Height="92" />
+      <Render posX="1655" posY="1631" Width="59" Height="85" anchorX="16" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="85" />
+      <Render posX="1767" posY="1636" Width="69" Height="80" anchorX="22" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="69" Height="81" />
+      <Render posX="1881" posY="1638" Width="68" Height="78" anchorX="22" anchorY="48" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="69" Height="77" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Orc_Shaman_Battle_Taking_Damage" Frames="1" repeat="1" Texture="PC Computer - Diablo 2 Diablo 2 Lord of Destruction - Fallen Shaman.png">
+    <Frame_Data>
+      <Render posX="1944" posY="2409" Width="97" Height="80" anchorX="48" anchorY="49" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="98" Height="80" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

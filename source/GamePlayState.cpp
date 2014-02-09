@@ -166,12 +166,12 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(420);
 			pTemp->AddWaypoint(200,420);
 			pTemp->AddWaypoint(200,260);
-			pTemp->SetName("Pathetic_Orc");
-			pTemp->GetAnimInfo()->SetAnimation("Pathetic_Orc_Idle");
+			pTemp->SetName("Orc_Shaman");
+			pTemp->GetAnimInfo()->SetAnimation("Orc_Shaman_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Leader", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Pathetic_Orc", 200.0f, 350.0f, 5, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Orc", 100.0f, 400.0f, 9, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 400.0f, 9, 150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -799,6 +799,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Pathetic_Orc")
 	{
 		pTemp->SetAnimation("Pathetic_Orc_Battle_Idle");
+	}
+	else if (input == "Orc_Shaman")
+	{
+		pTemp->SetAnimation("Orc_Shaman_Battle_Idle");
 	}
 	else if (input == "Snail")
 	{
