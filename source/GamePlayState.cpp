@@ -132,12 +132,12 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(410);
 			pTemp->AddWaypoint(355,410);
 			pTemp->AddWaypoint(355,555);
-			pTemp->SetName("Cave_Spider");
-			pTemp->GetAnimInfo()->SetAnimation("Cave_Spider_Idle");
+			pTemp->SetName("Cave_Bat");
+			pTemp->GetAnimInfo()->SetAnimation("Cave_Bat_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->Release();
 
 			pTemp = new CNpcs();
@@ -813,6 +813,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Cave_Spider")
 	{
 		pTemp->SetAnimation("Cave_Spider_Battle_Idle");
+	}
+	else if (input == "Cave_Bat")
+	{
+		pTemp->SetAnimation("Cave_Bat_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);
