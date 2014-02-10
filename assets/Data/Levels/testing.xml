@@ -119,10 +119,10 @@
       <Tile_Data xTileID="0" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="39" posX="9" posY="2">
-      <Tile_Data xTileID="1" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="2" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="40" posX="10" posY="2">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="41" posX="11" posY="2">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
@@ -179,7 +179,7 @@
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="59" posX="14" posY="3">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="60" posX="0" posY="4">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -215,13 +215,13 @@
       <Tile_Data xTileID="5" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="71" posX="11" posY="4">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="72" posX="12" posY="4">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="73" posX="13" posY="4">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="74" posX="14" posY="4">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -260,13 +260,13 @@
       <Tile_Data xTileID="5" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="86" posX="11" posY="5">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="87" posX="12" posY="5">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="88" posX="13" posY="5">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="3" yTileID="0" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" />
     </Tile>
     <Tile ID="89" posX="14" posY="5">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -302,16 +302,16 @@
       <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="100" posX="10" posY="6">
-      <Tile_Data xTileID="5" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="5" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="101" posX="11" posY="6">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="102" posX="12" posY="6">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="103" posX="13" posY="6">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="104" posX="14" posY="6">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -401,7 +401,7 @@
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="133" posX="13" posY="8">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="134" posX="14" posY="8">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -449,7 +449,7 @@
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="149" posX="14" posY="9">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" />
     </Tile>
     <Tile ID="150" posX="0" posY="10">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
@@ -786,14 +786,16 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" />
     </Tile>
   </Layer>
-  <Block_Data Total="8">
+  <Block_Data Total="10">
     <Block PosX="9" PosY="129" Width="120" Height="573" />
     <Block PosX="125" PosY="573" Width="800" Height="126" />
-    <Block PosX="713" PosY="142" Width="626" Height="422" />
     <Block PosX="580" PosY="1" Width="380" Height="133" />
     <Block PosX="321" PosY="319" Width="130" Height="128" />
     <Block PosX="512" PosY="319" Width="64" Height="128" />
     <Block PosX="5" PosY="1" Width="277" Height="126" />
     <Block PosX="262" PosY="227" Width="181" Height="80" />
+    <Block PosX="704" PosY="135" Width="245" Height="121" />
+    <Block PosX="895" PosY="257" Width="60" Height="319" />
+    <Block PosX="703" PosY="447" Width="191" Height="127" />
   </Block_Data>
 </World>

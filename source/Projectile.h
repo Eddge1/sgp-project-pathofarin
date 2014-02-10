@@ -8,9 +8,13 @@ class CProjectile :	public CEntity
 	CMiniGames* m_pMaster;
 	bool m_bCollided;
 	bool m_bCrit;
+	int m_nAudioSFX;
 public:
 	void SetMasterGame(CMiniGames* pMini) {m_pMaster = pMini;}
 	void SetTarget(CUnits* pUnit);
+
+	void SetAudio(int input) { m_nAudioSFX = input; }
+	void PlaySFX();
 
 	void SetCritical(bool bCrit) {m_bCrit = bCrit;}
 	bool GetCrit() const {return m_bCrit;}

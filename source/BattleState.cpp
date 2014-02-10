@@ -45,7 +45,7 @@ CBattleState::CBattleState(void)
 	m_fDelayTurn = 0.0f;
 	m_bDelayed = false;
 
-	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm")));
+	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
@@ -64,7 +64,7 @@ CBattleState::~CBattleState(void)
 
 void CBattleState::Activate(void)
 {
-	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
+	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	m_pFont = CGame::GetInstance()->GetFont("Arial");
 	m_bDefeat = false;
 	m_bVictory = false;

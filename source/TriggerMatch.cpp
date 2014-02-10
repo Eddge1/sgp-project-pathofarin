@@ -213,7 +213,7 @@ void CTriggerMatch::InstantiateSkill()
 		pNewProjectile->GetAnimInfo()->SetAnimation(pTemp->GetAnimInfo()->GetCurrentAnimation());
 		pNewProjectile->SetPosX(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosX());
 		pNewProjectile->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY());
-
+		pTemp->PlaySFX();
 		m_vSkills.push_back(pNewProjectile);
 	}
 }

@@ -471,7 +471,7 @@
       <Filter>GameStates\h</Filter>
     </ClInclude>
     <ClInclude Include="source\Projectile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

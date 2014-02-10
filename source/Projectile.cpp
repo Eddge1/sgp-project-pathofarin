@@ -1,11 +1,12 @@
 #include "Projectile.h"
-
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 
 CProjectile::CProjectile(void)
 {
 	m_pTarget = nullptr;
 	m_pMaster = nullptr;
 	m_bCollided = false;
+	m_nAudioSFX = -1;
 }
 
 
@@ -57,4 +58,12 @@ void CProjectile::SetTarget(CUnits* pUnit)
 	m_pTarget = pUnit;
 	if(m_pTarget != nullptr)
 		m_pTarget->AddRef();
+}
+
+void CProjectile::PlaySFX(void)
+{
+	if(m_nAudioSFX != -1)
+	{
+		CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nAudioSFX,false);
+	}
 }
