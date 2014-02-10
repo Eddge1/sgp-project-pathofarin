@@ -12,7 +12,7 @@ public:
 
 	virtual void Update(float fElapsedTime) override;
 
-	void DoAttack(void);
+	virtual void DoAttack(void) override;
 
 	CUnits* GetTarget(void) { return m_pTarget; }
 	void SetTarget(CUnits* l) { m_pTarget = l; }

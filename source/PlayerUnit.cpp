@@ -23,7 +23,6 @@ CPlayerUnit::CPlayerUnit(void)
 	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 	m_nSelectionConfirm = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionConfirm.wav"));
 	m_nSelectionBack = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionBack.wav"));
-
 }
 
 CPlayerUnit::~CPlayerUnit(void)

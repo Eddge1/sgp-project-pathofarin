@@ -8,6 +8,7 @@ public:
 	virtual ~CSteadyShot(void);
 	virtual void ResetSkill() override { }
 	virtual void HandleEvent( const CEvent* pEvent ) override {}
+	virtual void DoAttack(void) override {}
 
 };
 

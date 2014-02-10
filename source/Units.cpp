@@ -16,6 +16,8 @@ CUnits::CUnits(void)
 	m_nExperience = 0; 
 	m_bTurn = false;
 	m_nAvailStats = 0;
+
+	m_bTutorial = false;
 }
 
 CUnits::~CUnits(void)

@@ -1,12 +1,11 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
-
 #include <Windows.h>
 #include <string>
 #include "Units.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 
-class CSkills;
+class CProjectile;
 class CMiniGames : public IListener
 {
 	CUnits* m_pMaster;
@@ -14,8 +13,7 @@ class CMiniGames : public IListener
 	int m_nCost;
 	float m_fDamageMultiplier;
 	bool m_bTutorial;
-
-	CSkills* m_pSkill;
+	CProjectile* m_pSkill;
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
 	CUnits* GetOwner(void) { return m_pMaster; }
@@ -27,8 +25,10 @@ public:
 	virtual void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
 	virtual void SetChances( int nAttempts ) {m_nChances = nAttempts;}
 	virtual void SetCost ( int nAmount ) {m_nCost = nAmount;}
+	virtual void DoAttack() {};
 
-	void SetSkill(CSkills* pSkill);
+	void SetSkill(CProjectile* pSkill) {m_pSkill = pSkill;}
+	CProjectile* GetSkill() const {return m_pSkill;}
 	void SetTutorial (bool bTut) {m_bTutorial = bTut;}
 	bool GetTutorial ( ) const{return m_bTutorial;}
 	virtual void ResetSkill( void ) {  }

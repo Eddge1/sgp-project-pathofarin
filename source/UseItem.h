@@ -16,5 +16,7 @@ public:
 	virtual ~CUseItem(void);
 	virtual void ResetSkill() override {m_bGetInventory = false; m_mTemp = nullptr; m_nSelection = 0;}
 	virtual void HandleEvent( const CEvent* pEvent ) override{ }
+	virtual void DoAttack(void) override {}
+
 };
 

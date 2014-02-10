@@ -15,6 +15,8 @@ public:
 	CChargeCrystal(void);
 	virtual ~CChargeCrystal(void);
 
+	virtual void DoAttack(void) override {}
+
 	virtual void Render() override;
 	virtual void Update(float fElpasedTime) override;
 	virtual void ResetSkill() override;

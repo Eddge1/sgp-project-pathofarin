@@ -508,10 +508,26 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 	pTest = new CCommands;
 	CTriggerMatch *pTrig = new CTriggerMatch;
-	pTest->SetName("Trig Dash");
+	pTest->SetName("FireBall");
+	CProjectile* pFireBall = new CProjectile();
+	pFireBall->SetMasterGame(pTrig);
+	pFireBall->GetAnimInfo()->SetAnimation("Fireball_Left");
+	pTrig->SetSkill(pFireBall);
 	pTest->SetMiniGame(pTrig);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	pTrig = new CTriggerMatch;
+	pTest->SetName("Icespear");
+	CProjectile* pIceSpear = new CProjectile();
+	pIceSpear->SetMasterGame(pTrig);
+	pIceSpear->GetAnimInfo()->SetAnimation("Ice_Spear_Left");
+	pTrig->SetSkill(pIceSpear);
+	pTest->SetMiniGame(pTrig);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
 
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
