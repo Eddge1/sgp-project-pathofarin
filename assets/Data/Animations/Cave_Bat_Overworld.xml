@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Cave_Bat_Idle" Frames="3" repeat="1" Texture="Monster_Bat_8D.png">
+    <Frame_Data>
+      <Render posX="0" posY="194" Width="32" Height="22" anchorX="13" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="22" />
+      <Render posX="33" posY="200" Width="30" Height="14" anchorX="12" anchorY="6" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="14" />
+      <Render posX="65" posY="195" Width="27" Height="27" anchorX="11" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="27" Height="26" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Walk_Down" Frames="3" repeat="1" Texture="Monster_Bat_8D.png">
+    <Frame_Data>
+      <Render posX="0" posY="0" Width="32" Height="18" anchorX="16" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="18" />
+      <Render posX="33" posY="0" Width="30" Height="18" anchorX="15" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="30" Height="17" />
+      <Render posX="71" posY="0" Width="18" Height="20" anchorX="9" anchorY="6" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="19" Height="20" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Walk_Left" Frames="3" repeat="1" Texture="Monster_Bat_8D.png">
+    <Frame_Data>
+      <Render posX="5" posY="31" Width="27" Height="22" anchorX="5" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="28" Height="22" />
+      <Render posX="36" posY="31" Width="27" Height="22" anchorX="6" anchorY="12" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="28" Height="22" />
+      <Render posX="68" posY="32" Width="25" Height="27" anchorX="6" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="26" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Walk_Right" Frames="3" repeat="1" Texture="Monster_Bat_8D.png">
+    <Frame_Data>
+      <Render posX="0" posY="63" Width="26" Height="23" anchorX="21" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="24" Height="23" />
+      <Render posX="34" posY="65" Width="25" Height="22" anchorX="20" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="25" Height="22" />
+      <Render posX="67" posY="64" Width="27" Height="28" anchorX="18" anchorY="9" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="28" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Walk_Up" Frames="3" repeat="1" Texture="Monster_Bat_8D.png">
+    <Frame_Data>
+      <Render posX="0" posY="95" Width="33" Height="19" anchorX="16" anchorY="9" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="33" Height="19" />
+      <Render posX="34" posY="95" Width="30" Height="19" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="20" />
+      <Render posX="68" posY="93" Width="22" Height="24" anchorX="12" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="23" Height="25" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

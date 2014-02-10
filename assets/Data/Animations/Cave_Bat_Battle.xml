@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Cave_Bat_Battle_Idle" Frames="6" repeat="1" Texture="00-017-0000.png">
+    <Frame_Data>
+      <Render posX="257" posY="0" Width="45" Height="35" anchorX="8" anchorY="26" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="35" />
+      <Render posX="256" posY="37" Width="43" Height="41" anchorX="9" anchorY="31" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="43" Height="42" />
+      <Render posX="257" posY="82" Width="44" Height="36" anchorX="7" anchorY="25" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="44" Height="36" />
+      <Render posX="255" posY="121" Width="43" Height="33" anchorX="9" anchorY="18" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="43" Height="34" />
+      <Render posX="254" posY="153" Width="41" Height="30" anchorX="8" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="42" Height="31" />
+      <Render posX="254" posY="183" Width="41" Height="29" anchorX="10" anchorY="17" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="41" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Battle_Basic_Attack" Frames="3" repeat="0" Texture="00-017-0000.png">
+    <Frame_Data>
+      <Render posX="400" posY="2" Width="46" Height="43" anchorX="4" anchorY="27" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="46" Height="43" />
+      <Render posX="393" posY="50" Width="52" Height="38" anchorX="8" anchorY="17" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="0" Width="52" Height="38" />
+      <Render posX="448" posY="41" Width="53" Height="37" anchorX="5" anchorY="27" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="54" Height="37" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Bat_Battle_Taking_Damage" Frames="1" repeat="0" Texture="00-017-0000.png">
+    <Frame_Data>
+      <Render posX="346" posY="204" Width="50" Height="38" anchorX="24" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="50" Height="39" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
