@@ -4,6 +4,7 @@
 #include "BattleState.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "Player.h"
+#include "TutorialBattle.h"
 
 CPlayerUnit::CPlayerUnit(void)
 {
@@ -12,16 +13,16 @@ CPlayerUnit::CPlayerUnit(void)
 	m_bInSubMenu = false;
 	m_bSkillSelected = false;
 	m_bCasting = false;
+	m_bDodge = false;
 	m_nMenuSelect = 0;
 	m_nSkillSelect = 0;
 	m_pPlayer = nullptr;
 	m_bDodge = false;
-	timer = 1.0f;
+	timer = 0.0f;
 	CSGD_EventSystem::GetInstance()->RegisterClient("DODGE", this);
 	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 	m_nSelectionConfirm = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionConfirm.wav"));
 	m_nSelectionBack = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionBack.wav"));
-
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -42,7 +43,10 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 		timer = 1.0f;
 		std::wostringstream woss;
 		woss << "Attempt ";
-		CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+		if(!GetTutorial())
+			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+		else
+			CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
 
 	}
 }
@@ -102,15 +106,24 @@ void CPlayerUnit::Update(float fElapsedTime)
 				{
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
 					if(m_bInSubMenu)
-						m_bSkillSelected = true;
+					{
+						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost())
+						{
+							m_bSkillSelected = true;
+						}
+
+					}
 					else
 					{
 						if(m_vCommands[m_nMenuSelect]->GetIsGame())
 						{
-							if(m_nMenuSelect == 2)
-								m_bCasting = true;
+							if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost())
+							{
+								if(m_nMenuSelect == 2)
+									m_bCasting = true;
 
-							m_bSkillSelected = true;
+								m_bSkillSelected = true;
+							}
 						}
 						else
 							m_bInSubMenu = true;
@@ -133,27 +146,21 @@ void CPlayerUnit::Update(float fElapsedTime)
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
 					if(m_bInSubMenu)
 					{
-						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost())
-						{
-							m_bCasting = true;
-							ModifyAP(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost());
-						}
+						m_bCasting = true;
+						ModifyAP(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost());
 					}
 					else
 					{
-						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost())
-						{
-							m_bCasting = true;
-							ModifyAP(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost());
-						}
+						m_bCasting = true;
+						ModifyAP(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost());
 					}
 				}
 				else if(pDI->KeyPressed(DIK_ESCAPE))
 				{
 					m_bSkillSelected = false;
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionBack);
-
 				}
+
 			}
 		}
 		else

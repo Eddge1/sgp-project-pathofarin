@@ -83,6 +83,14 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
 			}
+			else if (GetName() == "Orc_Shaman")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Right");
+			}
+			else if (GetName() == "Cave_Spider")
+			{
+				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Right");
+			}
 		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
 		{
@@ -98,6 +106,14 @@ void CNpcs::Update(float fElapsedTime)
 			else if (GetName() == "Orc_Leader")
 			{
 				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
+			}
+			else if (GetName() == "Orc_Shaman")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Left");
+			}
+			else if (GetName() == "Cave_Spider")
+			{
+				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Left");
 			}
 		}
 
@@ -116,6 +132,14 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
 			}
+			else if (GetName() == "Orc_Shaman")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Down");
+			}
+			else if (GetName() == "Cave_Spider")
+			{
+				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Down");
+			}
 		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
 		{
@@ -132,6 +156,14 @@ void CNpcs::Update(float fElapsedTime)
 			{
 				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
 			}
+			else if (GetName() == "Orc_Shaman")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Up");
+			}
+			else if (GetName() == "Cave_Spider")
+			{
+				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Up");
+			}
 		}
 		else
 		{
@@ -146,6 +178,14 @@ void CNpcs::Update(float fElapsedTime)
 			else if (GetName() == "Orc_Leader")
 			{
 				GetAnimInfo()->SetAnimation("Orc_Leader_Idle");
+			}
+			else if (GetName() == "Orc_Shaman")
+			{
+				GetAnimInfo()->SetAnimation("Orc_Shaman_Idle");
+			}
+			else if (GetName() == "Cave_Spider")
+			{
+				GetAnimInfo()->SetAnimation("Cave_Spider_Idle");
 			}
 		}
 

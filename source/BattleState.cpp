@@ -46,13 +46,13 @@ CBattleState::CBattleState(void)
 	m_bDelayed = false;
 
 	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm")));
-	m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
-	m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
-	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
+	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
+	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
+	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 
-	m_nMenuImage		  =	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
-	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
-	m_nForestBattleID	  = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nMenuImage			=	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
 }
 
 CBattleState::~CBattleState(void)
@@ -200,7 +200,7 @@ void CBattleState::Render(void)
 			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			
+
 			woss << m_vBattleUnits[m_nTarget]->GetHealth();
 			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
@@ -330,11 +330,10 @@ void CBattleState::Render(void)
 	}
 }
 
-bool SortSpeed(CUnits *l, CUnits *r)
+bool CBattleState::SortSpeed(CUnits *l, CUnits *r)
 {
 	return l->GetSpeed() > r->GetSpeed();
 }
-
 
 void CBattleState::Initialize(void)
 {
@@ -353,30 +352,23 @@ void CBattleState::Initialize(void)
 	}
 
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
-
 	GetNextTarget();
-
 	m_eCurrentPhase = BP_BATTLE;
 }
 
 void CBattleState::Battle(float fElapsedTime)
 {
+	if(m_eCurrentPhase == BP_BATTLE)
+	{
+		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			m_vBattleUnits[i]->Update(fElapsedTime);
+		}
+	}
 	if(m_fDelayTurn <= 0.0f && m_bDelayed == false)
 	{
 		if(m_eCurrentPhase == BP_BATTLE)
 		{
-			for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-			{
-				m_vBattleUnits[i]->Update(fElapsedTime);
-			}
-			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
-			if(pTemp != nullptr)
-			{
-				if(pTemp->GetReady())
-				{
-
-				}
-			}
 			if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 			{
 				if(m_vBattleUnits.size() == 1)
@@ -415,8 +407,6 @@ void CBattleState::Battle(float fElapsedTime)
 				}
 				if(m_nTurn >= (int)m_vBattleUnits.size())
 					m_nTurn = 0;
-				if(m_eCurrentPhase != BP_END)
-					m_vBattleUnits[m_nTurn]->SetTurn(true);
 			}
 		}
 	}
@@ -439,6 +429,8 @@ void CBattleState::Battle(float fElapsedTime)
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}
+		if(m_eCurrentPhase != BP_END)
+			m_vBattleUnits[m_nTurn]->SetTurn(true);
 		m_bDelayed = false;
 	}
 }

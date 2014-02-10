@@ -198,9 +198,6 @@
     <ClCompile Include="source\Units.cpp">
       <Filter>Objects\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\Skills.cpp">
-      <Filter>Objects\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\Tile.cpp">
       <Filter>World\cpp</Filter>
     </ClCompile>
@@ -272,6 +269,12 @@
     </ClCompile>
     <ClCompile Include="source\AIValrion.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TutorialBattle.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Projectile.cpp">
+      <Filter>Objects\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -395,9 +398,6 @@
     <ClInclude Include="source\PlayerUnit.h">
       <Filter>Objects\h</Filter>
     </ClInclude>
-    <ClInclude Include="source\Skills.h">
-      <Filter>Objects\h</Filter>
-    </ClInclude>
     <ClInclude Include="source\Units.h">
       <Filter>Objects\h</Filter>
     </ClInclude>
@@ -465,6 +465,12 @@
       <Filter>AIControllers\h</Filter>
     </ClInclude>
     <ClInclude Include="source\AIValrion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TutorialBattle.h">
+      <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

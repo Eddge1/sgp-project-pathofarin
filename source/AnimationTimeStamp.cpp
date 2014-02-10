@@ -30,5 +30,6 @@ void CAnimationTimeStamp::SetAnimation(std::string szAnimName)
 	{
 		m_nCurrFrame = 0;
 		m_szCurrentAnimation = szAnimName; 
+		m_fTimeOnStamp = 0.0f;
 	}
 }

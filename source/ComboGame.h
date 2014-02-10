@@ -15,5 +15,7 @@ public:
 	virtual void Update(float fElpasedTime) override;
 	virtual void ResetSkill() override;
 	virtual void HandleEvent( const CEvent* pEvent ) override { }
+	virtual void DoAttack(void) override {}
+
 };
 

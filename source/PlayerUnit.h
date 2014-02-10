@@ -29,6 +29,7 @@ public:
 
 	bool GetInSubMenu	(void) const	{return m_bInSubMenu;}
 	bool GetReady		(void) const	{return m_bSkillSelected;}
+	void SetDodge		(bool bDodge)	{m_bDodge = bDodge;}
 	virtual void EndTurn() override;
 
 	int  GetMenuID		(void) const	{return m_nMenuSelect;}

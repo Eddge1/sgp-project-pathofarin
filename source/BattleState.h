@@ -26,6 +26,7 @@ class CBattleState : public CGameStates
 	};
 public:
 	static CBattleState* GetInstance( void );
+	static bool CBattleState::SortSpeed(CUnits *l, CUnits *r);
 
 	// Temp player.
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp);
@@ -58,7 +59,6 @@ private:
 	CBitmapFont* m_pFont;
 
 	vector<CUnits*> m_vBattleUnits;
-	vector<CUnits*> m_vDeadUnits;
 	CObjects* m_pSender;
 	CUnits* m_pPlayerUnit;
 

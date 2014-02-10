@@ -12,6 +12,8 @@ class CTriggerMatch :
 	bool m_bLeft;
 	float m_fMoveSpeed;
 	int m_nSuccess;
+	std::vector<CProjectile*> m_vSkills;
+
 public:
 	CTriggerMatch(void);
 	virtual ~CTriggerMatch(void);
@@ -19,6 +21,8 @@ public:
 	virtual void Update(float fElpasedTime) override;
 	virtual void ResetSkill() override;
 	virtual void HandleEvent( const CEvent* pEvent ) override { }
+	virtual void DoAttack(void) override;
+	virtual void InstantiateSkill();
 
 };
 

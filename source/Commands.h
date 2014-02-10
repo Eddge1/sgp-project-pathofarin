@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Minigames.h"
-#include "Skills.h"
+#include "Projectile.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -14,10 +14,9 @@ class CCommands
 	CMiniGames* m_pMiniGame;
 	bool m_bIsGame;
 	
-
 public:
 
-	void SetSkill(CSkills* l) { m_pMiniGame->SetSkill(l);}
+	void SetSkill(CProjectile* l) { m_pMiniGame->SetSkill(l);}
 	vector<CCommands*>* GetCommands(void) { return &m_vCommands; }
 	void AddCommands(CCommands* l) { m_vCommands.push_back(l); }
 	CCommands* GetCommand(int ID) { return m_vCommands[ID]; }
