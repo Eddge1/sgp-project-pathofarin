@@ -41,7 +41,8 @@ public:
 
 	void SetWindow ( bool bIsWindow )	{   m_bIsWindowed = bIsWindow;}
 	void SetMemory ( bool bIsMemory )	{   m_bMemory = bIsMemory;}
-
+	void SetSafePath();
+	std::string GetSafePath() {return m_szSafeFolders;}
 	//BitmapFont Accessor
 	CBitmapFont* GetFont(std::string) const;
 
@@ -75,6 +76,7 @@ private:
 	//TODO: Bitmap font.
 	CBitmapFont*			m_pFont;
 	HWND	m_hWnd;
+	std::string m_szSafeFolders;
 
 	// Window Attributes
 	int						m_nScreenWidth;

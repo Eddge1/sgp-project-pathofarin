@@ -44,9 +44,9 @@ void CProfileMenuState::Activate()
 	CGamePlayState::GetInstance()->Activate();
 	CGamePlayState::GetInstance()->Sleep();
 
-	LoadSave("assets/Data/Saves/Player1.xml");
-	LoadSave("assets/Data/Saves/Player2.xml");
-	LoadSave("assets/Data/Saves/Player3.xml");
+	LoadSave("Player1.xml");
+	LoadSave("Player2.xml");
+	LoadSave("Player3.xml");
 
 	m_eCurrState = PS_SELECT;
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
@@ -120,7 +120,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[0] = CreatePlayer();
 					m_vCharacterList[0]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-					SaveGame("assets/Data/Saves/Player1.xml");
+					SaveGame("Player1.xml");
 					m_vWorldData[0].clear();
 
 				}
@@ -130,7 +130,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[0] = nullptr;
 					m_vCharacterList[0] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-					SaveGame("assets/Data/Saves/Player1.xml");
+					SaveGame("Player1.xml");
 					m_vWorldData[0].clear();
 
 				}
@@ -140,7 +140,7 @@ bool CProfileMenuState::Input()
 					{
 						m_vCharacterList[0]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-						SaveGame("assets/Data/Saves/Player1.xml");
+						SaveGame("Player1.xml");
 					}
 					else
 					{
@@ -163,7 +163,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[1] = CreatePlayer();
 					m_vCharacterList[1]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-					SaveGame("assets/Data/Saves/Player2.xml");
+					SaveGame("Player2.xml");
 					m_vWorldData[1].clear();
 					m_eCurrState = PS_SELECT;
 
@@ -174,7 +174,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[1] = nullptr;
 					m_vCharacterList[1] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-					SaveGame("assets/Data/Saves/Player2.xml");
+					SaveGame("Player2.xml");
 					m_vWorldData[1].clear();
 
 				}
@@ -184,7 +184,7 @@ bool CProfileMenuState::Input()
 					{
 						m_vCharacterList[1]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-						SaveGame("assets/Data/Saves/Player2.xml");
+						SaveGame("Player2.xml");
 
 					}
 					else
@@ -209,7 +209,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[2] = CreatePlayer();
 					m_vCharacterList[2]->GetUnit()->SetName("Empty");
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-					SaveGame("assets/Data/Saves/Player3.xml");
+					SaveGame("Player3.xml");
 					m_vWorldData[2].clear();
 
 					m_eCurrState = PS_SELECT;
@@ -219,7 +219,7 @@ bool CProfileMenuState::Input()
 					m_vCharacterList[2];
 					m_vCharacterList[2] = CreatePlayer();
 					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-					SaveGame("assets/Data/Saves/Player3.xml");
+					SaveGame("Player3.xml");
 					m_vWorldData[2].clear();
 
 				}
@@ -229,8 +229,7 @@ bool CProfileMenuState::Input()
 					{
 						m_vCharacterList[2]->GetUnit()->SetName("Arin");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-						SaveGame("assets/Data/Saves/Player3.xml");
-
+						SaveGame("Player3.xml");
 					}
 					else
 					{
@@ -349,8 +348,10 @@ void CProfileMenuState::Render()
 
 void CProfileMenuState::LoadSave(std::string szFileName)
 {
+	string szSaveName = CGame::GetInstance()->GetSafePath();
+	szSaveName +=szFileName;
 	TiXmlDocument doc;
-	if(doc.LoadFile(szFileName.c_str()) == false)
+	if(doc.LoadFile(szSaveName.c_str()) == false)
 	{
 		TiXmlDeclaration* pDecl = new TiXmlDeclaration("1.0", "utf-8", "");
 		doc.LinkEndChild(pDecl);	
@@ -372,10 +373,10 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pRoot->LinkEndChild(pSlot);
 		pRoot->LinkEndChild(pWorldData);
 
-		doc.SaveFile(szFileName.c_str());
+		doc.SaveFile(szSaveName.c_str());
 	}
 
-	if(doc.LoadFile(szFileName.c_str()) == false)
+	if(doc.LoadFile(szSaveName.c_str()) == false)
 		return;
 	TiXmlElement *pRoot = doc.RootElement();
 	if(	pRoot == nullptr )
@@ -450,8 +451,10 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 	}
 	pRoot->LinkEndChild(pSlot);
 	pRoot->LinkEndChild(pWorldData);
-	doc.SaveFile(szFileName.c_str());
-}
+	string szSaveName = CGame::GetInstance()->GetSafePath();
+	szSaveName += szFileName;
+	doc.SaveFile(szSaveName.c_str());
+	}
 
 CPlayer* CProfileMenuState::CreatePlayer()
 {

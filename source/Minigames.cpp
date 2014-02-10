@@ -8,6 +8,7 @@ CMiniGames::CMiniGames(void)
 {
 	m_pMaster = nullptr;
 	m_nCost = 0;
+	m_bTutorial = false;
 }
 
 CMiniGames::~CMiniGames(void)

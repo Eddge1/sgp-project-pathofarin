@@ -3,6 +3,9 @@
 #include "GameStates.h"
 #include "MainMenuState.h"
 #include "..\TinyXML\tinyxml.h"
+#include <string>
+#include <ShlObj.h>
+#include <sstream>
 
 CGame* CGame::s_pInstance = nullptr;
 
@@ -44,6 +47,7 @@ CGame::CGame(void)
 	m_pCurrState	= nullptr;
 
 	m_dwCurrTime	= 0;
+	m_szSafeFolders  = "";
 
 	// seeding the random number generator
 	srand( (unsigned int)time( nullptr ) );
@@ -60,6 +64,8 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 					   int nWidth, int nHeight,
 					   bool bIsWindowed )
 {
+	SetSafePath();
+
 	// Store the SGD Wrapper singletons
 	m_pD3D			= CSGD_Direct3D::GetInstance();
 	m_pDI			= CSGD_DirectInput::GetInstance();
@@ -91,6 +97,7 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 
 	if(Load() == false)
 		CreateConfig();
+
 }
 
 // Run
@@ -210,7 +217,9 @@ void CGame::ChangeState( CGameStates* pState )
 bool CGame::Load()
 {
 	TiXmlDocument doc;
-	if(doc.LoadFile("Assets/Data/Config/Options.xml") == false)
+	string szTemp = m_szSafeFolders;
+	szTemp += "Options.xml";
+	if(doc.LoadFile(szTemp.c_str()) == false)
 		return false;
 
 	TiXmlElement *pRoot = doc.RootElement();
@@ -284,8 +293,9 @@ void CGame::CreateConfig(int nMusic/* = 100*/, int nSFX/* = 100*/, bool bFullscr
 	pConfig = new TiXmlElement("Fullscreen_Mode");
 	pConfig->SetAttribute("Enabled",  szTemp.c_str());
 	pRoot->LinkEndChild(pConfig);
-
-	doc.SaveFile("Assets/Data/Config/Options.xml");
+	string szSaveName = m_szSafeFolders;
+	szSaveName += "Options.xml";
+	doc.SaveFile(szSaveName.c_str());
 }
 
 CBitmapFont* CGame::GetFont(std::string szFont) const
@@ -295,4 +305,35 @@ CBitmapFont* CGame::GetFont(std::string szFont) const
 
 	return m_pFont->GetFont(szFont);
 
+}
+
+void CGame::SetSafePath()
+{
+	HRESULT hr;
+	ostringstream oss;
+	char path[MAX_PATH];
+	WCHAR wPath[MAX_PATH];
+	LPWSTR wszPath = NULL;
+	size_t   size;
+
+	// Get the path to the app data folder
+	hr = SHGetKnownFolderPath( FOLDERID_LocalAppData, 0, 0, &wszPath); 
+
+	// Convert from LPWSTR to char[]
+	wcstombs_s(&size,path,MAX_PATH,wszPath,MAX_PATH);
+
+	// Convert char types
+	if(hr == S_OK)
+		oss << path;
+	m_szSafeFolders = oss.str();
+	// Add the company and game information
+	m_szSafeFolders += "\\DNaS\\Path of Arin\\Config\\";
+	for(int i = 0; i < m_szSafeFolders.length(); i++)
+	{
+		wPath[i] = m_szSafeFolders.c_str()[i];
+		if(i == m_szSafeFolders.length() -1)
+			wPath[i+1] = '\0';
+	}
+	// Create our directory
+	SHCreateDirectoryEx(NULL,wPath,0);
 }
