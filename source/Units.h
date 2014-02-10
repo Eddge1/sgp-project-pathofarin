@@ -27,7 +27,6 @@ enum UnitClass {UC_ENEMY, UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE};
 
 class CUnits : public CEntity
 {
-
 	int m_nHealth;
 	int m_nMaxHealth;
 	int m_nAbilityPoints;
@@ -36,6 +35,7 @@ class CUnits : public CEntity
 	int m_nLevel;
 	int m_nSpeed;
 
+	bool m_bTutorial;
 	bool m_bTurn;
 	int m_nExperience;
 	int m_nAvailStats;
@@ -59,6 +59,8 @@ public:
 	virtual void Update(float fElapsedTime) override;
 
 	void SetTurn(bool bTurn) {m_bTurn = bTurn;}
+	void SetTutorial(bool bTut) {m_bTutorial = bTut;}
+	bool GetTutorial() {return m_bTutorial;}
 	virtual void EndTurn() {m_bTurn = false;}
 
 	int GetSpeed			( void ) const			{return m_nSpeed;};

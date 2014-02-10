@@ -46,13 +46,13 @@ CBattleState::CBattleState(void)
 	m_bDelayed = false;
 
 	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm")));
-	m_nDefeatMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
-	m_nVictoryMusic = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
-	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
+	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
+	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
+	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 
-	m_nMenuImage		  =	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
-	m_nMenuSelectionImage = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
-	m_nForestBattleID	  = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nMenuImage			=	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
 }
 
 CBattleState::~CBattleState(void)
@@ -330,11 +330,10 @@ void CBattleState::Render(void)
 	}
 }
 
-bool SortSpeed(CUnits *l, CUnits *r)
+bool CBattleState::SortSpeed(CUnits *l, CUnits *r)
 {
 	return l->GetSpeed() > r->GetSpeed();
 }
-
 
 void CBattleState::Initialize(void)
 {

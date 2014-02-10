@@ -2,8 +2,8 @@
 #include "Game.h"
 #include "BitmapFont.h"
 #include "GamePlayState.h"
+#include "TutorialBattle.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
-
 
 CBasicAttack::CBasicAttack(void)
 {
@@ -11,7 +11,6 @@ CBasicAttack::CBasicAttack(void)
 
 	bAttacked = false;
 }
-
 
 CBasicAttack::~CBasicAttack(void)
 {
@@ -22,18 +21,36 @@ void CBasicAttack::DoAttack(void)
 {
 	if(GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
-		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		CUnits* tempP;
+
+		if(!GetTutorial())
+			 tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		else
+			 tempP = CTutorialBattle::GetInstance()->GetCurrentTarget();
+
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
 			GetOwner()->ModifyAP(-(temp * 2 * 0.2f));
 			tempP->ModifyHealth(temp * 2, false);
-			GetOwner()->EndTurn();
+			if(!GetTutorial())
+				GetOwner()->EndTurn();
+			else
+			{
+				CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+				GetOwner()->EndTurn();
+			}
 		}
 	}
 	else
 	{
-		CUnits* tempP = CGamePlayState::GetInstance()->GetPlayerUnit();
+		CUnits* tempP;
+
+		if(!GetTutorial())
+			tempP = CGamePlayState::GetInstance()->GetPlayerUnit();
+		else
+			tempP = reinterpret_cast<CUnits*>(CTutorialBattle::GetInstance()->GetPlayerUnit());
+
 		if(tempP != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
@@ -42,7 +59,6 @@ void CBasicAttack::DoAttack(void)
 		}
 	}
 }
-
 void CBasicAttack::Update(float fElapsedTime)
 {
 	if (GetOwner()->GetType() == OBJ_PLAYER_UNIT)
@@ -59,12 +75,10 @@ void CBasicAttack::Update(float fElapsedTime)
 	else 
 		DoAttack();
 }
-
 void CBasicAttack::ResetSkill()
 {
 	bAttacked = false;
 }
-
 void CBasicAttack::HandleEvent( const CEvent* pEvent )
 {
 	if (pEvent->GetEventID() == "BASIC_ATTACK" && bAttacked)

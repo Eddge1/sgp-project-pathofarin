@@ -5,6 +5,7 @@
 #include "BattleState.h"
 #include "Game.h"
 #include "BitmapFont.h"
+#include "TutorialBattle.h"
 #include <sstream>
 using namespace std;
 
@@ -168,8 +169,13 @@ void CTriggerSpree::Update(float fElpasedTime)
 	{
 		m_bSuccess = false;
 		m_nSuccess++;
+		CUnits* tempP;
 
-		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		if(!GetTutorial())
+			tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		else
+			tempP = CTutorialBattle::GetInstance()->GetCurrentTarget();
+
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
@@ -180,14 +186,30 @@ void CTriggerSpree::Update(float fElpasedTime)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(GetOwner());
 			if(pTemp != nullptr)
-				GetOwner()->EndTurn();
+			{
+				if(!GetTutorial())
+					GetOwner()->EndTurn();
+				else
+				{
+					CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+					GetOwner()->EndTurn();
+				}
+			}
 		}
 	}
 	else if(m_bFailed)
 	{
 		CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(GetOwner());
 		if(pTemp != nullptr)
-			GetOwner()->EndTurn();
+		{
+			if(!GetTutorial())
+				GetOwner()->EndTurn();
+			else
+			{
+				CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+				GetOwner()->EndTurn();
+			}
+		}
 	}
 
 }

@@ -129,6 +129,7 @@
     <ClCompile Include="source\Tile.cpp" />
     <ClCompile Include="source\TriggerMatch.cpp" />
     <ClCompile Include="source\TriggerSpree.cpp" />
+    <ClCompile Include="source\TutorialBattle.cpp" />
     <ClCompile Include="source\Units.cpp" />
     <ClCompile Include="source\UseItem.cpp" />
     <ClCompile Include="source\VictoryState.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="source\Tile.h" />
     <ClInclude Include="source\TriggerMatch.h" />
     <ClInclude Include="source\TriggerSpree.h" />
+    <ClInclude Include="source\TutorialBattle.h" />
     <ClInclude Include="source\Units.h" />
     <ClInclude Include="source\UseItem.h" />
     <ClInclude Include="source\VictoryState.h" />

@@ -273,6 +273,9 @@
     <ClCompile Include="source\AIValrion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\TutorialBattle.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -466,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="source\AIValrion.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\TutorialBattle.h">
+      <Filter>GameStates\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

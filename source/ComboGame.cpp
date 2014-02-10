@@ -4,6 +4,7 @@
 #include "../SGD Wrappers/CSGD_TextureManager.h"
 #include "PlayerUnit.h"
 #include "BattleState.h"
+#include "TutorialBattle.h"
 #include "Game.h"
 
 CComboGame::CComboGame(void)
@@ -171,7 +172,13 @@ void CComboGame::Update(float fElpasedTime)
 		m_fTimer += 1.0f;
 		m_nCurr = 0;
 
-		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		CUnits* tempP;
+
+		if(!GetTutorial())
+			tempP = CBattleState::GetInstance()->GetCurrentTarget();
+		else
+			tempP = CTutorialBattle::GetInstance()->GetCurrentTarget();
+
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
@@ -182,6 +189,12 @@ void CComboGame::Update(float fElpasedTime)
 	if(m_fTimer <= 0.0f)
 	{
 		ResetSkill();
-		GetOwner()->EndTurn();
+		if(!GetTutorial())
+			GetOwner()->EndTurn();
+		else
+		{
+			CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+			GetOwner()->EndTurn();
+		}
 	}
 }

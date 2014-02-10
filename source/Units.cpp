@@ -1,5 +1,6 @@
 #include "Units.h"
 #include "BattleState.h"
+#include "TutorialBattle.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include <sstream>
 
@@ -43,18 +44,30 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 		if(nAmount < 0)
 		{
 			woss << (nAmount * -1);
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+
 		}
 		else if(nAmount > 0)
 		{
 			woss << nAmount;
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+
 		}
 		else
 		{
 			woss.str(_T(""));
 			woss << "DODGED!";
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
 
 		}
 	}
@@ -63,25 +76,29 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 		if(nAmount < 0)
 		{
 			woss << (nAmount * -1);
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
 		}
 		else if(nAmount > 0)
 		{
 			woss << nAmount;
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
 		}
 		else
 		{
 			woss.str(_T(""));
 			woss << "DODGED!";
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
-
+			if(!m_bTutorial)
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
 		}
 	}
-
-
-	//Floating Text
-
 }
 
 void CUnits::ModifyAP(int nAmount)

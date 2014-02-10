@@ -8,6 +8,7 @@
 #include "ProfileMenuState.h"
 #include "OptionsMenu.h"
 #include "CreditState.h"
+#include "TutorialBattle.h"
 
 #include "GamePlayState.h"
 #include "ProfileMenuState.h"
@@ -124,7 +125,7 @@ void CMainMenuState::Render(void)
 		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
 
 		RECT rTemp = {336, 408, 464,536};
-		pFont->Draw(_T("Play\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		pFont->Draw(_T("Play\nTutorial\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;
@@ -144,7 +145,7 @@ bool CMainMenuState::Input(void)
 		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
-				SetCursorSelection(3);
+				SetCursorSelection(4);
 			else
 				SetCursorSelection(GetCursorSelection() - 1);
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
@@ -152,7 +153,7 @@ bool CMainMenuState::Input(void)
 		}
 		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
 		{
-			if(GetCursorSelection() >= 3)
+			if(GetCursorSelection() >= 4)
 				SetCursorSelection(0);
 			else
 				SetCursorSelection(GetCursorSelection() + 1);
@@ -167,12 +168,18 @@ bool CMainMenuState::Input(void)
 				CGame::GetInstance()->ChangeState(CProfileMenuState::GetInstance()); // <-Should be going to profile state.
 				break;
 			case 1:
+				{
+					CTutorialBattle::GetInstance()->FromMenu(true);
+					CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance()); // <-Should be going to profile state.
+					break;
+				}
+			case 2:
 				CGame::GetInstance()->ChangeState(COptionsMenu::GetInstance());
 				break;
-			case 2:
+			case 3:
 				CGame::GetInstance()->ChangeState(CCreditState::GetInstance());
 				break;
-			case 3:
+			case 4:
 				return false;
 			default:
 				break;

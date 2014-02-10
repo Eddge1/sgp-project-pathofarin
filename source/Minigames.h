@@ -13,6 +13,7 @@ class CMiniGames : public IListener
 	int m_nChances;
 	int m_nCost;
 	float m_fDamageMultiplier;
+	bool m_bTutorial;
 
 	CSkills* m_pSkill;
 public:
@@ -21,15 +22,15 @@ public:
 
 	CMiniGames(void);
 	virtual ~CMiniGames(void);
-
 	virtual void Update(float fElapsedTime);
 	virtual void Render();
-
 	virtual void SetDamage( float fDam ) {m_fDamageMultiplier = fDam;}
 	virtual void SetChances( int nAttempts ) {m_nChances = nAttempts;}
 	virtual void SetCost ( int nAmount ) {m_nCost = nAmount;}
 
 	void SetSkill(CSkills* pSkill);
+	void SetTutorial (bool bTut) {m_bTutorial = bTut;}
+	bool GetTutorial ( ) const{return m_bTutorial;}
 	virtual void ResetSkill( void ) {  }
 
 	float ScalarDistance(float fx1, float fy1, float fx2, float fy2);
