@@ -510,6 +510,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CTriggerMatch *pTrig = new CTriggerMatch;
 	pTest->SetName("FireBall");
 	CProjectile* pFireBall = new CProjectile();
+
 	pFireBall->SetMasterGame(pTrig);
 	pFireBall->GetAnimInfo()->SetAnimation("Fireball_Left");
 	pTrig->SetSkill(pFireBall);
