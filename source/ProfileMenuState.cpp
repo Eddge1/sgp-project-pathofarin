@@ -513,6 +513,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 	pFireBall->SetMasterGame(pTrig);
 	pFireBall->GetAnimInfo()->SetAnimation("Fireball_Left");
+	pFireBall->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_LargeFireball.wav")));
 	pTrig->SetSkill(pFireBall);
 	pTest->SetMiniGame(pTrig);
 	pTest->SetIsGame(true);
@@ -524,6 +525,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CProjectile* pIceSpear = new CProjectile();
 	pIceSpear->SetMasterGame(pTrig);
 	pIceSpear->GetAnimInfo()->SetAnimation("Ice_Spear_Left");
+	pIceSpear->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_IceSpear.wav")));
 	pTrig->SetSkill(pIceSpear);
 	pTest->SetMiniGame(pTrig);
 	pTest->SetIsGame(true);

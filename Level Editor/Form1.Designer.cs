@@ -752,10 +752,15 @@
             this.nudBlockWidth.Enabled = false;
             this.nudBlockWidth.Location = new System.Drawing.Point(160, 156);
             this.nudBlockWidth.Maximum = new decimal(new int[] {
-            3000,
+            10000,
             0,
             0,
             0});
+            this.nudBlockWidth.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.nudBlockWidth.Name = "nudBlockWidth";
             this.nudBlockWidth.Size = new System.Drawing.Size(51, 20);
             this.nudBlockWidth.TabIndex = 4;
@@ -766,10 +771,15 @@
             this.nudBlockHeight.Enabled = false;
             this.nudBlockHeight.Location = new System.Drawing.Point(160, 182);
             this.nudBlockHeight.Maximum = new decimal(new int[] {
-            3000,
+            10000,
             0,
             0,
             0});
+            this.nudBlockHeight.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.nudBlockHeight.Name = "nudBlockHeight";
             this.nudBlockHeight.Size = new System.Drawing.Size(51, 20);
             this.nudBlockHeight.TabIndex = 3;
@@ -780,10 +790,15 @@
             this.nudBlockY.Enabled = false;
             this.nudBlockY.Location = new System.Drawing.Point(66, 180);
             this.nudBlockY.Maximum = new decimal(new int[] {
-            3000,
+            10000,
             0,
             0,
             0});
+            this.nudBlockY.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.nudBlockY.Name = "nudBlockY";
             this.nudBlockY.Size = new System.Drawing.Size(51, 20);
             this.nudBlockY.TabIndex = 2;
@@ -794,10 +809,15 @@
             this.nudBlockX.Enabled = false;
             this.nudBlockX.Location = new System.Drawing.Point(66, 156);
             this.nudBlockX.Maximum = new decimal(new int[] {
-            3000,
+            10000,
             0,
             0,
             0});
+            this.nudBlockX.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
             this.nudBlockX.Name = "nudBlockX";
             this.nudBlockX.Size = new System.Drawing.Size(51, 20);
             this.nudBlockX.TabIndex = 1;
