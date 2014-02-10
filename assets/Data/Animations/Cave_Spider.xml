@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Cave_Spider_Idle" Frames="2" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="7" posY="268" Width="48" Height="39" anchorX="13" anchorY="36" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="39" />
+      <Render posX="71" posY="273" Width="47" Height="32" anchorX="13" anchorY="27" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="48" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Walk_Up" Frames="6" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="265" posY="13" Width="47" Height="40" anchorX="24" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="48" Height="40" />
+      <Render posX="327" posY="10" Width="48" Height="43" anchorX="24" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="47" Height="43" />
+      <Render posX="393" posY="12" Width="48" Height="41" anchorX="24" anchorY="37" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="49" Height="41" />
+      <Render posX="456" posY="13" Width="46" Height="41" anchorX="23" anchorY="35" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="46" Height="41" />
+      <Render posX="519" posY="9" Width="50" Height="47" anchorX="24" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="50" Height="47" />
+      <Render posX="583" posY="11" Width="48" Height="43" anchorX="24" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="49" Height="43" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Walk_Left" Frames="6" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="265" posY="76" Width="45" Height="40" anchorX="35" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="45" Height="40" />
+      <Render posX="326" posY="75" Width="47" Height="43" anchorX="39" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="48" Height="43" />
+      <Render posX="394" posY="78" Width="42" Height="39" anchorX="35" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="43" Height="39" />
+      <Render posX="458" posY="77" Width="40" Height="39" anchorX="35" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="40" Height="39" />
+      <Render posX="518" posY="75" Width="49" Height="42" anchorX="39" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="42" />
+      <Render posX="586" posY="75" Width="45" Height="42" anchorX="35" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="45" Height="42" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Walk_Down" Frames="6" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="264" posY="139" Width="46" Height="45" anchorX="22" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="47" Height="45" />
+      <Render posX="328" posY="138" Width="50" Height="51" anchorX="23" anchorY="7" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="51" />
+      <Render posX="392" posY="137" Width="48" Height="50" anchorX="23" anchorY="8" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="50" />
+      <Render posX="454" posY="139" Width="50" Height="43" anchorX="24" anchorY="6" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="43" />
+      <Render posX="521" posY="140" Width="48" Height="48" anchorX="22" anchorY="4" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="48" Height="49" />
+      <Render posX="583" posY="141" Width="48" Height="44" anchorX="24" anchorY="4" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="44" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Walk_Right" Frames="6" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="268" posY="205" Width="44" Height="41" anchorX="6" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="44" Height="42" />
+      <Render posX="330" posY="204" Width="47" Height="41" anchorX="8" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="47" Height="42" />
+      <Render posX="394" posY="204" Width="44" Height="41" anchorX="9" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="44" Height="41" />
+      <Render posX="458" posY="205" Width="43" Height="41" anchorX="9" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="44" Height="41" />
+      <Render posX="521" posY="205" Width="49" Height="41" anchorX="9" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="41" />
+      <Render posX="588" posY="205" Width="45" Height="41" anchorX="8" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="45" Height="41" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Battle_Idle" Frames="2" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="13" posY="206" Width="39" Height="39" anchorX="6" anchorY="14" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="39" />
+      <Render posX="207" posY="206" Width="39" Height="39" anchorX="8" anchorY="13" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="39" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Battle_Basic_Attack" Frames="4" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="13" posY="206" Width="40" Height="39" anchorX="5" anchorY="13" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="40" Height="39" />
+      <Render posX="76" posY="206" Width="47" Height="41" anchorX="9" anchorY="13" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="47" Height="41" />
+      <Render posX="145" posY="207" Width="45" Height="39" anchorX="15" anchorY="15" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="0" Width="45" Height="39" />
+      <Render posX="204" posY="204" Width="45" Height="41" anchorX="12" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="45" Height="41" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cave_Spider_Battle_Taking_Damage" Frames="1" repeat="1" Texture="spider08.png">
+    <Frame_Data>
+      <Render posX="140" posY="272" Width="38" Height="29" anchorX="5" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="38" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

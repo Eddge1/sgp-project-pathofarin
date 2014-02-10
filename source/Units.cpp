@@ -11,11 +11,13 @@ CUnits::CUnits(void)
 	m_nLevel = 1;
 	m_nHealth = m_nMaxHealth = 100;
 	m_nAbilityPoints = m_nMaxAbilityPoints = 100;
-	m_nAttackPower	= 5;
+	m_nAttackPower = 5;
 	m_nSpeed = 0;
 	m_nExperience = 0; 
 	m_bTurn = false;
 	m_nAvailStats = 0;
+
+	m_bTutorial = false;
 }
 
 CUnits::~CUnits(void)
@@ -27,7 +29,7 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 {
 	std::wostringstream woss;
 	m_nHealth -= nAmount;
-	if (GetName() == "Tree" || GetName() == "Orc" || GetName() == "Snail" || GetName() == "Pathetic_Orc" || GetName() == "Orc_Leader" || GetName() == "Orc_Shaman")
+	if (GetName() == "Tree" || GetName() == "Orc" || GetName() == "Snail" || GetName() == "Pathetic_Orc" || GetName() == "Orc_Leader" || GetName() == "Orc_Shaman" || GetName() == "Cave_Spider")
 	{
 		string szTemp = GetName() + "_Battle_Taking_Damage";
 		GetAnimInfo()->SetCurrentFrame(0);
