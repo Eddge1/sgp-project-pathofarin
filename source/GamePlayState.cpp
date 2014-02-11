@@ -952,11 +952,12 @@ CConsumable* CGamePlayState::CreatePotion(string input)
 	CUnits* CGamePlayState::GetUnit(std::string)
 	{
 
-
+		return nullptr;
 	}
 
 	CNpcs* CGamePlayState::GetNpc(std::string)
 	{
 
+		return nullptr;
 
 	}
