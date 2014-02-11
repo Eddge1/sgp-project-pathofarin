@@ -105,7 +105,7 @@ void CNpcs::Update(float fElapsedTime)
 				GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}
-		else
+		else if (GetVelX() == 0 && GetVelY() == 0)
 		{
 			string szTemp = GetName();
 			szTemp += "_Idle";

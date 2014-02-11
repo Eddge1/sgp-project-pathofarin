@@ -156,7 +156,7 @@ void CGamePlayState::Activate(void)
 			pTemp->GetAnimInfo()->SetAnimation("Cave_Spider_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Snail", 200.0f, 350.0f, 5,  150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->Release();
 
