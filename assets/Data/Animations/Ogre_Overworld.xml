@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Ogre_Idle" Frames="2" repeat="1" Texture="ogre.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="108" Height="143" anchorX="54" anchorY="19" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="108" Height="143" />
+      <Render posX="109" posY="2" Width="106" Height="142" anchorX="54" anchorY="21" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="103" Height="143" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ogre_Walk_Down" Frames="4" repeat="1" Texture="ogre.png">
+    <Frame_Data>
+      <Render posX="1" posY="1" Width="106" Height="144" anchorX="54" anchorY="21" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="107" Height="143" />
+      <Render posX="108" posY="0" Width="106" Height="145" anchorX="55" anchorY="25" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="105" Height="145" />
+      <Render posX="215" posY="0" Width="109" Height="146" anchorX="56" anchorY="22" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="107" Height="146" />
+      <Render posX="325" posY="0" Width="110" Height="146" anchorX="51" anchorY="25" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="111" Height="146" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ogre_Walk_Left" Frames="4" repeat="1" Texture="ogre.png">
+    <Frame_Data>
+      <Render posX="2" posY="148" Width="90" Height="141" anchorX="47" anchorY="22" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="91" Height="140" />
+      <Render posX="113" posY="147" Width="98" Height="144" anchorX="39" anchorY="24" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="98" Height="144" />
+      <Render posX="221" posY="147" Width="88" Height="144" anchorX="46" anchorY="24" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="88" Height="144" />
+      <Render posX="317" posY="150" Width="117" Height="142" anchorX="64" anchorY="22" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="118" Height="143" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ogre_Walk_Right" Frames="4" repeat="1" Texture="ogre.png">
+    <Frame_Data>
+      <Render posX="11" posY="292" Width="79" Height="141" anchorX="44" anchorY="22" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="79" Height="141" />
+      <Render posX="108" posY="292" Width="96" Height="143" anchorX="57" anchorY="25" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="96" Height="143" />
+      <Render posX="228" posY="292" Width="81" Height="141" anchorX="40" anchorY="22" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="81" Height="141" />
+      <Render posX="333" posY="295" Width="88" Height="139" anchorX="52" anchorY="19" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="89" Height="140" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ogre_Walk_Up" Frames="4" repeat="1" Texture="ogre.png">
+    <Frame_Data>
+      <Render posX="1" posY="434" Width="110" Height="146" anchorX="52" anchorY="19" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="110" Height="146" />
+      <Render posX="112" posY="434" Width="101" Height="146" anchorX="47" anchorY="19" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="101" Height="145" />
+      <Render posX="214" posY="434" Width="108" Height="147" anchorX="55" anchorY="20" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="107" Height="148" />
+      <Render posX="325" posY="434" Width="102" Height="148" anchorX="53" anchorY="20" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="104" Height="148" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
