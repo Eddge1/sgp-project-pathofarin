@@ -9,6 +9,7 @@
 #include "Consumable.h"
 #include "../SGD Wrappers/IListener.h"
 #include <sstream>
+#include "Npcs.h"
 using namespace std;
 
 // Forward Class Declarations

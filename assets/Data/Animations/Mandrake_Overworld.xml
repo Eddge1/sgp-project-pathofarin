@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Mandrake_Idle" Frames="12" repeat="1" Texture="POA_Mandrake_Overworld.png">
+    <Frame_Data>
+      <Render posX="55" posY="798" Width="71" Height="95" anchorX="31" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="71" Height="96" />
+      <Render posX="125" posY="799" Width="75" Height="93" anchorX="35" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="76" Height="93" />
+      <Render posX="201" posY="799" Width="71" Height="93" anchorX="33" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="71" Height="93" />
+      <Render posX="274" posY="799" Width="76" Height="95" anchorX="35" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="76" Height="94" />
+      <Render posX="353" posY="800" Width="84" Height="93" anchorX="38" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="84" Height="93" />
+      <Render posX="434" posY="799" Width="83" Height="93" anchorX="37" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="84" Height="93" />
+      <Render posX="515" posY="799" Width="83" Height="95" anchorX="38" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="83" Height="95" />
+      <Render posX="600" posY="800" Width="75" Height="94" anchorX="35" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="75" Height="93" />
+      <Render posX="677" posY="800" Width="78" Height="94" anchorX="36" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="78" Height="94" />
+      <Render posX="758" posY="799" Width="76" Height="98" anchorX="34" anchorY="78" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="2" Width="77" Height="96" />
+      <Render posX="837" posY="799" Width="74" Height="98" anchorX="34" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="73" Height="96" />
+      <Render posX="912" posY="796" Width="76" Height="101" anchorX="35" anchorY="81" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="2" Width="75" Height="99" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mandrake_Walk_Down" Frames="5" repeat="1" Texture="POA_Mandrake_Overworld.png">
+    <Frame_Data>
+      <Render posX="2" posY="4" Width="80" Height="93" anchorX="41" anchorY="81" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="78" Height="93" />
+      <Render posX="82" posY="4" Width="79" Height="92" anchorX="37" anchorY="80" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="77" Height="92" />
+      <Render posX="162" posY="4" Width="85" Height="94" anchorX="43" anchorY="79" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="86" Height="94" />
+      <Render posX="248" posY="3" Width="79" Height="95" anchorX="42" anchorY="80" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="80" Height="95" />
+      <Render posX="329" posY="3" Width="76" Height="95" anchorX="40" anchorY="81" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="75" Height="94" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mandrake_Walk_Up" Frames="5" repeat="1" Texture="POA_Mandrake_Overworld.png">
+    <Frame_Data>
+      <Render posX="5" posY="103" Width="81" Height="94" anchorX="44" anchorY="82" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="81" Height="93" />
+      <Render posX="87" posY="103" Width="78" Height="97" anchorX="40" anchorY="80" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="79" Height="97" />
+      <Render posX="166" posY="103" Width="83" Height="96" anchorX="41" anchorY="79" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="83" Height="96" />
+      <Render posX="250" posY="102" Width="80" Height="97" anchorX="39" anchorY="82" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="80" Height="97" />
+      <Render posX="331" posY="102" Width="76" Height="97" anchorX="35" anchorY="82" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="77" Height="97" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mandrake_Walk_Right" Frames="5" repeat="1" Texture="POA_Mandrake_Overworld.png">
+    <Frame_Data>
+      <Render posX="427" posY="9" Width="64" Height="88" anchorX="37" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="88" />
+      <Render posX="492" posY="5" Width="62" Height="92" anchorX="35" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="92" />
+      <Render posX="555" posY="4" Width="62" Height="93" anchorX="37" anchorY="75" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="63" Height="93" />
+      <Render posX="619" posY="4" Width="63" Height="94" anchorX="35" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="63" Height="93" />
+      <Render posX="684" posY="5" Width="63" Height="94" anchorX="33" anchorY="78" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="64" Height="94" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mandrake_Walk_Left" Frames="5" repeat="1" Texture="POA_Mandrake_Overworld.png">
+    <Frame_Data>
+      <Render posX="678" posY="105" Width="63" Height="89" anchorX="28" anchorY="74" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="63" Height="87" />
+      <Render posX="613" posY="101" Width="64" Height="94" anchorX="29" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="63" Height="91" />
+      <Render posX="549" posY="102" Width="63" Height="92" anchorX="29" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="92" />
+      <Render posX="488" posY="102" Width="62" Height="94" anchorX="26" anchorY="77" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="60" Height="93" />
+      <Render posX="420" posY="104" Width="66" Height="92" anchorX="31" anchorY="76" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="66" Height="92" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
