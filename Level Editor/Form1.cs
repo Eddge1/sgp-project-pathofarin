@@ -166,13 +166,13 @@ namespace SGP_PoA_LevelEditor
                     {
                         Point nPrev = (Point)lstWaypoints.Items[i - 1];
                         Point nNow = (Point)lstWaypoints.Items[i];
-                        DX.DrawLine(nPrev.X, nPrev.Y, nNow.X, nNow.Y, Color.FromArgb(0, 255, 255), 2);
+                        DX.DrawLine(nPrev.X + panel2.AutoScrollPosition.X, nPrev.Y + panel2.AutoScrollPosition.Y, nNow.X + panel2.AutoScrollPosition.X, nNow.Y + panel2.AutoScrollPosition.Y, Color.FromArgb(0, 255, 255), 2);
                     }
                 }
                 if (lstWaypoints.SelectedIndex >= 0)
                 {
                     Point nNow = (Point)lstWaypoints.Items[lstWaypoints.SelectedIndex];
-                    DX.DrawHollowRect(new Rectangle(nNow.X - 3, nNow.Y - 3, 6, 6), Color.FromArgb(255, 0, 0), 3);
+                    DX.DrawHollowRect(new Rectangle(nNow.X - 3 + panel2.AutoScrollPosition.X, nNow.Y - 3 + panel2.AutoScrollPosition.Y, 6, 6), Color.FromArgb(255, 0, 0), 3);
                 }
             }
 
