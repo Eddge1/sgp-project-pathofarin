@@ -964,27 +964,58 @@ void CGamePlayState::LoadNPCs(void)
 		TiXmlElement *pRoot = doc.RootElement();
 		if(pRoot == nullptr)
 			return;
-		/*
-		pRoot->Attribute("Transparency", &transparency);
-		int TotalLayers = 0;
 
-		pRoot->Attribute("Width", &layerWidth);
-		Worldtemp->SetTileWidth(tileWidth);
+		CNpcs *pTempNpc = new CNpcs();
 
-		TiXmlElement* pLoad = pRoot->FirstChildElement("Layer");
-		if(pLoad != nullptr)
+		int nConversations = 0;
+		string szName = "";
+		string szHostile = "";
+		int nUnits = 0;
+
+		TiXmlElement *pNPC = pRoot->FirstChildElement("NPC");
+		szName = pNPC->Attribute("Name");
+		szHostile = pNPC->Attribute("Hostile");
+		pNPC->Attribute("Units", &nUnits);
+		pNPC->Attribute("Total_Conversations", &nConversations);
+
+		pTempNpc->SetName(szName);
+
+		if(szHostile == "true")
+			pTempNpc->SetHostile(true);
+		else
+			pTempNpc->SetHostile(false);
+
+
+		TiXmlElement *pConvo = pNPC->FirstChildElement("Convo");
+		if(pConvo != nullptr)
 		{
-		TiXmlElement* pTile;
-		string ReadIn = "";
-
-
-		for(int i = 0; i < TotalLayers; i++)
-		{
-		pLoad->Attribute("Yoffset", &nLayerYOffset);
-
+			for(int i = 0; i < nConversations; i++)
+			{
+				if(pConvo != nullptr)
+				{
+					/////////// TO DO ADD IN WHEN WE START CONVERSATIONS
+				}
+				pConvo = pConvo->NextSiblingElement("Convo");
+			}
 		}
-		pLoad = pRoot->FirstChildElement("Block_Data");
-		*/
+
+		TiXmlElement *pUnit = pNPC->FirstChildElement("Unit");
+		if(pUnit != nullptr)
+		{
+			for(int i = 0; i < nUnits; i++)
+			{
+				if(pUnit != nullptr)
+				{
+					CEnemyUnit* pTempBattle = reinterpret_cast<CEnemyUnit*>(GetUnit(szName));
+					if(pTempBattle != nullptr)
+						pTempNpc->SetUnits(pTempBattle);
+				}
+				pUnit = pUnit->NextSiblingElement("Unit");
+			}
+		}
+
+		m_mNPCManager[szName] = pTempNpc;
+
 	}while(FindNextFile(hFile, &fileSearch));
 }
 
@@ -994,7 +1025,6 @@ void CGamePlayState::LoadUnits(void)
 	HANDLE hFile;
 	WCHAR cDirectory[] = L"assets/Data/Units/*.xml";
 	hFile = FindFirstFile(cDirectory,&fileSearch);
-
 	do
 	{
 		std::string szInput;
@@ -1013,6 +1043,9 @@ void CGamePlayState::LoadUnits(void)
 		TiXmlElement *pRoot = doc.RootElement();
 		if(pRoot == nullptr)
 			return;
+
+
+
 
 	}while(FindNextFile(hFile, &fileSearch));
 }
@@ -1055,7 +1088,7 @@ CNpcs* CGamePlayState::GetNpc(std::string szNpc)
 	{
 		pTempUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(vTemp[i]->GetName()));
 		if(pTempUnit!= nullptr)
-		pTemp->SetUnits(pTempUnit);
+			pTemp->SetUnits(pTempUnit);
 	}
 
 	return pTemp;
