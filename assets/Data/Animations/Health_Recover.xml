@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="Health_Recover" Frames="6" repeat="0" Texture="health_recover.png">
+    <Frame_Data>
+      <Render posX="7" posY="26" Width="53" Height="40" anchorX="28" anchorY="22" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="51" Height="41" />
+      <Render posX="67" posY="12" Width="60" Height="51" anchorX="31" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="61" Height="51" />
+      <Render posX="128" posY="3" Width="67" Height="60" anchorX="36" anchorY="38" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="66" Height="60" />
+      <Render posX="194" posY="2" Width="60" Height="61" anchorX="36" anchorY="38" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="60" />
+      <Render posX="260" posY="0" Width="59" Height="51" anchorX="33" anchorY="31" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="60" Height="52" />
+      <Render posX="323" posY="0" Width="59" Height="49" anchorX="35" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="60" Height="50" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

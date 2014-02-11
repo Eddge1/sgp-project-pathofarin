@@ -80,7 +80,7 @@
       <ActiveCollision posX="0" posY="0" Width="39" Height="39" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Cave_Spider_Battle_Basic_Attack" Frames="4" repeat="1" Texture="spider08.png">
+  <Animation_Info Name="Cave_Spider_Battle_Basic_Attack" Frames="4" repeat="0" Texture="spider08.png">
     <Frame_Data>
       <Render posX="13" posY="206" Width="40" Height="39" anchorX="5" anchorY="13" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="40" Height="39" />
