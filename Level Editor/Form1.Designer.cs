@@ -71,12 +71,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
-            this.lstNPC = new System.Windows.Forms.ListBox();
-            this.btnNPCMove = new System.Windows.Forms.Button();
-            this.btnNPCUnits = new System.Windows.Forms.Button();
-            this.btnNpcApply = new System.Windows.Forms.Button();
-            this.btnNpcCancel = new System.Windows.Forms.Button();
-            this.chkMoves = new System.Windows.Forms.CheckBox();
             this.grpBlock = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -87,6 +81,12 @@
             this.nudBlockY = new System.Windows.Forms.NumericUpDown();
             this.nudBlockX = new System.Windows.Forms.NumericUpDown();
             this.lstBlock = new System.Windows.Forms.ListBox();
+            this.lstNPC = new System.Windows.Forms.ListBox();
+            this.btnNPCMove = new System.Windows.Forms.Button();
+            this.btnNPCUnits = new System.Windows.Forms.Button();
+            this.btnNpcApply = new System.Windows.Forms.Button();
+            this.btnNpcCancel = new System.Windows.Forms.Button();
+            this.chkMoves = new System.Windows.Forms.CheckBox();
             this.grpWayPoints = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.radWPMove = new System.Windows.Forms.RadioButton();
@@ -614,70 +614,6 @@
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
             // 
-            // lstNPC
-            // 
-            this.lstNPC.FormattingEnabled = true;
-            this.lstNPC.Location = new System.Drawing.Point(6, 21);
-            this.lstNPC.Name = "lstNPC";
-            this.lstNPC.Size = new System.Drawing.Size(207, 121);
-            this.lstNPC.TabIndex = 12;
-            this.lstNPC.SelectedIndexChanged += new System.EventHandler(this.lstNPC_SelectedIndexChanged);
-            // 
-            // btnNPCMove
-            // 
-            this.btnNPCMove.Enabled = false;
-            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
-            this.btnNPCMove.Name = "btnNPCMove";
-            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
-            this.btnNPCMove.TabIndex = 11;
-            this.btnNPCMove.Text = "Move";
-            this.btnNPCMove.UseVisualStyleBackColor = true;
-            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
-            // 
-            // btnNPCUnits
-            // 
-            this.btnNPCUnits.Enabled = false;
-            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
-            this.btnNPCUnits.Name = "btnNPCUnits";
-            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
-            this.btnNPCUnits.TabIndex = 10;
-            this.btnNPCUnits.Text = "Units";
-            this.btnNPCUnits.UseVisualStyleBackColor = true;
-            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
-            // 
-            // btnNpcApply
-            // 
-            this.btnNpcApply.Enabled = false;
-            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
-            this.btnNpcApply.Name = "btnNpcApply";
-            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
-            this.btnNpcApply.TabIndex = 8;
-            this.btnNpcApply.Text = "Apply";
-            this.btnNpcApply.UseVisualStyleBackColor = true;
-            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
-            // 
-            // btnNpcCancel
-            // 
-            this.btnNpcCancel.Enabled = false;
-            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
-            this.btnNpcCancel.Name = "btnNpcCancel";
-            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
-            this.btnNpcCancel.TabIndex = 7;
-            this.btnNpcCancel.Text = "Cancel";
-            this.btnNpcCancel.UseVisualStyleBackColor = true;
-            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
-            // 
-            // chkMoves
-            // 
-            this.chkMoves.AutoSize = true;
-            this.chkMoves.Location = new System.Drawing.Point(155, 151);
-            this.chkMoves.Name = "chkMoves";
-            this.chkMoves.Size = new System.Drawing.Size(58, 17);
-            this.chkMoves.TabIndex = 5;
-            this.chkMoves.Text = "Moves";
-            this.chkMoves.UseVisualStyleBackColor = true;
-            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
-            // 
             // grpBlock
             // 
             this.grpBlock.Controls.Add(this.label15);
@@ -816,6 +752,69 @@
             this.lstBlock.Size = new System.Drawing.Size(199, 134);
             this.lstBlock.TabIndex = 0;
             this.lstBlock.SelectedIndexChanged += new System.EventHandler(this.lstBlock_SelectedIndexChanged);
+            // 
+            // lstNPC
+            // 
+            this.lstNPC.FormattingEnabled = true;
+            this.lstNPC.Location = new System.Drawing.Point(6, 21);
+            this.lstNPC.Name = "lstNPC";
+            this.lstNPC.Size = new System.Drawing.Size(207, 121);
+            this.lstNPC.TabIndex = 12;
+            // 
+            // btnNPCMove
+            // 
+            this.btnNPCMove.Enabled = false;
+            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
+            this.btnNPCMove.Name = "btnNPCMove";
+            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
+            this.btnNPCMove.TabIndex = 11;
+            this.btnNPCMove.Text = "Move";
+            this.btnNPCMove.UseVisualStyleBackColor = true;
+            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
+            // 
+            // btnNPCUnits
+            // 
+            this.btnNPCUnits.Enabled = false;
+            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
+            this.btnNPCUnits.Name = "btnNPCUnits";
+            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
+            this.btnNPCUnits.TabIndex = 10;
+            this.btnNPCUnits.Text = "Units";
+            this.btnNPCUnits.UseVisualStyleBackColor = true;
+            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
+            // 
+            // btnNpcApply
+            // 
+            this.btnNpcApply.Enabled = false;
+            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
+            this.btnNpcApply.Name = "btnNpcApply";
+            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
+            this.btnNpcApply.TabIndex = 8;
+            this.btnNpcApply.Text = "Apply";
+            this.btnNpcApply.UseVisualStyleBackColor = true;
+            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
+            // 
+            // btnNpcCancel
+            // 
+            this.btnNpcCancel.Enabled = false;
+            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
+            this.btnNpcCancel.Name = "btnNpcCancel";
+            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
+            this.btnNpcCancel.TabIndex = 7;
+            this.btnNpcCancel.Text = "Cancel";
+            this.btnNpcCancel.UseVisualStyleBackColor = true;
+            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
+            // 
+            // chkMoves
+            // 
+            this.chkMoves.AutoSize = true;
+            this.chkMoves.Location = new System.Drawing.Point(155, 151);
+            this.chkMoves.Name = "chkMoves";
+            this.chkMoves.Size = new System.Drawing.Size(58, 17);
+            this.chkMoves.TabIndex = 5;
+            this.chkMoves.Text = "Moves";
+            this.chkMoves.UseVisualStyleBackColor = true;
+            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
             // 
             // grpWayPoints
             // 

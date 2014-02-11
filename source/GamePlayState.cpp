@@ -938,3 +938,25 @@ CConsumable* CGamePlayState::CreatePotion(string input)
 
 }
 
+	void CGamePlayState::LoadNPCs(void)
+	{
+
+
+	}
+
+	void CGamePlayState::LoadUnits(void)
+	{
+
+	}
+
+	CUnits* CGamePlayState::GetUnit(std::string)
+	{
+
+
+	}
+
+	CNpcs* CGamePlayState::GetNpc(std::string)
+	{
+
+
+	}

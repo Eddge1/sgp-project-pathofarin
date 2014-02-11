@@ -53,6 +53,11 @@ public:
 	CPlayer* GetPlayer() {return m_pPlayer;}
 
 	void LoadWorld(void);
+	void LoadNPCs(void);
+	void LoadUnits(void);
+	CUnits* GetUnit(std::string);
+	CNpcs* GetNpc(std::string);
+
 	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack = 5);
 	CConsumable* CreatePotion(string input);
@@ -76,6 +81,9 @@ private:
 
 	map<string, CWorld*> m_mWorldManager;
 	map<string, InventoryItems> m_mItemManager;
+
+	map<string, CNpcs*> m_mNPCManager;
+	map<string, CUnits*> m_mUnitsManager;
 
 	vector<NPCDialogue*> m_vShowOnScreen;
 	string m_sCurrWorld;
