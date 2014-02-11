@@ -196,12 +196,10 @@ void CPlayerUnit::EndTurn()
 	if(m_bInSubMenu)
 	{
 		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
-		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(nullptr);
 	}
 	else
 	{
 		m_vCommands[m_nMenuSelect]->GetMiniGame()->ResetSkill();
-		m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(nullptr);
 	}
 	SetTurn(false);
 	m_bSkillSelected = false;

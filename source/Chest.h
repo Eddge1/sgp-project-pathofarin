@@ -11,6 +11,7 @@ class CChest : public CObjects
 	bool m_bOpened;
 	bool m_bCollided;
 	string m_szBroadCast;
+	int m_nSound;
 public:
 	void RegEvent(string szEvent) {m_szBroadCast = szEvent;}
 	void AddConsumableItem(CItem* input, int nAmount = 1, float fChance = 1.0f);

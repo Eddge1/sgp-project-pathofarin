@@ -15,12 +15,12 @@ namespace SGP_PoA_LevelEditor
         int warpX;
         int warpY;
         string szSpecial;
-        myNPC npc;
+        List<Point> m_vWaypoints;
 
-        internal myNPC Npc
+        public List<Point> Waypoints
         {
-            get { return npc; }
-            set { npc = value; }
+            get { return m_vWaypoints; }
+            set { m_vWaypoints = value; }
         }
 
         public int WarpY

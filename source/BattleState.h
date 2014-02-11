@@ -2,6 +2,7 @@
 #include "gamestates.h"
 #include "../SGD Wrappers/IListener.h"
 #include "Minigames.h"
+#include "Projectile.h"
 #include <vector>
 #include <string>
 #include <sstream>
@@ -35,12 +36,12 @@ public:
 	void GetPreviousTarget(void);
 	CUnits* GetCurrentTarget(void);
 	vector<CUnits*>& GetBattleUnits(void) { return m_vBattleUnits; }
-
+	vector<CProjectile*> m_vSkills;
 	void Initialize(void);
 	void Battle(float fElapsedTime);
 	void EndBattle(void);
 	void AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText);
-
+	void AddSkill(CProjectile* pTemp) {m_vSkills.push_back(pTemp); pTemp->AddRef();}
 	virtual void Activate( void )	override;				// load resources
 	virtual void Sleep( void )	override;					// unload resources
 	virtual bool Input( void )	override;					// handle user input

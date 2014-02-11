@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data Count="2">
+<Animation_Data Count="5">
   <Animation_Info Name="Tree_Idle" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
     <Frame_Data>
       <Render posX="4" posY="17" Width="185" Height="172" anchorX="63" anchorY="167" Duration="0.05" Event="NULL" />
@@ -16,7 +16,55 @@
       <ActiveCollision posX="0" posY="0" Width="184" Height="177" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Tree_Walk" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+  <Animation_Info Name="Tree_Walk_Left" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="1" posY="234" Width="188" Height="179" anchorX="85" anchorY="149" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="188" Height="179" />
+      <Render posX="201" posY="234" Width="185" Height="179" anchorX="84" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="185" Height="179" />
+      <Render posX="398" posY="233" Width="187" Height="180" anchorX="88" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="188" Height="181" />
+      <Render posX="602" posY="231" Width="193" Height="183" anchorX="91" anchorY="153" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="194" Height="184" />
+      <Render posX="807" posY="231" Width="185" Height="182" anchorX="87" anchorY="152" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="183" Height="182" />
+      <Render posX="1008" posY="234" Width="180" Height="179" anchorX="85" anchorY="150" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="180" Height="179" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Tree_Walk_Right" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="1" posY="234" Width="188" Height="179" anchorX="85" anchorY="149" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="188" Height="179" />
+      <Render posX="201" posY="234" Width="185" Height="179" anchorX="84" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="185" Height="179" />
+      <Render posX="398" posY="233" Width="187" Height="180" anchorX="88" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="188" Height="181" />
+      <Render posX="602" posY="231" Width="193" Height="183" anchorX="91" anchorY="153" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="194" Height="184" />
+      <Render posX="807" posY="231" Width="185" Height="182" anchorX="87" anchorY="152" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="183" Height="182" />
+      <Render posX="1008" posY="234" Width="180" Height="179" anchorX="85" anchorY="150" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="180" Height="179" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Tree_Walk_Up" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
+    <Frame_Data>
+      <Render posX="1" posY="234" Width="188" Height="179" anchorX="85" anchorY="149" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="188" Height="179" />
+      <Render posX="201" posY="234" Width="185" Height="179" anchorX="84" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="185" Height="179" />
+      <Render posX="398" posY="233" Width="187" Height="180" anchorX="88" anchorY="151" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="188" Height="181" />
+      <Render posX="602" posY="231" Width="193" Height="183" anchorX="91" anchorY="153" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="194" Height="184" />
+      <Render posX="807" posY="231" Width="185" Height="182" anchorX="87" anchorY="152" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="183" Height="182" />
+      <Render posX="1008" posY="234" Width="180" Height="179" anchorX="85" anchorY="150" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="180" Height="179" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Tree_Walk_Down" Frames="6" repeat="1" Texture="PC Computer - Maple Story - Stumpy.png">
     <Frame_Data>
       <Render posX="1" posY="234" Width="188" Height="179" anchorX="85" anchorY="149" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="188" Height="179" />

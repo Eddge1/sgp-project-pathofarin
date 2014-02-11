@@ -68,185 +68,48 @@ void CNpcs::Update(float fElapsedTime)
 			}
 		}
 
+		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
+		{
+			SetVelY(100);
+				string szTemp = GetName();
+				szTemp += "_Walk_Down";
+				GetAnimInfo()->SetAnimation(szTemp.c_str());
+		}
+		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
+		{
+			SetVelY(-100);
+				string szTemp = GetName();
+				szTemp += "_Walk_Up";
+				GetAnimInfo()->SetAnimation(szTemp.c_str());
+		}
+
+
 		if(GetPosX() < m_vWaypoints[m_nWaypoint]->locX - 1)
 		{
 			SetVelX(100);
-			if (GetName() == "Orc")
+			if(GetVelY() == 0)
 			{
-				GetAnimInfo()->SetAnimation("Orc_Walk_Right");
-			}
-			else if (GetName() == "Pathetic_Orc")
-			{
-				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Right");
-			}
-			else if (GetName() == "Orc_Leader")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
-			}
-			else if (GetName() == "Orc_Shaman")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Right");
-			}
-			else if (GetName() == "Cave_Spider")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Right");
-			}
-			else if (GetName() == "Cave_Bat")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Bat_Walk_Right");
-			}
-			else if (GetName() == "Ogre")
-			{
-				GetAnimInfo()->SetAnimation("Ogre_Walk_Right");
-			}
-			else if (GetName() == "Thornbiter")
-			{
-				GetAnimInfo()->SetAnimation("Thornbiter_Walk_Right");
+				string szTemp = GetName();
+				szTemp += "_Walk_Right";
+				GetAnimInfo()->SetAnimation(szTemp.c_str());
+
 			}
 		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
 		{
 			SetVelX(-100);
-			if (GetName() == "Orc")
+			if(GetVelY() == 0)
 			{
-				GetAnimInfo()->SetAnimation("Orc_Walk_Left");
-			}
-			else if (GetName() == "Pathetic_Orc")
-			{
-				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Left");
-			}
-			else if (GetName() == "Orc_Leader")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
-			}
-			else if (GetName() == "Orc_Shaman")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Left");
-			}
-			else if (GetName() == "Cave_Spider")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Left");
-			}
-			else if (GetName() == "Cave_Bat")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Bat_Walk_Left");
-			}
-			else if (GetName() == "Ogre")
-			{
-				GetAnimInfo()->SetAnimation("Ogre_Walk_Left");
-			}
-			else if (GetName() == "Thornbiter")
-			{
-				GetAnimInfo()->SetAnimation("Thornbiter_Walk_Left");
-			}
-		}
-
-		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
-		{
-			SetVelY(100);
-			if (GetName() == "Orc")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Walk_Down");
-			}
-			else if (GetName() == "Pathetic_Orc")
-			{
-				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Down");
-			}
-			else if (GetName() == "Orc_Leader")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
-			}
-			else if (GetName() == "Orc_Shaman")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Down");
-			}
-			else if (GetName() == "Cave_Spider")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Down");
-			}
-			else if (GetName() == "Cave_Bat")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Bat_Walk_Down");
-			}
-			else if (GetName() == "Ogre")
-			{
-				GetAnimInfo()->SetAnimation("Ogre_Walk_Down");
-			}
-			else if (GetName() == "Thornbiter")
-			{
-				GetAnimInfo()->SetAnimation("Thornbiter_Walk_Down");
-			}
-		}
-		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
-		{
-			SetVelY(-100);
-			if (GetName() == "Orc")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Walk_Up");
-			}
-			else if (GetName() == "Pathetic_Orc")
-			{
-				GetAnimInfo()->SetAnimation("Pathetic_Orc_Walk_Up");
-			}
-			else if (GetName() == "Orc_Leader")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Leader_Walk_Right");
-			}
-			else if (GetName() == "Orc_Shaman")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Shaman_Walk_Up");
-			}
-			else if (GetName() == "Cave_Spider")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Spider_Walk_Up");
-			}
-			else if (GetName() == "Cave_Bat")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Bat_Walk_Up");
-			}
-			else if (GetName() == "Ogre")
-			{
-				GetAnimInfo()->SetAnimation("Ogre_Walk_Up");
-			}
-			else if (GetName() == "Thornbiter")
-			{
-				GetAnimInfo()->SetAnimation("Thornbiter_Walk_Up");
+				string szTemp = GetName();
+				szTemp += "_Walk_Left";
+				GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}
 		else
 		{
-			if (GetName() == "Orc")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Idle");
-			}
-			else if (GetName() == "Pathetic_Orc")
-			{
-				GetAnimInfo()->SetAnimation("Pathetic_Orc_Idle");
-			}
-			else if (GetName() == "Orc_Leader")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Leader_Idle");
-			}
-			else if (GetName() == "Orc_Shaman")
-			{
-				GetAnimInfo()->SetAnimation("Orc_Shaman_Idle");
-			}
-			else if (GetName() == "Cave_Spider")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Spider_Idle");
-			}
-			else if (GetName() == "Cave_Bat")
-			{
-				GetAnimInfo()->SetAnimation("Cave_Bat_Idle");
-			}
-			else if (GetName() == "Ogre")
-			{
-				GetAnimInfo()->SetAnimation("Ogre_Idle");
-			}
-			else if (GetName() == "Thornbiter")
-			{
-				GetAnimInfo()->SetAnimation("Thornbiter_Idle");
-			}
+			string szTemp = GetName();
+			szTemp += "_Idle";
+			GetAnimInfo()->SetAnimation(szTemp.c_str());
 		}
 
 		CEntity::Update(fElapsedTime);

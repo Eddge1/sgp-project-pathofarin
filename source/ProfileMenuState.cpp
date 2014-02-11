@@ -510,6 +510,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CTriggerMatch *pTrig = new CTriggerMatch;
 	pTest->SetName("FireBall");
 	CProjectile* pFireBall = new CProjectile();
+
 	pFireBall->SetMasterGame(pTrig);
 	pFireBall->GetAnimInfo()->SetAnimation("Fireball_Left");
 	pFireBall->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_LargeFireball.wav")));

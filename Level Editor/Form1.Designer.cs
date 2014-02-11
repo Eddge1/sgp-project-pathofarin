@@ -40,6 +40,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTilesetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewNPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -70,14 +71,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lstAnimations = new System.Windows.Forms.ListBox();
+            this.lstNPC = new System.Windows.Forms.ListBox();
             this.btnNPCMove = new System.Windows.Forms.Button();
             this.btnNPCUnits = new System.Windows.Forms.Button();
             this.btnNpcApply = new System.Windows.Forms.Button();
             this.btnNpcCancel = new System.Windows.Forms.Button();
             this.chkMoves = new System.Windows.Forms.CheckBox();
-            this.chkHostile = new System.Windows.Forms.CheckBox();
             this.grpBlock = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -225,7 +224,8 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadTilesetToolStripMenuItem});
+            this.loadTilesetToolStripMenuItem,
+            this.createNewNPCToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "&Options";
@@ -236,6 +236,13 @@
             this.loadTilesetToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.loadTilesetToolStripMenuItem.Text = "Load Tileset";
             this.loadTilesetToolStripMenuItem.Click += new System.EventHandler(this.loadTilesetToolStripMenuItem_Click);
+            // 
+            // createNewNPCToolStripMenuItem
+            // 
+            this.createNewNPCToolStripMenuItem.Name = "createNewNPCToolStripMenuItem";
+            this.createNewNPCToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.createNewNPCToolStripMenuItem.Text = "NPC Editor";
+            this.createNewNPCToolStripMenuItem.Click += new System.EventHandler(this.createNewNPCToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -593,14 +600,12 @@
             // 
             // grpNPC
             // 
-            this.grpNPC.Controls.Add(this.label8);
-            this.grpNPC.Controls.Add(this.lstAnimations);
+            this.grpNPC.Controls.Add(this.lstNPC);
             this.grpNPC.Controls.Add(this.btnNPCMove);
             this.grpNPC.Controls.Add(this.btnNPCUnits);
             this.grpNPC.Controls.Add(this.btnNpcApply);
             this.grpNPC.Controls.Add(this.btnNpcCancel);
             this.grpNPC.Controls.Add(this.chkMoves);
-            this.grpNPC.Controls.Add(this.chkHostile);
             this.grpNPC.Location = new System.Drawing.Point(1033, 181);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 201);
@@ -609,23 +614,14 @@
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
             // 
-            // label8
+            // lstNPC
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Animation";
-            // 
-            // lstAnimations
-            // 
-            this.lstAnimations.FormattingEnabled = true;
-            this.lstAnimations.Location = new System.Drawing.Point(13, 36);
-            this.lstAnimations.Name = "lstAnimations";
-            this.lstAnimations.Size = new System.Drawing.Size(199, 108);
-            this.lstAnimations.TabIndex = 12;
-            this.lstAnimations.SelectedIndexChanged += new System.EventHandler(this.lstAnimations_SelectedIndexChanged);
+            this.lstNPC.FormattingEnabled = true;
+            this.lstNPC.Location = new System.Drawing.Point(6, 21);
+            this.lstNPC.Name = "lstNPC";
+            this.lstNPC.Size = new System.Drawing.Size(207, 121);
+            this.lstNPC.TabIndex = 12;
+            this.lstNPC.SelectedIndexChanged += new System.EventHandler(this.lstNPC_SelectedIndexChanged);
             // 
             // btnNPCMove
             // 
@@ -674,24 +670,13 @@
             // chkMoves
             // 
             this.chkMoves.AutoSize = true;
-            this.chkMoves.Location = new System.Drawing.Point(131, 147);
+            this.chkMoves.Location = new System.Drawing.Point(155, 151);
             this.chkMoves.Name = "chkMoves";
             this.chkMoves.Size = new System.Drawing.Size(58, 17);
             this.chkMoves.TabIndex = 5;
             this.chkMoves.Text = "Moves";
             this.chkMoves.UseVisualStyleBackColor = true;
             this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
-            // 
-            // chkHostile
-            // 
-            this.chkHostile.AutoSize = true;
-            this.chkHostile.Location = new System.Drawing.Point(30, 147);
-            this.chkHostile.Name = "chkHostile";
-            this.chkHostile.Size = new System.Drawing.Size(65, 17);
-            this.chkHostile.TabIndex = 2;
-            this.chkHostile.Text = "isHostile";
-            this.chkHostile.UseVisualStyleBackColor = true;
-            this.chkHostile.CheckedChanged += new System.EventHandler(this.chkHostile_CheckedChanged_1);
             // 
             // grpBlock
             // 
@@ -706,7 +691,7 @@
             this.grpBlock.Controls.Add(this.lstBlock);
             this.grpBlock.Location = new System.Drawing.Point(1033, 181);
             this.grpBlock.Name = "grpBlock";
-            this.grpBlock.Size = new System.Drawing.Size(223, 213);
+            this.grpBlock.Size = new System.Drawing.Size(223, 201);
             this.grpBlock.TabIndex = 12;
             this.grpBlock.TabStop = false;
             this.grpBlock.Text = "Block Editor";
@@ -1271,7 +1256,6 @@
         private System.Windows.Forms.Button btnNpcApply;
         private System.Windows.Forms.Button btnNpcCancel;
         private System.Windows.Forms.CheckBox chkMoves;
-        private System.Windows.Forms.CheckBox chkHostile;
         private System.Windows.Forms.Button btnNPCMove;
         private System.Windows.Forms.Button btnNPCUnits;
         private System.Windows.Forms.GroupBox grpWayPoints;
@@ -1301,8 +1285,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.NumericUpDown nudXOffset;
         private System.Windows.Forms.NumericUpDown nudYOffset;
-        private System.Windows.Forms.ListBox lstAnimations;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox grpUnits;
         private System.Windows.Forms.Button btnAddUnit;
         private System.Windows.Forms.Label label26;
@@ -1323,6 +1305,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ListBox lstUnitAnimation;
         private System.Windows.Forms.ListBox lstUnits;
+        private System.Windows.Forms.ToolStripMenuItem createNewNPCToolStripMenuItem;
+        private System.Windows.Forms.ListBox lstNPC;
     }
 }
 

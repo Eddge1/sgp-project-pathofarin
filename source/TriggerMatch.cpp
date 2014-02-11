@@ -106,23 +106,11 @@ void CTriggerMatch::Render()
 	pFont->Draw(_T(" out of "), 300, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	pFont->Draw(coss.str().c_str(), 400, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 
-	for(unsigned int i = 0; i < m_vSkills.size(); i++)
-	{
-		CAnimationSystem::GetInstance()->Render(m_vSkills[i]->GetAnimInfo(), m_vSkills[i]->GetPosX(), m_vSkills[i]->GetPosY(), 1.0f, D3DCOLOR_XRGB(255,255,255));
-	}
-
 }
 
 void CTriggerMatch::Update(float fElpasedTime) 
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-
-
-	for(unsigned int i = 0; i < m_vSkills.size(); i++)
-	{
-		m_vSkills[i]->Update(fElpasedTime);
-	}
-
 	if(m_bLeft)
 	{
 		m_rTrigger.left -= long(m_fMoveSpeed * fElpasedTime);
@@ -215,6 +203,7 @@ void CTriggerMatch::InstantiateSkill()
 		pNewProjectile->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY());
 		pTemp->PlaySFX();
 		m_vSkills.push_back(pNewProjectile);
+		CBattleState::GetInstance()->AddSkill(pNewProjectile);
 	}
 }
 

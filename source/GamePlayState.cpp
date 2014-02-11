@@ -117,6 +117,7 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
+			pTemp->SetName("Tree");
 			pTemp->GetAnimInfo()->SetAnimation("Tree_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 250.0f, 12, 150, 20));
@@ -754,8 +755,8 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Thornbiter_Idle");
-	pTemp->SetCurrentFrame(0);
+	//pTemp->SetAnimation("Thornbiter_Idle");
+	//pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
 	{

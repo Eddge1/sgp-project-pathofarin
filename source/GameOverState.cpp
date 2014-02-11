@@ -36,6 +36,9 @@ void CGameOverState::Activate(void)
 
 void CGameOverState::Sleep(void)
 {
+	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
+		CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
+	
 	CProfileMenuState::GetInstance()->Sleep();
 	m_szGameOverMsg ="";
 }
