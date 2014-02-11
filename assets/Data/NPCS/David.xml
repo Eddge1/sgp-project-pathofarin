@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="2" Name="David" Hostile="true" Units="1">
+  <Convo Text="Example 3" Event="Event 2" />
+  <Convo Text="Example 4" Event="Event 4" />
+  <Unit Name="David" />
+</NPC>

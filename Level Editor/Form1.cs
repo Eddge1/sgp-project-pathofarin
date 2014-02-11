@@ -158,7 +158,19 @@ namespace SGP_PoA_LevelEditor
                 }
             }
 
+            if (lstWaypoints.Items.Count > 0)
+            {
+                for (int i = 0; i < lstWaypoints.Items.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        Point nPrev = (Point)lstWaypoints.Items[i - 1];
+                        Point nNow = (Point)lstWaypoints.Items[i];
+                        DX.DrawLine(nPrev.X, nPrev.Y, nNow.X, nNow.Y, Color.FromArgb(0, 0, 0), 3);
+                    }
+                }
 
+            }
 
             if (ShowGrid)
             {
@@ -217,6 +229,7 @@ namespace SGP_PoA_LevelEditor
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
+            lstNPC.Items.Clear();
             lstMaps.Items.Clear();
             lstLayers.Items.Clear();
             lstBlock.Items.Clear();
@@ -225,6 +238,11 @@ namespace SGP_PoA_LevelEditor
             {
                 string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
                 lstMaps.Items.Add(szTemp);
+            }
+            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\", "*.xml").Select(Path.GetFileName))
+            {
+                string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
+                lstNPC.Items.Add(szTemp);
             }
             cmbMode.Items.Clear();
             cmbMode.Items.Add("MAP_EDIT");
@@ -235,15 +253,6 @@ namespace SGP_PoA_LevelEditor
             cmbMode.Items.Add("CHEST");
             cmbAI.Items.Clear();
             cmbAI.Items.Add("BASIC");
-
-            lstAnimations.Items.Clear();
-            lstUnitAnimation.Items.Clear();
-
-            foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Animations\\", "*.xml").Select(Path.GetFileName))
-            {
-                lstAnimations.Items.Add(szMapID);
-                lstUnitAnimation.Items.Add(szMapID);
-            }
 
             cmbMode.SelectedIndex = 0;
 
@@ -546,88 +555,58 @@ namespace SGP_PoA_LevelEditor
                 }
                 else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "NPCS")
                 {
-
-                    if (grpWayPoints.Visible)
+                    if (e.Button == MouseButtons.Left)
                     {
-                        if (e.Button == MouseButtons.Left)
+
+                        if (grpWayPoints.Visible)
                         {
                             if (radWPAdd.Checked)
                             {
-
-
+                                L.MyTiles[Temp.X, Temp.Y].Waypoints.Add(new Point(Temp.X * TileSize.Width + TileSize.Width / 2, Temp.Y * TileSize.Height + TileSize.Height / 2));
+                                lstWaypoints.Items.Add(new Point(Temp.X * TileSize.Width + TileSize.Width / 2, Temp.Y * TileSize.Height + TileSize.Height / 2));
                             }
                             else if (radWPMove.Checked)
                             {
+                                if (lstWaypoints.SelectedIndex >= 0)
+                                {
+                                    Point ptTemp = (Point)lstWaypoints.Items[lstWaypoints.SelectedIndex];
+                                    ptTemp = new Point(Temp.X * TileSize.Width + TileSize.Width / 2, Temp.Y * TileSize.Height + TileSize.Height / 2);
 
-
+                                    lstWaypoints.Items[lstWaypoints.SelectedIndex] = ptTemp;
+                                }
                             }
                         }
                         else
                         {
-                            //Delete
+                            mapTile = Temp;
+                            if (L.MyTiles[Temp.X, Temp.Y].EventType == "NPCS")
+                            {
+                                for (int i = 0; i < lstNPC.Items.Count; i++)
+                                {
+                                    if (lstNPC.Items[i] == L.MyTiles[Temp.X, Temp.Y].SzSpecial)
+                                    {
+                                        lstNPC.SelectedIndex = i;
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (lstNPC.SelectedIndex >= 0)
+                                {
+                                    L.MyTiles[Temp.X, Temp.Y].EventType = "NPCS";
+                                    L.MyTiles[Temp.X, Temp.Y].SzSpecial = lstNPC.Items[lstNPC.SelectedIndex].ToString();
+                                }
+                            }
+
                         }
                     }
                     else
                     {
-                        if (e.Button == MouseButtons.Right)
-                        {
-                            L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
-                            L.MyTiles[Temp.X, Temp.Y].Npc = new myNPC();
-                        }
-                        else
-                        {
-                            if (L.MyTiles[Temp.X, Temp.Y].EventType == "NPCS")
-                            {
-                                selectedNPC = L.MyTiles[Temp.X, Temp.Y].Npc;
-                                lstUnits.Items.Clear();
-                                lstWaypoints.Items.Clear();
-                                lstUnitAnimation.SelectedIndex = -1;
-                                if (selectedNPC.Animation != "")
-                                {
-                                    bool bSuccess = false;
-                                    for (int i = 0; i < lstAnimations.Items.Count; i++)
-                                    {
-                                        string szTemp = (string)lstAnimations.Items[i];
-                                        if (selectedNPC.Animation == szTemp)
-                                        {
-                                            lstAnimations.SelectedIndex = i;
-                                            bSuccess = true;
-                                            break;
-                                        }
-                                    }
-                                    if (!bSuccess)
-                                        lstAnimations.SelectedIndex = -1;
-                                }
-                                else
-                                    lstAnimations.SelectedIndex = -1;
-                                if (selectedNPC.Units.Count > 0)
-                                {
-                                    foreach (myUnits u in selectedNPC.Units)
-                                    {
-                                        lstUnits.Items.Add(u);
-                                    }
-                                }
-                                if (selectedNPC.Waypoints.Count > 0)
-                                {
-                                    foreach (Point p in selectedNPC.Waypoints)
-                                    {
-                                        lstWaypoints.Items.Add(p);
-                                    }
-                                }
-
-                                chkHostile.Checked = selectedNPC.IsHostile;
-                                chkMoves.Checked = selectedNPC.Moves;
-                            }
-                            else
-                            {
-                                selectedNPC = new myNPC();
-                                selectedNPC.Units = new List<myUnits>();
-                                selectedNPC.Waypoints = new List<Point>();
-                                L.MyTiles[Temp.X, Temp.Y].EventType = "NPCS";
-                                L.MyTiles[Temp.X, Temp.Y].Npc = selectedNPC;
-                                selectedNPC.Animation = "";
-                            }
-                        }
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
+                        L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].Waypoints.Clear();
+                        lstWaypoints.Items.Clear();
                     }
                 }
                 else
@@ -916,13 +895,22 @@ namespace SGP_PoA_LevelEditor
                             if (L.MyTiles[x, y].SzSpecial == null)
                                 L.MyTiles[x, y].SzSpecial = "";
                             XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
-
+                            XAttribute xWayPointTotal = new XAttribute("Total_Waypoints", L.MyTiles[x, y].Waypoints.Count);
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
                             xTileData.Add(xEventId);
                             xTileData.Add(xTileEventType);
                             xTileData.Add(xTileWarpX);
                             xTileData.Add(xTileWarpY);
+                            xTileData.Add(xWayPointTotal);
+
+                            for (int j = 0; j < L.MyTiles[x, y].Waypoints.Count; j++)
+                            {
+                                XElement xWayPointData = new XElement("Waypoint");
+                                XAttribute xWaypointPositionX = new XAttribute("X", L.MyTiles[x, y].Waypoints[j].X);
+                                XAttribute xWaypointPositionY = new XAttribute("Y", L.MyTiles[x, y].Waypoints[j].Y);
+                                xTileData.Add(xWayPointData);
+                            }
 
                             xTile.Add(xTileData);
                         }
@@ -1058,6 +1046,8 @@ namespace SGP_PoA_LevelEditor
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].WarpY = Convert.ToInt32(xTileWarpY.Value) / TileSize.Height;
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].SzSpecial = xTileEventID.Value;
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].EventType = xTileEventType.Value;
+                        ////////////////// TEMPORARY FOR CONVERSION CHANGE AFTER MAPS ARE CONVERTED
+                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].Waypoints = new List<Point>();
 
                     }
                     lstLayers.Items.Add(lTemp);
@@ -1220,16 +1210,6 @@ namespace SGP_PoA_LevelEditor
                 grpWayPoints.Visible = false;
         }
 
-        private void chkHostile_CheckedChanged(object sender, EventArgs e)
-        {
-            btnNPCUnits.Enabled = chkHostile.Checked;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            btnNpcCancel.Enabled = true;
-        }
-
         private void btnNpcAdd_Click(object sender, EventArgs e)
         {
 
@@ -1281,6 +1261,7 @@ namespace SGP_PoA_LevelEditor
                 {
                     lTemp.MyTiles[x, y].X = -1;
                     lTemp.MyTiles[x, y].Y = -1;
+                    lTemp.MyTiles[x, y].Waypoints = new List<Point>();
                 }
             }
 
@@ -1452,6 +1433,8 @@ namespace SGP_PoA_LevelEditor
                                 {
                                     tLayer.MyTiles[x, y].X = -1;
                                     tLayer.MyTiles[x, y].Y = -1;
+                                    tLayer.MyTiles[x, y].Waypoints = new List<Point>();
+
                                 }
                             }
                         }
@@ -1488,6 +1471,8 @@ namespace SGP_PoA_LevelEditor
                                 {
                                     tLayer.MyTiles[x, y].X = -1;
                                     tLayer.MyTiles[x, y].Y = -1;
+                                    tLayer.MyTiles[x, y].Waypoints = new List<Point>();
+
                                 }
                             }
                         }
@@ -1539,11 +1524,25 @@ namespace SGP_PoA_LevelEditor
                 lstWaypoints.Items.Clear();
         }
 
-        private void chkHostile_CheckedChanged_1(object sender, EventArgs e)
+        private void createNewNPCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnNPCUnits.Enabled = chkHostile.Checked;
-            if (!chkHostile.Checked)
-                lstUnits.Items.Clear();
+            ModalNpc nEdit = new ModalNpc();
+            if (DialogResult.OK == nEdit.ShowDialog())
+            {
+                lstNPC.Items.Clear();
+                foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\", "*.xml"))
+                {
+                    string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
+                    lstMaps.Items.Add(szTemp);
+                    lstNPC.Items.Add(szTemp);
+                }
+            }
+
+        }
+
+        private void lstNPC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 

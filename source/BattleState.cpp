@@ -315,6 +315,12 @@ void CBattleState::Render(void)
 		for(int i = 0; i < (int)m_vText.size(); i++)
 			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
 
+		for(unsigned int i = 0; i < m_vSkills.size(); i++)
+		{
+			CAnimationSystem::GetInstance()->Render(m_vSkills[i]->GetAnimInfo(), m_vSkills[i]->GetPosX(), m_vSkills[i]->GetPosY(), 1.0f, D3DCOLOR_XRGB(255,255,255));
+		}
+
+
 		if(m_bVictory)
 		{
 			woss.str(_T(""));
@@ -363,6 +369,19 @@ void CBattleState::Battle(float fElapsedTime)
 		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			m_vBattleUnits[i]->Update(fElapsedTime);
+		}
+
+		for(unsigned int i = 0; i < m_vSkills.size();)
+		{
+			m_vSkills[i]->Update(fElapsedTime);
+			if(m_vSkills[i]->GetCollided())
+			{
+				m_vSkills[i]->Release();
+				m_vSkills.erase(m_vSkills.begin() + i);
+			}
+			else
+				i++;
+
 		}
 	}
 	if(m_fDelayTurn <= 0.0f && m_bDelayed == false)

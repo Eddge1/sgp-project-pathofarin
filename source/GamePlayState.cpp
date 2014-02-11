@@ -117,6 +117,7 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
+			pTemp->SetName("Tree");
 			pTemp->GetAnimInfo()->SetAnimation("Tree_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 250.0f, 12, 150, 20));
@@ -183,6 +184,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
+			pTemp->SetName("Snail");
 			pTemp->SetUnits(CreateTempEnemy("Snail", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Snail", 200.0f, 350.0f, 5,  150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Snail", 100.0f, 400.0f, 9,  150, 20));

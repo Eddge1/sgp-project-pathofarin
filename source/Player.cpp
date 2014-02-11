@@ -35,20 +35,6 @@ void CPlayer::Update(float fElapsedTime)
 	SetVelX(0);
 	SetVelY(0);
 
-	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT))
-	{
-		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Left");
-		SetVelX(-100);
-	}
-	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT))
-	{
-		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Right");
-		SetVelX(100);
-	}
-	else
-		SetVelX( GetVelX() - (GetVelX() * 0.005f));
-
-
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP))
 	{
 		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Up");
@@ -59,6 +45,21 @@ void CPlayer::Update(float fElapsedTime)
 		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Down");
 		SetVelY(100);
 	}
+
+	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT))
+	{
+		if(GetVelY() == 0)
+			this->GetAnimInfo()->SetAnimation("Warrior_Walk_Left");
+		SetVelX(-100);
+	}
+	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT))
+	{
+		if(GetVelY() == 0)
+			this->GetAnimInfo()->SetAnimation("Warrior_Walk_Right");
+		SetVelX(100);
+	}
+	else
+		SetVelX( GetVelX() - (GetVelX() * 0.005f));
 
 	if (this->GetVelX() == 0 && this->GetVelY() == 0)
 	{
