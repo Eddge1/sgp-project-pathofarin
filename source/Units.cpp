@@ -29,12 +29,12 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 {
 	std::wostringstream woss;
 	m_nHealth -= nAmount;
-	if (GetName() == "Tree" || GetName() == "Orc" || GetName() == "Snail" || GetName() == "Pathetic_Orc" || GetName() == "Orc_Leader" || GetName() == "Orc_Shaman" || GetName() == "Cave_Spider" || GetName() == "Cave_Bat" || GetName() == "Ogre")
+	if(GetType() != OBJ_PLAYER_UNIT)
 	{
 		string szTemp = GetName() + "_Battle_Taking_Damage";
-		GetAnimInfo()->SetCurrentFrame(0);
 		GetAnimInfo()->SetAnimation(szTemp.c_str());
 	}
+	if(GetType() != OBJ_PLAYER_UNIT)
 	if(m_nHealth < 0)
 		m_nHealth = 0;
 	if(m_nHealth > m_nMaxHealth)

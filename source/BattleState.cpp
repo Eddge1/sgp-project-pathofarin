@@ -437,14 +437,9 @@ void CBattleState::Battle(float fElapsedTime)
 			{
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
 			}
-			else if (m_vBattleUnits[i]->GetName() != "Thornbiter")
-			{
-				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
-			}
 			else
 			{
-				string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}

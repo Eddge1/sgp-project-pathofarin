@@ -497,17 +497,7 @@
       <Tile_Data xTileID="4" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="165" posX="5" posY="4">
-      <Tile_Data xTileID="4" yTileID="1" EventID="David" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="9">
-        <Waypoint X="352" Y="288" />
-        <Waypoint X="352" Y="416" />
-        <Waypoint X="224" Y="416" />
-        <Waypoint X="224" Y="224" />
-        <Waypoint X="352" Y="96" />
-        <Waypoint X="480" Y="224" />
-        <Waypoint X="480" Y="416" />
-        <Waypoint X="352" Y="416" />
-        <Waypoint X="352" Y="288" />
-      </Tile_Data>
+      <Tile_Data xTileID="4" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="166" posX="6" posY="4">
       <Tile_Data xTileID="4" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Thornbiter_Battle_Idle" Frames="6" repeat="1" Texture="1stEnemy.png">
+    <Frame_Data>
+      <Render posX="4" posY="3" Width="93" Height="78" anchorX="55" anchorY="71" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="91" Height="77" />
+      <Render posX="99" posY="2" Width="90" Height="72" anchorX="58" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="91" Height="72" />
+      <Render posX="3" posY="84" Width="91" Height="75" anchorX="59" anchorY="70" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="91" Height="75" />
+      <Render posX="96" posY="81" Width="94" Height="71" anchorX="61" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="93" Height="71" />
+      <Render posX="3" posY="160" Width="102" Height="75" anchorX="65" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="102" Height="76" />
+      <Render posX="107" posY="158" Width="106" Height="75" anchorX="66" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="107" Height="75" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Thornbiter_Battle_Basic_Attack" Frames="3" repeat="0" Texture="1stEnemy.png">
+    <Frame_Data>
+      <Render posX="346" posY="259" Width="89" Height="74" anchorX="62" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="89" Height="74" />
+      <Render posX="335" posY="344" Width="97" Height="78" anchorX="65" anchorY="72" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="1" Width="96" Height="79" />
+      <Render posX="336" posY="426" Width="93" Height="68" anchorX="65" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="94" Height="67" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Thornbiter_Battle_Taking_Damage" Frames="2" repeat="0" Texture="1stEnemy.png">
+    <Frame_Data>
+      <Render posX="434" posY="368" Width="76" Height="64" anchorX="29" anchorY="59" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="76" Height="64" />
+      <Render posX="431" posY="436" Width="79" Height="68" anchorX="40" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="79" Height="68" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
