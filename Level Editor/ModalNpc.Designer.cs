@@ -33,6 +33,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.dtnDel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.grpUnitList = new System.Windows.Forms.GroupBox();
             this.lstUnits = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -79,8 +81,6 @@
             this.lstUnitSelection = new System.Windows.Forms.ListBox();
             this.btnNewUnit = new System.Windows.Forms.Button();
             this.btnNewNPC = new System.Windows.Forms.Button();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.grpUnitList.SuspendLayout();
             this.grpUnits.SuspendLayout();
@@ -154,6 +154,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "NPC Stats";
             this.groupBox1.Visible = false;
+            // 
+            // txtFileName
+            // 
+            this.txtFileName.Location = new System.Drawing.Point(13, 186);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.Size = new System.Drawing.Size(100, 20);
+            this.txtFileName.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 170);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "File Name";
             // 
             // grpUnitList
             // 
@@ -324,7 +340,7 @@
             this.grpUnits.Controls.Add(this.label8);
             this.grpUnits.Controls.Add(this.label7);
             this.grpUnits.Controls.Add(this.groupBox2);
-            this.grpUnits.Location = new System.Drawing.Point(716, 329);
+            this.grpUnits.Location = new System.Drawing.Point(191, 13);
             this.grpUnits.Name = "grpUnits";
             this.grpUnits.Size = new System.Drawing.Size(519, 222);
             this.grpUnits.TabIndex = 8;
@@ -677,22 +693,6 @@
             this.btnNewNPC.Text = "New";
             this.btnNewNPC.UseVisualStyleBackColor = true;
             this.btnNewNPC.Click += new System.EventHandler(this.btnNewNPC_Click);
-            // 
-            // txtFileName
-            // 
-            this.txtFileName.Location = new System.Drawing.Point(13, 186);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(100, 20);
-            this.txtFileName.TabIndex = 15;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 170);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "File Name";
             // 
             // ModalNpc
             // 
