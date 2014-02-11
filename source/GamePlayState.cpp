@@ -32,6 +32,7 @@
 #include "Chest.h"
 #include "AITigerlily.h"
 #include "AIValrion.h"
+#include "EnemyUnit.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -829,7 +830,6 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 		pTemp->SetAnimation("Thornbiter_Battle_Idle");
 	}
 
-
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
 	temp->SetAIController(tempAI);
@@ -963,25 +963,27 @@ void CGamePlayState::LoadNPCs(void)
 		TiXmlElement *pRoot = doc.RootElement();
 		if(pRoot == nullptr)
 			return;
+		/*
+		pRoot->Attribute("Transparency", &transparency);
+		int TotalLayers = 0;
+
+		pRoot->Attribute("Width", &layerWidth);
+		Worldtemp->SetTileWidth(tileWidth);
+
+		TiXmlElement* pLoad = pRoot->FirstChildElement("Layer");
+		if(pLoad != nullptr)
+		{
+		TiXmlElement* pTile;
+		string ReadIn = "";
 
 
+		for(int i = 0; i < TotalLayers; i++)
+		{
+		pLoad->Attribute("Yoffset", &nLayerYOffset);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		}
+		pLoad = pRoot->FirstChildElement("Block_Data");
+		*/
 	}while(FindNextFile(hFile, &fileSearch));
 }
 
@@ -1011,27 +1013,6 @@ void CGamePlayState::LoadUnits(void)
 		if(pRoot == nullptr)
 			return;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}while(FindNextFile(hFile, &fileSearch));
 }
 
@@ -1057,7 +1038,7 @@ CUnits* CGamePlayState::GetUnit(std::string szUnit)
 	CAIController* pNew = new CAIController();
 	pTemp->SetAIController(pNew);
 
-	return reinterpret_cast<CUnits*>(pTemp);
+	return pTemp;
 }
 
 CNpcs* CGamePlayState::GetNpc(std::string szNpc)
@@ -1068,9 +1049,13 @@ CNpcs* CGamePlayState::GetNpc(std::string szNpc)
 	CNpcs* pTemp = new CNpcs();
 	pTemp->SetName(szNpc);
 	std::vector<CEnemyUnit*>& vTemp = m_mNPCManager[szNpc]->GetUnits();
-	CUnits* pTempUnit;
+	CEnemyUnit* pTempUnit;
 	for(unsigned int i = 0; i < vTemp.size(); i++)
-		pTemp->SetUnits(GetUnit(vTemp[i]->GetName()));
+	{
+		pTempUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(vTemp[i]->GetName()));
+		if(pTempUnit!= nullptr)
+		pTemp->SetUnits(pTempUnit);
+	}
 
 	return pTemp;
 }
