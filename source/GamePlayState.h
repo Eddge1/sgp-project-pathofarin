@@ -8,6 +8,7 @@
 #include "Item.h"
 #include "Consumable.h"
 #include "../SGD Wrappers/IListener.h"
+#include "Npcs.h"
 #include <sstream>
 using namespace std;
 

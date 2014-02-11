@@ -79,6 +79,8 @@ public:
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
 	void SetAttack			( int nAmount )		{m_nAttackPower = nAmount; }
+	void SetLevel			( int nAmount )		{m_nLevel = nAmount; }
+
 	void GiveExperience		( int nAmount );
 	void SetName( string input ) { m_sName = input; }
 	void SetClass( UnitClass eClass ) {m_eClass = eClass;}

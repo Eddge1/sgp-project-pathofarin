@@ -189,7 +189,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Ogre", 200.0f, 350.0f, 5,  150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
-			
+
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 
 			pTemp->Release();
@@ -253,7 +253,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("TEST_ITEM", this);
 			m_pES->RegisterClient("GAME_WON", this);
 
-			
+
 
 			m_eCurrPhase = GP_NAV;
 		}
@@ -533,7 +533,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_fGameEndTimer = 4.0f;
 	}
 
-	
+
 }
 
 void CGamePlayState::LoadWorld(void)
@@ -938,25 +938,139 @@ CConsumable* CGamePlayState::CreatePotion(string input)
 
 }
 
-	void CGamePlayState::LoadNPCs(void)
+void CGamePlayState::LoadNPCs(void)
+{
+	WIN32_FIND_DATA fileSearch;
+	HANDLE hFile;
+	WCHAR cDirectory[] = L"assets/Data/NPCS/*.xml";
+	hFile = FindFirstFile(cDirectory,&fileSearch);
+
+	do
 	{
+		std::string szInput;
+		char cFile[128] = "assets/Data/NPCS/";
+		for(int i = 0; i < 128; i++)
+		{
+			cFile[i + 19] = char(fileSearch.cFileName[i]);
+			if(fileSearch.cFileName[i] == '\0')
+				break;
+			szInput += char(fileSearch.cFileName[i]);
+		}
+		TiXmlDocument doc;
+		if(doc.LoadFile(cFile) == false)
+			return;
+
+		TiXmlElement *pRoot = doc.RootElement();
+		if(pRoot == nullptr)
+			return;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}while(FindNextFile(hFile, &fileSearch));
+}
+
+void CGamePlayState::LoadUnits(void)
+{
+	WIN32_FIND_DATA fileSearch;
+	HANDLE hFile;
+	WCHAR cDirectory[] = L"assets/Data/Units/*.xml";
+	hFile = FindFirstFile(cDirectory,&fileSearch);
+
+	do
+	{
+		std::string szInput;
+		char cFile[128] = "assets/Data/Units/";
+		for(int i = 0; i < 128; i++)
+		{
+			cFile[i + 19] = char(fileSearch.cFileName[i]);
+			if(fileSearch.cFileName[i] == '\0')
+				break;
+			szInput += char(fileSearch.cFileName[i]);
+		}
+		TiXmlDocument doc;
+		if(doc.LoadFile(cFile) == false)
+			return;
+
+		TiXmlElement *pRoot = doc.RootElement();
+		if(pRoot == nullptr)
+			return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}while(FindNextFile(hFile, &fileSearch));
+}
+
+CUnits* CGamePlayState::GetUnit(std::string szUnit)
+{
+	if(szUnit == "")
+		return nullptr;
+	CEnemyUnit* pTemp = new CEnemyUnit();
+
+	pTemp->SetName(szUnit);
+	pTemp->SetAttack(m_mUnitsManager[szUnit]->GetAttack());
+	pTemp->SetLevel(m_mUnitsManager[szUnit]->GetLevel());
+	pTemp->GiveExperience(m_mUnitsManager[szUnit]->GetExperience());
+	pTemp->SetMaxHealth(m_mUnitsManager[szUnit]->GetMaxHealth());
+	pTemp->SetMaxAP(m_mUnitsManager[szUnit]->GetMaxAP());
+
+	map<string, InventoryItems>* vTemp = m_mUnitsManager[szUnit]->GetInv();
+	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
+	{
+		pTemp->AddConsumableItem(i->second.Item, i->second.DropChance);
 	}
 
-	void CGamePlayState::LoadUnits(void)
-	{
+	CAIController* pNew = new CAIController();
+	pTemp->SetAIController(pNew);
 
-	}
+	return reinterpret_cast<CUnits*>(pTemp);
+}
 
-	CUnits* CGamePlayState::GetUnit(std::string)
-	{
+CNpcs* CGamePlayState::GetNpc(std::string szNpc)
+{
+	if(szNpc == "")
+		return nullptr;
 
+	CNpcs* pTemp = new CNpcs();
+	pTemp->SetName(szNpc);
+	std::vector<CEnemyUnit*>& vTemp = m_mNPCManager[szNpc]->GetUnits();
+	CUnits* pTempUnit;
+	for(unsigned int i = 0; i < vTemp.size(); i++)
+		pTemp->SetUnits(GetUnit(vTemp[i]->GetName()));
 
-	}
-
-	CNpcs* CGamePlayState::GetNpc(std::string)
-	{
-
-
-	}
+	return pTemp;
+}
