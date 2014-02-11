@@ -32,7 +32,6 @@ void CAnimationSystem::DeleteInstance( void )
 CAnimationSystem::CAnimationSystem(void)
 {
 	m_bEventThrown = false;
-
 }
 
 
