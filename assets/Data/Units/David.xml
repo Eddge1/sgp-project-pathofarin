@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Unit Name="David" Health="8" Ap="6" Attack="4" Exp="4" Speed="6" Level="1" AI="Brute" Total_Items="1">
-  <Item Name="Potion" Chance="5" />
-</Unit>
