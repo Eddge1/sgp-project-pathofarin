@@ -32,6 +32,7 @@
 #include "Chest.h"
 #include "AITigerlily.h"
 #include "AIValrion.h"
+#include "EnemyUnit.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
