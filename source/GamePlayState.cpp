@@ -169,8 +169,8 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(420);
 			pTemp->AddWaypoint(200,420);
 			pTemp->AddWaypoint(200,260);
-			pTemp->SetName("Orc_Shaman");
-			pTemp->GetAnimInfo()->SetAnimation("Orc_Shaman_Idle");
+			pTemp->SetName("Ogre");
+			pTemp->GetAnimInfo()->SetAnimation("Ogre_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Leader", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Pathetic_Orc", 200.0f, 350.0f, 5, 150, 20));
@@ -186,10 +186,9 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(203,535);
 			pTemp->SetName("Snail");
 			pTemp->SetUnits(CreateTempEnemy("Snail", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Snail", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Snail", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->GetAnimInfo()->SetAnimation("Snail_Idle");
-			pTemp->GetAnimInfo()->SetCurrentFrame(1);
+			pTemp->SetUnits(CreateTempEnemy("Ogre", 200.0f, 350.0f, 5,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
+			
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 
 			pTemp->Release();
@@ -820,6 +819,11 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	{
 		pTemp->SetAnimation("Cave_Bat_Battle_Idle");
 	}
+	else if (input == "Ogre")
+	{
+		pTemp->SetAnimation("Ogre_Battle_Idle");
+	}
+
 
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);

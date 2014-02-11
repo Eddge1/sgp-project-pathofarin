@@ -62,6 +62,7 @@ void CUseItem::Update(float fElapsedTime)
 						{
 							if(ItemTemp->GetType() == "HP")
 								GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+								
 							else if(ItemTemp->GetType() == "MP")
 								GetOwner()->ModifyAP(-ItemTemp->GetAmount());
 

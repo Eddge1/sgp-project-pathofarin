@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="6">
+  <Animation_Info Name="Blood_Splatter" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="10" posY="9" Width="48" Height="47" anchorX="24" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="47" />
+      <Render posX="70" posY="7" Width="52" Height="45" anchorX="26" anchorY="22" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="53" Height="46" />
+      <Render posX="131" posY="6" Width="59" Height="51" anchorX="30" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="60" Height="51" />
+      <Render posX="190" posY="4" Width="71" Height="63" anchorX="34" anchorY="33" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="70" Height="61" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Blood_Splatter_Alternate" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="17" posY="76" Width="34" Height="38" anchorX="16" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="34" Height="38" />
+      <Render posX="73" posY="74" Width="50" Height="45" anchorX="26" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="45" />
+      <Render posX="131" posY="72" Width="61" Height="53" anchorX="31" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="61" Height="52" />
+      <Render posX="197" posY="71" Width="66" Height="58" anchorX="33" anchorY="31" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="67" Height="58" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fire_Splatter" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="20" posY="146" Width="28" Height="30" anchorX="14" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="28" Height="31" />
+      <Render posX="77" posY="140" Width="41" Height="43" anchorX="21" anchorY="22" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="41" Height="43" />
+      <Render posX="138" posY="139" Width="49" Height="50" anchorX="25" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="50" />
+      <Render posX="198" posY="137" Width="56" Height="57" anchorX="29" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="57" Height="58" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Fire_Splatter_Alternate" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="18" posY="207" Width="27" Height="28" anchorX="13" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="26" Height="28" />
+      <Render posX="75" posY="203" Width="41" Height="42" anchorX="21" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="42" Height="43" />
+      <Render posX="128" posY="198" Width="57" Height="56" anchorX="29" anchorY="29" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="57" Height="56" />
+      <Render posX="189" posY="198" Width="61" Height="60" anchorX="29" anchorY="31" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="62" Height="60" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Splatter" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="16" posY="272" Width="34" Height="31" anchorX="18" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="34" Height="31" />
+      <Render posX="71" posY="267" Width="52" Height="43" anchorX="27" anchorY="23" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="53" Height="44" />
+      <Render posX="130" posY="264" Width="60" Height="48" anchorX="29" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="60" Height="48" />
+      <Render posX="192" posY="260" Width="66" Height="59" anchorX="32" anchorY="31" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="67" Height="59" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ice_Splatter_Alternate" Frames="4" repeat="0" Texture="sparks.png">
+    <Frame_Data>
+      <Render posX="16" posY="335" Width="32" Height="33" anchorX="15" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="33" />
+      <Render posX="74" posY="329" Width="45" Height="50" anchorX="23" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="44" Height="48" />
+      <Render posX="135" posY="326" Width="55" Height="56" anchorX="28" anchorY="27" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="56" Height="55" />
+      <Render posX="192" posY="326" Width="66" Height="61" anchorX="31" anchorY="33" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="66" Height="61" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
