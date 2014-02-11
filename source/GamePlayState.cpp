@@ -184,8 +184,9 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
-			pTemp->SetName("Snail");
-			pTemp->SetUnits(CreateTempEnemy("Snail", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetName("Thornbiter");
+			pTemp->GetAnimInfo()->SetAnimation("Thornbiter_Idle");
+			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Ogre", 200.0f, 350.0f, 5,  150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
 			
@@ -754,8 +755,8 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Thornbiter_Idle");
-	pTemp->SetCurrentFrame(0);
+	//pTemp->SetAnimation("Thornbiter_Idle");
+	//pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	if(input == "ManDrake")
 	{
@@ -822,6 +823,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Ogre")
 	{
 		pTemp->SetAnimation("Ogre_Battle_Idle");
+	}
+	else if (input == "Thornbiter")
+	{
+		pTemp->SetAnimation("Thornbiter_Battle_Idle");
 	}
 
 

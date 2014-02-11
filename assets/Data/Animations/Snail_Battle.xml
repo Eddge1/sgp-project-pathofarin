@@ -16,13 +16,13 @@
       <ActiveCollision posX="1" posY="0" Width="108" Height="96" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Snail_Battle_Taking_Damage" Frames="1" repeat="1" Texture="PC Computer - Maple Story - Moss Snail.png">
+  <Animation_Info Name="Snail_Battle_Taking_Damage" Frames="1" repeat="0" Texture="PC Computer - Maple Story - Moss Snail.png">
     <Frame_Data>
       <Render posX="2" posY="226" Width="144" Height="120" anchorX="20" anchorY="115" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="0" Width="145" Height="120" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Snail_Battle_Basic_Attack" Frames="12" repeat="1" Texture="PC Computer - Maple Story - Moss Snail.png">
+  <Animation_Info Name="Snail_Battle_Basic_Attack" Frames="12" repeat="0" Texture="PC Computer - Maple Story - Moss Snail.png">
     <Frame_Data>
       <Render posX="1" posY="114" Width="107" Height="97" anchorX="15" anchorY="91" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="107" Height="97" />
