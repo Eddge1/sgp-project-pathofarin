@@ -1,6 +1,7 @@
 #include "Chest.h"
 #include "GamePlayState.h"
 #include "AnimationSystem.h"
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 
 
 
@@ -13,6 +14,7 @@ CChest::CChest(void)
 	SetType(OBJ_CHEST);
 	SetRender(true);
 	SetActive(true);
+	m_nSound = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/General/POA_Chest_Open.wav"));
 }
 
 
@@ -59,6 +61,7 @@ void CChest::HandleCollision(CObjects* col)
 		{
 			m_bCollided = true;
 			this->GetAnimInfo()->SetAnimation("Chest_Opening");
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
 		}
 	}
 
