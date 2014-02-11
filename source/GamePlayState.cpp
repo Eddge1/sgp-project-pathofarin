@@ -107,6 +107,11 @@ void CGamePlayState::Activate(void)
 				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
 
 			}
+
+			LoadUnits();
+			LoadNPCs();
+
+
 			CNpcs* pTemp = new CNpcs();
 			LoadWorld();
 			m_sCurrWorld = "Level2.xml";
@@ -790,8 +795,6 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Tree")
 	{
 		delete tempAI;
-		//CAIOrcLeader* OrcTemp = new CAIOrcLeader;
-		//CAITigerlily* TigerTemp = new CAITigerlily;
 		CAIValrion* Inferno = new CAIValrion;
 		tempAI = reinterpret_cast<CAIController*>(Inferno);
 		Inferno = nullptr;
@@ -952,7 +955,7 @@ void CGamePlayState::LoadNPCs(void)
 		char cFile[128] = "assets/Data/NPCS/";
 		for(int i = 0; i < 128; i++)
 		{
-			cFile[i + 19] = char(fileSearch.cFileName[i]);
+			cFile[i + 17] = char(fileSearch.cFileName[i]);
 			if(fileSearch.cFileName[i] == '\0')
 				break;
 			szInput += char(fileSearch.cFileName[i]);
@@ -972,11 +975,10 @@ void CGamePlayState::LoadNPCs(void)
 		string szHostile = "";
 		int nUnits = 0;
 
-		TiXmlElement *pNPC = pRoot->FirstChildElement("NPC");
-		szName = pNPC->Attribute("Name");
-		szHostile = pNPC->Attribute("Hostile");
-		pNPC->Attribute("Units", &nUnits);
-		pNPC->Attribute("Total_Conversations", &nConversations);
+		szName = pRoot->Attribute("Name");
+		szHostile = pRoot->Attribute("Hostile");
+		pRoot->Attribute("Units", &nUnits);
+		pRoot->Attribute("Total_Conversations", &nConversations);
 
 		pTempNpc->SetName(szName);
 
@@ -986,7 +988,7 @@ void CGamePlayState::LoadNPCs(void)
 			pTempNpc->SetHostile(false);
 
 
-		TiXmlElement *pConvo = pNPC->FirstChildElement("Convo");
+		TiXmlElement *pConvo = pRoot->FirstChildElement("Convo");
 		if(pConvo != nullptr)
 		{
 			for(int i = 0; i < nConversations; i++)
@@ -999,7 +1001,7 @@ void CGamePlayState::LoadNPCs(void)
 			}
 		}
 
-		TiXmlElement *pUnit = pNPC->FirstChildElement("Unit");
+		TiXmlElement *pUnit = pRoot->FirstChildElement("Unit");
 		if(pUnit != nullptr)
 		{
 			for(int i = 0; i < nUnits; i++)
@@ -1031,7 +1033,7 @@ void CGamePlayState::LoadUnits(void)
 		char cFile[128] = "assets/Data/Units/";
 		for(int i = 0; i < 128; i++)
 		{
-			cFile[i + 19] = char(fileSearch.cFileName[i]);
+			cFile[i + 18] = char(fileSearch.cFileName[i]);
 			if(fileSearch.cFileName[i] == '\0')
 				break;
 			szInput += char(fileSearch.cFileName[i]);
@@ -1044,9 +1046,101 @@ void CGamePlayState::LoadUnits(void)
 		if(pRoot == nullptr)
 			return;
 
+		CEnemyUnit* pTempUnit = new CEnemyUnit();
+		string szName = "";
+		int nHealth = 0;
+		int nAP = 0;
+		int nAttack =0;
+		int nEXP = 0;
+		int nSpeed = 1;
+		int nLevel = 0;
+		string szAI = "";
+		int nTotalItems = 0;
+
+		szName = pRoot->Attribute("Name");
+		szAI = pRoot->Attribute("AI");
+		pRoot->Attribute("Health",&nHealth);
+		pRoot->Attribute("AP",&nAP);
+		pRoot->Attribute("Attack",&nAttack);
+		pRoot->Attribute("Exp",&nEXP);
+		pRoot->Attribute("Speed",&nSpeed);
+		pRoot->Attribute("Level",&nLevel);
+		pRoot->Attribute("Total_Items",&nTotalItems);
+		pTempUnit->SetName(szName);
+		pTempUnit->SetMaxHealth(nHealth);
+		pTempUnit->SetMaxAP(nAP);
+		pTempUnit->SetAttack(nAttack);
+		pTempUnit->SetLevel(nLevel);
+		pTempUnit->GiveExperience(nEXP);
+		pTempUnit->SetSpeed(nSpeed);
+		CBasicAttack* tempAtk = new CBasicAttack;
+		CAIController* tempAI = new CAIController();
+		if(szAI == "Minion Melee")
+		{
+			CAIController* pAI = new CAIController();
+		}
+		else if(szAI == "Brute")
+		{
+			delete tempAI;
+			CAIBrute* Temp = new CAIBrute;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+		}
+		else if( szAI == "BasicHealer")
+		{
+			delete tempAI;
+			CAIBasicHealer* Temp = new CAIBasicHealer;
+			tempAI = reinterpret_cast<CAIController*>(Temp);
+			Temp = nullptr;
+			pTempUnit->SetType(OBJ_LEADER);
+		}
+		else if( szAI == "OrcLeader")
+		{
+			delete tempAI;
+			CAIOrcLeader* Inferno = new CAIOrcLeader;
+			tempAI = reinterpret_cast<CAIController*>(Inferno);
+			Inferno = nullptr;
+			pTempUnit->SetType(OBJ_LEADER);
+
+		}
+		else if(szAI == "TigerLily")
+		{
+			delete tempAI;
+			CAITigerlily* Inferno = new CAITigerlily;
+			tempAI = reinterpret_cast<CAIController*>(Inferno);
+			Inferno = nullptr;
+			pTempUnit->SetType(OBJ_LEADER);
+		}
+		else if(szAI == "Valrion")
+		{
+			delete tempAI;
+			CAIValrion* Inferno = new CAIValrion;
+			tempAI = reinterpret_cast<CAIController*>(Inferno);
+			Inferno = nullptr;
+			pTempUnit->SetType(OBJ_LEADER);
+		}
+		tempAI->AddMinigame(tempAtk);
+		tempAI->MakeOwner(pTempUnit);
+		pTempUnit->SetAIController(tempAI);
+
+		TiXmlElement *pItems = pRoot->FirstChildElement("Item");
+		{
+			if(pItems != nullptr)
+			{
+
+				for(int i = 0; i < nTotalItems; i++)
+				{
+					if(pItems != nullptr)
+					{
 
 
+					}
+					pItems = pItems->NextSiblingElement("Item");
+				}
+			}
+		}
 
+		m_mUnitsManager[szName] = pTempUnit;
 	}while(FindNextFile(hFile, &fileSearch));
 }
 
