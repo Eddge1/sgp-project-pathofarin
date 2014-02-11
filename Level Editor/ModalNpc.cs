@@ -35,6 +35,7 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xHostile = xRoot.Attribute("Hostile");
                 XAttribute xTotalUnits = xRoot.Attribute("Units");
                 XAttribute xFileName = xRoot.Attribute("File");
+                tempNPC.FileName = xFileName.Value;
                 IEnumerable<XElement> xConvos = xRoot.Elements("Convo");
 
                 tempNPC.Name = xName.Value;
@@ -285,6 +286,7 @@ namespace SGP_PoA_LevelEditor
                 xRoot.Add(xName);
                 xRoot.Add(xHostile);
                 xRoot.Add(xTotalUnits);
+                xRoot.Add(xFileName);
 
                 foreach (myConvo mc in npc.MyConvos)
                 {
@@ -308,7 +310,7 @@ namespace SGP_PoA_LevelEditor
                         xRoot.Add(xUnit);
                     }
                 }
-                string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\" + npc.Name + ".xml");
+                string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\" + npc.FileName + ".xml");
                 xRoot.Save(temp);
 
             }

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Pathetic_Orc" Hostile="true" Units="3" File="AllPathOrc">
+  <Unit Name="Pathetic_Orc" />
+  <Unit Name="Pathetic_Orc" />
+  <Unit Name="Pathetic_Orc" />
+</NPC>

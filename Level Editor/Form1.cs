@@ -1567,10 +1567,9 @@ namespace SGP_PoA_LevelEditor
             if (DialogResult.OK == nEdit.ShowDialog())
             {
                 lstNPC.Items.Clear();
-                foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\", "*.xml"))
+                foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\NPCS\\", "*.xml").Select(Path.GetFileName))
                 {
                     string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
-                    lstMaps.Items.Add(szTemp);
                     lstNPC.Items.Add(szTemp);
                 }
             }

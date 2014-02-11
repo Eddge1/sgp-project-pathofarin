@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<NPC Total_Conversations="0" Name="Snail" Hostile="true" Units="3">
+<NPC Total_Conversations="0" Name="Snail" Hostile="true" Units="3" File="AllSnail">
   <Unit Name="Snail" />
   <Unit Name="Snail" />
   <Unit Name="Snail" />
