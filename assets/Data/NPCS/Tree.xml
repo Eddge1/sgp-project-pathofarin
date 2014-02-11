@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<NPC Total_Conversations="0" Name="Tree" Hostile="true" Units="3">
-  <Unit Name="Snail" />
-  <Unit Name="Tree" />
-  <Unit Name="Snail" />
-</NPC>

@@ -79,6 +79,8 @@
             this.lstUnitSelection = new System.Windows.Forms.ListBox();
             this.btnNewUnit = new System.Windows.Forms.Button();
             this.btnNewNPC = new System.Windows.Forms.Button();
+            this.txtFileName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.grpUnitList.SuspendLayout();
             this.grpUnits.SuspendLayout();
@@ -132,6 +134,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtFileName);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.grpUnitList);
             this.groupBox1.Controls.Add(this.btnConvoDel);
             this.groupBox1.Controls.Add(this.txtEvent);
@@ -266,7 +270,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(26, 211);
+            this.checkBox1.Location = new System.Drawing.Point(26, 251);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(58, 17);
             this.checkBox1.TabIndex = 4;
@@ -276,7 +280,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(13, 185);
+            this.txtName.Location = new System.Drawing.Point(13, 225);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 20);
             this.txtName.TabIndex = 3;
@@ -284,7 +288,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 169);
+            this.label3.Location = new System.Drawing.Point(10, 209);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 2;
@@ -320,7 +324,7 @@
             this.grpUnits.Controls.Add(this.label8);
             this.grpUnits.Controls.Add(this.label7);
             this.grpUnits.Controls.Add(this.groupBox2);
-            this.grpUnits.Location = new System.Drawing.Point(191, 13);
+            this.grpUnits.Location = new System.Drawing.Point(716, 329);
             this.grpUnits.Name = "grpUnits";
             this.grpUnits.Size = new System.Drawing.Size(519, 222);
             this.grpUnits.TabIndex = 8;
@@ -674,6 +678,22 @@
             this.btnNewNPC.UseVisualStyleBackColor = true;
             this.btnNewNPC.Click += new System.EventHandler(this.btnNewNPC_Click);
             // 
+            // txtFileName
+            // 
+            this.txtFileName.Location = new System.Drawing.Point(13, 186);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.Size = new System.Drawing.Size(100, 20);
+            this.txtFileName.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 170);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "File Name";
+            // 
             // ModalNpc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -768,5 +788,7 @@
         private System.Windows.Forms.ListBox lstUnitSelection;
         private System.Windows.Forms.Button btnNewUnit;
         private System.Windows.Forms.Button btnNewNPC;
+        private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.Label label2;
     }
 }

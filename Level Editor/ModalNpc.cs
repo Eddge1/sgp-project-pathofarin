@@ -34,6 +34,7 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xName = xRoot.Attribute("Name");
                 XAttribute xHostile = xRoot.Attribute("Hostile");
                 XAttribute xTotalUnits = xRoot.Attribute("Units");
+                XAttribute xFileName = xRoot.Attribute("File");
                 IEnumerable<XElement> xConvos = xRoot.Elements("Convo");
 
                 tempNPC.Name = xName.Value;
@@ -61,6 +62,7 @@ namespace SGP_PoA_LevelEditor
                     temporary.Name = xUnitName.Value;
                     tempNPC.Units.Add(temporary);
                 }
+
                 string szFileName = Path.GetFileName(szMapID);
                 string szTemp = szFileName.Remove(szFileName.Length - 4, 4);
                 lstNPC.Items.Add(tempNPC);
@@ -133,6 +135,7 @@ namespace SGP_PoA_LevelEditor
         {
             if (lstNPC.SelectedIndex >= 0)
             {
+                lstAddUnit.Items.Clear();
                 lstUnitSelection.SelectedIndex = -1;
                 grpUnits.Visible = false;
                 groupBox1.Visible = true;
@@ -150,6 +153,7 @@ namespace SGP_PoA_LevelEditor
                     lstAddUnit.Items.Add(tempUnit);
                 }
                 txtName.Text = tempNPC.Name;
+                txtFileName.Text = tempNPC.FileName;
 
             }
         }
@@ -209,6 +213,7 @@ namespace SGP_PoA_LevelEditor
             tempNPC = new myNPC();
             tempNPC.MyConvos = new List<myConvo>();
             tempNPC.Units = new List<myUnits>();
+            tempNPC.FileName = txtFileName.Text;
 
             for (int i = 0; i < lstConversation.Items.Count; i++)
             {
@@ -275,7 +280,7 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xName = new XAttribute("Name", npc.Name);
                 XAttribute xHostile = new XAttribute("Hostile", npc.IsHostile);
                 XAttribute xTotalUnits = new XAttribute("Units", npc.Units.Count);
-
+                XAttribute xFileName = new XAttribute("File", npc.FileName);
                 xRoot.Add(xTotalConvo);
                 xRoot.Add(xName);
                 xRoot.Add(xHostile);

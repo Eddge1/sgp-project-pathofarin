@@ -98,9 +98,16 @@ namespace SGP_PoA_LevelEditor
         bool moves;
         bool isHostile;
         string animation;
+        string fileName;
         List<myUnits> units;
         List<Point> waypoints;
         List<myConvo> lConvos;
+
+        public string FileName
+        {
+            get { return fileName; }
+            set { fileName = value; }
+        }
 
         internal List<myConvo> MyConvos
         {
@@ -146,7 +153,7 @@ namespace SGP_PoA_LevelEditor
 
         public override string ToString()
         {
-            return Name;
+            return FileName;
         }
     }
 
