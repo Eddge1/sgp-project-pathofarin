@@ -107,6 +107,8 @@ namespace SGP_PoA_LevelEditor
                 string szTemp = szFileName.Remove(szFileName.Length - 4, 4);
                 lstUnitSelection.Items.Add(tempUnit);
             }
+
+            cmb_AI.Items.Add("Minion Melee");
             cmb_AI.Items.Add("Brute");
             cmb_AI.Items.Add("BasicHealer");
             cmb_AI.Items.Add("OrcLeader");
