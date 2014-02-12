@@ -108,8 +108,8 @@ void CGamePlayState::Activate(void)
 
 			}
 
-			LoadUnits();
-			LoadNPCs();
+			//LoadUnits();
+			//LoadNPCs();
 
 
 			CNpcs* pTemp = new CNpcs();
@@ -128,7 +128,7 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Orc_Leader", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Tree", 200.0f,		  350.0f, 25, 500, 20, 25));
+			pTemp->SetUnits(CreateTempEnemy("Tree",		  200.0f, 350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -693,7 +693,27 @@ void CGamePlayState::LoadWorld(void)
 											if(pOtherUnits != nullptr)
 											{
 												szUnitName = pOtherUnits->Attribute("Name");
-												CEnemyUnit* pEUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(szUnitName));
+												CEnemyUnit* pEUnit = reinterpret_cast<CEnemyUnit*>(LoadUnit(szUnitName));
+												if(pEUnit != nullptr)
+												{
+													if(i == 0)
+													{
+														pEUnit->SetPosX(100.0f);
+														pEUnit->SetPosY(250.0f);
+													}
+													else if(i == 1)
+													{
+														pEUnit->SetPosX(200.0f);
+														pEUnit->SetPosY(350.0f);
+													}
+													else if(i == 2)
+													{
+														pEUnit->SetPosX(100.0f);
+														pEUnit->SetPosY(400.0f);
+													}
+													pNpc->SetUnits(pEUnit);
+
+												}
 												szUnitName = "";
 											}
 											pOtherUnits = pOtherUnits->NextSiblingElement("Unit");
@@ -1013,254 +1033,220 @@ CConsumable* CGamePlayState::CreatePotion(string input)
 
 }
 
-void CGamePlayState::LoadNPCs(void)
+//void CGamePlayState::LoadNPCs(void)
+//{
+//	WIN32_FIND_DATA fileSearch;
+//	HANDLE hFile;
+//	WCHAR cDirectory[] = L"assets/Data/NPCS/*.xml";
+//	hFile = FindFirstFile(cDirectory,&fileSearch);
+//
+//	do
+//	{
+//		std::string szInput;
+//		char cFile[128] = "assets/Data/NPCS/";
+//		for(int i = 0; i < 128; i++)
+//		{
+//			cFile[i + 17] = char(fileSearch.cFileName[i]);
+//			if(fileSearch.cFileName[i] == '\0')
+//				break;
+//			szInput += char(fileSearch.cFileName[i]);
+//		}
+//		TiXmlDocument doc;
+//		if(doc.LoadFile(cFile) == false)
+//			return;
+//
+//		TiXmlElement *pRoot = doc.RootElement();
+//		if(pRoot == nullptr)
+//			return;
+//
+//		CNpcs *pTempNpc = new CNpcs();
+//
+//		int nConversations = 0;
+//		string szName = "";
+//		string szHostile = "";
+//		int nUnits = 0;
+//
+//		szName = pRoot->Attribute("Name");
+//		szHostile = pRoot->Attribute("Hostile");
+//		pRoot->Attribute("Units", &nUnits);
+//		pRoot->Attribute("Total_Conversations", &nConversations);
+//
+//		pTempNpc->SetName(szName);
+//
+//		if(szHostile == "true")
+//			pTempNpc->SetHostile(true);
+//		else
+//			pTempNpc->SetHostile(false);
+//
+//
+//		TiXmlElement *pConvo = pRoot->FirstChildElement("Convo");
+//		if(pConvo != nullptr)
+//		{
+//			for(int i = 0; i < nConversations; i++)
+//			{
+//				if(pConvo != nullptr)
+//				{
+//					/////////// TO DO ADD IN WHEN WE START CONVERSATIONS
+//				}
+//				pConvo = pConvo->NextSiblingElement("Convo");
+//			}
+//		}
+//
+//		TiXmlElement *pUnit = pRoot->FirstChildElement("Unit");
+//		if(pUnit != nullptr)
+//		{
+//			for(int i = 0; i < nUnits; i++)
+//			{
+//				if(pUnit != nullptr)
+//				{
+//					CEnemyUnit* pTempBattle = reinterpret_cast<CEnemyUnit*>(GetUnit(szName));
+//					if(pTempBattle != nullptr)
+//						pTempNpc->SetUnits(pTempBattle);
+//				}
+//				pUnit = pUnit->NextSiblingElement("Unit");
+//			}
+//		}
+//
+//		m_mNPCManager[szName] = pTempNpc;
+//
+//	}while(FindNextFile(hFile, &fileSearch));
+//}
+
+CUnits* CGamePlayState::LoadUnit(string szFileName)
 {
-	WIN32_FIND_DATA fileSearch;
-	HANDLE hFile;
-	WCHAR cDirectory[] = L"assets/Data/NPCS/*.xml";
-	hFile = FindFirstFile(cDirectory,&fileSearch);
-
-	do
-	{
-		std::string szInput;
-		char cFile[128] = "assets/Data/NPCS/";
-		for(int i = 0; i < 128; i++)
-		{
-			cFile[i + 17] = char(fileSearch.cFileName[i]);
-			if(fileSearch.cFileName[i] == '\0')
-				break;
-			szInput += char(fileSearch.cFileName[i]);
-		}
-		TiXmlDocument doc;
-		if(doc.LoadFile(cFile) == false)
-			return;
-
-		TiXmlElement *pRoot = doc.RootElement();
-		if(pRoot == nullptr)
-			return;
-
-		CNpcs *pTempNpc = new CNpcs();
-
-		int nConversations = 0;
-		string szName = "";
-		string szHostile = "";
-		int nUnits = 0;
-
-		szName = pRoot->Attribute("Name");
-		szHostile = pRoot->Attribute("Hostile");
-		pRoot->Attribute("Units", &nUnits);
-		pRoot->Attribute("Total_Conversations", &nConversations);
-
-		pTempNpc->SetName(szName);
-
-		if(szHostile == "true")
-			pTempNpc->SetHostile(true);
-		else
-			pTempNpc->SetHostile(false);
-
-
-		TiXmlElement *pConvo = pRoot->FirstChildElement("Convo");
-		if(pConvo != nullptr)
-		{
-			for(int i = 0; i < nConversations; i++)
-			{
-				if(pConvo != nullptr)
-				{
-					/////////// TO DO ADD IN WHEN WE START CONVERSATIONS
-				}
-				pConvo = pConvo->NextSiblingElement("Convo");
-			}
-		}
-
-		TiXmlElement *pUnit = pRoot->FirstChildElement("Unit");
-		if(pUnit != nullptr)
-		{
-			for(int i = 0; i < nUnits; i++)
-			{
-				if(pUnit != nullptr)
-				{
-					CEnemyUnit* pTempBattle = reinterpret_cast<CEnemyUnit*>(GetUnit(szName));
-					if(pTempBattle != nullptr)
-						pTempNpc->SetUnits(pTempBattle);
-				}
-				pUnit = pUnit->NextSiblingElement("Unit");
-			}
-		}
-
-		m_mNPCManager[szName] = pTempNpc;
-
-	}while(FindNextFile(hFile, &fileSearch));
-}
-
-void CGamePlayState::LoadUnits(void)
-{
-	WIN32_FIND_DATA fileSearch;
-	HANDLE hFile;
-	WCHAR cDirectory[] = L"assets/Data/Units/*.xml";
-	hFile = FindFirstFile(cDirectory,&fileSearch);
-	do
-	{
-		std::string szInput;
-		char cFile[128] = "assets/Data/Units/";
-		for(int i = 0; i < 128; i++)
-		{
-			cFile[i + 18] = char(fileSearch.cFileName[i]);
-			if(fileSearch.cFileName[i] == '\0')
-				break;
-			szInput += char(fileSearch.cFileName[i]);
-		}
-		TiXmlDocument doc;
-		if(doc.LoadFile(cFile) == false)
-			return;
-
-		TiXmlElement *pRoot = doc.RootElement();
-		if(pRoot == nullptr)
-			return;
-
-		CEnemyUnit* pTempUnit = new CEnemyUnit();
-		string szName = "";
-		int nHealth = 0;
-		int nAP = 0;
-		int nAttack =0;
-		int nEXP = 0;
-		int nSpeed = 1;
-		int nLevel = 0;
-		string szAI = "";
-		int nTotalItems = 0;
-
-		szName = pRoot->Attribute("Name");
-		szAI = pRoot->Attribute("AI");
-		pRoot->Attribute("Health",&nHealth);
-		pRoot->Attribute("AP",&nAP);
-		pRoot->Attribute("Attack",&nAttack);
-		pRoot->Attribute("Exp",&nEXP);
-		pRoot->Attribute("Speed",&nSpeed);
-		pRoot->Attribute("Level",&nLevel);
-		pRoot->Attribute("Total_Items",&nTotalItems);
-		pTempUnit->SetName(szName);
-		pTempUnit->SetMaxHealth(nHealth);
-		pTempUnit->SetMaxAP(nAP);
-		pTempUnit->SetAttack(nAttack);
-		pTempUnit->SetLevel(nLevel);
-		pTempUnit->GiveExperience(nEXP);
-		pTempUnit->SetSpeed(nSpeed);
-		CBasicAttack* tempAtk = new CBasicAttack;
-		CAIController* tempAI = new CAIController();
-		if(szAI == "Minion Melee")
-		{
-			CAIController* pAI = new CAIController();
-		}
-		else if(szAI == "Brute")
-		{
-			delete tempAI;
-			CAIBrute* Temp = new CAIBrute;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-		}
-		else if( szAI == "BasicHealer")
-		{
-			delete tempAI;
-			CAIBasicHealer* Temp = new CAIBasicHealer;
-			tempAI = reinterpret_cast<CAIController*>(Temp);
-			Temp = nullptr;
-			pTempUnit->SetType(OBJ_LEADER);
-		}
-		else if( szAI == "OrcLeader")
-		{
-			delete tempAI;
-			CAIOrcLeader* Inferno = new CAIOrcLeader;
-			tempAI = reinterpret_cast<CAIController*>(Inferno);
-			Inferno = nullptr;
-			pTempUnit->SetType(OBJ_LEADER);
-
-		}
-		else if(szAI == "TigerLily")
-		{
-			delete tempAI;
-			CAITigerlily* Inferno = new CAITigerlily;
-			tempAI = reinterpret_cast<CAIController*>(Inferno);
-			Inferno = nullptr;
-			pTempUnit->SetType(OBJ_LEADER);
-		}
-		else if(szAI == "Valrion")
-		{
-			delete tempAI;
-			CAIValrion* Inferno = new CAIValrion;
-			tempAI = reinterpret_cast<CAIController*>(Inferno);
-			Inferno = nullptr;
-			pTempUnit->SetType(OBJ_LEADER);
-		}
-		tempAI->AddMinigame(tempAtk);
-		tempAI->MakeOwner(pTempUnit);
-		pTempUnit->SetAIController(tempAI);
-
-		TiXmlElement *pItems = pRoot->FirstChildElement("Item");
-		{
-			if(pItems != nullptr)
-			{
-
-				for(int i = 0; i < nTotalItems; i++)
-				{
-					if(pItems != nullptr)
-					{
-
-
-					}
-					pItems = pItems->NextSiblingElement("Item");
-				}
-			}
-		}
-
-		m_mUnitsManager[szName] = pTempUnit;
-	}while(FindNextFile(hFile, &fileSearch));
-}
-
-CUnits* CGamePlayState::GetUnit(std::string szUnit)
-{
-	if(szUnit == "")
-		return nullptr;
-	CEnemyUnit* pTemp = new CEnemyUnit();
-
-	pTemp->SetName(szUnit);
-	pTemp->SetAttack(m_mUnitsManager[szUnit]->GetAttack());
-	pTemp->SetLevel(m_mUnitsManager[szUnit]->GetLevel());
-	pTemp->GiveExperience(m_mUnitsManager[szUnit]->GetExperience());
-	pTemp->SetMaxHealth(m_mUnitsManager[szUnit]->GetMaxHealth());
-	pTemp->SetMaxAP(m_mUnitsManager[szUnit]->GetMaxAP());
-	string szTemp = szUnit + "_Battle_Idle";
-
-	pTemp->GetAnimInfo()->SetAnimation(szTemp);
-	map<string, InventoryItems>* vTemp = m_mUnitsManager[szUnit]->GetInv();
-	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
-	{
-		pTemp->AddConsumableItem(i->second.Item, i->second.DropChance);
-	}
-
-	CAIController* pNew = new CAIController();
-	pTemp->SetAIController(pNew);
-
-	return pTemp;
-}
-
-CNpcs* CGamePlayState::GetNpc(std::string szNpc)
-{
-	if(szNpc == "")
+	string szFile = "assets/Data/Units/" + szFileName + ".xml";
+	TiXmlDocument doc;
+	if(doc.LoadFile(szFile.c_str()) == false)
 		return nullptr;
 
-	CNpcs* pTemp = new CNpcs();
-	pTemp->SetName(szNpc);
-	std::vector<CEnemyUnit*>& vTemp = m_mNPCManager[szNpc]->GetUnits();
-	CEnemyUnit* pTempUnit;
-	
-	string szTemp = szNpc + "_Idle";
+	TiXmlElement *pRoot = doc.RootElement();
+	if(pRoot == nullptr)
+		return nullptr;
+
+	CEnemyUnit* pTempUnit = new CEnemyUnit();
+	string szName = "";
+	int nHealth = 0;
+	int nAP = 0;
+	int nAttack =0;
+	int nEXP = 0;
+	int nSpeed = 1;
+	int nLevel = 0;
+	string szAI = "";
+	int nTotalItems = 0;
+
+	szName = pRoot->Attribute("Name");
+	szAI = pRoot->Attribute("AI");
+	pRoot->Attribute("Health",&nHealth);
+	pRoot->Attribute("AP",&nAP);
+	pRoot->Attribute("Attack",&nAttack);
+	pRoot->Attribute("Exp",&nEXP);
+	pRoot->Attribute("Speed",&nSpeed);
+	pRoot->Attribute("Level",&nLevel);
+	pRoot->Attribute("Total_Items",&nTotalItems);
+	pTempUnit->SetName(szName);
+	pTempUnit->SetMaxHealth(nHealth);
+	pTempUnit->SetMaxAP(nAP);
+	pTempUnit->SetAttack(nAttack);
+	pTempUnit->SetLevel(nLevel);
+	pTempUnit->GiveExperience(nEXP);
+	pTempUnit->SetSpeed(nSpeed);
+
+	string szTemp = szFileName + "_Battle_Idle";
 	pTempUnit->GetAnimInfo()->SetAnimation(szTemp);
 
-	for(unsigned int i = 0; i < vTemp.size(); i++)
+	CBasicAttack* tempAtk = new CBasicAttack;
+	CAIController* tempAI = new CAIController();
+	if(szAI == "Minion Melee")
 	{
-		pTempUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(vTemp[i]->GetName()));
-		if(pTempUnit!= nullptr)
-			pTemp->SetUnits(pTempUnit);
+		CAIController* pAI = new CAIController();
+	}
+	else if(szAI == "Brute")
+	{
+		delete tempAI;
+		CAIBrute* Temp = new CAIBrute;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+	}
+	else if( szAI == "BasicHealer")
+	{
+		delete tempAI;
+		CAIBasicHealer* Temp = new CAIBasicHealer;
+		tempAI = reinterpret_cast<CAIController*>(Temp);
+		Temp = nullptr;
+		pTempUnit->SetType(OBJ_LEADER);
+	}
+	else if( szAI == "OrcLeader")
+	{
+		delete tempAI;
+		CAIOrcLeader* Inferno = new CAIOrcLeader;
+		tempAI = reinterpret_cast<CAIController*>(Inferno);
+		Inferno = nullptr;
+		pTempUnit->SetType(OBJ_LEADER);
+
+	}
+	else if(szAI == "TigerLily")
+	{
+		delete tempAI;
+		CAITigerlily* Inferno = new CAITigerlily;
+		tempAI = reinterpret_cast<CAIController*>(Inferno);
+		Inferno = nullptr;
+		pTempUnit->SetType(OBJ_LEADER);
+	}
+	else if(szAI == "Valrion")
+	{
+		delete tempAI;
+		CAIValrion* Inferno = new CAIValrion;
+		tempAI = reinterpret_cast<CAIController*>(Inferno);
+		Inferno = nullptr;
+		pTempUnit->SetType(OBJ_LEADER);
+	}
+	tempAI->AddMinigame(tempAtk);
+	tempAI->MakeOwner(pTempUnit);
+	pTempUnit->SetAIController(tempAI);
+
+	TiXmlElement *pItems = pRoot->FirstChildElement("Item");
+	{
+		if(pItems != nullptr)
+		{
+
+			for(int i = 0; i < nTotalItems; i++)
+			{
+				if(pItems != nullptr)
+				{
+
+
+				}
+				pItems = pItems->NextSiblingElement("Item");
+			}
+		}
 	}
 
-	return pTemp;
+	return pTempUnit;
 }
+
+//CUnits* CGamePlayState::GetUnit(std::string szUnit)
+//{
+//	if(szUnit == "")
+//		return nullptr;
+//	CEnemyUnit* pTemp = new CEnemyUnit();
+//
+//	pTemp->SetName(szUnit);
+//	pTemp->SetAttack(m_mUnitsManager[szUnit]->GetAttack());
+//	pTemp->SetLevel(m_mUnitsManager[szUnit]->GetLevel());
+//	pTemp->GiveExperience(m_mUnitsManager[szUnit]->GetExperience());
+//	pTemp->SetMaxHealth(m_mUnitsManager[szUnit]->GetMaxHealth());
+//	pTemp->SetMaxAP(m_mUnitsManager[szUnit]->GetMaxAP());
+//	string szTemp = szUnit + "_Battle_Idle";
+//
+//	pTemp->GetAnimInfo()->SetAnimation(szTemp);
+//	map<string, InventoryItems>* vTemp = m_mUnitsManager[szUnit]->GetInv();
+//	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
+//	{
+//		pTemp->AddConsumableItem(i->second.Item, i->second.DropChance);
+//	}
+//
+//	CAIController* pNew = new CAIController();
+//	pTemp->SetAIController(pNew);
+//
+//	return pTemp;
+//}
