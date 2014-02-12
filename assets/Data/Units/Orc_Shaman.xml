@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Orc_Shaman" Health="250" Ap="1" Attack="20" Exp="200" Speed="10" Level="4" AI="BasicHealer" Total_Items="1">
+  <Item Name="Titan-Ether" Chance="100" />
+</Unit>

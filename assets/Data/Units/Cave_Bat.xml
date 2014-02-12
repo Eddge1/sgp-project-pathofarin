@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Cave_Bat" Health="375" Ap="1" Attack="40" Exp="360" Speed="10" Level="7" AI="BasicHealer" Total_Items="1">
+  <Item Name="Hi-Ether" Chance="30" />
+</Unit>

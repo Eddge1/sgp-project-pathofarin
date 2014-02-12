@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Orc_Leader" Hostile="true" Units="3" File="OrcLeader">
+  <Unit Name="Orc_Shaman" />
+  <Unit Name="Orc_Leader" />
+  <Unit Name="Orc" />
+</NPC>

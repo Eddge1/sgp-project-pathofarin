@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="TigerLily_Idle" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
+      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
+      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
+      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
+      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TigerLily_Walk_Up" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
+      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
+      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
+      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
+      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TigerLily_Walk_Down" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
+      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
+      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
+      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
+      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TigerLily_Walk_Left" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
+      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
+      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
+      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
+      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="TigerLily_Walk_Right" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+    <Frame_Data>
+      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
+      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
+      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
+      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
+      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

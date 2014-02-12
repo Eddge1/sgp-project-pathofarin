@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Ogre" Health="500" Ap="1" Attack="65" Exp="720" Speed="2" Level="8" AI="Brute" Total_Items="2">
+  <Item Name="Hi-Potion" Chance="80" />
+  <Item Name="Titan-Potion" Chance="2" />
+</Unit>
