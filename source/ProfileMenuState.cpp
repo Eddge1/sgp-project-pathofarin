@@ -9,6 +9,7 @@
 #include "BasicAttack.h"
 #include "TriggerSpree.h"
 #include "TriggerMatch.h"
+#include "ChargeCrystal.h"
 #include "ComboGame.h"
 #include "UseItem.h"
 
@@ -454,7 +455,7 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 	string szSaveName = CGame::GetInstance()->GetSafePath();
 	szSaveName += szFileName;
 	doc.SaveFile(szSaveName.c_str());
-	}
+}
 
 CPlayer* CProfileMenuState::CreatePlayer()
 {
@@ -531,6 +532,12 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 
+	pTest = new CCommands;
+	CChargeCrystal* pCrystal = new CChargeCrystal;
+	pTest->SetName("Test");
+	pTest->SetMiniGame(pCrystal);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
 
 	temp->AddSkill(tempC);
 	tempC = new CCommands;

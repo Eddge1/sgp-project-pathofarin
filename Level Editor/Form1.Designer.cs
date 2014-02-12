@@ -71,6 +71,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
+            this.lstNPC = new System.Windows.Forms.ListBox();
+            this.btnNPCMove = new System.Windows.Forms.Button();
+            this.btnNPCUnits = new System.Windows.Forms.Button();
+            this.btnNpcApply = new System.Windows.Forms.Button();
+            this.btnNpcCancel = new System.Windows.Forms.Button();
+            this.chkMoves = new System.Windows.Forms.CheckBox();
             this.grpBlock = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -81,12 +87,6 @@
             this.nudBlockY = new System.Windows.Forms.NumericUpDown();
             this.nudBlockX = new System.Windows.Forms.NumericUpDown();
             this.lstBlock = new System.Windows.Forms.ListBox();
-            this.lstNPC = new System.Windows.Forms.ListBox();
-            this.btnNPCMove = new System.Windows.Forms.Button();
-            this.btnNPCUnits = new System.Windows.Forms.Button();
-            this.btnNpcApply = new System.Windows.Forms.Button();
-            this.btnNpcCancel = new System.Windows.Forms.Button();
-            this.chkMoves = new System.Windows.Forms.CheckBox();
             this.grpWayPoints = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.radWPMove = new System.Windows.Forms.RadioButton();
@@ -119,6 +119,16 @@
             this.label19 = new System.Windows.Forms.Label();
             this.lstUnitAnimation = new System.Windows.Forms.ListBox();
             this.lstUnits = new System.Windows.Forms.ListBox();
+            this.grpChest = new System.Windows.Forms.GroupBox();
+            this.cmbItemChoice = new System.Windows.Forms.ComboBox();
+            this.lstItems = new System.Windows.Forms.ListBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnDelItem = new System.Windows.Forms.Button();
+            this.nudItems = new System.Windows.Forms.NumericUpDown();
+            this.label27 = new System.Windows.Forms.Label();
+            this.btnItemApply = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
@@ -143,6 +153,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).BeginInit();
+            this.grpChest.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudItems)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -152,7 +164,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1437, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1267, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -614,6 +626,69 @@
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
             // 
+            // lstNPC
+            // 
+            this.lstNPC.FormattingEnabled = true;
+            this.lstNPC.Location = new System.Drawing.Point(6, 21);
+            this.lstNPC.Name = "lstNPC";
+            this.lstNPC.Size = new System.Drawing.Size(207, 121);
+            this.lstNPC.TabIndex = 12;
+            // 
+            // btnNPCMove
+            // 
+            this.btnNPCMove.Enabled = false;
+            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
+            this.btnNPCMove.Name = "btnNPCMove";
+            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
+            this.btnNPCMove.TabIndex = 11;
+            this.btnNPCMove.Text = "Move";
+            this.btnNPCMove.UseVisualStyleBackColor = true;
+            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
+            // 
+            // btnNPCUnits
+            // 
+            this.btnNPCUnits.Enabled = false;
+            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
+            this.btnNPCUnits.Name = "btnNPCUnits";
+            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
+            this.btnNPCUnits.TabIndex = 10;
+            this.btnNPCUnits.Text = "Units";
+            this.btnNPCUnits.UseVisualStyleBackColor = true;
+            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
+            // 
+            // btnNpcApply
+            // 
+            this.btnNpcApply.Enabled = false;
+            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
+            this.btnNpcApply.Name = "btnNpcApply";
+            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
+            this.btnNpcApply.TabIndex = 8;
+            this.btnNpcApply.Text = "Apply";
+            this.btnNpcApply.UseVisualStyleBackColor = true;
+            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
+            // 
+            // btnNpcCancel
+            // 
+            this.btnNpcCancel.Enabled = false;
+            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
+            this.btnNpcCancel.Name = "btnNpcCancel";
+            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
+            this.btnNpcCancel.TabIndex = 7;
+            this.btnNpcCancel.Text = "Cancel";
+            this.btnNpcCancel.UseVisualStyleBackColor = true;
+            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
+            // 
+            // chkMoves
+            // 
+            this.chkMoves.AutoSize = true;
+            this.chkMoves.Location = new System.Drawing.Point(155, 151);
+            this.chkMoves.Name = "chkMoves";
+            this.chkMoves.Size = new System.Drawing.Size(58, 17);
+            this.chkMoves.TabIndex = 5;
+            this.chkMoves.Text = "Moves";
+            this.chkMoves.UseVisualStyleBackColor = true;
+            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
+            // 
             // grpBlock
             // 
             this.grpBlock.Controls.Add(this.label15);
@@ -752,69 +827,6 @@
             this.lstBlock.Size = new System.Drawing.Size(199, 134);
             this.lstBlock.TabIndex = 0;
             this.lstBlock.SelectedIndexChanged += new System.EventHandler(this.lstBlock_SelectedIndexChanged);
-            // 
-            // lstNPC
-            // 
-            this.lstNPC.FormattingEnabled = true;
-            this.lstNPC.Location = new System.Drawing.Point(6, 21);
-            this.lstNPC.Name = "lstNPC";
-            this.lstNPC.Size = new System.Drawing.Size(207, 121);
-            this.lstNPC.TabIndex = 12;
-            // 
-            // btnNPCMove
-            // 
-            this.btnNPCMove.Enabled = false;
-            this.btnNPCMove.Location = new System.Drawing.Point(119, 171);
-            this.btnNPCMove.Name = "btnNPCMove";
-            this.btnNPCMove.Size = new System.Drawing.Size(45, 23);
-            this.btnNPCMove.TabIndex = 11;
-            this.btnNPCMove.Text = "Move";
-            this.btnNPCMove.UseVisualStyleBackColor = true;
-            this.btnNPCMove.Click += new System.EventHandler(this.btnNPCMove_Click);
-            // 
-            // btnNPCUnits
-            // 
-            this.btnNPCUnits.Enabled = false;
-            this.btnNPCUnits.Location = new System.Drawing.Point(64, 170);
-            this.btnNPCUnits.Name = "btnNPCUnits";
-            this.btnNPCUnits.Size = new System.Drawing.Size(49, 23);
-            this.btnNPCUnits.TabIndex = 10;
-            this.btnNPCUnits.Text = "Units";
-            this.btnNPCUnits.UseVisualStyleBackColor = true;
-            this.btnNPCUnits.Click += new System.EventHandler(this.btnNPCUnits_Click);
-            // 
-            // btnNpcApply
-            // 
-            this.btnNpcApply.Enabled = false;
-            this.btnNpcApply.Location = new System.Drawing.Point(172, 171);
-            this.btnNpcApply.Name = "btnNpcApply";
-            this.btnNpcApply.Size = new System.Drawing.Size(44, 23);
-            this.btnNpcApply.TabIndex = 8;
-            this.btnNpcApply.Text = "Apply";
-            this.btnNpcApply.UseVisualStyleBackColor = true;
-            this.btnNpcApply.Click += new System.EventHandler(this.btnNpcApply_Click);
-            // 
-            // btnNpcCancel
-            // 
-            this.btnNpcCancel.Enabled = false;
-            this.btnNpcCancel.Location = new System.Drawing.Point(5, 170);
-            this.btnNpcCancel.Name = "btnNpcCancel";
-            this.btnNpcCancel.Size = new System.Drawing.Size(53, 23);
-            this.btnNpcCancel.TabIndex = 7;
-            this.btnNpcCancel.Text = "Cancel";
-            this.btnNpcCancel.UseVisualStyleBackColor = true;
-            this.btnNpcCancel.Click += new System.EventHandler(this.btnNpcCancel_Click);
-            // 
-            // chkMoves
-            // 
-            this.chkMoves.AutoSize = true;
-            this.chkMoves.Location = new System.Drawing.Point(155, 151);
-            this.chkMoves.Name = "chkMoves";
-            this.chkMoves.Size = new System.Drawing.Size(58, 17);
-            this.chkMoves.TabIndex = 5;
-            this.chkMoves.Text = "Moves";
-            this.chkMoves.UseVisualStyleBackColor = true;
-            this.chkMoves.CheckedChanged += new System.EventHandler(this.chkMoves_CheckedChanged_1);
             // 
             // grpWayPoints
             // 
@@ -1146,12 +1158,112 @@
             this.lstUnits.TabIndex = 0;
             this.lstUnits.SelectedIndexChanged += new System.EventHandler(this.lstUnits_SelectedIndexChanged);
             // 
+            // grpChest
+            // 
+            this.grpChest.Controls.Add(this.btnItemApply);
+            this.grpChest.Controls.Add(this.label27);
+            this.grpChest.Controls.Add(this.nudItems);
+            this.grpChest.Controls.Add(this.btnDelItem);
+            this.grpChest.Controls.Add(this.btnAddItem);
+            this.grpChest.Controls.Add(this.label8);
+            this.grpChest.Controls.Add(this.label7);
+            this.grpChest.Controls.Add(this.lstItems);
+            this.grpChest.Controls.Add(this.cmbItemChoice);
+            this.grpChest.Location = new System.Drawing.Point(1033, 181);
+            this.grpChest.Name = "grpChest";
+            this.grpChest.Size = new System.Drawing.Size(223, 201);
+            this.grpChest.TabIndex = 34;
+            this.grpChest.TabStop = false;
+            this.grpChest.Text = "Chest Tools";
+            this.grpChest.Visible = false;
+            // 
+            // cmbItemChoice
+            // 
+            this.cmbItemChoice.FormattingEnabled = true;
+            this.cmbItemChoice.Location = new System.Drawing.Point(6, 154);
+            this.cmbItemChoice.Name = "cmbItemChoice";
+            this.cmbItemChoice.Size = new System.Drawing.Size(99, 21);
+            this.cmbItemChoice.TabIndex = 0;
+            // 
+            // lstItems
+            // 
+            this.lstItems.FormattingEnabled = true;
+            this.lstItems.Location = new System.Drawing.Point(7, 35);
+            this.lstItems.Name = "lstItems";
+            this.lstItems.Size = new System.Drawing.Size(145, 95);
+            this.lstItems.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Items";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 136);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Item Choice";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Location = new System.Drawing.Point(158, 153);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(59, 23);
+            this.btnAddItem.TabIndex = 4;
+            this.btnAddItem.Text = "Add";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // btnDelItem
+            // 
+            this.btnDelItem.Location = new System.Drawing.Point(157, 35);
+            this.btnDelItem.Name = "btnDelItem";
+            this.btnDelItem.Size = new System.Drawing.Size(59, 23);
+            this.btnDelItem.TabIndex = 5;
+            this.btnDelItem.Text = "Delete";
+            this.btnDelItem.UseVisualStyleBackColor = true;
+            this.btnDelItem.Click += new System.EventHandler(this.btnDelItem_Click);
+            // 
+            // nudItems
+            // 
+            this.nudItems.Location = new System.Drawing.Point(111, 155);
+            this.nudItems.Name = "nudItems";
+            this.nudItems.Size = new System.Drawing.Size(41, 20);
+            this.nudItems.TabIndex = 6;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(108, 136);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(43, 13);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Amount";
+            // 
+            // btnItemApply
+            // 
+            this.btnItemApply.Location = new System.Drawing.Point(157, 107);
+            this.btnItemApply.Name = "btnItemApply";
+            this.btnItemApply.Size = new System.Drawing.Size(59, 23);
+            this.btnItemApply.TabIndex = 28;
+            this.btnItemApply.Text = "Apply";
+            this.btnItemApply.UseVisualStyleBackColor = true;
+            this.btnItemApply.Click += new System.EventHandler(this.btnItemApply_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1437, 762);
+            this.ClientSize = new System.Drawing.Size(1267, 762);
+            this.Controls.Add(this.grpChest);
             this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);
             this.Controls.Add(this.grpUnits);
@@ -1208,6 +1320,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHealth)).EndInit();
+            this.grpChest.ResumeLayout(false);
+            this.grpChest.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1306,6 +1421,16 @@
         private System.Windows.Forms.ListBox lstUnits;
         private System.Windows.Forms.ToolStripMenuItem createNewNPCToolStripMenuItem;
         private System.Windows.Forms.ListBox lstNPC;
+        private System.Windows.Forms.GroupBox grpChest;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.NumericUpDown nudItems;
+        private System.Windows.Forms.Button btnDelItem;
+        private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ListBox lstItems;
+        private System.Windows.Forms.ComboBox cmbItemChoice;
+        private System.Windows.Forms.Button btnItemApply;
     }
 }
 

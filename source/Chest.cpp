@@ -10,7 +10,7 @@ CChest::CChest(void)
 	m_bOpened = false;
 	m_szBroadCast = "";
 	m_bCollided = false;
-	CSGD_EventSystem::GetInstance()->RegisterClient("GIVE_ITEM", this);
+	CSGD_EventSystem::GetInstance()->RegisterClient("OPEN_CHEST", this);
 	SetType(OBJ_CHEST);
 	SetRender(true);
 	SetActive(true);
@@ -24,11 +24,13 @@ CChest::~CChest(void)
 
 void CChest::HandleEvent( const CEvent* pEvent )
 {
-	if(pEvent->GetEventID() == "GIVE_ITEM")
+	if(pEvent->GetEventID() == "OPEN_CHEST")
 	{
-		if(m_szBroadCast != "" && m_bOpened == false && m_bCollided)
+		if(m_bOpened == false && m_bCollided)
 		{
-			CSGD_EventSystem::GetInstance()->SendEventNow(m_szBroadCast.c_str(), &(m_vItems));
+			CSGD_EventSystem::GetInstance()->SendEventNow("GIVE_ITEM", &(m_vItems));
+			if(m_szBroadCast != "")
+				CSGD_EventSystem::GetInstance()->SendEventNow(m_szBroadCast.c_str());
 			m_bOpened = true;
 		}
 	}

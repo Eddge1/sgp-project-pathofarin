@@ -7,6 +7,29 @@ using System.Threading.Tasks;
 
 namespace SGP_PoA_LevelEditor
 {
+    struct myChest
+    {
+        string szItem;
+        decimal howMany;
+
+        public string SzItem
+        {
+            get { return szItem; }
+            set { szItem = value; }
+        }
+
+        public decimal HowMany
+        {
+            get { return howMany; }
+            set { howMany = value; }
+        }
+
+        public override string ToString()
+        {
+            return SzItem + " x" + HowMany.ToString();
+        }
+    }
+
     struct myTile
     {
         int x;
@@ -15,8 +38,15 @@ namespace SGP_PoA_LevelEditor
         int warpX;
         int warpY;
         string szSpecial;
+        List<myChest> cItems;
         List<Point> m_vWaypoints;
 
+        internal List<myChest> CItems
+        {
+            get { return cItems; }
+            set { cItems = value; }
+        }
+        
         public List<Point> Waypoints
         {
             get { return m_vWaypoints; }
