@@ -190,11 +190,11 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosY(535);
 			pTemp->AddWaypoint(557,535);
 			pTemp->AddWaypoint(203,535);
-			pTemp->SetName("Mandrake");
-			pTemp->GetAnimInfo()->SetAnimation("Mandrake_Idle");
+			pTemp->SetName("Bee");
+			pTemp->GetAnimInfo()->SetAnimation("Bee_Idle");
 			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Mandrake", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Bee", 100.0f, 400.0f, 9,  150, 20));
 
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 
@@ -832,6 +832,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Thornbiter")
 	{
 		pTemp->SetAnimation("Thornbiter_Battle_Idle");
+	}
+	else if (input == "Bee")
+	{
+		pTemp->SetAnimation("Bee_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);

@@ -365,7 +365,10 @@ void CTutorialBattle::Render( void )
 				float PosY = m_vBattleUnits[i]->GetPosY();
 				if (nImageID != -1)
 				{
-					CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT || m_vBattleUnits[i]->GetName() == "Pathetic_Orc" || m_vBattleUnits[i]->GetName() == "Orc" || m_vBattleUnits[i]->GetName() == "Orc_Shaman" || m_vBattleUnits[i]->GetName() == "Orc_Leader" || m_vBattleUnits[i]->GetName() == "Ogre" || m_vBattleUnits[i]->GetName() == "Cave_Spider")
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+					else
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 				}
 				nImageID = -1;
 			}
