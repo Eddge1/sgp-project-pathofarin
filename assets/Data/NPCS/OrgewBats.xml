@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Ogre" Hostile="true" Units="3" File="OrgewBats">
+  <Unit Name="Cave_Bat" />
+  <Unit Name="Ogre" />
+  <Unit Name="Cave_Bat" />
+</NPC>

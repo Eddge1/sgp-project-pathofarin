@@ -921,7 +921,12 @@ namespace SGP_PoA_LevelEditor
                             if (L.MyTiles[x, y].SzSpecial == null)
                                 L.MyTiles[x, y].SzSpecial = "";
                             XAttribute xEventId = new XAttribute("EventID", L.MyTiles[x, y].SzSpecial);
-                            XAttribute xWayPointTotal = new XAttribute("Total_Waypoints", L.MyTiles[x, y].Waypoints.Count);
+                            XAttribute xWayPointTotal;
+                            if (L.MyTiles[x, y].Waypoints != null)
+                                xWayPointTotal = new XAttribute("Total_Waypoints", L.MyTiles[x, y].Waypoints.Count);
+                            else
+                                xWayPointTotal = new XAttribute("Total_Waypoints", 0);
+
                             xTileData.Add(xTileX);
                             xTileData.Add(xTileY);
                             xTileData.Add(xEventId);
@@ -929,16 +934,18 @@ namespace SGP_PoA_LevelEditor
                             xTileData.Add(xTileWarpX);
                             xTileData.Add(xTileWarpY);
                             xTileData.Add(xWayPointTotal);
-
-                            for (int j = 0; j < L.MyTiles[x, y].Waypoints.Count; j++)
+                            if (L.MyTiles[x, y].Waypoints != null)
                             {
-                                XElement xWayPointData = new XElement("Waypoint");
-                                XAttribute xWaypointPositionX = new XAttribute("X", L.MyTiles[x, y].Waypoints[j].X);
-                                XAttribute xWaypointPositionY = new XAttribute("Y", L.MyTiles[x, y].Waypoints[j].Y);
-                                xWayPointData.Add(xWaypointPositionX);
-                                xWayPointData.Add(xWaypointPositionY);
+                                for (int j = 0; j < L.MyTiles[x, y].Waypoints.Count; j++)
+                                {
+                                    XElement xWayPointData = new XElement("Waypoint");
+                                    XAttribute xWaypointPositionX = new XAttribute("X", L.MyTiles[x, y].Waypoints[j].X);
+                                    XAttribute xWaypointPositionY = new XAttribute("Y", L.MyTiles[x, y].Waypoints[j].Y);
+                                    xWayPointData.Add(xWaypointPositionX);
+                                    xWayPointData.Add(xWaypointPositionY);
 
-                                xTileData.Add(xWayPointData);
+                                    xTileData.Add(xWayPointData);
+                                }
                             }
 
                             xTile.Add(xTileData);

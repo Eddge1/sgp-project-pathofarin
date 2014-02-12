@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Cave_Spider" Health="350" Ap="1" Attack="40" Exp="320" Speed="8" Level="6" AI="Minion Melee" Total_Items="1">
+  <Item Name="Hi-Potion" Chance="25" />
+</Unit>

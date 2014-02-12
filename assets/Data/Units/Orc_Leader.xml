@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Orc_Leader" Health="1500" Ap="1" Attack="50" Exp="1200" Speed="10" Level="6" AI="OrcLeader" Total_Items="2">
+  <Item Name="Hi-Potion" Chance="100" />
+  <Item Name="Hi-Ether" Chance="100" />
+</Unit>
