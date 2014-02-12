@@ -3,6 +3,7 @@
 #include "TutorialBattle.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include <sstream>
+#include "Particle.h"
 
 
 CUnits::CUnits(void)
@@ -35,70 +36,128 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 		GetAnimInfo()->SetAnimation(szTemp.c_str());
 	}
 	if(GetType() != OBJ_PLAYER_UNIT)
-	if(m_nHealth < 0)
-		m_nHealth = 0;
+		if(m_nHealth < 0)
+			m_nHealth = 0;
 	if(m_nHealth > m_nMaxHealth)
 		m_nHealth = m_nMaxHealth;
 
 	if(isCrit)
 	{
-		woss << "CRITICAL ";
 		if(nAmount < 0)
 		{
-			woss << (nAmount * -1);
+			CParticle* pPart = new CParticle();
+			//pPart->SetAudio();
+			pPart->GetAnimInfo()->SetAnimation("Health_Recover");
+			pPart->SetPosX(GetPosX());
+			pPart->SetPosY(GetPosY());
+			woss << "+" << nAmount * -1 << " HP";
 			if(!m_bTutorial)
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+			{
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+				CBattleState::GetInstance()->AddSkill(pPart);
+			}
 			else
+			{
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
-
+			}
+			pPart->Release();
 		}
 		else if(nAmount > 0)
 		{
-			woss << nAmount;
+			CParticle* pPart = new CParticle();
+			//pPart->SetAudio();
+			pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
+			pPart->SetPosX(GetPosX());
+			pPart->SetPosY(GetPosY());
+			woss << "-" << nAmount << " HP";
 			if(!m_bTutorial)
+			{
 				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+				CBattleState::GetInstance()->AddSkill(pPart);
+			}
 			else
+			{
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
-
+			}
+			pPart->Release();
 		}
 		else
 		{
 			woss.str(_T(""));
 			woss << "DODGED!";
 			if(!m_bTutorial)
+			{
 				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
+
+			}
 			else
+			{
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
 
 
+			}
 		}
 	}
 	else
 	{
 		if(nAmount < 0)
 		{
-			woss << (nAmount * -1);
+			woss << "+" << (nAmount * -1) << " HP";
+			CParticle* pPart = new CParticle();
+			//pPart->SetAudio();
+			pPart->GetAnimInfo()->SetAnimation("Health_Recover");
+			pPart->SetPosX(GetPosX());
+			pPart->SetPosY(GetPosY());
 			if(!m_bTutorial)
+			{
 				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+				CBattleState::GetInstance()->AddSkill(pPart);
+
+
+			}
 			else
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
 		}
 		else if(nAmount > 0)
 		{
-			woss << nAmount;
+			woss << "-" << nAmount << " HP";
+			CParticle* pPart = new CParticle();
+			//pPart->SetAudio();
+			pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
+			pPart->SetPosX(GetPosX());
+			pPart->SetPosY(GetPosY());
 			if(!m_bTutorial)
+			{
 				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+				CBattleState::GetInstance()->AddSkill(pPart);
+
+
+			}
 			else
+			{
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+
+
+			}
+			pPart->Release();
 		}
 		else
 		{
 			woss.str(_T(""));
 			woss << "DODGED!";
 			if(!m_bTutorial)
+			{
 				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
+
+			}
 			else
+			{
 				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
+
+			}
 		}
 	}
 }
@@ -112,6 +171,26 @@ void CUnits::ModifyAP(int nAmount)
 	if(m_nAbilityPoints > m_nMaxAbilityPoints)
 		m_nAbilityPoints = m_nMaxAbilityPoints;
 
+
+	if(nAmount < 0)
+	{			
+		CParticle* pPart = new CParticle();
+		//pPart->SetAudio();
+		pPart->GetAnimInfo()->SetAnimation("AP_Recover");
+		pPart->SetPosX(GetPosX());
+		pPart->SetPosY(GetPosY());
+		if(!GetTutorial())
+		{
+				CBattleState::GetInstance()->AddSkill(pPart);
+
+		}
+		else
+		{
+
+
+		}
+		pPart->Release();
+	}
 	//Floating Text
 }
 

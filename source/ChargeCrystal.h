@@ -15,13 +15,15 @@ class CChargeCrystal :
 	float m_fScale;
 	bool m_bDamage;
 	bool m_bFailed;
+	bool m_bHeal;
 public:
 	CChargeCrystal(void);
 	virtual ~CChargeCrystal(void);
-	virtual void DoAttack(void) override {}
+	virtual void DoAttack(void) override;
 	void SetDamageSkill(bool bValue) {m_bDamage = bValue;}
 	bool DamageSkill(void) {return m_bDamage;}
-
+	void SetHeal(bool bValue) {m_bHeal = bValue;}
+	void InstantiateSkill();
 	virtual void Render() override;
 	virtual void Update(float fElpasedTime) override;
 	virtual void ResetSkill() override;

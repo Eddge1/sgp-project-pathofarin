@@ -53,6 +53,8 @@ CBattleState::CBattleState(void)
 	m_nMenuImage			=	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
+	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
 }
 
 CBattleState::~CBattleState(void)
@@ -177,17 +179,26 @@ void CBattleState::Render(void)
 	// Printing out variables
 	std::wostringstream woss;
 
-	m_pFont->Draw(_T("HP:"), 660, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-	m_pFont->Draw(_T("AP:"), 660, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+	m_pFont->Draw(_T("HP:"), 450, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+
+
+
 
 	if(m_vBattleUnits.size() > 0)
 	{
+		float hPercent = m_pPlayerUnit->GetHealth() / float(m_pPlayerUnit->GetMaxHealth());
+		RECT rHealth = {0,0,256, 32};
+		pTM->Draw(m_nHealthBar, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+		rHealth.right = long(256 * hPercent);
+		pTM->Draw(m_nHealthBar, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+		rHealth.right = 256;
+		pTM->Draw(m_nHealthBarPlate, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				woss << m_vBattleUnits[i]->GetHealth();
-				m_pFont->Draw( woss.str().c_str(), 700, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+				m_pFont->Draw( woss.str().c_str(), 524, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 				woss << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
@@ -197,33 +208,43 @@ void CBattleState::Render(void)
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
+			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			rHealth.right = long(256 * hPercent);
+			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			rHealth.right = 256;
+			pTM->Draw(m_nHealthBarPlate, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
+			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
 			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			hPercent = m_vBattleUnits[m_nTurn]->GetHealth() / float(m_vBattleUnits[m_nTurn]->GetMaxHealth());
+			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			rHealth.right = long(256 * hPercent);
+			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			rHealth.right = 256;
+			pTM->Draw(m_nHealthBarPlate, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTurn]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTurn]->GetAbilityPoints();
 			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
@@ -399,7 +420,7 @@ void CBattleState::Battle(float fElapsedTime)
 					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 						m_eCurrentPhase = BP_END;
 				}
-				m_nTurn++;
+
 				m_fDelayTurn = 0.6f;
 				m_bDelayed = true;
 				for(unsigned int i = 0; i < m_vBattleUnits.size();)
@@ -428,13 +449,15 @@ void CBattleState::Battle(float fElapsedTime)
 						i++;
 
 				}
-				if(m_nTurn >= (int)m_vBattleUnits.size())
-					m_nTurn = 0;
+
 			}
 		}
 	}
 	else if(m_fDelayTurn <= 0.0f && m_bDelayed)
 	{
+		m_nTurn++;
+		if(m_nTurn >= (int)m_vBattleUnits.size())
+			m_nTurn = 0;
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)

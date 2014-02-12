@@ -98,14 +98,12 @@ void CTriggerMatch::Render()
 	wostringstream woss;
 	wostringstream coss;
 
-
 	woss << m_nSuccess;
 	coss << GetChances();
 
 	pFont->Draw(woss.str().c_str(), 264, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	pFont->Draw(_T(" out of "), 300, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	pFont->Draw(coss.str().c_str(), 400, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
-
 }
 
 void CTriggerMatch::Update(float fElpasedTime) 

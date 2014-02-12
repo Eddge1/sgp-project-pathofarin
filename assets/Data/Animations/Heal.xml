@@ -2,31 +2,31 @@
 <Animation_Data Count="1">
   <Animation_Info Name="Heal" Frames="13" repeat="0" Texture="Heal.png">
     <Frame_Data>
-      <Render posX="12" posY="15" Width="157" Height="161" anchorX="76" anchorY="90" Duration="0.1" Event="NULL" />
+      <Render posX="12" posY="15" Width="157" Height="161" anchorX="76" anchorY="90" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="1" Width="157" Height="160" />
-      <Render posX="201" posY="10" Width="165" Height="168" anchorX="86" anchorY="89" Duration="0.1" Event="NULL" />
+      <Render posX="201" posY="10" Width="165" Height="168" anchorX="86" anchorY="89" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="1" Width="165" Height="167" />
-      <Render posX="412" posY="17" Width="149" Height="159" anchorX="85" anchorY="88" Duration="0.1" Event="NULL" />
+      <Render posX="412" posY="17" Width="149" Height="159" anchorX="85" anchorY="88" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="149" Height="159" />
-      <Render posX="585" posY="20" Width="167" Height="155" anchorX="84" anchorY="87" Duration="0.1" Event="NULL" />
+      <Render posX="585" posY="20" Width="167" Height="155" anchorX="84" anchorY="87" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="167" Height="155" />
-      <Render posX="786" posY="21" Width="162" Height="153" anchorX="77" anchorY="74" Duration="0.1" Event="NULL" />
+      <Render posX="786" posY="21" Width="162" Height="153" anchorX="77" anchorY="74" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="-2" posY="-1" Width="164" Height="154" />
-      <Render posX="20" posY="203" Width="153" Height="157" anchorX="78" anchorY="80" Duration="0.1" Event="NULL" />
+      <Render posX="20" posY="203" Width="153" Height="157" anchorX="78" anchorY="80" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="-1" posY="1" Width="154" Height="156" />
-      <Render posX="213" posY="206" Width="155" Height="161" anchorX="77" anchorY="82" Duration="0.1" Event="NULL" />
+      <Render posX="213" posY="206" Width="155" Height="161" anchorX="77" anchorY="82" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="-1" posY="0" Width="156" Height="161" />
-      <Render posX="403" posY="206" Width="152" Height="167" anchorX="83" anchorY="87" Duration="0.1" Event="NULL" />
+      <Render posX="403" posY="206" Width="152" Height="167" anchorX="83" anchorY="87" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="1" Width="152" Height="166" />
-      <Render posX="593" posY="203" Width="149" Height="159" anchorX="80" anchorY="88" Duration="0.1" Event="NULL" />
+      <Render posX="593" posY="203" Width="149" Height="159" anchorX="80" anchorY="88" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="1" Width="149" Height="158" />
-      <Render posX="779" posY="202" Width="151" Height="157" anchorX="79" anchorY="81" Duration="0.1" Event="NULL" />
+      <Render posX="779" posY="202" Width="151" Height="157" anchorX="79" anchorY="81" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="-1" posY="-1" Width="151" Height="158" />
-      <Render posX="18" posY="397" Width="150" Height="156" anchorX="77" anchorY="78" Duration="0.1" Event="NULL" />
+      <Render posX="18" posY="397" Width="150" Height="156" anchorX="77" anchorY="78" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="1" Width="151" Height="155" />
-      <Render posX="239" posY="425" Width="117" Height="130" anchorX="59" anchorY="63" Duration="0.1" Event="NULL" />
+      <Render posX="239" posY="425" Width="117" Height="130" anchorX="59" anchorY="63" Duration="0.03" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="117" Height="130" />
-      <Render posX="397" posY="392" Width="176" Height="178" anchorX="85" anchorY="87" Duration="0.1" Event="HEAL" />
+      <Render posX="397" posY="392" Width="176" Height="178" anchorX="85" anchorY="87" Duration="0.03" Event="HEAL" />
       <ActiveCollision posX="-1" posY="-1" Width="178" Height="180" />
     </Frame_Data>
   </Animation_Info>

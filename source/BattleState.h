@@ -72,6 +72,7 @@ private:
 	int m_nVictoryMusic;
 	int m_nDefeatMusic;
 	int m_nHealthBar;
+	int m_nHealthBarPlate;
 	int m_nAPBar;
 	int m_nTarget;
 	int m_nGoldObtained;

@@ -276,6 +276,12 @@
     <ClCompile Include="source\AIValrion.cpp">
       <Filter>AIControllers\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\Buff.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Particle.cpp">
+      <Filter>Objects\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -472,6 +478,12 @@
     </ClInclude>
     <ClInclude Include="source\AIValrion.h">
       <Filter>AIControllers\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Buff.h">
+      <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Particle.h">
+      <Filter>Objects\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

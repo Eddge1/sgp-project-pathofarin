@@ -77,6 +77,8 @@ public:
 
 	void SetMaxHealth		( int nAmount )		{m_nHealth = m_nMaxHealth = nAmount;}
 	void SetMaxAP			( int nAmount )		{m_nAbilityPoints = m_nMaxAbilityPoints = nAmount;}
+	void SetHealth			( int nAmount )		{m_nHealth = nAmount;}
+	void SetAP				( int nAmount )		{m_nAbilityPoints = nAmount;}
 	void SetSpeed			( int nAmount )		{m_nSpeed = nAmount; }
 	void SetAttack			( int nAmount )		{m_nAttackPower = nAmount; }
 	void SetLevel			( int nAmount )		{m_nLevel = nAmount; }

@@ -110,6 +110,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			LoadWorld();
+
 			m_sCurrWorld = "Level2.xml";
 			pTemp->SetActive(true);
 			pTemp->SetHostile(true);
@@ -363,9 +364,9 @@ void CGamePlayState::Update( float fElapsedTime )
 void CGamePlayState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-	RECT temp = { 0, 0, WorldHeight, WorldWidth };
-	OffsetRect(&temp, -WorldCamX, -WorldCamY);
-	pD3D->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
+	//RECT temp = { 0, 0, WorldHeight, WorldWidth };
+	//OffsetRect(&temp, -WorldCamX, -WorldCamY);
+	//pD3D->DrawRect( temp, D3DCOLOR_XRGB( 255,255,0 ) );
 
 	m_pRM->Render();
 	m_temp.Render();
