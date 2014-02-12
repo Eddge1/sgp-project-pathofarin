@@ -108,10 +108,6 @@ void CGamePlayState::Activate(void)
 
 			}
 
-			//LoadUnits();
-			//LoadNPCs();
-
-
 			CNpcs* pTemp = new CNpcs();
 			LoadWorld();
 			m_sCurrWorld = "Level2.xml";
@@ -123,84 +119,16 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
-			pTemp->SetName("Tree");
-			pTemp->GetAnimInfo()->SetAnimation("Tree_Idle");
+			pTemp->SetName("TigerLily");
+			pTemp->GetAnimInfo()->SetAnimation("TigerLily_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Orc_Leader", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("TigerLily", 100.0f, 400.0f, 9,  150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Tree",		  200.0f, 350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
-			pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(355);
-			pTemp->SetPosY(410);
-			pTemp->AddWaypoint(355,410);
-			pTemp->AddWaypoint(355,555);
-			pTemp->SetName("Cave_Bat");
-			pTemp->GetAnimInfo()->SetAnimation("Cave_Bat_Idle");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Bat", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->Release();
-
-			pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(1376);
-			pTemp->SetPosY(468);
-			pTemp->AddWaypoint(1376,468);
-			pTemp->AddWaypoint(975,405);
-			pTemp->AddWaypoint(1162,206);
-			pTemp->AddWaypoint(1358,139);
-			pTemp->AddWaypoint(1162,206);
-			pTemp->AddWaypoint(975,405);
-			pTemp->SetName("Cave_Spider");
-			pTemp->GetAnimInfo()->SetAnimation("Cave_Spider_Idle");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->Release();
-
 			m_sCurrWorld = "testing.xml";
-
-			pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(200);
-			pTemp->SetPosY(420);
-			pTemp->AddWaypoint(200,420);
-			pTemp->AddWaypoint(200,260);
-			pTemp->SetName("Ogre");
-			pTemp->GetAnimInfo()->SetAnimation("Ogre_Idle");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Orc_Leader", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Pathetic_Orc", 200.0f, 350.0f, 5, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 400.0f, 9, 150, 20));
-			pTemp->Release();
-
-			pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(557);
-			pTemp->SetPosY(535);
-			pTemp->AddWaypoint(557,535);
-			pTemp->AddWaypoint(203,535);
-			pTemp->SetName("Mandrake");
-			pTemp->GetAnimInfo()->SetAnimation("Mandrake_Idle");
-			pTemp->SetUnits(CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Mandrake", 200.0f, 350.0f, 5,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cave_Spider", 100.0f, 400.0f, 9,  150, 20));
-
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-
-			pTemp->Release();
-			pTemp = nullptr;
-
 
 			pTemp = new CNpcs();
 			pTemp->SetActive(true);
@@ -218,10 +146,9 @@ void CGamePlayState::Activate(void)
 			pTemp = nullptr;
 
 			CChest* pChest = new CChest();
-			pChest->SetPosX(609);
-			pChest->SetPosY(161);
+			pChest->SetPosX(586);
+			pChest->SetPosY(128);
 			pChest->AddConsumableItem(m_mItemManager["Ether"].Item, 3);
-			pChest->RegEvent("TEST_ITEM");
 			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pChest, 2);
 			pChest->Release();
@@ -256,7 +183,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 			m_pES->RegisterClient("LEVEL_UP", this);
 			m_pES->RegisterClient("VALRION_DEFEAT", this);
-			m_pES->RegisterClient("TEST_ITEM", this);
+			m_pES->RegisterClient("GIVE_ITEM", this);
 			m_pES->RegisterClient("GAME_WON", this);
 
 
@@ -508,7 +435,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
 	}
-	else if(pEvent->GetEventID() == "TEST_ITEM")
+	else if(pEvent->GetEventID() == "GIVE_ITEM")
 	{
 		map<string,InventoryItems>* mTemp = reinterpret_cast<map<string,InventoryItems>*>(pEvent->GetParam());
 		if(mTemp != nullptr)
@@ -538,7 +465,6 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_bGameVictory = true;
 		m_fGameEndTimer = 4.0f;
 	}
-
 
 }
 
@@ -924,6 +850,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	{
 		pTemp->SetAnimation("Thornbiter_Battle_Idle");
 	}
+	else if (input == "TigerLily")
+	{
+		pTemp->SetAnimation("TigerLily_Battle_Idle");
+	}
 
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
@@ -1032,85 +962,6 @@ CConsumable* CGamePlayState::CreatePotion(string input)
 		return temp;
 
 }
-
-//void CGamePlayState::LoadNPCs(void)
-//{
-//	WIN32_FIND_DATA fileSearch;
-//	HANDLE hFile;
-//	WCHAR cDirectory[] = L"assets/Data/NPCS/*.xml";
-//	hFile = FindFirstFile(cDirectory,&fileSearch);
-//
-//	do
-//	{
-//		std::string szInput;
-//		char cFile[128] = "assets/Data/NPCS/";
-//		for(int i = 0; i < 128; i++)
-//		{
-//			cFile[i + 17] = char(fileSearch.cFileName[i]);
-//			if(fileSearch.cFileName[i] == '\0')
-//				break;
-//			szInput += char(fileSearch.cFileName[i]);
-//		}
-//		TiXmlDocument doc;
-//		if(doc.LoadFile(cFile) == false)
-//			return;
-//
-//		TiXmlElement *pRoot = doc.RootElement();
-//		if(pRoot == nullptr)
-//			return;
-//
-//		CNpcs *pTempNpc = new CNpcs();
-//
-//		int nConversations = 0;
-//		string szName = "";
-//		string szHostile = "";
-//		int nUnits = 0;
-//
-//		szName = pRoot->Attribute("Name");
-//		szHostile = pRoot->Attribute("Hostile");
-//		pRoot->Attribute("Units", &nUnits);
-//		pRoot->Attribute("Total_Conversations", &nConversations);
-//
-//		pTempNpc->SetName(szName);
-//
-//		if(szHostile == "true")
-//			pTempNpc->SetHostile(true);
-//		else
-//			pTempNpc->SetHostile(false);
-//
-//
-//		TiXmlElement *pConvo = pRoot->FirstChildElement("Convo");
-//		if(pConvo != nullptr)
-//		{
-//			for(int i = 0; i < nConversations; i++)
-//			{
-//				if(pConvo != nullptr)
-//				{
-//					/////////// TO DO ADD IN WHEN WE START CONVERSATIONS
-//				}
-//				pConvo = pConvo->NextSiblingElement("Convo");
-//			}
-//		}
-//
-//		TiXmlElement *pUnit = pRoot->FirstChildElement("Unit");
-//		if(pUnit != nullptr)
-//		{
-//			for(int i = 0; i < nUnits; i++)
-//			{
-//				if(pUnit != nullptr)
-//				{
-//					CEnemyUnit* pTempBattle = reinterpret_cast<CEnemyUnit*>(GetUnit(szName));
-//					if(pTempBattle != nullptr)
-//						pTempNpc->SetUnits(pTempBattle);
-//				}
-//				pUnit = pUnit->NextSiblingElement("Unit");
-//			}
-//		}
-//
-//		m_mNPCManager[szName] = pTempNpc;
-//
-//	}while(FindNextFile(hFile, &fileSearch));
-//}
 
 CUnits* CGamePlayState::LoadUnit(string szFileName)
 {
@@ -1223,30 +1074,3 @@ CUnits* CGamePlayState::LoadUnit(string szFileName)
 
 	return pTempUnit;
 }
-
-//CUnits* CGamePlayState::GetUnit(std::string szUnit)
-//{
-//	if(szUnit == "")
-//		return nullptr;
-//	CEnemyUnit* pTemp = new CEnemyUnit();
-//
-//	pTemp->SetName(szUnit);
-//	pTemp->SetAttack(m_mUnitsManager[szUnit]->GetAttack());
-//	pTemp->SetLevel(m_mUnitsManager[szUnit]->GetLevel());
-//	pTemp->GiveExperience(m_mUnitsManager[szUnit]->GetExperience());
-//	pTemp->SetMaxHealth(m_mUnitsManager[szUnit]->GetMaxHealth());
-//	pTemp->SetMaxAP(m_mUnitsManager[szUnit]->GetMaxAP());
-//	string szTemp = szUnit + "_Battle_Idle";
-//
-//	pTemp->GetAnimInfo()->SetAnimation(szTemp);
-//	map<string, InventoryItems>* vTemp = m_mUnitsManager[szUnit]->GetInv();
-//	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
-//	{
-//		pTemp->AddConsumableItem(i->second.Item, i->second.DropChance);
-//	}
-//
-//	CAIController* pNew = new CAIController();
-//	pTemp->SetAIController(pNew);
-//
-//	return pTemp;
-//}

@@ -60,7 +60,7 @@ void CObjectManager::Render(unsigned int nLayer)
 			float PosY = temp[i]->GetPosY() - WorldCamY;
 			if (nImageID != -1)
 			{
-				CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+				CAnimationSystem::GetInstance()->Render(temp[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 
 			}
 		}

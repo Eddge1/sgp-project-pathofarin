@@ -117,6 +117,12 @@ namespace SGP_PoA_LevelEditor
                                             new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
                                              TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 255, 0));
                                         }
+                                        else if (L.MyTiles[x, y].EventType == "CHESTS")
+                                        {
+                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 127,0,127));
+                                        }
                                         else
                                             TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                                 new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
@@ -256,11 +262,19 @@ namespace SGP_PoA_LevelEditor
             cmbMode.Items.Add("EVENT");
             cmbMode.Items.Add("NPCS");
             cmbMode.Items.Add("WARP");
-            cmbMode.Items.Add("CHEST");
+            cmbMode.Items.Add("CHESTS");
             cmbAI.Items.Clear();
             cmbAI.Items.Add("BASIC");
+            cmbItemChoice.Items.Clear();
+            cmbItemChoice.Items.Add("Potion");
+            cmbItemChoice.Items.Add("Hi-Potion");
+            cmbItemChoice.Items.Add("Titan-Potion");
+            cmbItemChoice.Items.Add("Ether");
+            cmbItemChoice.Items.Add("Hi-Ether");
+            cmbItemChoice.Items.Add("Titan-Ether");
 
             cmbMode.SelectedIndex = 0;
+            cmbItemChoice.SelectedIndex = 0;
 
             DX.Initialize(panel2, false);
             DX.AddRenderTarget(panel1);
@@ -621,6 +635,38 @@ namespace SGP_PoA_LevelEditor
                         lstWaypoints.Items.Clear();
                     }
                 }
+                else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "CHESTS")
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (L.MyTiles[Temp.X, Temp.Y].EventType == "CHESTS")
+                        {
+                            lstItems.Items.Clear();
+                            foreach (myChest mc in L.MyTiles[Temp.X, Temp.Y].CItems)
+                            {
+                                lstItems.Items.Add(mc);
+                            }
+                        }
+                        else
+                        {
+                            L.MyTiles[Temp.X, Temp.Y].EventType = "CHESTS";
+                            L.MyTiles[Temp.X, Temp.Y].SzSpecial = txtEventBroadCast.Text;
+                            for (int i = 0; i < lstItems.Items.Count; i++)
+                            {
+                                myChest temp = (myChest)lstItems.Items[i];
+                                L.MyTiles[Temp.X, Temp.Y].CItems.Add(temp);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        lstItems.Items.Clear();
+                        L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
+                        L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].CItems.Clear();
+
+                    }
+                }
                 else
                 {
                     if (e.Button == MouseButtons.Left)
@@ -818,6 +864,20 @@ namespace SGP_PoA_LevelEditor
                                 xTileData.Add(xWayPointData);
                             }
 
+                            if (L.MyTiles[x, y].EventType == "CHESTS")
+                            {
+                                for (int j = 0; j < L.MyTiles[x, y].CItems.Count; j++)
+                                {
+                                    XElement xChestData = new XElement("Chest");
+                                    XAttribute xItemName = new XAttribute("Name", L.MyTiles[x, y].CItems[j].SzItem);
+                                    XAttribute xHowMany = new XAttribute("Amount", L.MyTiles[x, y].CItems[j].HowMany);
+                                    xChestData.Add(xItemName);
+                                    xChestData.Add(xHowMany);
+
+                                    xTileData.Add(xChestData);
+                                }
+                            }
+
                             xTile.Add(xTileData);
                         }
                     }
@@ -945,6 +1005,20 @@ namespace SGP_PoA_LevelEditor
                                     xWayPointData.Add(xWaypointPositionY);
 
                                     xTileData.Add(xWayPointData);
+                                }
+                            }
+
+                            if (L.MyTiles[x, y].EventType == "CHESTS")
+                            {
+                                for (int j = 0; j < L.MyTiles[x, y].CItems.Count; j++)
+                                {
+                                    XElement xChestData = new XElement("Chest");
+                                    XAttribute xItemName = new XAttribute("Name", L.MyTiles[x, y].CItems[j].SzItem);
+                                    XAttribute xHowMany = new XAttribute("Amount", L.MyTiles[x, y].CItems[j].HowMany);
+                                    xChestData.Add(xItemName);
+                                    xChestData.Add(xHowMany);
+
+                                    xTileData.Add(xChestData);
                                 }
                             }
 
@@ -1094,6 +1168,24 @@ namespace SGP_PoA_LevelEditor
                             int nWPy = Convert.ToInt32(xWPy.Value);
 
                             lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].Waypoints.Add(new Point(nWPx, nWPy));
+                        }
+                        lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].CItems = new List<myChest>();
+
+                        if (xTileEventType.Value == "CHESTS")
+                        {
+                            IEnumerable<XElement> xChests = xTileInfo.Elements("Chest");
+                            foreach (XElement ch in xChests)
+                            {
+                                XAttribute xItemName = ch.Attribute("Name");
+                                XAttribute xAmount = ch.Attribute("Amount");
+                                myChest tempChest = new myChest();
+
+                                tempChest.SzItem = xItemName.Value;
+                                tempChest.HowMany = Convert.ToDecimal(xAmount.Value);
+
+                                lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].CItems.Add(tempChest);
+                            }
+
                         }
                     }
                     lstLayers.Items.Add(lTemp);
@@ -1308,6 +1400,8 @@ namespace SGP_PoA_LevelEditor
                     lTemp.MyTiles[x, y].X = -1;
                     lTemp.MyTiles[x, y].Y = -1;
                     lTemp.MyTiles[x, y].Waypoints = new List<Point>();
+                    lTemp.MyTiles[x, y].CItems = new List<myChest>();
+
                 }
             }
 
@@ -1365,6 +1459,7 @@ namespace SGP_PoA_LevelEditor
             grpNPC.Visible = false;
             grpWayPoints.Visible = false;
             grpBlock.Visible = false;
+            grpChest.Visible = false;
             lstUnits.Items.Clear();
             lstWaypoints.Items.Clear();
             bCreateRect = false;
@@ -1383,6 +1478,10 @@ namespace SGP_PoA_LevelEditor
             else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "BLOCK")
             {
                 grpBlock.Visible = true;
+            }
+            else if (cmbMode.Items[cmbMode.SelectedIndex].ToString() == "CHESTS")
+            {
+                grpChest.Visible = true;
             }
 
         }
@@ -1480,6 +1579,7 @@ namespace SGP_PoA_LevelEditor
                                     tLayer.MyTiles[x, y].X = -1;
                                     tLayer.MyTiles[x, y].Y = -1;
                                     tLayer.MyTiles[x, y].Waypoints = new List<Point>();
+                                    tLayer.MyTiles[x, y].CItems = new List<myChest>();
                                 }
                             }
                         }
@@ -1517,6 +1617,7 @@ namespace SGP_PoA_LevelEditor
                                     tLayer.MyTiles[x, y].X = -1;
                                     tLayer.MyTiles[x, y].Y = -1;
                                     tLayer.MyTiles[x, y].Waypoints = new List<Point>();
+                                    tLayer.MyTiles[x, y].CItems = new List<myChest>();
                                 }
                             }
                         }
@@ -1579,6 +1680,45 @@ namespace SGP_PoA_LevelEditor
                     string szTemp = szMapID.Remove(szMapID.Length - 4, 4);
                     lstNPC.Items.Add(szTemp);
                 }
+            }
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            if (cmbItemChoice.SelectedIndex >= 0)
+            {
+                myChest temp = new myChest();
+                temp.SzItem = cmbItemChoice.Items[cmbItemChoice.SelectedIndex].ToString();
+                temp.HowMany = nudItems.Value;
+
+                lstItems.Items.Add(temp);
+                cmbItemChoice.SelectedIndex = 0;
+                nudItems.Value = 1;
+                lstItems.SelectedIndex = -1;
+            }
+        }
+
+        private void btnItemApply_Click(object sender, EventArgs e)
+        {
+            if (lstItems.SelectedIndex >= 0)
+            {
+                myChest temp = (myChest)lstItems.Items[lstItems.SelectedIndex];
+                temp.SzItem = cmbItemChoice.Items[cmbItemChoice.SelectedIndex].ToString();
+                temp.HowMany = nudItems.Value;
+                lstItems.Items[lstItems.SelectedIndex] = temp;
+
+                nudItems.Value = 1;
+                cmbItemChoice.SelectedIndex = 0;
+                lstItems.SelectedIndex = -1;
+            }
+        }
+
+        private void btnDelItem_Click(object sender, EventArgs e)
+        {
+            if (lstItems.SelectedIndex >= 0)
+            {
+                lstItems.Items.RemoveAt(lstItems.SelectedIndex);
+                lstItems.SelectedIndex = -1;
             }
         }
     }

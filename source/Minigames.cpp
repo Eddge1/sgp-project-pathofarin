@@ -37,7 +37,7 @@ void CMiniGames::SetOwner(CUnits* pOwner)
 
 
 // fx1 and fy1 are the current targets, fx2 and fy2 is for the other.
-float ScalarDistance(float fx1, float fy1, float fx2, float fy2)
+float CMiniGames::ScalarDistance(float fx1, float fy1, float fx2, float fy2)
 {
 	float dx = fx2 - fx1;
 	dx *= dx;
