@@ -650,11 +650,82 @@ void CGamePlayState::LoadWorld(void)
 							if(ReadIn == "EVENT")
 							{
 								pTempTile->SetEvent(true);
-								pTempTile->SetEventID(pLoad->Attribute("EventID"));
+								pTempTile->SetEventID(pTileData->Attribute("EventID"));
 							}
 							else if(ReadIn == "NPCS")
 							{
+								CNpcs* pNpc = new CNpcs();
+								string szTemp ="assets/Data/NPCS/";
+								szTemp += pTileData->Attribute("EventID");
+								szTemp += ".xml";
+								int nWaypoints = 0;
+								pTileData->Attribute("Total_Waypoints", &nWaypoints);
+								TiXmlElement* pWaypoints = nullptr;
+								if(nWaypoints != 0)
+									pWaypoints = pTileData->FirstChildElement("Waypoint");
+								TiXmlDocument tempDoc;
+								if(tempDoc.LoadFile(szTemp.c_str()))
+								{
+									TiXmlElement* pOtherRoot = tempDoc.RootElement();
+									pNpc->SetName(pOtherRoot->Attribute("Name"));
+									string szTemporary = pNpc->GetName() + "_Idle";
+									pNpc->GetAnimInfo()->SetAnimation(szTemporary);
+									pNpc->SetPosX(float(tileID % layerWidth * tileWidth));
+									pNpc->SetPosY(float(tileID / layerWidth * tileHeight));
 
+									int nUnits = 0;
+									int nConvos = 0;
+									pOtherRoot->Attribute("Total_Conversations", &nConvos);
+									pOtherRoot->Attribute("Units", &nUnits);
+									string Hostile = pOtherRoot->Attribute("Hostile");
+									if(Hostile == "true")
+										pNpc->SetHostile(true);
+									else
+										pNpc->SetHostile(false);
+
+									TiXmlElement* pOtherUnits = pOtherRoot->FirstChildElement("Unit");
+									string szUnitName = "";
+									if(pOtherUnits != nullptr)
+									{
+
+										for(int i =0; i < nUnits; i++)
+										{
+											if(pOtherUnits != nullptr)
+											{
+												szUnitName = pOtherUnits->Attribute("Name");
+												CEnemyUnit* pEUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(szUnitName));
+												szUnitName = "";
+											}
+											pOtherUnits = pOtherUnits->NextSiblingElement("Unit");
+										}
+									}
+
+									if(pWaypoints != nullptr)
+									{
+										for(int i = 0; i < nWaypoints; i++)
+										{
+											if(pWaypoints != nullptr)
+											{
+												int nWPx = -1;
+												int nWPy = -1;
+												pWaypoints->Attribute("X", &nWPx);
+												pWaypoints->Attribute("Y", &nWPy);
+												pNpc->AddWaypoint(float(nWPx), float(nWPy));
+											}
+											pWaypoints = pWaypoints->NextSiblingElement("Waypoint");
+
+										}
+									}
+
+									////////////Add Conversations here///////////
+									Worldtemp->AddObject(pNpc, 2);
+
+
+								}
+								else
+								{
+									delete pNpc;
+								}
 							}
 							else if(ReadIn == "WARP")
 							{
@@ -1156,7 +1227,9 @@ CUnits* CGamePlayState::GetUnit(std::string szUnit)
 	pTemp->GiveExperience(m_mUnitsManager[szUnit]->GetExperience());
 	pTemp->SetMaxHealth(m_mUnitsManager[szUnit]->GetMaxHealth());
 	pTemp->SetMaxAP(m_mUnitsManager[szUnit]->GetMaxAP());
+	string szTemp = szUnit + "_Battle_Idle";
 
+	pTemp->GetAnimInfo()->SetAnimation(szTemp);
 	map<string, InventoryItems>* vTemp = m_mUnitsManager[szUnit]->GetInv();
 	for(auto i = vTemp->begin(); i != vTemp->end(); i++)
 	{
@@ -1178,6 +1251,10 @@ CNpcs* CGamePlayState::GetNpc(std::string szNpc)
 	pTemp->SetName(szNpc);
 	std::vector<CEnemyUnit*>& vTemp = m_mNPCManager[szNpc]->GetUnits();
 	CEnemyUnit* pTempUnit;
+	
+	string szTemp = szNpc + "_Idle";
+	pTempUnit->GetAnimInfo()->SetAnimation(szTemp);
+
 	for(unsigned int i = 0; i < vTemp.size(); i++)
 	{
 		pTempUnit = reinterpret_cast<CEnemyUnit*>(GetUnit(vTemp[i]->GetName()));
