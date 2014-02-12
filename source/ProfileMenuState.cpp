@@ -16,6 +16,7 @@
 #include "MainMenuState.h"
 #include "GamePlayState.h"
 #include "Game.h"
+#include "Buff.h"
 #include <sstream>
 CProfileMenuState::CProfileMenuState(void)
 {
@@ -291,7 +292,10 @@ void CProfileMenuState::Render()
 	if(m_fPosY <= 0.0f)
 	{
 		std::wostringstream woss;
-		woss << "New Game\n\n\tSlot 1: " << m_vCharacterList[0]->GetUnit()->GetName().c_str() << "\n\n\tSlot 2: " << m_vCharacterList[1]->GetUnit()->GetName().c_str() << "\n\n\tSlot 3: " << m_vCharacterList[2]->GetUnit()->GetName().c_str() << "\n\nDelete\nMain Menu";
+		woss << "New Game\n\n    Slot 1: " << m_vCharacterList[0]->GetUnit()->GetName().c_str() << "\tLevel: " << m_vCharacterList[0]->GetUnit()->GetLevel() << "\tZone: " << m_vCharacterList[0]->GetZone().c_str()
+			<< "\n\n    Slot 2: " << m_vCharacterList[1]->GetUnit()->GetName().c_str() << "\tLevel: " << m_vCharacterList[1]->GetUnit()->GetLevel() << "\tZone: " << m_vCharacterList[1]->GetZone().c_str()
+			<< "\n\n    Slot 3: " << m_vCharacterList[2]->GetUnit()->GetName().c_str() << "\tLevel: " << m_vCharacterList[2]->GetUnit()->GetLevel() << "\tZone: " << m_vCharacterList[2]->GetZone().c_str()
+			<< "\n\nDelete\nMain Menu";
 		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 64, 272,1.0f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		RECT rTemp = {0,0,16,32};
@@ -302,15 +306,15 @@ void CProfileMenuState::Render()
 			break;
 
 		case 1:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 339, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 72 + (int)m_fOffSetX, 339, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 2:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 400, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 72 + (int)m_fOffSetX, 400, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 3:
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 176 + (int)m_fOffSetX, 461, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 72 + (int)m_fOffSetX, 461, 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 			break;
 
 		case 4:
@@ -365,6 +369,13 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 
 		pSlot->SetAttribute("Name", szTemp.c_str());
 		pSlot->SetAttribute("Level", 1);
+		pSlot->SetAttribute("Attack", 20);
+		pSlot->SetAttribute("Health", 350);
+		pSlot->SetAttribute("Max_Health", 350);
+		pSlot->SetAttribute("AP", 100);
+		pSlot->SetAttribute("Max_AP", 100);
+		pSlot->SetAttribute("Experience", 0);
+		pSlot->SetAttribute("Speed:", 3);
 		pSlot->SetAttribute("Class", 0);
 		pSlot->SetAttribute("posX", 488);
 		pSlot->SetAttribute("posY", 420);
@@ -396,6 +407,34 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pPlayer->SetPosY(float(nTemp));
 		pPlayer->SetName(szFileName);
 		pPlayer->SetZone(pSlot->Attribute("Zone"));
+
+		int nLevel = 0;
+		int nAttack = 0;
+		int nHealth = 0;
+		int nMaxHealth = 0;
+		int nAP = 0;
+		int nMaxAP = 0;
+		int nExp = 0;
+		int nSpeed = 0;
+
+		pSlot->Attribute("Level", &nLevel);
+		pSlot->Attribute("Attack", &nAttack);
+		pSlot->Attribute("Health", &nHealth);
+		pSlot->Attribute("Max_Health", &nMaxHealth);
+		pSlot->Attribute("AP", &nAP);
+		pSlot->Attribute("Max_AP", &nMaxAP);
+		pSlot->Attribute("Experience", &nExp);
+		pSlot->Attribute("Speed", &nSpeed);
+
+		pPlayer->GetUnit()->SetLevel(nLevel);
+		pPlayer->GetUnit()->SetMaxHealth(nMaxHealth);
+		pPlayer->GetUnit()->SetMaxAP(nAP);
+		pPlayer->GetUnit()->GiveExperience(nExp);
+		pPlayer->GetUnit()->SetSpeed(nSpeed);
+		pPlayer->GetUnit()->SetHealth(nHealth);
+		pPlayer->GetUnit()->SetAP(nAP);
+		pPlayer->GetUnit()->SetAttack(nAttack);
+
 		m_vCharacterList.push_back(pPlayer);
 		TiXmlElement* pWorldData = pRoot->FirstChildElement("Defeated");
 		TiXmlElement* pNPCid = pWorldData->FirstChildElement("NPC");
@@ -431,10 +470,18 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 	{
 		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
 		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
+		pSlot->SetAttribute("Attack", pTemp->GetUnit()->GetAttack());
+		pSlot->SetAttribute("Health", pTemp->GetUnit()->GetHealth());
+		pSlot->SetAttribute("Max_Health", pTemp->GetUnit()->GetMaxHealth());
+		pSlot->SetAttribute("AP", pTemp->GetUnit()->GetAbilityPoints());
+		pSlot->SetAttribute("Max_AP", pTemp->GetUnit()->GetMaxAP());
+		pSlot->SetAttribute("Experience", pTemp->GetUnit()->GetExperience());
+		pSlot->SetAttribute("Speed", pTemp->GetUnit()->GetSpeed());
 		pSlot->SetAttribute("Class", 0);
 		pSlot->SetAttribute("posX", int(pTemp->GetPosX()));
 		pSlot->SetAttribute("posY", int(pTemp->GetPosY()));
 		pSlot->SetAttribute("Zone", pTemp->GetZone().c_str());
+
 
 		pTemp->SetName(szFileName);
 		string szZone = pTemp->GetZone();
@@ -483,7 +530,6 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CCommands* tempC = new CCommands;
 	CBasicAttack* tempM = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
-	temp->SetAttack(20);
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Warrior_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
@@ -534,7 +580,30 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 	pTest = new CCommands;
 	CChargeCrystal* pCrystal = new CChargeCrystal;
-	pTest->SetName("Test");
+	pCrystal->SetDamageSkill(false);
+	pCrystal->SetHeal(true);
+	pTest->SetName("Heal");
+	CBuff* pHeal = new CBuff();
+	pHeal->SetMasterGame(pTrig);
+	pHeal->GetAnimInfo()->SetAnimation("Heal");
+	pHeal->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_HealingSpell.wav")));
+	pCrystal->SetSkill(pHeal);
+	pCrystal->SetCost(20);
+	pTest->SetMiniGame(pCrystal);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	pCrystal = new CChargeCrystal;
+	pCrystal->SetDamageSkill(false);
+	pCrystal->SetHeal(false);
+	pTest->SetName("Meditiate");
+	CBuff* pMeditate = new CBuff();
+	pMeditate->SetMasterGame(pTrig);
+	pMeditate->GetAnimInfo()->SetAnimation("Meditate");
+	pMeditate->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_HealingSpell.wav")));
+	pCrystal->SetSkill(pMeditate);
+	pCrystal->SetCost(5);
 	pTest->SetMiniGame(pCrystal);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
@@ -545,13 +614,14 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
 	temp->AddSkill(tempC);
+	temp->SetAttack(20);
 	temp->SetMaxHealth(350);
 	temp->SetMaxAP(100);
 	temp->SetPosX(600);
 	temp->SetPosY(250);
 	temp->SetVelX(0);
 	temp->SetVelY(0);
-	temp->SetSpeed(1);
+	temp->SetSpeed(3);
 	temp->SetType(OBJ_PLAYER_UNIT);
 	temp->SetName("Arin");
 

@@ -21,6 +21,7 @@ public:
 	CMiniGames* GetMini() const {return m_pMaster;}
 	CUnits* GetTarget() const {return m_pTarget;}
 	bool GetCollided() const{return m_bCollided;}
+	void SetCollided(bool bValue) {m_bCollided = bValue;}
 	CProjectile(void);
 	virtual ~CProjectile(void);
 	virtual void Update(float fElapsedTime);

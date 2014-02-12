@@ -96,6 +96,7 @@
     <ClCompile Include="source\BasicAttack.cpp" />
     <ClCompile Include="source\BattleState.cpp" />
     <ClCompile Include="source\BitmapFont.cpp" />
+    <ClCompile Include="source\Buff.cpp" />
     <ClCompile Include="source\CharacterMenuState.cpp" />
     <ClCompile Include="source\ChargeCrystal.cpp" />
     <ClCompile Include="source\Chest.cpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\Objects.cpp" />
     <ClCompile Include="source\OptionsMenu.cpp" />
+    <ClCompile Include="source\Particle.cpp" />
     <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\PlayerUnit.cpp" />
     <ClCompile Include="source\PrecisionStrike.cpp" />
@@ -165,6 +167,7 @@
     <ClInclude Include="source\BasicAttack.h" />
     <ClInclude Include="source\BattleState.h" />
     <ClInclude Include="source\BitmapFont.h" />
+    <ClInclude Include="source\Buff.h" />
     <ClInclude Include="source\CharacterMenuState.h" />
     <ClInclude Include="source\ChargeCrystal.h" />
     <ClInclude Include="source\Chest.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="source\ObjectManager.h" />
     <ClInclude Include="source\Objects.h" />
     <ClInclude Include="source\OptionsMenu.h" />
+    <ClInclude Include="source\Particle.h" />
     <ClInclude Include="source\Player.h" />
     <ClInclude Include="source\PlayerUnit.h" />
     <ClInclude Include="source\PrecisionStrike.h" />
