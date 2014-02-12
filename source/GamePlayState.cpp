@@ -110,6 +110,7 @@ void CGamePlayState::Activate(void)
 
 			CNpcs* pTemp = new CNpcs();
 			LoadWorld();
+
 			m_sCurrWorld = "Level2.xml";
 			pTemp->SetActive(true);
 			pTemp->SetHostile(true);
@@ -138,7 +139,7 @@ void CGamePlayState::Activate(void)
 			pTemp->RegEvent("VALRION_DEFEAT");
 			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
 			pTemp->SetName("OldMan");
-			pTemp->GetAnimInfo()->SetAnimation("NPC_Male_Idle");
+			pTemp->GetAnimInfo()->SetAnimation("OldMan_Idle");
 			pTemp->GetAnimInfo()->SetCurrentFrame(0);
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 

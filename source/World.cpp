@@ -29,7 +29,6 @@ void CWorld::Render(int layer)
 	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
 	m_pOM->Render(layer);
 
-
 	if(GetID() == -1 || layer >= int(m_vMyLayers.size()))
 		return;
 
