@@ -30,7 +30,7 @@ public:
 	void EventIsThrown(bool bEventThrow) { m_bEventThrown = bEventThrow; }
 
 
-	void Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor);
+	void Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScaleX, float fScaleY, DWORD dwColor);
 	void Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTime);
 };
 

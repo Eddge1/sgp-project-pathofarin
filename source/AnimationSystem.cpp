@@ -158,7 +158,7 @@ void CAnimationSystem::LoadAnimations()
 
 }
 
-void CAnimationSystem::Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScale, DWORD dwColor)
+void CAnimationSystem::Render(CAnimationTimeStamp* aTimeStamp, float fPosX, float fPosY, float fScaleX, float fScaleY, DWORD dwColor)
 {
 	RECT rFrame = loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetFrames()[aTimeStamp->GetCurrentFrame()]->GetRenderRect();
 	int nAnchorX = loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetFrames()[aTimeStamp->GetCurrentFrame()]->GetAnchorX();
@@ -166,9 +166,9 @@ void CAnimationSystem::Render(CAnimationTimeStamp* aTimeStamp, float fPosX, floa
 
 	CSGD_TextureManager::GetInstance()->Draw(
 		loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetImageID(), 
-		(int)(fPosX - (nAnchorX * fScale)),
-		(int)(fPosY - (nAnchorY * fScale)), 
-		fScale, fScale, &rFrame, 
+		(int)(fPosX - (nAnchorX * fScaleX)),
+		(int)(fPosY - (nAnchorY * fScaleY)), 
+		fScaleX, fScaleY, &rFrame, 
 		0.0f, 0.0f, 0.0f, dwColor);
 }
 
