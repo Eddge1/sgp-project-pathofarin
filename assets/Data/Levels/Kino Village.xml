@@ -29,10 +29,10 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="9" posX="9" posY="0">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="ToTheDungeon" EventType="WARP" WarpX="448" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="10" posX="10" posY="0">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="ToTheDungeon" EventType="WARP" WarpX="448" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="11" posX="11" posY="0">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1828,7 +1828,7 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="208" posX="8" posY="10">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="ToTheDungeon" EventType="MAP_EDIT" WarpX="448" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="209" posX="9" posY="10">
       <Tile_Data xTileID="3" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

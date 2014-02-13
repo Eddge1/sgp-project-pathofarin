@@ -282,6 +282,9 @@
     <ClCompile Include="source\Particle.cpp">
       <Filter>Objects\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\Augment.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -484,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="source\Particle.h">
       <Filter>Objects\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Augment.h">
+      <Filter>Items\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

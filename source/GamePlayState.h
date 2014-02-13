@@ -11,6 +11,9 @@
 #include "Npcs.h"
 #include <sstream>
 #include "Npcs.h"
+#include "Augment.h"
+#include "Armor.h"
+#include "Weapon.h"
 using namespace std;
 
 // Forward Class Declarations
@@ -61,6 +64,12 @@ public:
 	CWorld* GetWorld(string szName);
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack = 5);
 	CConsumable* CreatePotion(string input);
+
+
+	// New stuff
+	CAugment* CreateAugment(string Type, float Effect);
+	CArmor* CreateArmor(string Name, float Hp, float Attk, float Speed);
+	CWeapon* CreateWeapon(string Name, int Attack);
 
 
 private:

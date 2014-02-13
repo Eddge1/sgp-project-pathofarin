@@ -1,5 +1,5 @@
 #pragma once
-enum ItemTypes {IT_UNDEFINE, IT_CONSUMABLE, IT_ARMOR, IT_WEAPON};
+enum ItemTypes {IT_UNDEFINE, IT_CONSUMABLE, IT_ARMOR, IT_WEAPON, IT_AUGMENT};
 #include <string>
 #include "AnimationTimeStamp.h"
 using namespace std;
