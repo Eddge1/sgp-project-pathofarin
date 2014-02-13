@@ -128,7 +128,7 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 	if (pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
 		m_szConversation.pop_back();
-		m_szConversation.push_back("Thank you for saving our Village! We are forever in your debt!\n...You have Won the First Playable! Congratulations!");
+		m_szConversation.push_back("Thank you for saving our Village!  We are forever in your debt!  You have Won the First Playable!  Congratulations!");
 		m_bGameVictory = true;
 	}
 }

@@ -328,7 +328,7 @@ void CGame::SetSafePath()
 	m_szSafeFolders = oss.str();
 	// Add the company and game information
 	m_szSafeFolders += "\\DNaS\\Path of Arin\\Config\\";
-	for(int i = 0; i < m_szSafeFolders.length(); i++)
+	for(unsigned int i = 0; i < m_szSafeFolders.length(); i++)
 	{
 		wPath[i] = m_szSafeFolders.c_str()[i];
 		if(i == m_szSafeFolders.length() -1)

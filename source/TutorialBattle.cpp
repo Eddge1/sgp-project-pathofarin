@@ -397,7 +397,7 @@ void CTutorialBattle::Render( void )
 				m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
 				woss.str(_T(""));
 				woss << "\"Attempt\"";
-				m_pFont->Draw(woss.str().c_str(), m_pPlayerUnit->GetPosX(),m_pPlayerUnit->GetPosY(),1.0f, D3DCOLOR_XRGB(0,255,255));
+				m_pFont->Draw(woss.str().c_str(), int(m_pPlayerUnit->GetPosX()),int(m_pPlayerUnit->GetPosY()),1.0f, D3DCOLOR_XRGB(0,255,255));
 			}
 			//////////////////////// EXPLAIN ATTACK
 			else if(m_bExplainAttack)

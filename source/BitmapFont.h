@@ -29,6 +29,8 @@ struct CharSet
 	CharDescriptor Chars[256];
 };
 
+
+class CObjects;
 class CBitmapFont
 {
 	int m_nImageID;
@@ -44,6 +46,12 @@ public:
 	void Initialize(void);
 	void Shutdown();
 	CBitmapFont* GetFont(std::string);
+
+	/*This function does not return values
+	  Instead it takes in 3 parameters, 2
+	  of which are out parameters that adjusts
+	  everything for a decent dialog system.*/
+	void GetDimensions(CObjects* pObj, RECT& rPos, wostringstream& szText);
 
 	//Parse XML to load font
 	std::string FontParser(char* fileName);

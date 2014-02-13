@@ -194,7 +194,7 @@ void COptionsMenu::Render( void )
 			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),187,383,1.0f,1.0f,&rCursor,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
 	}
 
-	RECT rMusic = {273, 275, 273 + (213 * (m_nMusicVolume / 100.0f)), 288};
+	RECT rMusic = {273, 275, 273 + (213 * long(m_nMusicVolume / 100.0f)), 288};
 	CSGD_Direct3D::GetInstance()->DrawRect(rMusic, D3DCOLOR_XRGB(0,255,255));
 	rMusic.top += 4;
 	rMusic.bottom -= 4;
@@ -207,7 +207,7 @@ void COptionsMenu::Render( void )
 	woss << m_nMusicVolume;
 	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 487,268,0.75f,D3DCOLOR_ARGB(255,0,0,0));
 
-	RECT rSFX = {273,297,273 + (213 * (m_nSFXVolume / 100.0f)),310};
+	RECT rSFX = {273,297,273 + (213 * long(m_nSFXVolume / 100.0f)),310};
 	CSGD_Direct3D::GetInstance()->DrawRect(rSFX, D3DCOLOR_XRGB(0,255,255));
 	rSFX.top += 4;
 	rSFX.bottom -= 4;

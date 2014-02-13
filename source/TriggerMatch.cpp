@@ -211,7 +211,7 @@ void CTriggerMatch::DoAttack()
 	{
 		if(m_vSkills[i]->GetCollided())
 		{
-			int nTemp = GetOwner()->GetAttack() * GetDamage();
+			int nTemp = int(GetOwner()->GetAttack() * GetDamage());
 			if(m_vSkills[i]->GetCrit() == false)
 				m_vSkills[i]->GetTarget()->ModifyHealth(nTemp, false);
 			else
