@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Snake" Health="650" Ap="1" Attack="150" Exp="2800" Speed="18" Level="16" AI="Brute" Total_Items="1">
+  <Item Name="Titan-Ether" Chance="45" />
+</Unit>

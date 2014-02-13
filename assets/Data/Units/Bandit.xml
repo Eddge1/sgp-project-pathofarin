@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Bandit" Health="580" Ap="1" Attack="130" Exp="1980" Speed="22" Level="14" AI="Minion Melee" Total_Items="1">
+  <Item Name="Titan-Ether" Chance="45" />
+</Unit>
