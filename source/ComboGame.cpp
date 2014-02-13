@@ -58,7 +58,7 @@ void CComboGame::Render()
 	rTemp.right = 16;
 	rTemp.top = 0;
 	rTemp.bottom = 16;
-	for(int i = m_nCurr; i < m_vMoveList.size(); i++)
+	for(int i = m_nCurr; i < int(m_vMoveList.size()); i++)
 	{
 		if(m_vMoveList[i] == 0)
 			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f);

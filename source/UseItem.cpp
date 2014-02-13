@@ -45,7 +45,7 @@ void CUseItem::Update(float fElapsedTime)
 		if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
 		{
 			m_nSelection++;
-			if(m_nSelection >= m_mTemp->size())
+			if(m_nSelection >= int(m_mTemp->size()))
 				m_nSelection = m_mTemp->size() -1;
 		}
 		if(pDI->KeyPressed(DIK_RETURN))

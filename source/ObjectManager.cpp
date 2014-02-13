@@ -175,7 +175,7 @@ void CObjectManager::DeactiveObject(int nID, unsigned int nLayer)
 	if(nLayer >= m_vObjects.size())
 		return;
 	ObjectVector search = m_vObjects[nLayer];
-	if(nID >= search.size())
+	if(nID >= int(search.size()))
 		return;
 	search[nID]->SetActive(false);
 	search[nID]->SetRender(false);

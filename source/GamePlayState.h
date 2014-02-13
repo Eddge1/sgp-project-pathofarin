@@ -64,12 +64,14 @@ public:
 
 
 private:
+
 	struct NPCDialogue
 	{
 		wostringstream szText;
 		CObjects* pOwner;
 		float m_fTimer;
 		DWORD Color;
+		RECT rPos;
 	};
 
 	enum GamePhase {GP_NAV, GP_BATTLE, GP_MENU, GP_START, GP_END};
@@ -107,6 +109,5 @@ private:
 	float m_fGameText;
 	float m_fGameEndTimer;
 	GamePhase m_eCurrPhase;
-
 };
 

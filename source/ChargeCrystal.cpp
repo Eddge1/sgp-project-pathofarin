@@ -36,9 +36,9 @@ void CChargeCrystal::Render()
 	CSGD_TextureManager* pTM= CSGD_TextureManager::GetInstance();
 	RECT rTemp = {0,0,128,128};
 
-	pTM->Draw(m_nChargeImgID, 400-64*m_fScale, 200-64*m_fScale, m_fScale, m_fScale, &rTemp, 64*m_fScale,64*m_fScale,m_fRotation, D3DCOLOR_XRGB(255,255,255));
+	pTM->Draw(m_nChargeImgID, int(400-64*m_fScale), int(200-64*m_fScale), m_fScale, m_fScale, &rTemp, 64*m_fScale,64*m_fScale,m_fRotation, D3DCOLOR_XRGB(255,255,255));
 	RECT rGem = {0,0,16,16};
-	pTM->Draw(m_nCursorImageID, m_fCursorX - 8, m_fCursorY - 8, 1.0f,1.0f,&rGem,8.0f,8.0f,-m_fRotation, D3DCOLOR_XRGB(255,255,255));
+	pTM->Draw(m_nCursorImageID, int(m_fCursorX - 8), int(m_fCursorY - 8), 1.0f,1.0f,&rGem,8.0f,8.0f,-m_fRotation, D3DCOLOR_XRGB(255,255,255));
 }
 
 void CChargeCrystal::Update(float fElpasedTime)

@@ -234,7 +234,7 @@ void CVictoryState::Render( void )
 		fPercent = m_pPlayer->GetExperience() /  (m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100.0f);
 		RECT rCurrent = {272, 128, 528, 141};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
-		rCurrent.right = 272 + (256 * fPercent);
+		rCurrent.right = 272 + long(256 * fPercent);
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,255,255));
 
 		rCurrent.right = 528;
@@ -254,7 +254,7 @@ void CVictoryState::Render( void )
 	{
 		fPercent = m_pPlayer->GetExperience() /  (m_nNeeded * 1.0f);
 
-		RECT rCurrent = {272, 128, 272 + (256 * fPercent), 141};
+		RECT rCurrent = {272, 128, 272 + long(256 * fPercent), 141};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
 
 		rCurrent.right = 528;
