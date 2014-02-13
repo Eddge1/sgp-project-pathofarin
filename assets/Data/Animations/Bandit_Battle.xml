@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Bandit_Battle_Idle" Frames="6" repeat="1" Texture="sgp_BanditSprites.png">
+    <Frame_Data>
+      <Render posX="578" posY="1" Width="33" Height="62" anchorX="14" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="33" Height="61" />
+      <Render posX="609" posY="1" Width="42" Height="55" anchorX="22" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="42" Height="55" />
+      <Render posX="650" posY="0" Width="40" Height="55" anchorX="19" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="39" Height="54" />
+      <Render posX="692" posY="1" Width="38" Height="55" anchorX="18" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="39" Height="56" />
+      <Render posX="730" posY="1" Width="40" Height="55" anchorX="20" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="40" Height="55" />
+      <Render posX="771" posY="0" Width="38" Height="57" anchorX="20" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="35" Height="56" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Battle_Basic_Attack" Frames="6" repeat="0" Texture="sgp_BanditSprites.png">
+    <Frame_Data>
+      <Render posX="672" posY="673" Width="54" Height="55" anchorX="26" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-2" Width="53" Height="53" />
+      <Render posX="729" posY="675" Width="52" Height="52" anchorX="26" anchorY="49" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="51" Height="52" />
+      <Render posX="792" posY="673" Width="42" Height="55" anchorX="18" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="42" Height="54" />
+      <Render posX="577" posY="720" Width="65" Height="46" anchorX="38" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="46" />
+      <Render posX="648" posY="730" Width="89" Height="40" anchorX="66" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="90" Height="40" />
+      <Render posX="747" posY="730" Width="85" Height="39" anchorX="64" anchorY="35" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="0" Width="85" Height="39" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Battle_Taking_Damage" Frames="3" repeat="0" Texture="sgp_BanditSprites.png">
+    <Frame_Data>
+      <Render posX="658" posY="59" Width="41" Height="54" anchorX="20" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="41" Height="54" />
+      <Render posX="701" posY="59" Width="40" Height="53" anchorX="19" anchorY="47" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="40" Height="54" />
+      <Render posX="748" posY="58" Width="60" Height="47" anchorX="23" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="60" Height="48" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

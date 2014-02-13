@@ -429,7 +429,7 @@ void CBattleState::Battle(float fElapsedTime)
 					{
 						if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 						{
-							string szName = m_vBattleUnits[m_nTurn - 1]->GetName();
+							string szName = m_vBattleUnits[m_nTurn]->GetName();
 							szName += " defeated you by dropping your health to 0.";
 							CGameOverState::GetInstance()->SetMessage(szName);
 							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
