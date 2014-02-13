@@ -120,12 +120,12 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
-			pTemp->SetName("Snake");
-			pTemp->GetAnimInfo()->SetAnimation("Snake_Idle");
+			pTemp->SetName("Golem");
+			pTemp->GetAnimInfo()->SetAnimation("Golem_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Bandit", 100.0f, 250.0f, 12, 150, 20));
 			pTemp->SetUnits(CreateTempEnemy("Snake", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Bee",		  200.0f, 350.0f, 25, 500, 20, 25));
+			pTemp->SetUnits(CreateTempEnemy("Golem",		  200.0f, 350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -866,6 +866,10 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "Snake")
 	{
 		pTemp->SetAnimation("Snake_Battle_Idle");
+	}
+	else if (input == "Golem")
+	{
+		pTemp->SetAnimation("Golem_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);

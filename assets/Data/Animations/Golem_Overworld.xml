@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Golem_Idle" Frames="2" repeat="1" Texture="PoA_Sand_Golem_OverWorld.png">
+    <Frame_Data>
+      <Render posX="0" posY="0" Width="31" Height="31" anchorX="16" anchorY="6" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="31" />
+      <Render posX="33" posY="1" Width="29" Height="31" anchorX="14" anchorY="6" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="30" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Walk_Down" Frames="5" repeat="1" Texture="PoA_Sand_Golem_OverWorld.png">
+    <Frame_Data>
+      <Render posX="0" posY="0" Width="31" Height="31" anchorX="15" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="31" />
+      <Render posX="32" posY="0" Width="30" Height="32" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-34" Width="29" Height="31" />
+      <Render posX="63" posY="0" Width="30" Height="31" anchorX="17" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="29" Height="31" />
+      <Render posX="94" posY="1" Width="33" Height="30" anchorX="17" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="33" Height="31" />
+      <Render posX="128" posY="0" Width="30" Height="32" anchorX="17" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="33" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Walk_Left" Frames="5" repeat="1" Texture="PoA_Sand_Golem_OverWorld.png">
+    <Frame_Data>
+      <Render posX="2" posY="31" Width="26" Height="32" anchorX="12" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="26" Height="32" />
+      <Render posX="32" posY="33" Width="29" Height="30" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="29" Height="31" />
+      <Render posX="62" posY="32" Width="27" Height="31" anchorX="12" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="27" Height="31" />
+      <Render posX="95" posY="32" Width="25" Height="31" anchorX="10" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="27" Height="30" />
+      <Render posX="126" posY="33" Width="26" Height="31" anchorX="10" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="27" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Walk_Up" Frames="5" repeat="1" Texture="PoA_Sand_Golem_OverWorld.png">
+    <Frame_Data>
+      <Render posX="1" posY="63" Width="31" Height="33" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="33" />
+      <Render posX="34" posY="63" Width="28" Height="32" anchorX="14" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="27" Height="32" />
+      <Render posX="66" posY="65" Width="29" Height="30" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="30" Height="31" />
+      <Render posX="97" posY="65" Width="29" Height="30" anchorX="15" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="30" Height="31" />
+      <Render posX="129" posY="65" Width="27" Height="31" anchorX="15" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="27" Height="30" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Walk_Right" Frames="5" repeat="1" Texture="PoA_Sand_Golem_OverWorld.png">
+    <Frame_Data>
+      <Render posX="5" posY="95" Width="24" Height="32" anchorX="14" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="22" Height="31" />
+      <Render posX="38" posY="96" Width="20" Height="31" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="19" Height="31" />
+      <Render posX="70" posY="95" Width="23" Height="32" anchorX="14" anchorY="7" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="22" Height="32" />
+      <Render posX="97" posY="96" Width="27" Height="31" anchorX="15" anchorY="8" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="26" Height="31" />
+      <Render posX="127" posY="95" Width="25" Height="32" anchorX="17" anchorY="9" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="24" Height="30" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
