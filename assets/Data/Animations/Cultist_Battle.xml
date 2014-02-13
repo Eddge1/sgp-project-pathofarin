@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Cultist_Battle_Idle" Frames="12" repeat="1" Texture="POA_Cultist_Battle.png">
+    <Frame_Data>
+      <Render posX="1" posY="150" Width="37" Height="68" anchorX="11" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="38" Height="69" />
+      <Render posX="38" posY="149" Width="37" Height="68" anchorX="13" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="38" Height="69" />
+      <Render posX="77" posY="148" Width="40" Height="69" anchorX="10" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="40" Height="69" />
+      <Render posX="118" posY="149" Width="37" Height="69" anchorX="10" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="37" Height="70" />
+      <Render posX="157" posY="150" Width="35" Height="68" anchorX="10" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="36" Height="69" />
+      <Render posX="193" posY="150" Width="40" Height="68" anchorX="14" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="68" />
+      <Render posX="234" posY="150" Width="38" Height="68" anchorX="11" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="38" Height="68" />
+      <Render posX="273" posY="150" Width="38" Height="68" anchorX="11" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="39" Height="68" />
+      <Render posX="313" posY="149" Width="36" Height="69" anchorX="10" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="36" Height="69" />
+      <Render posX="349" posY="148" Width="40" Height="70" anchorX="14" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="70" />
+      <Render posX="389" posY="148" Width="38" Height="70" anchorX="12" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="38" Height="71" />
+      <Render posX="428" posY="147" Width="39" Height="69" anchorX="10" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="69" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Battle_Basic_Attack" Frames="11" repeat="0" Texture="POA_Cultist_Battle.png">
+    <Frame_Data>
+      <Render posX="1141" posY="2602" Width="37" Height="66" anchorX="15" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="36" Height="64" />
+      <Render posX="1208" posY="2605" Width="41" Height="67" anchorX="18" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="38" Height="67" />
+      <Render posX="1270" posY="2606" Width="46" Height="64" anchorX="21" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-2" Width="46" Height="65" />
+      <Render posX="1338" posY="2613" Width="43" Height="57" anchorX="21" anchorY="51" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="44" Height="56" />
+      <Render posX="1401" posY="2610" Width="53" Height="61" anchorX="19" anchorY="51" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="-1" posY="0" Width="53" Height="61" />
+      <Render posX="1472" posY="2610" Width="44" Height="61" anchorX="22" anchorY="54" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="45" Height="61" />
+      <Render posX="1538" posY="2605" Width="44" Height="66" anchorX="23" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="42" Height="65" />
+      <Render posX="1611" posY="2604" Width="38" Height="66" anchorX="15" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="36" Height="66" />
+      <Render posX="1676" posY="2606" Width="39" Height="65" anchorX="16" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="38" Height="65" />
+      <Render posX="1741" posY="2604" Width="42" Height="65" anchorX="18" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="42" Height="63" />
+      <Render posX="1809" posY="2601" Width="38" Height="69" anchorX="16" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="3" posY="1" Width="32" Height="68" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Battle_Taking_Damage" Frames="5" repeat="0" Texture="POA_Cultist_Battle.png">
+    <Frame_Data>
+      <Render posX="2539" posY="142" Width="47" Height="65" anchorX="17" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="46" Height="65" />
+      <Render posX="2588" posY="149" Width="54" Height="58" anchorX="22" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="55" Height="56" />
+      <Render posX="2643" posY="150" Width="51" Height="57" anchorX="18" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="51" Height="57" />
+      <Render posX="2695" posY="144" Width="50" Height="63" anchorX="18" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="50" Height="63" />
+      <Render posX="2746" posY="142" Width="47" Height="65" anchorX="19" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="49" Height="63" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
