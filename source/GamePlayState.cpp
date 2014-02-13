@@ -120,12 +120,12 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
-			pTemp->SetName("TigerLily");
-			pTemp->GetAnimInfo()->SetAnimation("TigerLily_Idle");
+			pTemp->SetName("Snake");
+			pTemp->GetAnimInfo()->SetAnimation("Snake_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Orc_Shaman", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("TigerLily", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Tree",		  200.0f, 350.0f, 25, 500, 20, 25));
+			pTemp->SetUnits(CreateTempEnemy("Bandit", 100.0f, 250.0f, 12, 150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Snake", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Bee",		  200.0f, 350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -861,6 +861,18 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	else if (input == "TigerLily")
 	{
 		pTemp->SetAnimation("TigerLily_Battle_Idle");
+	}
+	else if (input == "Bee")
+	{
+		pTemp->SetAnimation("Bee_Battle_Idle");
+	}
+	else if (input == "Bandit")
+	{
+		pTemp->SetAnimation("Bandit_Battle_Idle");
+	}
+	else if (input == "Snake")
+	{
+		pTemp->SetAnimation("Snake_Battle_Idle");
 	}
 
 	tempAI->AddMinigame(tempAtk);

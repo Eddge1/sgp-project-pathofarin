@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Bandit_Idle" Frames="2" repeat="1" Texture="Sprite_old_woman_walk.png">
+    <Frame_Data>
+      <Render posX="3" posY="10" Width="28" Height="55" anchorX="13" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="28" Height="55" />
+      <Render posX="34" posY="10" Width="28" Height="55" anchorX="13" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="29" Height="55" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Walk_Down" Frames="6" repeat="1" Texture="Sprite_old_woman_walk.png">
+    <Frame_Data>
+      <Render posX="4" posY="10" Width="28" Height="55" anchorX="12" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="27" Height="56" />
+      <Render posX="34" posY="10" Width="30" Height="54" anchorX="13" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="29" Height="53" />
+      <Render posX="66" posY="11" Width="28" Height="54" anchorX="13" anchorY="15" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="29" Height="55" />
+      <Render posX="97" posY="11" Width="29" Height="54" anchorX="14" anchorY="16" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="29" Height="53" />
+      <Render posX="131" posY="11" Width="29" Height="55" anchorX="12" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="28" Height="55" />
+      <Render posX="161" posY="11" Width="32" Height="56" anchorX="14" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="31" Height="57" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Walk_Up" Frames="6" repeat="1" Texture="Sprite_old_woman_walk.png">
+    <Frame_Data>
+      <Render posX="2" posY="73" Width="29" Height="56" anchorX="15" anchorY="14" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="29" Height="56" />
+      <Render posX="33" posY="74" Width="30" Height="55" anchorX="16" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="55" />
+      <Render posX="66" posY="74" Width="28" Height="55" anchorX="14" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="28" Height="56" />
+      <Render posX="96" posY="74" Width="32" Height="55" anchorX="16" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="31" Height="54" />
+      <Render posX="130" posY="75" Width="29" Height="54" anchorX="14" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="29" Height="54" />
+      <Render posX="161" posY="75" Width="30" Height="56" anchorX="16" anchorY="12" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="31" Height="56" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Walk_Left" Frames="6" repeat="1" Texture="Sprite_old_woman_walk.png">
+    <Frame_Data>
+      <Render posX="160" posY="141" Width="32" Height="54" anchorX="14" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="54" />
+      <Render posX="129" posY="140" Width="28" Height="54" anchorX="14" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="30" Height="54" />
+      <Render posX="96" posY="141" Width="30" Height="52" anchorX="15" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="33" Height="51" />
+      <Render posX="64" posY="140" Width="32" Height="54" anchorX="13" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="31" Height="53" />
+      <Render posX="32" posY="138" Width="30" Height="54" anchorX="15" anchorY="11" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="31" Height="54" />
+      <Render posX="1" posY="138" Width="29" Height="53" anchorX="13" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="53" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Bandit_Walk_Right" Frames="6" repeat="1" Texture="Sprite_old_woman_walk.png">
+    <Frame_Data>
+      <Render posX="3" posY="201" Width="28" Height="56" anchorX="14" anchorY="13" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="25" Height="55" />
+      <Render posX="33" posY="202" Width="29" Height="56" anchorX="15" anchorY="12" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="29" Height="56" />
+      <Render posX="66" posY="203" Width="27" Height="55" anchorX="15" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-3" posY="2" Width="24" Height="57" />
+      <Render posX="98" posY="204" Width="28" Height="55" anchorX="16" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="27" Height="55" />
+      <Render posX="130" posY="204" Width="29" Height="55" anchorX="15" anchorY="9" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="28" Height="56" />
+      <Render posX="163" posY="204" Width="30" Height="55" anchorX="13" anchorY="10" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="29" Height="56" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
