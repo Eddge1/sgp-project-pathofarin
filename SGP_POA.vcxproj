@@ -106,6 +106,7 @@
     <ClCompile Include="source\CreditState.cpp" />
     <ClCompile Include="source\EnemyUnit.cpp" />
     <ClCompile Include="source\Entity.cpp" />
+    <ClCompile Include="source\EquipmentState.cpp" />
     <ClCompile Include="source\Frame.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameOverState.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="source\CreditState.h" />
     <ClInclude Include="source\EnemyUnit.h" />
     <ClInclude Include="source\Entity.h" />
+    <ClInclude Include="source\EquipmentState.h" />
     <ClInclude Include="source\Frame.h" />
     <ClInclude Include="source\Game.h" />
     <ClInclude Include="source\GameOverState.h" />

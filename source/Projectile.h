@@ -8,6 +8,7 @@ class CProjectile :	public CEntity
 	CMiniGames* m_pMaster;
 	bool m_bCollided;
 	bool m_bCrit;
+	bool m_bReady;
 	int m_nAudioSFX;
 public:
 	void SetMasterGame(CMiniGames* pMini) {m_pMaster = pMini;}
@@ -22,6 +23,9 @@ public:
 	CUnits* GetTarget() const {return m_pTarget;}
 	bool GetCollided() const{return m_bCollided;}
 	void SetCollided(bool bValue) {m_bCollided = bValue;}
+	bool GetReady() const{return m_bReady;}
+	void SetReady(bool bValue) {m_bReady = bValue;}
+
 	CProjectile(void);
 	virtual ~CProjectile(void);
 	virtual void Update(float fElapsedTime);

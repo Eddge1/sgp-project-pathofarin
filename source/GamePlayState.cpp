@@ -426,6 +426,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "WARP")
 	{
+		m_pPlayer->SetIsWarping(true);
 		CWarp* pWarp = reinterpret_cast<CWarp*>(pEvent->GetSender());
 		m_pPlayer->SetLastPositionX((float)pWarp->GetWarpX());
 		m_pPlayer->SetLastPositionY((float)pWarp->GetWarpY());
@@ -766,6 +767,8 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 
 	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld + ".xml";
+
+	m_pPlayer->SetIsWarping(false);
 }
 
 void CGamePlayState::SetPlayer(CPlayer* pPlayer)

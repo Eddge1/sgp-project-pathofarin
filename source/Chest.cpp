@@ -1,6 +1,7 @@
 #include "Chest.h"
 #include "GamePlayState.h"
 #include "AnimationSystem.h"
+#include "Player.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 
 
@@ -59,11 +60,18 @@ void CChest::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_PLAYER)
 	{
-		if(m_bCollided == false)
+		CPlayer* pTemp = reinterpret_cast<CPlayer*>(col);
+		if(pTemp != nullptr)
 		{
-			m_bCollided = true;
-			this->GetAnimInfo()->SetAnimation("Chest_Opening");
-			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
+			if(!pTemp->GetIsWarping())
+			{
+				if(m_bCollided == false)
+				{
+					m_bCollided = true;
+					this->GetAnimInfo()->SetAnimation("Chest_Opening");
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
+				}
+			}
 		}
 	}
 

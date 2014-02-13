@@ -11,6 +11,7 @@ CMiniGames::CMiniGames(void)
 	m_nCost = 0;
 	m_bTutorial = false;
 	m_pSkill = nullptr;
+	m_bAOE = false;
 }
 
 CMiniGames::~CMiniGames(void)

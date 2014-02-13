@@ -47,6 +47,7 @@ public:
 	virtual bool Input( void )	override;					// handle user input
 	virtual void Update( float fElapsedTime )	override;	// update entities
 	virtual void Render( void )	override;	
+	unsigned int GetTotalUnits() {return m_vBattleUnits.size();}
 
 	void SetSender(CObjects* pSender);
 	void SetPlayer(CUnits* pPlayer);

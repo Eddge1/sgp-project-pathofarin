@@ -4,7 +4,6 @@
 #include "../SGD Wrappers/CSGD_DirectInput.h"
 #include "../SGD Wrappers/CSGD_XAudio2.h"
 #include "../SGD Wrappers/CSGD_TextureManager.h"
-
 #include "ProfileMenuState.h"
 #include "OptionsMenu.h"
 #include "CreditState.h"
@@ -13,6 +12,7 @@
 #include "GamePlayState.h"
 #include "ProfileMenuState.h"
 #include "BattleState.h" // <- TEMP needs to be deleted after testing.
+#include "EquipmentState.h"
 #include "Game.h"
 
 CMainMenuState* CMainMenuState::GetInstance( void )
@@ -141,6 +141,9 @@ bool CMainMenuState::Input(void)
 	{
 		if(pDI->KeyPressed(DIK_ESCAPE))
 			return false;
+
+		if(pDI->KeyPressed(DIK_M))
+			CGame::GetInstance()->ChangeState(CEquipmentState::GetInstance());
 
 		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 		{

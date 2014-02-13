@@ -1,6 +1,7 @@
 #include "Npcs.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "GamePlayState.h"
+#include "Player.h"
 
 CNpcs::CNpcs(void)
 {
@@ -71,16 +72,16 @@ void CNpcs::Update(float fElapsedTime)
 		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
 		{
 			SetVelY(100);
-				string szTemp = GetName();
-				szTemp += "_Walk_Down";
-				GetAnimInfo()->SetAnimation(szTemp.c_str());
+			string szTemp = GetName();
+			szTemp += "_Walk_Down";
+			GetAnimInfo()->SetAnimation(szTemp.c_str());
 		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
 		{
 			SetVelY(-100);
-				string szTemp = GetName();
-				szTemp += "_Walk_Up";
-				GetAnimInfo()->SetAnimation(szTemp.c_str());
+			string szTemp = GetName();
+			szTemp += "_Walk_Up";
+			GetAnimInfo()->SetAnimation(szTemp.c_str());
 		}
 
 
@@ -136,43 +137,63 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 void CNpcs::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_PLAYER)
-	{
-		if(m_bIsHostile)
+	{		
+		CPlayer* pTemp = reinterpret_cast<CPlayer*>(col);
+		if(pTemp != nullptr)
 		{
-			CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);
-			SetActive(false);
-			SetRender(false);
-		}
-		else
-		{
-			if(m_fDelayChat < 0)
+			if(!pTemp->GetIsWarping())
 			{
-				wostringstream woss;
-				if(m_szConversation.size() > 0)
+				if(m_bIsHostile)
 				{
-					woss << m_szConversation[0].c_str();
-					CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
-					if(m_bGameVictory)
-						CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
-					m_fDelayChat = 1.0f;
+					CSGD_EventSystem::GetInstance()->SendEventNow("INIT_BATTLE", nullptr, nullptr, this);
+					SetActive(false);
+					SetRender(false);
+				}
+				else
+				{
+					if(m_fDelayChat < 0)
+					{
+						wostringstream woss;
+						if(m_szConversation.size() > 0)
+						{
+							woss << m_szConversation[0].c_str();
+							CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
+							if(m_bGameVictory)
+								CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
+							m_fDelayChat = 1.0f;
+						}
+					}
 				}
 			}
-		}
-		RECT rTemp = col->GetCollisionRect();
-		int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
-		if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)
-		{
-			SetPosX(GetPosX() +1);
-			SetVelX(0);
-		}
-		else if(GetCollisionRect().right < rTemp.left + 20 && GetCollisionRect().right > rTemp.left)
-		{
-			SetPosX(GetPosX() -1);
-			SetVelX(0);
-		}
-		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
-		{
-			if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
+			RECT rTemp = col->GetCollisionRect();
+			int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
+			if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)
+			{
+				SetPosX(GetPosX() +1);
+				SetVelX(0);
+			}
+			else if(GetCollisionRect().right < rTemp.left + 20 && GetCollisionRect().right > rTemp.left)
+			{
+				SetPosX(GetPosX() -1);
+				SetVelX(0);
+			}
+			else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
+			{
+				if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
+				{
+					if(GetVelY() > 0)
+					{
+						SetPosY(GetPosY() - 1);
+						SetVelY(0);
+					}
+				}
+				else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
+				{
+					SetPosY(GetPosY() + 1);
+					SetVelY(0);
+				}
+			}
+			else if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
 			{
 				if(GetVelY() > 0)
 				{
@@ -183,26 +204,11 @@ void CNpcs::HandleCollision(CObjects* col)
 			else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
 			{
 				SetPosY(GetPosY() + 1);
+
 				SetVelY(0);
 			}
 		}
-		else if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
-		{
-			if(GetVelY() > 0)
-			{
-				SetPosY(GetPosY() - 1);
-				SetVelY(0);
-			}
-		}
-		else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
-		{
-			SetPosY(GetPosY() + 1);
-
-			SetVelY(0);
-		}
-
 	}
-
 }
 
 void CNpcs::AddWaypoint(float fX, float fY)

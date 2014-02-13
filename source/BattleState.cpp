@@ -92,10 +92,14 @@ void CBattleState::Sleep(void)
 	}
 	for(int i = 0; i < int(m_vText.size()); i++)
 		delete m_vText[i];
-	for(unsigned int i = 0; i < m_vSkills.size(); i++)
-		m_vSkills[i]->Release();
 	
-	m_vSkills.clear();
+	for(unsigned int i = 0; i < m_vSkills.size();)
+	{
+		m_vSkills[i]->Release();
+		m_vSkills[i] = nullptr;
+		m_vSkills.erase(m_vSkills.begin() + i);
+	}
+	
 	m_vText.clear();
 
 	SetSender(nullptr);
@@ -184,9 +188,6 @@ void CBattleState::Render(void)
 
 	m_pFont->Draw(_T("HP:"), 450, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
-
-
-
 	if(m_vBattleUnits.size() > 0)
 	{
 		float hPercent = m_pPlayerUnit->GetHealth() / float(m_pPlayerUnit->GetMaxHealth());
@@ -209,7 +210,7 @@ void CBattleState::Render(void)
 			}
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < m_vBattleUnits.size() && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
@@ -405,6 +406,7 @@ void CBattleState::Battle(float fElapsedTime)
 			if(m_vSkills[i]->GetCollided())
 			{
 				m_vSkills[i]->Release();
+				m_vSkills[i] = nullptr;
 				m_vSkills.erase(m_vSkills.begin() + i);
 			}
 			else

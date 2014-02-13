@@ -1,6 +1,6 @@
 #include "Warp.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
-
+#include "Player.h"
 CWarp::CWarp(void)
 {
 	SetType(OBJ_WARP);
@@ -17,7 +17,17 @@ CWarp::~CWarp(void)
 void CWarp::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_PLAYER)
-		CSGD_EventSystem::GetInstance()->SendEventNow("WARP", nullptr, nullptr, this);
+	{
+		CPlayer* pTemp = reinterpret_cast<CPlayer*>(col);
+		if(pTemp != nullptr)
+		{
+			if(!pTemp->GetIsWarping())
+			{
+				CSGD_EventSystem::GetInstance()->SendEventNow("WARP", nullptr, nullptr, this);
 
+			}
+
+		}
+	}
 }
 

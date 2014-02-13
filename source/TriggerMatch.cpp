@@ -7,6 +7,7 @@
 #include "BitmapFont.h"
 #include "AnimationSystem.h"
 #include "GamePlayState.h"
+#include "Buff.h"
 
 CTriggerMatch::CTriggerMatch(void)
 {
@@ -124,7 +125,6 @@ void CTriggerMatch::Update(float fElpasedTime)
 	else if(m_rTrigger.left <= 200)
 		m_bLeft = false;
 
-
 	if(pDI->KeyPressed(DIK_RETURN))
 	{
 		GetOwner()->GetAnimInfo()->SetCurrentFrame(0);
@@ -135,15 +135,11 @@ void CTriggerMatch::Update(float fElpasedTime)
 			if(IntersectRect(&rTemp, &m_rTrigger,m_vGameElements[i]))
 			{
 				if(i == 1)
-				{
 					m_bCritical = true;
-					break;
-				}
 				else
-				{
 					m_bSuccess = true;
-					break;
-				}
+				break;
+
 			}
 		}
 		if(!m_bCritical && !m_bSuccess)
@@ -164,10 +160,7 @@ void CTriggerMatch::Update(float fElpasedTime)
 	}
 
 	if(m_nSuccess >= GetChances() || m_bFailed)
-	{
 		GetOwner()->EndTurn();
-		ResetSkill();
-	}
 }
 
 void CTriggerMatch::ResetSkill() 
@@ -191,35 +184,86 @@ void CTriggerMatch::InstantiateSkill()
 	CProjectile* pTemp = GetSkill();
 	if(pTemp != nullptr)
 	{
-		CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
-		CProjectile* pNewProjectile = new CProjectile();
-		pNewProjectile->SetMasterGame(this);
-		pNewProjectile->SetTarget(tempP);
-		pNewProjectile->SetCritical(m_bCritical);
-		pNewProjectile->GetAnimInfo()->SetAnimation(pTemp->GetAnimInfo()->GetCurrentAnimation());
-		pNewProjectile->SetPosX(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosX());
-		pNewProjectile->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY());
-		pTemp->PlaySFX();
-		m_vSkills.push_back(pNewProjectile);
-		CBattleState::GetInstance()->AddSkill(pNewProjectile);
+		if(!GetAOE())
+		{
+			CUnits* tempP = CBattleState::GetInstance()->GetCurrentTarget();
+			CProjectile* pNewProjectile = new CProjectile();
+			pNewProjectile->SetMasterGame(this);
+			pNewProjectile->SetTarget(tempP);
+			pNewProjectile->SetCritical(m_bCritical);
+			pNewProjectile->GetAnimInfo()->SetAnimation(pTemp->GetAnimInfo()->GetCurrentAnimation());
+			pNewProjectile->SetPosX(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosX());
+			pNewProjectile->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY());
+			pTemp->PlaySFX();
+			m_vSkills.push_back(pNewProjectile);
+			CBattleState::GetInstance()->AddSkill(pNewProjectile);
+		}
+		else
+		{
+			vector<CUnits*>& vTemp = CBattleState::GetInstance()->GetBattleUnits();
+			CBuff* pNewProjectile;
+
+			for(unsigned int i = 0; i < vTemp.size(); i++)
+			{
+				if(vTemp[i]->GetType() != OBJ_PLAYER_UNIT)
+				{
+					pNewProjectile = new CBuff();
+					pNewProjectile->SetMasterGame(this);
+					pNewProjectile->SetTarget(vTemp[i]);
+					pNewProjectile->SetCritical(m_bCritical);
+					pNewProjectile->GetAnimInfo()->SetAnimation(pTemp->GetAnimInfo()->GetCurrentAnimation());
+					pNewProjectile->SetPosX(vTemp[i]->GetPosX());
+					pNewProjectile->SetPosY(vTemp[i]->GetPosY());
+					pTemp->PlaySFX();
+					m_vSkills.push_back(pNewProjectile);
+					CBattleState::GetInstance()->AddSkill(pNewProjectile);
+				}
+			}
+		}
 	}
 }
 
 void CTriggerMatch::DoAttack()
 {
-	for(unsigned int i =0; i < m_vSkills.size();)
+	if(!GetAOE())
 	{
-		if(m_vSkills[i]->GetCollided())
+		for(unsigned int i =0; i < m_vSkills.size();)
 		{
-			int nTemp = int(GetOwner()->GetAttack() * GetDamage());
-			if(m_vSkills[i]->GetCrit() == false)
-				m_vSkills[i]->GetTarget()->ModifyHealth(nTemp, false);
+			if(m_vSkills[i]->GetCollided())
+			{
+				int nTemp = int(GetOwner()->GetAttack() * GetDamage());
+				if(m_vSkills[i]->GetCrit() == false)
+					m_vSkills[i]->GetTarget()->ModifyHealth(nTemp, false);
+				else
+					m_vSkills[i]->GetTarget()->ModifyHealth(nTemp * 2, false);
+				m_vSkills[i]->Release();
+				m_vSkills[i] = nullptr;
+				m_vSkills.erase(m_vSkills.begin() + i);
+				break;
+			}
 			else
-				m_vSkills[i]->GetTarget()->ModifyHealth(nTemp * 2, false);
-			m_vSkills[i]->Release();
-			m_vSkills.erase(m_vSkills.begin() + i);
+				i++;
 		}
-		else
-			i++;
+	}
+	else
+	{
+		for(unsigned int i =0; i < m_vSkills.size();)
+		{
+			if(m_vSkills[i]->GetReady())
+			{
+				int nTemp = int(GetOwner()->GetAttack() * GetDamage());
+				if(m_vSkills[i]->GetCrit() == false)
+					m_vSkills[i]->GetTarget()->ModifyHealth(nTemp, false);
+				else
+					m_vSkills[i]->GetTarget()->ModifyHealth(nTemp * 2, false);
+				m_vSkills[i]->Release();
+				m_vSkills[i] = nullptr;
+				m_vSkills.erase(m_vSkills.begin() + i);
+				break;
+			}
+			else
+				i++;
+		}
+
 	}
 }

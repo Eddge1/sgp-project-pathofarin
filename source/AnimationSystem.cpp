@@ -181,13 +181,14 @@ void CAnimationSystem::Update(CAnimationTimeStamp* aTimeStamp, float fElapsedTim
 	if (aTimeStamp->GetTimeOnStamp() > fDuration)
 	{
 		aTimeStamp->AdvanceCurrentFrame();
+		m_bEventThrown = false;
 		aTimeStamp->SetTimeOnStamp(0.0f);
 	}
 
-	if (pFrame->GetEventID() != "" /*&& m_bEventThrown == false*/)
+	if (pFrame->GetEventID() != "NULL" && m_bEventThrown == false)
 	{
 		m_bEventThrown = true;
-		CSGD_EventSystem::GetInstance()->SendEventNow(pFrame->GetEventID());
+		CSGD_EventSystem::GetInstance()->SendEventNow(pFrame->GetEventID(), nullptr, nullptr, aTimeStamp);
 	}
 }
 

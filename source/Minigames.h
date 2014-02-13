@@ -14,6 +14,7 @@ class CMiniGames : public IListener
 	float m_fDamageMultiplier;
 	bool m_bTutorial;
 	CProjectile* m_pSkill;
+	bool m_bAOE;
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
 	CUnits* GetOwner(void) { return m_pMaster; }
@@ -31,6 +32,10 @@ public:
 	CProjectile* GetSkill() const {return m_pSkill;}
 	void SetTutorial (bool bTut) {m_bTutorial = bTut;}
 	bool GetTutorial ( ) const{return m_bTutorial;}
+	void SetAOE (bool bAOE) {m_bAOE = bAOE;}
+	bool GetAOE ( ) const{return m_bAOE;}
+
+
 	virtual void ResetSkill( void ) {  }
 
 	float ScalarDistance(float fx1, float fy1, float fx2, float fy2);

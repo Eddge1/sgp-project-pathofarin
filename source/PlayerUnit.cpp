@@ -187,7 +187,6 @@ void CPlayerUnit::Update(float fElapsedTime)
 		{
 			m_bDodge = true;
 		}
-
 	}
 	if(timer <= -0.4f)
 		m_bDodge = false;

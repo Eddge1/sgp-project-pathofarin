@@ -579,6 +579,19 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->AddCommands(pTest);
 
 	pTest = new CCommands;
+	pTrig = new CTriggerMatch;
+	pTest->SetName("EarthRip");
+	CBuff* pEarthRip = new CBuff();
+	pEarthRip->SetMasterGame(pTrig);
+	pEarthRip->GetAnimInfo()->SetAnimation("Earth_Rip");
+	pEarthRip->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_IceSpear.wav")));
+	pTrig->SetSkill(pEarthRip);
+	pTrig->SetAOE(true);
+	pTest->SetMiniGame(pTrig);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
 	CChargeCrystal* pCrystal = new CChargeCrystal;
 	pCrystal->SetDamageSkill(false);
 	pCrystal->SetHeal(true);

@@ -18,7 +18,7 @@
       <ActiveCollision posX="0" posY="0" Width="101" Height="106" />
       <Render posX="695" posY="84" Width="105" Height="59" anchorX="51" anchorY="44" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="-1" posY="0" Width="106" Height="59" />
-      <Render posX="809" posY="86" Width="105" Height="58" anchorX="54" anchorY="41" Duration="0.1" Event="NULL" />
+      <Render posX="809" posY="86" Width="105" Height="58" anchorX="54" anchorY="41" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="0" posY="1" Width="105" Height="57" />
     </Frame_Data>
   </Animation_Info>

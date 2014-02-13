@@ -12,6 +12,7 @@ CPlayer::CPlayer(void)
 
 	m_fLastY = -1;
 	m_fLastX = -1;
+	m_bIsWarping = false;
 }
 
 
