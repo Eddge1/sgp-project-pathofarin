@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Golem" Health="700" Ap="1" Attack="210" Exp="3000" Speed="2" Level="18" AI="Brute" Total_Items="2">
+  <Item Name="Titan-Ether" Chance="45" />
+  <Item Name="Titan-Potion" Chance="65" />
+</Unit>
