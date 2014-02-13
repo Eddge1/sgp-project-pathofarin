@@ -40,6 +40,7 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 {
 	if(pEvent->GetEventID() == "DODGE")
 	{
+		m_bDodge = false;
 		timer = 1.0f;
 		std::wostringstream woss;
 		woss << "Attempt ";
@@ -188,6 +189,9 @@ void CPlayerUnit::Update(float fElapsedTime)
 		}
 
 	}
+	if(timer <= -0.4f)
+		m_bDodge = false;
+
 	CEntity::Update(fElapsedTime);
 }
 
@@ -216,11 +220,12 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
 {
 	if(m_bDodge == true)
 	{
-		CUnits::ModifyHealth(0, false);
 		m_bDodge = false;
+		CUnits::ModifyHealth(0, false);
 	}
 	else
 	{
+
 		if(nAmount > 0)
 			this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
 		CUnits::ModifyHealth(nAmount, isCrit);

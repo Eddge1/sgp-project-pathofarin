@@ -120,12 +120,12 @@ void CGamePlayState::Activate(void)
 			pTemp->AddWaypoint(1778,273);
 			pTemp->AddWaypoint(1581,273);
 			pTemp->AddWaypoint(1581,162);
-			pTemp->SetName("Bandit");
-			pTemp->GetAnimInfo()->SetAnimation("Bandit_Idle");
+			pTemp->SetName("Golem");
+			pTemp->GetAnimInfo()->SetAnimation("Golem_Idle");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
 			pTemp->SetUnits(CreateTempEnemy("Bandit", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("TigerLily", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Bee",		  200.0f, 350.0f, 25, 500, 20, 25));
+			pTemp->SetUnits(CreateTempEnemy("Snake", 100.0f, 400.0f, 9,  150, 20));
+			pTemp->SetUnits(CreateTempEnemy("Golem",		  200.0f, 350.0f, 25, 500, 20, 25));
 			pTemp->SetEvent("VALRION_DEFEAT");
 			pTemp->Release();
 
@@ -137,7 +137,7 @@ void CGamePlayState::Activate(void)
 			pTemp->SetPosX(557);
 			pTemp->SetPosY(300);
 			pTemp->RegEvent("VALRION_DEFEAT");
-			pTemp->AddConversation("Hello Mortal! There is an Evil Tree \nthat is terrorizing our Village! Please help us!");
+			pTemp->AddConversation("Hello Mortal!  There is an Evil Tree that is terrorizing our Village!  Please help us!");
 			pTemp->SetName("OldMan");
 			pTemp->GetAnimInfo()->SetAnimation("OldMan_Idle");
 			pTemp->GetAnimInfo()->SetCurrentFrame(0);
@@ -375,8 +375,15 @@ void CGamePlayState::Render(void)
 	for(unsigned int i = 0; i < m_vShowOnScreen.size();i++)
 	{
 		woss << m_vShowOnScreen[i]->szText.str();
+		RECT rTemp = m_vShowOnScreen[i]->rPos;
+		rTemp.left += long(m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX);
+		rTemp.right += long(m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX);
+		rTemp.top += long(m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY);
+		rTemp.bottom += long(m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY);
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(186,0,0,0));
+		pD3D->DrawHollowRect(rTemp, D3DCOLOR_ARGB(255,255,0,0));
 
-		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX - ( m_vShowOnScreen[i]->szText.str().length() * 8 * 0.5f), m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), rTemp.left + 4, rTemp.top + 4, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 
 		woss.str(_T(""));
 	}
@@ -863,6 +870,14 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 	{
 		pTemp->SetAnimation("Bandit_Battle_Idle");
 	}
+	else if (input == "Snake")
+	{
+		pTemp->SetAnimation("Snake_Battle_Idle");
+	}
+	else if (input == "Golem")
+	{
+		pTemp->SetAnimation("Golem_Battle_Idle");
+	}
 
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(temp);
@@ -903,9 +918,14 @@ void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstr
 	ftTemp->pOwner = pOwner;
 	if(pOwner != nullptr)
 		pOwner->AddRef();
+
+	CGame::GetInstance()->GetFont("Arial")->GetDimensions(pOwner,ftTemp->rPos, szText);
+
 	ftTemp->Color = dColor;
 	ftTemp->szText << szText.str();
 	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
+	
+
 	m_vShowOnScreen.push_back(ftTemp);
 }
 

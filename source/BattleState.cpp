@@ -92,7 +92,10 @@ void CBattleState::Sleep(void)
 	}
 	for(int i = 0; i < int(m_vText.size()); i++)
 		delete m_vText[i];
-
+	for(unsigned int i = 0; i < m_vSkills.size(); i++)
+		m_vSkills[i]->Release();
+	
+	m_vSkills.clear();
 	m_vText.clear();
 
 	SetSender(nullptr);
@@ -421,6 +424,7 @@ void CBattleState::Battle(float fElapsedTime)
 						m_eCurrentPhase = BP_END;
 				}
 
+				m_nTurn++;
 				m_fDelayTurn = 0.6f;
 				m_bDelayed = true;
 				for(unsigned int i = 0; i < m_vBattleUnits.size();)
@@ -450,14 +454,15 @@ void CBattleState::Battle(float fElapsedTime)
 
 				}
 
+				if(m_nTurn >= (int)m_vBattleUnits.size())
+					m_nTurn = 0;
+
 			}
 		}
 	}
 	else if(m_fDelayTurn <= 0.0f && m_bDelayed)
 	{
-		m_nTurn++;
-		if(m_nTurn >= (int)m_vBattleUnits.size())
-			m_nTurn = 0;
+
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)

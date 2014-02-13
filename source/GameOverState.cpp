@@ -54,7 +54,7 @@ void CGameOverState::Render(void)
 	woss << m_szGameOverMsg.c_str();
 	CBitmapFont* temp = CGame::GetInstance()->GetFont("Arial");
 	temp->Draw(_T("Game Over"), 300, 300, 1.0f, D3DCOLOR_XRGB(0,0,0));
-	temp->Draw(woss.str().c_str(), 400 - (m_szGameOverMsg.size() * 16 / 2 * 0.75), 272, 0.75, D3DCOLOR_XRGB(255,0,0));
+	temp->Draw(woss.str().c_str(), 400 - int(m_szGameOverMsg.size() * 16 / 2 * 0.75f), 272, 0.75, D3DCOLOR_XRGB(255,0,0));
 	RECT tempR = { 250, 300, 500, 400 };
 	CSGD_Direct3D::GetInstance()->DrawHollowRect(tempR, D3DCOLOR_XRGB(0,0,0));
 	temp->Draw(_T("Continue?"), 280, 320, 0.8f, D3DCOLOR_XRGB(0,0,0));

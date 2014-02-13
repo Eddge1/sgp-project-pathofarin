@@ -2,6 +2,8 @@
 
 #include "..\SGD Wrappers\CSGD_TextureManager.h"
 #include "..\TinyXML\tinyxml.h"
+#include "Objects.h"
+#include <sstream>
 
 CharDescriptor::CharDescriptor()
 {
@@ -209,3 +211,52 @@ CBitmapFont* CBitmapFont::GetFont(std::string szFont)
 	return nullptr;
 
 }
+
+void CBitmapFont::GetDimensions(CObjects* pObj, RECT& rPos, wostringstream& szText)
+{
+	RECT rTemp = pObj->GetCollisionRect();
+	int nCenter = int((rTemp.right + rTemp.left) * 0.5f);
+	rPos.top = int(rTemp.bottom - pObj->GetPosY() + 6);
+
+	int nWidth = 0;
+	int nHeight = 0;
+	bool bMaxWidth = false;
+	string szblarg = "";
+	for(unsigned int i = 0; i < szText.str().length(); i++)
+	{
+		szblarg += char(szText.str()[i]);
+		nWidth += m_Font.Chars[int(szText.str()[i])].m_nWidth;
+		if(nWidth > 500)
+		{
+			for(int j = i; i > 0; j--)
+			{
+				if(szText.str()[j] == ' ')
+				{
+					szblarg.erase(szblarg.begin() + j + 1, szblarg.end());
+					szblarg += "\n";
+					nWidth = 0;
+					nHeight++;
+					bMaxWidth = true;
+					i = j;
+					break;
+				}
+			}
+		}
+	}
+	
+	szText.str(_T(""));
+	szText << szblarg.c_str();
+
+	if(bMaxWidth)
+	{
+		rPos.left = -203;
+		rPos.right = 203;
+		rPos.bottom = rPos.top + nHeight * m_nMaxCharHeight + 26;
+	}
+	else
+	{
+		rPos.left = -(nWidth / 2) + 20;
+		rPos.right = rPos.left + nWidth - 20 ;
+		rPos.bottom = rPos.top + m_nMaxCharHeight + 6;
+	}
+} 
