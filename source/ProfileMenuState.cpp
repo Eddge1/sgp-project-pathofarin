@@ -586,7 +586,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CBuff* pEarthRip = new CBuff();
 	pEarthRip->SetMasterGame(pTrig);
 	pEarthRip->GetAnimInfo()->SetAnimation("Earth_Rip");
-	pEarthRip->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_IceSpear.wav")));
+	pEarthRip->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_Earth_Rip.wav")));
 	pTrig->SetSkill(pEarthRip);
 	pTrig->SetAOE(true);
 	pTest->SetMiniGame(pTrig);
@@ -616,7 +616,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CBuff* pMeditate = new CBuff();
 	pMeditate->SetMasterGame(pTrig);
 	pMeditate->GetAnimInfo()->SetAnimation("Meditate");
-	pMeditate->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_HealingSpell.wav")));
+	pMeditate->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_Med.wav")));
 	pCrystal->SetSkill(pMeditate);
 	pCrystal->SetCost(5);
 	pTest->SetMiniGame(pCrystal);

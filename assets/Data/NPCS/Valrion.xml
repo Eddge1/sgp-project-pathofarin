@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Valrion" Hostile="true" Units="3" File="Valrion">
+  <Unit Name="Cultist" />
+  <Unit Name="Valrion" />
+  <Unit Name="Cultist" />
+</NPC>

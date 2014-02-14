@@ -4,6 +4,7 @@
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include <sstream>
 #include "Particle.h"
+#include"../SGD Wrappers/CSGD_XAudio2.h"
 
 
 CUnits::CUnits(void)
@@ -48,7 +49,6 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 			if(nAmount < 0)
 			{
 				CParticle* pPart = new CParticle();
-				//pPart->SetAudio();
 				pPart->GetAnimInfo()->SetAnimation("Health_Recover");
 				pPart->SetPosX(GetPosX());
 				pPart->SetPosY(GetPosY());
@@ -68,6 +68,8 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 			{
 				CParticle* pPart = new CParticle();
 				//pPart->SetAudio();
+				pPart->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/General/POA_TakeDamage.wav")));
+				pPart->PlaySFX();
 				pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
 				pPart->SetPosX(GetPosX());
 				pPart->SetPosY(GetPosY());
@@ -126,6 +128,8 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 				woss << "-" << nAmount << " HP";
 				CParticle* pPart = new CParticle();
 				//pPart->SetAudio();
+				pPart->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/General/POA_TakeDamage.wav")));
+				pPart->PlaySFX();
 				pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
 				pPart->SetPosX(GetPosX());
 				pPart->SetPosY(GetPosY());

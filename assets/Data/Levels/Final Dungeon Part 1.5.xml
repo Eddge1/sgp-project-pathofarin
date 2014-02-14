@@ -68,7 +68,13 @@
       <Tile_Data xTileID="8" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="22" posX="9" posY="1">
-      <Tile_Data xTileID="9" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="9" yTileID="5" EventID="Shade" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
+        <Waypoint X="608" Y="96" />
+        <Waypoint X="608" Y="480" />
+        <Waypoint X="480" Y="480" />
+        <Waypoint X="480" Y="96" />
+        <Waypoint X="608" Y="96" />
+      </Tile_Data>
     </Tile>
     <Tile ID="23" posX="10" posY="1">
       <Tile_Data xTileID="10" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

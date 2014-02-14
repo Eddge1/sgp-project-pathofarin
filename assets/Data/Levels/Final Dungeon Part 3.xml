@@ -98,10 +98,16 @@
       <Tile_Data xTileID="1" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="32" posX="2" posY="2">
-      <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="2" yTileID="2" EventID="Cultist" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
+        <Waypoint X="160" Y="160" />
+        <Waypoint X="864" Y="160" />
+        <Waypoint X="160" Y="160" />
+      </Tile_Data>
     </Tile>
     <Tile ID="33" posX="3" posY="2">
-      <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="1">
+        <Waypoint X="160" Y="160" />
+      </Tile_Data>
     </Tile>
     <Tile ID="34" posX="4" posY="2">
       <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -323,7 +329,13 @@
       <Tile_Data xTileID="1" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="107" posX="2" posY="7">
-      <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="2" yTileID="2" EventID="Cultist" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
+        <Waypoint X="160" Y="480" />
+        <Waypoint X="160" Y="672" />
+        <Waypoint X="672" Y="672" />
+        <Waypoint X="672" Y="480" />
+        <Waypoint X="160" Y="480" />
+      </Tile_Data>
     </Tile>
     <Tile ID="108" posX="3" posY="7">
       <Tile_Data xTileID="2" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -626,7 +638,11 @@
       <Tile_Data xTileID="7" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="208" posX="13" posY="13">
-      <Tile_Data xTileID="8" yTileID="8" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="8" yTileID="8" EventID="Cultist" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
+        <Waypoint X="864" Y="864" />
+        <Waypoint X="864" Y="96" />
+        <Waypoint X="864" Y="864" />
+      </Tile_Data>
     </Tile>
     <Tile ID="209" posX="14" posY="13">
       <Tile_Data xTileID="9" yTileID="8" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />

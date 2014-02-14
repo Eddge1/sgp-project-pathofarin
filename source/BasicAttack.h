@@ -2,12 +2,14 @@
 #include "minigames.h"
 #include "BattleState.h"
 #include "Units.h"
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 
 class CBasicAttack : public CMiniGames
 {
 
 	CUnits* m_pTarget;
 	bool bAttacked;
+	int m_nSound;
 public:
 
 	virtual void Update(float fElapsedTime) override;
