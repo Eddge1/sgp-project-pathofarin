@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Golem_Battle_Idle" Frames="2" repeat="1" Texture="PlayStation 2 - Disgaea 2 Cursed Memories - Wood Golem.png">
+    <Frame_Data>
+      <Render posX="767" posY="1" Width="67" Height="78" anchorX="35" anchorY="44" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="66" Height="77" />
+      <Render posX="832" posY="6" Width="66" Height="74" anchorX="29" anchorY="42" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="74" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Battle_Basic_Attack" Frames="8" repeat="0" Texture="PlayStation 2 - Disgaea 2 Cursed Memories - Wood Golem.png">
+    <Frame_Data>
+      <Render posX="769" posY="256" Width="69" Height="80" anchorX="36" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="69" Height="80" />
+      <Render posX="840" posY="257" Width="71" Height="86" anchorX="29" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="73" Height="85" />
+      <Render posX="914" posY="257" Width="75" Height="87" anchorX="31" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="1" Width="76" Height="88" />
+      <Render posX="771" posY="345" Width="76" Height="88" anchorX="28" anchorY="52" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="75" Height="87" />
+      <Render posX="847" posY="352" Width="82" Height="74" anchorX="47" anchorY="32" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="-1" Width="81" Height="72" />
+      <Render posX="937" posY="353" Width="88" Height="70" anchorX="54" anchorY="29" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="1" Width="81" Height="72" />
+      <Render posX="766" posY="439" Width="82" Height="74" anchorX="49" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="82" Height="74" />
+      <Render posX="851" posY="441" Width="77" Height="72" anchorX="49" anchorY="30" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="78" Height="72" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Golem_Battle_Taking_Damage" Frames="1" repeat="0" Texture="PlayStation 2 - Disgaea 2 Cursed Memories - Wood Golem.png">
+    <Frame_Data>
+      <Render posX="768" posY="1695" Width="96" Height="83" anchorX="52" anchorY="50" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="97" Height="84" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

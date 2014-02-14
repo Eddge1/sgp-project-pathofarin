@@ -3,6 +3,8 @@
 
 CWeapon::CWeapon(void)
 {
+	Attack = 0;
+	SetItemType(IT_WEAPON);
 }
 
 

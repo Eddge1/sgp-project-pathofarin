@@ -285,6 +285,9 @@
     <ClCompile Include="source\EquipmentState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\Augment.cpp">
+      <Filter>Items\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="source\EquipmentState.h">
       <Filter>GameStates\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Augment.h">
+      <Filter>Items\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

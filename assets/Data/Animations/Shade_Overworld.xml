@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Shade_Idle" Frames="2" repeat="1" Texture="Wraith.png">
+    <Frame_Data>
+      <Render posX="26" posY="32" Width="49" Height="78" anchorX="22" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="78" />
+      <Render posX="103" posY="34" Width="77" Height="70" anchorX="41" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="76" Height="71" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Shade_Walk_Down" Frames="7" repeat="1" Texture="Wraith.png">
+    <Frame_Data>
+      <Render posX="26" posY="32" Width="49" Height="78" anchorX="22" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="78" />
+      <Render posX="103" posY="34" Width="77" Height="70" anchorX="41" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="76" Height="71" />
+      <Render posX="216" posY="33" Width="49" Height="79" anchorX="25" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="50" Height="79" />
+      <Render posX="315" posY="32" Width="45" Height="85" anchorX="22" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="45" Height="84" />
+      <Render posX="395" posY="33" Width="76" Height="69" anchorX="41" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="76" Height="68" />
+      <Render posX="507" posY="29" Width="54" Height="84" anchorX="25" anchorY="22" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="55" Height="85" />
+      <Render posX="612" posY="30" Width="39" Height="81" anchorX="18" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="38" Height="80" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Shade_Walk_Left" Frames="7" repeat="1" Texture="Wraith.png">
+    <Frame_Data>
+      <Render posX="32" posY="155" Width="45" Height="79" anchorX="20" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="44" Height="78" />
+      <Render posX="106" posY="154" Width="69" Height="81" anchorX="42" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="69" Height="81" />
+      <Render posX="223" posY="155" Width="46" Height="79" anchorX="24" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="45" Height="79" />
+      <Render posX="291" posY="154" Width="77" Height="61" anchorX="50" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="78" Height="61" />
+      <Render posX="395" posY="157" Width="72" Height="82" anchorX="45" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="73" Height="83" />
+      <Render posX="512" posY="157" Width="52" Height="79" anchorX="24" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="50" Height="80" />
+      <Render posX="615" posY="157" Width="45" Height="80" anchorX="18" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="44" Height="80" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Shade_Walk_Up" Frames="7" repeat="1" Texture="Wraith.png">
+    <Frame_Data>
+      <Render posX="22" posY="287" Width="49" Height="75" anchorX="27" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="-1" Width="51" Height="75" />
+      <Render posX="112" posY="289" Width="76" Height="71" anchorX="34" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="76" Height="71" />
+      <Render posX="220" posY="289" Width="46" Height="74" anchorX="22" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="47" Height="75" />
+      <Render posX="310" posY="270" Width="55" Height="82" anchorX="28" anchorY="34" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="55" Height="83" />
+      <Render posX="384" posY="286" Width="96" Height="67" anchorX="51" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="93" Height="67" />
+      <Render posX="507" posY="288" Width="49" Height="75" anchorX="27" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="49" Height="74" />
+      <Render posX="610" posY="288" Width="40" Height="81" anchorX="20" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="39" Height="81" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Shade_Walk_Right" Frames="7" repeat="1" Texture="Wraith.png">
+    <Frame_Data>
+      <Render posX="28" posY="401" Width="45" Height="83" anchorX="23" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="45" Height="82" />
+      <Render posX="122" posY="403" Width="45" Height="82" anchorX="25" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="46" Height="81" />
+      <Render posX="215" posY="405" Width="72" Height="78" anchorX="29" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="71" Height="77" />
+      <Render posX="318" posY="405" Width="70" Height="55" anchorX="23" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="69" Height="54" />
+      <Render posX="415" posY="407" Width="49" Height="74" anchorX="23" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="50" Height="73" />
+      <Render posX="509" posY="404" Width="69" Height="79" anchorX="27" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="69" Height="79" />
+      <Render posX="605" posY="405" Width="48" Height="78" anchorX="27" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="48" Height="78" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

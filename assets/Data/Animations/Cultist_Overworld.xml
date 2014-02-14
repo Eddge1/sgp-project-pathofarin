@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="5">
+  <Animation_Info Name="Cultist_Idle" Frames="2" repeat="1" Texture="monk1.png">
+    <Frame_Data>
+      <Render posX="1" posY="1" Width="31" Height="46" anchorX="15" anchorY="30" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="31" Height="46" />
+      <Render posX="34" posY="1" Width="30" Height="49" anchorX="14" anchorY="31" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="30" Height="48" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Walk_Down" Frames="4" repeat="1" Texture="monk1.png">
+    <Frame_Data>
+      <Render posX="0" posY="2" Width="31" Height="45" anchorX="17" anchorY="30" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="30" Height="46" />
+      <Render posX="32" posY="1" Width="32" Height="48" anchorX="16" anchorY="31" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="32" Height="46" />
+      <Render posX="65" posY="1" Width="31" Height="46" anchorX="16" anchorY="31" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="30" Height="47" />
+      <Render posX="98" posY="2" Width="32" Height="46" anchorX="14" anchorY="31" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="46" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Walk_Left" Frames="4" repeat="1" Texture="monk1.png">
+    <Frame_Data>
+      <Render posX="0" posY="49" Width="32" Height="46" anchorX="16" anchorY="31" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="32" Height="44" />
+      <Render posX="33" posY="50" Width="30" Height="45" anchorX="14" anchorY="30" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="31" Height="45" />
+      <Render posX="64" posY="50" Width="32" Height="45" anchorX="16" anchorY="29" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="45" />
+      <Render posX="98" posY="50" Width="30" Height="46" anchorX="14" anchorY="28" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="30" Height="46" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Walk_Right" Frames="4" repeat="1" Texture="monk1.png">
+    <Frame_Data>
+      <Render posX="1" posY="96" Width="27" Height="47" anchorX="14" anchorY="30" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="26" Height="46" />
+      <Render posX="31" posY="98" Width="30" Height="46" anchorX="18" anchorY="28" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="31" Height="45" />
+      <Render posX="64" posY="98" Width="29" Height="47" anchorX="16" anchorY="27" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="30" Height="48" />
+      <Render posX="94" posY="99" Width="31" Height="46" anchorX="18" anchorY="27" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="28" Height="46" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Cultist_Walk_Up" Frames="4" repeat="1" Texture="monk1.png">
+    <Frame_Data>
+      <Render posX="1" posY="144" Width="31" Height="51" anchorX="16" anchorY="33" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="30" Height="49" />
+      <Render posX="34" posY="146" Width="30" Height="49" anchorX="14" anchorY="32" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="31" Height="49" />
+      <Render posX="66" posY="145" Width="30" Height="49" anchorX="14" anchorY="35" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="30" Height="51" />
+      <Render posX="98" posY="145" Width="30" Height="49" anchorX="14" anchorY="35" Duration="0.3" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="30" Height="47" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

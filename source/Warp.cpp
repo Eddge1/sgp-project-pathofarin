@@ -23,8 +23,12 @@ void CWarp::HandleCollision(CObjects* col)
 		{
 			if(!pTemp->GetIsWarping())
 			{
+				pTemp->SetIsWarping(true);
 				CSGD_EventSystem::GetInstance()->SendEventNow("WARP", nullptr, nullptr, this);
-
+				pTemp->SetPosX(m_nX);
+				pTemp->SetPosY(m_nY);
+				pTemp->SetLastPositionX(m_nX);
+				pTemp->SetLastPositionY(m_nY);
 			}
 
 		}

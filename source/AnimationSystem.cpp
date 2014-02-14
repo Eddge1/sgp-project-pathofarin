@@ -40,12 +40,16 @@ CAnimationSystem::~CAnimationSystem(void)
 	for (auto i = loadedAnimation.begin(); i != loadedAnimation.end(); ++i)
 	{
 		delete i->second;
+		i->second = nullptr;
 	}
+	loadedAnimation.clear();
 }
 
 void CAnimationSystem::LoadAnimations()
 {
 	//"assets/Data/Animations/"
+	CAnimation* pTempAnim;
+	CFrame* temp;
 	WIN32_FIND_DATA fileSearch;
 	HANDLE hFile;
 	WCHAR cDirectory[] = L"assets/Data/Animations/*.xml";
@@ -80,8 +84,7 @@ void CAnimationSystem::LoadAnimations()
 			pRoot->Attribute("Count", &nCount);
 			for (int i = 0; i < nCount; i++)
 			{
-
-				CAnimation* pTempAnim = new CAnimation;
+				pTempAnim = new CAnimation;
 				szTempName = pAnim->Attribute("Name");
 				pAnim->Attribute("Frames", &nFrames);
 				pTempAnim->SetAnimationName(szTempName);
@@ -137,7 +140,7 @@ void CAnimationSystem::LoadAnimations()
 								rTempCollisionRect.right = right - nAnchorX;
 								rTempCollisionRect.bottom = bottom - nAnchorY;
 							}
-							CFrame* temp = new CFrame;
+							temp = new CFrame;
 							temp->SetRenderRect(rTempRenderRect);
 							temp->SetAnchor(nAnchorX, nAnchorY);
 							temp->SetCollisionRect(rTempCollisionRect);
@@ -149,6 +152,7 @@ void CAnimationSystem::LoadAnimations()
 					}
 				}
 				loadedAnimation[szTempName] = pTempAnim;
+				szTempName = "";
 				pBacktoRoot = pBacktoRoot->NextSiblingElement("Animation_Info");
 				pAnim = pBacktoRoot;
 			}
