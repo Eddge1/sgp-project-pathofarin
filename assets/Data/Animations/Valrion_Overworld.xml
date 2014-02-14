@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="6">
+  <Animation_Info Name="Valrion_Idle" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data>
+      <Render posX="729" posY="2151" Width="56" Height="102" anchorX="32" anchorY="56" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-3" Width="45" Height="91" />
+      <Render posX="809" posY="2149" Width="52" Height="102" anchorX="31" anchorY="58" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="50" Height="98" />
+      <Render posX="888" posY="2150" Width="50" Height="101" anchorX="31" anchorY="57" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="46" Height="96" />
+      <Render posX="965" posY="2150" Width="52" Height="102" anchorX="33" anchorY="57" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-4" Width="43" Height="94" />
+      <Render posX="1046" posY="2151" Width="52" Height="102" anchorX="31" anchorY="56" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="45" Height="98" />
+      <Render posX="1125" posY="2149" Width="50" Height="102" anchorX="31" anchorY="58" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-2" Width="44" Height="98" />
+      <Render posX="1203" posY="2148" Width="52" Height="102" anchorX="32" anchorY="59" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-7" posY="-4" Width="40" Height="96" />
+      <Render posX="1284" posY="2150" Width="49" Height="101" anchorX="30" anchorY="57" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-1" Width="42" Height="97" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Walk_Down" Frames="0" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data />
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Walk_Down" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data>
+      <Render posX="1367" posY="2152" Width="49" Height="104" anchorX="26" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-3" Width="41" Height="98" />
+      <Render posX="1443" posY="2151" Width="48" Height="104" anchorX="27" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="-4" Width="39" Height="97" />
+      <Render posX="1522" posY="2151" Width="47" Height="102" anchorX="25" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="41" Height="98" />
+      <Render posX="1601" posY="2149" Width="42" Height="105" anchorX="22" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="39" Height="100" />
+      <Render posX="1675" posY="2148" Width="43" Height="106" anchorX="25" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-3" Width="39" Height="100" />
+      <Render posX="1751" posY="2148" Width="47" Height="105" anchorX="26" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-5" posY="-3" Width="38" Height="100" />
+      <Render posX="1832" posY="2150" Width="43" Height="103" anchorX="23" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="39" Height="101" />
+      <Render posX="1905" posY="2151" Width="46" Height="103" anchorX="27" anchorY="62" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-1" Width="40" Height="98" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Walk_Left" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data>
+      <Render posX="1358" posY="2376" Width="45" Height="111" anchorX="26" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="42" Height="109" />
+      <Render posX="1431" posY="2374" Width="52" Height="113" anchorX="29" anchorY="71" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-2" Width="42" Height="110" />
+      <Render posX="1511" posY="2374" Width="43" Height="112" anchorX="27" anchorY="70" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="39" Height="107" />
+      <Render posX="1591" posY="2372" Width="40" Height="114" anchorX="24" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="37" Height="112" />
+      <Render posX="1666" posY="2374" Width="44" Height="112" anchorX="26" anchorY="70" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="39" Height="109" />
+      <Render posX="1743" posY="2372" Width="44" Height="114" anchorX="26" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-2" Width="38" Height="110" />
+      <Render posX="1816" posY="2374" Width="51" Height="113" anchorX="30" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-2" Width="48" Height="109" />
+      <Render posX="1894" posY="2375" Width="48" Height="111" anchorX="28" anchorY="70" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="42" Height="110" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Walk_Up" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data>
+      <Render posX="1369" posY="2608" Width="49" Height="112" anchorX="24" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-4" posY="-3" Width="40" Height="105" />
+      <Render posX="1451" posY="2606" Width="43" Height="114" anchorX="19" anchorY="75" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="37" Height="110" />
+      <Render posX="1526" posY="2608" Width="45" Height="112" anchorX="20" anchorY="73" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-1" Width="35" Height="108" />
+      <Render posX="1602" posY="2608" Width="46" Height="112" anchorX="22" anchorY="73" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-2" Width="38" Height="107" />
+      <Render posX="1678" posY="2607" Width="45" Height="113" anchorX="22" anchorY="75" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-2" Width="38" Height="108" />
+      <Render posX="1755" posY="2607" Width="46" Height="113" anchorX="22" anchorY="74" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-3" posY="-3" Width="39" Height="107" />
+      <Render posX="1832" posY="2608" Width="46" Height="112" anchorX="22" anchorY="73" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-3" Width="40" Height="105" />
+      <Render posX="1911" posY="2608" Width="43" Height="113" anchorX="20" anchorY="72" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-2" Width="38" Height="108" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Walk_Right" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+    <Frame_Data>
+      <Render posX="1382" posY="2857" Width="50" Height="105" anchorX="23" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="45" Height="104" />
+      <Render posX="1459" posY="2856" Width="49" Height="104" anchorX="22" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="49" Height="103" />
+      <Render posX="1539" posY="2856" Width="43" Height="103" anchorX="20" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="42" Height="103" />
+      <Render posX="1615" posY="2855" Width="43" Height="104" anchorX="20" anchorY="68" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="40" Height="101" />
+      <Render posX="1689" posY="2856" Width="45" Height="103" anchorX="24" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="43" Height="99" />
+      <Render posX="1766" posY="2856" Width="48" Height="103" anchorX="24" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="41" Height="101" />
+      <Render posX="1845" posY="2853" Width="45" Height="106" anchorX="22" anchorY="70" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="43" Height="104" />
+      <Render posX="1921" posY="2855" Width="49" Height="104" anchorX="22" anchorY="68" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="103" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
