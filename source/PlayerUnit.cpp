@@ -23,6 +23,15 @@ CPlayerUnit::CPlayerUnit(void)
 	m_nSelectionChange = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 	m_nSelectionConfirm = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionConfirm.wav"));
 	m_nSelectionBack = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionBack.wav"));
+
+	m_pEquippedArmor	= nullptr;
+	m_pEquippedWeapon	= nullptr;
+	m_pEquippedAugment	= nullptr;
+
+	m_nHealthMod = 0;
+	m_nAttackMod = 0;
+	m_nAPMod = 0;
+	m_nSpeedMod = 0;
 }
 
 CPlayerUnit::~CPlayerUnit(void)
@@ -34,6 +43,9 @@ CPlayerUnit::~CPlayerUnit(void)
 	}
 	m_vCommands.clear();
 	SetOwner(nullptr);
+	m_pEquippedArmor	= nullptr;
+	m_pEquippedWeapon	= nullptr;
+	m_pEquippedAugment	= nullptr;
 }
 
 void CPlayerUnit::HandleEvent( const CEvent* pEvent )
@@ -236,4 +248,97 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 	else
 		CUnits::ModifyHealth(nAmount, isCrit, inMenu);
 }
+
+void CPlayerUnit::EquipArmor(CArmor* pArmor)
+{
+	if(pArmor == nullptr)
+		return;
+	if(m_pEquippedArmor != nullptr && pArmor->GetName() == m_pEquippedArmor->GetName())
+	{
+		m_nHealthMod -= int(pArmor->GetHpStat());
+		m_nAttackMod -= int(pArmor->GetAttkStat());
+		m_nSpeedMod -=  int(pArmor->GetSpeedStat());
+
+		m_pEquippedArmor = nullptr;
+	}
+	else
+	{
+		if(m_pEquippedArmor != nullptr)
+		{
+			m_nHealthMod -= int(m_pEquippedArmor->GetHpStat());
+			m_nAttackMod -= int(m_pEquippedArmor->GetAttkStat());
+			m_nSpeedMod  -= int(m_pEquippedArmor->GetSpeedStat());
+		}
+		m_pEquippedArmor = pArmor;
+
+		m_nHealthMod += int(pArmor->GetHpStat());
+		m_nAttackMod += int(pArmor->GetAttkStat());
+		m_nSpeedMod  += int(pArmor->GetSpeedStat());
+	}
+}
+
+void CPlayerUnit::EquipWeapon(CWeapon* pWeapon)
+{
+	if(pWeapon == nullptr)
+		return;
+
+	if(m_pEquippedWeapon != nullptr && pWeapon->GetName() == m_pEquippedWeapon->GetName())
+	{
+		m_nAttackMod -= int(pWeapon->GetAttack());
+		m_pEquippedWeapon = nullptr;
+	}
+	else
+	{
+		if(m_pEquippedWeapon != nullptr)
+			m_nAttackMod -= int(m_pEquippedWeapon->GetAttack());
+		m_pEquippedWeapon = pWeapon;
+		m_nAttackMod += int(m_pEquippedWeapon->GetAttack());
+	}
+}
+
+void CPlayerUnit::EquipAugment(CAugment* pAugment)
+{
+	if(pAugment == nullptr)
+		return;
+	if(m_pEquippedAugment != nullptr && pAugment->GetName() == m_pEquippedAugment->GetName())
+	{
+		if(pAugment->GetAugType() == "HP")
+			m_nHealthMod -= int(pAugment->GetEffect());
+		else if(pAugment->GetAugType() == "ATTK")
+			m_nAttackMod -= int(pAugment->GetEffect());
+		else if(pAugment->GetAugType() == "AP")
+			m_nAPMod -= int(pAugment->GetEffect());
+		else if(pAugment->GetAugType() == "SPEED")
+			m_nSpeedMod -= int(pAugment->GetEffect());
+
+
+		m_pEquippedAugment = nullptr;
+	}
+	else
+	{
+		if(m_pEquippedAugment != nullptr)
+		{
+			if(m_pEquippedAugment->GetAugType() == "HP")
+				m_nHealthMod -= int(m_pEquippedAugment->GetEffect());
+			else if(m_pEquippedAugment->GetAugType() == "ATTK")
+				m_nAttackMod -= int(m_pEquippedAugment->GetEffect());
+			else if(m_pEquippedAugment->GetAugType() == "AP")
+				m_nAPMod -= int(m_pEquippedAugment->GetEffect());
+			else if(m_pEquippedAugment->GetAugType() == "SPEED")
+				m_nSpeedMod -= int(m_pEquippedAugment->GetEffect());
+
+		}
+		m_pEquippedAugment = pAugment;
+
+		if(m_pEquippedAugment->GetAugType() == "HP")
+			m_nHealthMod += int(m_pEquippedAugment->GetEffect());
+		else if(m_pEquippedAugment->GetAugType() == "ATTK")
+			m_nAttackMod += int(m_pEquippedAugment->GetEffect());
+		else if(m_pEquippedAugment->GetAugType() == "AP")
+			m_nAPMod += int(m_pEquippedAugment->GetEffect());
+		else if(m_pEquippedAugment->GetAugType() == "SPEED")
+			m_nSpeedMod += int(m_pEquippedAugment->GetEffect());
+	}
+}
+
 

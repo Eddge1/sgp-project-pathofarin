@@ -38,8 +38,8 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 	if(GetType() != OBJ_PLAYER_UNIT)
 		if(m_nHealth < 0)
 			m_nHealth = 0;
-	if(m_nHealth > m_nMaxHealth)
-		m_nHealth = m_nMaxHealth;
+	if(m_nHealth > GetMaxHealth())
+		m_nHealth = GetMaxHealth();
 
 	if(!inMenu)
 	{
@@ -171,8 +171,8 @@ void CUnits::ModifyAP(int nAmount, bool inMenu)
 
 	if(m_nAbilityPoints < 0)
 		m_nAbilityPoints = 0;
-	if(m_nAbilityPoints > m_nMaxAbilityPoints)
-		m_nAbilityPoints = m_nMaxAbilityPoints;
+	if(m_nAbilityPoints > GetMaxAP())
+		m_nAbilityPoints = GetMaxAP();
 
 	if(!inMenu)
 	{

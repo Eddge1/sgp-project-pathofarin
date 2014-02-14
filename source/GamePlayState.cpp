@@ -83,6 +83,17 @@ void CGamePlayState::Activate(void)
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Potion"].Item, 2);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["HP Augment"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["AP Augment"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Atk Augment"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Speed Augment"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Sword of Suffering"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Staff of Lucidity"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Bow of the Great Hunt"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Armor of the Ghost Wolf"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Robes of the Ancient One"].Item, 1);
+			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Vestments of the Savage tribes"].Item, 1);
+
 		}
 		break;
 	case CGamePlayState::GP_MENU:
@@ -97,16 +108,16 @@ void CGamePlayState::Activate(void)
 			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 			// setting up the items
 
-			m_mItemManager["HP"].Item = CreateAugment("HP", 25.0f);
-			m_mItemManager["AP"].Item = CreateAugment("AP", 15.0f);
-			m_mItemManager["ATTK"].Item = CreateAugment("ATTK", 10.0f);
-			m_mItemManager["SPEED"].Item = CreateAugment("ATTK", 10.0f);
-			m_mItemManager["Sword"].Item = CreateWeapon("Sword of Suffering", 10);
-			m_mItemManager["Staff"].Item = CreateWeapon("Staff of Lucidity", 8);
-			m_mItemManager["Bow"].Item = CreateWeapon("Bow of the Great Hunt", 12);
-			m_mItemManager["Plate"].Item = CreateArmor("Armor of the Ghost Wolf", 50.0f, 5.0f, 1.0f);
-			m_mItemManager["Robe"].Item = CreateArmor("Robes of the Ancient One", 20.0f, 10.0f, 5.0f);
-			m_mItemManager["Leather"].Item = CreateArmor("Vestments of the Savage tribes", 30.0f, 8.0f, 8.0f);
+			m_mItemManager["HP Augment"].Item = CreateAugment("HP", 25.0f);
+			m_mItemManager["AP Augment"].Item = CreateAugment("AP", 15.0f);
+			m_mItemManager["Atk Augment"].Item = CreateAugment("ATTK", 10.0f);
+			m_mItemManager["Speed Augment"].Item = CreateAugment("ATTK", 10.0f);
+			m_mItemManager["Sword of Suffering"].Item = CreateWeapon("Sword of Suffering", 10);
+			m_mItemManager["Staff of Lucidity"].Item = CreateWeapon("Staff of Lucidity", 8);
+			m_mItemManager["Bow of the Great Hunt"].Item = CreateWeapon("Bow of the Great Hunt", 12);
+			m_mItemManager["Armor of the Ghost Wolf"].Item = CreateArmor("Armor of the Ghost Wolf", 50.0f, 5.0f, 1.0f);
+			m_mItemManager["Robes of the Ancient One"].Item = CreateArmor("Robes of the Ancient One", 20.0f, 10.0f, 5.0f);
+			m_mItemManager["Vestments of the Savage tribes"].Item = CreateArmor("Vestments of the Savage tribes", 30.0f, 8.0f, 8.0f);
 
 			m_mItemManager["Potion"].Item = CreatePotion("Potion");
 			m_mItemManager["Hi-Potion"].Item = CreatePotion("Hi-Potion");
@@ -1145,24 +1156,28 @@ CAugment* CGamePlayState::CreateAugment(string Type, float Effect)
 	if(Type == "HP")
 	{
 		temp = new CAugment;
+		temp->SetAugType(Type);
 		temp->SetName("HP Augment");
 		temp->SetEffect(Effect);
 	}
 	else if(Type == "ATTK")
 	{
 		temp = new CAugment;
+		temp->SetAugType(Type);
 		temp->SetName("Atk Augment");
 		temp->SetEffect(Effect);
 	}
 	else if(Type == "AP")
 	{
 		temp = new CAugment;
-		temp->SetName("HP Augment");
+		temp->SetAugType(Type);
+		temp->SetName("AP Augment");
 		temp->SetEffect(Effect);
 	}
 	else if(Type == "SPEED")
 	{
 		temp = new CAugment;
+		temp->SetAugType(Type);
 		temp->SetName("Speed Augment");
 		temp->SetEffect(Effect);
 	}

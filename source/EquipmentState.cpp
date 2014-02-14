@@ -56,41 +56,65 @@ void CEquipmentState::Activate( void )
 			assert(m_pPlayer == nullptr && "Player not set correctly");
 		m_vInventory = m_pPlayer->GetInv();
 	}
+
 	for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
 	{
-		if(i->second.Owned > 0)
+		if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 		{
-			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
-			{
-				m_nTotalItems++;
-			}
-			else if(i->second.Item->GetItemType() == IT_WEAPON)
-			{
-				if(i->second.Item->GetName() == "")
-				{
-
-				}
-				else if(i->second.Item->GetName() == "")
-				{
-
-				}
-				else if(i->second.Item->GetName() == "")
-				{
-
-				}
-			}
-			else if(i->second.Item->GetItemType() == IT_ARMOR)
-			{
-
-
-			}
-			else if(i->second.Item->GetItemType() == IT_AUGMENT)
-			{
-
-
-			}
+			m_nTotalItems++;
 		}
 	}
+
+	string szWeapon = "";
+	string szArmor = "";
+	string szAugment = "";
+
+	if(m_pPlayer->GetWeapon() != nullptr)
+		szWeapon = m_pPlayer->GetWeapon()->GetName();
+
+	if(m_pPlayer->GetArmor() != nullptr)
+		szArmor = m_pPlayer->GetArmor()->GetName();
+
+	if(m_pPlayer->GetAugment() != nullptr)
+		szAugment = m_pPlayer->GetAugment()->GetName();
+
+	if(szAugment != "")
+	{
+		if(szAugment == "HP Augment")
+			m_nEquippedAugment = 0;
+		if(szAugment == "AP Augment")
+			m_nEquippedAugment = 1;
+		if(szAugment == "Atk Augment")
+			m_nEquippedAugment = 2;
+		if(szAugment == "Speed Augment")
+			m_nEquippedAugment = 3;
+	}
+	else
+		m_nEquippedAugment = -1;
+
+	if(szWeapon != "")
+	{
+		if(szWeapon == "Sword of Suffering")
+			m_nEquippedWeapon = 0;
+		if(szWeapon == "Staff of Lucidity")
+			m_nEquippedWeapon = 1;
+		if(szWeapon == "Bow of the Great Hunt")
+			m_nEquippedWeapon = 2;
+	}
+	else
+		m_nEquippedWeapon = -1;
+	if(szArmor != "")
+	{
+		if(szArmor == "Armor of the Ghost Wolf")
+			m_nEquippedArmor = 0;
+		if(szArmor == "Robes of the Ancient One")
+			m_nEquippedArmor = 1;
+		if(szArmor == "Vestments of the Savage tribes")
+			m_nEquippedArmor = 2;
+	}
+	else
+		m_nEquippedArmor = -1;
+
 
 }
 void CEquipmentState::Sleep( void )		
@@ -130,8 +154,6 @@ void CEquipmentState::Render( void )
 			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
 	}
 
-
-
 	//// Draw All the slots First
 	pTM->Draw(m_nUnusedSlotID, 164, 268);
 	pTM->Draw(m_nUnusedSlotID, 232, 268);
@@ -149,6 +171,12 @@ void CEquipmentState::Render( void )
 
 	////Draw All the Equipped Items
 
+	if(m_nEquippedWeapon != -1)
+		pTM->Draw(m_nUsedSlotID, 164 + (m_nEquippedWeapon * 68), 268);
+	if(m_nEquippedArmor != -1)
+		pTM->Draw(m_nUsedSlotID, 164 + (m_nEquippedArmor * 68), 336);
+	if(m_nEquippedAugment != -1)
+		pTM->Draw(m_nUsedSlotID, 164 + (m_nEquippedAugment * 68), 404);
 
 	////Draw the Cursor
 	if(GetCursorSelection() == 0 && m_bSubMenu)
@@ -209,6 +237,7 @@ void CEquipmentState::Render( void )
 			}
 		}
 	}
+
 	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Arin"),84,100,0.75f,D3DCOLOR_ARGB(255,200,200,0));
 	float hPercent = m_pPlayer->GetHealth() / float(m_pPlayer->GetMaxHealth());
 	RECT rHealth = {0,0,256, 32};
@@ -220,9 +249,14 @@ void CEquipmentState::Render( void )
 	woss.str(_T(""));
 	woss << m_pPlayer->GetHealth();
 	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),112,126,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+	woss.str(_T(""));
+	woss << m_pPlayer->GetAbilityPoints() << " / " << m_pPlayer->GetMaxAP();
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),232,134,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+	woss.str(_T(""));
+	woss << "Attack: " << m_pPlayer->GetAttack() << "\nSpeed: " << m_pPlayer->GetSpeed() << "\nExperience: " << m_pPlayer->GetExperience() << " / " << m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100;
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),232,150,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+}	
 
-
-}		
 bool CEquipmentState::Input( void )	
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
@@ -368,13 +402,249 @@ bool CEquipmentState::Input( void )
 				switch(m_nGearSelection)
 				{
 				case 0:
+					{
+						if(m_nWeaponSelection == 0)
+						{
+							if((*m_vInventory)["Sword of Suffering"].Owned > 0)
+							{
+								if(m_pPlayer->GetWeapon() != nullptr)
+								{
+									if(m_pPlayer->GetWeapon()->GetName() == "Sword of Suffering")
+										m_nEquippedWeapon = -1;
+									else
+										m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+								else
+								{
+									m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+							}
 
+						}
+						else if(m_nWeaponSelection == 1)
+						{
+							if((*m_vInventory)["Staff of Lucidity"].Owned > 0)
+							{
+								if(m_pPlayer->GetWeapon() != nullptr)
+								{
+									if(m_pPlayer->GetWeapon()->GetName() == "Staff of Lucidity")
+										m_nEquippedWeapon = -1;
+									else
+										m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Staff of Lucidity"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+								else
+								{
+									m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Staff of Lucidity"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+							}
+						}
+						else if(m_nWeaponSelection == 2)
+						{
+							if((*m_vInventory)["Bow of the Great Hunt"].Owned > 0)
+							{
+								if(m_pPlayer->GetWeapon() != nullptr)
+								{
+									if(m_pPlayer->GetWeapon()->GetName() == "Bow of the Great Hunt")
+										m_nEquippedWeapon = -1;
+									else
+										m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Bow of the Great Hunt"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+								else
+								{
+									m_nEquippedWeapon = m_nWeaponSelection;
+									CWeapon* pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Bow of the Great Hunt"].Item);
+									if(pWeapon != nullptr)
+										m_pPlayer->EquipWeapon(pWeapon);
+								}
+							}
+						}
+					}
 					break;
 				case 1:
+					{
+						if(m_nArmorSelection == 0)
+						{
+							if((*m_vInventory)["Armor of the Ghost Wolf"].Owned > 0)
+							{
+								if(m_pPlayer->GetArmor() != nullptr)
+								{
+									if(m_pPlayer->GetArmor()->GetName() == "Armor of the Ghost Wolf")
+										m_nEquippedArmor = -1;
+									else
+										m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Armor of the Ghost Wolf"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+								else
+								{
+									m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Armor of the Ghost Wolf"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+							}
 
+						}
+						else if(m_nArmorSelection == 1)
+						{
+							if((*m_vInventory)["Robes of the Ancient One"].Owned > 0)
+							{
+								if(m_pPlayer->GetArmor() != nullptr)
+								{
+									if(m_pPlayer->GetArmor()->GetName() == "Robes of the Ancient One")
+										m_nEquippedArmor = -1;
+									else
+										m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Robes of the Ancient One"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+								else
+								{
+									m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Robes of the Ancient One"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+							}
+						}
+						else if(m_nArmorSelection == 2)
+						{
+							if((*m_vInventory)["Vestments of the Savage tribes"].Owned > 0)
+							{
+								if(m_pPlayer->GetArmor() != nullptr)
+								{
+									if(m_pPlayer->GetArmor()->GetName() == "Vestments of the Savage tribes")
+										m_nEquippedArmor = -1;
+									else
+										m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Vestments of the Savage tribes"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+								else
+								{
+									m_nEquippedArmor = m_nArmorSelection;
+									CArmor* pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Vestments of the Savage tribes"].Item);
+									if(pArmor != nullptr)
+										m_pPlayer->EquipArmor(pArmor);
+								}
+							}
+						}
+					}
 					break;
 				case 2:
+					{
+						if(m_nAugmentSelection == 0)
+						{
+							if((*m_vInventory)["HP Augment"].Owned > 0)
+							{
+								if(m_pPlayer->GetAugment() != nullptr)
+								{
+									if(m_pPlayer->GetAugment()->GetName() == "HP Augment")
+										m_nEquippedAugment = -1;
+									else
+										m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["HP Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+								else
+								{
+									m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["HP Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+							}
 
+						}
+						else if(m_nAugmentSelection == 1)
+						{
+							if((*m_vInventory)["AP Augment"].Owned > 0)
+							{
+								if(m_pPlayer->GetAugment() != nullptr)
+								{
+									if(m_pPlayer->GetAugment()->GetName() == "AP Augment")
+										m_nEquippedAugment = -1;
+									else
+										m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["AP Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+								else
+								{
+									m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["AP Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+							}
+						}
+						else if(m_nAugmentSelection == 2)
+						{
+							if((*m_vInventory)["Atk Augment"].Owned > 0)
+							{
+								if(m_pPlayer->GetAugment() != nullptr)
+								{
+									if(m_pPlayer->GetAugment()->GetName() == "Atk Augment")
+										m_nEquippedAugment = -1;
+									else
+										m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Atk Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+								else
+								{
+									m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Atk Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+							}
+						}
+						else if(m_nAugmentSelection == 3)
+						{
+							if((*m_vInventory)["Speed Augment"].Owned > 0)
+							{
+								if(m_pPlayer->GetAugment() != nullptr)
+								{
+									if(m_pPlayer->GetAugment()->GetName() == "Speed Augment")
+										m_nEquippedAugment = -1;
+									else
+										m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Speed Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+								else
+								{
+									m_nEquippedAugment = m_nAugmentSelection;
+									CAugment* pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Speed Augment"].Item);
+									if(pAugment != nullptr)
+										m_pPlayer->EquipAugment(pAugment);
+								}
+							}
+						}
+					}
 					break;
 				default:
 					break;
