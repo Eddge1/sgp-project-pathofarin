@@ -234,6 +234,7 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 		if(m_bDodge == true)
 		{
 			m_bDodge = false;
+			this->GetAnimInfo()->SetAnimation("Dodge");
 			CUnits::ModifyHealth(0, false);
 		}
 		else
