@@ -92,12 +92,14 @@ void CComboGame::Update(float fElpasedTime)
 		{
 			m_vMovesMade.push_back(0);
 			m_nCurr++;
+			PlaySuccess();
 		}
 		else
 		{
 			if(m_vMovesMade.size() > 0)
 				m_vMovesMade.pop_back();
 			m_nCurr--;
+			PlayFail();
 		}
 
 	}
@@ -108,12 +110,16 @@ void CComboGame::Update(float fElpasedTime)
 		{
 			m_vMovesMade.push_back(3);
 			m_nCurr++;
+			PlaySuccess();
+
 		}
 		else
 		{
 			if(m_vMovesMade.size() > 0)
 				m_vMovesMade.pop_back();
 			m_nCurr--;
+			PlayFail();
+
 		}
 	}
 
@@ -123,12 +129,14 @@ void CComboGame::Update(float fElpasedTime)
 		{
 			m_vMovesMade.push_back(2);
 			m_nCurr++;
+			PlaySuccess();
 		}
 		else
 		{
 			if(m_vMovesMade.size() > 0)
 				m_vMovesMade.pop_back();
 			m_nCurr--;
+			PlayFail();
 		}
 	}
 
@@ -138,12 +146,15 @@ void CComboGame::Update(float fElpasedTime)
 		{
 			m_vMovesMade.push_back(1);
 			m_nCurr++;
+			PlaySuccess();
 		}
 		else
 		{
 			if(m_vMovesMade.size() > 0)
 				m_vMovesMade.pop_back();
 			m_nCurr--;
+			PlayFail();
+
 		}
 	}
 
@@ -171,7 +182,7 @@ void CComboGame::Update(float fElpasedTime)
 		m_vMovesMade.clear();
 		m_fTimer += 1.0f;
 		m_nCurr = 0;
-
+		PlayCrit();
 		CUnits* tempP;
 
 		if(!GetTutorial())

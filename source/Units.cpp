@@ -36,9 +36,9 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 		string szTemp = GetName() + "_Battle_Taking_Damage";
 		GetAnimInfo()->SetAnimation(szTemp.c_str());
 	}
-	if(GetType() != OBJ_PLAYER_UNIT)
-		if(m_nHealth < 0)
-			m_nHealth = 0;
+
+	if(m_nHealth < 0)
+		m_nHealth = 0;
 	if(m_nHealth > GetMaxHealth())
 		m_nHealth = GetMaxHealth();
 
@@ -233,9 +233,9 @@ void CUnits::GiveExperience		( int nAmount )
 		case UC_NONE:
 			break;
 		case UC_WARRIOR:
-			SetMaxHealth(GetMaxHealth() + (nLevels * 40));
-			SetAttack(GetAttack() + (nLevels * 3));
-			SetMaxAP(GetMaxAP() + (nLevels * 20));
+			SetMaxHealth(CUnits::GetMaxHealth() + (nLevels * 40));
+			SetAttack(CUnits::GetAttack() + (nLevels * 3));
+			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 20));
 			break;
 		case UC_RANGER:
 			break;

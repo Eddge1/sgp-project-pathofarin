@@ -4,6 +4,7 @@
 #include <string>
 #include "Units.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 
 class CProjectile;
 class CMiniGames : public IListener
@@ -11,6 +12,9 @@ class CMiniGames : public IListener
 	CUnits* m_pMaster;
 	int m_nChances;
 	int m_nCost;
+	int m_nSFXID;
+	int m_nCriticalSFXID;
+	int m_nFailSFXID;
 	float m_fDamageMultiplier;
 	bool m_bTutorial;
 	CProjectile* m_pSkill;
@@ -35,6 +39,9 @@ public:
 	void SetAOE (bool bAOE) {m_bAOE = bAOE;}
 	bool GetAOE ( ) const{return m_bAOE;}
 
+	void PlaySuccess()  {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSFXID);}
+	void PlayCrit() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCriticalSFXID);}
+	void PlayFail() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nFailSFXID);}
 
 	virtual void ResetSkill( void ) {  }
 

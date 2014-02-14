@@ -92,14 +92,14 @@ void CBattleState::Sleep(void)
 	}
 	for(int i = 0; i < int(m_vText.size()); i++)
 		delete m_vText[i];
-	
+
 	for(unsigned int i = 0; i < m_vSkills.size();)
 	{
 		m_vSkills[i]->Release();
 		m_vSkills[i] = nullptr;
 		m_vSkills.erase(m_vSkills.begin() + i);
 	}
-	
+
 	m_vText.clear();
 
 	SetSender(nullptr);
@@ -140,6 +140,26 @@ bool CBattleState::Input(void)
 void CBattleState::Update(float fElapsedTime)
 {
 	m_fDelayTurn -= fElapsedTime;
+	if(m_fDelayTurn <= 0.0f && m_bDelayed)
+	{
+
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+			}
+			else
+			{
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
+			}
+		}
+		if(m_eCurrentPhase != BP_END)
+			m_vBattleUnits[m_nTurn]->SetTurn(true);
+		m_bDelayed = false;
+	}
+
 	for(int i = 0; i < (int)m_vText.size(); )
 	{
 		m_vText[i]->m_fTimer -= fElapsedTime;
@@ -151,6 +171,28 @@ void CBattleState::Update(float fElapsedTime)
 		}
 		else
 			i++;
+	}
+
+	if(m_eCurrentPhase != BP_INIT)
+	{
+		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			m_vBattleUnits[i]->Update(fElapsedTime);
+		}
+
+		for(unsigned int i = 0; i < m_vSkills.size();)
+		{
+			m_vSkills[i]->Update(fElapsedTime);
+			if(m_vSkills[i]->GetCollided())
+			{
+				m_vSkills[i]->Release();
+				m_vSkills[i] = nullptr;
+				m_vSkills.erase(m_vSkills.begin() + i);
+			}
+			else
+				i++;
+
+		}
 	}
 
 	if(m_bVictory || m_bDefeat)
@@ -393,27 +435,7 @@ void CBattleState::Initialize(void)
 
 void CBattleState::Battle(float fElapsedTime)
 {
-	if(m_eCurrentPhase == BP_BATTLE)
-	{
-		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		{
-			m_vBattleUnits[i]->Update(fElapsedTime);
-		}
 
-		for(unsigned int i = 0; i < m_vSkills.size();)
-		{
-			m_vSkills[i]->Update(fElapsedTime);
-			if(m_vSkills[i]->GetCollided())
-			{
-				m_vSkills[i]->Release();
-				m_vSkills[i] = nullptr;
-				m_vSkills.erase(m_vSkills.begin() + i);
-			}
-			else
-				i++;
-
-		}
-	}
 	if(m_fDelayTurn <= 0.0f && m_bDelayed == false)
 	{
 		if(m_eCurrentPhase == BP_BATTLE)
@@ -461,25 +483,6 @@ void CBattleState::Battle(float fElapsedTime)
 
 			}
 		}
-	}
-	else if(m_fDelayTurn <= 0.0f && m_bDelayed)
-	{
-
-		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		{
-			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
-			{
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
-			}
-			else
-			{
-				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
-			}
-		}
-		if(m_eCurrentPhase != BP_END)
-			m_vBattleUnits[m_nTurn]->SetTurn(true);
-		m_bDelayed = false;
 	}
 }
 

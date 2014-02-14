@@ -569,7 +569,7 @@ void CTutorialBattle::Battle(float fElapsedTime)
 			}
 			else if (m_vBattleUnits[i]->GetName() == "Thornbiter")
 			{
-				string szTemp = m_vBattleUnits[i]->GetName() + "_Idle";
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}
@@ -638,7 +638,7 @@ CEnemyUnit* CTutorialBattle::CreateTempEnemy(string input, float X, float Y, int
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Thornbiter_Idle");
+	pTemp->SetAnimation("Thornbiter_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	tempAtk->SetTutorial(true);

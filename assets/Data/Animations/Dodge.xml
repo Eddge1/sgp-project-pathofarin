@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="Dodge" Frames="7" repeat="0" Texture="slash_001.png">
+    <Frame_Data>
+      <Render posX="54" posY="58" Width="86" Height="82" anchorX="44" anchorY="39" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="83" Height="77" />
+      <Render posX="226" posY="34" Width="131" Height="126" anchorX="65" anchorY="60" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="127" Height="127" />
+      <Render posX="398" posY="16" Width="166" Height="162" anchorX="85" anchorY="79" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-2" posY="-1" Width="161" Height="160" />
+      <Render posX="585" posY="6" Width="181" Height="180" anchorX="91" anchorY="89" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="179" Height="181" />
+      <Render posX="771" posY="8" Width="190" Height="177" anchorX="97" anchorY="86" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="185" Height="177" />
+      <Render posX="11" posY="198" Width="186" Height="176" anchorX="87" anchorY="90" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="181" Height="176" />
+      <Render posX="200" posY="190" Width="195" Height="195" anchorX="89" anchorY="100" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="194" Height="198" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
