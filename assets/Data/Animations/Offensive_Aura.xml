@@ -24,7 +24,7 @@
       <ActiveCollision posX="-1" posY="-2" Width="248" Height="207" />
       <Render posX="270" posY="739" Width="258" Height="216" anchorX="136" anchorY="188" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="-12" posY="-1" Width="241" Height="208" />
-      <Render posX="568" posY="741" Width="236" Height="213" anchorX="117" anchorY="191" Duration="0.1" Event="NULL" />
+      <Render posX="568" posY="741" Width="236" Height="213" anchorX="117" anchorY="191" Duration="0.1" Event="FLARE" />
       <ActiveCollision posX="0" posY="-2" Width="233" Height="209" />
       <Render posX="3" posY="953" Width="248" Height="224" anchorX="119" anchorY="194" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="-1" Width="247" Height="221" />
@@ -36,7 +36,7 @@
       <ActiveCollision posX="0" posY="1" Width="239" Height="223" />
       <Render posX="265" posY="1185" Width="243" Height="223" anchorX="117" anchorY="197" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="-2" Width="244" Height="222" />
-      <Render posX="552" posY="1193" Width="237" Height="216" anchorX="119" anchorY="192" Duration="0.1" Event="NULL" />
+      <Render posX="552" posY="1193" Width="237" Height="216" anchorX="119" anchorY="192" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="-1" posY="0" Width="235" Height="214" />
     </Frame_Data>
   </Animation_Info>

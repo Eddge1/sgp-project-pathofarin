@@ -5,6 +5,7 @@ CBuff::CBuff(void)
 	CSGD_EventSystem::GetInstance()->RegisterClient("HEAL", this);
 	CSGD_EventSystem::GetInstance()->RegisterClient("MEDITATE", this);
 	CSGD_EventSystem::GetInstance()->RegisterClient("COLLIDE", this);
+	CSGD_EventSystem::GetInstance()->RegisterClient("FLARE", this);
 	CSGD_EventSystem::GetInstance()->RegisterClient("COMPLETE", this);
 }
 
@@ -36,7 +37,10 @@ void CBuff::HandleEvent( const CEvent* pEvent )
 		GetMini()->DoAttack();
 		SetMasterGame(nullptr);
 	}
-
+	if (pEvent->GetEventID() == "FLARE" && GetMini() != nullptr && pEvent->GetSender() == this->GetAnimInfo())
+	{
+		SetReady(true);
+	}
 	if(pEvent->GetEventID() =="COMPLETE" && !GetCollided() && GetReady() && pEvent->GetSender() == this->GetAnimInfo())
 	{
 		SetCollided(true);

@@ -131,10 +131,9 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 				pPart->SetPosY(GetPosY());
 				if(!m_bTutorial)
 				{
+
 					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
 					CBattleState::GetInstance()->AddSkill(pPart);
-
-
 				}
 				else
 				{

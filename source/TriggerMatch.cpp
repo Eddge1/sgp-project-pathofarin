@@ -53,6 +53,9 @@ CTriggerMatch::CTriggerMatch(void)
 	m_bSuccess = false;
 	m_bCritical = false;
 	m_bFailed = false;
+	m_bAuraPlay = true;
+
+	pBuff = nullptr;
 }
 
 
@@ -108,6 +111,20 @@ void CTriggerMatch::Render()
 
 	woss << m_nSuccess;
 	coss << GetChances();
+
+	if (m_bAuraPlay == true)
+	{
+		CUnits* tempP = GetOwner();
+		pBuff = new CBuff();
+		pBuff->SetMasterGame(this);
+		pBuff->SetTarget(tempP);
+		pBuff->GetAnimInfo()->SetAnimation("Offensive_Aura");
+		pBuff->SetPosX(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosX());
+		pBuff->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY() + 32);
+		CBattleState::GetInstance()->AddSkill(pBuff);
+		pBuff->Release();
+		m_bAuraPlay = false;
+	}
 
 	pFont->Draw(woss.str().c_str(), 264, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	pFont->Draw(_T(" out of "), 300, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
@@ -181,6 +198,7 @@ void CTriggerMatch::ResetSkill()
 	m_bSuccess = false;
 	m_bCritical = false;
 	m_bFailed = false;
+	m_bAuraPlay = true;
 	m_fMoveSpeed = 200.0f;
 	m_nSuccess = 0;
 }
