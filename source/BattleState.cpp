@@ -210,7 +210,7 @@ void CBattleState::Render(void)
 			}
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < m_vBattleUnits.size() && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
