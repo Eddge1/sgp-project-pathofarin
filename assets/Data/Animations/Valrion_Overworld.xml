@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data Count="6">
+<Animation_Data Count="5">
   <Animation_Info Name="Valrion_Idle" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
     <Frame_Data>
       <Render posX="729" posY="2151" Width="56" Height="102" anchorX="32" anchorY="56" Duration="0.2" Event="NULL" />
@@ -19,9 +19,6 @@
       <Render posX="1284" posY="2150" Width="49" Height="101" anchorX="30" anchorY="57" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="-4" posY="-1" Width="42" Height="97" />
     </Frame_Data>
-  </Animation_Info>
-  <Animation_Info Name="Valrion_Walk_Down" Frames="0" repeat="1" Texture="POA_Valrion_Overworld.png">
-    <Frame_Data />
   </Animation_Info>
   <Animation_Info Name="Valrion_Walk_Down" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
     <Frame_Data>

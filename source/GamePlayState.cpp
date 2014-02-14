@@ -1064,11 +1064,7 @@ CUnits* CGamePlayState::LoadUnit(string szFileName)
 
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAIController* tempAI = new CAIController();
-	if(szAI == "Minion Melee")
-	{
-		CAIController* pAI = new CAIController();
-	}
-	else if(szAI == "Brute")
+	if(szAI == "Brute")
 	{
 		delete tempAI;
 		CAIBrute* Temp = new CAIBrute;
@@ -1108,6 +1104,7 @@ CUnits* CGamePlayState::LoadUnit(string szFileName)
 		Inferno = nullptr;
 		pTempUnit->SetType(OBJ_LEADER);
 	}
+
 	tempAI->AddMinigame(tempAtk);
 	tempAI->MakeOwner(pTempUnit);
 	pTempUnit->SetAIController(tempAI);
