@@ -132,7 +132,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 						{
 							if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost())
 							{
-								if(m_nMenuSelect == 2)
+								if(m_nMenuSelect == 4)
 									m_bCasting = true;
 
 								m_bSkillSelected = true;

@@ -539,21 +539,9 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC = new CCommands;
 	tempC->SetName("Spells");
 	tempC->SetIsGame(false);
+	
+	
 	CCommands* pTest = new CCommands;
-	CTriggerSpree *pSpree = new CTriggerSpree;
-	pTest->SetName("SwordSlash");
-	pTest->SetMiniGame(pSpree);
-	pTest->SetIsGame(true);
-	tempC->AddCommands(pTest);
-
-	pTest = new CCommands;
-	CComboGame *pCombo = new CComboGame;
-	pTest->SetName("Blitz");
-	pTest->SetMiniGame(pCombo);
-	pTest->SetIsGame(true);
-	tempC->AddCommands(pTest);
-
-	pTest = new CCommands;
 	CTriggerMatch *pTrig = new CTriggerMatch;
 	pTest->SetName("FireBall");
 	CProjectile* pFireBall = new CProjectile();
@@ -622,10 +610,26 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->AddCommands(pTest);
 
 	temp->AddSkill(tempC);
+
+	tempC = new CCommands;
+	CTriggerSpree *pSpree = new CTriggerSpree;
+	tempC->SetName("SwordSlash");
+	tempC->SetMiniGame(pSpree);
+	tempC->SetIsGame(true);
+	temp->AddSkill(tempC);
+
+	tempC = new CCommands;
+	CComboGame *pCombo = new CComboGame;
+	tempC->SetName("Blitz");
+	tempC->SetMiniGame(pCombo);
+	tempC->SetIsGame(true);
+	temp->AddSkill(tempC);
+
 	tempC = new CCommands;
 	CUseItem* tempL = new CUseItem;
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
+	tempC->SetIsGame(true);
 	temp->AddSkill(tempC);
 	temp->SetAttack(20);
 	temp->SetMaxHealth(350);

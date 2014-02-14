@@ -254,7 +254,6 @@ void CBattleState::Render(void)
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
 			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
@@ -270,11 +269,10 @@ void CBattleState::Render(void)
 			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTurn]->GetHealth() / float(m_vBattleUnits[m_nTurn]->GetMaxHealth());
 			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
@@ -286,11 +284,8 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTurn]->GetHealth();
 			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetAbilityPoints();
-			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
