@@ -323,6 +323,7 @@ void CEquipmentState::Render( void )
 	woss.str(_T(""));
 	woss << "Attack: " << m_pPlayer->GetAttack() << "\nSpeed: " << m_pPlayer->GetSpeed() << "\nExperience: " << m_pPlayer->GetExperience() << " / " << m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100;
 	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),232,150,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+
 }	
 
 bool CEquipmentState::Input( void )	

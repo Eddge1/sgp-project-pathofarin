@@ -92,14 +92,14 @@ void CBattleState::Sleep(void)
 	}
 	for(int i = 0; i < int(m_vText.size()); i++)
 		delete m_vText[i];
-	
+
 	for(unsigned int i = 0; i < m_vSkills.size();)
 	{
 		m_vSkills[i]->Release();
 		m_vSkills[i] = nullptr;
 		m_vSkills.erase(m_vSkills.begin() + i);
 	}
-	
+
 	m_vText.clear();
 
 	SetSender(nullptr);
@@ -140,6 +140,26 @@ bool CBattleState::Input(void)
 void CBattleState::Update(float fElapsedTime)
 {
 	m_fDelayTurn -= fElapsedTime;
+	if(m_fDelayTurn <= 0.0f && m_bDelayed)
+	{
+
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			{
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+			}
+			else
+			{
+				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
+				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
+			}
+		}
+		if(m_eCurrentPhase != BP_END)
+			m_vBattleUnits[m_nTurn]->SetTurn(true);
+		m_bDelayed = false;
+	}
+
 	for(int i = 0; i < (int)m_vText.size(); )
 	{
 		m_vText[i]->m_fTimer -= fElapsedTime;
@@ -151,6 +171,28 @@ void CBattleState::Update(float fElapsedTime)
 		}
 		else
 			i++;
+	}
+
+	if(m_eCurrentPhase != BP_INIT)
+	{
+		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+		{
+			m_vBattleUnits[i]->Update(fElapsedTime);
+		}
+
+		for(unsigned int i = 0; i < m_vSkills.size();)
+		{
+			m_vSkills[i]->Update(fElapsedTime);
+			if(m_vSkills[i]->GetCollided())
+			{
+				m_vSkills[i]->Release();
+				m_vSkills[i] = nullptr;
+				m_vSkills.erase(m_vSkills.begin() + i);
+			}
+			else
+				i++;
+
+		}
 	}
 
 	if(m_bVictory || m_bDefeat)
@@ -212,7 +254,6 @@ void CBattleState::Render(void)
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
 			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
@@ -228,11 +269,10 @@ void CBattleState::Render(void)
 			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 16, 516, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 			hPercent = m_vBattleUnits[m_nTurn]->GetHealth() / float(m_vBattleUnits[m_nTurn]->GetMaxHealth());
 			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
@@ -244,11 +284,8 @@ void CBattleState::Render(void)
 			woss << m_vBattleUnits[m_nTurn]->GetHealth();
 			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetAbilityPoints();
-			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
@@ -393,27 +430,7 @@ void CBattleState::Initialize(void)
 
 void CBattleState::Battle(float fElapsedTime)
 {
-	if(m_eCurrentPhase == BP_BATTLE)
-	{
-		for (unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		{
-			m_vBattleUnits[i]->Update(fElapsedTime);
-		}
 
-		for(unsigned int i = 0; i < m_vSkills.size();)
-		{
-			m_vSkills[i]->Update(fElapsedTime);
-			if(m_vSkills[i]->GetCollided())
-			{
-				m_vSkills[i]->Release();
-				m_vSkills[i] = nullptr;
-				m_vSkills.erase(m_vSkills.begin() + i);
-			}
-			else
-				i++;
-
-		}
-	}
 	if(m_fDelayTurn <= 0.0f && m_bDelayed == false)
 	{
 		if(m_eCurrentPhase == BP_BATTLE)
@@ -461,25 +478,6 @@ void CBattleState::Battle(float fElapsedTime)
 
 			}
 		}
-	}
-	else if(m_fDelayTurn <= 0.0f && m_bDelayed)
-	{
-
-		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		{
-			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
-			{
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
-			}
-			else
-			{
-				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
-			}
-		}
-		if(m_eCurrentPhase != BP_END)
-			m_vBattleUnits[m_nTurn]->SetTurn(true);
-		m_bDelayed = false;
 	}
 }
 

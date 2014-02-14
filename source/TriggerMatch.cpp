@@ -159,15 +159,23 @@ void CTriggerMatch::Update(float fElpasedTime)
 			if(IntersectRect(&rTemp, &m_rTrigger,m_vGameElements[i]))
 			{
 				if(i == 1)
+				{
 					m_bCritical = true;
+					PlayCrit();
+				}
 				else
+				{
 					m_bSuccess = true;
+					PlaySuccess();
+				}
 				break;
-
 			}
 		}
 		if(!m_bCritical && !m_bSuccess)
+		{
 			m_bFailed = true;
+			PlayFail();
+		}
 	}
 
 	if(m_bSuccess || m_bCritical)

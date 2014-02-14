@@ -162,9 +162,6 @@
     <ClCompile Include="source\ComboGame.cpp">
       <Filter>MiniGames\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\TriggerSpree.cpp">
-      <Filter>MiniGames\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\TriggerMatch.cpp">
       <Filter>MiniGames\cpp</Filter>
     </ClCompile>
@@ -287,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="source\Augment.cpp">
       <Filter>Items\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TriggerSpree.cpp">
+      <Filter>MiniGames\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

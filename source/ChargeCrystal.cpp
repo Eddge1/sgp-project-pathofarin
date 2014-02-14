@@ -10,7 +10,7 @@
 CChargeCrystal::CChargeCrystal(void)
 {
 	m_fMoveSpeed = 100.0f;
-	m_fTimer = 3.0f;
+	m_fTimer = 2.0f;
 	m_nSuccess = 0;
 	m_nChargeImgID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/MiniGames/PoA_ChargeCrystal.png"));
 	m_nCursorImageID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/MiniGames/PoA_Gem.png"));
@@ -83,16 +83,19 @@ void CChargeCrystal::Update(float fElpasedTime)
 					SetDamage(1.3f);
 					m_fScale -= 0.1f;
 					m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f * m_fScale;
-					m_fTimer = 2.5f;
+					m_fTimer = 1.5f;
+					PlaySuccess();
 					break;
 				case 1:
 					SetDamage(1.6f);
 					m_fScale -= 0.1f;
 					m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f * m_fScale;
-					m_fTimer = 2.0f;
+					m_fTimer = 1.0f;
+					PlaySuccess();
 					break;
 				case 2:
 					SetDamage(2.3f);
+					PlayCrit();
 					break;
 				default:
 					break;
@@ -100,7 +103,10 @@ void CChargeCrystal::Update(float fElpasedTime)
 				m_nSuccess++;
 			}
 			else
+			{
 				m_bFailed = true;
+				PlayFail();
+			}
 			if(m_nSuccess == 3 || m_bFailed)
 			{
 				switch (m_nSuccess)
@@ -129,7 +135,7 @@ void CChargeCrystal::ResetSkill()
 {
 	m_fRotation = 0.0f;
 	m_fMoveSpeed = 100.0f;
-	m_fTimer = 3.0f;
+	m_fTimer = 2.0f;
 	m_nSuccess = 0;
 	m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f;
 	m_fScale = 1.0f;

@@ -10,6 +10,8 @@ CUseItem::CUseItem(void)
 	m_bGetInventory = false;
 	m_mTemp = nullptr;
 	m_nSelection = 0;
+	m_nItemTotal = 0;
+	m_bFirstDone = false;
 }
 
 
@@ -24,6 +26,12 @@ void CUseItem::Update(float fElapsedTime)
 	CPlayerUnit* tempP = reinterpret_cast<CPlayerUnit*>(GetOwner());
 	if(tempP != nullptr)
 	{
+		if(m_bFirstDone && m_nItemTotal < 1)
+		{
+			ResetSkill();
+			tempP->SetReady(false);
+			tempP->SetCasting(false);
+		}
 		if(!m_bGetInventory)
 		{
 			m_mTemp = GetOwner()->GetInv();
@@ -45,8 +53,8 @@ void CUseItem::Update(float fElapsedTime)
 		if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
 		{
 			m_nSelection++;
-			if(m_nSelection >= int(m_mTemp->size()))
-				m_nSelection = m_mTemp->size() -1;
+			if(m_nSelection >= m_nItemTotal)
+				m_nSelection = m_nItemTotal -1;
 		}
 		if(pDI->KeyPressed(DIK_RETURN))
 		{
@@ -103,19 +111,24 @@ void CUseItem::Render(void)
 	{
 		wostringstream woss;
 		int m_nCount = 0;
+		m_nItemTotal = 0;
 		if(m_mTemp != nullptr)
 		{
 			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
 			{
-				CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-				if(ItemTemp != nullptr)
+				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 				{
-					if(i->second.Owned > 0)
+					m_nItemTotal++;
+					CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+					if(ItemTemp != nullptr)
 					{
-						woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
-						m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
-						woss.str(_T(""));
-						m_nCount++;
+						if(i->second.Owned > 0)
+						{
+							woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
+							m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
+							woss.str(_T(""));
+							m_nCount++;
+						}
 					}
 				}
 			}
@@ -131,7 +144,6 @@ void CUseItem::Render(void)
 			}
 		}
 
+		m_bFirstDone = true;
 	}
-
-
 }

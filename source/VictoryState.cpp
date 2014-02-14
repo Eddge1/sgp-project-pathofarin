@@ -73,6 +73,9 @@ void CVictoryState::Sleep( void )
 	m_nCurrentExp = 0;
 	m_pItemDistro = nullptr;
 	m_bDoOnce = false;
+	m_nHealthMod	= 0;
+	m_nAPMod		= 0;
+	m_nAttackMod	= 0;
 
 	CBattleState::GetInstance()->ClearItems();
 }
@@ -222,6 +225,8 @@ void CVictoryState::Render( void )
 { 
 	std::wostringstream woss;
 	CSGD_Direct3D* pD3d = CSGD_Direct3D::GetInstance();
+	RECT temp = {0, 0, 800, 600};
+	CSGD_Direct3D::GetInstance()->DrawRect(temp, D3DCOLOR_XRGB(255,255,255));
 
 	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Victory!"), 336, 15, 1.0f, D3DCOLOR_XRGB(0,0,0));
 	woss << "Level: " << m_pPlayer->GetLevel() << "\nExperience: " << m_pPlayer->GetExperience();
