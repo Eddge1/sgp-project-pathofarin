@@ -63,15 +63,15 @@ public:
 	bool GetTutorial() {return m_bTutorial;}
 	virtual void EndTurn() {m_bTurn = false;}
 
-	int GetSpeed			( void ) const			{return m_nSpeed;};
-	int GetLevel			( void ) const			{return m_nLevel;}
-	int GetAttack			( void ) const			{return m_nAttackPower;}
-	int GetHealth			( void ) const			{return m_nHealth;}
-	int GetAbilityPoints	( void ) const			{return m_nAbilityPoints;}
-	int GetExperience       ( void ) const			{return m_nExperience;}
-	int GetStats			( void ) const			{return m_nAvailStats;}
-	int GetMaxHealth		( void ) const			{return m_nMaxHealth;}
-	int GetMaxAP			( void ) const			{return m_nMaxAbilityPoints;}
+	virtual int GetSpeed			( void ) const			{return m_nSpeed;};
+	virtual int GetLevel			( void ) const			{return m_nLevel;}
+	virtual int GetAttack			( void ) const			{return m_nAttackPower;}
+	virtual int GetHealth			( void ) const			{return m_nHealth;}
+	virtual int GetAbilityPoints	( void ) const			{return m_nAbilityPoints;}
+	virtual int GetExperience       ( void ) const			{return m_nExperience;}
+	virtual int GetStats			( void ) const			{return m_nAvailStats;}
+	virtual int GetMaxHealth		( void ) const			{return m_nMaxHealth;}
+	virtual int GetMaxAP			( void ) const			{return m_nMaxAbilityPoints;}
 	bool GetTurn			( void ) const			{return m_bTurn;}
 	string GetName			( void ) const			{return m_sName; }
 

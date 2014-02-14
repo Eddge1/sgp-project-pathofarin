@@ -9,6 +9,11 @@ class CEquipmentState :	public CGameStates
 	CEquipmentState& operator= ( const CEquipmentState& );
 	CPlayerUnit * m_pPlayer;
 
+
+	int m_nEquippedWeapon;
+	int m_nEquippedArmor;
+	int m_nEquippedAugment;
+
 	int m_nUnusedSlotID;
 	int m_nUsedSlotID;
 	int m_nEquipmentCursorID;
