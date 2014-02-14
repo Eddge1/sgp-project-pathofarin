@@ -61,6 +61,13 @@ CTriggerMatch::~CTriggerMatch(void)
 	for(unsigned int i = 0; i < m_vGameElements.size(); i++)
 		delete m_vGameElements[i];
 
+	for(unsigned int i = 0; i < m_vSkills.size(); i++)
+	{
+		m_vSkills[i]->Release();
+		m_vSkills[i] = nullptr;
+	}
+
+	m_vSkills.clear();
 	m_vGameElements.clear();
 }
 

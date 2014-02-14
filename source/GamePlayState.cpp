@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "RenderManager.h"
 #include "ProfileMenuState.h"
+#include "EquipmentState.h"
 #include "Game.h"
 #include "MainMenuState.h"
 #include "CharacterMenuState.h"
@@ -84,10 +85,9 @@ void CGamePlayState::Activate(void)
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Potion"].Item, 2);
 		}
 		break;
+	case CGamePlayState::GP_MENU:
 	case CGamePlayState::GP_BATTLE:
 		m_eCurrPhase = GP_NAV;
-		break;
-	case CGamePlayState::GP_MENU:
 		break;
 	case CGamePlayState::GP_START:
 		{
@@ -282,6 +282,14 @@ bool CGamePlayState::Input(void)
 	{
 		bisPaused = !bisPaused;
 		return true;
+	}
+	if(!bisPaused)
+	{
+		if(pDI->KeyPressed(DIK_M))
+		{
+			m_eCurrPhase = GP_MENU;
+			CGame::GetInstance()->ChangeState(CEquipmentState::GetInstance());
+		}
 	}
 	else if(bisPaused)
 	{

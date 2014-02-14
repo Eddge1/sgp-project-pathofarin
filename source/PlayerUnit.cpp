@@ -215,20 +215,25 @@ void CPlayerUnit::SetOwner(CPlayer* pPlayer)
 	m_pPlayer = pPlayer;
 }
 
-void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit)
+void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 {
-	if(m_bDodge == true)
+	if(!inMenu)
 	{
-		m_bDodge = false;
-		CUnits::ModifyHealth(0, false);
+		if(m_bDodge == true)
+		{
+			m_bDodge = false;
+			CUnits::ModifyHealth(0, false);
+		}
+		else
+		{
+
+			if(nAmount > 0)
+				this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
+			CUnits::ModifyHealth(nAmount, isCrit, inMenu);
+			timer = 0.0f;
+		}
 	}
 	else
-	{
-
-		if(nAmount > 0)
-			this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
-		CUnits::ModifyHealth(nAmount, isCrit);
-		timer = 0.0f;
-	}
+		CUnits::ModifyHealth(nAmount, isCrit, inMenu);
 }
 

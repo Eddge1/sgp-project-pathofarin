@@ -40,7 +40,7 @@ public:
 
 	void SetCasting(bool l) { m_bCasting = l; }
 	bool GetCasting(void) { return m_bCasting; }
-	void ModifyHealth(int nAmount, bool isCrit);
+	void ModifyHealth(int nAmount, bool isCrit, bool inMenu = false);
 
 	void SetInSubMenu	(bool bValue)	{m_bInSubMenu = bValue;}
 	void SetReady		(bool bValue)	{m_bSkillSelected = bValue;}

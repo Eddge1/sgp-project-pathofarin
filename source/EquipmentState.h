@@ -17,7 +17,11 @@ class CEquipmentState :	public CGameStates
 	int m_nAugmentSelection;
 	int m_nItemSelection;
 	int m_nGearSelection;
+	int m_nTotalItems;
+	int m_nHealthBar;
+	int m_nHealthBarPlate;
 	bool m_bSubMenu;
+	map<string, InventoryItems>* m_vInventory;
 public:
 	static CEquipmentState* GetInstance( void );
 	virtual void Activate( void )	override;					// load resources

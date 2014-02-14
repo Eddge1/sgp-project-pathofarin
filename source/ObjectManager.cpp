@@ -140,7 +140,7 @@ void CObjectManager::HandleCollision(unsigned int unLayer1, unsigned int unLayer
 				if(IntersectRect(&rTempReturn, &rTemp1, &rTemp2))
 				{
 					Collision1[i]->HandleCollision(Collision2[j]);
-					if(Collision1[i]->GetType() == OBJ_WARP)
+					if(Collision1[i]->GetType() == OBJ_WARP && Collision2[j]->GetType() == OBJ_PLAYER)
 					{
 						m_bIterating = false;
 						return;

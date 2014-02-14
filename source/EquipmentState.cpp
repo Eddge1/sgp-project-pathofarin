@@ -7,6 +7,8 @@
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "../SGD Wrappers/SGD_Math.h"
 
+#include "GamePlayState.h"
+#include <cassert>
 CEquipmentState* CEquipmentState::GetInstance( void )
 {
 	static CEquipmentState s_Instance;
@@ -15,7 +17,6 @@ CEquipmentState* CEquipmentState::GetInstance( void )
 
 CEquipmentState::CEquipmentState(void)
 {
-	m_pPlayer = nullptr;
 	m_nUnusedSlotID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Equipment_Slot_Unused.png"));
 	m_nUsedSlotID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Equipment_Slot_used.png"));
 	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_EquipmentScreen.png")));
@@ -27,6 +28,11 @@ CEquipmentState::CEquipmentState(void)
 	m_nItemSelection = 0;
 	m_nGearSelection = 0;
 	m_bSubMenu = false;
+	m_vInventory = nullptr;
+	m_pPlayer = nullptr;
+	m_nTotalItems = 0;
+	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
+	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
 }
 
 CEquipmentState::~CEquipmentState(void)
@@ -41,10 +47,57 @@ void CEquipmentState::Activate( void )
 	m_nWeaponSelection =0;
 	m_nAugmentSelection = 0;
 	m_nItemSelection = 0;
+
+	CUnits* pUnit = CGamePlayState::GetInstance()->GetPlayerUnit();
+	if(pUnit->GetType() == OBJ_PLAYER_UNIT)
+	{
+		m_pPlayer = reinterpret_cast<CPlayerUnit*>(pUnit);
+		if(m_pPlayer == nullptr)
+			assert(m_pPlayer == nullptr && "Player not set correctly");
+		m_vInventory = m_pPlayer->GetInv();
+	}
+	for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
+	{
+		if(i->second.Owned > 0)
+		{
+			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			{
+				m_nTotalItems++;
+			}
+			else if(i->second.Item->GetItemType() == IT_WEAPON)
+			{
+				if(i->second.Item->GetName() == "")
+				{
+
+				}
+				else if(i->second.Item->GetName() == "")
+				{
+
+				}
+				else if(i->second.Item->GetName() == "")
+				{
+
+				}
+			}
+			else if(i->second.Item->GetItemType() == IT_ARMOR)
+			{
+
+
+			}
+			else if(i->second.Item->GetItemType() == IT_AUGMENT)
+			{
+
+
+			}
+		}
+	}
+
 }
 void CEquipmentState::Sleep( void )		
 {
-
+	m_vInventory = nullptr;
+	m_pPlayer = nullptr;
+	m_nTotalItems = 0;
 }			
 void CEquipmentState::Update( float fElapsedTime )	
 {
@@ -76,6 +129,9 @@ void CEquipmentState::Render( void )
 		else
 			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
 	}
+
+
+
 	//// Draw All the slots First
 	pTM->Draw(m_nUnusedSlotID, 164, 268);
 	pTM->Draw(m_nUnusedSlotID, 232, 268);
@@ -133,9 +189,38 @@ void CEquipmentState::Render( void )
 		default:
 			break;
 		}
-
-
 	}
+	else if(m_bSubMenu)
+	{
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),628,112 + (m_nItemSelection * 16),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(255,255,255,255));
+	}
+	wostringstream woss;
+	int nCount = 0;
+	for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
+	{
+		woss.str(_T(""));
+		if(i->second.Owned > 0)
+		{
+			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			{
+				woss << i->second.Item->GetName().c_str() << "\tx" << i->second.Owned;
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),632,112 + (nCount * 16),0.75f,D3DCOLOR_ARGB(255,200,200,0));
+				nCount++;
+			}
+		}
+	}
+	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Arin"),84,100,0.75f,D3DCOLOR_ARGB(255,200,200,0));
+	float hPercent = m_pPlayer->GetHealth() / float(m_pPlayer->GetMaxHealth());
+	RECT rHealth = {0,0,256, 32};
+	pTM->Draw(m_nHealthBar, 100,122,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+	rHealth.right = long(256 * hPercent);
+	pTM->Draw(m_nHealthBar, 100,122,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+	rHealth.right = 256;
+	pTM->Draw(m_nHealthBarPlate, 100,122,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+	woss.str(_T(""));
+	woss << m_pPlayer->GetHealth();
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),112,126,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+
 
 }		
 bool CEquipmentState::Input( void )	
@@ -145,10 +230,7 @@ bool CEquipmentState::Input( void )
 	if(pDI->KeyPressed(DIK_ESCAPE))
 	{
 		if(!m_bSubMenu)
-		{
-
-
-		}
+			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 		else
 			m_bSubMenu = false;
 	}
@@ -164,7 +246,9 @@ bool CEquipmentState::Input( void )
 			}
 			else
 			{
-
+				m_nItemSelection--;
+				if(m_nItemSelection < 0)
+					m_nItemSelection = 0;
 			}
 		}
 	}
@@ -181,7 +265,9 @@ bool CEquipmentState::Input( void )
 			}
 			else
 			{
-
+				m_nItemSelection++;
+				if(m_nItemSelection > m_nTotalItems -1)
+					m_nItemSelection = m_nTotalItems -1;
 			}
 		}
 	}
@@ -271,7 +357,10 @@ bool CEquipmentState::Input( void )
 	if(pDI->KeyPressed(DIK_RETURN))
 	{
 		if(!m_bSubMenu)
-			m_bSubMenu = true;
+		{
+			if((GetCursorSelection() == 1 && m_nTotalItems > 0) || GetCursorSelection() == 0)
+				m_bSubMenu = true;
+		}
 		else
 		{
 			if(GetCursorSelection() == 0)
@@ -293,11 +382,54 @@ bool CEquipmentState::Input( void )
 			}
 			else
 			{
+				int nID = 0;
+				for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
+				{
+					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					{
+						if(nID == m_nItemSelection)
+						{
+							CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+							if(ItemTemp != nullptr)
+							{
+								if(i->second.Owned > 0)
+								{
+									if(ItemTemp->GetType() == "HP")
+										m_pPlayer->ModifyHealth(-ItemTemp->GetAmount(), false, true);
 
+									else if(ItemTemp->GetType() == "MP")
+										m_pPlayer->ModifyAP(-ItemTemp->GetAmount(), true);
 
+									if(i->second.Item != nullptr)
+									{
+										if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+										{
+											CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+											if(pTemp != nullptr)
+											{
+												m_pPlayer->RemoveConsumableItem(pTemp);
+												if(i->second.Owned <= 0)
+													m_nTotalItems--;
+												if(m_nTotalItems <= 0)
+													m_bSubMenu = false;
+												else
+												{
+													if(m_nItemSelection >= m_nTotalItems)
+														m_nItemSelection = m_nTotalItems -1;
+												}
+												break;
+											}
+										}
+									}
+								}
+							}
+						}
+						else
+							nID++;
+					}
+				}
 			}
 		}
 	}
-
 	return true;
 }	

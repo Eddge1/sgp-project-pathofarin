@@ -53,8 +53,8 @@ public:
 	CUnits(void);
 	virtual ~CUnits(void);
 
-	virtual void ModifyHealth(int nAmount, bool isCrit);
-	void ModifyAP(int nAmount);
+	virtual void ModifyHealth(int nAmount, bool isCrit, bool inMenu = false);
+	void ModifyAP(int nAmount, bool inMenu = false);
 
 	virtual void Update(float fElapsedTime) override;
 

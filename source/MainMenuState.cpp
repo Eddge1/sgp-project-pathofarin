@@ -142,9 +142,6 @@ bool CMainMenuState::Input(void)
 		if(pDI->KeyPressed(DIK_ESCAPE))
 			return false;
 
-		if(pDI->KeyPressed(DIK_M))
-			CGame::GetInstance()->ChangeState(CEquipmentState::GetInstance());
-
 		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)

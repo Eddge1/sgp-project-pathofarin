@@ -26,7 +26,7 @@ CUnits::~CUnits(void)
 	m_mInventory.clear();
 }
 
-void CUnits::ModifyHealth(int nAmount, bool isCrit)
+void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 {
 	std::wostringstream woss;
 	m_nHealth -= nAmount;
@@ -41,128 +41,131 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit)
 	if(m_nHealth > m_nMaxHealth)
 		m_nHealth = m_nMaxHealth;
 
-	if(isCrit)
+	if(!inMenu)
 	{
-		if(nAmount < 0)
+		if(isCrit)
 		{
-			CParticle* pPart = new CParticle();
-			//pPart->SetAudio();
-			pPart->GetAnimInfo()->SetAnimation("Health_Recover");
-			pPart->SetPosX(GetPosX());
-			pPart->SetPosY(GetPosY());
-			woss << "+" << nAmount * -1 << " HP";
-			if(!m_bTutorial)
+			if(nAmount < 0)
 			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
-				CBattleState::GetInstance()->AddSkill(pPart);
+				CParticle* pPart = new CParticle();
+				//pPart->SetAudio();
+				pPart->GetAnimInfo()->SetAnimation("Health_Recover");
+				pPart->SetPosX(GetPosX());
+				pPart->SetPosY(GetPosY());
+				woss << "+" << nAmount * -1 << " HP";
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+					CBattleState::GetInstance()->AddSkill(pPart);
+				}
+				else
+				{
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+				}
+				pPart->Release();
+			}
+			else if(nAmount > 0)
+			{
+				CParticle* pPart = new CParticle();
+				//pPart->SetAudio();
+				pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
+				pPart->SetPosX(GetPosX());
+				pPart->SetPosY(GetPosY());
+				woss << "-" << nAmount << " HP";
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+					CBattleState::GetInstance()->AddSkill(pPart);
+				}
+				else
+				{
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+				}
+				pPart->Release();
 			}
 			else
 			{
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+				woss.str(_T(""));
+				woss << "DODGED!";
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
+
+				}
+				else
+				{
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+
+
+				}
 			}
-			pPart->Release();
-		}
-		else if(nAmount > 0)
-		{
-			CParticle* pPart = new CParticle();
-			//pPart->SetAudio();
-			pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
-			pPart->SetPosX(GetPosX());
-			pPart->SetPosY(GetPosY());
-			woss << "-" << nAmount << " HP";
-			if(!m_bTutorial)
-			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
-				CBattleState::GetInstance()->AddSkill(pPart);
-			}
-			else
-			{
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
-			}
-			pPart->Release();
 		}
 		else
 		{
-			woss.str(_T(""));
-			woss << "DODGED!";
-			if(!m_bTutorial)
+			if(nAmount < 0)
 			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+				woss << "+" << (nAmount * -1) << " HP";
+				CParticle* pPart = new CParticle();
+				//pPart->SetAudio();
+				pPart->GetAnimInfo()->SetAnimation("Health_Recover");
+				pPart->SetPosX(GetPosX());
+				pPart->SetPosY(GetPosY());
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+					CBattleState::GetInstance()->AddSkill(pPart);
 
 
+				}
+				else
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
+			}
+			else if(nAmount > 0)
+			{
+				woss << "-" << nAmount << " HP";
+				CParticle* pPart = new CParticle();
+				//pPart->SetAudio();
+				pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
+				pPart->SetPosX(GetPosX());
+				pPart->SetPosY(GetPosY());
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+					CBattleState::GetInstance()->AddSkill(pPart);
+
+
+				}
+				else
+				{
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
+
+
+				}
+				pPart->Release();
 			}
 			else
 			{
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
+				woss.str(_T(""));
+				woss << "DODGED!";
+				if(!m_bTutorial)
+				{
+					CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
 
 
-			}
-		}
-	}
-	else
-	{
-		if(nAmount < 0)
-		{
-			woss << "+" << (nAmount * -1) << " HP";
-			CParticle* pPart = new CParticle();
-			//pPart->SetAudio();
-			pPart->GetAnimInfo()->SetAnimation("Health_Recover");
-			pPart->SetPosX(GetPosX());
-			pPart->SetPosY(GetPosY());
-			if(!m_bTutorial)
-			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
-				CBattleState::GetInstance()->AddSkill(pPart);
+				}
+				else
+				{
+					CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
 
 
-			}
-			else
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,0), woss);
-		}
-		else if(nAmount > 0)
-		{
-			woss << "-" << nAmount << " HP";
-			CParticle* pPart = new CParticle();
-			//pPart->SetAudio();
-			pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
-			pPart->SetPosX(GetPosX());
-			pPart->SetPosY(GetPosY());
-			if(!m_bTutorial)
-			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
-				CBattleState::GetInstance()->AddSkill(pPart);
-
-
-			}
-			else
-			{
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(255,0,0), woss);
-
-
-			}
-			pPart->Release();
-		}
-		else
-		{
-			woss.str(_T(""));
-			woss << "DODGED!";
-			if(!m_bTutorial)
-			{
-				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
-
-
-			}
-			else
-			{
-				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
-
-
+				}
 			}
 		}
 	}
 }
 
-void CUnits::ModifyAP(int nAmount)
+void CUnits::ModifyAP(int nAmount, bool inMenu)
 {
 	m_nAbilityPoints -= nAmount;
 
@@ -171,25 +174,29 @@ void CUnits::ModifyAP(int nAmount)
 	if(m_nAbilityPoints > m_nMaxAbilityPoints)
 		m_nAbilityPoints = m_nMaxAbilityPoints;
 
-
-	if(nAmount < 0)
-	{			
-		CParticle* pPart = new CParticle();
-		//pPart->SetAudio();
-		pPart->GetAnimInfo()->SetAnimation("AP_Recover");
-		pPart->SetPosX(GetPosX());
-		pPart->SetPosY(GetPosY());
-		if(!GetTutorial())
-		{
+	if(!inMenu)
+	{
+		if(nAmount < 0)
+		{	
+			wostringstream woss;
+			CParticle* pPart = new CParticle();
+			//pPart->SetAudio();
+			pPart->GetAnimInfo()->SetAnimation("AP_Recover");
+			pPart->SetPosX(GetPosX());
+			pPart->SetPosY(GetPosY());
+			woss << "+" << nAmount * -1<< " AP";
+			if(!GetTutorial())
+			{
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,0,255), woss);
 				CBattleState::GetInstance()->AddSkill(pPart);
+			}
+			else
+			{
 
+
+			}
+			pPart->Release();
 		}
-		else
-		{
-
-
-		}
-		pPart->Release();
 	}
 	//Floating Text
 }
@@ -213,26 +220,28 @@ void CUnits::GiveExperience		( int nAmount )
 	}
 
 	m_nLevel += nLevels;
-	switch (m_eClass)
+	if(nLevels > 0)
 	{
-	case UC_ENEMY:
-		break;
-	case UC_NONE:
-		break;
-	case UC_WARRIOR:
-		SetMaxHealth(GetMaxHealth() + (nLevels * 40));
-		SetAttack(GetAttack() + (nLevels * 3));
-		SetMaxAP(GetMaxAP() + (nLevels * 20));
-		break;
-	case UC_RANGER:
-		break;
-	case UC_MAGE:
-		break;
-	default:
-		break;
+		switch (m_eClass)
+		{
+		case UC_ENEMY:
+			break;
+		case UC_NONE:
+			break;
+		case UC_WARRIOR:
+			SetMaxHealth(GetMaxHealth() + (nLevels * 40));
+			SetAttack(GetAttack() + (nLevels * 3));
+			SetMaxAP(GetMaxAP() + (nLevels * 20));
+			break;
+		case UC_RANGER:
+			break;
+		case UC_MAGE:
+			break;
+		default:
+			break;
+		}
+		m_nAvailStats += (5 * nLevels);
 	}
-	m_nAvailStats += (5 * nLevels);
-
 	m_nExperience = nExp;
 }
 
