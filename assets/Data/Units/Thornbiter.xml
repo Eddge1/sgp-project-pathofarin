@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Thornbiter" Health="350" Ap="1" Attack="70" Exp="810" Speed="1" Level="9" AI="Minion Melee" Total_Items="2">
+  <Item Name="Hi-Ether" Chance="10" />
+  <Item Name="Titan-Ether" Chance="1" />
+</Unit>

@@ -626,6 +626,7 @@ void CGamePlayState::LoadWorld(void)
 								szTemp += ".xml";
 								int nWaypoints = 0;
 								pTileData->Attribute("Total_Waypoints", &nWaypoints);
+								TiXmlElement *pConvo = nullptr;
 								TiXmlElement* pWaypoints = nullptr;
 								if(nWaypoints != 0)
 									pWaypoints = pTileData->FirstChildElement("Waypoint");
@@ -649,6 +650,9 @@ void CGamePlayState::LoadWorld(void)
 									else
 										pNpc->SetHostile(false);
 
+
+									if(nConvos != 0)
+										pConvo = pOtherRoot->FirstChildElement("Convo");
 									TiXmlElement* pOtherUnits = pOtherRoot->FirstChildElement("Unit");
 									string szUnitName = "";
 									if(pOtherUnits != nullptr)
@@ -703,7 +707,19 @@ void CGamePlayState::LoadWorld(void)
 										}
 									}
 
-									////////////Add Conversations here///////////
+									if(pConvo != nullptr)
+									{
+										for(int i = 0; i < nConvos; i++)
+										{
+											if(pConvo != nullptr)
+											{
+												pNpc->AddConversation(pConvo->Attribute("Text"));
+											}
+											pConvo = pConvo->NextSiblingElement("Convo");
+
+										}
+									}
+
 									Worldtemp->AddObject(pNpc, 2);
 									pNpc->Release();
 

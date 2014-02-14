@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Mandrake" Health="325" Ap="1" Attack="65" Exp="810" Speed="1" Level="1" AI="BasicHealer" Total_Items="2">
+  <Item Name="Hi-Ether" Chance="10" />
+  <Item Name="Titan-Ether" Chance="1" />
+</Unit>

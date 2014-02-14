@@ -33,6 +33,18 @@ CEquipmentState::CEquipmentState(void)
 	m_nTotalItems = 0;
 	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
 	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
+
+	m_nWeapon1ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Sword.png"));
+	m_nWeapon2ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Staff.png"));
+	m_nWeapon3ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Bow.png"));
+	m_nArmor1ID				= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Plate.png"));
+	m_nArmor2ID				= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Robe.png"));
+	m_nArmor3ID				= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Leather.png"));
+	m_nAugment1ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Augment1.png"));
+	m_nAugment2ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Augment2.png"));
+	m_nAugment3ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Augment3.png"));
+	m_nAugment4ID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Augment4.png"));
+
 }
 
 CEquipmentState::~CEquipmentState(void)
@@ -142,17 +154,73 @@ void CEquipmentState::Render( void )
 	if(!m_bSubMenu)
 	{
 		if(GetCursorSelection() == 0)
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),80,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(255,255,255,255));
+			pTM->Draw(GetCursorIMG(),80,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(255,255,255,255));
 		else
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(255,255,255,255));
+			pTM->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(255,255,255,255));
 	}
 	else
 	{
 		if(GetCursorSelection() == 0)
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),80,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
+			pTM->Draw(GetCursorIMG(),80,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
 		else
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
+			pTM->Draw(GetCursorIMG(),644,68,1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2,D3DCOLOR_ARGB(127,50,50,50));
 	}
+
+	RECT rItem = {0,0,64,64};
+
+	if((*m_vInventory)["Sword of Suffering"].Owned > 0)
+		pTM->Draw(m_nWeapon1ID, 164, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nWeapon1ID, 164, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+
+	if((*m_vInventory)["Staff of Lucidity"].Owned > 0)
+		pTM->Draw(m_nWeapon2ID, 232, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nWeapon2ID, 232, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Bow of the Great Hunt"].Owned > 0)
+		pTM->Draw(m_nWeapon3ID, 300, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nWeapon3ID, 300, 268, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Armor of the Ghost Wolf"].Owned > 0)
+		pTM->Draw(m_nArmor1ID, 164, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nArmor1ID, 164, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Robes of the Ancient One"].Owned > 0)
+		pTM->Draw(m_nArmor2ID, 232, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nArmor2ID, 232, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Vestments of the Savage tribes"].Owned > 0)
+		pTM->Draw(m_nArmor3ID, 300, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nArmor3ID, 300, 336, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+
+	if((*m_vInventory)["HP Augment"].Owned > 0)
+		pTM->Draw(m_nAugment1ID, 164, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nAugment1ID, 164, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["AP Augment"].Owned > 0)
+		pTM->Draw(m_nAugment2ID, 232, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nAugment2ID, 232, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Atk Augment"].Owned > 0)
+		pTM->Draw(m_nAugment3ID, 300, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nAugment3ID, 300, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+	if((*m_vInventory)["Speed Augment"].Owned > 0)
+		pTM->Draw(m_nAugment4ID, 368, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(255,255,255));
+	else
+		pTM->Draw(m_nAugment4ID, 368, 404, 1.0f,1.0f,&rItem,0,0,0,D3DCOLOR_XRGB(50,50,50));
+
+
 
 	//// Draw All the slots First
 	pTM->Draw(m_nUnusedSlotID, 164, 268);

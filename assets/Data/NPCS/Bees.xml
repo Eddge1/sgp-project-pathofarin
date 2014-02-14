@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Bee" Hostile="true" Units="3" File="Bees">
+  <Unit Name="Bee" />
+  <Unit Name="Bee" />
+  <Unit Name="Bee" />
+</NPC>
