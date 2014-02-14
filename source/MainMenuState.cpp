@@ -113,6 +113,8 @@ void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Comic Sans MS");
+	RECT clearscreenson = {0, 0, 800, 600};
+	CSGD_Direct3D::GetInstance()->DrawRect(clearscreenson, D3DCOLOR_XRGB(255,255,255));
 
 	RECT rtemp = {36, 48, 220, 206};
 	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));

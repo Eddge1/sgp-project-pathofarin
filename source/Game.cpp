@@ -182,7 +182,7 @@ bool CGame::Update( void )
 void CGame::Render(void)
 {
 	// Clear the backbuffer
-	m_pD3D->Clear( D3DCOLOR_XRGB( 255, 255, 255 ) ); // White 
+	m_pD3D->Clear( D3DCOLOR_XRGB( 0, 0, 0 ) ); // Black
 
 	// Begin rendering
 	m_pD3D->DeviceBegin();
