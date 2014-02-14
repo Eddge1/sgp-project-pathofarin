@@ -4542,7 +4542,7 @@
   </Layer>
   <Layer ID="2" Width="30" Height="30" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="Garden Part1" EventType="MAP_EDIT" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1" posX="1" posY="0">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -4560,28 +4560,28 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="6" posX="6" posY="0">
-      <Tile_Data xTileID="11" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="0" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="7" posX="7" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="8" posX="8" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="9" posX="9" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="10" posX="10" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="11" posX="11" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="12" posX="12" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="13" posX="13" posY="0">
-      <Tile_Data xTileID="9" yTileID="0" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="9" yTileID="0" EventID="Garden Part1" EventType="WARP" WarpX="1152" WarpY="640" Total_Waypoints="0" />
     </Tile>
     <Tile ID="14" posX="14" posY="0">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
