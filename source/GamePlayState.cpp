@@ -33,6 +33,7 @@
 #include "AITigerlily.h"
 #include "AIValrion.h"
 #include "EnemyUnit.h"
+#include "Augment.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -94,6 +95,19 @@ void CGamePlayState::Activate(void)
 			m_bGameVictory = false;
 			SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png")));
 			SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+			// setting up the items
+
+			m_mItemManager["HP"].Item = CreateAugment("HP", 25.0f);
+			m_mItemManager["AP"].Item = CreateAugment("AP", 15.0f);
+			m_mItemManager["ATTK"].Item = CreateAugment("ATTK", 10.0f);
+			m_mItemManager["SPEED"].Item = CreateAugment("ATTK", 10.0f);
+			m_mItemManager["Sword"].Item = CreateWeapon("Sword of Suffering", 10);
+			m_mItemManager["Staff"].Item = CreateWeapon("Staff of Lucidity", 8);
+			m_mItemManager["Bow"].Item = CreateWeapon("Bow of the Great Hunt", 12);
+			m_mItemManager["Plate"].Item = CreateArmor("Armor of the Ghost Wolf", 50.0f, 5.0f, 1.0f);
+			m_mItemManager["Robe"].Item = CreateArmor("Robes of the Ancient One", 20.0f, 10.0f, 5.0f);
+			m_mItemManager["Leather"].Item = CreateArmor("Vestments of the Savage tribes", 30.0f, 8.0f, 8.0f);
+			
 			m_mItemManager["Potion"].Item = CreatePotion("Potion");
 			m_mItemManager["Hi-Potion"].Item = CreatePotion("Hi-Potion");
 			m_mItemManager["Titan-Potion"].Item = CreatePotion("Titan-Potion");
@@ -936,7 +950,7 @@ void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstr
 	ftTemp->Color = dColor;
 	ftTemp->szText << szText.str();
 	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
-	
+
 
 	m_vShowOnScreen.push_back(ftTemp);
 }
@@ -1115,3 +1129,59 @@ CUnits* CGamePlayState::LoadUnit(string szFileName)
 
 	return pTempUnit;
 }
+
+CAugment* CGamePlayState::CreateAugment(string Type, float Effect)
+{
+
+	CAugment* temp;
+
+	if(Type == "HP")
+	{
+		temp = new CAugment;
+		temp->SetName("HP Augment");
+		temp->SetEffect(Effect);
+	}
+	else if(Type == "ATTK")
+	{
+		temp = new CAugment;
+		temp->SetName("Atk Augment");
+		temp->SetEffect(Effect);
+	}
+	else if(Type == "AP")
+	{
+		temp = new CAugment;
+		temp->SetName("HP Augment");
+		temp->SetEffect(Effect);
+	}
+	else if(Type == "SPEED")
+	{
+		temp = new CAugment;
+		temp->SetName("Speed Augment");
+		temp->SetEffect(Effect);
+	}
+	else
+	{
+		temp = nullptr;
+	}
+
+	return temp;
+}
+
+CArmor* CGamePlayState::CreateArmor(string Name, float Hp, float Attk, float Speed)
+{
+	CArmor* temp = new CArmor;
+	temp->SetName(Name);
+	temp->SetAttkStat(Attk);
+	temp->SetHpStat(Hp);
+	temp->SetSpeedStat(Speed);
+	return temp;
+}
+
+CWeapon* CGamePlayState::CreateWeapon(string Name, int Attack)
+{
+	CWeapon* temp = new CWeapon;
+	temp->SetAttack(Attack);
+	temp->SetName(Name);
+	return temp;
+}
+

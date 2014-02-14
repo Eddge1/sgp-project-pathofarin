@@ -93,6 +93,7 @@
     <ClCompile Include="source\AnimationSystem.cpp" />
     <ClCompile Include="source\AnimationTimeStamp.cpp" />
     <ClCompile Include="source\Armor.cpp" />
+    <ClCompile Include="source\Augment.cpp" />
     <ClCompile Include="source\BasicAttack.cpp" />
     <ClCompile Include="source\BattleState.cpp" />
     <ClCompile Include="source\BitmapFont.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="source\AnimationSystem.h" />
     <ClInclude Include="source\AnimationTimeStamp.h" />
     <ClInclude Include="source\Armor.h" />
+    <ClInclude Include="source\Augment.h" />
     <ClInclude Include="source\BasicAttack.h" />
     <ClInclude Include="source\BattleState.h" />
     <ClInclude Include="source\BitmapFont.h" />
