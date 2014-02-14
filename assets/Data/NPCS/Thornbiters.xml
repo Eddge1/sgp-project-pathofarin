@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="0" Name="Thornbiter" Hostile="true" Units="3" File="Thornbiters">
+  <Unit Name="Thornbiter" />
+  <Unit Name="Thornbiter" />
+  <Unit Name="Thornbiter" />
+</NPC>

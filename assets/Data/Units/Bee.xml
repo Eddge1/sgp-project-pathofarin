@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Bee" Health="500" Ap="1" Attack="75" Exp="1620" Speed="1" Level="9" AI="Brute" Total_Items="4">
+  <Item Name="Potion" Chance="20" />
+  <Item Name="Ether" Chance="20" />
+  <Item Name="Hi-Potion" Chance="5" />
+  <Item Name="Hi-Ether" Chance="5" />
+</Unit>
