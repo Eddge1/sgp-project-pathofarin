@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Shade" Health="850" Ap="1" Attack="180" Exp="3375" Speed="9" Level="16" AI="Minion Melee" Total_Items="2">
+  <Item Name="Titan-Potion" Chance="100" />
+  <Item Name="Titan-Ether" Chance="100" />
+</Unit>

@@ -288,6 +288,8 @@ void CProfileMenuState::Render()
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	RECT rLogo = {0,0,512,256};
+	RECT temp = {0, 0, 800, 600};
+	CSGD_Direct3D::GetInstance()->DrawRect(temp, D3DCOLOR_XRGB(255,255,255));
 	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	if(m_fPosY <= 0.0f)
 	{
@@ -572,7 +574,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CBuff* pEarthRip = new CBuff();
 	pEarthRip->SetMasterGame(pTrig);
 	pEarthRip->GetAnimInfo()->SetAnimation("Earth_Rip");
-	pEarthRip->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_IceSpear.wav")));
+	pEarthRip->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_Earth_Rip.wav")));
 	pTrig->SetSkill(pEarthRip);
 	pTrig->SetAOE(true);
 	pTest->SetMiniGame(pTrig);
@@ -602,7 +604,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	CBuff* pMeditate = new CBuff();
 	pMeditate->SetMasterGame(pTrig);
 	pMeditate->GetAnimInfo()->SetAnimation("Meditate");
-	pMeditate->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_HealingSpell.wav")));
+	pMeditate->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_Med.wav")));
 	pCrystal->SetSkill(pMeditate);
 	pCrystal->SetCost(5);
 	pTest->SetMiniGame(pCrystal);

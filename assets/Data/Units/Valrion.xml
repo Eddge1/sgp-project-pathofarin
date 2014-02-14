@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Valrion" Health="10000" Ap="9999" Attack="200" Exp="9001" Speed="20" Level="20" AI="Valrion" Total_Items="2">
+  <Item Name="Titan-Potion" Chance="100" />
+  <Item Name="Titan-Ether" Chance="100" />
+</Unit>

@@ -2665,9 +2665,11 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="286" posX="16" posY="9">
-      <Tile_Data xTileID="5" yTileID="3" EventID="OrgewBats" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
+      <Tile_Data xTileID="5" yTileID="3" EventID="OrgewBats" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
         <Waypoint X="1056" Y="608" />
         <Waypoint X="928" Y="608" />
+        <Waypoint X="928" Y="672" />
+        <Waypoint X="1056" Y="672" />
         <Waypoint X="1056" Y="608" />
       </Tile_Data>
     </Tile>

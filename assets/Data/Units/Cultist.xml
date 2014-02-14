@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Unit Name="Cultist" Health="650" Ap="1" Attack="120" Exp="3850" Speed="10" Level="17" AI="BasicHealer" Total_Items="2">
+  <Item Name="Titan-Potion" Chance="100" />
+  <Item Name="Titan-Ether" Chance="100" />
+</Unit>

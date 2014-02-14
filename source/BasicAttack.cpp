@@ -8,6 +8,7 @@
 CBasicAttack::CBasicAttack(void)
 {
 	CSGD_EventSystem::GetInstance()->RegisterClient("BASIC_ATTACK", this);
+	m_nSound = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Enemies/POA_tempEnemey.wav"));
 
 	bAttacked = false;
 }
@@ -53,6 +54,7 @@ void CBasicAttack::DoAttack(void)
 
 		if(tempP != nullptr)
 		{
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp, false);
 			GetOwner()->EndTurn();
