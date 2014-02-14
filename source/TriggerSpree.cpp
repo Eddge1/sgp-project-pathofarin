@@ -142,6 +142,7 @@ void CTriggerSpree::Update(float fElpasedTime)
 			delete m_vTriggers[i];
 			m_vTriggers.erase(m_vTriggers.begin() + i);
 			m_bFailed = true;
+			PlayFail();
 			return;
 		}
 		else i++;
@@ -157,11 +158,15 @@ void CTriggerSpree::Update(float fElpasedTime)
 			if(IntersectRect(&rTemp, m_vTriggers[0], m_vGameElements[1]))
 			{
 				m_bSuccess = true;
+				PlaySuccess();
 				delete m_vTriggers[0];
 				m_vTriggers.erase(m_vTriggers.begin());
 			}
 			else
+			{
 				m_bFailed = true;
+				PlayFail();
+			}
 		}
 	}
 

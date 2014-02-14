@@ -12,6 +12,10 @@ CMiniGames::CMiniGames(void)
 	m_bTutorial = false;
 	m_pSkill = nullptr;
 	m_bAOE = false;
+	m_nSFXID			= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_SuccessCharge.wav"));
+	m_nCriticalSFXID	= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_CritBar.wav"));
+	m_nFailSFXID		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_Fail.wav"));
+
 }
 
 CMiniGames::~CMiniGames(void)
@@ -19,7 +23,7 @@ CMiniGames::~CMiniGames(void)
 	CSGD_EventSystem::GetInstance()->UnregisterClientAll(this);
 	SetOwner(nullptr);
 	if(m_pSkill != nullptr)
-	m_pSkill->Release();
+		m_pSkill->Release();
 }
 
 void CMiniGames::Update(float fElapsedTime)

@@ -73,6 +73,9 @@ void CVictoryState::Sleep( void )
 	m_nCurrentExp = 0;
 	m_pItemDistro = nullptr;
 	m_bDoOnce = false;
+	m_nHealthMod	= 0;
+	m_nAPMod		= 0;
+	m_nAttackMod	= 0;
 
 	CBattleState::GetInstance()->ClearItems();
 }

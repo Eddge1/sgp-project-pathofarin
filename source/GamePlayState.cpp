@@ -111,7 +111,7 @@ void CGamePlayState::Activate(void)
 			m_mItemManager["HP Augment"].Item = CreateAugment("HP", 25.0f);
 			m_mItemManager["AP Augment"].Item = CreateAugment("AP", 15.0f);
 			m_mItemManager["Atk Augment"].Item = CreateAugment("ATTK", 10.0f);
-			m_mItemManager["Speed Augment"].Item = CreateAugment("ATTK", 10.0f);
+			m_mItemManager["Speed Augment"].Item = CreateAugment("SPEED", 10.0f);
 			m_mItemManager["Sword of Suffering"].Item = CreateWeapon("Sword of Suffering", 10);
 			m_mItemManager["Staff of Lucidity"].Item = CreateWeapon("Staff of Lucidity", 8);
 			m_mItemManager["Bow of the Great Hunt"].Item = CreateWeapon("Bow of the Great Hunt", 12);
