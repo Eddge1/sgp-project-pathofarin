@@ -359,7 +359,7 @@
       <Tile_Data xTileID="12" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="119" posX="2" posY="9">
-      <Tile_Data xTileID="6" yTileID="4" EventID="Desert Part 1" EventType="WARP" WarpX="576" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="120" posX="3" posY="9">
       <Tile_Data xTileID="7" yTileID="4" EventID="Desert Part 1" EventType="WARP" WarpX="576" WarpY="128" Total_Waypoints="0" />
@@ -374,7 +374,7 @@
       <Tile_Data xTileID="7" yTileID="4" EventID="Desert Part 1" EventType="WARP" WarpX="576" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="124" posX="7" posY="9">
-      <Tile_Data xTileID="8" yTileID="4" EventID="Desert Part 1" EventType="WARP" WarpX="576" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="125" posX="8" posY="9">
       <Tile_Data xTileID="12" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -392,12 +392,14 @@
       <Tile_Data xTileID="12" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
   </Layer>
-  <Block_Data Total="6">
+  <Block_Data Total="8">
     <Block PosX="1" PosY="1" Width="64" Height="640" />
     <Block PosX="512" PosY="513" Width="65" Height="128" />
     <Block PosX="65" PosY="512" Width="62" Height="129" />
     <Block PosX="704" PosY="256" Width="128" Height="383" />
     <Block PosX="577" PosY="576" Width="128" Height="63" />
     <Block PosX="65" PosY="0" Width="768" Height="63" />
+    <Block PosX="127" PosY="575" Width="65" Height="62" />
+    <Block PosX="447" PosY="576" Width="64" Height="63" />
   </Block_Data>
 </World>

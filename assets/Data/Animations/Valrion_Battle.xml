@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="3">
+  <Animation_Info Name="Valrion_Battle_Idle" Frames="2" repeat="1" Texture="PlayStation 2 - Namco X Capcom - Wizards.png">
+    <Frame_Data>
+      <Render posX="3" posY="2" Width="100" Height="87" anchorX="53" anchorY="52" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="98" Height="87" />
+      <Render posX="340" posY="373" Width="100" Height="103" anchorX="51" anchorY="61" Duration="0.7" Event="NULL" />
+      <ActiveCollision posX="-340" posY="-373" Width="0" Height="0" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Battle_Basic_Attack" Frames="2" repeat="0" Texture="PlayStation 2 - Namco X Capcom - Wizards.png">
+    <Frame_Data>
+      <Render posX="134" posY="74" Width="76" Height="105" anchorX="33" anchorY="61" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="75" Height="105" />
+      <Render posX="3" posY="93" Width="121" Height="82" anchorX="63" anchorY="45" Duration="0.3" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="-1" posY="0" Width="122" Height="82" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Valrion_Battle_Taking_Damage" Frames="2" repeat="0" Texture="PlayStation 2 - Namco X Capcom - Wizards.png">
+    <Frame_Data>
+      <Render posX="1" posY="281" Width="93" Height="75" anchorX="57" anchorY="42" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="91" Height="72" />
+      <Render posX="95" posY="270" Width="96" Height="85" anchorX="55" anchorY="49" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="96" Height="83" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
