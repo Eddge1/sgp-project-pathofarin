@@ -82,9 +82,9 @@ void CComboGame::Render()
 	}
 }
 
-void CComboGame::Update(float fElpasedTime)
+void CComboGame::Update(float fElapsedTime)
 {
-	m_fTimer -= fElpasedTime;
+	m_fTimer -= fElapsedTime;
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->KeyPressed(DIK_D))
 	{

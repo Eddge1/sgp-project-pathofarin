@@ -12,7 +12,7 @@ public:
 	CComboGame(void);
 	virtual ~CComboGame(void);
 	virtual void Render() override;
-	virtual void Update(float fElpasedTime) override;
+	virtual void Update(float fElapsedTime) override;
 	virtual void ResetSkill() override;
 	virtual void HandleEvent( const CEvent* pEvent ) override { }
 	virtual void DoAttack(void) override {}

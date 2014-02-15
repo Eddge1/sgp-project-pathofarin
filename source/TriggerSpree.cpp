@@ -111,9 +111,9 @@ void CTriggerSpree::Render()
 
 }
 
-void CTriggerSpree::Update(float fElpasedTime)
+void CTriggerSpree::Update(float fElapsedTime)
 {
-	m_fTimer -= fElpasedTime;
+	m_fTimer -= fElapsedTime;
 
 	if(m_fTimer < 0.0f)
 	{
@@ -130,9 +130,9 @@ void CTriggerSpree::Update(float fElpasedTime)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	for(unsigned int i = 0; i < m_vTriggers.size();)
 	{
-		m_vTriggers[i]->left -= long(200 * fElpasedTime);
+		m_vTriggers[i]->left -= long(200 * fElapsedTime);
 		if(m_vTriggers[i]->left <= 584)
-			m_vTriggers[i]->right -= long(200 * fElpasedTime);
+			m_vTriggers[i]->right -= long(200 * fElapsedTime);
 
 		if(m_vTriggers[i]->left <= 200)
 			m_vTriggers[i]->left = 200;

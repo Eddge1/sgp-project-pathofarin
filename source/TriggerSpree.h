@@ -14,7 +14,7 @@ class CTriggerSpree : public CMiniGames
 public:
 	CTriggerSpree(void);
 	virtual void Render() override;
-	virtual void Update(float fElpasedTime) override;
+	virtual void Update(float fElapsedTime) override;
 	virtual ~CTriggerSpree(void);
 	virtual void ResetSkill() override;
 	virtual void HandleEvent( const CEvent* pEvent ) override;
