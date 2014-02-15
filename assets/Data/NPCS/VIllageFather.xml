@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="VIllageFather">
+  <Convo Text="Oh thank goodness!  Please stop these Orc things!  They keep yelling about the &quot;Coming of Valrion&quot; and boasting about how many houses they'll burn down!  I thought Valrion was gone for good when he was sealed away all that time ago... but if he's back, the world won't be around long enough to regret it.  You seem strong... maybe you can do something!" Event="" />
+</NPC>

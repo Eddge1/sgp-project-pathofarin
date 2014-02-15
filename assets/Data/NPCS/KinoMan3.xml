@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="KinoMan3">
+  <Convo Text="Hey!  Be careful if you're headed North... I hear those ruins have gotten way less ruined in the last few days, if you catch my drift.  Not sure what's going on, but it can't be good!" Event="" />
+</NPC>

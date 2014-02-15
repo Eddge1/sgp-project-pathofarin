@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="KinoMan2">
+  <Convo Text="Are you one of them beyond-the-mountain people?  You sure dress weird!  Well, maybe having a weapon isn't such a bad idea nowadays.  I heard that some weird stuff was happening over in the desert... sand attacking people and such.  Probably just people letting the sun get to their heads if you ask me." Event="" />
+</NPC>

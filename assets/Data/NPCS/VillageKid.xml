@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Kid" Hostile="false" Units="0" File="VillageKid">
+  <Convo Text="Hey! Listen!  Mister!  Please help me!  My dad was captured by those creatures and taken away!  I'm so scared!  What if they come back for me?  I want my mom!  WAAHHHHHH!" Event="" />
+</NPC>

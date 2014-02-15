@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="KinoMan">
+  <Convo Text="Welcome to Kino Village!  The Pride of the West!  Home to the Gardens of Kino, directly adjacent to the Desert of Kino, and just south of the Dungeon of Definitely Not Kino.  Enjoy your stay!" Event="" />
+</NPC>

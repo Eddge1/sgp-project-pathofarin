@@ -146,7 +146,11 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="48" posX="8" posY="2">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoMan3" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
+        <Waypoint X="544" Y="160" />
+        <Waypoint X="736" Y="160" />
+        <Waypoint X="544" Y="160" />
+      </Tile_Data>
     </Tile>
     <Tile ID="49" posX="9" posY="2">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -194,10 +198,23 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="64" posX="4" posY="3">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoKid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="12">
+        <Waypoint X="288" Y="224" />
+        <Waypoint X="96" Y="224" />
+        <Waypoint X="96" Y="416" />
+        <Waypoint X="288" Y="416" />
+        <Waypoint X="288" Y="224" />
+        <Waypoint X="288" Y="96" />
+        <Waypoint X="416" Y="96" />
+        <Waypoint X="480" Y="288" />
+        <Waypoint X="672" Y="224" />
+        <Waypoint X="736" Y="96" />
+        <Waypoint X="544" Y="416" />
+        <Waypoint X="288" Y="224" />
+      </Tile_Data>
     </Tile>
     <Tile ID="65" posX="5" posY="3">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="66" posX="6" posY="3">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -335,19 +352,13 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="111" posX="11" posY="5">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoMan2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="112" posX="12" posY="5">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="113" posX="13" posY="5">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
-        <Waypoint X="864" Y="352" />
-        <Waypoint X="736" Y="352" />
-        <Waypoint X="736" Y="224" />
-        <Waypoint X="864" Y="224" />
-        <Waypoint X="864" Y="352" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="114" posX="14" posY="5">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -443,7 +454,16 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="145" posX="5" posY="7">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoWoman2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="8">
+        <Waypoint X="352" Y="480" />
+        <Waypoint X="224" Y="480" />
+        <Waypoint X="96" Y="480" />
+        <Waypoint X="352" Y="480" />
+        <Waypoint X="96" Y="480" />
+        <Waypoint X="96" Y="416" />
+        <Waypoint X="352" Y="416" />
+        <Waypoint X="352" Y="480" />
+      </Tile_Data>
     </Tile>
     <Tile ID="146" posX="6" posY="7">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -557,16 +577,16 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="183" posX="3" posY="9">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
-        <Waypoint X="224" Y="608" />
-        <Waypoint X="416" Y="608" />
-        <Waypoint X="416" Y="672" />
-        <Waypoint X="416" Y="608" />
-        <Waypoint X="224" Y="608" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="184" posX="4" posY="9">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoKid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
+        <Waypoint X="288" Y="608" />
+        <Waypoint X="96" Y="608" />
+        <Waypoint X="96" Y="672" />
+        <Waypoint X="288" Y="672" />
+        <Waypoint X="288" Y="608" />
+      </Tile_Data>
     </Tile>
     <Tile ID="185" posX="5" posY="9">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -758,7 +778,13 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="248" posX="8" posY="12">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
+        <Waypoint X="544" Y="800" />
+        <Waypoint X="544" Y="672" />
+        <Waypoint X="736" Y="672" />
+        <Waypoint X="544" Y="672" />
+        <Waypoint X="544" Y="800" />
+      </Tile_Data>
     </Tile>
     <Tile ID="249" posX="9" posY="12">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -776,13 +802,7 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="254" posX="14" posY="12">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="5">
-        <Waypoint X="928" Y="800" />
-        <Waypoint X="928" Y="608" />
-        <Waypoint X="736" Y="608" />
-        <Waypoint X="928" Y="608" />
-        <Waypoint X="928" Y="800" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="255" posX="15" posY="12">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -851,7 +871,15 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="277" posX="17" posY="13">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoKid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="7">
+        <Waypoint X="1120" Y="864" />
+        <Waypoint X="1120" Y="672" />
+        <Waypoint X="928" Y="672" />
+        <Waypoint X="928" Y="864" />
+        <Waypoint X="864" Y="1056" />
+        <Waypoint X="1120" Y="1056" />
+        <Waypoint X="1120" Y="864" />
+      </Tile_Data>
     </Tile>
     <Tile ID="278" posX="18" posY="13">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -935,14 +963,10 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="305" posX="5" posY="15">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
-        <Waypoint X="352" Y="992" />
-        <Waypoint X="352" Y="672" />
-        <Waypoint X="352" Y="992" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="306" posX="6" posY="15">
-      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="10" EventID="KinoMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="307" posX="7" posY="15">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1074,11 +1098,7 @@
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="350" posX="10" posY="17">
-      <Tile_Data xTileID="0" yTileID="10" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
-        <Waypoint X="672" Y="1120" />
-        <Waypoint X="1056" Y="1120" />
-        <Waypoint X="672" Y="1120" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="351" posX="11" posY="17">
       <Tile_Data xTileID="0" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

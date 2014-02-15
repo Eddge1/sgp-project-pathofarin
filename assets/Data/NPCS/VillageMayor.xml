@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="VillageMayor">
+  <Convo Text="Hello young man!  Nice day isn't it?  Well, besides the crazy snails and evil trees.  Anyway, don't get in any trouble now!" Event="" />
+</NPC>

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldWoman" Hostile="false" Units="0" File="KinoWoman">
+  <Convo Text="The Gardens sure have gone downhill lately... what with all those killer plants and oversized bees.  I heard there's even some weird tiger plant lady stirring up trouble down there.  Sure would be nice to go for a walk without being afraid for my life!" Event="" />
+</NPC>
