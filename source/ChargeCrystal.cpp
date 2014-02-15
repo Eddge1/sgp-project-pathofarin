@@ -21,7 +21,7 @@ CChargeCrystal::CChargeCrystal(void)
 	m_fCursorX = 400.0f;
 	m_fCursorY = 200.0f;
 	m_bHeal = false;
-
+	m_bAuraPlay = true;
 }
 
 
@@ -35,6 +35,20 @@ void CChargeCrystal::Render()
 
 	CSGD_TextureManager* pTM= CSGD_TextureManager::GetInstance();
 	RECT rTemp = {0,0,128,128};
+
+	if (m_bAuraPlay == true)
+	{
+		CUnits* tempP = GetOwner();
+		CBuff* pBuff = new CBuff();
+		pBuff->SetMasterGame(this);
+		pBuff->SetTarget(tempP);
+		pBuff->GetAnimInfo()->SetAnimation("Defensive_Aura");
+		pBuff->SetPosX(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosX());
+		pBuff->SetPosY(CGamePlayState::GetInstance()->GetPlayerUnit()->GetPosY());
+		CBattleState::GetInstance()->AddSkill(pBuff);
+		pBuff->Release();
+		m_bAuraPlay = false;
+	}
 
 	pTM->Draw(m_nChargeImgID, int(400-64*m_fScale), int(200-64*m_fScale), m_fScale, m_fScale, &rTemp, 64*m_fScale,64*m_fScale,m_fRotation, D3DCOLOR_XRGB(255,255,255));
 	RECT rGem = {0,0,16,16};
@@ -141,6 +155,7 @@ void CChargeCrystal::ResetSkill()
 	m_fScale = 1.0f;
 	SetDamage(0);
 	m_bFailed = false;
+	m_bAuraPlay = true;
 	m_fCursorX = 400.0f;
 	m_fCursorY = 200.0f;
 

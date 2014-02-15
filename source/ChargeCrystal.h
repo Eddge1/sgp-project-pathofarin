@@ -16,6 +16,8 @@ class CChargeCrystal :
 	bool m_bDamage;
 	bool m_bFailed;
 	bool m_bHeal;
+	bool m_bAuraPlay;
+
 public:
 	CChargeCrystal(void);
 	virtual ~CChargeCrystal(void);

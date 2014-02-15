@@ -1259,10 +1259,20 @@
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="419" posX="19" posY="10">
-      <Tile_Data xTileID="3" yTileID="9" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="420" posX="20" posY="10">
-      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="VillageMaid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="9">
+        <Waypoint X="656" Y="336" />
+        <Waypoint X="592" Y="336" />
+        <Waypoint X="496" Y="432" />
+        <Waypoint X="688" Y="560" />
+        <Waypoint X="944" Y="560" />
+        <Waypoint X="944" Y="336" />
+        <Waypoint X="816" Y="272" />
+        <Waypoint X="688" Y="272" />
+        <Waypoint X="656" Y="336" />
+      </Tile_Data>
     </Tile>
     <Tile ID="421" posX="21" posY="10">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1511,7 +1521,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="503" posX="23" posY="12">
-      <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="VillageMaid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="504" posX="24" posY="12">
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1949,7 +1959,7 @@
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="649" posX="9" posY="16">
-      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="VillageMayor" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="650" posX="10" posY="16">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -2324,7 +2334,7 @@
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="774" posX="14" posY="19">
-      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="775" posX="15" posY="19">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -2621,7 +2631,7 @@
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="873" posX="33" posY="21">
-      <Tile_Data xTileID="3" yTileID="9" EventID="OldWoman" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="VillageWife" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="874" posX="34" posY="21">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -3170,7 +3180,10 @@
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1056" posX="16" posY="26">
-      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="VillageMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="2">
+        <Waypoint X="528" Y="848" />
+        <Waypoint X="944" Y="848" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1057" posX="17" posY="26">
       <Tile_Data xTileID="6" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5284,7 +5297,7 @@
       <Tile_Data xTileID="11" yTileID="31" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="560" posX="0" posY="14">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="561" posX="1" posY="14">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5404,7 +5417,7 @@
       <Tile_Data xTileID="11" yTileID="30" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="600" posX="0" posY="15">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="601" posX="1" posY="15">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5524,7 +5537,7 @@
       <Tile_Data xTileID="11" yTileID="31" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="640" posX="0" posY="16">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="641" posX="1" posY="16">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5644,10 +5657,10 @@
       <Tile_Data xTileID="11" yTileID="30" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="680" posX="0" posY="17">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="681" posX="1" posY="17">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="682" posX="2" posY="17">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5926,7 +5939,7 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="774" posX="14" posY="19">
-      <Tile_Data xTileID="3" yTileID="9" EventID="OldMan" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="775" posX="15" posY="19">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
