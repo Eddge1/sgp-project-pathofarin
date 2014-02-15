@@ -729,7 +729,7 @@
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="240" posX="0" posY="6">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="Mysterious Forest Village" EventType="MAP_EDIT" WarpX="128" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="241" posX="1" posY="6">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1446,7 +1446,7 @@
       <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="479" posX="39" posY="11">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Village" EventType="WARP" WarpX="128" WarpY="1024" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Forest Village" EventType="WARP" WarpX="128" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="480" posX="0" posY="12">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1566,7 +1566,7 @@
       <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="519" posX="39" posY="12">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Village" EventType="WARP" WarpX="128" WarpY="1024" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Forest Village" EventType="WARP" WarpX="128" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="520" posX="0" posY="13">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1686,7 +1686,7 @@
       <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="559" posX="39" posY="13">
-      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Village" EventType="WARP" WarpX="128" WarpY="1024" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Mysterious Forest Village" EventType="WARP" WarpX="128" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="560" posX="0" posY="14">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
