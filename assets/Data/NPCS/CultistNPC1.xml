@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Cultist" Hostile="false" Units="0" File="CultistNPC1">
+  <Convo Text="Ha!  Mortal!  You stand no chance against the might of Valrion!  He shall destroy everything!" Event="" />
+</NPC>

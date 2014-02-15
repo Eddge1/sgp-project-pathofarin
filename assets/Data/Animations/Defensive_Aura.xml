@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="Defensive_Aura" Frames="3" repeat="1" Texture="PlayStation - Tales of Destiny - Spell Effects.png">
+    <Frame_Data>
+      <Render posX="179" posY="1501" Width="104" Height="106" anchorX="53" anchorY="54" Duration="0.1" Event="FLARE" />
+      <ActiveCollision posX="1" posY="0" Width="105" Height="105" />
+      <Render posX="284" posY="1502" Width="103" Height="105" anchorX="50" anchorY="57" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="99" Height="103" />
+      <Render posX="223" posY="6" Width="101" Height="101" anchorX="51" anchorY="53" Duration="0.1" Event="COMPLETE" />
+      <ActiveCollision posX="0" posY="-1" Width="101" Height="99" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
