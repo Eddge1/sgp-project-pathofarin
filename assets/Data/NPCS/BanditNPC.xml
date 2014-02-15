@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Bandit" Hostile="false" Units="0" File="BanditNPC">
+  <Convo Text="Wow.  I can't believe someone actually came through all that stuff... Well if you're strong enough to get this far I honestly don't want to fight you.  Just take the stuff from the chest and leave me alone!  Maybe I should take up gardening..." Event="" />
+</NPC>
