@@ -12,6 +12,8 @@
 #include "ChargeCrystal.h"
 #include "ComboGame.h"
 #include "UseItem.h"
+#include "PrecisionStrike.h"
+#include "SteadyShot.h"
 
 #include "MainMenuState.h"
 #include "GamePlayState.h"
@@ -539,10 +541,10 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
-	tempC->SetName("Spells");
+	tempC->SetName("Mage");
 	tempC->SetIsGame(false);
-	
-	
+
+
 	CCommands* pTest = new CCommands;
 	CTriggerMatch *pTrig = new CTriggerMatch;
 	pTest->SetName("FireBall");
@@ -614,17 +616,43 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	temp->AddSkill(tempC);
 
 	tempC = new CCommands;
+	tempC->SetName("Warrior");
+	tempC->SetIsGame(false);
+
+	pTest = new CCommands;
 	CTriggerSpree *pSpree = new CTriggerSpree;
-	tempC->SetName("SwordSlash");
-	tempC->SetMiniGame(pSpree);
-	tempC->SetIsGame(true);
+	pTest->SetName("SwordSlash");
+	pTest->SetMiniGame(pSpree);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	CComboGame *pCombo = new CComboGame;
+	pTest->SetName("Blitz");
+	pTest->SetMiniGame(pCombo);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
 
 	tempC = new CCommands;
-	CComboGame *pCombo = new CComboGame;
-	tempC->SetName("Blitz");
-	tempC->SetMiniGame(pCombo);
-	tempC->SetIsGame(true);
+	tempC->SetName("Ranger");
+	tempC->SetIsGame(false);
+
+	pTest = new CCommands;
+	CSteadyShot *pAim = new CSteadyShot;
+	pTest->SetName("Aimed Shot");
+	pTest->SetMiniGame(pAim);
+	pAim->SetDamage(4.0f);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	CPrecisionStrike *pMulti = new CPrecisionStrike;
+	pTest->SetName("Multi-Shot");
+	pTest->SetMiniGame(pMulti);
+	pMulti->SetDamage(0.75f);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
 
 	tempC = new CCommands;

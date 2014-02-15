@@ -55,34 +55,34 @@ void CChargeCrystal::Render()
 	pTM->Draw(m_nCursorImageID, int(m_fCursorX - 8), int(m_fCursorY - 8), 1.0f,1.0f,&rGem,8.0f,8.0f,-m_fRotation, D3DCOLOR_XRGB(255,255,255));
 }
 
-void CChargeCrystal::Update(float fElpasedTime)
+void CChargeCrystal::Update(float fElapsedTime)
 {
 	if(m_nSuccess < 3 && !m_bFailed)
 	{
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		float fX = 0.0f;
 		float fY = 0.0f;
-		m_fTimer -= fElpasedTime;
-		m_fRotation += (10.0f * fElpasedTime);
+		m_fTimer -= fElapsedTime;
+		m_fRotation += (10.0f * fElapsedTime);
 
 		if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W)  )
-			fY -= 100.0f * fElpasedTime;
+			fY -= 100.0f * fElapsedTime;
 		else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) )
-			fY += 100.0f * fElpasedTime;
+			fY += 100.0f * fElapsedTime;
 		if(pDI->KeyDown(DIK_LEFTARROW) || pDI->KeyDown(DIK_A) )
-			fX -= 100.0f * fElpasedTime;
+			fX -= 100.0f * fElapsedTime;
 		else if(pDI->KeyDown(DIK_RIGHTARROW) || pDI->KeyDown(DIK_D) )
-			fX += 100.0f * fElpasedTime;
+			fX += 100.0f * fElapsedTime;
 
 		if(m_fCursorX < 400)
-			fX -= 50.0f * fElpasedTime;
+			fX -= 50.0f * fElapsedTime;
 		else
-			fX += 50.0f * fElpasedTime;
+			fX += 50.0f * fElapsedTime;
 
 		if(m_fCursorY < 200)
-			fY -= 50.0f * fElpasedTime;
+			fY -= 50.0f * fElapsedTime;
 		else
-			fY += 50.0f * fElpasedTime;
+			fY += 50.0f * fElapsedTime;
 
 		m_fCursorX += fX;
 		m_fCursorY += fY;

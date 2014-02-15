@@ -130,18 +130,18 @@ void CTriggerMatch::Render()
 	pFont->Draw(coss.str().c_str(), 400, 35, 1.0f, D3DCOLOR_XRGB(0,0,0));
 }
 
-void CTriggerMatch::Update(float fElpasedTime) 
+void CTriggerMatch::Update(float fElapsedTime) 
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(m_bLeft)
 	{
-		m_rTrigger.left -= long(m_fMoveSpeed * fElpasedTime);
-		m_rTrigger.right -= long(m_fMoveSpeed * fElpasedTime);
+		m_rTrigger.left -= long(m_fMoveSpeed * fElapsedTime);
+		m_rTrigger.right -= long(m_fMoveSpeed * fElapsedTime);
 	}
 	else
 	{
-		m_rTrigger.left += long(m_fMoveSpeed * fElpasedTime);
-		m_rTrigger.right += long(m_fMoveSpeed * fElpasedTime);
+		m_rTrigger.left += long(m_fMoveSpeed * fElapsedTime);
+		m_rTrigger.right += long(m_fMoveSpeed * fElapsedTime);
 	}
 	if(m_rTrigger.right >= 600)
 		m_bLeft = true;

@@ -38,7 +38,7 @@ void CGameOverState::Sleep(void)
 {
 	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
 		CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
-	
+
 	CProfileMenuState::GetInstance()->Sleep();
 	m_szGameOverMsg ="";
 }
@@ -50,6 +50,8 @@ void CGameOverState::Update(float fElapsedTime)
 
 void CGameOverState::Render(void)
 {
+	RECT clearscreenson = {0, 0, 800, 600};
+	CSGD_Direct3D::GetInstance()->DrawRect(clearscreenson, D3DCOLOR_XRGB(255,255,255));
 	wostringstream woss;
 	woss << m_szGameOverMsg.c_str();
 	CBitmapFont* temp = CGame::GetInstance()->GetFont("Arial");

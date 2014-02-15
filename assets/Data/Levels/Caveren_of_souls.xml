@@ -604,22 +604,22 @@
       <Tile_Data xTileID="13" yTileID="2" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="4" posX="4" posY="0">
-      <Tile_Data xTileID="11" yTileID="0" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="0" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="5" posX="5" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="6" posX="6" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="7" posX="7" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="8" posX="8" posY="0">
-      <Tile_Data xTileID="4" yTileID="3" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="3" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="9" posX="9" posY="0">
-      <Tile_Data xTileID="9" yTileID="0" EventID="" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
+      <Tile_Data xTileID="9" yTileID="0" EventID="ForestLevelPart1" EventType="WARP" WarpX="384" WarpY="2176" Total_Waypoints="0" />
     </Tile>
     <Tile ID="10" posX="10" posY="0">
       <Tile_Data xTileID="13" yTileID="2" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />

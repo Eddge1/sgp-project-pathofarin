@@ -1572,7 +1572,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="520" posX="0" posY="13">
-      <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="1216" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="521" posX="1" posY="13">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1692,7 +1692,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="560" posX="0" posY="14">
-      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="64" WarpY="416" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="1216" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="561" posX="1" posY="14">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1812,7 +1812,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="600" posX="0" posY="15">
-      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="64" WarpY="416" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="1216" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="601" posX="1" posY="15">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1932,7 +1932,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="640" posX="0" posY="16">
-      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="64" WarpY="416" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="1216" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="641" posX="1" posY="16">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -2052,7 +2052,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="680" posX="0" posY="17">
-      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="64" WarpY="416" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="9" EventID="ForestLevelPart2" EventType="WARP" WarpX="1216" WarpY="512" Total_Waypoints="0" />
     </Tile>
     <Tile ID="681" posX="1" posY="17">
       <Tile_Data xTileID="3" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
