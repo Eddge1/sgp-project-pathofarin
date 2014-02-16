@@ -46,6 +46,8 @@ CBattleState::CBattleState(void)
 	m_bDelayed = false;
 
 	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
+	m_nOrcLeader = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_OrcSiegeLeader_Battle.xwm"));
+	m_nTigerlily = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_TigerLily_Battle.xwm"));
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
@@ -66,7 +68,6 @@ CBattleState::~CBattleState(void)
 
 void CBattleState::Activate(void)
 {
-	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	m_pFont = CGame::GetInstance()->GetFont("Arial");
 	m_bDefeat = false;
 	m_bVictory = false;
@@ -419,6 +420,47 @@ void CBattleState::Initialize(void)
 			temp->GetUnit(i)->AddRef();
 		}
 	}
+
+	for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+	{
+
+		if(m_vBattleUnits[i]->GetName() == "Orc_Leader")
+		{
+			SetBackgroundMusic(m_nOrcLeader);
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+		}
+		else if(m_vBattleUnits[i]->GetName() == "TigerLily")
+		{
+			SetBackgroundMusic(m_nTigerlily);
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+		}
+		else if(m_vBattleUnits[i]->GetName() == "Valrion")
+		{
+			SetBackgroundMusic(m_nValrion);
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+			break;
+		}
+
+	}
+
+	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_nOrcLeader))
+	{
+	}
+	else if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_nTigerlily))
+	{
+
+	}
+	else if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_nValrion))
+	{
+	}
+	else
+	{
+		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+	}
+
+
+
 
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), SortSpeed); 
 	GetNextTarget();

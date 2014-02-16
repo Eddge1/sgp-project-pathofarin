@@ -133,7 +133,7 @@ void CGamePlayState::Activate(void)
 			}
 
 			LoadWorld("Testing.xml");
-		
+
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -678,6 +678,37 @@ void CGamePlayState::LoadWorld(string szFileName)
 							Worldtemp->AddObject(warp, 2);
 							warp->Release();
 						}
+						else if(ReadIn == "CHESTS")
+						{
+							CChest* pChest = new CChest();
+							pChest->SetPosX(float(tileID % layerWidth * tileWidth));
+							pChest->SetPosY(float(tileID / layerWidth * tileHeight));
+							pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
+
+							TiXmlElement* pXmlChest = pTileData->FirstChildElement("Chest");
+							if(pXmlChest != nullptr)
+							{
+								int nItemAmount = 0;
+								string szItemName = "";
+								for(;;)
+								{
+									if(pXmlChest == nullptr)
+										break;
+
+									szItemName = pXmlChest->Attribute("Name");
+									pXmlChest->Attribute("Amount", &nItemAmount);
+
+									if(szItemName != "")
+										pChest->AddConsumableItem(m_mItemManager[szItemName].Item, nItemAmount);
+
+									pXmlChest = pXmlChest->NextSiblingElement("Chest");
+									szItemName = "";
+									nItemAmount = 0;
+								}
+							}
+							Worldtemp->AddObject(pChest, 2);
+							pChest->Release();
+						}
 						tempLayer->AddTile(pTempTile);
 						pTile = pTile->NextSiblingElement();
 						if(pTile != nullptr)
@@ -755,7 +786,11 @@ void CGamePlayState::SetPlayer(CPlayer* pPlayer)
 	m_pPlayer = pPlayer;
 
 	if(m_pPlayer != nullptr)
+	{
 		m_pPlayer->AddRef();
+
+
+	}
 }
 
 CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack)
@@ -892,6 +927,12 @@ CEnemyUnit* CGamePlayState::CreateTempEnemy(string input, float X, float Y, int 
 
 CWorld* CGamePlayState::GetWorld(string szName) 
 {
+	if(m_mWorldManager[szName] == nullptr)
+	{
+		string szTemporary = m_sCurrWorld;
+		LoadWorld(szName);
+		m_sCurrWorld = szTemporary;
+	}
 	return m_mWorldManager[szName];
 }
 
