@@ -10,6 +10,7 @@ CCreditState::CCreditState(void)
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
 	SetSFXID(-1);
+
 }
 
 

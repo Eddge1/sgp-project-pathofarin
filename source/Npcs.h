@@ -21,6 +21,8 @@ class CNpcs : public CEntity
 	bool m_bGameVictory;
 	int m_nWaypoint;
 	float m_fDelayChat;
+	float m_fLastX;
+	float m_fLastY;
 
 public:
 
