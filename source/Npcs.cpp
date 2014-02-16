@@ -108,15 +108,15 @@ void CNpcs::Update(float fElapsedTime)
 				GetAnimInfo()->SetAnimation(szTemp.c_str());
 			}
 		}
-		else if (GetVelX() == 0 && GetVelY() == 0)
-		{
-			string szTemp = GetName();
-			szTemp += "_Idle";
-			GetAnimInfo()->SetAnimation(szTemp.c_str());
-		}
-
-		CEntity::Update(fElapsedTime);
 	}
+	if (GetVelX() == 0 && GetVelY() == 0)
+	{
+		string szTemp = GetName();
+		szTemp += "_Idle";
+		GetAnimInfo()->SetAnimation(szTemp.c_str());
+	}
+
+	CEntity::Update(fElapsedTime);
 }
 
 void CNpcs::HandleEvent( const CEvent* pEvent )
