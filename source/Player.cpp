@@ -36,6 +36,16 @@ void CPlayer::Update(float fElapsedTime)
 	SetVelX(0);
 	SetVelY(0);
 
+	if (pDI->KeyPressed(DIK_F12))
+	{
+		if (this->GetAnimInfo()->GetPaused() == false)
+		{
+			this->GetAnimInfo()->Pause(true);
+		}
+		else
+			this->GetAnimInfo()->Pause(false);
+	}
+
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP))
 	{
 		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Up");

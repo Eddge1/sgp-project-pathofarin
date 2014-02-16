@@ -25,6 +25,7 @@ void CAIBrute::Update(float fElapsedTime)
 
 	if(m_bPrepare)
 	{
+		GetOwner()->GetAnimInfo()->Pause(false);
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
@@ -83,6 +84,7 @@ void CAIBrute::Update(float fElapsedTime)
 			m_bPrepare = true;
 			wostringstream woss;
 			woss << "Prepare";
+			GetOwner()->GetAnimInfo()->Pause(true);
 			CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 			m_pTarget = nullptr;
 			GetOwner()->EndTurn();
@@ -92,6 +94,7 @@ void CAIBrute::Update(float fElapsedTime)
 			m_bPrepare = true;
 			wostringstream woss;
 			woss << "Prepare";
+			GetOwner()->GetAnimInfo()->Pause(true);
 			CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 			m_pTarget = nullptr;
 			GetOwner()->EndTurn();
