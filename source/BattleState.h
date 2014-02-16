@@ -89,6 +89,11 @@ private:
 	int m_nExperienceGained;
 	int m_nSelectionChange;
 
+
+	int m_nOrcLeader;
+	int m_nTigerlily;
+	int m_nValrion;
+
 	CBattleState(void);
 	virtual ~CBattleState(void);
 	CBattleState( const CBattleState& );
