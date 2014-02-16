@@ -17,7 +17,6 @@ class CTriggerMatch :
 	float m_fMoveSpeed;
 	int m_nSuccess;
 	std::vector<CProjectile*> m_vSkills;
-	CBuff* pBuff;
 
 public:
 	CTriggerMatch(void);

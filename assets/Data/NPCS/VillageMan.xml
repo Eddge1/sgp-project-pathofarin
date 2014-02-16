@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="VillageMan">
+  <Convo Text="Kids these days!  Always runnin' up to random people and saying &quot;Hello&quot; and such!  In my day you wouldn't see such disrespect!  Shoo!  Run off and do your talkin' somewhere else!" Event="" />
+</NPC>

@@ -23,7 +23,7 @@ void CEnemyUnit::HandleEvent( const CEvent* pEvent )
 
 void CEnemyUnit::Update(float fElapsedTime)
 { 
-	if(GetTurn())
+	if(GetTurn() && GetHealth() > 0)
 	{
 		if(m_bEventSent == false && m_fTimerToSlow < 1)
 		{
@@ -53,5 +53,7 @@ void CEnemyUnit::Update(float fElapsedTime)
 			}
 		}
 	}
+	else if(GetTurn() && GetHealth() <1 )
+		EndTurn();
 	CEntity::Update(fElapsedTime);
 }

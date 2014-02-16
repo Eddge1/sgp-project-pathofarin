@@ -85,8 +85,6 @@ void CTutorialBattle::Activate( void )
 	m_eCurrentPhase = BP_INIT;
 	m_fDelayTurn = 0.0f;
 	m_bPlayerTurn = false;
-	if(m_bMenu)
-		CAnimationSystem::GetInstance()->LoadAnimations();
 
 	m_nTopMenuSelection = 0;
 	m_bSubMenuSelection = false;
@@ -119,9 +117,6 @@ void CTutorialBattle::Sleep( void )
 		delete m_vText[i];
 
 	m_vText.clear();
-
-	if(m_bMenu)
-		CAnimationSystem::GetInstance()->DeleteInstance();
 
 	if(m_pPlayerUnit != nullptr)
 		m_pPlayerUnit->Release();
@@ -156,12 +151,12 @@ bool CTutorialBattle::Input( void )
 				{
 					if(pTemp->GetReady() && pTemp->GetCasting() == false)
 					{
-						if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
+						if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ))
 						{
 							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 							GetNextTarget();
 						}
-						else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) == true )
+						else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
 						{
 							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 							GetPreviousTarget();

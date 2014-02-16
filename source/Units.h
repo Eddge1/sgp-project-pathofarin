@@ -23,7 +23,7 @@ struct InventoryItems
 
 };
 
-enum UnitClass {UC_ENEMY, UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE};
+enum UnitClass {UC_NONE, UC_WARRIOR, UC_RANGER, UC_MAGE, UC_ENEMY};
 
 class CUnits : public CEntity
 {
@@ -86,6 +86,7 @@ public:
 	void GiveExperience		( int nAmount );
 	void SetName( string input ) { m_sName = input; }
 	void SetClass( UnitClass eClass ) {m_eClass = eClass;}
+	UnitClass GetClass() const {return m_eClass;}
 
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 

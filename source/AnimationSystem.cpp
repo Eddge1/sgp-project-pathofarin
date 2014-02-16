@@ -6,6 +6,8 @@
 #include "..\TinyXML\tinyxml.h"
 #include <sstream>
 #include "../SGD Wrappers/CSGD_EventSystem.h"
+#include "SplashScreen.h"
+#include "Game.h"
 
 CAnimationSystem* CAnimationSystem::s_pInstance = nullptr;
 
@@ -54,18 +56,23 @@ void CAnimationSystem::LoadAnimations()
 	HANDLE hFile;
 	WCHAR cDirectory[] = L"assets/Data/Animations/*.xml";
 	hFile = FindFirstFile(cDirectory,&fileSearch);
-
+	std::string szLoadStatus = "";
+	int nFileCount = 0;
 	do
 	{
+		szLoadStatus = "";
 		char cFile[128] = "assets/Data/Animations/";
 		for(int i = 0; i < 128; i++)
 		{
 			cFile[i + 23] = char(fileSearch.cFileName[i]);
+			szLoadStatus += char(fileSearch.cFileName[i]);
 			if(fileSearch.cFileName[i] == '\0')
 				break;
 		}
 		TiXmlDocument doc;
-
+		CSplashScreen::GetInstance()->SetString(szLoadStatus);
+		CSplashScreen::GetInstance()->SetPercentDone( nFileCount / 55.0f );
+		CGame::GetInstance()->Render();
 		if (doc.LoadFile(cFile) == false)
 			return;
 
@@ -158,6 +165,7 @@ void CAnimationSystem::LoadAnimations()
 			}
 
 		}
+		nFileCount++;
 	}while(FindNextFile(hFile, &fileSearch));
 
 }

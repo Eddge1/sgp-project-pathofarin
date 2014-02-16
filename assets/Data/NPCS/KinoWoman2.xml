@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldWoman" Hostile="false" Units="0" File="KinoWoman2">
+  <Convo Text="Mercy!  What a fine young man you are!  Taking the time to talk to an old woman like me.... and those shoulders!  You should stay a while... have something to drink...." Event="" />
+</NPC>

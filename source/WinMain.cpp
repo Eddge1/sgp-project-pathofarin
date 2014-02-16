@@ -100,7 +100,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 						g_bIS_WINDOWED );
 
 	//////////////////////////////////////////
-
+	ShowCursor(false);
 
 	//	Enter main event loop
 	while( true )

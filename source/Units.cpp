@@ -237,8 +237,16 @@ void CUnits::GiveExperience		( int nAmount )
 			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 20));
 			break;
 		case UC_RANGER:
+			SetMaxHealth(CUnits::GetMaxHealth() + (nLevels * 30));
+			SetAttack(CUnits::GetAttack() + (nLevels * 3));
+			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 30));		
+			
 			break;
 		case UC_MAGE:
+			SetMaxHealth(CUnits::GetMaxHealth() + (nLevels * 20));
+			SetAttack(CUnits::GetAttack() + (nLevels * 3));
+			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 40));			
+			
 			break;
 		default:
 			break;

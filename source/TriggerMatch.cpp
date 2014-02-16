@@ -55,7 +55,6 @@ CTriggerMatch::CTriggerMatch(void)
 	m_bFailed = false;
 	m_bAuraPlay = true;
 
-	pBuff = nullptr;
 }
 
 
@@ -115,7 +114,7 @@ void CTriggerMatch::Render()
 	if (m_bAuraPlay == true)
 	{
 		CUnits* tempP = GetOwner();
-		pBuff = new CBuff();
+		CBuff* pBuff = new CBuff();
 		pBuff->SetMasterGame(this);
 		pBuff->SetTarget(tempP);
 		pBuff->GetAnimInfo()->SetAnimation("Offensive_Aura");

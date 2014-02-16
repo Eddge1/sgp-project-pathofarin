@@ -290,7 +290,7 @@
       <Tile_Data xTileID="12" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="96" posX="6" posY="6">
-      <Tile_Data xTileID="11" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="8" EventID="CultistNPC3" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="97" posX="7" posY="6">
       <Tile_Data xTileID="11" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -299,7 +299,7 @@
       <Tile_Data xTileID="11" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="99" posX="9" posY="6">
-      <Tile_Data xTileID="11" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="8" EventID="CultistNPC3" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="100" posX="10" posY="6">
       <Tile_Data xTileID="12" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -380,7 +380,7 @@
       <Tile_Data xTileID="12" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="126" posX="6" posY="8">
-      <Tile_Data xTileID="13" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="9" EventID="CultistNPC2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="127" posX="7" posY="8">
       <Tile_Data xTileID="13" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -389,7 +389,7 @@
       <Tile_Data xTileID="13" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="129" posX="9" posY="8">
-      <Tile_Data xTileID="13" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="9" EventID="CultistNPC2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="130" posX="10" posY="8">
       <Tile_Data xTileID="12" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -470,7 +470,7 @@
       <Tile_Data xTileID="12" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="156" posX="6" posY="10">
-      <Tile_Data xTileID="13" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="11" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="157" posX="7" posY="10">
       <Tile_Data xTileID="13" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -479,7 +479,7 @@
       <Tile_Data xTileID="13" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="159" posX="9" posY="10">
-      <Tile_Data xTileID="13" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="13" yTileID="11" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="160" posX="10" posY="10">
       <Tile_Data xTileID="12" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

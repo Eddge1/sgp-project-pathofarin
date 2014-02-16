@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldWoman" Hostile="false" Units="0" File="VillageWife">
+  <Convo Text="Hello Stranger!  Welcome to our humble Village.  Oh, Arin is your name?  Very nice.  Please be safe out there, the forest has become much more dangerous as of late!  In fact... I haven't seen my husband or my son since this morning.  I hope nothing has happened to them!  If you see them while in the forest could you please send them home?" Event="" />
+</NPC>

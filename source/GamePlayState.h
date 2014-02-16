@@ -57,7 +57,9 @@ public:
 	CWorld* GetWorld(void) { return m_mWorldManager[m_sCurrWorld]; }
 	CPlayer* GetPlayer() {return m_pPlayer;}
 
-	void LoadWorld(void);
+	//void LoadWorld(void);
+	void LoadWorld(string szFileName);
+
 	//void LoadNPCs(void);
 	CUnits* LoadUnit(std::string szFileName);
 

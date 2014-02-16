@@ -33,6 +33,7 @@ CMainMenuState::CMainMenuState(void)
 	m_fRotation = 0.0f;
 	m_fPosY = 0.0f;
 	m_bLeft = false;
+	m_bLeftMenuState = false;
 }
 
 CMainMenuState::~CMainMenuState(void)
@@ -49,6 +50,12 @@ void CMainMenuState::Activate(void)
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
 
+	if(m_bLeftMenuState)
+	{
+		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+		m_bLeftMenuState = false;
+	}
 	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
 	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png"));
 	m_nSelectionMenuID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
@@ -81,7 +88,11 @@ void CMainMenuState::Sleep(void)
 		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
 	if(GetCursorIMG() != -1)
 		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-
+	if(m_bLeftMenuState)
+	{
+		if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
+			CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+	}
 	SetCursorIMG(-1);
 	m_nWarriorID	= -1;
 	m_nRangerID		= -1;
@@ -144,7 +155,7 @@ bool CMainMenuState::Input(void)
 		if(pDI->KeyPressed(DIK_ESCAPE))
 			return false;
 
-		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
+		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
 				SetCursorSelection(4);
@@ -153,7 +164,7 @@ bool CMainMenuState::Input(void)
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
+		else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
 		{
 			if(GetCursorSelection() >= 4)
 				SetCursorSelection(0);
@@ -172,6 +183,7 @@ bool CMainMenuState::Input(void)
 			case 1:
 				{
 					CTutorialBattle::GetInstance()->FromMenu(true);
+					m_bLeftMenuState = true;
 					CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance()); // <-Should be going to profile state.
 					break;
 				}

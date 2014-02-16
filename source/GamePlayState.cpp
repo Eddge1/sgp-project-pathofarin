@@ -93,7 +93,6 @@ void CGamePlayState::Activate(void)
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Armor of the Ghost Wolf"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Robes of the Ancient One"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Vestments of the Savage tribes"].Item, 1);
-
 		}
 		break;
 	case CGamePlayState::GP_MENU:
@@ -133,73 +132,14 @@ void CGamePlayState::Activate(void)
 
 			}
 
-			CNpcs* pTemp = new CNpcs();
-			LoadWorld();
-
-			m_sCurrWorld = "Level2.xml";
-			pTemp->SetActive(true);
-			pTemp->SetHostile(true);
-			pTemp->SetPosX(1778);
-			pTemp->SetPosY(162);
-			pTemp->AddWaypoint(1778,162);
-			pTemp->AddWaypoint(1778,273);
-			pTemp->AddWaypoint(1581,273);
-			pTemp->AddWaypoint(1581,162);
-			pTemp->SetName("Valrion");
-			pTemp->GetAnimInfo()->SetAnimation("Valrion_Idle");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-			pTemp->SetUnits(CreateTempEnemy("Valrion", 100.0f, 250.0f, 12, 150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Shade", 100.0f, 400.0f, 9,  150, 20));
-			pTemp->SetUnits(CreateTempEnemy("Cultist",		  200.0f, 350.0f, 25, 500, 20, 25));
-			pTemp->SetEvent("VALRION_DEFEAT");
-			pTemp->Release();
-
-			m_sCurrWorld = "testing.xml";
-
-			pTemp = new CNpcs();
-			pTemp->SetActive(true);
-			pTemp->SetHostile(false);
-			pTemp->SetPosX(557);
-			pTemp->SetPosY(300);
-			pTemp->RegEvent("VALRION_DEFEAT");
-			pTemp->AddConversation("Hello Mortal!  There is an Evil Tree that is terrorizing our Village!  Please help us!");
-			pTemp->SetName("OldMan");
-			pTemp->GetAnimInfo()->SetAnimation("OldMan_Idle");
-			pTemp->GetAnimInfo()->SetCurrentFrame(0);
-			m_mWorldManager[m_sCurrWorld]->AddObject(pTemp, 2);
-
-			pTemp->Release();
-			pTemp = nullptr;
-
-			CChest* pChest = new CChest();
-			pChest->SetPosX(586);
-			pChest->SetPosY(128);
-			pChest->AddConsumableItem(m_mItemManager["Titan-Potion"].Item, 3);
-			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
-			m_mWorldManager[m_sCurrWorld]->AddObject(pChest, 2);
-			pChest->Release();
-			pChest = nullptr;
+			LoadWorld("Testing.xml");
+		
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
 
 			WorldHeight = CGame::GetInstance()->GetScreenHeight();
 			WorldWidth = CGame::GetInstance()->GetScreenWidth();
-
-			CAnimationSystem::GetInstance()->LoadAnimations();
-			/*CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Player_Warrior_Battle.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Overworld.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/TwistedTree_Battle.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Overworld.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Orc_Battle.xml");
-
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/NPC_Male.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/testAnim2.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/MageIdle.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/Plantdude.xml");
-			CAnimationSystem::GetInstance()->LoadAnimations("assets/Data/Animations/World_Chest.xml");*/
-
 
 			m_pES->RegisterClient("INIT_BATTLE", this);
 			m_pES->RegisterClient("GAME_OVER", this);
@@ -269,7 +209,6 @@ void CGamePlayState::Sleep(void)
 			}
 			m_mWorldManager.clear();
 
-			CAnimationSystem::GetInstance()->DeleteInstance();
 			for(auto Iter = m_mItemManager.begin(); Iter != m_mItemManager.end(); ++Iter)
 			{
 				delete Iter->second.Item;
@@ -438,9 +377,6 @@ void CGamePlayState::Render(void)
 		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 	}
 	woss.str(_T(""));
-
-	woss << m_pPlayer->GetPosX() << "\n" << m_pPlayer->GetPosY();
-	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 5, 5, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 }
 
 void CGamePlayState::HandleEvent( const CEvent* pEvent )
@@ -508,295 +444,285 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 
 }
 
-void CGamePlayState::LoadWorld(void)
+void CGamePlayState::LoadWorld(string szFileName)
 {
-	WIN32_FIND_DATA fileSearch;
-	HANDLE hFile;
-	WCHAR cDirectory[] = L"assets/Data/Levels/*.xml";
-	hFile = FindFirstFile(cDirectory,&fileSearch);
-
-	do
+	if(m_mWorldManager[szFileName] != nullptr)
 	{
-		std::string szInput;
-		char cFile[128] = "assets/Data/Levels/";
-		for(int i = 0; i < 128; i++)
+		m_sCurrWorld = szFileName;
+		return;
+	}
+	string szTempFileName = "assets/Data/Levels/";
+	szTempFileName += szFileName;
+
+	std::string temp;
+
+	CWorld* Worldtemp = new CWorld;
+	TiXmlDocument doc;
+	if(doc.LoadFile(szTempFileName.c_str()) == false)
+		return;
+
+	TiXmlElement *pRoot = doc.RootElement();
+	if(pRoot == nullptr)
+		return;
+
+	temp = pRoot->Attribute("Image");
+	wostringstream texture;
+	texture << "Assets/Graphics/Tilesets/" << temp.c_str();
+	int transparency = 0;
+
+	pRoot->Attribute("Transparency", &transparency);
+	Worldtemp->SetID(CSGD_TextureManager::GetInstance()->LoadTexture(texture.str().c_str(), transparency));
+
+	int tileWidth = 0;
+	int tileHeight = 0;
+	int layerWidth = 0;
+	int layerHeight = 0;
+	int TotalLayers = 0;
+
+	pRoot->Attribute("Layers", &TotalLayers);
+	pRoot->Attribute("TileHeight", &tileHeight);
+	pRoot->Attribute("TileWidth", &tileWidth);
+	pRoot->Attribute("Height", &layerHeight);
+	pRoot->Attribute("Width", &layerWidth);
+
+	Worldtemp->SetHeight(layerHeight);
+	Worldtemp->SetWidth(layerWidth);
+	Worldtemp->SetTileHeight(tileHeight);
+	Worldtemp->SetTileWidth(tileWidth);
+
+	TiXmlElement* pLoad = pRoot->FirstChildElement("Layer");
+	if(pLoad != nullptr)
+	{
+		TiXmlElement* pTile;
+		TiXmlElement* pTileData;
+
+		string ReadIn = "";
+		int TileXID = 0;
+		int TileYID = 0;
+		CLayer* tempLayer;
+		CTile* pTempTile;
+
+		int nLayerWidth = 0;
+		int nLayerHeight = 0;
+		int nLayerXOffset = 0;
+		int nLayerYOffset = 0;
+
+		for(int i = 0; i < TotalLayers; i++)
 		{
-			cFile[i + 19] = char(fileSearch.cFileName[i]);
-			if(fileSearch.cFileName[i] == '\0')
-				break;
-			szInput += char(fileSearch.cFileName[i]);
-		}
-		std::string temp;
+			tempLayer =  new CLayer;
 
-		CWorld* Worldtemp = new CWorld;
-		TiXmlDocument doc;
-		if(doc.LoadFile(cFile) == false)
-			return;
+			pLoad->Attribute("Width", &nLayerWidth);
+			pLoad->Attribute("Height", &nLayerHeight);
+			pLoad->Attribute("Xoffset", &nLayerXOffset);
+			pLoad->Attribute("Yoffset", &nLayerYOffset);
 
-		TiXmlElement *pRoot = doc.RootElement();
-		if(pRoot == nullptr)
-			return;
+			tempLayer->SetOffsetX(nLayerXOffset);
+			tempLayer->SetOffsetY(nLayerYOffset);
+			tempLayer->SetSizeX(nLayerWidth);
+			tempLayer->SetSizeY(nLayerHeight);
 
-		temp = pRoot->Attribute("Image");
-		wostringstream texture;
-		texture << "Assets/Graphics/Tilesets/" << temp.c_str();
-		int transparency = 0;
-
-		pRoot->Attribute("Transparency", &transparency);
-		Worldtemp->SetID(CSGD_TextureManager::GetInstance()->LoadTexture(texture.str().c_str(), transparency));
-
-		int tileWidth = 0;
-		int tileHeight = 0;
-		int layerWidth = 0;
-		int layerHeight = 0;
-		int TotalLayers = 0;
-
-		pRoot->Attribute("Layers", &TotalLayers);
-		pRoot->Attribute("TileHeight", &tileHeight);
-		pRoot->Attribute("TileWidth", &tileWidth);
-		pRoot->Attribute("Height", &layerHeight);
-		pRoot->Attribute("Width", &layerWidth);
-
-		Worldtemp->SetHeight(layerHeight);
-		Worldtemp->SetWidth(layerWidth);
-		Worldtemp->SetTileHeight(tileHeight);
-		Worldtemp->SetTileWidth(tileWidth);
-
-		TiXmlElement* pLoad = pRoot->FirstChildElement("Layer");
-		if(pLoad != nullptr)
-		{
-			TiXmlElement* pTile;
-			TiXmlElement* pTileData;
-
-			string ReadIn = "";
-			int TileXID = 0;
-			int TileYID = 0;
-			CLayer* tempLayer;
-			CTile* pTempTile;
-
-			int nLayerWidth = 0;
-			int nLayerHeight = 0;
-			int nLayerXOffset = 0;
-			int nLayerYOffset = 0;
-
-			for(int i = 0; i < TotalLayers; i++)
+			pTile = pLoad->FirstChildElement("Tile");
+			if(pTile != nullptr)
+				pTileData = pTile->FirstChildElement("Tile_Data");
+			if(pLoad != nullptr)
 			{
-				tempLayer =  new CLayer;
-
-				pLoad->Attribute("Width", &nLayerWidth);
-				pLoad->Attribute("Height", &nLayerHeight);
-				pLoad->Attribute("Xoffset", &nLayerXOffset);
-				pLoad->Attribute("Yoffset", &nLayerYOffset);
-
-				tempLayer->SetOffsetX(nLayerXOffset);
-				tempLayer->SetOffsetY(nLayerYOffset);
-				tempLayer->SetSizeX(nLayerWidth);
-				tempLayer->SetSizeY(nLayerHeight);
-
-				pTile = pLoad->FirstChildElement("Tile");
-				if(pTile != nullptr)
-					pTileData = pTile->FirstChildElement("Tile_Data");
-				if(pLoad != nullptr)
+				for(int tileID = 0; tileID < nLayerWidth * nLayerHeight; tileID++)
 				{
-					for(int tileID = 0; tileID < nLayerWidth * nLayerHeight; tileID++)
+
+					if(pTileData != nullptr)
 					{
 
-						if(pTileData != nullptr)
+						pTempTile = new CTile;
+						pTileData->Attribute("yTileID", &TileYID);
+						pTileData->Attribute("xTileID", &TileXID);
+
+						pTempTile->SetTileX(TileXID);
+						pTempTile->SetTileY(TileYID);
+
+
+						ReadIn = pTileData->Attribute("EventType");
+						if(ReadIn == "EVENT")
 						{
-
-							pTempTile = new CTile;
-							pTileData->Attribute("yTileID", &TileYID);
-							pTileData->Attribute("xTileID", &TileXID);
-
-							pTempTile->SetTileX(TileXID);
-							pTempTile->SetTileY(TileYID);
-
-
-							ReadIn = pTileData->Attribute("EventType");
-							if(ReadIn == "EVENT")
-							{
-								pTempTile->SetEvent(true);
-								pTempTile->SetEventID(pTileData->Attribute("EventID"));
-							}
-							else if(ReadIn == "NPCS")
-							{
-								CNpcs* pNpc = new CNpcs();
-								string szTemp ="assets/Data/NPCS/";
-								szTemp += pTileData->Attribute("EventID");
-								szTemp += ".xml";
-								int nWaypoints = 0;
-								pTileData->Attribute("Total_Waypoints", &nWaypoints);
-								TiXmlElement *pConvo = nullptr;
-								TiXmlElement* pWaypoints = nullptr;
-								if(nWaypoints != 0)
-									pWaypoints = pTileData->FirstChildElement("Waypoint");
-								TiXmlDocument tempDoc;
-								if(tempDoc.LoadFile(szTemp.c_str()))
-								{
-									TiXmlElement* pOtherRoot = tempDoc.RootElement();
-									pNpc->SetName(pOtherRoot->Attribute("Name"));
-									string szTemporary = pNpc->GetName() + "_Idle";
-									pNpc->GetAnimInfo()->SetAnimation(szTemporary);
-									pNpc->SetPosX(float(tileID % layerWidth * tileWidth));
-									pNpc->SetPosY(float(tileID / layerWidth * tileHeight));
-
-									int nUnits = 0;
-									int nConvos = 0;
-									pOtherRoot->Attribute("Total_Conversations", &nConvos);
-									pOtherRoot->Attribute("Units", &nUnits);
-									string Hostile = pOtherRoot->Attribute("Hostile");
-									if(Hostile == "true")
-										pNpc->SetHostile(true);
-									else
-										pNpc->SetHostile(false);
-
-
-									if(nConvos != 0)
-										pConvo = pOtherRoot->FirstChildElement("Convo");
-									TiXmlElement* pOtherUnits = pOtherRoot->FirstChildElement("Unit");
-									string szUnitName = "";
-									if(pOtherUnits != nullptr)
-									{
-
-										for(int i =0; i < nUnits; i++)
-										{
-											if(pOtherUnits != nullptr)
-											{
-												szUnitName = pOtherUnits->Attribute("Name");
-												CEnemyUnit* pEUnit = reinterpret_cast<CEnemyUnit*>(LoadUnit(szUnitName));
-												if(pEUnit != nullptr)
-												{
-													if(i == 0)
-													{
-														pEUnit->SetPosX(100.0f);
-														pEUnit->SetPosY(250.0f);
-													}
-													else if(i == 1)
-													{
-														pEUnit->SetPosX(200.0f);
-														pEUnit->SetPosY(350.0f);
-													}
-													else if(i == 2)
-													{
-														pEUnit->SetPosX(100.0f);
-														pEUnit->SetPosY(400.0f);
-													}
-													pNpc->SetUnits(pEUnit);
-
-												}
-												szUnitName = "";
-											}
-											pOtherUnits = pOtherUnits->NextSiblingElement("Unit");
-										}
-									}
-
-									if(pWaypoints != nullptr)
-									{
-										for(int i = 0; i < nWaypoints; i++)
-										{
-											if(pWaypoints != nullptr)
-											{
-												int nWPx = -1;
-												int nWPy = -1;
-												pWaypoints->Attribute("X", &nWPx);
-												pWaypoints->Attribute("Y", &nWPy);
-												pNpc->AddWaypoint(float(nWPx), float(nWPy));
-											}
-											pWaypoints = pWaypoints->NextSiblingElement("Waypoint");
-
-										}
-									}
-
-									if(pConvo != nullptr)
-									{
-										for(int i = 0; i < nConvos; i++)
-										{
-											if(pConvo != nullptr)
-											{
-												pNpc->AddConversation(pConvo->Attribute("Text"));
-											}
-											pConvo = pConvo->NextSiblingElement("Convo");
-
-										}
-									}
-
-									Worldtemp->AddObject(pNpc, 2);
-									pNpc->Release();
-
-
-								}
-								else
-								{
-									delete pNpc;
-								}
-							}
-							else if(ReadIn == "WARP")
-							{
-								CWarp* warp = new CWarp;
-								warp->SetPosX(float(tileID % layerWidth * tileWidth));
-								warp->SetPosY(float(tileID / layerWidth * tileHeight));
-								warp->SetHeight(tileHeight);
-								warp->SetWidth(tileWidth);
-								int nX = 0;
-								int nY = 0;
-
-								pTileData->Attribute("WarpX", &nX);
-								pTileData->Attribute("WarpY", &nY);
-
-								warp->SetWarpX(nX);
-								warp->SetWarpY(nY);
-
-								warp->SetMapName(pTileData->Attribute("EventID"));
-								Worldtemp->AddObject(warp, 2);
-								warp->Release();
-							}
-							tempLayer->AddTile(pTempTile);
-							pTile = pTile->NextSiblingElement();
-							if(pTile != nullptr)
-								pTileData = pTile->FirstChildElement("Tile_Data");
+							pTempTile->SetEvent(true);
+							pTempTile->SetEventID(pTileData->Attribute("EventID"));
 						}
-					}
+						else if(ReadIn == "NPCS")
+						{
+							CNpcs* pNpc = new CNpcs();
+							string szTemp ="assets/Data/NPCS/";
+							szTemp += pTileData->Attribute("EventID");
+							szTemp += ".xml";
+							int nWaypoints = 0;
+							pTileData->Attribute("Total_Waypoints", &nWaypoints);
+							TiXmlElement *pConvo = nullptr;
+							TiXmlElement* pWaypoints = nullptr;
+							if(nWaypoints != 0)
+								pWaypoints = pTileData->FirstChildElement("Waypoint");
+							TiXmlDocument tempDoc;
+							if(tempDoc.LoadFile(szTemp.c_str()))
+							{
+								TiXmlElement* pOtherRoot = tempDoc.RootElement();
+								pNpc->SetName(pOtherRoot->Attribute("Name"));
+								string szTemporary = pNpc->GetName() + "_Idle";
+								pNpc->GetAnimInfo()->SetAnimation(szTemporary);
+								pNpc->SetPosX(float(tileID % layerWidth * tileWidth));
+								pNpc->SetPosY(float(tileID / layerWidth * tileHeight));
 
-					Worldtemp->AddLayers(tempLayer);
-					pLoad = pLoad->NextSiblingElement();
+								int nUnits = 0;
+								int nConvos = 0;
+								pOtherRoot->Attribute("Total_Conversations", &nConvos);
+								pOtherRoot->Attribute("Units", &nUnits);
+								string Hostile = pOtherRoot->Attribute("Hostile");
+								if(Hostile == "true")
+									pNpc->SetHostile(true);
+								else
+									pNpc->SetHostile(false);
+
+
+								if(nConvos != 0)
+									pConvo = pOtherRoot->FirstChildElement("Convo");
+								TiXmlElement* pOtherUnits = pOtherRoot->FirstChildElement("Unit");
+								string szUnitName = "";
+								if(pOtherUnits != nullptr)
+								{
+
+									for(int i =0; i < nUnits; i++)
+									{
+										if(pOtherUnits != nullptr)
+										{
+											szUnitName = pOtherUnits->Attribute("Name");
+											CEnemyUnit* pEUnit = reinterpret_cast<CEnemyUnit*>(LoadUnit(szUnitName));
+											if(pEUnit != nullptr)
+											{
+												if(i == 0)
+												{
+													pEUnit->SetPosX(100.0f);
+													pEUnit->SetPosY(250.0f);
+												}
+												else if(i == 1)
+												{
+													pEUnit->SetPosX(200.0f);
+													pEUnit->SetPosY(350.0f);
+												}
+												else if(i == 2)
+												{
+													pEUnit->SetPosX(100.0f);
+													pEUnit->SetPosY(400.0f);
+												}
+												pNpc->SetUnits(pEUnit);
+
+											}
+											szUnitName = "";
+										}
+										pOtherUnits = pOtherUnits->NextSiblingElement("Unit");
+									}
+								}
+
+								if(pWaypoints != nullptr)
+								{
+									for(int i = 0; i < nWaypoints; i++)
+									{
+										if(pWaypoints != nullptr)
+										{
+											int nWPx = -1;
+											int nWPy = -1;
+											pWaypoints->Attribute("X", &nWPx);
+											pWaypoints->Attribute("Y", &nWPy);
+											pNpc->AddWaypoint(float(nWPx), float(nWPy));
+										}
+										pWaypoints = pWaypoints->NextSiblingElement("Waypoint");
+
+									}
+								}
+
+								if(pConvo != nullptr)
+								{
+									for(int i = 0; i < nConvos; i++)
+									{
+										if(pConvo != nullptr)
+										{
+											pNpc->AddConversation(pConvo->Attribute("Text"));
+										}
+										pConvo = pConvo->NextSiblingElement("Convo");
+
+									}
+								}
+
+								Worldtemp->AddObject(pNpc, 2);
+								pNpc->Release();
+
+
+							}
+							else
+							{
+								delete pNpc;
+							}
+						}
+						else if(ReadIn == "WARP")
+						{
+							CWarp* warp = new CWarp;
+							warp->SetPosX(float(tileID % layerWidth * tileWidth));
+							warp->SetPosY(float(tileID / layerWidth * tileHeight));
+							warp->SetHeight(tileHeight);
+							warp->SetWidth(tileWidth);
+							int nX = 0;
+							int nY = 0;
+
+							pTileData->Attribute("WarpX", &nX);
+							pTileData->Attribute("WarpY", &nY);
+
+							warp->SetWarpX(nX);
+							warp->SetWarpY(nY);
+
+							warp->SetMapName(pTileData->Attribute("EventID"));
+							Worldtemp->AddObject(warp, 2);
+							warp->Release();
+						}
+						tempLayer->AddTile(pTempTile);
+						pTile = pTile->NextSiblingElement();
+						if(pTile != nullptr)
+							pTileData = pTile->FirstChildElement("Tile_Data");
+					}
 				}
-			}
-			pLoad = pRoot->FirstChildElement("Block_Data");
-			int nObjects = 0;
-			pLoad->Attribute("Total",&nObjects);
-			TiXmlElement* pBlockData = pLoad->FirstChildElement("Block");
-			if(pBlockData != nullptr)
-			{
-				for(int i = 0; i < nObjects; i++)
-				{
-					if(pBlockData != nullptr)
-					{
-						CObjects* block = new CObjects;
-						int nPosX = 0;
-						int nPosY = 0;
-						int nWidth = 0;
-						int nHeight = 0;
-						pBlockData->Attribute("PosX", &nPosX);
-						pBlockData->Attribute("PosY", &nPosY);
-						pBlockData->Attribute("Width",&nWidth);
-						pBlockData->Attribute("Height",&nHeight);
 
-						block->SetPosX(float(nPosX));
-						block->SetPosY(float(nPosY));
-						block->SetHeight(nHeight);
-						block->SetWidth(nWidth);
-						Worldtemp->AddObject(block, 2);
-						block->Release();
-						pBlockData = pBlockData->NextSiblingElement();
-					}
+				Worldtemp->AddLayers(tempLayer);
+				pLoad = pLoad->NextSiblingElement();
+			}
+		}
+		pLoad = pRoot->FirstChildElement("Block_Data");
+		int nObjects = 0;
+		pLoad->Attribute("Total",&nObjects);
+		TiXmlElement* pBlockData = pLoad->FirstChildElement("Block");
+		if(pBlockData != nullptr)
+		{
+			for(int i = 0; i < nObjects; i++)
+			{
+				if(pBlockData != nullptr)
+				{
+					CObjects* block = new CObjects;
+					int nPosX = 0;
+					int nPosY = 0;
+					int nWidth = 0;
+					int nHeight = 0;
+					pBlockData->Attribute("PosX", &nPosX);
+					pBlockData->Attribute("PosY", &nPosY);
+					pBlockData->Attribute("Width",&nWidth);
+					pBlockData->Attribute("Height",&nHeight);
+
+					block->SetPosX(float(nPosX));
+					block->SetPosY(float(nPosY));
+					block->SetHeight(nHeight);
+					block->SetWidth(nWidth);
+					Worldtemp->AddObject(block, 2);
+					block->Release();
+					pBlockData = pBlockData->NextSiblingElement();
 				}
 			}
 		}
+	}
 
-		m_mWorldManager[szInput] = Worldtemp;
-		m_sCurrWorld = szInput;
-
-	}while(FindNextFile(hFile, &fileSearch));
+	m_mWorldManager[szFileName] = Worldtemp;
+	m_sCurrWorld = szFileName;
 }
 
 CUnits* CGamePlayState::GetPlayerUnit()
@@ -808,11 +734,13 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 {
 	if(m_sCurrWorld == szNewWorld + ".xml" || szNewWorld == "")
 		return;
+
 	m_pPlayer->SetZone(szNewWorld);
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 	m_mWorldManager[m_sCurrWorld]->ActivateNPCs();
 	m_mWorldManager[m_sCurrWorld]->ClearNPCList();
 
+	LoadWorld(szNewWorld + ".xml");
 	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld + ".xml";
 
@@ -1153,8 +1081,10 @@ CUnits* CGamePlayState::LoadUnit(string szFileName)
 			{
 				if(pItems != nullptr)
 				{
-
-
+					int nDropChance = 0;
+					string szItemName = pItems->Attribute("Name");
+					pItems->Attribute("Chance", &nDropChance);
+					pTempUnit->AddConsumableItem(m_mItemManager[szItemName].Item,1,nDropChance * 0.01f);
 				}
 				pItems = pItems->NextSiblingElement("Item");
 			}

@@ -60,6 +60,13 @@ void CProfileMenuState::Activate()
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
 	m_fPosY = 172.0f;
+
+	if(CMainMenuState::GetInstance()->GetLeftMenuState())
+	{
+		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(CMainMenuState::GetInstance()->GetBackgroundMusic(), true);
+		CMainMenuState::GetInstance()->SetLeftMenuState(false);
+	}
 }
 
 void CProfileMenuState::Sleep()
@@ -75,10 +82,19 @@ void CProfileMenuState::Sleep()
 	SetCursorIMG(-1);
 
 	for(unsigned int i = 0; i < m_vCharacterList.size(); i++)
+	{
 		m_vCharacterList[i]->Release();
+		m_vCharacterList[i] = nullptr;
+	}
 
 	m_vCharacterList.clear();
 	m_vWorldData.clear();
+
+	if(CMainMenuState::GetInstance()->GetLeftMenuState())
+	{
+		if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
+			CSGD_XAudio2::GetInstance()->MusicStopSong(CMainMenuState::GetInstance()->GetBackgroundMusic());
+	}
 }
 
 bool CProfileMenuState::Input()
@@ -119,133 +135,127 @@ bool CProfileMenuState::Input()
 			case 1:
 				if(m_eCurrState == PS_DELETE)
 				{
-					m_vCharacterList[0]->Release();
-					m_vCharacterList[0] = nullptr;
-					m_vCharacterList[0] = CreatePlayer();
-					m_vCharacterList[0]->GetUnit()->SetName("Empty");
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-					SaveGame("Player1.xml");
-					m_vWorldData[0].clear();
+					if(m_vCharacterList[0]->GetUnit()->GetName() != "Empty")
+					{
+						m_vCharacterList[0]->Release();
+						m_vCharacterList[0] = nullptr;
+						m_vCharacterList[0] = CreatePlayer();
+						m_vCharacterList[0]->GetUnit()->SetName("Empty");
+						m_vWorldData[0].clear();
+						SaveGame("Player1.xml");
+						m_eCurrState = PS_SELECT;
+					}
 
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					m_vCharacterList[0]->Release();
-					m_vCharacterList[0] = nullptr;
-					m_vCharacterList[0] = CreatePlayer();
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-					SaveGame("Player1.xml");
-					m_vWorldData[0].clear();
+					if(m_vCharacterList[0]->GetUnit()->GetName() == "Empty")
+					{
+						m_vCharacterList[0]->Release();
+						m_vCharacterList[0] = nullptr;
+						m_vCharacterList[0] = CreatePlayer();
+						m_vWorldData[0].clear();
+						SaveGame("Player1.xml");
+						m_eCurrState = PS_SELECT;
+					}
 
 				}
 				else
 				{
-					if(m_vCharacterList[0]->GetUnit()->GetName() == "Empty")
-					{
-						m_vCharacterList[0]->GetUnit()->SetName("Arin");
-						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
-						SaveGame("Player1.xml");
-					}
-					else
+					if(m_vCharacterList[0]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[0]->GetZone() + ".xml";
 						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 						for(unsigned int i = 0; i < m_vWorldData[0].size();i++)
 							pWorld->AddClear(m_vWorldData[0][i]);
+						CMainMenuState::GetInstance()->SetLeftMenuState(true);
+						CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 					}
-					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
-				m_eCurrState = PS_SELECT;
 
 				break;
 			case 2:
 				if(m_eCurrState == PS_DELETE)
 				{
-					m_vCharacterList[1]->Release();
-					m_vCharacterList[1] = nullptr;
-					m_vCharacterList[1] = CreatePlayer();
-					m_vCharacterList[1]->GetUnit()->SetName("Empty");
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-					SaveGame("Player2.xml");
-					m_vWorldData[1].clear();
-					m_eCurrState = PS_SELECT;
+					if(m_vCharacterList[1]->GetUnit()->GetName() != "Empty")
+					{
+						m_vCharacterList[1]->Release();
+						m_vCharacterList[1] = nullptr;
+						m_vCharacterList[1] = CreatePlayer();
+						m_vCharacterList[1]->GetUnit()->SetName("Empty");
+						m_vWorldData[1].clear();
+						SaveGame("Player2.xml");
+						m_eCurrState = PS_SELECT;
+					}
 
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					m_vCharacterList[1]->Release();
-					m_vCharacterList[1] = nullptr;
-					m_vCharacterList[1] = CreatePlayer();
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-					SaveGame("Player2.xml");
-					m_vWorldData[1].clear();
+					if(m_vCharacterList[1]->GetUnit()->GetName() == "Empty")
+					{
+						m_vCharacterList[1]->Release();
+						m_vCharacterList[1] = nullptr;
+						m_vCharacterList[1] = CreatePlayer();
+						m_vWorldData[1].clear();
+						SaveGame("Player2.xml");
+						m_eCurrState = PS_SELECT;
+					}
 
 				}
 				else
 				{
-					if(m_vCharacterList[1]->GetUnit()->GetName() == "Empty")
-					{
-						m_vCharacterList[1]->GetUnit()->SetName("Arin");
-						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
-						SaveGame("Player2.xml");
-
-					}
-					else
+					if(m_vCharacterList[1]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[1]->GetZone() + ".xml";
 						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 						for(unsigned int i = 0; i < m_vWorldData[1].size();i++)
 							pWorld->AddClear(m_vWorldData[1][i]);
+						CMainMenuState::GetInstance()->SetLeftMenuState(true);
+						CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 					}
-					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
-
 				}
-				m_eCurrState = PS_SELECT;
-
 				break;
 			case 3:
 				if(m_eCurrState == PS_DELETE)
 				{
-					m_vCharacterList[2]->Release();
-					m_vCharacterList[2] = nullptr;
-					m_vCharacterList[2] = CreatePlayer();
-					m_vCharacterList[2]->GetUnit()->SetName("Empty");
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-					SaveGame("Player3.xml");
-					m_vWorldData[2].clear();
-
-					m_eCurrState = PS_SELECT;
+					if(m_vCharacterList[2]->GetUnit()->GetName() != "Empty")
+					{
+						m_vCharacterList[2]->Release();
+						m_vCharacterList[2] = nullptr;
+						m_vCharacterList[2] = CreatePlayer();
+						m_vCharacterList[2]->GetUnit()->SetName("Empty");
+						m_vWorldData[2].clear();
+						SaveGame("Player3.xml");
+						m_eCurrState = PS_SELECT;
+					}
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					m_vCharacterList[2];
-					m_vCharacterList[2] = CreatePlayer();
-					CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-					SaveGame("Player3.xml");
-					m_vWorldData[2].clear();
-
+					if(m_vCharacterList[2]->GetUnit()->GetName() == "Empty")
+					{
+						m_vCharacterList[2]->Release();
+						m_vCharacterList[2] = nullptr;
+						m_vCharacterList[2] = CreatePlayer();
+						m_vWorldData[2].clear();
+						SaveGame("Player3.xml");
+						m_eCurrState = PS_SELECT;
+					}
 				}
 				else
 				{
-					if(m_vCharacterList[2]->GetUnit()->GetName() == "Empty")
-					{
-						m_vCharacterList[2]->GetUnit()->SetName("Arin");
-						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-						SaveGame("Player3.xml");
-					}
-					else
+					if(m_vCharacterList[2]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[2]->GetZone() + ".xml";
 						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 						for(unsigned int i = 0; i < m_vWorldData[2].size();i++)
 							pWorld->AddClear(m_vWorldData[2][i]);
+						CMainMenuState::GetInstance()->SetLeftMenuState(true);
+						CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 					}
-					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 				}
-				m_eCurrState = PS_SELECT;
 				break;
 			case 4:
 				if(m_eCurrState != PS_DELETE)
@@ -385,7 +395,6 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("posY", 420);
 		pSlot->SetAttribute("Zone", "testing");
 		string szZone = "testing.xml";
-		CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 		pRoot->LinkEndChild(pSlot);
 		pRoot->LinkEndChild(pWorldData);
 
@@ -491,13 +500,16 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 		string szZone = pTemp->GetZone();
 		szZone += ".xml";
 		CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
-		vector<int>& vTemp = pWorld->GetClearedNpcs();
-		TiXmlElement* pNPCid;
-		for(unsigned int i = 0; i < vTemp.size(); i++)
+		if(pWorld != nullptr)
 		{
-			pNPCid = new TiXmlElement("NPC");
-			pNPCid->SetAttribute("ID",vTemp[i]);
-			pWorldData->LinkEndChild(pNPCid);
+			vector<int>& vTemp = pWorld->GetClearedNpcs();
+			TiXmlElement* pNPCid;
+			for(unsigned int i = 0; i < vTemp.size(); i++)
+			{
+				pNPCid = new TiXmlElement("NPC");
+				pNPCid->SetAttribute("ID",vTemp[i]);
+				pWorldData->LinkEndChild(pNPCid);
+			}
 		}
 
 	}

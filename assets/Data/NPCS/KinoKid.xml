@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Kid" Hostile="false" Units="0" File="KinoKid">
+  <Convo Text="Hi Mister! Welcome to Kino Village!" Event="" />
+</NPC>
