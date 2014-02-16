@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Sign1" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="255" posY="2" Width="33" Height="30" anchorX="15" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="33" Height="30" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign2" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="288" posY="2" Width="32" Height="30" anchorX="15" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="30" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign3" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="258" posY="32" Width="29" Height="32" anchorX="13" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="29" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign4" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="288" posY="33" Width="33" Height="31" anchorX="15" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="34" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign5" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="256" posY="65" Width="30" Height="32" anchorX="15" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="32" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign6" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="286" posY="64" Width="34" Height="33" anchorX="19" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="34" Height="33" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign7" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="259" posY="102" Width="27" Height="29" anchorX="14" anchorY="14" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="27" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Sign8" Frames="1" repeat="1" Texture="desert__s_tileset_by_sd_arius-d37vy2t.png">
+    <Frame_Data>
+      <Render posX="291" posY="101" Width="29" Height="28" anchorX="13" anchorY="16" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="29" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
