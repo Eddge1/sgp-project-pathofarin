@@ -46,7 +46,7 @@ void CMainMenuState::Activate(void)
 {
 	if(GetBackgroundMusic() == -1)
 	{
-		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_Test.xwm")));
+		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_MainMenu_Background.xwm")));
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	}
 

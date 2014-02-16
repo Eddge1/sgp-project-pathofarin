@@ -9,6 +9,12 @@ class CSplashScreen : public CGameStates
 	CSplashScreen& operator= ( const CSplashScreen& );
 	std::string m_szLoadStatus;
 	float m_fPercentDone;
+	int m_nLogoID;
+	float  m_fDisappear1;
+	float  m_fAppearDisappear;
+	float m_fDelay;
+	bool m_bFadeIn;
+	bool  m_bComplete;
 public:
 	static CSplashScreen* GetInstance( void );
 
