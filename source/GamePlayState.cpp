@@ -174,7 +174,7 @@ void CGamePlayState::Activate(void)
 			CChest* pChest = new CChest();
 			pChest->SetPosX(586);
 			pChest->SetPosY(128);
-			pChest->AddConsumableItem(m_mItemManager["Ether"].Item, 3);
+			pChest->AddConsumableItem(m_mItemManager["Titan-Potion"].Item, 3);
 			pChest->GetAnimInfo()->SetAnimation("Chest_Closed");
 			m_mWorldManager[m_sCurrWorld]->AddObject(pChest, 2);
 			pChest->Release();
