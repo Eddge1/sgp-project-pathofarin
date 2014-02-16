@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="Crystal_Mage_Idle" Frames="6" repeat="1" Texture="POA_Crystal_Mage.png">
+    <Frame_Data>
+      <Render posX="8" posY="14" Width="100" Height="127" anchorX="55" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="100" Height="127" />
+      <Render posX="137" posY="17" Width="103" Height="129" anchorX="56" anchorY="63" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="103" Height="129" />
+      <Render posX="260" posY="17" Width="128" Height="124" anchorX="63" anchorY="64" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="129" Height="124" />
+      <Render posX="1" posY="178" Width="127" Height="128" anchorX="62" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="128" Height="128" />
+      <Render posX="149" posY="178" Width="105" Height="126" anchorX="44" anchorY="66" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="105" Height="126" />
+      <Render posX="278" posY="184" Width="107" Height="120" anchorX="45" anchorY="59" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="107" Height="120" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

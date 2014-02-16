@@ -2,7 +2,9 @@
 <World Width="15" Height="15" Layers="3" TileWidth="64" TileHeight="64" Image="POA_Tiles.png" Transparency="-16777216">
   <Layer ID="0" Width="15" Height="15" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
-      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="1">
+        <Waypoint X="608" Y="224" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1" posX="1" posY="0">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -164,7 +166,7 @@
       <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="54" posX="9" posY="3">
-      <Tile_Data xTileID="4" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="4" yTileID="4" EventID="Crystal_Mage" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="55" posX="10" posY="3">
       <Tile_Data xTileID="5" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
