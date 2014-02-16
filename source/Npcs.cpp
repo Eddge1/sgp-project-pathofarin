@@ -54,6 +54,8 @@ CEnemyUnit* CNpcs::GetUnit(int nI)
 
 void CNpcs::Update(float fElapsedTime)
 {
+	m_fLastX = GetPosX();
+	m_fLastY = GetPosY();
 	SetVelX(0);
 	SetVelY(0);
 	m_fDelayChat -= fElapsedTime;
@@ -166,46 +168,33 @@ void CNpcs::HandleCollision(CObjects* col)
 				}
 			}
 			RECT rTemp = col->GetCollisionRect();
-			int nMid = rTemp.top + (rTemp.bottom - rTemp.top) / 2;
-			if(GetCollisionRect().left > rTemp.right - 20 && GetCollisionRect().left < rTemp.right)
+			if(GetCollisionRect().left > rTemp.left && GetCollisionRect().left < rTemp.right)
 			{
-				SetPosX(GetPosX() +1);
-				SetVelX(0);
+				SetPosX(m_fLastX);
 			}
-			else if(GetCollisionRect().right < rTemp.left + 20 && GetCollisionRect().right > rTemp.left)
+			else if(GetCollisionRect().right < rTemp.right && GetCollisionRect().right > rTemp.left)
 			{
-				SetPosX(GetPosX() -1);
-				SetVelX(0);
+				SetPosX(m_fLastX);
 			}
 			else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
 			{
-				if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
+				if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
 				{
-					if(GetVelY() > 0)
-					{
-						SetPosY(GetPosY() - 1);
-						SetVelY(0);
-					}
+					SetPosY(m_fLastY);
 				}
-				else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
+				else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
 				{
-					SetPosY(GetPosY() + 1);
-					SetVelY(0);
+					SetPosY(m_fLastY);
 				}
 			}
-			else if(GetCollisionRect().bottom < rTemp.top + 20 && GetCollisionRect().bottom > rTemp.top)
-			{
-				if(GetVelY() > 0)
-				{
-					SetPosY(GetPosY() - 1);
-					SetVelY(0);
-				}
-			}
-			else if(GetCollisionRect().top > rTemp.bottom - 20 && GetCollisionRect().top < rTemp.bottom)
-			{
-				SetPosY(GetPosY() + 1);
 
-				SetVelY(0);
+			if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
+			{
+				SetPosY(m_fLastY);
+			}
+			else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
+			{
+				SetPosY(m_fLastY);
 			}
 		}
 	}
