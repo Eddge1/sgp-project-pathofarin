@@ -93,6 +93,12 @@ void CGamePlayState::Activate(void)
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Armor of the Ghost Wolf"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Robes of the Ancient One"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Vestments of the Savage tribes"].Item, 1);
+			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
+			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
+			{
+				CMainMenuState::GetInstance()->SetLeftMenuState(true);
+				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
+			}
 		}
 		break;
 	case CGamePlayState::GP_MENU:
@@ -124,13 +130,6 @@ void CGamePlayState::Activate(void)
 			m_mItemManager["Ether"].Item = CreatePotion("Ether");
 			m_mItemManager["Hi-Ether"].Item = CreatePotion("Hi-Ether");
 			m_mItemManager["Titan-Ether"].Item = CreatePotion("Titan-Ether");
-
-			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
-			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
-			{
-				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
-
-			}
 
 			LoadWorld("Testing.xml");
 
