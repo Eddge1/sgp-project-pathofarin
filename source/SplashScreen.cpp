@@ -53,6 +53,8 @@ void CSplashScreen::Sleep( void )
 }
 void CSplashScreen::Update( float fElapsedTime )
 {
+	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+		m_bComplete = true;
 	m_fPercentDone = 1.0f;
 	if(m_fDisappear1 > 0)
 		m_fDisappear1 -= 0.5f*fElapsedTime;

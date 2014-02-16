@@ -167,8 +167,8 @@ bool CProfileMenuState::Input()
 					if(m_vCharacterList[0]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[0]->GetZone() + ".xml";
-						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						for(unsigned int i = 0; i < m_vWorldData[0].size();i++)
 							pWorld->AddClear(m_vWorldData[0][i]);
 						CMainMenuState::GetInstance()->SetLeftMenuState(true);
