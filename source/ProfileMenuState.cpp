@@ -141,6 +141,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[0] = nullptr;
 						m_vCharacterList[0] = CreatePlayer();
 						m_vCharacterList[0]->GetUnit()->SetName("Empty");
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 						m_vWorldData[0].clear();
 						SaveGame("Player1.xml");
 						m_eCurrState = PS_SELECT;
@@ -154,6 +155,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[0]->Release();
 						m_vCharacterList[0] = nullptr;
 						m_vCharacterList[0] = CreatePlayer();
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 						m_vWorldData[0].clear();
 						SaveGame("Player1.xml");
 						m_eCurrState = PS_SELECT;
@@ -184,6 +186,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[1] = nullptr;
 						m_vCharacterList[1] = CreatePlayer();
 						m_vCharacterList[1]->GetUnit()->SetName("Empty");
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 						m_vWorldData[1].clear();
 						SaveGame("Player2.xml");
 						m_eCurrState = PS_SELECT;
@@ -198,6 +201,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[1] = nullptr;
 						m_vCharacterList[1] = CreatePlayer();
 						m_vWorldData[1].clear();
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 						SaveGame("Player2.xml");
 						m_eCurrState = PS_SELECT;
 					}
@@ -225,6 +229,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[2]->Release();
 						m_vCharacterList[2] = nullptr;
 						m_vCharacterList[2] = CreatePlayer();
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 						m_vCharacterList[2]->GetUnit()->SetName("Empty");
 						m_vWorldData[2].clear();
 						SaveGame("Player3.xml");
@@ -238,6 +243,7 @@ bool CProfileMenuState::Input()
 						m_vCharacterList[2]->Release();
 						m_vCharacterList[2] = nullptr;
 						m_vCharacterList[2] = CreatePlayer();
+						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
 						m_vWorldData[2].clear();
 						SaveGame("Player3.xml");
 						m_eCurrState = PS_SELECT;
