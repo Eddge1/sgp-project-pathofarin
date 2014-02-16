@@ -120,12 +120,12 @@ bool CBattleState::Input(void)
 			{
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
-					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) == true )
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) )
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
 					}
-					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) == true )
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetPreviousTarget();
@@ -449,8 +449,8 @@ void CBattleState::Battle(float fElapsedTime)
 					{
 						if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 						{
-							string szName = m_vBattleUnits[m_nTurn]->GetName();
-							szName += " defeated you by dropping your health to 0.";
+							string szName = m_vBattleUnits[m_nTurn - 1]->GetName();
+							szName += " defeated you by bashing your face in.";
 							CGameOverState::GetInstance()->SetMessage(szName);
 							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
 							m_eCurrentPhase = BP_END;

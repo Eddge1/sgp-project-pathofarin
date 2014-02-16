@@ -83,14 +83,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 			{
 				if(m_bInSubMenu)
 				{
-					if(pDI->KeyPressed(DIK_W))
+					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect--;
 						if(m_nSkillSelect < 0)
 							m_nSkillSelect = (int)m_vCommands[m_nMenuSelect]->GetCommands()->size() - 1;
 					}
-					else if(pDI->KeyPressed(DIK_S))
+					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect++;
@@ -100,14 +100,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 				}
 				else
 				{
-					if(pDI->KeyPressed(DIK_W))
+					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect--;
 						if(m_nMenuSelect < 0)
 							m_nMenuSelect = (int)m_vCommands.size() - 1;
 					}
-					else if(pDI->KeyPressed(DIK_S))
+					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect++;
@@ -148,6 +148,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 					{
 						m_bInSubMenu = false;
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionBack);
+						m_nSkillSelect = 0;
 
 					}
 				}
@@ -216,6 +217,7 @@ void CPlayerUnit::EndTurn()
 	{
 		m_vCommands[m_nMenuSelect]->GetMiniGame()->ResetSkill();
 	}
+	m_nSkillSelect = 0;
 	SetTurn(false);
 	m_bSkillSelected = false;
 	m_bInSubMenu = false;

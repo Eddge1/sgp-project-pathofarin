@@ -19,6 +19,8 @@ class CMiniGames : public IListener
 	bool m_bTutorial;
 	CProjectile* m_pSkill;
 	bool m_bAOE;
+	enum MiniType {MG_OFFENSIVE, MG_DEFENSIVE};
+	MiniType m_eType;
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
 	CUnits* GetOwner(void) { return m_pMaster; }
@@ -31,6 +33,9 @@ public:
 	virtual void SetChances( int nAttempts ) {m_nChances = nAttempts;}
 	virtual void SetCost ( int nAmount ) {m_nCost = nAmount;}
 	virtual void DoAttack() {};
+
+	virtual void SetType(MiniType eType) {m_eType = eType;}
+	MiniType GetType() const {return m_eType;}
 
 	void SetSkill(CProjectile* pSkill) {m_pSkill = pSkill;}
 	CProjectile* GetSkill() const {return m_pSkill;}

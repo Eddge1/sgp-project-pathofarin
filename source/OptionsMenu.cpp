@@ -81,10 +81,10 @@ void COptionsMenu::Update( float fElapsedTime )
 
 void COptionsMenu::Render( void )
 {
-	RECT rLogo = {0,0,512,256};
-	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	RECT clearscreenson = {0, 0, 800, 600};
 	CSGD_Direct3D::GetInstance()->DrawRect(clearscreenson, D3DCOLOR_XRGB(255,255,255));
+	RECT rLogo = {0,0,512,256};
+	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
 	std::wostringstream woss;
 	RECT rCursor = {0,0,16,32};
 	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Sound:\n\n\nGraphics:\n\nSave Cursor Location:\n\nReturn"), 136,250,0.75f,D3DCOLOR_XRGB(0,0,0));

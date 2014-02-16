@@ -14,6 +14,8 @@ public:
 	virtual void Render( void )	override;	
 	virtual bool Input( void )	override;	
 
+	bool GetLeftMenuState() const {return m_bLeftMenuState;}
+	void SetLeftMenuState(bool bState) {m_bLeftMenuState = bState;}
 private:
 
 	float m_fRotation;
@@ -25,6 +27,7 @@ private:
 	float m_fPosX;
 	float m_fPosY;
 	bool m_bLeft;
+	bool m_bLeftMenuState;
 	char m_cTrans;
 
 	CMainMenuState(void);

@@ -142,19 +142,19 @@ void CVictoryState::Update( float fElapsedTime )
 				CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 		}
 
-		if(pDI->KeyPressed(DIK_UPARROW))
+		if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W))
 		{
 			SetCursorSelection(GetCursorSelection() - 1);
 			if(GetCursorSelection() < 0)
 				SetCursorSelection(0);
 		}
-		else if(pDI->KeyPressed(DIK_DOWNARROW))
+		else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S))
 		{
 			SetCursorSelection(GetCursorSelection() + 1);
 			if(GetCursorSelection() > 2)
 				SetCursorSelection(2);
 		}
-		if(pDI->KeyPressed(DIK_LEFTARROW))
+		if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A))
 		{
 			if(m_pPlayer->GetStats() < m_nMaxStat)
 			{
@@ -187,7 +187,7 @@ void CVictoryState::Update( float fElapsedTime )
 				}
 			}
 		}
-		else if(pDI->KeyPressed(DIK_RIGHTARROW))
+		else if(pDI->KeyPressed(DIK_RIGHTARROW)  || pDI->KeyPressed(DIK_D))
 		{
 			if(m_pPlayer->GetStats() > 0)
 			{

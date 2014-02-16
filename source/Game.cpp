@@ -2,7 +2,9 @@
 #include <ctime>
 #include "GameStates.h"
 #include "MainMenuState.h"
+#include "SplashScreen.h"
 #include "..\TinyXML\tinyxml.h"
+#include "AnimationSystem.h"
 #include <string>
 #include <ShlObj.h>
 #include <sstream>
@@ -84,19 +86,20 @@ void CGame::Initialize( HWND hWnd, HINSTANCE hInstance,
 	m_pD3D->Initialize( hWnd, m_nScreenWidth, m_nScreenHeight, m_bIsWindowed, false );
 	m_pDI->Initialize( hWnd, hInstance, DI_KEYBOARD /*| DI_MOUSE*/ | DI_JOYSTICKS );
 	m_pTM->Initialize( m_pD3D->GetDirect3DDevice(),	m_pD3D->GetSprite() );
+
 	m_pXA->Initialize();
 
 	m_pFont = new CBitmapFont;
 	m_pFont->Initialize();
 
+	if(Load() == false)
+		CreateConfig();
+
 	// Start in the Main Menu state
-	ChangeState( CMainMenuState::GetInstance() );
+	ChangeState( CSplashScreen::GetInstance() );
 
 	// Store the current time
 	m_dwCurrTime	= GetTickCount();
-
-	if(Load() == false)
-		CreateConfig();
 
 }
 
@@ -150,6 +153,7 @@ bool CGame::Update( void )
 		m_bGamePaused = true;
 	else
 		m_bGamePaused = false;
+
 	DWORD dwNow = GetTickCount();
 	float fElapsedTime = (dwNow - m_dwCurrTime) / 1000.0f;
 	m_dwCurrTime = dwNow;

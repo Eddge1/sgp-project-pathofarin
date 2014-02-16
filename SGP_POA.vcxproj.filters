@@ -288,6 +288,9 @@
     <ClCompile Include="source\TriggerSpree.cpp">
       <Filter>MiniGames\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="source\SplashScreen.cpp">
+      <Filter>GameStates\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SGD Wrappers\CEvent.h">
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="source\Augment.h">
       <Filter>Items\h</Filter>
+    </ClInclude>
+    <ClInclude Include="source\SplashScreen.h">
+      <Filter>GameStates\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
