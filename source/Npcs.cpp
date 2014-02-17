@@ -153,7 +153,7 @@ void CNpcs::HandleCollision(CObjects* col)
 				}
 				else
 				{
-					if(m_fDelayChat < 0)
+					if(pTemp->GetInteraction())
 					{
 						wostringstream woss;
 						if(m_szConversation.size() > 0)

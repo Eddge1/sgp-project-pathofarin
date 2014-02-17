@@ -14,7 +14,7 @@
 #include <windows.h>	//	Needed for Windows Applications.
 #include <tchar.h>
 #include <vld.h>		//	Needed for Visual Leak Detector
-
+#include "../resource.h"
 #include "Game.h"
 
 const TCHAR*	g_szWINDOW_CLASS_NAME	= _T("Path of Arin - SGP");		//	Window Class Name.
@@ -203,8 +203,8 @@ BOOL RegisterWindowClass(HINSTANCE hInstance)
 	winClassEx.cbClsExtra		= 0;
 	winClassEx.cbWndExtra		= 0;
 	winClassEx.hInstance		= hInstance;
-	winClassEx.hIcon			= LoadIcon(NULL, IDI_APPLICATION);
-	winClassEx.hIconSm			= NULL;
+	winClassEx.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	winClassEx.hIconSm			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 	winClassEx.hCursor			= LoadCursor(NULL, IDC_ARROW);
 	winClassEx.hbrBackground	= (HBRUSH)GetStockObject(BLACK_BRUSH);
 	winClassEx.lpszMenuName		= NULL; 

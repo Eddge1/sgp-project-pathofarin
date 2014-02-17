@@ -65,11 +65,14 @@ void CChest::HandleCollision(CObjects* col)
 		{
 			if(!pTemp->GetIsWarping())
 			{
-				if(m_bCollided == false)
+				if(pTemp->GetInteraction())
 				{
-					m_bCollided = true;
-					this->GetAnimInfo()->SetAnimation("Chest_Opening");
-					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
+					if(m_bCollided == false)
+					{
+						m_bCollided = true;
+						this->GetAnimInfo()->SetAnimation("Chest_Opening");
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
+					}
 				}
 			}
 		}

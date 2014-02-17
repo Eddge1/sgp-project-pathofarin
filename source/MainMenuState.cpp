@@ -24,12 +24,15 @@ CMainMenuState* CMainMenuState::GetInstance( void )
 
 CMainMenuState::CMainMenuState(void)
 {
-	SetBackgroundImg(-1);
-	SetBackgroundMusic(-1);
-	SetSFXID(-1);
-	SetCursorIMG(-1);
-	m_nLogoID = -1;
-	m_nSelectionMenuID = -1;
+	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_background.png")));
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
+	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png"));
+	m_nSelectionMenuID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+	m_nWarriorID	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Warrior.png"));
+	m_nRangerID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Ranger.png"));
+	m_nMageID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Mage.png"));
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_MainMenu_Background.xwm")));
 	m_fRotation = 0.0f;
 	m_fPosY = 0.0f;
 	m_bLeft = false;
@@ -44,26 +47,13 @@ CMainMenuState::~CMainMenuState(void)
 
 void CMainMenuState::Activate(void)
 {
-	if(GetBackgroundMusic() == -1)
-	{
-		SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_MainMenu_Background.xwm")));
-		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
-	}
 
 	if(m_bLeftMenuState)
 	{
 		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
-			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 		m_bLeftMenuState = false;
 	}
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
-	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png"));
-	m_nSelectionMenuID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
-	m_nWarriorID	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Warrior.png"));
-	m_nRangerID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Ranger.png"));
-	m_nMageID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Mage.png"));
 
-	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	m_fRotation = 0.0f;
 	m_fPosX = 360.0f;
 	m_fPosY = 0.0f;
@@ -71,32 +61,7 @@ void CMainMenuState::Activate(void)
 
 void CMainMenuState::Sleep(void)
 {
-	if(GetSFXID() != -1)
-		CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
-	SetSFXID(-1);
-	if(m_nLogoID != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nLogoID);
-	m_nLogoID = -1;
-	if(m_nSelectionMenuID != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nSelectionMenuID);
-	m_nSelectionMenuID = -1;
-	if(m_nWarriorID != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nWarriorID);
-	if(m_nRangerID != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nRangerID);
-	if(m_nMageID != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(m_nMageID);
-	if(GetCursorIMG() != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-	if(m_bLeftMenuState)
-	{
-		if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
-			CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
-	}
-	SetCursorIMG(-1);
-	m_nWarriorID	= -1;
-	m_nRangerID		= -1;
-	m_nMageID		= -1;
+
 }
 
 void CMainMenuState::Update(float fElapsedTime)
@@ -125,7 +90,7 @@ void CMainMenuState::Render(void)
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
 	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Comic Sans MS");
 	RECT clearscreenson = {0, 0, 800, 600};
-	CSGD_Direct3D::GetInstance()->DrawRect(clearscreenson, D3DCOLOR_XRGB(255,255,255));
+	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	RECT rtemp = {36, 48, 220, 206};
 	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
@@ -133,12 +98,14 @@ void CMainMenuState::Render(void)
 	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
 	RECT rLogo = {0,0,512,256};
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
+	
+	
 	if(m_fPosY >= 172.0f)
 	{
 		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
 
 		RECT rTemp = {336, 408, 464,536};
-		pFont->Draw(_T("Play\nTutorial\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		pFont->Draw(_T("Play\nTutorial\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(255,255,255));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;
@@ -184,6 +151,11 @@ bool CMainMenuState::Input(void)
 				{
 					CTutorialBattle::GetInstance()->FromMenu(true);
 					m_bLeftMenuState = true;
+					if(m_bLeftMenuState)
+					{
+						if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
+							CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+					}
 					CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance()); // <-Should be going to profile state.
 					break;
 				}

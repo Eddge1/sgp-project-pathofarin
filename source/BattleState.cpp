@@ -39,7 +39,7 @@ CBattleState::CBattleState(void)
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
 	SetBackgroundImg(-1);
-	SetCursorIMG(-1);
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Cursor.png")));
 	SetSFXID(-1);
 	m_bLeveled = false;
 	m_fDelayTurn = 0.0f;
@@ -220,6 +220,7 @@ void CBattleState::Render(void)
 {
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D*			pD3D = CSGD_Direct3D::GetInstance();
+	RECT rCursor = {0,0,16,32};
 
 	//Temp drawing the UI
 	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
@@ -286,16 +287,37 @@ void CBattleState::Render(void)
 			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		int nImageID = -1;
+		CAnimation* pAnim; 
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -30),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -25),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 20) };
-			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+			if(m_vBattleUnits[i]->GetRender())
+			{
+				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
+				{
+					pAnim = CAnimationSystem::GetInstance()->GetAnimation(m_vBattleUnits[i]->GetAnimInfo()->GetCurrentAnimation());
+					nImageID = pAnim->GetImageID();
+				}
+				float PosX = m_vBattleUnits[i]->GetPosX(); 
+				float PosY = m_vBattleUnits[i]->GetPosY();
+				if (nImageID != -1)
+				{
+					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT || m_vBattleUnits[i]->GetName() == "Pathetic_Orc" || m_vBattleUnits[i]->GetName() == "Orc" || m_vBattleUnits[i]->GetName() == "Orc_Shaman" || m_vBattleUnits[i]->GetName() == "Orc_Leader" || m_vBattleUnits[i]->GetName() == "Ogre" || m_vBattleUnits[i]->GetName() == "Cave_Spider" || m_vBattleUnits[i]->GetName() == "Cultist")
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+					else
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+
+				}
+				nImageID = -1;
+			}
 		}
-		else
+
+
+		for(unsigned int i = 0; i < m_vSkills.size(); i++)
 		{
-			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -20),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -15),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 30) };
-			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+			CAnimationSystem::GetInstance()->Render(m_vSkills[i]->GetAnimInfo(), m_vSkills[i]->GetPosX(), m_vSkills[i]->GetPosY(), 1.0f, 1.0f, D3DCOLOR_XRGB(255,255,255));
 		}
+
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
@@ -305,7 +327,10 @@ void CBattleState::Render(void)
 				{
 					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
 					if(pTemp->GetCasting() == false)
-						pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+					{
+						RECT rTarget = m_vBattleUnits[m_nTarget]->GetCollisionRectNoCam();
+						CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rTarget.right + 8), int((rTarget.top + rTarget.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5*D3DX_PI,D3DCOLOR_XRGB(255,0,0));
+					}
 					if(pTemp->GetCasting())
 					{
 						if(pTemp->GetInSubMenu())
@@ -351,38 +376,12 @@ void CBattleState::Render(void)
 
 			}
 		}
-		int nImageID = -1;
-		CAnimation* pAnim; 
-		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
-		{
-			if(m_vBattleUnits[i]->GetRender())
-			{
-				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
-				{
-					pAnim = CAnimationSystem::GetInstance()->GetAnimation(m_vBattleUnits[i]->GetAnimInfo()->GetCurrentAnimation());
-					nImageID = pAnim->GetImageID();
-				}
-				float PosX = m_vBattleUnits[i]->GetPosX(); 
-				float PosY = m_vBattleUnits[i]->GetPosY();
-				if (nImageID != -1)
-				{
-					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT || m_vBattleUnits[i]->GetName() == "Pathetic_Orc" || m_vBattleUnits[i]->GetName() == "Orc" || m_vBattleUnits[i]->GetName() == "Orc_Shaman" || m_vBattleUnits[i]->GetName() == "Orc_Leader" || m_vBattleUnits[i]->GetName() == "Ogre" || m_vBattleUnits[i]->GetName() == "Cave_Spider" || m_vBattleUnits[i]->GetName() == "Cultist")
-						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
-					else
-						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
 
-				}
-				nImageID = -1;
-			}
-		}
 
 		for(int i = 0; i < (int)m_vText.size(); i++)
 			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
 
-		for(unsigned int i = 0; i < m_vSkills.size(); i++)
-		{
-			CAnimationSystem::GetInstance()->Render(m_vSkills[i]->GetAnimInfo(), m_vSkills[i]->GetPosX(), m_vSkills[i]->GetPosY(), 1.0f, 1.0f, D3DCOLOR_XRGB(255,255,255));
-		}
+
 
 
 		if(m_bVictory)
@@ -396,6 +395,17 @@ void CBattleState::Render(void)
 			woss.str(_T(""));
 			woss << "Defeated!";
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
+		}
+
+		RECT rPTemp = m_vBattleUnits[m_nTurn]->GetCollisionRectNoCam();
+
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		{
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.right + 8), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5*D3DX_PI,D3DCOLOR_XRGB(255,255,255));
+		}
+		else
+		{
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.left - 32), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,D3DX_PI / 2,D3DCOLOR_XRGB(255,255,255));
 		}
 	}
 }
@@ -649,7 +659,7 @@ void CBattleState::SetSender(CObjects* pSender)
 		m_pSender->AddRef();
 }
 
-void CBattleState::SetPlayer(CUnits* pPlayer)
+void CBattleState::SetPlayer(CPlayerUnit* pPlayer)
 {
 	if(m_pPlayerUnit != nullptr)
 		m_pPlayerUnit->Release();

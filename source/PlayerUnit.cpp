@@ -123,6 +123,8 @@ void CPlayerUnit::Update(float fElapsedTime)
 						if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost())
 						{
 							m_bSkillSelected = true;
+							if(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetAOE() == true || m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->DamageSkill() == false)
+								m_bCasting = true;
 						}
 
 					}
@@ -132,10 +134,9 @@ void CPlayerUnit::Update(float fElapsedTime)
 						{
 							if(GetAbilityPoints() >= m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost())
 							{
-								if(m_nMenuSelect == 2)
-									m_bCasting = true;
-
 								m_bSkillSelected = true;
+								if(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetAOE() || m_vCommands[m_nMenuSelect]->GetName() == "Items")
+									m_bCasting = true;
 							}
 						}
 						else

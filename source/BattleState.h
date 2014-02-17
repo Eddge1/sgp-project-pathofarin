@@ -50,7 +50,7 @@ public:
 	unsigned int GetTotalUnits() {return m_vBattleUnits.size();}
 
 	void SetSender(CObjects* pSender);
-	void SetPlayer(CUnits* pPlayer);
+	void SetPlayer(CPlayerUnit* pPlayer);
 	void SetItems(CUnits* pDead);
 	void ClearItems();
 	map<string,InventoryItems>* GetItems() {return &m_vItems;}
@@ -62,7 +62,7 @@ private:
 
 	vector<CUnits*> m_vBattleUnits;
 	CObjects* m_pSender;
-	CUnits* m_pPlayerUnit;
+	CPlayerUnit* m_pPlayerUnit;
 
 	PBattlephase m_eCurrentPhase;
 

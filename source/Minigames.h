@@ -21,6 +21,8 @@ class CMiniGames : public IListener
 	bool m_bAOE;
 	enum MiniType {MG_OFFENSIVE, MG_DEFENSIVE};
 	MiniType m_eType;
+	bool m_bDamage;
+
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
 	CUnits* GetOwner(void) { return m_pMaster; }
@@ -43,6 +45,9 @@ public:
 	bool GetTutorial ( ) const{return m_bTutorial;}
 	void SetAOE (bool bAOE) {m_bAOE = bAOE;}
 	bool GetAOE ( ) const{return m_bAOE;}
+
+	void SetDamageSkill(bool bValue) {m_bDamage = bValue;}
+	bool DamageSkill(void) {return m_bDamage;}
 
 	void PlaySuccess()  {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSFXID);}
 	void PlayCrit() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCriticalSFXID);}

@@ -45,3 +45,16 @@ RECT CEntity::GetCollisionRect()
 
 	return rTemp;
 }
+
+RECT CEntity::GetCollisionRectNoCam()
+{
+	CAnimation* pTemp = CAnimationSystem::GetInstance()->GetAnimation(GetAnimInfo()->GetCurrentAnimation());
+	CFrame* pFrame = pTemp->GetIndividualFrame(GetAnimInfo()->GetCurrentFrame());
+	RECT rTemp = pFrame->GetCollisionRect();
+	rTemp.left += long(GetPosX());
+	rTemp.right += long(GetPosX());
+	rTemp.top += long(GetPosY());
+	rTemp.bottom += long(GetPosY());
+
+	return rTemp;
+}

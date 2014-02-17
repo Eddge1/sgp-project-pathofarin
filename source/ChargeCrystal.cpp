@@ -6,6 +6,7 @@
 #include "TutorialBattle.h"
 #include "GamePlayState.h"
 #include "Buff.h"
+#include "PlayerUnit.h"
 
 CChargeCrystal::CChargeCrystal(void)
 {

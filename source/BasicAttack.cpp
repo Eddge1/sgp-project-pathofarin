@@ -48,7 +48,7 @@ void CBasicAttack::DoAttack(void)
 		CUnits* tempP;
 
 		if(!GetTutorial())
-			tempP = CGamePlayState::GetInstance()->GetPlayerUnit();
+			tempP = reinterpret_cast<CUnits*>(CGamePlayState::GetInstance()->GetPlayerUnit());
 		else
 			tempP = reinterpret_cast<CUnits*>(CTutorialBattle::GetInstance()->GetPlayerUnit());
 

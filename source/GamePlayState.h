@@ -50,7 +50,7 @@ public:
 	virtual void Render( void )	override;					// render entities
 
 	void SetPlayer(CPlayer* pPlayer);
-	CUnits* GetPlayerUnit();
+	CPlayerUnit* GetPlayerUnit();
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 	void TransitionWorld(std::string szNewWorld);
 
@@ -72,7 +72,7 @@ public:
 	CAugment* CreateAugment(string Type, float Effect);
 	CArmor* CreateArmor(string Name, float Hp, float Attk, float Speed);
 	CWeapon* CreateWeapon(string Name, int Attack);
-
+	
 
 private:
 
@@ -103,6 +103,8 @@ private:
 	CRenderManager*			m_pRM;
 	CMiniGames				m_temp;
 
+	bool m_bDialogue;
+
 	// Game Entities
 
 	CPlayer* m_pPlayer;
@@ -116,9 +118,12 @@ private:
 	bool bisPaused;
 	int m_nCursor;
 	int m_nConversationID;
+	int m_nSaveSelection;
 	float m_fFireBallTimer;
 	float m_fGameText;
 	float m_fGameEndTimer;
+	bool m_bSaveGameStatus;
+	bool m_bSaveSuccess;
 	GamePhase m_eCurrPhase;
 };
 
