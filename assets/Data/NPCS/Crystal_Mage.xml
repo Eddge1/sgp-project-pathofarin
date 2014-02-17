@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Crystal_Mage" Hostile="false" Units="0" File="Crystal_Mage">
+  <Convo Text="I AM SO MANY PEOPLE RIGHT NOW!" Event="" />
+</NPC>

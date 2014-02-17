@@ -299,7 +299,7 @@ void CEquipmentState::Render( void )
 		{
 			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 			{
-				woss << i->second.Item->GetName().c_str() << "\tx" << i->second.Owned;
+				woss << i->second.Item->GetName().c_str() << " x" << i->second.Owned;
 				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),632,112 + (nCount * 16),0.75f,D3DCOLOR_ARGB(255,200,200,0));
 				nCount++;
 			}
