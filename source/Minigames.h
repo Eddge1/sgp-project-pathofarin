@@ -21,6 +21,7 @@ class CMiniGames : public IListener
 	bool m_bAOE;
 	enum MiniType {MG_OFFENSIVE, MG_DEFENSIVE};
 	MiniType m_eType;
+
 public:
 	virtual void SetOwner(CUnits* pOwner) final;
 	CUnits* GetOwner(void) { return m_pMaster; }

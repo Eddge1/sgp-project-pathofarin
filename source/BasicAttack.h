@@ -9,7 +9,13 @@ class CBasicAttack : public CMiniGames
 
 	CUnits* m_pTarget;
 	bool bAttacked;
+	bool bhasPlayed;
+	
 	int m_nSound;
+	int m_nOrcLeader;
+	int m_nPathOrc;
+
+
 public:
 
 	virtual void Update(float fElapsedTime) override;
