@@ -1763,22 +1763,22 @@
       <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="587" posX="7" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="588" posX="8" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="589" posX="9" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="590" posX="10" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="591" posX="11" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="592" posX="12" posY="29">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="593" posX="13" posY="29">
       <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -7181,16 +7181,16 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="879" posX="9" posY="29">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="880" posX="10" posY="29">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="881" posX="11" posY="29">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="882" posX="12" posY="29">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="MountainCavePart1" EventType="WARP" WarpX="704" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="883" posX="13" posY="29">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

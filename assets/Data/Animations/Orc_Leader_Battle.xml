@@ -10,7 +10,7 @@
   </Animation_Info>
   <Animation_Info Name="Orc_Leader_Battle_Basic_Attack" Frames="3" repeat="0" Texture="Arcade - King of Dragons - Orcs.png">
     <Frame_Data>
-      <Render posX="14" posY="886" Width="88" Height="65" anchorX="41" anchorY="58" Duration="0.2" Event="NULL" />
+      <Render posX="14" posY="886" Width="88" Height="65" anchorX="41" anchorY="58" Duration="0.2" Event="START_AUDIO" />
       <ActiveCollision posX="1" posY="0" Width="89" Height="65" />
       <Render posX="105" posY="886" Width="62" Height="64" anchorX="11" anchorY="57" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="2" posY="0" Width="64" Height="64" />

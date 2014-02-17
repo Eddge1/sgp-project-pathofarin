@@ -14,7 +14,7 @@
   </Animation_Info>
   <Animation_Info Name="Orc_Battle_Basic_Attack" Frames="4" repeat="0" Texture="PC Computer - Heroes of Might and Magic III - Orc.png">
     <Frame_Data>
-      <Render posX="22" posY="469" Width="68" Height="83" anchorX="41" anchorY="48" Duration="0.1" Event="NULL" />
+      <Render posX="22" posY="469" Width="68" Height="83" anchorX="41" anchorY="48" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="68" Height="83" />
       <Render posX="117" posY="465" Width="84" Height="88" anchorX="57" anchorY="53" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="83" Height="88" />

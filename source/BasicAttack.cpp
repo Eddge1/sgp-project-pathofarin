@@ -8,9 +8,13 @@
 CBasicAttack::CBasicAttack(void)
 {
 	CSGD_EventSystem::GetInstance()->RegisterClient("BASIC_ATTACK", this);
-	m_nSound = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Enemies/POA_tempEnemey.wav"));
+	CSGD_EventSystem::GetInstance()->RegisterClient("START_AUDIO", this);
 
+	m_nSound = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Enemies/POA_tempEnemey.wav"));
+	m_nOrcLeader = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcSiegeLeader_Attack.wav"));
+	m_nPathOrc = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_PathOrc_Attack.wav"));
 	bAttacked = false;
+	bhasPlayed = false;
 }
 
 CBasicAttack::~CBasicAttack(void)
@@ -25,9 +29,9 @@ void CBasicAttack::DoAttack(void)
 		CUnits* tempP;
 
 		if(!GetTutorial())
-			 tempP = CBattleState::GetInstance()->GetCurrentTarget();
+			tempP = CBattleState::GetInstance()->GetCurrentTarget();
 		else
-			 tempP = CTutorialBattle::GetInstance()->GetCurrentTarget();
+			tempP = CTutorialBattle::GetInstance()->GetCurrentTarget();
 
 		if(GetOwner() != nullptr)
 		{
@@ -54,7 +58,8 @@ void CBasicAttack::DoAttack(void)
 
 		if(tempP != nullptr)
 		{
-			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSound);
+
+
 			int temp = GetOwner()->GetAttack();
 			tempP->ModifyHealth(temp, false);
 			GetOwner()->EndTurn();
@@ -73,17 +78,46 @@ void CBasicAttack::Update(float fElapsedTime)
 		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
 		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
 		bAttacked = true;
+		bhasPlayed = false;
 	}
 }
 void CBasicAttack::ResetSkill()
 {
 	bAttacked = false;
+	bhasPlayed = false;
 }
 void CBasicAttack::HandleEvent( const CEvent* pEvent )
 {
+
+
+	if (pEvent->GetEventID() == "START_AUDIO" && !bhasPlayed)
+	{
+		if(GetOwner() != nullptr)
+		{
+			if(GetOwner()->GetName() == "Orc_Leader")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+			else if(GetOwner()->GetName() == "Orc")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+			else if(GetOwner()->GetName() == "Orc_Shaman")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+			else if(GetOwner()->GetName() == "Bat")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+			else if(GetOwner()->GetName() == "Spider")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+			else if(GetOwner()->GetName() == "Pathetic_Orc")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nPathOrc);
+
+
+			bhasPlayed = true;
+		}
+
+	}
+
 	if (pEvent->GetEventID() == "BASIC_ATTACK" && bAttacked)
 	{
 		bAttacked = false;
 		DoAttack();
 	}
+
+
 }

@@ -20,6 +20,9 @@ CUnits::CUnits(void)
 	m_nAvailStats = 0;
 
 	m_bTutorial = false;
+
+
+	m_nOrcLeaderHurt = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcSiegeLeader_Hurt.wav"));
 }
 
 CUnits::~CUnits(void)
@@ -128,6 +131,10 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 				woss << "-" << nAmount << " HP";
 				CParticle* pPart = new CParticle();
 				//pPart->SetAudio();
+
+				if(this->GetName() == "Orc_Leader")
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeaderHurt);
+
 				pPart->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/General/POA_TakeDamage.wav")));
 				pPart->PlaySFX();
 				pPart->GetAnimInfo()->SetAnimation("Blood_Splatter");
@@ -240,13 +247,13 @@ void CUnits::GiveExperience		( int nAmount )
 			SetMaxHealth(CUnits::GetMaxHealth() + (nLevels * 30));
 			SetAttack(CUnits::GetAttack() + (nLevels * 3));
 			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 30));		
-			
+
 			break;
 		case UC_MAGE:
 			SetMaxHealth(CUnits::GetMaxHealth() + (nLevels * 20));
 			SetAttack(CUnits::GetAttack() + (nLevels * 3));
 			SetMaxAP(CUnits::GetMaxAP() + (nLevels * 40));			
-			
+
 			break;
 		default:
 			break;
