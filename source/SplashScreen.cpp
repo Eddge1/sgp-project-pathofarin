@@ -19,6 +19,8 @@ CSplashScreen::CSplashScreen(void)
 	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/Menus/PoA_DNAS_Logo.png")));
 	m_fPercentDone = 0.0f;
 	m_nLogoID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/Menus/PoA_Rizzle_Logo.png"));
+	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("Assets/Audio/Music/POA_MainMenu_Background.xwm")));
+
 	m_fDisappear1 = 1.0f;
 	m_fDelay = 1.0f;
 	m_fAppearDisappear = 0.0f;
@@ -34,6 +36,7 @@ CSplashScreen::~CSplashScreen(void)
 
 void CSplashScreen::Activate( void )
 {
+
 	m_fDisappear1 = 1.0f;
 	m_fAppearDisappear = 0.0f;
 	m_fDelay = 1.0f;
@@ -53,6 +56,9 @@ void CSplashScreen::Sleep( void )
 }
 void CSplashScreen::Update( float fElapsedTime )
 {
+	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()) == false)
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
+
 	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
 		m_bComplete = true;
 	m_fPercentDone = 1.0f;

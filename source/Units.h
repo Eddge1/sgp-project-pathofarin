@@ -109,6 +109,22 @@ public:
 		return l.GetSpeed() > r.GetSpeed();
 	}
 
+private:
+
+	int m_nOrcLeaderHurt;
+	int m_nPathOrc;
+	int m_nOrcShaman;
+	int m_nOrcBrute;
+	int m_nSnail;
+	int m_nSpider;
+	int m_nTree;
+	int m_nBandit;
+	int m_nSnake;
+	int m_nThornBiter;
+	int m_nTigerLily;
+	int m_nOgre;
+	int m_nValrion;
+
 
 };
 

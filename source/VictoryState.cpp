@@ -25,7 +25,7 @@ CVictoryState::CVictoryState(void)
 	m_bLeveled = false;
 
 	SetBackgroundMusic(-1);
-	SetBackgroundImg(-1);
+	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_VictoryScreen.png")));
 	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 	SetSFXID(-1);
 	m_fTimer = 0.1f;
@@ -227,42 +227,41 @@ void CVictoryState::Render( void )
 	CSGD_Direct3D* pD3d = CSGD_Direct3D::GetInstance();
 	RECT temp = {0, 0, 800, 600};
 	CSGD_Direct3D::GetInstance()->DrawRect(temp, D3DCOLOR_XRGB(255,255,255));
-
-	CGame::GetInstance()->GetFont("Arial")->Draw(_T("Victory!"), 336, 15, 1.0f, D3DCOLOR_XRGB(0,0,0));
+	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 	woss << "Level: " << m_pPlayer->GetLevel() << "\nExperience: " << m_pPlayer->GetExperience();
-	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 64, 0.75f, D3DCOLOR_XRGB(0,0,0));
+	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 32, 96, 0.75f, D3DCOLOR_XRGB(0,0,0));
 
 	float fPercent = m_nCurrentExp / (m_nNeeded * 1.0f);
 
 	if(m_bLeveled)
 	{
 		fPercent = m_pPlayer->GetExperience() /  (m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100.0f);
-		RECT rCurrent = {272, 128, 528, 141};
+		RECT rCurrent = {32, 145, 288, 165};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
-		rCurrent.right = 272 + long(256 * fPercent);
+		rCurrent.right = 32 + long(256 * fPercent);
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,255,255));
 
-		rCurrent.right = 528;
+		rCurrent.right = 288;
 		pD3d->DrawHollowRect(rCurrent, D3DCOLOR_XRGB(0,0,0), 3);
 
 		woss.str(_T(""));
 		woss << "HP: " << m_nCurrMaxHP << "  +" << m_pPlayer->GetMaxHealth() - m_nCurrMaxHP << "\nAP: " << m_nCurrMaxAP  << "  +" << m_pPlayer->GetMaxAP() - m_nCurrMaxAP << "\nAtk: " << m_nCurrAttack  << "  +" << m_pPlayer->GetAttack() - m_nCurrAttack << "\nStats: " << m_pPlayer->GetStats();
-		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 32, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		woss.str(_T(""));
 		woss << "\t" << m_nHealthMod << "\n\t" << m_nAPMod << "\n\t" << m_nAttackMod;
-		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 352, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 112, 172, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		RECT rTemp = {0,0,16,32};
 
-		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 432, 172 + (GetCursorSelection() * 23), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 192, 172 + (GetCursorSelection() * 23), 1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI/2, D3DCOLOR_XRGB(255,255,255));
 	}
 	else
 	{
 		fPercent = m_pPlayer->GetExperience() /  (m_nNeeded * 1.0f);
 
-		RECT rCurrent = {272, 128, 272 + long(256 * fPercent), 141};
+		RECT rCurrent = {32, 145, 32 + long(256 * fPercent), 165};
 		pD3d->DrawRect(rCurrent, D3DCOLOR_XRGB(50,50,255));
 
-		rCurrent.right = 528;
+		rCurrent.right = 288;
 		pD3d->DrawHollowRect(rCurrent, D3DCOLOR_XRGB(0,0,0), 3);
 	}
 
@@ -270,7 +269,7 @@ void CVictoryState::Render( void )
 
 	if(m_pItemDistro != nullptr)
 	{
-		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Items Obtained:"), 272, 300, 0.75f, D3DCOLOR_XRGB(0,0,0));
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Items Obtained:"), 432, 96, 0.75f, D3DCOLOR_XRGB(0,0,0));
 		if(m_pItemDistro->size() > 0)
 		{
 			int nCount = 0;
@@ -285,7 +284,7 @@ void CVictoryState::Render( void )
 						{
 							woss.str(_T(""));
 							woss << pTemp->GetName().c_str() << "  x" << i->second.Owned;
-							CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 272, 317 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
+							CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 432, 113 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
 						}
 					}
 				}
@@ -293,6 +292,6 @@ void CVictoryState::Render( void )
 			}
 		}
 		else
-			CGame::GetInstance()->GetFont("Arial")->Draw(_T("Nothing"), 272, 317, 0.75f, D3DCOLOR_XRGB(0,0,0));
+			CGame::GetInstance()->GetFont("Arial")->Draw(_T("Nothing"), 432, 113, 0.75f, D3DCOLOR_XRGB(0,0,0));
 	}
 }

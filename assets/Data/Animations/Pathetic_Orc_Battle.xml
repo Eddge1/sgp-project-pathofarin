@@ -14,7 +14,7 @@
   </Animation_Info>
   <Animation_Info Name="Pathetic_Orc_Battle_Basic_Attack" Frames="4" repeat="1" Texture="orc_regular_0.png">
     <Frame_Data>
-      <Render posX="1574" posY="551" Width="55" Height="65" anchorX="7" anchorY="57" Duration="0.1" Event="NULL" />
+      <Render posX="1574" posY="551" Width="55" Height="65" anchorX="7" anchorY="57" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="55" Height="65" />
       <Render posX="1704" posY="552" Width="61" Height="63" anchorX="7" anchorY="57" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="61" Height="63" />

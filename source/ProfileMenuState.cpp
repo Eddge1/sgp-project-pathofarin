@@ -25,10 +25,12 @@ CProfileMenuState::CProfileMenuState(void)
 	m_eCurrState = PS_SELECT;
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
-	SetBackgroundImg(-1);
+
+	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
+	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png")));
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
+
 	SetBackgroundMusic(-1);
-	SetSFXID(-1);
-	SetCursorIMG(-1);
 }
 
 CProfileMenuState::~CProfileMenuState(void)
@@ -53,9 +55,6 @@ void CProfileMenuState::Activate()
 	LoadSave("Player3.xml");
 
 	m_eCurrState = PS_SELECT;
-	SetSFXID(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/SFX/POA_CursorSFX.wav")));
-	SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_logo.png")));
-	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png")));
 
 	m_bLeft = false;
 	m_fOffSetX = 0.0f;
@@ -71,16 +70,6 @@ void CProfileMenuState::Activate()
 
 void CProfileMenuState::Sleep()
 {
-	if(GetBackgroundImg() != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(GetBackgroundImg());
-	if(GetCursorIMG() != -1)
-		CSGD_TextureManager::GetInstance()->UnloadTexture(GetCursorIMG());
-	if(GetSFXID() != -1)
-		CSGD_XAudio2::GetInstance()->SFXUnloadSound(GetSFXID());
-	SetSFXID(-1);
-	SetBackgroundImg(-1);
-	SetCursorIMG(-1);
-
 	for(unsigned int i = 0; i < m_vCharacterList.size(); i++)
 	{
 		m_vCharacterList[i]->Release();
@@ -90,11 +79,7 @@ void CProfileMenuState::Sleep()
 	m_vCharacterList.clear();
 	m_vWorldData.clear();
 
-	if(CMainMenuState::GetInstance()->GetLeftMenuState())
-	{
-		if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
-			CSGD_XAudio2::GetInstance()->MusicStopSong(CMainMenuState::GetInstance()->GetBackgroundMusic());
-	}
+
 }
 
 bool CProfileMenuState::Input()
@@ -104,7 +89,7 @@ bool CProfileMenuState::Input()
 	{
 		if(pDI->KeyPressed(DIK_ESCAPE))
 			CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
-		if(pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP))
+		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
 				SetCursorSelection(5);
@@ -113,7 +98,7 @@ bool CProfileMenuState::Input()
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN))
+		else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
 		{
 			if(GetCursorSelection() >= 5)
 				SetCursorSelection(0);
@@ -282,6 +267,12 @@ bool CProfileMenuState::Input()
 
 void CProfileMenuState::Update(float fElapsedTime )
 {
+	if(CMainMenuState::GetInstance()->GetLeftMenuState())
+	{
+		if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
+			CSGD_XAudio2::GetInstance()->MusicStopSong(CMainMenuState::GetInstance()->GetBackgroundMusic());
+	}
+
 	if(m_fPosY > 0)
 	{
 		m_fPosY -= 200 * fElapsedTime;
@@ -556,6 +547,7 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 	pTemp->SetAnimation("Warrior_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
+	tempM->SetCost(0);
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
 	tempC = new CCommands;
@@ -675,6 +667,8 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 	tempC = new CCommands;
 	CUseItem* tempL = new CUseItem;
+	tempL->SetDamageSkill(false);
+	tempL->SetCost(0);
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
 	tempC->SetIsGame(true);

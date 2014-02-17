@@ -17,6 +17,8 @@ public:
 
 	virtual void HandleEvent( const CEvent* pEvent ) override;
 	virtual RECT GetCollisionRect() final;
+	virtual RECT GetCollisionRectNoCam();
+
 
 
 };

@@ -52,8 +52,11 @@ CGamePlayState::CGamePlayState(void)
 
 	m_pPlayer = nullptr;
 	bisPaused = false;
+	m_bSaveGameStatus = false;
+	m_bSaveSuccess = false;
 
 	m_nCursor = 0;
+	m_nSaveSelection = 0;
 	m_fFireBallTimer = 0.0f;
 	m_eCurrPhase = GP_START;
 
@@ -161,7 +164,7 @@ void CGamePlayState::Activate(void)
 	default:
 		break;
 	}
-
+	m_bDialogue = false;
 
 }
 
@@ -229,28 +232,44 @@ bool CGamePlayState::Input(void)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9) || pDI->JoystickButtonPressed(2))
 	{
-		bisPaused = !bisPaused;
+		if(m_bSaveGameStatus && !m_bSaveSuccess)
+			m_bSaveGameStatus = false;
+		else if(m_bSaveSuccess)
+		{
+			m_bSaveGameStatus = false;
+			m_bSaveSuccess = false;
+		}
+		else
+			bisPaused = !bisPaused;
 		return true;
+
 	}
 	if(!bisPaused)
 	{
-		if(pDI->KeyPressed(DIK_M))
+		if(m_bDialogue)
 		{
-			m_eCurrPhase = GP_MENU;
-			CGame::GetInstance()->ChangeState(CEquipmentState::GetInstance());
+			if(pDI->GetInstance()->KeyPressed(DIK_RETURN))
+			{
+				m_pPlayer->SetInteraction(false);
+				m_bDialogue = false;
+				m_vShowOnScreen[0]->pOwner->Release();
+				m_vShowOnScreen[0]->pOwner = nullptr;
+				delete m_vShowOnScreen[0];
+				m_vShowOnScreen.clear();
+			}
 		}
 	}
-	else if(bisPaused)
+	else if(bisPaused && !m_bSaveGameStatus)
 	{
 		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
 			SetCursorSelection(GetCursorSelection() - 1);
 		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
 			SetCursorSelection(GetCursorSelection() + 1);
 
-		if(GetCursorSelection() > 2)
+		if(GetCursorSelection() > 3)
 			SetCursorSelection(0);
 		else if(GetCursorSelection() < 0)
-			SetCursorSelection(2);
+			SetCursorSelection(3);
 
 
 		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
@@ -265,12 +284,19 @@ bool CGamePlayState::Input(void)
 				break;
 			case 1:			// PLAY
 				{
-					CProfileMenuState::GetInstance()->SaveGame(m_pPlayer->GetName());
+					m_eCurrPhase = GP_MENU;
+					CGame::GetInstance()->ChangeState(CEquipmentState::GetInstance());
+					return true;
+				}
+				break;
+			case 2:			// PLAY
+				{
+					m_bSaveGameStatus = true;
 					return true;
 				}
 				break;
 
-			case 2:			
+			case 3:			
 				{
 					bisPaused = !bisPaused;
 					m_eCurrPhase = GP_END;
@@ -281,6 +307,52 @@ bool CGamePlayState::Input(void)
 				break;
 			}
 		}
+	}
+	else if(m_bSaveGameStatus && !m_bSaveSuccess)
+	{
+		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
+			m_nSaveSelection -= 1;
+		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
+			m_nSaveSelection += 1;
+
+		if(m_nSaveSelection > 1)
+			m_nSaveSelection = 0;
+		else if(m_nSaveSelection < 0)
+			m_nSaveSelection = 1;
+
+
+		if( pDI->KeyPressed( DIK_RETURN ) == true || pDI->JoystickButtonPressed(1))
+		{
+			switch( m_nSaveSelection )
+			{
+			case 0:			// PLAY
+				{
+					CProfileMenuState::GetInstance()->SaveGame(m_pPlayer->GetName());
+					m_bSaveSuccess = true;
+					return true;
+				}
+				break;
+			case 1:			// PLAY
+				{
+					m_bSaveGameStatus = false;
+					return true;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+
+
+	}
+	else if(m_bSaveSuccess)
+	{
+		if(pDI->KeyPressed(DIK_RETURN))
+		{
+			m_bSaveSuccess = false;
+			m_bSaveGameStatus = false;
+		}
+
 	}
 
 	return true;
@@ -300,38 +372,31 @@ void CGamePlayState::Update( float fElapsedTime )
 	}
 	if(bisPaused == false)
 	{
-		for(unsigned int i = 0; i < m_vShowOnScreen.size();)
+		if(!m_bDialogue)
 		{
-			m_vShowOnScreen[i]->m_fTimer -= fElapsedTime;
-			if(m_vShowOnScreen[i]->m_fTimer < 0)
+			for(unsigned int i = 0; i < m_vShowOnScreen.size();i++)
 			{
-				m_vShowOnScreen[i]->pOwner->Release();
-				m_vShowOnScreen[i]->pOwner = nullptr;
-				delete m_vShowOnScreen[i];
-				m_vShowOnScreen.erase(m_vShowOnScreen.begin() + i);
+				m_vShowOnScreen[i]->m_fTimer -= fElapsedTime;
+				if(m_vShowOnScreen[i]->m_fTimer < 0)
+				{
+					m_bDialogue = true;
+				}
 			}
-			else
-				i++;
+			WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
+			WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
+
+			if(WorldCamX < 0)
+				WorldCamX = 0;
+			else if(WorldCamX > m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800)
+				WorldCamX = m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800;
+
+			if(WorldCamY < 0)
+				WorldCamY = 0;
+			else if(WorldCamY > m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600)
+				WorldCamY = m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600;
+
+			m_mWorldManager[m_sCurrWorld]->Update(fElapsedTime);
 		}
-		WorldCamX = int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
-		WorldCamY = int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
-		if(WorldCamX < 0)
-			WorldCamX = 0;
-		else if(WorldCamX > m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800)
-			WorldCamX = m_mWorldManager[m_sCurrWorld]->GetWidth() * m_mWorldManager[m_sCurrWorld]->GetTileWidth() - 800;
-
-		if(WorldCamY < 0)
-			WorldCamY = 0;
-		else if(WorldCamY > m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600)
-			WorldCamY = m_mWorldManager[m_sCurrWorld]->GetHeight() * m_mWorldManager[m_sCurrWorld]->GetTileHeight() - 600;
-
-		m_fFireBallTimer += fElapsedTime;
-
-		m_mWorldManager[m_sCurrWorld]->Update(fElapsedTime);
-		m_pES->ProcessEvents();
-		m_temp.Update(fElapsedTime);
-
 		m_pES->ProcessEvents();
 	}
 }
@@ -350,30 +415,46 @@ void CGamePlayState::Render(void)
 	for(unsigned int i = 0; i < m_vShowOnScreen.size();i++)
 	{
 		woss << m_vShowOnScreen[i]->szText.str();
-		RECT rTemp = m_vShowOnScreen[i]->rPos;
-		rTemp.left += long(m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX);
-		rTemp.right += long(m_vShowOnScreen[i]->pOwner->GetPosX() - WorldCamX);
-		rTemp.top += long(m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY);
-		rTemp.bottom += long(m_vShowOnScreen[i]->pOwner->GetPosY() - WorldCamY);
-		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(186,0,0,0));
-		pD3D->DrawHollowRect(rTemp, D3DCOLOR_ARGB(255,255,0,0));
+		pD3D->DrawRect(m_vShowOnScreen[i]->rPos, D3DCOLOR_ARGB(186,0,0,0));
+		pD3D->DrawHollowRect(m_vShowOnScreen[i]->rPos, D3DCOLOR_ARGB(255,255,0,0));
 
-		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), rTemp.left + 4, rTemp.top + 4, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
+		CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), m_vShowOnScreen[i]->rPos.left + 4, m_vShowOnScreen[i]->rPos.top + 4, 0.8f, D3DCOLOR_XRGB(255, 255, 255));
 
 		woss.str(_T(""));
 	}
 
-	if(bisPaused)
+	if(bisPaused && !m_bSaveGameStatus)
 	{
 		RECT rTemp = {336, 236, 464,364};
 		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
 		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
-		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Resume\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Resume\nItems\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;
 		rTemp.bottom = 32;
 		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 262 + (GetCursorSelection() * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
+	}
+	else if(m_bSaveGameStatus && !m_bSaveSuccess)
+	{
+		RECT rTemp = {336, 236, 464,364};
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
+		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Save?\n\nYes\nNo"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+		rTemp.left = 0;
+		rTemp.top = 0;
+		rTemp.right = 16;
+		rTemp.bottom = 32;
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 304 + (m_nSaveSelection * 21),1.0f,1.0f,&rTemp,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
+	}
+	else if(m_bSaveSuccess)
+	{
+		RECT rTemp = {336, 236, 464,364};
+		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
+		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Success!"), 360,294, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+
+
 	}
 	woss.str(_T(""));
 }
@@ -755,9 +836,9 @@ void CGamePlayState::LoadWorld(string szFileName)
 	m_sCurrWorld = szFileName;
 }
 
-CUnits* CGamePlayState::GetPlayerUnit()
+CPlayerUnit* CGamePlayState::GetPlayerUnit()
 {
-	return m_pPlayer->GetUnit();
+	return reinterpret_cast<CPlayerUnit*>(m_pPlayer->GetUnit());
 }
 
 void CGamePlayState::TransitionWorld(std::string szNewWorld)
@@ -954,7 +1035,7 @@ void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstr
 
 	ftTemp->Color = dColor;
 	ftTemp->szText << szText.str();
-	ftTemp->m_fTimer = (szText.str().length() / 10.0f) + 1.0f;
+	ftTemp->m_fTimer = 0.1f;
 
 
 	m_vShowOnScreen.push_back(ftTemp);
