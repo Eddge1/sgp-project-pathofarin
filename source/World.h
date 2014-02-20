@@ -18,6 +18,7 @@ class CWorld : public IListener
 
 	int m_nTileWidth;
 	int m_nTileHeight;
+	int m_nMusic;
 
 	vector<CLayer*> m_vMyLayers;
 	vector<int> m_vClearNPC;
@@ -29,7 +30,9 @@ public:
 	void Update(float fElapsedTime);
 	void AddObject(CObjects* pObject, unsigned int nLayer);
 	void RemoveObject(CObjects* pObject);
+	void SetMusic(int nID) {m_nMusic = nID;}
 
+	int GetMusicID() const {return m_nMusic;}
 	int GetTileHeight( void) { return m_nTileHeight; }
 	void SetTileHeight(int t) { m_nTileHeight = t; }
 	int GetTileWidth( void) { return m_nTileWidth; }

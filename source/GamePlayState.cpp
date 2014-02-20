@@ -571,6 +571,18 @@ void CGamePlayState::LoadWorld(string szFileName)
 	pRoot->Attribute("Height", &layerHeight);
 	pRoot->Attribute("Width", &layerWidth);
 
+	string szMusic = "";
+
+	if(pRoot->Attribute("Music") != nullptr)
+	{
+		wostringstream woss;
+		szMusic = pRoot->Attribute("Music");
+		woss << "Assets/Audio/Music/" << szMusic.c_str();
+		Worldtemp->SetMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(woss.str().c_str()));
+	}
+
+
+
 	Worldtemp->SetHeight(layerHeight);
 	Worldtemp->SetWidth(layerWidth);
 	Worldtemp->SetTileHeight(tileHeight);
@@ -852,6 +864,8 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 	if(m_sCurrWorld == szNewWorld + ".xml" || szNewWorld == "")
 		return;
 
+	int nOldMusic = m_mWorldManager[m_sCurrWorld]->GetMusicID();
+	int nNewMusic = -1;
 	m_pPlayer->SetZone(szNewWorld);
 	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
 	m_mWorldManager[m_sCurrWorld]->ActivateNPCs();
@@ -860,6 +874,14 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 	LoadWorld(szNewWorld + ".xml");
 	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
 	m_sCurrWorld = szNewWorld + ".xml";
+
+	nNewMusic = m_mWorldManager[m_sCurrWorld]->GetMusicID();
+
+	if(nNewMusic != -1 && nOldMusic != -1 && nNewMusic != nOldMusic)
+	{
+		CSGD_XAudio2::GetInstance()->MusicStopSong(nOldMusic);
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(nNewMusic, true);
+	}
 
 	m_pPlayer->SetIsWarping(false);
 }

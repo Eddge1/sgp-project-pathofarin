@@ -10,6 +10,7 @@ CWorld::CWorld(void)
 {
 	m_pOM = new CObjectManager();
 	CSGD_EventSystem::GetInstance()->RegisterClient("INIT_BATTLE", this);
+	m_nMusic = -1;
 }
 
 CWorld::~CWorld(void)
