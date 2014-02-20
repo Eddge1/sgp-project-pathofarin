@@ -60,13 +60,13 @@ void CSteadyShot::Update(float fElapsedTime)
 	float fX = 0.0f;
 	float fY = 0.0f;
 
-	if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W)  )
+	if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W) || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP)  )
 		fY -= 100.0f * fElapsedTime;
-	else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) )
+	else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN)  )
 		fY += 100.0f * fElapsedTime;
-	if(pDI->KeyDown(DIK_LEFTARROW) || pDI->KeyDown(DIK_A) )
+	if(pDI->KeyDown(DIK_LEFTARROW) || pDI->KeyDown(DIK_A) || pDI->JoystickDPadDown(DIR_LEFT) || pDI->JoystickGetLStickDirDown(DIR_LEFT)  )
 		fX -= 100.0f * fElapsedTime;
-	else if(pDI->KeyDown(DIK_RIGHTARROW) || pDI->KeyDown(DIK_D) )
+	else if(pDI->KeyDown(DIK_RIGHTARROW) || pDI->KeyDown(DIK_D) || pDI->JoystickDPadDown(DIR_RIGHT) || pDI->JoystickGetLStickDirDown(DIR_RIGHT)  )
 		fX += 100.0f * fElapsedTime;
 
 	if(m_fCursorX < 400)
@@ -74,7 +74,7 @@ void CSteadyShot::Update(float fElapsedTime)
 	else
 		fX += 50.0f * fElapsedTime;
 
-	if(m_fCursorY < 200)
+	if(m_fCursorY < 300)
 		fY -= 50.0f * fElapsedTime;
 	else
 		fY += 50.0f * fElapsedTime;

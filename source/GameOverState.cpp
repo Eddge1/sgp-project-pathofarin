@@ -36,8 +36,7 @@ void CGameOverState::Activate(void)
 
 void CGameOverState::Sleep(void)
 {
-	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
-		CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
+
 
 	CProfileMenuState::GetInstance()->Sleep();
 	m_szGameOverMsg ="";
@@ -83,32 +82,36 @@ bool CGameOverState::Input(void)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 
-	if(pDI->KeyPressed(DIK_RETURN))
+	if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
 	{
 		switch(selection)
 		{
 		case 0:
 			{
 				CProfileMenuState::GetInstance()->ContinueGame(CProfileMenuState::GetInstance()->GetCursorSelection());
+				if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
+					CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
 				break;
 			}
 		case 1:
 			{
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+				if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
+					CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
 				break;
 			}
 		}
 	}
 
 
-	if(pDI->KeyPressed(DIK_UP) || pDI->KeyPressed(DIK_W))
+	if(pDI->KeyPressed(DIK_UP) || pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 	{
 		selection += 1;
 
 		if(selection > 1)
 			selection = 0;
 	}
-	else if(pDI->KeyPressed(DIK_DOWN) || pDI->KeyPressed(DIK_S))
+	else if(pDI->KeyPressed(DIK_DOWN) || pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 	{
 		selection -= 1;
 

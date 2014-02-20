@@ -63,7 +63,7 @@ bool CCreditState::Input( void )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 
-	if(pDI->KeyPressed(DIK_ESCAPE))
+	if(pDI->KeyPressed(DIK_ESCAPE)|| pDI->JoystickButtonPressed(2))
 		CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 
 	return true;

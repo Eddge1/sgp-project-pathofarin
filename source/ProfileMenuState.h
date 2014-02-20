@@ -12,7 +12,6 @@ class CProfileMenuState : public CGameStates
 	std::vector<CPlayer*> m_vCharacterList;
 	std::vector<std::vector<int>> m_vWorldData;
 
-
 public:
 
 	CProfileMenuState(void);
@@ -21,7 +20,11 @@ public:
 	static CProfileMenuState* GetInstance( void );
 	void SaveGame(std::string szFileName);
 
+	CPlayerUnit* CreateWarrior(void);
+	CPlayerUnit* CreateRanger(void);
+	CPlayerUnit* CreateMage(void);
 	CPlayerUnit* CreateTempPlayer(void);
+
 	CPlayer* CreatePlayer();
 
 

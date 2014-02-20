@@ -15,7 +15,6 @@
 #include "EquipmentState.h"
 #include "Game.h"
 #include "MainMenuState.h"
-#include "CharacterMenuState.h"
 #include "BattleState.h"
 #include "Npcs.h"
 #include "../TinyXML/tinyxml.h"
@@ -35,6 +34,7 @@
 #include "AIValrion.h"
 #include "EnemyUnit.h"
 #include "Augment.h"
+#include "TutorialBattle.h"
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -77,6 +77,12 @@ void CGamePlayState::Activate(void)
 {
 	switch (m_eCurrPhase)
 	{
+	case CGamePlayState::GP_INIT:
+		if(m_pPlayer->GetUnit()->GetClass() == UC_NONE)
+		{
+			m_eCurrPhase = GP_NAV;
+			CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance());
+		}
 	case CGamePlayState::GP_NAV:
 		if(m_pPlayer != nullptr)
 		{
@@ -85,7 +91,6 @@ void CGamePlayState::Activate(void)
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
 
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Potion"].Item, 2);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["HP Augment"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["AP Augment"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Atk Augment"].Item, 1);
@@ -96,6 +101,7 @@ void CGamePlayState::Activate(void)
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Armor of the Ghost Wolf"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Robes of the Ancient One"].Item, 1);
 			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Vestments of the Savage tribes"].Item, 1);
+
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
 			{
@@ -156,7 +162,7 @@ void CGamePlayState::Activate(void)
 
 
 
-			m_eCurrPhase = GP_NAV;
+			m_eCurrPhase = GP_INIT;
 		}
 		break;
 	case CGamePlayState::GP_END:
@@ -230,7 +236,7 @@ void CGamePlayState::Sleep(void)
 bool CGamePlayState::Input(void)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9) || pDI->JoystickButtonPressed(2))
+	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9))
 	{
 		if(m_bSaveGameStatus && !m_bSaveSuccess)
 			m_bSaveGameStatus = false;
@@ -248,7 +254,7 @@ bool CGamePlayState::Input(void)
 	{
 		if(m_bDialogue)
 		{
-			if(pDI->GetInstance()->KeyPressed(DIK_RETURN))
+			if(pDI->GetInstance()->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 			{
 				m_pPlayer->SetInteraction(false);
 				m_bDialogue = false;
@@ -347,7 +353,7 @@ bool CGamePlayState::Input(void)
 	}
 	else if(m_bSaveSuccess)
 	{
-		if(pDI->KeyPressed(DIK_RETURN))
+		if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
 		{
 			m_bSaveSuccess = false;
 			m_bSaveGameStatus = false;
