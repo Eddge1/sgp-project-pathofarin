@@ -1739,7 +1739,7 @@ namespace SGP_PoA_LevelEditor
         private void btnSound_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Data\\Levels");
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Audio\\Music");
             ofd.InitialDirectory = temp;
             ofd.Filter = "All Files|*.*";
             ofd.FilterIndex = 1;

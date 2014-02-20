@@ -81,7 +81,14 @@ void CGamePlayState::Activate(void)
 		if(m_pPlayer->GetUnit()->GetClass() == UC_NONE)
 		{
 			m_eCurrPhase = GP_NAV;
+			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
+			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
+			{
+				CMainMenuState::GetInstance()->SetLeftMenuState(true);
+				CSGD_XAudio2::GetInstance()->MusicStopSong(nTemp);
+			}
 			CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance());
+			return;
 		}
 	case CGamePlayState::GP_NAV:
 		if(m_pPlayer != nullptr)
@@ -112,6 +119,7 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_MENU:
 	case CGamePlayState::GP_BATTLE:
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
 		m_eCurrPhase = GP_NAV;
 		break;
 	case CGamePlayState::GP_START:
@@ -306,6 +314,8 @@ bool CGamePlayState::Input(void)
 				{
 					bisPaused = !bisPaused;
 					m_eCurrPhase = GP_END;
+					if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_mWorldManager[m_sCurrWorld]->GetMusicID()))
+						CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
 					CGame::GetInstance()->ChangeState( CMainMenuState::GetInstance() ); // Will return you to the main menu
 					SetCursorSelection(0);
 					return true;
@@ -470,6 +480,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	if(pEvent->GetEventID() == "INIT_BATTLE" && m_eCurrPhase != GP_END)
 	{
 		m_eCurrPhase = GP_BATTLE;
+		CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}
@@ -882,6 +893,8 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 		CSGD_XAudio2::GetInstance()->MusicStopSong(nOldMusic);
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(nNewMusic, true);
 	}
+	else if(nNewMusic != -1 && nOldMusic != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nNewMusic) == false)
+		CSGD_XAudio2::GetInstance()->MusicPlaySong(nNewMusic, true);
 
 	m_pPlayer->SetIsWarping(false);
 }
