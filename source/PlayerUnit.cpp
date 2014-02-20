@@ -57,7 +57,7 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 		std::wostringstream woss;
 		woss << "Attempt ";
 		if(!GetTutorial())
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss, 0.3f);
 		else
 			CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
 
@@ -83,14 +83,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 			{
 				if(m_bInSubMenu)
 				{
-					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
+					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect--;
 						if(m_nSkillSelect < 0)
 							m_nSkillSelect = (int)m_vCommands[m_nMenuSelect]->GetCommands()->size() - 1;
 					}
-					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
+					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nSkillSelect++;
@@ -100,14 +100,14 @@ void CPlayerUnit::Update(float fElapsedTime)
 				}
 				else
 				{
-					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
+					if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect--;
 						if(m_nMenuSelect < 0)
 							m_nMenuSelect = (int)m_vCommands.size() - 1;
 					}
-					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
+					else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						m_nMenuSelect++;
@@ -115,7 +115,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 							m_nMenuSelect = 0;
 					}
 				}
-				if(pDI->KeyPressed(DIK_RETURN))
+				if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 				{
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
 					if(m_bInSubMenu)
@@ -143,7 +143,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 							m_bInSubMenu = true;
 					}
 				}
-				else if(pDI->KeyPressed(DIK_ESCAPE))
+				else if(pDI->KeyPressed(DIK_ESCAPE)|| pDI->JoystickButtonPressed(2))
 				{
 					if(m_bInSubMenu == true)
 					{
@@ -156,7 +156,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 			}
 			else
 			{
-				if(pDI->KeyPressed(DIK_RETURN))
+				if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 				{
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionConfirm);
 					if(m_bInSubMenu)
@@ -170,7 +170,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 						ModifyAP(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost());
 					}
 				}
-				else if(pDI->KeyPressed(DIK_ESCAPE))
+				else if(pDI->KeyPressed(DIK_ESCAPE)|| pDI->JoystickButtonPressed(2))
 				{
 					m_bSkillSelected = false;
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionBack);
@@ -197,7 +197,7 @@ void CPlayerUnit::Update(float fElapsedTime)
 
 	if(timer > 0)
 	{
-		if(pDI->KeyPressed(DIK_RETURN))
+		if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 		{
 			m_bDodge = true;
 		}

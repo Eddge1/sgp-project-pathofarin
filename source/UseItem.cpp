@@ -43,20 +43,20 @@ void CUseItem::Update(float fElapsedTime)
 			tempP->SetReady(false);
 			tempP->SetCasting(false);
 		}
-		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
+		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 		{
 			m_nSelection--;
 			if(m_nSelection < 0)
 				m_nSelection = 0;
 
 		}
-		if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
+		if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 		{
 			m_nSelection++;
 			if(m_nSelection >= m_nItemTotal)
 				m_nSelection = m_nItemTotal -1;
 		}
-		if(pDI->KeyPressed(DIK_RETURN))
+		if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 		{
 			int nID = 0;
 			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)

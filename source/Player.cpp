@@ -36,9 +36,9 @@ void CPlayer::Update(float fElapsedTime)
 	SetVelX(0);
 	SetVelY(0);
 
-	if(pDI->KeyPressed(DIK_RETURN) && m_bInteraction == false)
+	if((pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1)) && m_bInteraction == false)
 		m_bInteraction = true;
-	if(!pDI->KeyPressed(DIK_RETURN))
+	if(!pDI->KeyPressed(DIK_RETURN) && !pDI->JoystickButtonPressed(1))
 		m_bInteraction = false;
 
 
@@ -52,7 +52,7 @@ void CPlayer::Update(float fElapsedTime)
 			this->GetAnimInfo()->Pause(false);
 	}
 
-	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP))
+	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP))
 	{
 
 		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Up");
@@ -60,7 +60,7 @@ void CPlayer::Update(float fElapsedTime)
 
 		SetVelY(-100);
 	}
-	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN))
+	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN))
 	{
 
 
@@ -70,7 +70,7 @@ void CPlayer::Update(float fElapsedTime)
 		SetVelY(100);
 	}
 
-	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT))
+	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT) || pDI->JoystickGetLStickDirDown(DIR_LEFT))
 	{
 		if(GetVelY() == 0)
 		{
@@ -79,7 +79,7 @@ void CPlayer::Update(float fElapsedTime)
 		}
 		SetVelX(-100);
 	}
-	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT))
+	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT) || pDI->JoystickGetLStickDirDown(DIR_RIGHT))
 	{
 		if(GetVelY() == 0)
 		{

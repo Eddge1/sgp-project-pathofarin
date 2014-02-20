@@ -40,7 +40,7 @@ public:
 	void Initialize(void);
 	void Battle(float fElapsedTime);
 	void EndBattle(void);
-	void AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText);
+	void AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText, float fTimer = 1.5f);
 	void AddSkill(CProjectile* pTemp) {m_vSkills.push_back(pTemp); pTemp->AddRef();}
 	virtual void Activate( void )	override;				// load resources
 	virtual void Sleep( void )	override;					// unload resources

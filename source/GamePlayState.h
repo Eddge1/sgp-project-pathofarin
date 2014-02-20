@@ -67,12 +67,11 @@ public:
 	CEnemyUnit* CreateTempEnemy(string input, float X, float Y, int speed, int hp, int mp, int attack = 5);
 	CConsumable* CreatePotion(string input);
 
-
 	// New stuff
 	CAugment* CreateAugment(string Type, float Effect);
 	CArmor* CreateArmor(string Name, float Hp, float Attk, float Speed);
 	CWeapon* CreateWeapon(string Name, int Attack);
-	
+	map<string, InventoryItems>* GetItemManager() {return &m_mItemManager;}
 
 private:
 
@@ -85,7 +84,7 @@ private:
 		RECT rPos;
 	};
 
-	enum GamePhase {GP_NAV, GP_BATTLE, GP_MENU, GP_START, GP_END};
+	enum GamePhase {GP_NAV, GP_INIT, GP_BATTLE, GP_MENU, GP_START, GP_END};
 	// Singleton (but not dynamically allocated)
 	CGamePlayState( void );
 	virtual ~CGamePlayState( void );

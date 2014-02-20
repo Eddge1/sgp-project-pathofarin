@@ -76,6 +76,7 @@ void CBasicAttack::Update(float fElapsedTime)
 	else
 	{
 		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
+		CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
 		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
 		bAttacked = true;
 		bhasPlayed = false;
@@ -88,8 +89,6 @@ void CBasicAttack::ResetSkill()
 }
 void CBasicAttack::HandleEvent( const CEvent* pEvent )
 {
-
-
 	if (pEvent->GetEventID() == "START_AUDIO" && !bhasPlayed)
 	{
 		if(GetOwner() != nullptr)
@@ -106,11 +105,8 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
 			else if(GetOwner()->GetName() == "Pathetic_Orc")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nPathOrc);
-
-
 			bhasPlayed = true;
 		}
-
 	}
 
 	if (pEvent->GetEventID() == "BASIC_ATTACK" && bAttacked)

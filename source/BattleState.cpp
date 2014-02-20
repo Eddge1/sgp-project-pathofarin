@@ -121,12 +121,14 @@ bool CBattleState::Input(void)
 			{
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
-					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) )
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+						 || CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
 					}
-					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetPreviousTarget();
@@ -675,7 +677,7 @@ CUnits* CBattleState::GetCurrentTarget(void)
 	return m_vBattleUnits[m_nTarget];
 }
 
-void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText)
+void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText, float fTimer)
 {
 	FloatingText* ftTemp = new FloatingText;
 
@@ -683,7 +685,7 @@ void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wo
 	ftTemp->m_fLocY = posY;
 	ftTemp->Color = dColor;
 	ftTemp->szText << szText.str();
-	ftTemp->m_fTimer = 1.5f;
+	ftTemp->m_fTimer = fTimer;
 	m_vText.push_back(ftTemp);
 }
 

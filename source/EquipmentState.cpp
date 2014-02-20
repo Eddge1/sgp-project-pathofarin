@@ -330,14 +330,14 @@ bool CEquipmentState::Input( void )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 
-	if(pDI->KeyPressed(DIK_ESCAPE))
+	if(pDI->KeyPressed(DIK_ESCAPE) || pDI->JoystickButtonPressed(2))
 	{
 		if(!m_bSubMenu)
 			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 		else
 			m_bSubMenu = false;
 	}
-	if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW))
+	if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 	{
 		if(m_bSubMenu)
 		{
@@ -355,7 +355,7 @@ bool CEquipmentState::Input( void )
 			}
 		}
 	}
-	if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW))
+	if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 	{
 
 		if(m_bSubMenu)
@@ -374,7 +374,7 @@ bool CEquipmentState::Input( void )
 			}
 		}
 	}
-	if(pDI->KeyPressed(DIK_A) || pDI->KeyPressed(DIK_LEFTARROW))
+	if(pDI->KeyPressed(DIK_A) || pDI->KeyPressed(DIK_LEFTARROW) || pDI->JoystickDPadPressed(DIR_LEFT) || pDI->JoystickGetLStickDirPressed(DIR_LEFT))
 	{
 
 		if(!m_bSubMenu)
@@ -416,7 +416,7 @@ bool CEquipmentState::Input( void )
 		}
 
 	}
-	if(pDI->KeyPressed(DIK_D) || pDI->KeyPressed(DIK_RIGHTARROW))
+	if(pDI->KeyPressed(DIK_D) || pDI->KeyPressed(DIK_RIGHTARROW) || pDI->JoystickDPadPressed(DIR_RIGHT) || pDI->JoystickGetLStickDirPressed(DIR_RIGHT))
 	{
 		if(!m_bSubMenu)
 		{
@@ -457,7 +457,7 @@ bool CEquipmentState::Input( void )
 		}
 	}
 
-	if(pDI->KeyPressed(DIK_RETURN))
+	if(pDI->KeyPressed(DIK_RETURN) || pDI->JoystickButtonPressed(1))
 	{
 		if(!m_bSubMenu)
 		{

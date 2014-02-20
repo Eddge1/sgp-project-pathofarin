@@ -120,9 +120,6 @@
     <ClCompile Include="source\BattleState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="source\CharacterMenuState.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
     <ClCompile Include="source\CreditState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
@@ -139,9 +136,6 @@
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
     <ClCompile Include="source\ProfileMenuState.cpp">
-      <Filter>GameStates\cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ShopState.cpp">
       <Filter>GameStates\cpp</Filter>
     </ClCompile>
     <ClCompile Include="source\AIController.cpp">
@@ -335,9 +329,6 @@
     <ClInclude Include="source\BattleState.h">
       <Filter>GameStates\h</Filter>
     </ClInclude>
-    <ClInclude Include="source\CharacterMenuState.h">
-      <Filter>GameStates\h</Filter>
-    </ClInclude>
     <ClInclude Include="source\CreditState.h">
       <Filter>GameStates\h</Filter>
     </ClInclude>
@@ -357,9 +348,6 @@
       <Filter>GameStates\h</Filter>
     </ClInclude>
     <ClInclude Include="source\ProfileMenuState.h">
-      <Filter>GameStates\h</Filter>
-    </ClInclude>
-    <ClInclude Include="source\ShopState.h">
       <Filter>GameStates\h</Filter>
     </ClInclude>
     <ClInclude Include="source\VictoryState.h">
