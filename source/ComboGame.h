@@ -8,6 +8,8 @@ class CComboGame :	public CMiniGames
 	float m_fTimer;
 	bool m_bSuccess;
 	int m_nCurr;
+	int m_nTotalMoves;
+	int m_nSuccessCombo;
 public:
 	CComboGame(void);
 	virtual ~CComboGame(void);
