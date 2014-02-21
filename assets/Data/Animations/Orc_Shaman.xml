@@ -196,7 +196,7 @@
       <ActiveCollision posX="1" posY="0" Width="86" Height="66" />
       <Render posX="482" posY="1646" Width="92" Height="69" anchorX="36" anchorY="40" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="1" Width="93" Height="70" />
-      <Render posX="599" posY="1635" Width="92" Height="81" anchorX="33" anchorY="52" Duration="0.1" Event="NULL" />
+      <Render posX="599" posY="1635" Width="92" Height="81" anchorX="33" anchorY="52" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="1" posY="0" Width="93" Height="81" />
       <Render posX="717" posY="1635" Width="91" Height="81" anchorX="30" anchorY="51" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="-2" Width="92" Height="79" />

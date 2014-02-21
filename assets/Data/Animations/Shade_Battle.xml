@@ -26,7 +26,7 @@
   </Animation_Info>
   <Animation_Info Name="Shade_Battle_Basic_Attack" Frames="12" repeat="0" Texture="DS - Drawn to Life - Shadow Ghoul.png">
     <Frame_Data>
-      <Render posX="19" posY="138" Width="60" Height="64" anchorX="34" anchorY="60" Duration="0.1" Event="NULL" />
+      <Render posX="19" posY="138" Width="60" Height="64" anchorX="34" anchorY="60" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="59" Height="63" />
       <Render posX="107" posY="142" Width="54" Height="59" anchorX="26" anchorY="57" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="-1" Width="55" Height="58" />

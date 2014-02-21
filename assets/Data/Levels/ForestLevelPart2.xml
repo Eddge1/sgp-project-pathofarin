@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<World Width="40" Height="40" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Tiles.png" Transparency="-6068157">
+<World Music="POA_Forest_Background.xwm" Width="40" Height="40" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Tiles.png" Transparency="-6068157">
   <Layer ID="0" Width="40" Height="40" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />

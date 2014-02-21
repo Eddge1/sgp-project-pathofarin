@@ -12,7 +12,7 @@
     <Frame_Data>
       <Render posX="769" posY="256" Width="69" Height="80" anchorX="36" anchorY="46" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="0" Width="69" Height="80" />
-      <Render posX="840" posY="257" Width="71" Height="86" anchorX="29" anchorY="52" Duration="0.1" Event="NULL" />
+      <Render posX="840" posY="257" Width="71" Height="86" anchorX="29" anchorY="52" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="1" posY="-1" Width="73" Height="85" />
       <Render posX="914" posY="257" Width="75" Height="87" anchorX="31" anchorY="50" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="2" posY="1" Width="76" Height="88" />

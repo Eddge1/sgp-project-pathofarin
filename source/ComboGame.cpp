@@ -13,7 +13,9 @@ CComboGame::CComboGame(void)
 	SetCost(50);
 	SetDamage(1.5f);
 	m_vMoveList.clear();
-	for(int i = 0; i < 6; i++)
+	m_nTotalMoves = 4;
+	m_nSuccessCombo = 0;
+	for(int i = 0; i < m_nTotalMoves; i++)
 	{
 		m_vMoveList.push_back(rand() % 4);
 	}
@@ -34,7 +36,9 @@ void CComboGame::ResetSkill()
 {
 	m_vMovesMade.clear();
 	m_vMoveList.clear();
-	for(int i = 0; i < 6; i++)
+	m_nTotalMoves = 4;
+	m_nSuccessCombo = 0;
+	for(int i = 0; i < m_nTotalMoves; i++)
 	{
 		m_vMoveList.push_back(rand() % 4);
 	}
@@ -61,24 +65,24 @@ void CComboGame::Render()
 	for(int i = m_nCurr; i < int(m_vMoveList.size()); i++)
 	{
 		if(m_vMoveList[i] == 0)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f);
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f);
 		else if(m_vMoveList[i] == 1)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f* 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
 		else if(m_vMoveList[i] == 2)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI);
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f* 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI);
 		else if(m_vMoveList[i] == 3)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f* 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
 	}
 	for(int i = 0; i < m_nCurr; i++)
 	{
 		if(m_vMovesMade[i] == 0)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,0.0f,D3DCOLOR_XRGB(100,255,100));
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,0.0f,D3DCOLOR_XRGB(100,255,100));
 		else if(m_vMovesMade[i] == 1)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2,D3DCOLOR_XRGB(100,255,100));
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2,D3DCOLOR_XRGB(100,255,100));
 		else if(m_vMovesMade[i] == 2)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI,D3DCOLOR_XRGB(100,255,100));
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI,D3DCOLOR_XRGB(100,255,100));
 		else if(m_vMovesMade[i] == 3)
-			pTM->Draw(m_nCombArrowImgID,352 + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2,D3DCOLOR_XRGB(100,255,100));
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2,D3DCOLOR_XRGB(100,255,100));
 	}
 }
 
@@ -161,10 +165,10 @@ void CComboGame::Update(float fElapsedTime)
 	if(m_nCurr < 0)
 		m_nCurr = 0;
 
-	if(m_vMovesMade.size() > 6)
+	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves))
 		m_vMovesMade.erase(m_vMovesMade.begin());
 
-	if(m_vMovesMade.size() > 5)
+	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves - 1))
 	{
 		if(m_vMoveList == m_vMovesMade)
 			m_bSuccess =true;
@@ -172,10 +176,17 @@ void CComboGame::Update(float fElapsedTime)
 
 	if(m_bSuccess)
 	{
+		m_nSuccessCombo++;
+		if(m_nSuccessCombo >= 3)
+		{
+			m_nTotalMoves++;
+			m_nSuccessCombo = 0;
+		}
+
 		m_bSuccess = false;
 		vector<int> vMoves;
 		m_vMoveList.clear();
-		for(int i = 0; i < 6; i++)
+		for(int i = 0; i < m_nTotalMoves; i++)
 		{
 			m_vMoveList.push_back(rand() % 4);
 		}
@@ -193,7 +204,7 @@ void CComboGame::Update(float fElapsedTime)
 		if(GetOwner() != nullptr)
 		{
 			int temp = GetOwner()->GetAttack();
-			tempP->ModifyHealth(int(temp * GetDamage()), false);
+			tempP->ModifyHealth(int(temp * (GetDamage() + (0.25f * (m_nTotalMoves - 4)))), false);
 		}
 	}
 

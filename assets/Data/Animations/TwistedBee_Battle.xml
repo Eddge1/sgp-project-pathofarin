@@ -12,7 +12,7 @@
   </Animation_Info>
   <Animation_Info Name="Bee_Battle_Basic_Attack" Frames="3" repeat="0" Texture="PSP - Lunar Silver Star Harmony - Wasp.png">
     <Frame_Data>
-      <Render posX="278" posY="0" Width="61" Height="81" anchorX="32" anchorY="77" Duration="0.1" Event="NULL" />
+      <Render posX="278" posY="0" Width="61" Height="81" anchorX="32" anchorY="77" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="61" Height="81" />
       <Render posX="342" posY="1" Width="56" Height="84" anchorX="29" anchorY="77" Duration="0.3" Event="BASIC_ATTACK" />
       <ActiveCollision posX="1" posY="0" Width="57" Height="84" />

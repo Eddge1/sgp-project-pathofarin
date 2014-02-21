@@ -30,7 +30,7 @@
     <Frame_Data>
       <Render posX="23" posY="550" Width="96" Height="110" anchorX="50" anchorY="58" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="-1" posY="-1" Width="97" Height="111" />
-      <Render posX="144" posY="541" Width="111" Height="119" anchorX="65" anchorY="66" Duration="0.1" Event="NULL" />
+      <Render posX="144" posY="541" Width="111" Height="119" anchorX="65" anchorY="66" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="111" Height="119" />
       <Render posX="315" posY="577" Width="92" Height="85" anchorX="23" anchorY="33" Duration="0.1" Event="BASIC_ATTACK" />
       <ActiveCollision posX="0" posY="1" Width="91" Height="83" />

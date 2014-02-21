@@ -14,6 +14,20 @@ class CBasicAttack : public CMiniGames
 	int m_nSound;
 	int m_nOrcLeader;
 	int m_nPathOrc;
+	int m_nOrcSha;
+	int m_nSnail;
+	int m_nSpider;
+	int m_nTree;
+	int m_nOgre;
+	int m_nBat;
+	int m_nBandit;
+	int m_nThornBiter;
+	int m_nGolem;
+	int m_nShade;
+	int m_nBee;
+	int m_nOrc;
+	int m_nSnake;
+	int m_nValrion;
 
 
 public:
