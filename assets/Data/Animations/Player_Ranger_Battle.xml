@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="6">
+  <Animation_Info Name="Ranger_Battle_Idle" Frames="4" repeat="1" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="2" posY="3" Width="41" Height="53" anchorX="17" anchorY="47" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="42" Height="53" />
+      <Render posX="44" posY="4" Width="41" Height="52" anchorX="16" anchorY="47" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="41" Height="53" />
+      <Render posX="85" posY="5" Width="41" Height="51" anchorX="17" anchorY="46" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="42" Height="51" />
+      <Render posX="127" posY="6" Width="38" Height="51" anchorX="15" anchorY="46" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="39" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Battle_Taking_Damage" Frames="1" repeat="0" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="389" posY="7" Width="45" Height="50" anchorX="9" anchorY="42" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-388" posY="-4" Width="42" Height="53" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Battle_Basic_Attack" Frames="6" repeat="0" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="2" posY="141" Width="40" Height="51" anchorX="7" anchorY="46" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="41" Height="51" />
+      <Render posX="43" posY="140" Width="49" Height="53" anchorX="21" anchorY="48" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="53" />
+      <Render posX="98" posY="141" Width="50" Height="53" anchorX="20" anchorY="47" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="-1" posY="-1" Width="51" Height="54" />
+      <Render posX="151" posY="141" Width="53" Height="52" anchorX="22" anchorY="47" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="53" Height="52" />
+      <Render posX="206" posY="141" Width="56" Height="53" anchorX="24" anchorY="48" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="56" Height="53" />
+      <Render posX="264" posY="141" Width="44" Height="53" anchorX="15" anchorY="47" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="45" Height="53" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Battle_Victory" Frames="4" repeat="1" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="322" posY="138" Width="33" Height="51" anchorX="14" anchorY="45" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="34" Height="52" />
+      <Render posX="360" posY="138" Width="36" Height="52" anchorX="12" anchorY="46" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-2" posY="0" Width="37" Height="52" />
+      <Render posX="398" posY="138" Width="41" Height="51" anchorX="14" anchorY="46" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="41" Height="50" />
+      <Render posX="359" posY="137" Width="38" Height="53" anchorX="13" anchorY="47" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="2" posY="2" Width="36" Height="50" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Battle_Special_Attack" Frames="7" repeat="1" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="3" posY="210" Width="41" Height="51" anchorX="8" anchorY="45" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="42" Height="52" />
+      <Render posX="46" posY="214" Width="40" Height="48" anchorX="17" anchorY="43" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="40" Height="49" />
+      <Render posX="88" posY="210" Width="47" Height="52" anchorX="22" anchorY="47" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="47" Height="51" />
+      <Render posX="138" posY="213" Width="52" Height="49" anchorX="24" anchorY="44" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="53" Height="50" />
+      <Render posX="192" posY="214" Width="55" Height="50" anchorX="27" anchorY="43" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="55" Height="50" />
+      <Render posX="252" posY="213" Width="54" Height="47" anchorX="26" anchorY="42" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="54" Height="48" />
+      <Render posX="309" posY="215" Width="42" Height="48" anchorX="16" anchorY="42" Duration="0.2" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="43" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Battle_Dead" Frames="1" repeat="0" Texture="POA_Ranger.png">
+    <Frame_Data>
+      <Render posX="322" posY="20" Width="61" Height="37" anchorX="54" anchorY="19" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="61" Height="38" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
