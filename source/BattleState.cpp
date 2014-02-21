@@ -53,9 +53,15 @@ CBattleState::CBattleState(void)
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 
-	m_nMenuImage			=	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nCampBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Camp_Battle.png"));
+	m_nCavernBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cavern_Battle.png"));
+	m_nCaveBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cave1_Battle.png"));
+	m_nGardenBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Garden_Battle.png"));
+	m_nDesertBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Desert_Battle.png"));
+	m_nDungeonBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Dungeon_Battle.png"));
 	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
 	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
 }
@@ -123,7 +129,7 @@ bool CBattleState::Input(void)
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
 					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
-						 || CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
@@ -149,11 +155,16 @@ void CBattleState::Update(float fElapsedTime)
 
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT && m_eCurrentPhase != BP_END)
 			{
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+				if(m_vBattleUnits[i]->GetClass() == UC_WARRIOR || m_vBattleUnits[i]->GetClass() == UC_NONE) 
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+				else if(m_vBattleUnits[i]->GetClass() == UC_MAGE)
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Mage_Battle_Idle");
+				else if(m_vBattleUnits[i]->GetClass() == UC_RANGER)
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Ranger_Battle_Idle");
 			}
-			else
+			else if(m_vBattleUnits[i]->GetType() != OBJ_PLAYER_UNIT)
 			{
 				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
@@ -226,14 +237,27 @@ void CBattleState::Render(void)
 	RECT rCursor = {0,0,16,32};
 
 	//Temp drawing the UI
-	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
+	if (CGamePlayState::GetInstance()->GetMapName() == "Cavern of Souls.xml")
+		pTM->Draw(m_nCavernBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart2.xml")
+		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart2.xml")
+		pTM->Draw(m_nCampBattleID, 0, 0, 3.125f, 4.69f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart2.xml")
+		pTM->Draw(m_nCaveBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Garden Part1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Garden Part2.xml")
+		pTM->Draw(m_nGardenBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Desert Part1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Desert Part2.xml")
+		pTM->Draw(m_nDesertBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.9.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Behold, Valrion.xml")
+		pTM->Draw(m_nDungeonBattleID, 0, 0, 1.6f, 2.3f);
+	else
+		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
 	pTM->Draw(m_nMenuImage, 0,472);
 	pTM->Draw(m_nMenuSelectionImage, 272,408);
 
 	// Printing out variables
 	std::wostringstream woss;
-
-	m_pFont->Draw(_T("HP:"), 450, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
 
 	if(m_vBattleUnits.size() > 0)
 	{
@@ -251,7 +275,7 @@ void CBattleState::Render(void)
 				woss << m_vBattleUnits[i]->GetHealth();
 				m_pFont->Draw( woss.str().c_str(), 524, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-				woss << m_vBattleUnits[i]->GetAbilityPoints();
+				woss << "AP: " << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			}
@@ -489,11 +513,6 @@ void CBattleState::Battle(float fElapsedTime)
 		{
 			if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 			{
-				if(m_vBattleUnits.size() == 1)
-				{
-					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
-						m_eCurrentPhase = BP_END;
-				}
 
 				m_nTurn++;
 				m_fDelayTurn = 0.6f;
@@ -507,7 +526,13 @@ void CBattleState::Battle(float fElapsedTime)
 							string szName = m_vBattleUnits[m_nTurn - 1]->GetName();
 							szName += " defeated you by bashing your face in.";
 							CGameOverState::GetInstance()->SetMessage(szName);
-							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+							if(m_vBattleUnits[i]->GetClass() == UC_WARRIOR || m_vBattleUnits[i]->GetClass() == UC_NONE)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+							else if(m_vBattleUnits[i]->GetClass() == UC_MAGE)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Mage_Battle_Dead");
+							else if(m_vBattleUnits[i]->GetClass() == UC_RANGER)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Ranger_Battle_Dead");
+
 							m_eCurrentPhase = BP_END;
 							break;
 						}
@@ -523,6 +548,12 @@ void CBattleState::Battle(float fElapsedTime)
 					else
 						i++;
 
+				}
+
+				if(m_vBattleUnits.size() == 1)
+				{
+					if(m_vBattleUnits[0]->GetType() == OBJ_PLAYER_UNIT)
+						m_eCurrentPhase = BP_END;
 				}
 
 				if(m_nTurn >= (int)m_vBattleUnits.size())
@@ -726,4 +757,10 @@ void CBattleState::SetItems(CUnits* pDead)
 void CBattleState::ClearItems()
 {
 	m_vItems.clear();
+}
+
+CUnits* CBattleState::GetCurrentTurn()
+{
+	return m_vBattleUnits[m_nTurn];
+
 }

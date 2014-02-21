@@ -88,7 +88,7 @@ void CMainMenuState::Update(float fElapsedTime)
 void CMainMenuState::Render(void)
 {
 	CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Comic Sans MS");
+	CBitmapFont* pFont = CGame::GetInstance()->GetFont("Big Caslon");
 	RECT clearscreenson = {0, 0, 800, 600};
 	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 

@@ -119,7 +119,8 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_MENU:
 	case CGamePlayState::GP_BATTLE:
-		CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
+		if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1)
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
 		m_eCurrPhase = GP_NAV;
 		break;
 	case CGamePlayState::GP_START:
@@ -249,7 +250,7 @@ void CGamePlayState::Sleep(void)
 bool CGamePlayState::Input(void)
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9))
+	if(pDI->KeyPressed( DIK_ESCAPE ) == true || pDI->JoystickButtonPressed(9) || pDI->JoystickButtonPressed(6))
 	{
 		if(m_bSaveGameStatus && !m_bSaveSuccess)
 			m_bSaveGameStatus = false;
@@ -319,7 +320,7 @@ bool CGamePlayState::Input(void)
 				{
 					bisPaused = !bisPaused;
 					m_eCurrPhase = GP_END;
-					if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_mWorldManager[m_sCurrWorld]->GetMusicID()))
+					if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_mWorldManager[m_sCurrWorld]->GetMusicID()))
 						CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
 					CGame::GetInstance()->ChangeState( CMainMenuState::GetInstance() ); // Will return you to the main menu
 					SetCursorSelection(0);
@@ -449,7 +450,7 @@ void CGamePlayState::Render(void)
 		RECT rTemp = {336, 236, 464,364};
 		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
 		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
-		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Resume\nItems\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
+		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Resume\nCharacter\nSave\nQuit"), 368,258, 0.75f, D3DCOLOR_XRGB(255,255, 255));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;
@@ -485,7 +486,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	if(pEvent->GetEventID() == "INIT_BATTLE" && m_eCurrPhase != GP_END)
 	{
 		m_eCurrPhase = GP_BATTLE;
-		CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
+		if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_mWorldManager[m_sCurrWorld]->GetMusicID()))
+			CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}

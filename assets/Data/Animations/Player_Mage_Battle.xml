@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="6">
+  <Animation_Info Name="Mage_Battle_Idle" Frames="2" repeat="1" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="2" posY="2" Width="43" Height="78" anchorX="8" anchorY="71" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="42" Height="78" />
+      <Render posX="96" posY="2" Width="45" Height="78" anchorX="10" anchorY="71" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="44" Height="78" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Battle_Basic_Attack" Frames="3" repeat="1" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="135" posY="563" Width="56" Height="76" anchorX="33" anchorY="72" Duration="0.2" Event="START_AUDIO" />
+      <ActiveCollision posX="-1" posY="0" Width="57" Height="76" />
+      <Render posX="196" posY="562" Width="61" Height="78" anchorX="36" anchorY="73" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="61" Height="78" />
+      <Render posX="61" posY="732" Width="63" Height="77" anchorX="35" anchorY="72" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="63" Height="77" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Battle_Special_Attack" Frames="22" repeat="1" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="7" posY="389" Width="50" Height="75" anchorX="13" anchorY="68" Duration="0.1" Event="START_AUDIO" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="75" />
+      <Render posX="70" posY="389" Width="51" Height="75" anchorX="15" anchorY="68" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="51" Height="75" />
+      <Render posX="125" posY="389" Width="49" Height="74" anchorX="16" anchorY="68" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="74" />
+      <Render posX="175" posY="384" Width="66" Height="79" anchorX="41" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="-1" Width="67" Height="80" />
+      <Render posX="2" posY="473" Width="62" Height="78" anchorX="39" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="61" Height="78" />
+      <Render posX="64" posY="473" Width="65" Height="79" anchorX="41" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="79" />
+      <Render posX="130" posY="473" Width="62" Height="79" anchorX="39" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="62" Height="79" />
+      <Render posX="193" posY="473" Width="64" Height="78" anchorX="40" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="78" />
+      <Render posX="2" posY="563" Width="61" Height="75" anchorX="39" anchorY="71" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="62" Height="75" />
+      <Render posX="64" posY="562" Width="64" Height="77" anchorX="41" anchorY="72" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="77" />
+      <Render posX="132" posY="561" Width="59" Height="79" anchorX="38" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="79" />
+      <Render posX="194" posY="561" Width="63" Height="78" anchorX="40" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="63" Height="78" />
+      <Render posX="2" posY="641" Width="61" Height="78" anchorX="30" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="61" Height="78" />
+      <Render posX="64" posY="641" Width="65" Height="77" anchorX="30" anchorY="71" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="66" Height="77" />
+      <Render posX="131" posY="641" Width="57" Height="77" anchorX="31" anchorY="71" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="-1" Width="58" Height="78" />
+      <Render posX="193" posY="641" Width="61" Height="79" anchorX="39" anchorY="74" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="60" Height="79" />
+      <Render posX="4" posY="730" Width="56" Height="79" anchorX="36" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="56" Height="79" />
+      <Render posX="62" posY="730" Width="58" Height="78" anchorX="38" anchorY="73" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="58" Height="78" />
+      <Render posX="130" posY="733" Width="45" Height="78" anchorX="10" anchorY="71" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="45" Height="78" />
+      <Render posX="180" posY="733" Width="53" Height="74" anchorX="15" anchorY="68" Duration="0.1" Event="" />
+      <ActiveCollision posX="0" posY="-1" Width="53" Height="75" />
+      <Render posX="11" posY="815" Width="51" Height="72" anchorX="16" anchorY="66" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="52" Height="72" />
+      <Render posX="69" posY="816" Width="49" Height="70" anchorX="14" anchorY="65" Duration="0.1" Event="" />
+      <ActiveCollision posX="-1" posY="0" Width="50" Height="70" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Battle_Taking_Damage" Frames="1" repeat="0" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="7" posY="389" Width="50" Height="75" anchorX="13" anchorY="68" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="75" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Battle_Dead" Frames="1" repeat="0" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="1" posY="162" Width="87" Height="31" anchorX="80" anchorY="24" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="87" Height="31" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Battle_Victory" Frames="3" repeat="0" Texture="POA_Mage_Battle.png">
+    <Frame_Data>
+      <Render posX="2" posY="88" Width="62" Height="72" anchorX="24" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="1" Width="63" Height="73" />
+      <Render posX="66" posY="88" Width="60" Height="72" anchorX="24" anchorY="65" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="59" Height="72" />
+      <Render posX="128" posY="84" Width="64" Height="69" anchorX="26" anchorY="61" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="69" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>

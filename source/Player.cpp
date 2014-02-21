@@ -41,6 +41,27 @@ void CPlayer::Update(float fElapsedTime)
 	if(!pDI->KeyPressed(DIK_RETURN) && !pDI->JoystickButtonPressed(1))
 		m_bInteraction = false;
 
+	string szAnimation = "";
+
+	switch (this->GetUnit()->GetClass())
+	{
+	case UC_NONE:
+		szAnimation = "Kid";
+		break;
+	case UC_WARRIOR:
+		szAnimation = "Warrior";
+		break;
+
+	case UC_MAGE:
+		szAnimation = "Mage";
+		break;
+
+	case UC_RANGER:
+		szAnimation = "Ranger";
+		break;
+	default:
+		break;
+	}
 
 	if (pDI->KeyPressed(DIK_F12))
 	{
@@ -54,19 +75,12 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP))
 	{
-
-		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Up");
-
-
+		szAnimation += "_Walk_Up";
 		SetVelY(-100);
 	}
 	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN))
 	{
-
-
-		this->GetAnimInfo()->SetAnimation("Warrior_Walk_Down");
-		
-		
+		szAnimation += "_Walk_Down";
 		SetVelY(100);
 	}
 
@@ -74,8 +88,7 @@ void CPlayer::Update(float fElapsedTime)
 	{
 		if(GetVelY() == 0)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Walk_Left");
-
+			szAnimation += "_Walk_Left";
 		}
 		SetVelX(-100);
 	}
@@ -83,8 +96,7 @@ void CPlayer::Update(float fElapsedTime)
 	{
 		if(GetVelY() == 0)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Walk_Right");
-
+			szAnimation += "_Walk_Right";
 		}
 		SetVelX(100);
 	}
@@ -93,23 +105,86 @@ void CPlayer::Update(float fElapsedTime)
 
 	if (this->GetVelX() == 0 && this->GetVelY() == 0)
 	{
-		if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Up")
+		if(this->GetUnit()->GetClass() == UC_NONE)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Idle_Up");
+			if (this->GetAnimInfo()->GetCurrentAnimation() == "Kid_Walk_Up")
+			{
+				szAnimation += "_Idle_Up";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Kid_Walk_Down")
+			{
+				szAnimation += "_Idle_Down";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Kid_Walk_Left")
+			{
+				szAnimation += "_Idle_Left";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Kid_Walk_Right")
+			{
+				szAnimation += "_Idle_Right";
+			}
 		}
-		else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Down")
+		if(this->GetUnit()->GetClass() == UC_RANGER)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Idle_Down");
+			if (this->GetAnimInfo()->GetCurrentAnimation() == "Ranger_Walk_Up")
+			{
+				szAnimation += "_Idle_Up";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Ranger_Walk_Down")
+			{
+				szAnimation += "_Idle_Down";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Ranger_Walk_Left")
+			{
+				szAnimation += "_Idle_Left";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Ranger_Walk_Right")
+			{
+				szAnimation += "_Idle_Right";
+			}
 		}
-		else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Left")
+		if(this->GetUnit()->GetClass() == UC_MAGE)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Idle_Left");
+			if (this->GetAnimInfo()->GetCurrentAnimation() == "Mage_Walk_Up")
+			{
+				szAnimation += "_Idle_Up";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Mage_Walk_Down")
+			{
+				szAnimation += "_Idle_Down";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Mage_Walk_Left")
+			{
+				szAnimation += "_Idle_Left";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Mage_Walk_Right")
+			{
+				szAnimation += "_Idle_Right";
+			}
 		}
-		else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Right")
+		if(this->GetUnit()->GetClass() == UC_WARRIOR)
 		{
-			this->GetAnimInfo()->SetAnimation("Warrior_Idle_Right");
+			if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Up")
+			{
+				szAnimation += "_Idle_Up";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Down")
+			{
+				szAnimation += "_Idle_Down";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Left")
+			{
+				szAnimation += "_Idle_Left";
+			}
+			else if (this->GetAnimInfo()->GetCurrentAnimation() == "Warrior_Walk_Right")
+			{
+				szAnimation += "_Idle_Right";
+			}
 		}
 	}
+
+	if(szAnimation != "Warrior" && szAnimation != "Mage" && szAnimation != "Ranger" && szAnimation != "Kid")
+		this->GetAnimInfo()->SetAnimation(szAnimation.c_str());
 
 	CEntity::Update(fElapsedTime);
 }

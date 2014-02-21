@@ -35,6 +35,7 @@ public:
 	void GetNextTarget(void);
 	void GetPreviousTarget(void);
 	CUnits* GetCurrentTarget(void);
+	CUnits* GetCurrentTurn();
 	vector<CUnits*>& GetBattleUnits(void) { return m_vBattleUnits; }
 	vector<CProjectile*> m_vSkills;
 	void Initialize(void);
@@ -67,6 +68,12 @@ private:
 	PBattlephase m_eCurrentPhase;
 
 	int m_nForestBattleID;
+	int m_nCampBattleID;
+	int m_nCavernBattleID;
+	int m_nCaveBattleID;
+	int m_nGardenBattleID;
+	int m_nDesertBattleID;
+	int m_nDungeonBattleID;
 	int m_nTurn;
 	int m_nMenuImage;
 	int m_nMenuSelectionImage;

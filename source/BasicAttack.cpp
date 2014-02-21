@@ -85,7 +85,13 @@ void CBasicAttack::Update(float fElapsedTime)
 {
 	if (GetOwner()->GetType() == OBJ_PLAYER_UNIT)
 	{
-		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
+		if(GetOwner()->GetClass () == UC_WARRIOR || GetOwner()->GetClass () == UC_NONE)
+			GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Basic_Attack");
+		else if(GetOwner()->GetClass () == UC_MAGE)
+			GetOwner()->GetAnimInfo()->SetAnimation("Mage_Battle_Basic_Attack");
+		else if(GetOwner()->GetClass () == UC_RANGER)
+			GetOwner()->GetAnimInfo()->SetAnimation("Ranger_Battle_Basic_Attack");
+
 		bAttacked = true;
 	}
 	else
