@@ -15,6 +15,8 @@ class CPrecisionStrike : public CMiniGames
 	float m_fCursorY;
 	int	m_nImageID;
 	int m_nCursorImageID;
+	bool m_bReady;
+	CUnits* m_pTarget;
 
 public:
 
@@ -25,7 +27,6 @@ public:
 	virtual void Update(float fElapsedTime);
 	virtual void Render();
 	virtual void ResetSkill() override;
-
-
+	virtual bool PointToRect(RECT&, int, int);
 };
 

@@ -740,6 +740,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	pTest = new CCommands;
 	CPrecisionStrike *pMulti = new CPrecisionStrike;
 	pTest->SetName("Multi-Shot");
+	pMulti->SetAOE(true);
 	pTest->SetMiniGame(pMulti);
 	pMulti->SetDamage(0.75f);
 	pMulti->SetCost(15);
@@ -803,6 +804,29 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	pCombo->SetCost(30);
 	pCombo->SetDamage(1.3f);
 	pTest->SetMiniGame(pCombo);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+	temp->AddSkill(tempC);
+
+	pTest = new CCommands;
+	tempC = new CCommands;
+	tempC->SetName("Ranger");
+	tempC->SetIsGame(false);
+	CSteadyShot *pAim = new CSteadyShot;
+	pTest->SetName("Aimed Shot");
+	pTest->SetMiniGame(pAim);
+	pAim->SetDamage(4.0f);
+	pAim->SetCost(20);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
+
+	pTest = new CCommands;
+	CPrecisionStrike *pMulti = new CPrecisionStrike;
+	pTest->SetName("Multi-Shot");
+	pMulti->SetAOE(true);
+	pTest->SetMiniGame(pMulti);
+	pMulti->SetDamage(0.75f);
+	pMulti->SetCost(15);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
