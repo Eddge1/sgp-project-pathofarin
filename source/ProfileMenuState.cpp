@@ -392,8 +392,8 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("Class", 0);
 		pSlot->SetAttribute("posX", 488);
 		pSlot->SetAttribute("posY", 420);
-		pSlot->SetAttribute("Zone", "testing");
-		string szZone = "testing.xml";
+		pSlot->SetAttribute("Zone", "Caveren_of_souls");
+		string szZone = "Caveren_of_souls.xml";
 
 		TiXmlElement* pItem;
 		pItem = new TiXmlElement("Item");
@@ -650,7 +650,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Warrior_Idle_Down");
-	temp->SetZone("testing");
+	temp->SetZone("Caveren_of_souls");
 	CPlayerUnit* pUnit = CreateTempPlayer();
 	pUnit->SetClass(UC_NONE);
 	temp->SetUnit(pUnit);

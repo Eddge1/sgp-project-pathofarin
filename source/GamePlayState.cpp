@@ -119,7 +119,8 @@ void CGamePlayState::Activate(void)
 		break;
 	case CGamePlayState::GP_MENU:
 	case CGamePlayState::GP_BATTLE:
-		CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
+		if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1)
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
 		m_eCurrPhase = GP_NAV;
 		break;
 	case CGamePlayState::GP_START:
@@ -480,7 +481,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	if(pEvent->GetEventID() == "INIT_BATTLE" && m_eCurrPhase != GP_END)
 	{
 		m_eCurrPhase = GP_BATTLE;
-		CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
+		if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_mWorldManager[m_sCurrWorld]->GetMusicID()))
+			CSGD_XAudio2::GetInstance()->MusicStopSong(m_mWorldManager[m_sCurrWorld]->GetMusicID());
 		CBattleState::GetInstance()->SetSender((CObjects*)(pEvent->GetSender()));
 		CGame::GetInstance()->ChangeState(CBattleState::GetInstance());
 	}
