@@ -51,7 +51,7 @@ CBattleState::CBattleState(void)
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
-	
+
 	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
@@ -156,7 +156,12 @@ void CBattleState::Update(float fElapsedTime)
 		{
 			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT && m_eCurrentPhase != BP_END)
 			{
-				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+				if(m_vBattleUnits[i]->GetClass() == UC_WARRIOR || m_vBattleUnits[i]->GetClass() == UC_NONE) 
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
+				else if(m_vBattleUnits[i]->GetClass() == UC_MAGE)
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Mage_Battle_Idle");
+				else if(m_vBattleUnits[i]->GetClass() == UC_RANGER)
+					m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Ranger_Battle_Idle");
 			}
 			else if(m_vBattleUnits[i]->GetType() != OBJ_PLAYER_UNIT)
 			{
@@ -520,7 +525,13 @@ void CBattleState::Battle(float fElapsedTime)
 							string szName = m_vBattleUnits[m_nTurn - 1]->GetName();
 							szName += " defeated you by bashing your face in.";
 							CGameOverState::GetInstance()->SetMessage(szName);
-							m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+							if(m_vBattleUnits[i]->GetClass() == UC_WARRIOR || m_vBattleUnits[i]->GetClass() == UC_NONE)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Dead");
+							else if(m_vBattleUnits[i]->GetClass() == UC_MAGE)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Mage_Battle_Dead");
+							else if(m_vBattleUnits[i]->GetClass() == UC_RANGER)
+								m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Ranger_Battle_Dead");
+
 							m_eCurrentPhase = BP_END;
 							break;
 						}
@@ -699,14 +710,14 @@ CUnits* CBattleState::GetCurrentTarget(void)
 
 void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText, float fTimer)
 {
-		FloatingText* ftTemp = new FloatingText;
+	FloatingText* ftTemp = new FloatingText;
 
-		ftTemp->m_fLocX = posX;
-		ftTemp->m_fLocY = posY;
-		ftTemp->Color = dColor;
-		ftTemp->szText << szText.str();
-		ftTemp->m_fTimer = fTimer;
-		m_vText.push_back(ftTemp);
+	ftTemp->m_fLocX = posX;
+	ftTemp->m_fLocY = posY;
+	ftTemp->Color = dColor;
+	ftTemp->szText << szText.str();
+	ftTemp->m_fTimer = fTimer;
+	m_vText.push_back(ftTemp);
 }
 
 void CBattleState::SetItems(CUnits* pDead)
