@@ -4557,7 +4557,7 @@
       <Tile_Data xTileID="13" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="7" posX="7" posY="0">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="5" yTileID="3" EventID="MountainCavePart2" EventType="WARP" WarpX="704" WarpY="1792" Total_Waypoints="0" />
     </Tile>
     <Tile ID="8" posX="8" posY="0">
       <Tile_Data xTileID="5" yTileID="3" EventID="MountainCavePart2" EventType="WARP" WarpX="704" WarpY="1792" Total_Waypoints="0" />
