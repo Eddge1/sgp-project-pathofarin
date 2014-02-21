@@ -18,7 +18,7 @@
   </Animation_Info>
   <Animation_Info Name="Thornbiter_Battle_Basic_Attack" Frames="3" repeat="0" Texture="1stEnemy.png">
     <Frame_Data>
-      <Render posX="346" posY="259" Width="89" Height="74" anchorX="62" anchorY="69" Duration="0.1" Event="NULL" />
+      <Render posX="346" posY="259" Width="89" Height="74" anchorX="62" anchorY="69" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="89" Height="74" />
       <Render posX="335" posY="344" Width="97" Height="78" anchorX="65" anchorY="72" Duration="0.2" Event="BASIC_ATTACK" />
       <ActiveCollision posX="0" posY="1" Width="96" Height="79" />

@@ -10,7 +10,7 @@
   </Animation_Info>
   <Animation_Info Name="Valrion_Battle_Basic_Attack" Frames="2" repeat="0" Texture="PlayStation 2 - Namco X Capcom - Wizards.png">
     <Frame_Data>
-      <Render posX="134" posY="74" Width="76" Height="105" anchorX="33" anchorY="61" Duration="0.2" Event="NULL" />
+      <Render posX="134" posY="74" Width="76" Height="105" anchorX="33" anchorY="61" Duration="0.2" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="75" Height="105" />
       <Render posX="3" posY="93" Width="121" Height="82" anchorX="63" anchorY="45" Duration="0.3" Event="BASIC_ATTACK" />
       <ActiveCollision posX="-1" posY="0" Width="122" Height="82" />

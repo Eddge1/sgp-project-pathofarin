@@ -146,6 +146,8 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBandit);
 			else if(GetOwner()->GetName() == "Golem")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nGolem);
+			else if(GetOwner()->GetName() == "Bee")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBee);
 			bhasPlayed = true;
 		}
 	}
