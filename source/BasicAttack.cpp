@@ -13,6 +13,21 @@ CBasicAttack::CBasicAttack(void)
 	m_nSound = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Enemies/POA_tempEnemey.wav"));
 	m_nOrcLeader = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcSiegeLeader_Attack.wav"));
 	m_nPathOrc = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_PathOrc_Attack.wav"));
+	m_nSpider = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Spider_Attack.wav"));
+	m_nBandit = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bandit_Attack.wav"));
+	m_nBat = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bat_Attack.wav"));
+	m_nOrcSha = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcShaman_Attack.wav"));
+	m_nOrc = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_PathOrc_Attack.wav"));
+	m_nThornBiter = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_ThornBiter_Attack.wav"));
+	m_nGolem = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Golem_Attack.wav"));
+	m_nShade = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Shade_Attack.wav"));
+	m_nOgre = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Ogre_Attack.wav"));
+	m_nSnake = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snake_Attack.wav"));
+	m_nValrion = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Valrion_Attack.wav"));
+	m_nSnail = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snail_Attack.wav"));
+	m_nTree = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Tree_Attack.wav"));
+	m_nBee = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bee_Attack.wav"));
+
 	bAttacked = false;
 	bhasPlayed = false;
 }
@@ -96,15 +111,35 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 			if(GetOwner()->GetName() == "Orc_Leader")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
 			else if(GetOwner()->GetName() == "Orc")
-				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nPathOrc);
 			else if(GetOwner()->GetName() == "Orc_Shaman")
-				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
-			else if(GetOwner()->GetName() == "Bat")
-				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
-			else if(GetOwner()->GetName() == "Spider")
-				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcLeader);
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcSha);
+			else if(GetOwner()->GetName() == "Cave_Bat")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBat);
+			else if(GetOwner()->GetName() == "Cave_Spider")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpider);
 			else if(GetOwner()->GetName() == "Pathetic_Orc")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nPathOrc);
+			else if(GetOwner()->GetName() == "Snail")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnail);
+			else if(GetOwner()->GetName() == "Tree")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nTree);
+			else if(GetOwner()->GetName() == "Ogre")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOgre);
+			else if(GetOwner()->GetName() == "ThornBiter")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
+			else if(GetOwner()->GetName() == "ManDrake")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
+			else if(GetOwner()->GetName() == "Shade")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nShade);
+			else if(GetOwner()->GetName() == "TigerLily")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
+			else if(GetOwner()->GetName() == "Valrion")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nValrion);
+			else if(GetOwner()->GetName() == "Bandit")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBandit);
+			else if(GetOwner()->GetName() == "Golem")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nGolem);
 			bhasPlayed = true;
 		}
 	}

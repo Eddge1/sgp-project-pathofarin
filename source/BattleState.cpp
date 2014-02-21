@@ -48,6 +48,7 @@ CBattleState::CBattleState(void)
 	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
 	m_nOrcLeader = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_OrcSiegeLeader_Battle.xwm"));
 	m_nTigerlily = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_TigerLily_Battle.xwm"));
+	m_nValrion = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Valrion_Background.xwm"));
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));

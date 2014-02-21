@@ -235,6 +235,11 @@ void CGamePlayState::Sleep(void)
 		}
 
 		break;
+	case GP_INIT:
+		{
+		}
+		break;
+
 	default:
 		break;
 	}
