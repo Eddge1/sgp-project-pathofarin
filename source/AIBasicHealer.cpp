@@ -39,7 +39,7 @@ void CAIBasicHealer::Update(float fElapsedTime)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcSha);
 		else if(GetOwner()->GetName() == "Snake")
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnake);
-		else if(GetOwner()->GetName() == "ManDrake")
+		else if(GetOwner()->GetName() == "Mandrake")
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nManDrake);
 
 

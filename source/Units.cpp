@@ -173,9 +173,9 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nTree);
 				else if(this->GetName() == "TigerLily")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
-				else if(this->GetName() == "ThornBiter")
+				else if(this->GetName() == "Thornbiter")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
-				else if(this->GetName() == "ManDrake")
+				else if(this->GetName() == "Mandrake")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
 				else if(this->GetName() == "Shade")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nShade);

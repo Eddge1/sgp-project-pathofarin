@@ -132,9 +132,9 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nTree);
 			else if(GetOwner()->GetName() == "Ogre")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOgre);
-			else if(GetOwner()->GetName() == "ThornBiter")
+			else if(GetOwner()->GetName() == "Thornbiter")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
-			else if(GetOwner()->GetName() == "ManDrake")
+			else if(GetOwner()->GetName() == "Mandrake")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nThornBiter);
 			else if(GetOwner()->GetName() == "Shade")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nShade);

@@ -59,6 +59,8 @@ void CPlayer::Update(float fElapsedTime)
 	case UC_RANGER:
 		szAnimation = "Ranger";
 		break;
+	case UC_ENEMY:
+		break;
 	default:
 		break;
 	}
