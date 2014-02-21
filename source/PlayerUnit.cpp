@@ -56,15 +56,11 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 		timer = 1.0f;
 		std::wostringstream woss;
 		woss << "Attempt ";
-		if(!GetTutorial() && CBattleState::GetInstance()->GetCurrentTarget()->GetLevel() <= this->GetLevel() + 5)
-		{
+		if(!GetTutorial())
 			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss, 0.3f);
-
-		}
-		else if(!GetTutorial()  && CBattleState::GetInstance()->GetCurrentTarget()->GetLevel() > this->GetLevel() + 5)
-			timer = 0.0f;
 		else
 			CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+
 	}
 }
 
