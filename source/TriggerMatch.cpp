@@ -148,7 +148,7 @@ void CTriggerMatch::Update(float fElapsedTime)
 	else if(m_rTrigger.left <= 200)
 		m_bLeft = false;
 
-	if(pDI->KeyPressed(DIK_RETURN))
+	if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 	{
 		GetOwner()->GetAnimInfo()->SetCurrentFrame(0);
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");

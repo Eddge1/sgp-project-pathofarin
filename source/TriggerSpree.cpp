@@ -148,7 +148,7 @@ void CTriggerSpree::Update(float fElapsedTime)
 		else i++;
 	}
 
-	if(pDI->KeyPressed(DIK_RETURN))
+	if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 	{
 		GetOwner()->GetAnimInfo()->SetCurrentFrame(0);
 		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");

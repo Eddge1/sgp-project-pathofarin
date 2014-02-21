@@ -127,12 +127,14 @@ bool CBattleState::Input(void)
 			{
 				if(pTemp->GetReady() && pTemp->GetCasting() == false)
 				{
-					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) )
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetNextTarget();
 					}
-					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
 					{
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
 						GetPreviousTarget();
@@ -152,11 +154,11 @@ void CBattleState::Update(float fElapsedTime)
 
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
+			if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT && m_eCurrentPhase != BP_END)
 			{
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
 			}
-			else
+			else if(m_vBattleUnits[i]->GetType() != OBJ_PLAYER_UNIT)
 			{
 				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
@@ -239,8 +241,6 @@ void CBattleState::Render(void)
 	// Printing out variables
 	std::wostringstream woss;
 
-	m_pFont->Draw(_T("HP:"), 450, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-
 	if(m_vBattleUnits.size() > 0)
 	{
 		float hPercent = m_pPlayerUnit->GetHealth() / float(m_pPlayerUnit->GetMaxHealth());
@@ -257,7 +257,7 @@ void CBattleState::Render(void)
 				woss << m_vBattleUnits[i]->GetHealth();
 				m_pFont->Draw( woss.str().c_str(), 524, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-				woss << m_vBattleUnits[i]->GetAbilityPoints();
+				woss << "AP: " << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			}
@@ -495,11 +495,6 @@ void CBattleState::Battle(float fElapsedTime)
 		{
 			if(m_vBattleUnits[m_nTurn]->GetTurn() == false)
 			{
-				if(m_vBattleUnits.size() == 1)
-				{
-					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
-						m_eCurrentPhase = BP_END;
-				}
 
 				m_nTurn++;
 				m_fDelayTurn = 0.6f;
@@ -529,6 +524,12 @@ void CBattleState::Battle(float fElapsedTime)
 					else
 						i++;
 
+				}
+
+				if(m_vBattleUnits.size() == 1)
+				{
+					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+						m_eCurrentPhase = BP_END;
 				}
 
 				if(m_nTurn >= (int)m_vBattleUnits.size())
@@ -684,16 +685,16 @@ CUnits* CBattleState::GetCurrentTarget(void)
 	return m_vBattleUnits[m_nTarget];
 }
 
-void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText)
+void CBattleState::AddFloatingText(float posX, float posY, DWORD dColor, std::wostringstream &szText, float fTimer)
 {
-	FloatingText* ftTemp = new FloatingText;
+		FloatingText* ftTemp = new FloatingText;
 
-	ftTemp->m_fLocX = posX;
-	ftTemp->m_fLocY = posY;
-	ftTemp->Color = dColor;
-	ftTemp->szText << szText.str();
-	ftTemp->m_fTimer = 1.5f;
-	m_vText.push_back(ftTemp);
+		ftTemp->m_fLocX = posX;
+		ftTemp->m_fLocY = posY;
+		ftTemp->Color = dColor;
+		ftTemp->szText << szText.str();
+		ftTemp->m_fTimer = fTimer;
+		m_vText.push_back(ftTemp);
 }
 
 void CBattleState::SetItems(CUnits* pDead)
@@ -732,4 +733,10 @@ void CBattleState::SetItems(CUnits* pDead)
 void CBattleState::ClearItems()
 {
 	m_vItems.clear();
+}
+
+CUnits* CBattleState::GetCurrentTurn()
+{
+	return m_vBattleUnits[m_nTurn];
+
 }

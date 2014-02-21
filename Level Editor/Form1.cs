@@ -245,6 +245,7 @@ namespace SGP_PoA_LevelEditor
             lstMaps.Items.Clear();
             lstLayers.Items.Clear();
             lstBlock.Items.Clear();
+            lblAudio.Text = "Click to set Audio ----->";
 
             foreach (string szMapID in Directory.GetFiles(Environment.CurrentDirectory + "\\..\\Assets\\Data\\Levels\\", "*.xml").Select(Path.GetFileName))
             {
@@ -792,6 +793,9 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
                 XAttribute xColorTrans = new XAttribute("Transparency", cTransparency.ToArgb());
+                XAttribute xMusic = new XAttribute("Music", lblAudio.Text);
+                if (lblAudio.Text != "Click to set Audio ----->")
+                    xRoot.Add(xMusic);
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
@@ -931,6 +935,9 @@ namespace SGP_PoA_LevelEditor
                 XAttribute xTileHeight = new XAttribute("TileHeight", TileSize.Height);
                 XAttribute xImageLocation = new XAttribute("Image", szTileSetName);
                 XAttribute xColorTrans = new XAttribute("Transparency", cTransparency.ToArgb());
+                XAttribute xMusic = new XAttribute("Music", lblAudio.Text);
+                if (lblAudio.Text != "Click to set Audio ----->")
+                    xRoot.Add(xMusic);
 
                 xRoot.Add(xWidth);
                 xRoot.Add(xHeight);
@@ -1081,6 +1088,13 @@ namespace SGP_PoA_LevelEditor
                 Initialize();
                 XElement xRoot = XElement.Load(dlg.FileName);
                 IEnumerable<XElement> xLayers = xRoot.Elements("Layer");
+
+                XAttribute xMusic = xRoot.Attribute("Music");
+                
+                if (xMusic == null)
+                    lblAudio.Text = "Click to set Audio ----->";
+                else
+                    lblAudio.Text = xMusic.Value;
 
                 XAttribute xTotalLayers = xRoot.Attribute("Layers");
                 XAttribute xTileWidth = xRoot.Attribute("TileWidth");
@@ -1719,6 +1733,20 @@ namespace SGP_PoA_LevelEditor
             {
                 lstItems.Items.RemoveAt(lstItems.SelectedIndex);
                 lstItems.SelectedIndex = -1;
+            }
+        }
+
+        private void btnSound_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            string temp = Path.GetFullPath(Environment.CurrentDirectory + "\\..\\assets\\Audio\\Music");
+            ofd.InitialDirectory = temp;
+            ofd.Filter = "All Files|*.*";
+            ofd.FilterIndex = 1;
+
+            if (DialogResult.OK == ofd.ShowDialog())
+            {
+                lblAudio.Text = Path.GetFileName(ofd.FileName);
             }
         }
     }

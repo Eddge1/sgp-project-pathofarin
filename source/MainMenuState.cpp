@@ -119,10 +119,10 @@ bool CMainMenuState::Input(void)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	if(m_fPosY >= 172.0f)
 	{
-		if(pDI->KeyPressed(DIK_ESCAPE))
+		if(pDI->KeyPressed(DIK_ESCAPE)|| pDI->JoystickButtonPressed(2))
 			return false;
 
-		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP))
+		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
 				SetCursorSelection(4);
@@ -131,7 +131,7 @@ bool CMainMenuState::Input(void)
 			if(CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(GetSFXID()) == false)
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(GetSFXID());
 		}
-		else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN))
+		else if(pDI->KeyPressed(DIK_S) || pDI->KeyPressed(DIK_DOWNARROW) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 		{
 			if(GetCursorSelection() >= 4)
 				SetCursorSelection(0);

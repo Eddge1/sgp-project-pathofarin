@@ -86,7 +86,7 @@ void CComboGame::Update(float fElapsedTime)
 {
 	m_fTimer -= fElapsedTime;
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->KeyPressed(DIK_D))
+	if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->KeyPressed(DIK_D) || pDI->JoystickDPadPressed(DIR_RIGHT) || pDI->JoystickGetLStickDirPressed(DIR_RIGHT)  )
 	{
 		if(m_vMoveList[m_nCurr] == 0)
 		{
@@ -104,7 +104,7 @@ void CComboGame::Update(float fElapsedTime)
 
 	}
 
-	if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W))
+	if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP)  )
 	{
 		if(m_vMoveList[m_nCurr] == 3)
 		{
@@ -123,7 +123,7 @@ void CComboGame::Update(float fElapsedTime)
 		}
 	}
 
-	if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A))
+	if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A) || pDI->JoystickDPadPressed(DIR_LEFT) || pDI->JoystickGetLStickDirPressed(DIR_LEFT))
 	{
 		if(m_vMoveList[m_nCurr] == 2)
 		{
@@ -140,7 +140,7 @@ void CComboGame::Update(float fElapsedTime)
 		}
 	}
 
-	if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S))
+	if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 	{
 		if(m_vMoveList[m_nCurr] == 1)
 		{

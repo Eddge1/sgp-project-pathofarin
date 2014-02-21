@@ -59,7 +59,8 @@ void CSplashScreen::Update( float fElapsedTime )
 	if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()) == false)
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 
-	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+	if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE) 
+		|| CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2))
 		m_bComplete = true;
 	m_fPercentDone = 1.0f;
 	if(m_fDisappear1 > 0)

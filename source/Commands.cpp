@@ -4,6 +4,7 @@
 CCommands::CCommands(void)
 {
 	m_pMiniGame = nullptr;
+	m_bIsGame = true;
 }
 
 

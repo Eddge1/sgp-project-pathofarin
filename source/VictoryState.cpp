@@ -110,7 +110,7 @@ void CVictoryState::Update( float fElapsedTime )
 
 		if(m_pPlayer != nullptr && m_pPlayer->GetType() == OBJ_PLAYER_UNIT)
 		{
-			if(pDI->KeyPressed(DIK_RETURN))
+			if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 			{
 				m_pPlayer->GiveExperience(m_nExperienceGained);
 				m_nExperienceGained = 0;
@@ -138,23 +138,23 @@ void CVictoryState::Update( float fElapsedTime )
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		if(m_pPlayer->GetStats() < 1)
 		{
-			if(pDI->KeyPressed(DIK_RETURN) || pDI->KeyPressed(DIK_ESCAPE))
+			if(pDI->KeyPressed(DIK_RETURN) || pDI->KeyPressed(DIK_ESCAPE) || pDI->JoystickButtonPressed(1) || pDI->JoystickButtonPressed(2))
 				CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 		}
 
-		if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W))
+		if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 		{
 			SetCursorSelection(GetCursorSelection() - 1);
 			if(GetCursorSelection() < 0)
 				SetCursorSelection(0);
 		}
-		else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S))
+		else if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 		{
 			SetCursorSelection(GetCursorSelection() + 1);
 			if(GetCursorSelection() > 2)
 				SetCursorSelection(2);
 		}
-		if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A))
+		if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A) || pDI->JoystickDPadPressed(DIR_LEFT) || pDI->JoystickGetLStickDirPressed(DIR_LEFT))
 		{
 			if(m_pPlayer->GetStats() < m_nMaxStat)
 			{
@@ -187,7 +187,7 @@ void CVictoryState::Update( float fElapsedTime )
 				}
 			}
 		}
-		else if(pDI->KeyPressed(DIK_RIGHTARROW)  || pDI->KeyPressed(DIK_D))
+		else if(pDI->KeyPressed(DIK_RIGHTARROW)  || pDI->KeyPressed(DIK_D) || pDI->JoystickDPadPressed(DIR_RIGHT) || pDI->JoystickGetLStickDirPressed(DIR_RIGHT))
 		{
 			if(m_pPlayer->GetStats() > 0)
 			{
@@ -217,7 +217,7 @@ void CVictoryState::Update( float fElapsedTime )
 	{
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 
-		if(pDI->KeyPressed(DIK_RETURN) || pDI->KeyPressed(DIK_ESCAPE))
+		if(pDI->KeyPressed(DIK_RETURN) || pDI->KeyPressed(DIK_ESCAPE) || pDI->JoystickButtonPressed(1) || pDI->JoystickButtonPressed(2))
 			CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
 	}
 }

@@ -98,7 +98,6 @@
     <ClCompile Include="source\BattleState.cpp" />
     <ClCompile Include="source\BitmapFont.cpp" />
     <ClCompile Include="source\Buff.cpp" />
-    <ClCompile Include="source\CharacterMenuState.cpp" />
     <ClCompile Include="source\ChargeCrystal.cpp" />
     <ClCompile Include="source\Chest.cpp" />
     <ClCompile Include="source\ComboGame.cpp" />
@@ -128,7 +127,6 @@
     <ClCompile Include="source\Projectile.cpp" />
     <ClCompile Include="source\RenderManager.cpp" />
     <ClCompile Include="source\Shops.cpp" />
-    <ClCompile Include="source\ShopState.cpp" />
     <ClCompile Include="source\SplashScreen.cpp" />
     <ClCompile Include="source\SteadyShot.cpp" />
     <ClCompile Include="source\Tile.cpp" />
@@ -173,7 +171,6 @@
     <ClInclude Include="source\BattleState.h" />
     <ClInclude Include="source\BitmapFont.h" />
     <ClInclude Include="source\Buff.h" />
-    <ClInclude Include="source\CharacterMenuState.h" />
     <ClInclude Include="source\ChargeCrystal.h" />
     <ClInclude Include="source\Chest.h" />
     <ClInclude Include="source\ComboGame.h" />
@@ -204,7 +201,6 @@
     <ClInclude Include="source\Projectile.h" />
     <ClInclude Include="source\RenderManager.h" />
     <ClInclude Include="source\Shops.h" />
-    <ClInclude Include="source\ShopState.h" />
     <ClInclude Include="source\SplashScreen.h" />
     <ClInclude Include="source\SteadyShot.h" />
     <ClInclude Include="source\Tile.h" />
