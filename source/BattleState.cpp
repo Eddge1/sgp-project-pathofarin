@@ -48,6 +48,7 @@ CBattleState::CBattleState(void)
 	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
 	m_nOrcLeader = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_OrcSiegeLeader_Battle.xwm"));
 	m_nTigerlily = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_TigerLily_Battle.xwm"));
+	m_nValrion = CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Valrion_Background.xwm"));
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
@@ -55,7 +56,7 @@ CBattleState::CBattleState(void)
 	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
-	m_nCampBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cave2_Battle.png"));
+	m_nCampBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Camp_Battle.png"));
 	m_nCavernBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cavern_Battle.png"));
 	m_nCaveBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cave1_Battle.png"));
 	m_nGardenBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Garden_Battle.png"));
@@ -236,10 +237,22 @@ void CBattleState::Render(void)
 	RECT rCursor = {0,0,16,32};
 
 	//Temp drawing the UI
-	if (CGamePlayState::GetInstance()->GetWorld()->GetMapName() == "ForestLevelPart2")
-		pTM->Draw(m_nGardenBattleID, 0, 0, 2.0f, 2.0f);
+	if (CGamePlayState::GetInstance()->GetMapName() == "Cavern of Souls.xml")
+		pTM->Draw(m_nCavernBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart2.xml")
+		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart2.xml")
+		pTM->Draw(m_nCampBattleID, 0, 0, 3.125f, 4.69f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart2.xml")
+		pTM->Draw(m_nCaveBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Garden Part1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Garden Part2.xml")
+		pTM->Draw(m_nGardenBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Desert Part1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Desert Part2.xml")
+		pTM->Draw(m_nDesertBattleID, 0, 0, 1.6f, 2.3f);
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.9.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Behold, Valrion.xml")
+		pTM->Draw(m_nDungeonBattleID, 0, 0, 1.6f, 2.3f);
 	else
-		pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
+		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
 	pTM->Draw(m_nMenuImage, 0,472);
 	pTM->Draw(m_nMenuSelectionImage, 272,408);
 
@@ -539,7 +552,7 @@ void CBattleState::Battle(float fElapsedTime)
 
 				if(m_vBattleUnits.size() == 1)
 				{
-					if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+					if(m_vBattleUnits[0]->GetType() == OBJ_PLAYER_UNIT)
 						m_eCurrentPhase = BP_END;
 				}
 

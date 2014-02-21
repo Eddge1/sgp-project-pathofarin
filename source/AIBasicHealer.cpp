@@ -5,6 +5,13 @@ CAIBasicHealer::CAIBasicHealer(void)
 {
 	m_pTarget = nullptr;
 	m_nTurns = 0;
+	m_nManDrake = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_ThornBiter_Spell.wav"));
+	m_nTree = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_tempEnemey.wav"));
+	m_nBat = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bat_Attack.wav"));
+	m_nSnake = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snake_Spell.wav"));
+	m_nOrcSha = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcShaman_CastSpell.wav"));
+
+
 }
 
 
@@ -23,6 +30,20 @@ void CAIBasicHealer::Update(float fElapsedTime)
 		m_pTarget = nullptr;
 		m_nTurns = 0;
 		GetOwner()->EndTurn();
+
+		if(GetOwner()->GetName() == "Cave_Bat")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBat);
+		else if(GetOwner()->GetName() == "Tree")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nTree);
+		else if(GetOwner()->GetName() == "Orc_Shaman")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcSha);
+		else if(GetOwner()->GetName() == "Snake")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnake);
+		else if(GetOwner()->GetName() == "ManDrake")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nManDrake);
+
+
+
 	}
 	else
 	{

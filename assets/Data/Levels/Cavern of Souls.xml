@@ -1818,10 +1818,10 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="8" posX="8" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="9" posX="9" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="WARP" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="10" posX="0" posY="1">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

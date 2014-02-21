@@ -114,7 +114,7 @@ private:
 	int m_nOrcLeaderHurt;
 	int m_nPathOrc;
 	int m_nOrcShaman;
-	int m_nOrcBrute;
+	int m_nOrc;
 	int m_nSnail;
 	int m_nSpider;
 	int m_nTree;
@@ -124,7 +124,10 @@ private:
 	int m_nTigerLily;
 	int m_nOgre;
 	int m_nValrion;
-
+	int m_nBat;
+	int m_nGolem;
+	int m_nShade;
+	int m_nBee;
 
 };
 

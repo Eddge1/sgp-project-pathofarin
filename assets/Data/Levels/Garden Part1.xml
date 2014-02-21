@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<World Width="20" Height="15" Layers="2" TileWidth="64" TileHeight="64" Image="TileNature.png" Transparency="-16777216">
+<World Music="POA_Garden_Background.xwm" Width="20" Height="15" Layers="2" TileWidth="64" TileHeight="64" Image="TileNature.png" Transparency="-16777216">
   <Layer ID="0" Width="20" Height="15" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
