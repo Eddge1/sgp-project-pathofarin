@@ -151,7 +151,13 @@ void CTriggerMatch::Update(float fElapsedTime)
 	if(pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1))
 	{
 		GetOwner()->GetAnimInfo()->SetCurrentFrame(0);
-		GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");
+		if(GetOwner()->GetClass() == UC_WARRIOR || GetOwner()->GetClass() == UC_NONE)
+			GetOwner()->GetAnimInfo()->SetAnimation("Warrior_Battle_Special_Attack");
+		else if(GetOwner()->GetClass() == UC_MAGE)
+			GetOwner()->GetAnimInfo()->SetAnimation("Mage_Battle_Special_Attack");
+		else if(GetOwner()->GetClass() == UC_RANGER)
+			GetOwner()->GetAnimInfo()->SetAnimation("Ranger_Battle_Special_Attack");
+
 		RECT rTemp = {};
 		for(unsigned int i = 0; i < m_vGameElements.size() - 1; i++)
 		{

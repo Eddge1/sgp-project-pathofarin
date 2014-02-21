@@ -717,7 +717,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	CAnimationTimeStamp* pTemp;
 	temp->SetClass(UC_RANGER);
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Warrior_Battle_Idle");
+	pTemp->SetAnimation("Ranger_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempM->SetCost(0);
@@ -837,7 +837,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	CAnimationTimeStamp* pTemp;
 	temp->SetClass(UC_MAGE);
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Warrior_Battle_Idle");
+	pTemp->SetAnimation("Mage_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempM->SetCost(0);

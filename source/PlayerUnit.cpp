@@ -242,9 +242,15 @@ void CPlayerUnit::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 		}
 		else
 		{
-
 			if(nAmount > 0)
-				this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
+			{
+				if(GetClass() == UC_WARRIOR || GetClass() == UC_NONE)
+					this->GetAnimInfo()->SetAnimation("Warrior_Battle_Taking_Damage");
+				else if(GetClass() == UC_MAGE)
+					this->GetAnimInfo()->SetAnimation("Mage_Battle_Taking_Damage");
+				else if(GetClass() == UC_RANGER)
+					this->GetAnimInfo()->SetAnimation("Ranger_Battle_Taking_Damage");
+			}
 			CUnits::ModifyHealth(nAmount, isCrit, inMenu);
 			timer = 0.0f;
 		}
