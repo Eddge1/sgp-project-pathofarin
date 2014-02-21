@@ -73,6 +73,9 @@ public:
 	CWeapon* CreateWeapon(string Name, int Attack);
 	map<string, InventoryItems>* GetItemManager() {return &m_mItemManager;}
 
+	//Accessor for Map Name:
+	string GetMapName() { return m_sCurrWorld; }
+
 private:
 
 	struct NPCDialogue
