@@ -356,7 +356,7 @@ void CBattleState::Render(void)
 					if(pTemp->GetCasting() == false)
 					{
 						RECT rTarget = m_vBattleUnits[m_nTarget]->GetCollisionRectNoCam();
-						CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rTarget.right + 8), int((rTarget.top + rTarget.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5*D3DX_PI,D3DCOLOR_XRGB(255,0,0));
+						CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rTarget.right + 8), int((rTarget.top + rTarget.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5f*D3DX_PI,D3DCOLOR_XRGB(255,0,0));
 					}
 					if(pTemp->GetCasting())
 					{
@@ -428,7 +428,7 @@ void CBattleState::Render(void)
 
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
 		{
-			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.right + 8), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5*D3DX_PI,D3DCOLOR_XRGB(255,255,255));
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.right + 8), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5f*D3DX_PI,D3DCOLOR_XRGB(255,255,255));
 		}
 		else
 		{

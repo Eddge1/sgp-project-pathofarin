@@ -165,10 +165,10 @@ void CComboGame::Update(float fElapsedTime)
 	if(m_nCurr < 0)
 		m_nCurr = 0;
 
-	if(m_vMovesMade.size() > m_nTotalMoves)
+	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves))
 		m_vMovesMade.erase(m_vMovesMade.begin());
 
-	if(m_vMovesMade.size() > m_nTotalMoves - 1)
+	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves - 1))
 	{
 		if(m_vMoveList == m_vMovesMade)
 			m_bSuccess =true;
