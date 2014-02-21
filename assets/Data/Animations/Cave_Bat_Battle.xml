@@ -18,7 +18,7 @@
   </Animation_Info>
   <Animation_Info Name="Cave_Bat_Battle_Basic_Attack" Frames="3" repeat="0" Texture="00-017-0000.png">
     <Frame_Data>
-      <Render posX="400" posY="2" Width="46" Height="43" anchorX="4" anchorY="27" Duration="0.2" Event="NULL" />
+      <Render posX="400" posY="2" Width="46" Height="43" anchorX="4" anchorY="27" Duration="0.2" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="46" Height="43" />
       <Render posX="393" posY="50" Width="52" Height="38" anchorX="8" anchorY="17" Duration="0.2" Event="BASIC_ATTACK" />
       <ActiveCollision posX="0" posY="0" Width="52" Height="38" />

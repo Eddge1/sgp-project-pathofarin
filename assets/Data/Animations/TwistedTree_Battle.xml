@@ -32,7 +32,7 @@
       <ActiveCollision posX="0" posY="0" Width="198" Height="219" />
       <Render posX="1256" posY="663" Width="198" Height="206" anchorX="99" anchorY="161" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="198" Height="206" />
-      <Render posX="1473" posY="663" Width="198" Height="206" anchorX="93" anchorY="150" Duration="0.1" Event="NULL" />
+      <Render posX="1473" posY="663" Width="198" Height="206" anchorX="93" anchorY="150" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="198" Height="206" />
       <Render posX="1685" posY="663" Width="190" Height="204" anchorX="93" anchorY="148" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="190" Height="204" />
