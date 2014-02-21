@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Ranger_Idle_Down" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="3" posY="1" Width="22" Height="28" anchorX="12" anchorY="19" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="24" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Idle_Left" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="32" posY="1" Width="23" Height="28" anchorX="10" anchorY="18" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="23" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Idle_Right" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="63" posY="1" Width="25" Height="28" anchorX="14" anchorY="17" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="25" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Idle_Up" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="92" posY="1" Width="23" Height="28" anchorX="13" anchorY="16" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="24" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Walk_Down" Frames="8" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="4" posY="31" Width="23" Height="29" anchorX="10" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="22" Height="29" />
+      <Render posX="36" posY="31" Width="22" Height="28" anchorX="10" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="28" />
+      <Render posX="67" posY="30" Width="23" Height="27" anchorX="11" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="22" Height="27" />
+      <Render posX="100" posY="31" Width="21" Height="28" anchorX="10" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="22" Height="29" />
+      <Render posX="132" posY="32" Width="23" Height="28" anchorX="10" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="23" Height="27" />
+      <Render posX="165" posY="31" Width="20" Height="28" anchorX="9" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="20" Height="28" />
+      <Render posX="195" posY="29" Width="24" Height="28" anchorX="11" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="23" Height="27" />
+      <Render posX="227" posY="31" Width="24" Height="27" anchorX="11" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="25" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Walk_Left" Frames="9" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="1" posY="61" Width="24" Height="30" anchorX="11" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="1" Width="23" Height="32" />
+      <Render posX="34" posY="62" Width="23" Height="30" anchorX="10" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="23" Height="30" />
+      <Render posX="65" posY="62" Width="24" Height="30" anchorX="11" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="23" Height="31" />
+      <Render posX="97" posY="62" Width="24" Height="28" anchorX="11" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="24" Height="28" />
+      <Render posX="131" posY="61" Width="21" Height="29" anchorX="9" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="22" Height="27" />
+      <Render posX="163" posY="61" Width="21" Height="30" anchorX="9" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="30" />
+      <Render posX="195" posY="62" Width="21" Height="30" anchorX="9" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="22" Height="30" />
+      <Render posX="225" posY="62" Width="24" Height="28" anchorX="11" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="25" Height="28" />
+      <Render posX="259" posY="60" Width="23" Height="29" anchorX="9" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="23" Height="27" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Walk_Right" Frames="9" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="3" posY="92" Width="24" Height="31" anchorX="14" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="24" Height="32" />
+      <Render posX="34" posY="94" Width="25" Height="29" anchorX="15" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="25" Height="29" />
+      <Render posX="68" posY="95" Width="23" Height="29" anchorX="13" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="24" Height="29" />
+      <Render posX="100" posY="94" Width="23" Height="29" anchorX="13" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="23" Height="30" />
+      <Render posX="133" posY="93" Width="21" Height="29" anchorX="12" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="29" />
+      <Render posX="165" posY="93" Width="23" Height="31" anchorX="12" anchorY="20" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="22" Height="31" />
+      <Render posX="195" posY="95" Width="24" Height="28" anchorX="14" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="25" Height="28" />
+      <Render posX="227" posY="94" Width="24" Height="28" anchorX="14" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="24" Height="27" />
+      <Render posX="259" posY="93" Width="24" Height="28" anchorX="14" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="26" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Walk_Up" Frames="8" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="3" posY="126" Width="22" Height="30" anchorX="11" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="21" Height="29" />
+      <Render posX="35" posY="126" Width="22" Height="29" anchorX="11" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="20" Height="29" />
+      <Render posX="67" posY="126" Width="22" Height="28" anchorX="11" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="21" Height="28" />
+      <Render posX="98" posY="127" Width="24" Height="29" anchorX="12" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="25" Height="28" />
+      <Render posX="131" posY="127" Width="23" Height="29" anchorX="11" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="22" Height="29" />
+      <Render posX="161" posY="126" Width="25" Height="30" anchorX="13" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="25" Height="31" />
+      <Render posX="191" posY="126" Width="26" Height="29" anchorX="15" anchorY="17" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="26" Height="29" />
+      <Render posX="225" posY="126" Width="25" Height="28" anchorX="13" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="2" posY="0" Width="27" Height="28" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
