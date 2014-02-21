@@ -35,6 +35,7 @@ public:
 	void GetNextTarget(void);
 	void GetPreviousTarget(void);
 	CUnits* GetCurrentTarget(void);
+	CUnits* GetCurrentTurn();
 	vector<CUnits*>& GetBattleUnits(void) { return m_vBattleUnits; }
 	vector<CProjectile*> m_vSkills;
 	void Initialize(void);

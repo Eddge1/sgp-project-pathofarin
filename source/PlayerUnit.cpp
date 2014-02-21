@@ -52,15 +52,17 @@ void CPlayerUnit::HandleEvent( const CEvent* pEvent )
 {
 	if(pEvent->GetEventID() == "DODGE")
 	{
-		m_bDodge = false;
-		timer = 1.0f;
-		std::wostringstream woss;
-		woss << "Attempt ";
-		if(!GetTutorial())
-			CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss, 0.3f);
-		else
-			CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
-
+		if(CBattleState::GetInstance()->GetCurrentTarget()->GetLevel() <= this->GetLevel() + 5)
+		{
+			m_bDodge = false;
+			timer = 1.0f;
+			std::wostringstream woss;
+			woss << "Attempt ";
+			if(!GetTutorial())
+				CBattleState::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss, 0.3f);
+			else
+				CTutorialBattle::GetInstance()->AddFloatingText(GetPosX(), GetPosY(), D3DCOLOR_XRGB(0,255,255), woss);
+		}
 	}
 }
 
