@@ -1,43 +1,67 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Animation_Data Count="4">
-	<Animation_Info Name="Mage_Walk_Left" Frames="3" repeat="1" Texture="DBL_Mage.png">
-		<Frame_Data>
-			<Render posX="0" posY="110" Width="32" Height="34" anchorX="16" anchorY="33" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="34" posY="112" Width="30" Height="34" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="-1" Width="30" Height="34"/>
-			<Render posX="67" posY="110" Width="28" Height="34" anchorX="16" anchorY="33" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-		</Frame_Data>
-	</Animation_Info>
-	<Animation_Info Name="Mage_Walk_Right" Frames="3" repeat="1" Texture="DBL_Mage.png">
-		<Frame_Data>
-			<Render posX="0" posY="38" Width="32" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="34" posY="36" Width="30" Height="34" anchorX="16" anchorY="34" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="67" posY="38" Width="28" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-		</Frame_Data>
-	</Animation_Info>
-	<Animation_Info Name="Mage_Walk_Up" Frames="3" repeat="1" Texture="DBL_Mage.png">
-		<Frame_Data>
-			<Render posX="0" posY="2" Width="32" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="34" posY="0" Width="30" Height="34" anchorX="16" anchorY="34" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="67" posY="2" Width="28" Height="34" anchorX="16" anchorY="35" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-		</Frame_Data>
-	</Animation_Info>
-	<Animation_Info Name="Mage_Walk_Down" Frames="3" repeat="1" Texture="DBL_Mage.png">
-		<Frame_Data>
-			<Render posX="0" posY="72" Width="32" Height="36" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="34" posY="72" Width="30" Height="34" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-			<Render posX="67" posY="72" Width="28" Height="36" anchorX="16" anchorY="32" Duration="0.2" Event=""/>
-			<ActiveCollision posX="0" posY="0" Width="30" Height="34"/>
-		</Frame_Data>
-	</Animation_Info>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="8">
+  <Animation_Info Name="Mage_Walk_Left" Frames="3" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="0" posY="110" Width="32" Height="34" anchorX="13" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="34" posY="108" Width="30" Height="34" anchorX="11" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="67" posY="110" Width="28" Height="34" anchorX="10" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="28" Height="34" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Walk_Right" Frames="3" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="0" posY="38" Width="32" Height="34" anchorX="21" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="34" posY="36" Width="30" Height="34" anchorX="19" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="67" posY="38" Width="28" Height="34" anchorX="18" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Walk_Up" Frames="3" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="0" posY="2" Width="32" Height="34" anchorX="18" anchorY="19" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="34" posY="0" Width="30" Height="34" anchorX="16" anchorY="19" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="67" posY="2" Width="28" Height="34" anchorX="15" anchorY="19" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Walk_Down" Frames="3" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="0" posY="72" Width="32" Height="36" anchorX="17" anchorY="23" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="34" posY="72" Width="30" Height="34" anchorX="15" anchorY="21" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+      <Render posX="67" posY="72" Width="28" Height="36" anchorX="14" anchorY="23" Duration="0.2" Event="" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="34" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Idle_Up" Frames="1" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="1" posY="0" Width="32" Height="37" anchorX="16" anchorY="22" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="32" Height="37" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Idle_Right" Frames="1" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="2" posY="37" Width="30" Height="35" anchorX="20" anchorY="22" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="31" Height="35" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Idle_Down" Frames="1" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="2" posY="72" Width="31" Height="37" anchorX="15" anchorY="24" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="32" Height="37" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Mage_Idle_Left" Frames="1" repeat="1" Texture="DBL_Mage.png">
+    <Frame_Data>
+      <Render posX="2" posY="110" Width="30" Height="36" anchorX="11" anchorY="21" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="30" Height="36" />
+    </Frame_Data>
+  </Animation_Info>
 </Animation_Data>
