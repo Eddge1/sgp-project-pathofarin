@@ -67,6 +67,12 @@ private:
 	PBattlephase m_eCurrentPhase;
 
 	int m_nForestBattleID;
+	int m_nCampBattleID;
+	int m_nCavernBattleID;
+	int m_nCaveBattleID;
+	int m_nGardenBattleID;
+	int m_nDesertBattleID;
+	int m_nDungeonBattleID;
 	int m_nTurn;
 	int m_nMenuImage;
 	int m_nMenuSelectionImage;

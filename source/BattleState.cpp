@@ -51,10 +51,16 @@ CBattleState::CBattleState(void)
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nVictoryMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Victory.xwm"));
 	m_nSelectionChange		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
-
-	m_nMenuImage			=	CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	
+	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
+	m_nCampBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cave2_Battle.png"));
+	m_nCavernBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cavern_Battle.png"));
+	m_nCaveBattleID			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Cave1_Battle.png"));
+	m_nGardenBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Garden_Battle.png"));
+	m_nDesertBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Desert_Battle.png"));
+	m_nDungeonBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Dungeon_Battle.png"));
 	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
 	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
 }
@@ -223,7 +229,10 @@ void CBattleState::Render(void)
 	RECT rCursor = {0,0,16,32};
 
 	//Temp drawing the UI
-	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
+	if (CGamePlayState::GetInstance()->GetWorld()->GetMapName() == "ForestLevelPart2")
+		pTM->Draw(m_nGardenBattleID, 0, 0, 2.0f, 2.0f);
+	else
+		pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
 	pTM->Draw(m_nMenuImage, 0,472);
 	pTM->Draw(m_nMenuSelectionImage, 272,408);
 
