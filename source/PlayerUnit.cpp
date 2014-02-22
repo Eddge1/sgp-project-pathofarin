@@ -214,19 +214,22 @@ void CPlayerUnit::Update(float fElapsedTime)
 
 void CPlayerUnit::EndTurn()
 {
-	if(m_bInSubMenu)
+	if(GetTurn())
 	{
-		m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
+		if(m_bInSubMenu)
+		{
+			m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->ResetSkill();
+		}
+		else
+		{
+			m_vCommands[m_nMenuSelect]->GetMiniGame()->ResetSkill();
+		}
+		m_nSkillSelect = 0;
+		SetTurn(false);
+		m_bSkillSelected = false;
+		m_bInSubMenu = false;
+		m_bCasting = false;
 	}
-	else
-	{
-		m_vCommands[m_nMenuSelect]->GetMiniGame()->ResetSkill();
-	}
-	m_nSkillSelect = 0;
-	SetTurn(false);
-	m_bSkillSelected = false;
-	m_bInSubMenu = false;
-	m_bCasting = false;
 }
 
 void CPlayerUnit::SetOwner(CPlayer* pPlayer)
