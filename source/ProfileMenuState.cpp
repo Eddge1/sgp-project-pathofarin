@@ -875,6 +875,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pCrystal->SetSkill(pIceSpear);
 	pCrystal->SetDamage(1.5f);
 	pCrystal->SetCost(20);
+	pCrystal->SetOwner(temp);
 	pTest->SetMiniGame(pCrystal);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
@@ -907,6 +908,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pCrystal->SetSkill(pHeal);
 	pCrystal->SetCost(25);
 	pCrystal->SetDamage(1.5f);
+	pCrystal->SetOwner(temp);
 	pTest->SetMiniGame(pCrystal);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
@@ -923,6 +925,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pCrystal->SetSkill(pMeditate);
 	pCrystal->SetCost(0);
 	pCrystal->SetDamage(1.5f);
+	pCrystal->SetOwner(temp);
 	pTest->SetMiniGame(pCrystal);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);

@@ -124,7 +124,10 @@ void CPlayerUnit::Update(float fElapsedTime)
 						{
 							m_bSkillSelected = true;
 							if(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetAOE() == true || m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->DamageSkill() == false)
+							{
+								ModifyAP(m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->GetCost());
 								m_bCasting = true;
+							}
 						}
 
 					}
@@ -136,7 +139,10 @@ void CPlayerUnit::Update(float fElapsedTime)
 							{
 								m_bSkillSelected = true;
 								if(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetAOE() || m_vCommands[m_nMenuSelect]->GetName() == "Items")
+								{
 									m_bCasting = true;
+									ModifyAP(m_vCommands[m_nMenuSelect]->GetMiniGame()->GetCost());
+								}
 							}
 						}
 						else
@@ -182,12 +188,10 @@ void CPlayerUnit::Update(float fElapsedTime)
 		{
 			if(m_bInSubMenu)
 			{
-				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->SetOwner(this);
 				m_vCommands[m_nMenuSelect]->GetCommand(m_nSkillSelect)->GetMiniGame()->Update(fElapsedTime);
 			}
 			else
 			{
-				m_vCommands[m_nMenuSelect]->GetMiniGame()->SetOwner(this);
 				m_vCommands[m_nMenuSelect]->GetMiniGame()->Update(fElapsedTime);
 			}
 		}
