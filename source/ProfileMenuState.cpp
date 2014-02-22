@@ -721,6 +721,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempM->SetCost(0);
+	tempM->SetOwner(temp);
 	tempC->SetIsGame(true);
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
@@ -734,6 +735,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	pTest->SetMiniGame(pAim);
 	pAim->SetDamage(4.0f);
 	pAim->SetCost(20);
+	pAim->SetOwner(temp);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 
@@ -744,6 +746,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	pTest->SetMiniGame(pMulti);
 	pMulti->SetDamage(0.75f);
 	pMulti->SetCost(15);
+	pMulti->SetOwner(temp);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
@@ -752,6 +755,7 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	CUseItem* tempL = new CUseItem;
 	tempL->SetDamageSkill(false);
 	tempL->SetCost(0);
+	tempL->SetOwner(temp);
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
 	tempC->SetIsGame(true);
@@ -782,6 +786,7 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempM->SetCost(0);
+	tempM->SetOwner(temp);
 	tempC->SetIsGame(true);
 	tempC->SetMiniGame(tempM);
 	temp->AddSkill(tempC);
@@ -794,6 +799,7 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	pTest->SetName("SwordSlash");
 	pSpree->SetCost(15);
 	pSpree->SetDamage(0.75f);
+	pSpree->SetOwner(temp);
 	pTest->SetMiniGame(pSpree);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
@@ -802,6 +808,7 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	CComboGame *pCombo = new CComboGame;
 	pTest->SetName("Blitz");
 	pCombo->SetCost(30);
+	pCombo->SetOwner(temp);
 	pCombo->SetDamage(1.3f);
 	pTest->SetMiniGame(pCombo);
 	pTest->SetIsGame(true);
@@ -812,6 +819,7 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	CUseItem* tempL = new CUseItem;
 	tempL->SetDamageSkill(false);
 	tempL->SetCost(0);
+	tempL->SetOwner(temp);
 	tempC->SetName("Items");
 	tempC->SetMiniGame(tempL);
 	tempC->SetIsGame(true);
@@ -848,6 +856,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	tempC = new CCommands;
 	tempC->SetName("Mage");
 	tempC->SetIsGame(false);
+	tempM->SetOwner(temp);
 
 	CCommands* pTest = new CCommands;
 	CTriggerMatch *pTrig = new CTriggerMatch;
@@ -859,6 +868,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pFireBall->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_LargeFireball.wav")));
 	pTrig->SetSkill(pFireBall);
 	pTrig->SetChances(5);
+	pTrig->SetOwner(temp);
 	pTrig->SetDamage(1.5f);
 	pTrig->SetCost(15);
 	pTest->SetMiniGame(pTrig);
@@ -891,6 +901,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pTrig->SetCost(20);
 	pTrig->SetChances(3);
 	pTrig->SetDamage(1.0f);
+	pTrig->SetOwner(temp);
 	pTrig->SetAOE(true);
 	pTest->SetMiniGame(pTrig);
 	pTest->SetIsGame(true);
@@ -937,6 +948,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	tempL->SetDamageSkill(false);
 	tempL->SetCost(0);
 	tempC->SetName("Items");
+	tempL->SetOwner(temp);
 	tempC->SetMiniGame(tempL);
 	tempC->SetIsGame(true);
 	temp->AddSkill(tempC);

@@ -666,6 +666,7 @@ CPlayerUnit* CTutorialBattle::CreateTempPlayer()
 	pTemp->SetCurrentFrame(0);
 	tempC->SetName("Attack");
 	tempC->SetMiniGame(m_pAttack);
+	m_pAttack->SetOwner(temp);
 	temp->AddSkill(tempC);
 
 	tempC = new CCommands;
@@ -674,12 +675,14 @@ CPlayerUnit* CTutorialBattle::CreateTempPlayer()
 	CCommands* pTest = new CCommands;
 	pTest->SetName("SwordSlash");
 	pTest->SetMiniGame(m_pTrigger);
+	m_pTrigger->SetOwner(temp);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 
 	pTest = new CCommands;
 	pTest->SetName("Blitz");
 	pTest->SetMiniGame(m_pCombo);
+	m_pCombo->SetOwner(temp);
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 
