@@ -35,6 +35,7 @@
 #include "EnemyUnit.h"
 #include "Augment.h"
 #include "TutorialBattle.h"
+#include <cassert>
 
 // GetInstance
 CGamePlayState* CGamePlayState::GetInstance( void )
@@ -169,6 +170,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("CREATE_WARRIOR", this);
 			m_pES->RegisterClient("CREATE_RANGER", this);
 			m_pES->RegisterClient("CREATE_MAGE", this);
+			m_pES->RegisterClient("DA_DUMMY", this);
 
 			m_eCurrPhase = GP_INIT;
 		}
@@ -280,9 +282,9 @@ bool CGamePlayState::Input(void)
 	}
 	else if(bisPaused && !m_bSaveGameStatus)
 	{
-		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
+		if( pDI->KeyPressed( DIK_W ) == true || pDI->KeyPressed( DIK_UPARROW ) == true || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP) )
 			SetCursorSelection(GetCursorSelection() - 1);
-		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
+		if( pDI->KeyPressed( DIK_S ) == true || pDI->KeyPressed( DIK_DOWNARROW ) == true || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN) )
 			SetCursorSelection(GetCursorSelection() + 1);
 
 		if(GetCursorSelection() > 3)
@@ -331,9 +333,9 @@ bool CGamePlayState::Input(void)
 	}
 	else if(m_bSaveGameStatus && !m_bSaveSuccess)
 	{
-		if( pDI->KeyPressed( DIK_W ) == true || pDI->JoystickDPadPressed(DIR_UP))
+		if( pDI->KeyPressed( DIK_W ) == true || pDI->KeyPressed( DIK_UPARROW ) == true ||pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 			m_nSaveSelection -= 1;
-		if( pDI->KeyPressed( DIK_S ) == true || pDI->JoystickDPadPressed(DIR_DOWN))
+		if( pDI->KeyPressed( DIK_S ) == true || pDI->KeyPressed( DIK_DOWNARROW ) == true ||pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
 			m_nSaveSelection += 1;
 
 		if(m_nSaveSelection > 1)
@@ -570,6 +572,10 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			m_pPlayer->SetUnit(ptemp);
 			ptemp->Release();
 		}
+	}
+	else if(pEvent->GetEventID() == "DA_DUMMY")
+	{
+			assert(true && "Why are you sending the dummy message?");
 	}
 }
 

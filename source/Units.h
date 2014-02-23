@@ -128,6 +128,7 @@ private:
 	int m_nGolem;
 	int m_nShade;
 	int m_nBee;
+	int m_nCult;
 
 };
 
