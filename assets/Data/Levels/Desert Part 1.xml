@@ -110,9 +110,7 @@
       <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="36" posX="16" posY="1">
-      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
-        <Chest Name="Titan-Ether" Amount="1" />
-      </Tile_Data>
+      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="37" posX="17" posY="1">
       <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

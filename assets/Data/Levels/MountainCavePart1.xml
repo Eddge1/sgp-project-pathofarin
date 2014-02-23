@@ -2125,7 +2125,9 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="106" posX="16" posY="3">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Hi-Potion" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="107" posX="17" posY="3">
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -4222,7 +4224,9 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="796" posX="16" posY="26">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Hi-Ether" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="797" posX="17" posY="26">
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

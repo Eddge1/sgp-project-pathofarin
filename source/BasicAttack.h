@@ -28,6 +28,7 @@ class CBasicAttack : public CMiniGames
 	int m_nOrc;
 	int m_nSnake;
 	int m_nValrion;
+	int m_nCult;
 
 
 public:
