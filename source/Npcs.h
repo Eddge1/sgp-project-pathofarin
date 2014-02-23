@@ -24,6 +24,10 @@ class CNpcs : public CEntity
 	float m_fLastX;
 	float m_fLastY;
 
+
+
+	int m_nChat;
+
 public:
 
 	CNpcs(void);
