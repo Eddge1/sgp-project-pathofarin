@@ -27,6 +27,9 @@ CBasicAttack::CBasicAttack(void)
 	m_nSnail = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snail_Attack.wav"));
 	m_nTree = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Tree_Attack.wav"));
 	m_nBee = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bee_Attack.wav"));
+	m_nCult = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Cult_Attack.wav"));
+
+
 
 	bAttacked = false;
 	bhasPlayed = false;
@@ -148,6 +151,9 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nGolem);
 			else if(GetOwner()->GetName() == "Bee")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBee);
+			else if(GetOwner()->GetName() == "Cultist")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCult);
+
 			bhasPlayed = true;
 		}
 	}

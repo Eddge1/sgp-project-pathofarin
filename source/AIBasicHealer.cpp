@@ -10,6 +10,8 @@ CAIBasicHealer::CAIBasicHealer(void)
 	m_nBat = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bat_Attack.wav"));
 	m_nSnake = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snake_Spell.wav"));
 	m_nOrcSha = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_OrcShaman_CastSpell.wav"));
+	m_nCult = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Cult_Spell.wav"));
+
 
 
 }
@@ -41,7 +43,8 @@ void CAIBasicHealer::Update(float fElapsedTime)
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnake);
 		else if(GetOwner()->GetName() == "Mandrake")
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nManDrake);
-
+		else if(GetOwner()->GetName() == "Cultist")
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCult);
 
 
 	}

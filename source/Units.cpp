@@ -38,6 +38,8 @@ CUnits::CUnits(void)
 	m_nSnail = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Snail_Hurt.wav"));
 	m_nTree = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Tree_Hurt.wav"));
 	m_nBee = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Bee_Hurt.wav"));
+	m_nCult = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Cult_Hurt.wav"));
+
 
 
 
@@ -187,6 +189,8 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nValrion);
 				else if(this->GetName() == "Bee")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBee);
+				else if(this->GetName() == "Cultist")
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCult);
 
 
 
