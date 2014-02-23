@@ -13,6 +13,7 @@ CPlayer::CPlayer(void)
 	m_fLastY = -1;
 	m_fLastX = -1;
 	m_bIsWarping = false;
+	m_bBroadcast = false;
 }
 
 
@@ -229,7 +230,24 @@ void CPlayer::HandleCollision(CObjects* col)
 
 void CPlayer::HandleEvent( const CEvent* pEvent )
 {
-
+	for(unsigned int i = 0; i < m_szListen.size(); i++)
+	{
+		bool bHeard = false;
+		if(pEvent->GetEventID() == m_szListen[i])
+		{
+			for(unsigned int nLoop = 0; i < m_szHeard.size(); i++)
+			{
+				if(m_szHeard[nLoop] == m_szListen[i])
+				{
+					bHeard = true;
+					break;
+				}
+			}
+			if(!bHeard)
+				m_szHeard.push_back(m_szListen[i]);
+			break;
+		}
+	}
 
 }
 
@@ -244,3 +262,37 @@ void CPlayer::SetUnit	(CPlayerUnit* pUnit)
 		m_cBattle->AddRef();
 }
 
+void CPlayer::AddListen (std::string szEvent)
+{
+	if(szEvent == "")
+		return;
+	for(unsigned int i = 0; i < m_szListen.size(); i++)
+	{
+		if(m_szListen[i] == szEvent)
+			return;
+	}
+
+	m_szListen.push_back(szEvent);
+	CSGD_EventSystem::GetInstance()->RegisterClient(szEvent.c_str(), this);
+}
+
+void CPlayer::BroadCastHeard()
+{
+	for(unsigned int i = 0; i < m_szHeard.size(); i++)
+	{
+		CSGD_EventSystem::GetInstance()->SendEventNow(m_szHeard[i]);
+	}
+}
+
+void CPlayer::AddHeard (std::string szEvent)
+{
+	if(szEvent == "")
+		return;
+	for(unsigned int i = 0; i < m_szHeard.size(); i++)
+	{
+		if(m_szHeard[i] == szEvent)
+			return;
+	}
+
+	m_szHeard.push_back(szEvent);
+}

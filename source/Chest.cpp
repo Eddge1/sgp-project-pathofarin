@@ -35,6 +35,12 @@ void CChest::HandleEvent( const CEvent* pEvent )
 			m_bOpened = true;
 		}
 	}
+	if(pEvent->GetEventID() == m_szErase)
+	{
+		this->GetAnimInfo()->SetAnimation("Chest_Opening");
+		m_bCollided = true;
+		m_bOpened = true;
+	}
 }
 
 void CChest::AddConsumableItem(CItem* input, int nAmount, float fChance)

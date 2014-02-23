@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Pathetic_Orc" Hostile="false" Units="0" File="OrcWatcher">
+  <Convo Text="Ugg ugg lok ug ta og -They appear to be staring at some crystals behind you and won't let you pass-" Event="" />
+</NPC>

@@ -14,8 +14,8 @@ class CNpcs : public CEntity
 	std::vector<std::string> m_szConversation;
 	std::vector<SWaypoint*> m_vWaypoints;
 	std::string m_szEventThrow; 
+	std::vector<std::string> m_szEraseEvents;
 	std::string m_szName; 
-
 	bool m_bContainsUnits;
 	bool m_bIsHostile;
 	bool m_bGameVictory;
@@ -34,7 +34,7 @@ public:
 	void SetEvent(std::string szEvent)	{m_szEventThrow = szEvent;}
 	void SetHostile(bool bHostile)		{m_bIsHostile = bHostile;}
 	void SetName(std::string szName)	{m_szName = szName;}
-
+	void AddEraseEvent(std::string szEvent);
 	void SetUnits(CEnemyUnit* l);
 	void AddConversation(std::string szConvo);
 	void AddWaypoint(float fX, float fY);

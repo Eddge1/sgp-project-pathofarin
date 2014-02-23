@@ -121,7 +121,7 @@ namespace SGP_PoA_LevelEditor
                                         {
                                             TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
                                             new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 127,0,127));
+                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 127, 0, 127));
                                         }
                                         else
                                             TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
@@ -241,6 +241,9 @@ namespace SGP_PoA_LevelEditor
             szRelativePath = Environment.CurrentDirectory + "\\..\\Assets\\Graphics\\Tilesets\\";
             szTileSetName = "";
             szFileName = "";
+            txtBroadCast.Text = "";
+            txtChestBroadcast.Text = "";
+            txtErase.Text = "";
             lstNPC.Items.Clear();
             lstMaps.Items.Clear();
             lstLayers.Items.Clear();
@@ -610,11 +613,14 @@ namespace SGP_PoA_LevelEditor
                                         lstNPC.SelectedIndex = i;
                                         break;
                                     }
+
                                 }
                                 foreach (Point pt in L.MyTiles[Temp.X, Temp.Y].Waypoints)
                                 {
                                     lstWaypoints.Items.Add(pt);
                                 }
+                                txtErase.Text = L.MyTiles[Temp.X, Temp.Y].SzErase;
+                                txtBroadCast.Text = L.MyTiles[Temp.X, Temp.Y].BroadCast;
                             }
                             else
                             {
@@ -623,6 +629,8 @@ namespace SGP_PoA_LevelEditor
                                     L.MyTiles[Temp.X, Temp.Y].EventType = "NPCS";
                                     L.MyTiles[Temp.X, Temp.Y].SzSpecial = lstNPC.Items[lstNPC.SelectedIndex].ToString();
                                     lstWaypoints.Items.Clear();
+                                    L.MyTiles[Temp.X, Temp.Y].SzErase = txtErase.Text;
+                                    L.MyTiles[Temp.X, Temp.Y].BroadCast = txtBroadCast.Text;
                                 }
                             }
 
@@ -632,6 +640,8 @@ namespace SGP_PoA_LevelEditor
                     {
                         L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                         L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].SzErase = "";
+                        L.MyTiles[Temp.X, Temp.Y].BroadCast = "";
                         L.MyTiles[Temp.X, Temp.Y].Waypoints.Clear();
                         lstWaypoints.Items.Clear();
                     }
@@ -647,6 +657,7 @@ namespace SGP_PoA_LevelEditor
                             {
                                 lstItems.Items.Add(mc);
                             }
+                            txtChestBroadcast.Text = L.MyTiles[Temp.X, Temp.Y].BroadCast;
                         }
                         else
                         {
@@ -657,6 +668,7 @@ namespace SGP_PoA_LevelEditor
                                 myChest temp = (myChest)lstItems.Items[i];
                                 L.MyTiles[Temp.X, Temp.Y].CItems.Add(temp);
                             }
+                            L.MyTiles[Temp.X, Temp.Y].BroadCast = txtChestBroadcast.Text;
                         }
                     }
                     else
@@ -664,6 +676,7 @@ namespace SGP_PoA_LevelEditor
                         lstItems.Items.Clear();
                         L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                         L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
+                        L.MyTiles[Temp.X, Temp.Y].BroadCast = "";
                         L.MyTiles[Temp.X, Temp.Y].CItems.Clear();
 
                     }
@@ -684,6 +697,8 @@ namespace SGP_PoA_LevelEditor
                         L.MyTiles[Temp.X, Temp.Y].EventType = "MAP_EDIT";
                         L.MyTiles[Temp.X, Temp.Y].SzSpecial = "";
                         L.MyTiles[Temp.X, Temp.Y].WarpX = 0;
+                        L.MyTiles[Temp.X, Temp.Y].BroadCast = "";
+                        L.MyTiles[Temp.X, Temp.Y].SzErase = "";
                         L.MyTiles[Temp.X, Temp.Y].WarpY = 0;
                     }
 
@@ -838,6 +853,27 @@ namespace SGP_PoA_LevelEditor
                             XElement xTileData = new XElement("Tile_Data");
                             XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
                             XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
+                            if (L.MyTiles[x, y].EventType == "CHESTS")
+                            {
+                                if (L.MyTiles[x, y].BroadCast != null && L.MyTiles[x, y].BroadCast != "")
+                                {
+                                    XAttribute xChestBroadCast = new XAttribute("EventBroad", L.MyTiles[x, y].BroadCast);
+                                    xTileData.Add(xChestBroadCast);
+                                }
+                            }
+                            if (L.MyTiles[x, y].EventType == "NPCS")
+                            {
+                                if (L.MyTiles[x, y].BroadCast != null && L.MyTiles[x, y].BroadCast != "")
+                                {
+                                    XAttribute xNPCBroadCast = new XAttribute("EventBroad", L.MyTiles[x, y].BroadCast);
+                                    xTileData.Add(xNPCBroadCast);
+                                }
+                                if (L.MyTiles[x, y].SzErase != null && L.MyTiles[x, y].SzErase != "")
+                                {
+                                    XAttribute xNPCEraseCast = new XAttribute("RemoveEvent", L.MyTiles[x, y].SzErase);
+                                    xTileData.Add(xNPCEraseCast);
+                                }
+                            }
                             if (L.MyTiles[x, y].EventType == null)
                                 L.MyTiles[x, y].EventType = "MAP_EDIT";
                             XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
@@ -980,6 +1016,27 @@ namespace SGP_PoA_LevelEditor
                             XElement xTileData = new XElement("Tile_Data");
                             XAttribute xTileX = new XAttribute("xTileID", L.MyTiles[x, y].X);
                             XAttribute xTileY = new XAttribute("yTileID", L.MyTiles[x, y].Y);
+                            if (L.MyTiles[x, y].EventType == "CHESTS")
+                            {
+                                if (L.MyTiles[x, y].BroadCast != null && L.MyTiles[x, y].BroadCast != "")
+                                {
+                                    XAttribute xChestBroadCast = new XAttribute("EventBroad", L.MyTiles[x, y].BroadCast);
+                                    xTileData.Add(xChestBroadCast);
+                                }
+                            }
+                            if (L.MyTiles[x, y].EventType == "NPCS")
+                            {
+                                if (L.MyTiles[x, y].BroadCast != null && L.MyTiles[x, y].BroadCast != "")
+                                {
+                                    XAttribute xNPCBroadCast = new XAttribute("EventBroad", L.MyTiles[x, y].BroadCast);
+                                    xTileData.Add(xNPCBroadCast);
+                                }
+                                if (L.MyTiles[x, y].SzErase != null && L.MyTiles[x, y].SzErase != "")
+                                {
+                                    XAttribute xNPCEraseCast = new XAttribute("RemoveEvent", L.MyTiles[x, y].SzErase);
+                                    xTileData.Add(xNPCEraseCast);
+                                }
+                            }
                             if (L.MyTiles[x, y].EventType == null)
                                 L.MyTiles[x, y].EventType = "MAP_EDIT";
                             XAttribute xTileEventType = new XAttribute("EventType", L.MyTiles[x, y].EventType);
@@ -1090,7 +1147,7 @@ namespace SGP_PoA_LevelEditor
                 IEnumerable<XElement> xLayers = xRoot.Elements("Layer");
 
                 XAttribute xMusic = xRoot.Attribute("Music");
-                
+
                 if (xMusic == null)
                     lblAudio.Text = "Click to set Audio ----->";
                 else
@@ -1185,8 +1242,25 @@ namespace SGP_PoA_LevelEditor
                         }
                         lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].CItems = new List<myChest>();
 
+
+                        if (xTileEventType.Value == "NPCS")
+                        {
+                            XAttribute xNPCBroadCast = xTileInfo.Attribute("EventBroad");
+                            XAttribute xNPCEraseCast = xTileInfo.Attribute("RemoveEvent");
+                            if (xNPCBroadCast != null)
+                                lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].BroadCast = xNPCBroadCast.Value;
+
+                            if (xNPCEraseCast != null)
+                                lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].SzErase = xNPCEraseCast.Value;
+                        }
+
+
                         if (xTileEventType.Value == "CHESTS")
                         {
+                            XAttribute xChestBroadCast = xTileInfo.Attribute("EventBroad");
+                            if (xChestBroadCast.Value != null)
+                                lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].BroadCast = xChestBroadCast.Value;
+
                             IEnumerable<XElement> xChests = xTileInfo.Elements("Chest");
                             foreach (XElement ch in xChests)
                             {
