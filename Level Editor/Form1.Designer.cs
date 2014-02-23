@@ -54,6 +54,8 @@
             this.nudMapWidth = new System.Windows.Forms.NumericUpDown();
             this.nudMapHeight = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSound = new System.Windows.Forms.Button();
+            this.lblAudio = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEventBroadCast = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -129,8 +131,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lstItems = new System.Windows.Forms.ListBox();
             this.cmbItemChoice = new System.Windows.Forms.ComboBox();
-            this.lblAudio = new System.Windows.Forms.Label();
-            this.btnSound = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txtErase = new System.Windows.Forms.TextBox();
+            this.txtBroadCast = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.txtChestBroadcast = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
@@ -247,14 +253,14 @@
             // loadTilesetToolStripMenuItem
             // 
             this.loadTilesetToolStripMenuItem.Name = "loadTilesetToolStripMenuItem";
-            this.loadTilesetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadTilesetToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.loadTilesetToolStripMenuItem.Text = "Load Tileset";
             this.loadTilesetToolStripMenuItem.Click += new System.EventHandler(this.loadTilesetToolStripMenuItem_Click);
             // 
             // createNewNPCToolStripMenuItem
             // 
             this.createNewNPCToolStripMenuItem.Name = "createNewNPCToolStripMenuItem";
-            this.createNewNPCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createNewNPCToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.createNewNPCToolStripMenuItem.Text = "NPC Editor";
             this.createNewNPCToolStripMenuItem.Click += new System.EventHandler(this.createNewNPCToolStripMenuItem_Click);
             // 
@@ -446,6 +452,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Data";
             // 
+            // btnSound
+            // 
+            this.btnSound.Location = new System.Drawing.Point(136, 119);
+            this.btnSound.Name = "btnSound";
+            this.btnSound.Size = new System.Drawing.Size(21, 23);
+            this.btnSound.TabIndex = 29;
+            this.btnSound.Text = "M";
+            this.btnSound.UseVisualStyleBackColor = true;
+            this.btnSound.Click += new System.EventHandler(this.btnSound_Click);
+            // 
+            // lblAudio
+            // 
+            this.lblAudio.AutoSize = true;
+            this.lblAudio.Location = new System.Drawing.Point(12, 124);
+            this.lblAudio.Name = "lblAudio";
+            this.lblAudio.Size = new System.Drawing.Size(113, 13);
+            this.lblAudio.TabIndex = 28;
+            this.lblAudio.Text = "Click to set Audio ----->";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -616,6 +641,10 @@
             // 
             // grpNPC
             // 
+            this.grpNPC.Controls.Add(this.txtBroadCast);
+            this.grpNPC.Controls.Add(this.txtErase);
+            this.grpNPC.Controls.Add(this.label29);
+            this.grpNPC.Controls.Add(this.label28);
             this.grpNPC.Controls.Add(this.lstNPC);
             this.grpNPC.Controls.Add(this.btnNPCMove);
             this.grpNPC.Controls.Add(this.btnNPCUnits);
@@ -635,7 +664,7 @@
             this.lstNPC.FormattingEnabled = true;
             this.lstNPC.Location = new System.Drawing.Point(6, 21);
             this.lstNPC.Name = "lstNPC";
-            this.lstNPC.Size = new System.Drawing.Size(207, 121);
+            this.lstNPC.Size = new System.Drawing.Size(207, 95);
             this.lstNPC.TabIndex = 12;
             // 
             // btnNPCMove
@@ -704,7 +733,7 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(1033, 181);
+            this.grpBlock.Location = new System.Drawing.Point(1262, 83);
             this.grpBlock.Name = "grpBlock";
             this.grpBlock.Size = new System.Drawing.Size(223, 201);
             this.grpBlock.TabIndex = 12;
@@ -1164,6 +1193,8 @@
             // 
             // grpChest
             // 
+            this.grpChest.Controls.Add(this.txtChestBroadcast);
+            this.grpChest.Controls.Add(this.label30);
             this.grpChest.Controls.Add(this.btnItemApply);
             this.grpChest.Controls.Add(this.label27);
             this.grpChest.Controls.Add(this.nudItems);
@@ -1173,7 +1204,7 @@
             this.grpChest.Controls.Add(this.label7);
             this.grpChest.Controls.Add(this.lstItems);
             this.grpChest.Controls.Add(this.cmbItemChoice);
-            this.grpChest.Location = new System.Drawing.Point(1033, 181);
+            this.grpChest.Location = new System.Drawing.Point(1261, 327);
             this.grpChest.Name = "grpChest";
             this.grpChest.Size = new System.Drawing.Size(223, 201);
             this.grpChest.TabIndex = 34;
@@ -1194,7 +1225,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(108, 136);
+            this.label27.Location = new System.Drawing.Point(108, 156);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(43, 13);
             this.label27.TabIndex = 7;
@@ -1202,7 +1233,7 @@
             // 
             // nudItems
             // 
-            this.nudItems.Location = new System.Drawing.Point(111, 155);
+            this.nudItems.Location = new System.Drawing.Point(111, 175);
             this.nudItems.Name = "nudItems";
             this.nudItems.Size = new System.Drawing.Size(41, 20);
             this.nudItems.TabIndex = 6;
@@ -1219,7 +1250,7 @@
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(158, 153);
+            this.btnAddItem.Location = new System.Drawing.Point(158, 173);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(59, 23);
             this.btnAddItem.TabIndex = 4;
@@ -1230,7 +1261,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 136);
+            this.label8.Location = new System.Drawing.Point(6, 156);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 13);
             this.label8.TabIndex = 3;
@@ -1256,29 +1287,58 @@
             // cmbItemChoice
             // 
             this.cmbItemChoice.FormattingEnabled = true;
-            this.cmbItemChoice.Location = new System.Drawing.Point(6, 154);
+            this.cmbItemChoice.Location = new System.Drawing.Point(6, 174);
             this.cmbItemChoice.Name = "cmbItemChoice";
             this.cmbItemChoice.Size = new System.Drawing.Size(99, 21);
             this.cmbItemChoice.TabIndex = 0;
             // 
-            // lblAudio
+            // label28
             // 
-            this.lblAudio.AutoSize = true;
-            this.lblAudio.Location = new System.Drawing.Point(12, 124);
-            this.lblAudio.Name = "lblAudio";
-            this.lblAudio.Size = new System.Drawing.Size(113, 13);
-            this.lblAudio.TabIndex = 28;
-            this.lblAudio.Text = "Click to set Audio ----->";
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(9, 128);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(56, 13);
+            this.label28.TabIndex = 13;
+            this.label28.Text = "BroadCast";
             // 
-            // btnSound
+            // label29
             // 
-            this.btnSound.Location = new System.Drawing.Point(136, 119);
-            this.btnSound.Name = "btnSound";
-            this.btnSound.Size = new System.Drawing.Size(21, 23);
-            this.btnSound.TabIndex = 29;
-            this.btnSound.Text = "M";
-            this.btnSound.UseVisualStyleBackColor = true;
-            this.btnSound.Click += new System.EventHandler(this.btnSound_Click);
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(9, 149);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(34, 13);
+            this.label29.TabIndex = 14;
+            this.label29.Text = "Erase";
+            // 
+            // txtErase
+            // 
+            this.txtErase.Location = new System.Drawing.Point(43, 146);
+            this.txtErase.Name = "txtErase";
+            this.txtErase.Size = new System.Drawing.Size(100, 20);
+            this.txtErase.TabIndex = 15;
+            // 
+            // txtBroadCast
+            // 
+            this.txtBroadCast.Location = new System.Drawing.Point(67, 125);
+            this.txtBroadCast.Name = "txtBroadCast";
+            this.txtBroadCast.Size = new System.Drawing.Size(100, 20);
+            this.txtBroadCast.TabIndex = 16;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(5, 137);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(55, 13);
+            this.label30.TabIndex = 35;
+            this.label30.Text = "Broadcast";
+            // 
+            // txtChestBroadcast
+            // 
+            this.txtChestBroadcast.Location = new System.Drawing.Point(59, 134);
+            this.txtChestBroadcast.Name = "txtChestBroadcast";
+            this.txtChestBroadcast.Size = new System.Drawing.Size(95, 20);
+            this.txtChestBroadcast.TabIndex = 36;
             // 
             // Form1
             // 
@@ -1456,6 +1516,12 @@
         private System.Windows.Forms.Button btnItemApply;
         private System.Windows.Forms.Button btnSound;
         private System.Windows.Forms.Label lblAudio;
+        private System.Windows.Forms.TextBox txtBroadCast;
+        private System.Windows.Forms.TextBox txtErase;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox txtChestBroadcast;
+        private System.Windows.Forms.Label label30;
     }
 }
 

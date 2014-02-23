@@ -35,18 +35,32 @@ namespace SGP_PoA_LevelEditor
         int x;
         int y;
         string szEventType;
+        string szBroadCast;
+        string szErase;
         int warpX;
         int warpY;
         string szSpecial;
         List<myChest> cItems;
         List<Point> m_vWaypoints;
 
+        public string BroadCast
+        {
+            get { return szBroadCast; }
+            set { szBroadCast = value; }
+        }
+
+        public string SzErase
+        {
+            get { return szErase; }
+            set { szErase = value; }
+        }
+
         internal List<myChest> CItems
         {
             get { return cItems; }
             set { cItems = value; }
         }
-        
+
         public List<Point> Waypoints
         {
             get { return m_vWaypoints; }

@@ -197,8 +197,8 @@ bool CProfileMenuState::Input()
 					if(m_vCharacterList[1]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[1]->GetZone() + ".xml";
-						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						for(unsigned int i = 0; i < m_vWorldData[1].size();i++)
 							pWorld->AddClear(m_vWorldData[1][i]);
 						CMainMenuState::GetInstance()->SetLeftMenuState(true);
@@ -239,8 +239,8 @@ bool CProfileMenuState::Input()
 					if(m_vCharacterList[2]->GetUnit()->GetName() == "Arin")
 					{
 						string szZone = m_vCharacterList[2]->GetZone() + ".xml";
-						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
+						CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 						for(unsigned int i = 0; i < m_vWorldData[2].size();i++)
 							pWorld->AddClear(m_vWorldData[2][i]);
 						CMainMenuState::GetInstance()->SetLeftMenuState(true);
@@ -382,7 +382,7 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 
 		pSlot->SetAttribute("Name", szTemp.c_str());
 		pSlot->SetAttribute("Level", 1);
-		pSlot->SetAttribute("Attack", 20);
+		pSlot->SetAttribute("Attack", 10);
 		pSlot->SetAttribute("Health", 350);
 		pSlot->SetAttribute("Max_Health", 350);
 		pSlot->SetAttribute("AP", 100);
@@ -392,8 +392,8 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		pSlot->SetAttribute("Class", 0);
 		pSlot->SetAttribute("posX", 488);
 		pSlot->SetAttribute("posY", 420);
-		pSlot->SetAttribute("Zone", "Caveren_of_souls");
-		string szZone = "Caveren_of_souls.xml";
+		pSlot->SetAttribute("Zone", "Cavern of souls");
+		string szZone = "Cavern of souls.xml";
 
 		TiXmlElement* pItem;
 		pItem = new TiXmlElement("Item");
@@ -402,11 +402,9 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 
 		pInventory->LinkEndChild(pItem);
 
-
 		pEquipment->SetAttribute("Weapon", "Empty");
 		pEquipment->SetAttribute("Armor", "Empty");
 		pEquipment->SetAttribute("Augment", "Empty");
-
 
 		pRoot->LinkEndChild(pSlot);
 		pRoot->LinkEndChild(pEquipment);
@@ -500,6 +498,19 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		}
 		m_vWorldData.push_back(vTemp);
 
+		TiXmlElement* pGameProgress = pRoot->FirstChildElement("Events");
+		if(pGameProgress != nullptr)
+		{
+			std::string szEvents = "";
+			for(;pGameProgress !=nullptr;)
+			{
+				szEvents = pGameProgress->Attribute("Name");
+				pPlayer->AddHeard(szEvents);
+				szEvents = "";
+				pGameProgress = pGameProgress->NextSiblingElement("Events");
+			}
+		}
+
 		TiXmlElement* pInventory = pRoot->FirstChildElement("Inventory");
 		map<string, InventoryItems>* pTempItemManager = CGamePlayState::GetInstance()->GetItemManager();
 
@@ -569,13 +580,13 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 	{
 		pSlot->SetAttribute("Name", pTemp->GetUnit()->GetName().c_str());
 		pSlot->SetAttribute("Level", pTemp->GetUnit()->GetLevel());
-		pSlot->SetAttribute("Attack", pTemp->GetUnit()->GetAttack());
-		pSlot->SetAttribute("Health", pTemp->GetUnit()->GetHealth());
-		pSlot->SetAttribute("Max_Health", pTemp->GetUnit()->GetMaxHealth());
-		pSlot->SetAttribute("AP", pTemp->GetUnit()->GetAbilityPoints());
-		pSlot->SetAttribute("Max_AP", pTemp->GetUnit()->GetMaxAP());
+		pSlot->SetAttribute("Attack", pTemp->GetUnit()->CUnits::GetAttack());
+		pSlot->SetAttribute("Health", pTemp->GetUnit()->CUnits::GetHealth());
+		pSlot->SetAttribute("Max_Health", pTemp->GetUnit()->CUnits::GetMaxHealth());
+		pSlot->SetAttribute("AP", pTemp->GetUnit()->CUnits::GetAbilityPoints());
+		pSlot->SetAttribute("Max_AP", pTemp->GetUnit()->CUnits::GetMaxAP());
 		pSlot->SetAttribute("Experience", pTemp->GetUnit()->GetExperience());
-		pSlot->SetAttribute("Speed", pTemp->GetUnit()->GetSpeed());
+		pSlot->SetAttribute("Speed", pTemp->GetUnit()->CUnits::GetSpeed());
 		pSlot->SetAttribute("Class", (int)pTemp->GetUnit()->GetClass());
 		pSlot->SetAttribute("posX", int(pTemp->GetPosX()));
 		pSlot->SetAttribute("posY", int(pTemp->GetPosY()));
@@ -596,7 +607,14 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 				pInventory->LinkEndChild(pItem);
 			}
 		}
-
+		std::vector<std::string> vEvents = pTemp->getHeard();
+		TiXmlElement* pHeard;
+		for(unsigned int i = 0; i < vEvents.size(); i++)
+		{
+			pHeard = new TiXmlElement("Events");
+			pHeard->SetAttribute("Name", vEvents[i].c_str());
+			pRoot->LinkEndChild(pHeard);
+		}
 
 		CPlayerUnit* pTempUnit = reinterpret_cast<CPlayerUnit*>(pTemp->GetUnit());
 
@@ -631,6 +649,7 @@ void CProfileMenuState::SaveGame(std::string szFileName)
 		}
 
 	}
+
 	pRoot->LinkEndChild(pSlot);
 	pRoot->LinkEndChild(pEquipment);
 	pRoot->LinkEndChild(pWorldData);
@@ -650,7 +669,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
 	pTemp->SetAnimation("Warrior_Idle_Down");
-	temp->SetZone("Caveren_of_souls");
+	temp->SetZone("Cavern of souls");
 	CPlayerUnit* pUnit = CreateTempPlayer();
 	pUnit->SetClass(UC_NONE);
 	temp->SetUnit(pUnit);

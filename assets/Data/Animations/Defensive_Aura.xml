@@ -1,13 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="1">
-  <Animation_Info Name="Defensive_Aura" Frames="3" repeat="1" Texture="PlayStation - Tales of Destiny - Spell Effects.png">
+  <Animation_Info Name="Defensive_Aura" Frames="10" repeat="1" Texture="POA_Defensive_Aura.png">
     <Frame_Data>
-      <Render posX="179" posY="1501" Width="104" Height="106" anchorX="53" anchorY="54" Duration="0.1" Event="FLARE" />
-      <ActiveCollision posX="1" posY="0" Width="105" Height="105" />
-      <Render posX="284" posY="1502" Width="103" Height="105" anchorX="50" anchorY="57" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="99" Height="103" />
-      <Render posX="223" posY="6" Width="101" Height="101" anchorX="51" anchorY="53" Duration="0.1" Event="COMPLETE" />
-      <ActiveCollision posX="0" posY="-1" Width="101" Height="99" />
+      <Render posX="386" posY="13" Width="100" Height="132" anchorX="50" anchorY="66" Duration="0.1" Event="FLARE" />
+      <ActiveCollision posX="1" posY="0" Width="101" Height="131" />
+      <Render posX="497" posY="11" Width="99" Height="131" anchorX="49" anchorY="67" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="98" Height="131" />
+      <Render posX="605" posY="10" Width="105" Height="134" anchorX="51" anchorY="73" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="104" Height="134" />
+      <Render posX="717" posY="10" Width="99" Height="136" anchorX="49" anchorY="73" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="100" Height="136" />
+      <Render posX="827" posY="13" Width="98" Height="133" anchorX="49" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="98" Height="133" />
+      <Render posX="935" posY="14" Width="103" Height="134" anchorX="51" anchorY="68" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="103" Height="134" />
+      <Render posX="1045" posY="14" Width="102" Height="133" anchorX="51" anchorY="68" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="102" Height="133" />
+      <Render posX="1155" posY="13" Width="101" Height="133" anchorX="51" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="100" Height="133" />
+      <Render posX="1262" posY="13" Width="106" Height="133" anchorX="54" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="106" Height="133" />
+      <Render posX="1373" posY="13" Width="104" Height="133" anchorX="53" anchorY="69" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="105" Height="132" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>
