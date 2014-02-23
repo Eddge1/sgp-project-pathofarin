@@ -13,6 +13,8 @@ CNpcs::CNpcs(void)
 	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
 	m_fDelayChat = 0.0f;
 	m_bGameVictory = false;
+
+	m_nChat = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_Chat_Open.wav"));
 }
 
 
@@ -160,6 +162,8 @@ void CNpcs::HandleCollision(CObjects* col)
 						wostringstream woss;
 						if(m_szConversation.size() > 0)
 						{
+							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nChat);
+
 							woss << m_szConversation[0].c_str();
 							CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
 							if(m_bGameVictory)
