@@ -6,6 +6,7 @@
 #include "TutorialBattle.h"
 #include "GamePlayState.h"
 #include "Buff.h"
+#include "AnimationSystem.h"
 #include "PlayerUnit.h"
 
 CChargeCrystal::CChargeCrystal(void)
@@ -23,17 +24,23 @@ CChargeCrystal::CChargeCrystal(void)
 	m_fCursorY = 200.0f;
 	m_bHeal = false;
 	m_bAuraPlay = true;
+	pAnimation = new CEntity();
+	pAnimation->GetAnimInfo()->SetAnimation("Lightning_Effect");
+	pAnimation->SetPosX(400);
+	pAnimation->SetPosY(200);
 }
 
 
 CChargeCrystal::~CChargeCrystal(void)
 {
-
+	pAnimation->Release();
 }
 
 void CChargeCrystal::Render()
 {
+	RECT rFade = {0,0,800,600};
 
+	CSGD_Direct3D::GetInstance()->DrawRect(rFade, D3DCOLOR_ARGB(100,0,0,0));
 	CSGD_TextureManager* pTM= CSGD_TextureManager::GetInstance();
 	RECT rTemp = {0,0,128,128};
 
@@ -50,7 +57,7 @@ void CChargeCrystal::Render()
 		pBuff->Release();
 		m_bAuraPlay = false;
 	}
-
+	CAnimationSystem::GetInstance()->Render(pAnimation->GetAnimInfo(), pAnimation->GetPosX(), pAnimation->GetPosY(), 1.0f,1.0f, D3DCOLOR_XRGB(255,255,255));
 	pTM->Draw(m_nChargeImgID, int(400-64*m_fScale), int(200-64*m_fScale), m_fScale, m_fScale, &rTemp, 64*m_fScale,64*m_fScale,m_fRotation, D3DCOLOR_XRGB(255,255,255));
 	RECT rGem = {0,0,16,16};
 	pTM->Draw(m_nCursorImageID, int(m_fCursorX - 8), int(m_fCursorY - 8), 1.0f,1.0f,&rGem,8.0f,8.0f,-m_fRotation, D3DCOLOR_XRGB(255,255,255));
@@ -60,6 +67,7 @@ void CChargeCrystal::Update(float fElapsedTime)
 {
 	if(m_nSuccess < 3 && !m_bFailed)
 	{
+		pAnimation->Update(fElapsedTime);
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		float fX = 0.0f;
 		float fY = 0.0f;

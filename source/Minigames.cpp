@@ -15,6 +15,7 @@ CMiniGames::CMiniGames(void)
 	m_nSFXID			= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_SuccessCharge.wav"));
 	m_nCriticalSFXID	= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_CritBar.wav"));
 	m_nFailSFXID		= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_Fail.wav"));
+	m_nSuccessCompleteSFXID = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/MiniGame/POA_CritCharge.wav"));
 	m_eType = MG_OFFENSIVE;
 	m_bDamage = true;
 }

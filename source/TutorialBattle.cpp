@@ -149,25 +149,24 @@ bool CTutorialBattle::Input( void )
 				CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 				if(pTemp != nullptr)
 				{
-					if(pTemp->GetReady() && pTemp->GetCasting() == false)
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
 					{
-						if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ))
-						{
-							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-							GetNextTarget();
-						}
-						else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
-						{
-							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-							GetPreviousTarget();
-						}
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+						GetNextTarget();
+					}
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+						GetPreviousTarget();
 					}
 				}
 			}
 		}
 		else
 		{
-			if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true )
+			if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2) )
 			{
 				m_bExplanation = false;
 				if(m_bExplainDodge)
@@ -374,6 +373,13 @@ void CTutorialBattle::Render( void )
 
 		if(m_bVictory)
 		{
+			if(m_pPlayerUnit->GetClass() == UC_WARRIOR || m_pPlayerUnit->GetClass() == UC_NONE)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Warrior_Battle_Victory");
+			else if(m_pPlayerUnit->GetClass() == UC_RANGER)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Ranger_Battle_Victory");
+			else if(m_pPlayerUnit->GetClass() == UC_MAGE)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Mage_Battle_Victory");
+
 			woss.str(_T(""));
 			woss << "Victory!";
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));

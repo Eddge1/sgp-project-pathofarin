@@ -3,6 +3,7 @@
 #include "BitmapFont.h"
 #include "GamePlayState.h"
 #include "TutorialBattle.h"
+#include "PlayerUnit.h"
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 
 CBasicAttack::CBasicAttack(void)
@@ -100,7 +101,13 @@ void CBasicAttack::Update(float fElapsedTime)
 	else
 	{
 		string szTemp = GetOwner()->GetName() + "_Battle_Basic_Attack";
-		CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
+		if(CGame::GetInstance()->GetCurrentState() == CBattleState::GetInstance())
+		{
+			if(GetOwner()->GetLevel() <= CGamePlayState::GetInstance()->GetPlayerUnit()->GetLevel()+ 5)
+				CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
+		}
+		else
+			CSGD_EventSystem::GetInstance()->SendEventNow("DODGE");
 		GetOwner()->GetAnimInfo()->SetAnimation(szTemp.c_str());
 		bAttacked = true;
 		bhasPlayed = false;

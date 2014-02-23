@@ -553,7 +553,15 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits.size() == 1)
 				{
 					if(m_vBattleUnits[0]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						if(m_pPlayerUnit->GetClass() == UC_WARRIOR || m_pPlayerUnit->GetClass() == UC_NONE)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Warrior_Battle_Victory");
+						else if(m_pPlayerUnit->GetClass() == UC_RANGER)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Ranger_Battle_Victory");
+						else if(m_pPlayerUnit->GetClass() == UC_MAGE)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Mage_Battle_Victory");
 						m_eCurrentPhase = BP_END;
+					}
 				}
 
 				if(m_nTurn >= (int)m_vBattleUnits.size())

@@ -49,6 +49,7 @@ public:
 	void ChangeState( CGameStates* pState );
 	void CreateConfig(int nMusic = 100, int nSFX = 100, bool bFullscreen = false, bool bMemory = false);
 	void Render( void );
+	CGameStates* GetCurrentState() {return m_pCurrState;}
 
 private:
 

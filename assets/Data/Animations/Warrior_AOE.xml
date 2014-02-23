@@ -3,12 +3,12 @@
   <Animation_Info Name="Warrior_AOE" Frames="4" repeat="0" Texture="POA_Warrior_AOE.png">
     <Frame_Data>
       <Render posX="0" posY="0" Width="269" Height="269" anchorX="120" anchorY="216" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="268" Height="269" />
+      <ActiveCollision posX="0" posY="0" Width="269" Height="269" />
       <Render posX="266" posY="0" Width="349" Height="355" anchorX="217" anchorY="258" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="349" Height="355" />
-      <Render posX="618" posY="2" Width="427" Height="352" anchorX="237" anchorY="257" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="428" Height="353" />
-      <Render posX="1069" posY="1" Width="429" Height="294" anchorX="216" anchorY="198" Duration="0.1" Event="NULL" />
+      <Render posX="618" posY="2" Width="427" Height="352" anchorX="237" anchorY="257" Duration="0.1" Event="COLLIDE" />
+      <ActiveCollision posX="-1" posY="-1" Width="428" Height="353" />
+      <Render posX="1069" posY="1" Width="429" Height="294" anchorX="216" anchorY="198" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="0" posY="0" Width="429" Height="294" />
     </Frame_Data>
   </Animation_Info>
@@ -17,9 +17,9 @@
       <Render posX="1042" posY="350" Width="295" Height="186" anchorX="224" anchorY="138" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="295" Height="186" />
       <Render posX="1337" posY="349" Width="164" Height="114" anchorX="106" anchorY="70" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="163" Height="114" />
+      <ActiveCollision posX="1" posY="0" Width="163" Height="114" />
       <Render posX="1511" posY="348" Width="51" Height="57" anchorX="29" anchorY="30" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="52" Height="58" />
+      <ActiveCollision posX="-1" posY="-1" Width="52" Height="58" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>

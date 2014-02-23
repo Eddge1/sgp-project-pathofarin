@@ -210,13 +210,19 @@ void CComboGame::Update(float fElapsedTime)
 
 	if(m_fTimer <= 0.0f)
 	{
-		ResetSkill();
 		if(!GetTutorial())
 			GetOwner()->EndTurn();
 		else
 		{
 			CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+			if(m_nTotalMoves >= 6)
+					PlayCompletion();
+			else if (m_nTotalMoves <= 4)
+				PlayFail();
+			else
+				PlayCrit();
 			GetOwner()->EndTurn();
 		}
+		ResetSkill();
 	}
 }

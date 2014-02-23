@@ -1,7 +1,7 @@
 #pragma once
 #include "minigames.h"
-class CChargeCrystal :
-	public CMiniGames
+
+class CChargeCrystal :	public CMiniGames
 {
 	float	m_fMoveSpeed;
 	float	m_fTimer;
@@ -16,6 +16,7 @@ class CChargeCrystal :
 	bool m_bFailed;
 	bool m_bHeal;
 	bool m_bAuraPlay;
+	CEntity* pAnimation;
 
 public:
 	CChargeCrystal(void);
@@ -29,4 +30,3 @@ public:
 	virtual void ResetSkill() override;
 	virtual void HandleEvent( const CEvent* pEvent ) override { }
 };
-

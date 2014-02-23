@@ -750,6 +750,10 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	tempC->SetName("Ranger");
 	tempC->SetIsGame(false);
 	CSteadyShot *pAim = new CSteadyShot;
+	CProjectile* pArrow = new CProjectile();
+	pArrow->SetMasterGame(pAim);
+	pArrow->GetAnimInfo()->SetAnimation("Arrow_Left");
+	pAim->SetSkill(pArrow);
 	pTest->SetName("Aimed Shot");
 	pTest->SetMiniGame(pAim);
 	pAim->SetDamage(4.0f);
@@ -833,6 +837,23 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	pTest->SetIsGame(true);
 	tempC->AddCommands(pTest);
 	temp->AddSkill(tempC);
+
+	pTest = new CCommands;
+	CTriggerMatch* pCrystal = new CTriggerMatch;
+	pTest->SetName("Airblade");
+	CBuff* pWave = new CBuff();
+	pWave->SetMasterGame(pCrystal);
+	pWave->GetAnimInfo()->SetAnimation("Warrior_AOE");
+	pWave->SetAudio(CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Spells/POA_IceSpear.wav")));
+	pCrystal->SetAOE(true);
+	pCrystal->SetSkill(pWave);
+	pCrystal->SetCost(20);
+	pCrystal->SetChances(3);
+	pCrystal->SetDamage(1.5f);
+	pCrystal->SetOwner(temp);
+	pTest->SetMiniGame(pCrystal);
+	pTest->SetIsGame(true);
+	tempC->AddCommands(pTest);
 
 	tempC = new CCommands;
 	CUseItem* tempL = new CUseItem;
@@ -919,7 +940,7 @@ CPlayerUnit* CProfileMenuState::CreateMage(void)
 	pTrig->SetSkill(pEarthRip);
 	pTrig->SetCost(20);
 	pTrig->SetChances(3);
-	pTrig->SetDamage(1.0f);
+	pTrig->SetDamage(1.5f);
 	pTrig->SetOwner(temp);
 	pTrig->SetAOE(true);
 	pTest->SetMiniGame(pTrig);

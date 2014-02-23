@@ -197,6 +197,7 @@ void CTriggerSpree::Update(float fElapsedTime)
 				else
 				{
 					CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+					PlayCompletion();
 					GetOwner()->EndTurn();
 				}
 			}
