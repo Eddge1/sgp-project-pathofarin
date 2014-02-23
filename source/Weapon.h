@@ -3,9 +3,7 @@
 class CWeapon :
 	public CItem
 {
-
 	int Attack;
-
 
 public:
 
