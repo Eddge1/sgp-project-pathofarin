@@ -373,6 +373,13 @@ void CTutorialBattle::Render( void )
 
 		if(m_bVictory)
 		{
+			if(m_pPlayerUnit->GetClass() == UC_WARRIOR || m_pPlayerUnit->GetClass() == UC_NONE)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Warrior_Battle_Victory");
+			else if(m_pPlayerUnit->GetClass() == UC_RANGER)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Ranger_Battle_Victory");
+			else if(m_pPlayerUnit->GetClass() == UC_MAGE)
+				m_pPlayerUnit->GetAnimInfo()->SetAnimation("Mage_Battle_Victory");
+
 			woss.str(_T(""));
 			woss << "Victory!";
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));

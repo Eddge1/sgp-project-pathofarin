@@ -750,6 +750,10 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	tempC->SetName("Ranger");
 	tempC->SetIsGame(false);
 	CSteadyShot *pAim = new CSteadyShot;
+	CProjectile* pArrow = new CProjectile();
+	pArrow->SetMasterGame(pAim);
+	pArrow->GetAnimInfo()->SetAnimation("Arrow_Left");
+	pAim->SetSkill(pArrow);
 	pTest->SetName("Aimed Shot");
 	pTest->SetMiniGame(pAim);
 	pAim->SetDamage(4.0f);

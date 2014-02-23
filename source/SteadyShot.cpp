@@ -46,60 +46,75 @@ void CSteadyShot::DoAttack(void)
 			else
 			{
 				CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+				if(fDamage < 10)
+					PlayCompletion();
+				else if(fDamage < 30)
+					PlayCrit();
+				else
+					PlaySuccess();
 				GetOwner()->EndTurn();
 			}
 		}
 		else
+		{
+			PlayFail();
 			GetOwner()->EndTurn();
+		}
 	}
 }
 void CSteadyShot::Update(float fElapsedTime)
 {
-	m_fTimer -= fElapsedTime;
-	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	float fX = 0.0f;
-	float fY = 0.0f;
-
-	if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W) || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP)  )
-		fY -= 100.0f * fElapsedTime;
-	else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN)  )
-		fY += 100.0f * fElapsedTime;
-	if(pDI->KeyDown(DIK_LEFTARROW) || pDI->KeyDown(DIK_A) || pDI->JoystickDPadDown(DIR_LEFT) || pDI->JoystickGetLStickDirDown(DIR_LEFT)  )
-		fX -= 100.0f * fElapsedTime;
-	else if(pDI->KeyDown(DIK_RIGHTARROW) || pDI->KeyDown(DIK_D) || pDI->JoystickDPadDown(DIR_RIGHT) || pDI->JoystickGetLStickDirDown(DIR_RIGHT)  )
-		fX += 100.0f * fElapsedTime;
-
-	if(m_fCursorX < 400)
-		fX -= 50.0f * fElapsedTime;
-	else
-		fX += 50.0f * fElapsedTime;
-
-	if(m_fCursorY < 300)
-		fY -= 50.0f * fElapsedTime;
-	else
-		fY += 50.0f * fElapsedTime;
-
-	m_fCursorX += fX;
-	m_fCursorY += fY;
-
-
-	if(m_fTimer <= 0 && !m_bCompleted)
+	if(m_bCompleted == false)
 	{
-		m_bCompleted = true;
-		DoAttack();
+		m_fTimer -= fElapsedTime;
+		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+		float fX = 0.0f;
+		float fY = 0.0f;
+
+		if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W) || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP)  )
+			fY -= 100.0f * fElapsedTime;
+		else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN)  )
+			fY += 100.0f * fElapsedTime;
+		if(pDI->KeyDown(DIK_LEFTARROW) || pDI->KeyDown(DIK_A) || pDI->JoystickDPadDown(DIR_LEFT) || pDI->JoystickGetLStickDirDown(DIR_LEFT)  )
+			fX -= 100.0f * fElapsedTime;
+		else if(pDI->KeyDown(DIK_RIGHTARROW) || pDI->KeyDown(DIK_D) || pDI->JoystickDPadDown(DIR_RIGHT) || pDI->JoystickGetLStickDirDown(DIR_RIGHT)  )
+			fX += 100.0f * fElapsedTime;
+
+		if(m_fCursorX < 400)
+			fX -= 50.0f * fElapsedTime;
+		else
+			fX += 50.0f * fElapsedTime;
+
+		if(m_fCursorY < 300)
+			fY -= 50.0f * fElapsedTime;
+		else
+			fY += 50.0f * fElapsedTime;
+
+		m_fCursorX += fX;
+		m_fCursorY += fY;
+
+
+		if(m_fTimer <= 0 && !m_bCompleted)
+		{
+			m_bCompleted = true;
+			InstantiateSkill();
+		}
 	}
 }
 void CSteadyShot::Render()
 {
-	CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
+	if(m_bCompleted == false)
+	{
+		CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
 
-	pTM->Draw(m_nImageID, 272, 172);
-	pTM->Draw(m_nCursorImageID, int(m_fCursorX - 16), int(m_fCursorY-16));
+		pTM->Draw(m_nImageID, 272, 172);
+		pTM->Draw(m_nCursorImageID, int(m_fCursorX - 16), int(m_fCursorY-16));
 
-	RECT rTimer = {272,140,long(272 + (256 * m_fTimer / 4.0f)),156};
-	CSGD_Direct3D::GetInstance()->DrawRect(rTimer, D3DCOLOR_XRGB(0,255,255));
-	rTimer.right = 528;
-	CSGD_Direct3D::GetInstance()->DrawHollowRect(rTimer, D3DCOLOR_XRGB(0,0,0), 1);
+		RECT rTimer = {272,140,long(272 + (256 * m_fTimer / 4.0f)),156};
+		CSGD_Direct3D::GetInstance()->DrawRect(rTimer, D3DCOLOR_XRGB(0,255,255));
+		rTimer.right = 528;
+		CSGD_Direct3D::GetInstance()->DrawHollowRect(rTimer, D3DCOLOR_XRGB(0,0,0), 1);
+	}
 
 }
 void CSteadyShot::ResetSkill()
@@ -110,4 +125,24 @@ void CSteadyShot::ResetSkill()
 	m_fCursorX = 400.0f;
 	m_fCursorY = 300.0f;
 	m_bCompleted = false;
+}
+
+void CSteadyShot::InstantiateSkill()
+{
+	CProjectile* pTemp = GetSkill();
+	if(pTemp != nullptr)
+	{
+		CUnits* tempP;
+		if(DamageSkill())
+		{
+			tempP = CBattleState::GetInstance()->GetCurrentTarget();
+			CProjectile* pNewProjectile = new CProjectile();
+			pNewProjectile->SetMasterGame(this);
+			pNewProjectile->SetTarget(tempP);
+			pNewProjectile->GetAnimInfo()->SetAnimation(pTemp->GetAnimInfo()->GetCurrentAnimation());
+			pNewProjectile->SetPosX(GetOwner()->GetPosX());
+			pNewProjectile->SetPosY(GetOwner()->GetPosY());
+			CBattleState::GetInstance()->AddSkill(pNewProjectile);
+		}
+	}
 }

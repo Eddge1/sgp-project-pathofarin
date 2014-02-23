@@ -19,5 +19,6 @@ public:
 	virtual void Update(float fElapsedTime);
 	virtual void Render();
 	virtual void ResetSkill() override;
+	virtual void InstantiateSkill();
 };
 
