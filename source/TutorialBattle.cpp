@@ -149,25 +149,24 @@ bool CTutorialBattle::Input( void )
 				CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
 				if(pTemp != nullptr)
 				{
-					if(pTemp->GetReady() && pTemp->GetCasting() == false)
+					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
 					{
-						if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ))
-						{
-							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-							GetNextTarget();
-						}
-						else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW ))
-						{
-							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-							GetPreviousTarget();
-						}
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+						GetNextTarget();
+					}
+					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
+					{
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+						GetPreviousTarget();
 					}
 				}
 			}
 		}
 		else
 		{
-			if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true )
+			if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2) )
 			{
 				m_bExplanation = false;
 				if(m_bExplainDodge)
