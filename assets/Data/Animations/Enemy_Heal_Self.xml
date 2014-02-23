@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="1">
-  <Animation_Info Name="Enemy_Heal_Self" Frames="15" repeat="1" Texture="POA_Enemy_Heal_Self.png">
+  <Animation_Info Name="Enemy_Heal_Self" Frames="15" repeat="0" Texture="POA_Enemy_Heal_Self.png">
     <Frame_Data>
       <Render posX="1" posY="3" Width="129" Height="108" anchorX="66" anchorY="83" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="0" Width="130" Height="108" />
@@ -28,9 +28,9 @@
       <ActiveCollision posX="0" posY="0" Width="132" Height="107" />
       <Render posX="1643" posY="1" Width="128" Height="110" anchorX="68" anchorY="85" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="128" Height="110" />
-      <Render posX="1776" posY="1" Width="133" Height="111" anchorX="70" anchorY="85" Duration="0.1" Event="NULL" />
+      <Render posX="1776" posY="1" Width="133" Height="111" anchorX="70" anchorY="85" Duration="0.1" Event="FLARE" />
       <ActiveCollision posX="0" posY="-1" Width="133" Height="112" />
-      <Render posX="1913" posY="1" Width="132" Height="111" anchorX="69" anchorY="85" Duration="0.1" Event="NULL" />
+      <Render posX="1913" posY="1" Width="132" Height="111" anchorX="69" anchorY="85" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="-1" posY="0" Width="133" Height="111" />
     </Frame_Data>
   </Animation_Info>
