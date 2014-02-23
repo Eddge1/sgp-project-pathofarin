@@ -1610,7 +1610,7 @@
       <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="536" posX="16" posY="26">
-      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="537" posX="17" posY="26">
       <Tile_Data xTileID="11" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -2125,7 +2125,7 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="106" posX="16" posY="3">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="No" xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Hi-Potion" Amount="1" />
       </Tile_Data>
     </Tile>
@@ -4224,7 +4224,7 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="796" posX="16" posY="26">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="yes" xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Hi-Ether" Amount="1" />
       </Tile_Data>
     </Tile>
@@ -6928,7 +6928,7 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="796" posX="16" posY="26">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="797" posX="17" posY="26">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

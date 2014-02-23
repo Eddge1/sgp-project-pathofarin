@@ -3,6 +3,7 @@
 #include "Units.h"
 #include "BattleState.h"
 #include "AIController.h"
+#include "../SGD Wrappers/CSGD_XAudio2.h"
 #include <sstream>
 #include <vector>
 using namespace std;
@@ -17,6 +18,7 @@ class CAITigerlily : CAIController
 
 	int m_nTurns;
 	int m_nAoeHeal;
+	int m_nSpellSfx;
 
 public:
 

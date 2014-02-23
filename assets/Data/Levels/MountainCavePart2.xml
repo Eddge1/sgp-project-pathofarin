@@ -2270,7 +2270,7 @@
       <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="154" posX="4" posY="5">
-      <Tile_Data xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="plsnogankerino" xTileID="5" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Hi-Ether" Amount="1" />
         <Chest Name="Potion" Amount="1" />
       </Tile_Data>
