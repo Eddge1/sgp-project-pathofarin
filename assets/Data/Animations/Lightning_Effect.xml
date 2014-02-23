@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="Lightning_Effect" Frames="4" repeat="1" Texture="POA_Lightning_Effect.png">
+    <Frame_Data>
+      <Render posX="18" posY="30" Width="261" Height="262" anchorX="129" anchorY="131" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="3" posY="1" Width="264" Height="263" />
+      <Render posX="297" posY="24" Width="264" Height="270" anchorX="137" anchorY="137" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="-1" Width="265" Height="269" />
+      <Render posX="7" posY="299" Width="273" Height="268" anchorX="139" anchorY="135" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="272" Height="268" />
+      <Render posX="296" posY="304" Width="265" Height="258" anchorX="138" anchorY="130" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="265" Height="257" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
