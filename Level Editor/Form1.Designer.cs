@@ -73,6 +73,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.grpNPC = new System.Windows.Forms.GroupBox();
+            this.txtBroadCast = new System.Windows.Forms.TextBox();
+            this.txtErase = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.lstNPC = new System.Windows.Forms.ListBox();
             this.btnNPCMove = new System.Windows.Forms.Button();
             this.btnNPCUnits = new System.Windows.Forms.Button();
@@ -122,6 +126,8 @@
             this.lstUnitAnimation = new System.Windows.Forms.ListBox();
             this.lstUnits = new System.Windows.Forms.ListBox();
             this.grpChest = new System.Windows.Forms.GroupBox();
+            this.txtChestBroadcast = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.btnItemApply = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.nudItems = new System.Windows.Forms.NumericUpDown();
@@ -131,12 +137,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.lstItems = new System.Windows.Forms.ListBox();
             this.cmbItemChoice = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.txtErase = new System.Windows.Forms.TextBox();
-            this.txtBroadCast = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.txtChestBroadcast = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTileWidth)).BeginInit();
@@ -659,6 +659,38 @@
             this.grpNPC.Text = "NPC Tool";
             this.grpNPC.Visible = false;
             // 
+            // txtBroadCast
+            // 
+            this.txtBroadCast.Location = new System.Drawing.Point(67, 125);
+            this.txtBroadCast.Name = "txtBroadCast";
+            this.txtBroadCast.Size = new System.Drawing.Size(100, 20);
+            this.txtBroadCast.TabIndex = 16;
+            // 
+            // txtErase
+            // 
+            this.txtErase.Location = new System.Drawing.Point(43, 146);
+            this.txtErase.Name = "txtErase";
+            this.txtErase.Size = new System.Drawing.Size(100, 20);
+            this.txtErase.TabIndex = 15;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(9, 149);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(34, 13);
+            this.label29.TabIndex = 14;
+            this.label29.Text = "Erase";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(9, 128);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(56, 13);
+            this.label28.TabIndex = 13;
+            this.label28.Text = "BroadCast";
+            // 
             // lstNPC
             // 
             this.lstNPC.FormattingEnabled = true;
@@ -733,7 +765,7 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(1262, 83);
+            this.grpBlock.Location = new System.Drawing.Point(1033, 181);
             this.grpBlock.Name = "grpBlock";
             this.grpBlock.Size = new System.Drawing.Size(223, 201);
             this.grpBlock.TabIndex = 12;
@@ -1212,6 +1244,22 @@
             this.grpChest.Text = "Chest Tools";
             this.grpChest.Visible = false;
             // 
+            // txtChestBroadcast
+            // 
+            this.txtChestBroadcast.Location = new System.Drawing.Point(59, 134);
+            this.txtChestBroadcast.Name = "txtChestBroadcast";
+            this.txtChestBroadcast.Size = new System.Drawing.Size(95, 20);
+            this.txtChestBroadcast.TabIndex = 36;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(5, 137);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(55, 13);
+            this.label30.TabIndex = 35;
+            this.label30.Text = "Broadcast";
+            // 
             // btnItemApply
             // 
             this.btnItemApply.Location = new System.Drawing.Point(157, 107);
@@ -1291,54 +1339,6 @@
             this.cmbItemChoice.Name = "cmbItemChoice";
             this.cmbItemChoice.Size = new System.Drawing.Size(99, 21);
             this.cmbItemChoice.TabIndex = 0;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(9, 128);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(56, 13);
-            this.label28.TabIndex = 13;
-            this.label28.Text = "BroadCast";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(9, 149);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(34, 13);
-            this.label29.TabIndex = 14;
-            this.label29.Text = "Erase";
-            // 
-            // txtErase
-            // 
-            this.txtErase.Location = new System.Drawing.Point(43, 146);
-            this.txtErase.Name = "txtErase";
-            this.txtErase.Size = new System.Drawing.Size(100, 20);
-            this.txtErase.TabIndex = 15;
-            // 
-            // txtBroadCast
-            // 
-            this.txtBroadCast.Location = new System.Drawing.Point(67, 125);
-            this.txtBroadCast.Name = "txtBroadCast";
-            this.txtBroadCast.Size = new System.Drawing.Size(100, 20);
-            this.txtBroadCast.TabIndex = 16;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(5, 137);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(55, 13);
-            this.label30.TabIndex = 35;
-            this.label30.Text = "Broadcast";
-            // 
-            // txtChestBroadcast
-            // 
-            this.txtChestBroadcast.Location = new System.Drawing.Point(59, 134);
-            this.txtChestBroadcast.Name = "txtChestBroadcast";
-            this.txtChestBroadcast.Size = new System.Drawing.Size(95, 20);
-            this.txtChestBroadcast.TabIndex = 36;
             // 
             // Form1
             // 

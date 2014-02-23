@@ -256,7 +256,7 @@
       <Tile_Data xTileID="9" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="82" posX="2" posY="4">
-      <Tile_Data xTileID="10" yTileID="4" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="somanyluls" xTileID="10" yTileID="4" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Hi-Potion" Amount="1" />
         <Chest Name="Titan-Potion" Amount="1" />
       </Tile_Data>
@@ -682,10 +682,10 @@
       <Tile_Data xTileID="10" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="217" posX="17" posY="10">
-      <Tile_Data xTileID="10" yTileID="4" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="10" yTileID="4" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="218" posX="18" posY="10">
-      <Tile_Data xTileID="11" yTileID="4" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="manylewts" xTileID="11" yTileID="4" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Titan-Potion" Amount="3" />
         <Chest Name="Titan-Ether" Amount="3" />
       </Tile_Data>

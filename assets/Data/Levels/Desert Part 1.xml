@@ -110,10 +110,13 @@
       <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="36" posX="16" posY="1">
-      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="37" posX="17" posY="1">
-      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="youcouldhaveasked" xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Hi-Ether" Amount="1" />
+        <Chest Name="Hi-Potion" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="38" posX="18" posY="1">
       <Tile_Data xTileID="11" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -993,7 +996,7 @@
       <Tile_Data xTileID="9" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="322" posX="2" posY="16">
-      <Tile_Data xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="sandstuff" xTileID="10" yTileID="3" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Hi-Potion" Amount="1" />
         <Chest Name="Titan-Potion" Amount="1" />
       </Tile_Data>

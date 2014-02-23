@@ -5,6 +5,7 @@ CAITigerlily::CAITigerlily(void)
 {
 	m_nTurns = 0;
 	m_nAoeHeal = 0;
+	m_nSpellSfx = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Thornbiter_Spell.wav"));
 }
 
 
@@ -71,6 +72,7 @@ void CAITigerlily::Update(float fElapsedTime)
 					GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
 					wostringstream woss;
 					woss << "AOE Heal";
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 					CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 					comrades = 0;
 					m_nAoeHeal = 0;
@@ -93,6 +95,7 @@ void CAITigerlily::Update(float fElapsedTime)
 				if(GetOwner()->GetHealth() <= GetOwner()->GetMaxHealth() * 0.75)
 				{
 					GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 					comrades = 0;
 					m_nTurns = 0;
 					m_nAoeHeal++;
@@ -121,6 +124,7 @@ void CAITigerlily::Update(float fElapsedTime)
 					if(GetOwner()->GetHealth() < temp[i]->GetHealth())
 					{
 						GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3 , false);
+						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 						m_nTurns = 0;
 						comrades = 0;
 						m_nAoeHeal++;
@@ -138,6 +142,7 @@ void CAITigerlily::Update(float fElapsedTime)
 						if(temp[0]->GetHealth() > temp[1]->GetHealth())
 						{
 							temp[1]->ModifyHealth(-temp[1]->GetMaxHealth() / 3, false);
+							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 							m_nTurns = 0;
 							comrades = 0;
 							m_nAoeHeal++;
@@ -147,6 +152,7 @@ void CAITigerlily::Update(float fElapsedTime)
 						else if(temp[0]->GetHealth() < temp[1]->GetHealth())
 						{
 							temp[0]->ModifyHealth(-temp[0]->GetMaxHealth() / 3, false);
+							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 							m_nTurns = 0;
 							comrades = 0;
 							m_nAoeHeal++;
@@ -170,6 +176,7 @@ void CAITigerlily::Update(float fElapsedTime)
 				else if( comrades > 0)
 				{
 					temp[0]->ModifyHealth(-temp[0]->GetMaxHealth() / 3, false);
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 					m_nTurns = 0;
 					comrades = 0;
 					m_nAoeHeal++;
@@ -183,6 +190,7 @@ void CAITigerlily::Update(float fElapsedTime)
 			if(GetOwner()->GetHealth() <= GetOwner()->GetMaxHealth() * 0.75)
 			{
 				GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3 , false);
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 				m_nTurns = 0;
 				comrades = 0;
 				m_nAoeHeal++;

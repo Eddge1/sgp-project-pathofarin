@@ -22,6 +22,10 @@ class CAIValrion : CAIController
 	int m_nAttempts;
 	int m_nRageCount;
 
+	int m_nSpellSfx;
+	int m_nDevour;
+	int m_nAttack;
+
 public:
 	virtual void Update(float fElapsedTime );
 	virtual void Render(void);

@@ -11,6 +11,13 @@ CAIValrion::CAIValrion(void)
 	m_nAttempts = 0;
 	m_nRageCount = 0;
 	m_nSincePrepare = 0;
+
+	m_nSpellSfx = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Valrion_Power.wav"));
+	m_nDevour = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Valrion_Devour.wav"));
+	m_nAttack = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Valrion_Attack.wav"));
+
+
+
 }
 
 
@@ -48,6 +55,7 @@ void CAIValrion::Update(float fElapsedTime)
 		{
 			wostringstream woss;
 			woss << "BEHOLD, THE CATACLYSM!";
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 			CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 			for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 			{
@@ -83,6 +91,7 @@ void CAIValrion::Update(float fElapsedTime)
 			{
 				wostringstream woss;
 				woss << "Devoured";
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nDevour);
 				CBattleState::GetInstance()->AddFloatingText(m_pTarget->GetPosX(), m_pTarget->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 				m_pTarget->ModifyHealth(m_pTarget->GetMaxHealth(), false);
 				GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
@@ -99,7 +108,7 @@ void CAIValrion::Update(float fElapsedTime)
 				m_nAttempts++;
 				m_nRageCount++;
 				wostringstream woss;
-				woss << "Raged";
+				woss << "Enraged";
 				CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 				m_pTarget = nullptr;
 				m_bPrepare = false;
@@ -123,6 +132,7 @@ void CAIValrion::Update(float fElapsedTime)
 			{
 				wostringstream woss;
 				woss << "Devoured";
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nDevour);
 				CBattleState::GetInstance()->AddFloatingText(m_pTarget->GetPosX(), m_pTarget->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 				m_pTarget->ModifyHealth(m_pTarget->GetMaxHealth(), false);
 				GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
@@ -139,7 +149,7 @@ void CAIValrion::Update(float fElapsedTime)
 				m_nAttempts++;
 				m_nRageCount++;
 				wostringstream woss;
-				woss << "Raged";
+				woss << "Enraged";
 				CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 				m_pTarget = nullptr;
 				m_bPrepare = false;
@@ -161,6 +171,7 @@ void CAIValrion::Update(float fElapsedTime)
 			m_pTarget->ModifyHealth(GetOwner()->GetAttack() * 4 * (m_nRageCount + 1), false);
 			wostringstream woss;
 			woss << "Power Attack";
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 			CBattleState::GetInstance()->AddFloatingText(GetOwner()->GetPosX(), GetOwner()->GetPosY(), D3DCOLOR_XRGB(250,0,0), woss);
 			m_pTarget = nullptr;
 			m_bPrepare = false;
@@ -203,6 +214,8 @@ void CAIValrion::Update(float fElapsedTime)
 					break;
 				}
 			}
+
+			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nAttack);
 			m_pTarget->ModifyHealth(GetOwner()->GetAttack() * 2 * (m_nRageCount + 1), false);
 			wostringstream woss;
 			woss << "Fear me!";
