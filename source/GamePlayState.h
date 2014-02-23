@@ -17,6 +17,7 @@
 using namespace std;
 
 // Forward Class Declarations
+enum GamePhase {GP_NAV, GP_INIT, GP_BATTLE, GP_MENU, GP_START, GP_END};
 
 class CSGD_EventSystem;
 class CObjects;
@@ -75,7 +76,7 @@ public:
 
 	//Accessor for Map Name:
 	string GetMapName() { return m_sCurrWorld; }
-
+	void SetGameState(GamePhase ePhase) {m_eCurrPhase = ePhase;}
 private:
 
 	struct NPCDialogue
@@ -87,7 +88,6 @@ private:
 		RECT rPos;
 	};
 
-	enum GamePhase {GP_NAV, GP_INIT, GP_BATTLE, GP_MENU, GP_START, GP_END};
 	// Singleton (but not dynamically allocated)
 	CGamePlayState( void );
 	virtual ~CGamePlayState( void );
