@@ -95,6 +95,8 @@ bool CGameOverState::Input(void)
 			}
 		case 1:
 			{
+				CGamePlayState::GetInstance()->SetGameState(GP_END);
+				CGamePlayState::GetInstance()->Sleep();
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 				if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_music))
 					CSGD_XAudio2::GetInstance()->MusicStopSong(m_music);
