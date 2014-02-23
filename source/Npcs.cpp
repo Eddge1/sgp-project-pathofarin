@@ -128,11 +128,13 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 		}
 	}
-	if (pEvent->GetEventID() == "VALRION_DEFEAT")
+	for(unsigned int i = 0; i < m_szEraseEvents.size();i++)
 	{
-		m_szConversation.pop_back();
-		m_szConversation.push_back("Thank you for saving our Village!  We are forever in your debt!  You have Won the First Playable!  Congratulations!");
-		m_bGameVictory = true;
+		if(pEvent->GetEventID() == m_szEraseEvents[i])
+		{
+			this->SetActive(false);
+			this->SetRender(false);
+		}
 	}
 }
 
@@ -163,6 +165,10 @@ void CNpcs::HandleCollision(CObjects* col)
 							if(m_bGameVictory)
 								CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 							m_fDelayChat = 1.0f;
+							if(m_szEventThrow != "")
+							{
+								CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
+							}
 						}
 					}
 				}
@@ -206,4 +212,17 @@ void CNpcs::AddWaypoint(float fX, float fY)
 	pTemp->locX = fX;
 	pTemp->locY = fY;
 	m_vWaypoints.push_back(pTemp);
+}
+
+void CNpcs::AddEraseEvent(std::string szEvent)
+{
+	if(szEvent == "")
+		return;
+	for(unsigned int i = 0; i < m_szEraseEvents.size(); i++)
+	{
+		if(m_szEraseEvents[i] == szEvent)
+			return;
+	}
+	m_szEraseEvents.push_back(szEvent); 
+	CSGD_EventSystem::GetInstance()->RegisterClient(szEvent.c_str(), this);
 }

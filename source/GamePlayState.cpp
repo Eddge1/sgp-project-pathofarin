@@ -149,8 +149,6 @@ void CGamePlayState::Activate(void)
 			m_mItemManager["Hi-Ether"].Item = CreatePotion("Hi-Ether");
 			m_mItemManager["Titan-Ether"].Item = CreatePotion("Titan-Ether");
 
-			LoadWorld("Testing.xml");
-
 
 			m_pES = CSGD_EventSystem::GetInstance();
 			m_pRM = new CRenderManager;
@@ -168,8 +166,9 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("VALRION_DEFEAT", this);
 			m_pES->RegisterClient("GIVE_ITEM", this);
 			m_pES->RegisterClient("GAME_WON", this);
-
-
+			m_pES->RegisterClient("CREATE_WARRIOR", this);
+			m_pES->RegisterClient("CREATE_RANGER", this);
+			m_pES->RegisterClient("CREATE_MAGE", this);
 
 			m_eCurrPhase = GP_INIT;
 		}
@@ -515,7 +514,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
 	}
-	else if(pEvent->GetEventID() == "GIVE_ITEM")
+	else if(pEvent->GetEventID() == "GIVE_ITEM" && m_pPlayer->isBroadcasting() == false)
 	{
 		map<string,InventoryItems>* mTemp = reinterpret_cast<map<string,InventoryItems>*>(pEvent->GetParam());
 		if(mTemp != nullptr)
@@ -545,7 +544,33 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 		m_bGameVictory = true;
 		m_fGameEndTimer = 4.0f;
 	}
-
+	else if(pEvent->GetEventID() == "CREATE_WARRIOR")
+	{
+		if(m_pPlayer->isBroadcasting() == false)
+		{
+			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateWarrior();
+			m_pPlayer->SetUnit(ptemp);
+			ptemp->Release();
+		}
+	}
+	else if(pEvent->GetEventID() == "CREATE_MAGE")
+	{
+		if(m_pPlayer->isBroadcasting() == false)
+		{
+			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateMage();
+			m_pPlayer->SetUnit(ptemp);
+			ptemp->Release();
+		}
+	}
+	else if(pEvent->GetEventID() == "CREATE_RANGER")
+	{
+		if(m_pPlayer->isBroadcasting() == false)
+		{
+			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateRanger();
+			m_pPlayer->SetUnit(ptemp);
+			ptemp->Release();
+		}
+	}
 }
 
 void CGamePlayState::LoadWorld(string szFileName)
@@ -555,6 +580,7 @@ void CGamePlayState::LoadWorld(string szFileName)
 		m_sCurrWorld = szFileName;
 		return;
 	}
+
 	string szTempFileName = "assets/Data/Levels/";
 	szTempFileName += szFileName;
 
@@ -734,6 +760,35 @@ void CGamePlayState::LoadWorld(string szFileName)
 									}
 								}
 
+								std::string szErase = "";
+								std::string szBroadcast = "";
+
+								if(pTileData->Attribute("EventBroad") != nullptr)
+								{
+									szBroadcast = pTileData->Attribute("EventBroad");
+									pNpc->SetEvent(szBroadcast);
+									m_pPlayer->AddListen(szBroadcast);
+								}
+
+								if(pTileData->Attribute("RemoveEvent") != nullptr)
+								{
+									szErase = pTileData->Attribute("RemoveEvent");
+									pNpc->AddEraseEvent(szErase);
+									m_pPlayer->AddListen(szErase);
+								}
+
+								if(szFileName == "Cavern of souls.xml")
+								{
+									pNpc->AddEraseEvent("CREATE_WARRIOR");
+									pNpc->AddEraseEvent("CREATE_MAGE");
+									pNpc->AddEraseEvent("CREATE_RANGER");
+
+									m_pPlayer->AddListen("CREATE_WARRIOR");
+									m_pPlayer->AddListen("CREATE_MAGE");
+									m_pPlayer->AddListen("CREATE_RANGER");
+								}
+
+
 								if(pWaypoints != nullptr)
 								{
 									for(int i = 0; i < nWaypoints; i++)
@@ -870,6 +925,8 @@ void CGamePlayState::LoadWorld(string szFileName)
 
 	m_mWorldManager[szFileName] = Worldtemp;
 	m_sCurrWorld = szFileName;
+	if(m_pPlayer != nullptr)
+		m_pPlayer->BroadCastHeard();
 }
 
 CPlayerUnit* CGamePlayState::GetPlayerUnit()
@@ -882,12 +939,20 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 	if(m_sCurrWorld == szNewWorld + ".xml" || szNewWorld == "")
 		return;
 
-	int nOldMusic = m_mWorldManager[m_sCurrWorld]->GetMusicID();
+	int nOldMusic = -1;
 	int nNewMusic = -1;
+
+	m_pPlayer->SetBroadcasting(true);
 	m_pPlayer->SetZone(szNewWorld);
-	m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
-	m_mWorldManager[m_sCurrWorld]->ActivateNPCs();
-	m_mWorldManager[m_sCurrWorld]->ClearNPCList();
+
+	if(m_mWorldManager[m_sCurrWorld] != nullptr)
+	{
+		nOldMusic = m_mWorldManager[m_sCurrWorld]->GetMusicID();
+
+		m_mWorldManager[m_sCurrWorld]->RemoveObject(m_pPlayer);
+		m_mWorldManager[m_sCurrWorld]->ActivateNPCs();
+		m_mWorldManager[m_sCurrWorld]->ClearNPCList();
+	}
 
 	LoadWorld(szNewWorld + ".xml");
 	m_mWorldManager[szNewWorld + ".xml"]->AddObject(m_pPlayer, 2);
@@ -900,10 +965,11 @@ void CGamePlayState::TransitionWorld(std::string szNewWorld)
 		CSGD_XAudio2::GetInstance()->MusicStopSong(nOldMusic);
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(nNewMusic, true);
 	}
-	else if(nNewMusic != -1 && nOldMusic != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nNewMusic) == false)
+	else if(nNewMusic != -1 && CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nNewMusic) == false)
 		CSGD_XAudio2::GetInstance()->MusicPlaySong(nNewMusic, true);
 
 	m_pPlayer->SetIsWarping(false);
+	m_pPlayer->SetBroadcasting(false);
 }
 
 void CGamePlayState::SetPlayer(CPlayer* pPlayer)
