@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="9">
   <Animation_Info Name="Kid_Idle" Frames="1" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
@@ -15,55 +15,55 @@
   <Animation_Info Name="Kid_Idle_Up" Frames="1" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="2" posY="2" Width="28" Height="35" anchorX="15" anchorY="21" Duration="1.0" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="29" Height="36" />
+      <ActiveCollision posX="0" posY="-1" Width="29" Height="36" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Idle_Left" Frames="1" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="6" posY="110" Width="26" Height="36" anchorX="11" anchorY="20" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="-1" Width="24" Height="36" />
+      <ActiveCollision posX="0" posY="1" Width="24" Height="36" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Idle_Right" Frames="1" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="3" posY="38" Width="25" Height="37" anchorX="13" anchorY="21" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="-1" Width="27" Height="35" />
+      <ActiveCollision posX="-1" posY="1" Width="27" Height="35" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Walk_Up" Frames="3" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
-      <Render posX="2" posY="2" Width="28" Height="35" anchorX="15" anchorY="21" Duration="1.0" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="29" Height="36" />
-      <Render posX="33" posY="1" Width="31" Height="35" anchorX="16" anchorY="19" Duration="1.0" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="32" Height="36" />
-      <Render posX="66" posY="2" Width="31" Height="35" anchorX="15" anchorY="21" Duration="1.0" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="31" Height="36" />
+      <Render posX="2" posY="2" Width="28" Height="35" anchorX="15" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="29" Height="36" />
+      <Render posX="33" posY="1" Width="31" Height="35" anchorX="16" anchorY="19" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="-1" Width="32" Height="36" />
+      <Render posX="66" posY="2" Width="31" Height="35" anchorX="15" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="31" Height="36" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Walk_Right" Frames="3" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="3" posY="38" Width="25" Height="37" anchorX="13" anchorY="21" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="-1" Width="27" Height="35" />
+      <ActiveCollision posX="-1" posY="1" Width="27" Height="35" />
       <Render posX="35" posY="37" Width="25" Height="35" anchorX="13" anchorY="21" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="0" Width="26" Height="35" />
+      <ActiveCollision posX="-1" posY="0" Width="26" Height="35" />
       <Render posX="68" posY="39" Width="24" Height="35" anchorX="13" anchorY="20" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="21" Height="34" />
+      <ActiveCollision posX="1" posY="1" Width="21" Height="34" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Walk_Down" Frames="3" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="3" posY="76" Width="28" Height="34" anchorX="13" anchorY="19" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="28" Height="35" />
+      <ActiveCollision posX="0" posY="-1" Width="28" Height="35" />
       <Render posX="33" posY="74" Width="30" Height="35" anchorX="16" anchorY="18" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="28" Height="35" />
+      <ActiveCollision posX="1" posY="0" Width="28" Height="35" />
       <Render posX="66" posY="75" Width="29" Height="36" anchorX="15" anchorY="20" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="31" Height="38" />
+      <ActiveCollision posX="-1" posY="-1" Width="31" Height="38" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Kid_Walk_Left" Frames="3" repeat="1" Texture="DBL_Minion.png">
     <Frame_Data>
       <Render posX="6" posY="110" Width="26" Height="36" anchorX="11" anchorY="20" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="-1" Width="24" Height="36" />
+      <ActiveCollision posX="0" posY="1" Width="24" Height="36" />
       <Render posX="38" posY="108" Width="25" Height="36" anchorX="10" anchorY="20" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="24" Height="35" />
       <Render posX="69" posY="112" Width="26" Height="35" anchorX="11" anchorY="19" Duration="0.1" Event="NULL" />
