@@ -7,7 +7,10 @@
 #include <sstream>
 #include "../SGD Wrappers/CSGD_EventSystem.h"
 #include "SplashScreen.h"
+#include "BattleState.h"
+#include "GamePlayState.h"
 #include "Game.h"
+#include "PlayerUnit.h"
 
 CAnimationSystem* CAnimationSystem::s_pInstance = nullptr;
 
