@@ -37,7 +37,7 @@ void CAIBasicHealer::Update(float fElapsedTime)
 		CBuff* pHeal = new CBuff();
 		pHeal->SetPosX(GetOwner()->GetPosX());
 		pHeal->SetPosY(GetOwner()->GetPosY());
-		pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+		pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal");
 		CBattleState::GetInstance()->AddSkill(pHeal);
 		pHeal->Release();
 
@@ -71,6 +71,13 @@ void CAIBasicHealer::Update(float fElapsedTime)
 
 		if(m_pTarget != nullptr)
 		{
+			CBuff* pHeal = new CBuff();
+			pHeal->SetPosX(GetOwner()->GetPosX());
+			pHeal->SetPosY(GetOwner()->GetPosY());
+			pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Other");
+			CBattleState::GetInstance()->AddSkill(pHeal);
+			pHeal->Release();
+
 			m_pTarget->ModifyHealth(-m_pTarget->GetMaxHealth() / 3, false);
 			m_pTarget = nullptr;
 			m_nTurns = 0;

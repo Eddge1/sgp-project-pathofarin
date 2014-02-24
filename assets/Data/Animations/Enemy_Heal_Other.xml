@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="1">
-  <Animation_Info Name="Enemy_Heal_Self" Frames="15" repeat="0" Texture="POA_Enemy_Heal_Self.png">
+  <Animation_Info Name="Enemy_Heal_Other" Frames="15" repeat="0" Texture="POA_Enemy_Heal_Self.png">
     <Frame_Data>
       <Render posX="1" posY="3" Width="129" Height="108" anchorX="66" anchorY="83" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="0" Width="130" Height="108" />

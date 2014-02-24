@@ -11,6 +11,8 @@ class CSteadyShot :
 	int		m_nImageID;
 	int		m_nCursorImageID;
 	int		m_nGreatSFXID;
+	int		m_nGoodSFXID;
+	int		m_nBadSFXID;
 	bool	m_bCompleted;
 public:
 	CSteadyShot(void);
