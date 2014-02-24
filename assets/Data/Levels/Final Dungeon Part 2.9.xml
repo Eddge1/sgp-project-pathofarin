@@ -128,7 +128,7 @@
       <Tile_Data xTileID="5" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="42" posX="3" posY="3">
-      <Tile_Data xTileID="6" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="doyouwork" xTileID="6" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Titan-Potion" Amount="2" />
       </Tile_Data>
     </Tile>
@@ -139,7 +139,7 @@
       <Tile_Data xTileID="8" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="45" posX="6" posY="3">
-      <Tile_Data xTileID="9" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="onlyfivehands2" xTileID="9" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Titan-Ether" Amount="2" />
       </Tile_Data>
     </Tile>

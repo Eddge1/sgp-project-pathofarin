@@ -6,9 +6,9 @@
       <ActiveCollision posX="0" posY="0" Width="269" Height="269" />
       <Render posX="266" posY="0" Width="349" Height="355" anchorX="217" anchorY="258" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="349" Height="355" />
-      <Render posX="618" posY="2" Width="427" Height="352" anchorX="237" anchorY="257" Duration="0.1" Event="NULL" />
+      <Render posX="618" posY="2" Width="427" Height="352" anchorX="237" anchorY="257" Duration="0.1" Event="COLLIDE" />
       <ActiveCollision posX="-1" posY="-1" Width="428" Height="353" />
-      <Render posX="1069" posY="1" Width="429" Height="294" anchorX="216" anchorY="198" Duration="0.1" Event="NULL" />
+      <Render posX="1069" posY="1" Width="429" Height="294" anchorX="216" anchorY="198" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="0" posY="0" Width="429" Height="294" />
     </Frame_Data>
   </Animation_Info>

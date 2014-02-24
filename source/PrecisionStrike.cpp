@@ -94,6 +94,12 @@ void CPrecisionStrike::Update(float fElapsedTime)
 
 		if(m_fTimer <= 0 || m_vTargets.size() == 0)
 		{
+			if( m_vTargets.size() == 0)
+				PlayCompletion();
+			else if( m_vTargets.size() <= 5)
+				PlayCrit();
+			else
+				PlayFail();
 			GetOwner()->EndTurn();
 		}
 	}

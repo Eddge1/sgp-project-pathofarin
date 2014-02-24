@@ -15,6 +15,7 @@ class CMiniGames : public IListener
 	int m_nSFXID;
 	int m_nCriticalSFXID;
 	int m_nFailSFXID;
+	int m_nSuccessCompleteSFXID;
 	float m_fDamageMultiplier;
 	bool m_bTutorial;
 	CProjectile* m_pSkill;
@@ -52,6 +53,8 @@ public:
 	void PlaySuccess()  {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSFXID);}
 	void PlayCrit() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCriticalSFXID);}
 	void PlayFail() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nFailSFXID);}
+	void PlayCompletion() {CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSuccessCompleteSFXID);}
+
 
 	virtual void ResetSkill( void ) {  }
 

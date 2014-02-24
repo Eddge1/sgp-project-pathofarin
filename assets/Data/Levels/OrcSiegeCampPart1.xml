@@ -2112,7 +2112,7 @@
       <Tile_Data xTileID="6" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="687" posX="27" posY="22">
-      <Tile_Data xTileID="6" yTileID="0" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="somanyorcs" xTileID="6" yTileID="0" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Potion" Amount="2" />
       </Tile_Data>
     </Tile>

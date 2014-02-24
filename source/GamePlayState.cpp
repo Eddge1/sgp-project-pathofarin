@@ -78,7 +78,7 @@ void CGamePlayState::Activate(void)
 {
 	switch (m_eCurrPhase)
 	{
-	case CGamePlayState::GP_INIT:
+	case GP_INIT:
 		if(m_pPlayer->GetUnit()->GetClass() == UC_NONE)
 		{
 			m_eCurrPhase = GP_NAV;
@@ -91,7 +91,7 @@ void CGamePlayState::Activate(void)
 			CGame::GetInstance()->ChangeState(CTutorialBattle::GetInstance());
 			return;
 		}
-	case CGamePlayState::GP_NAV:
+	case GP_NAV:
 		if(m_pPlayer != nullptr)
 		{
 			TransitionWorld(m_pPlayer->GetZone());
@@ -118,13 +118,13 @@ void CGamePlayState::Activate(void)
 			}
 		}
 		break;
-	case CGamePlayState::GP_MENU:
-	case CGamePlayState::GP_BATTLE:
+	case GP_MENU:
+	case GP_BATTLE:
 		if(m_mWorldManager[m_sCurrWorld]->GetMusicID() != -1)
 			CSGD_XAudio2::GetInstance()->MusicPlaySong(m_mWorldManager[m_sCurrWorld]->GetMusicID(), true);
 		m_eCurrPhase = GP_NAV;
 		break;
-	case CGamePlayState::GP_START:
+	case GP_START:
 		{
 			m_fGameEndTimer = 0.0f;
 			m_bGameVictory = false;
@@ -175,7 +175,7 @@ void CGamePlayState::Activate(void)
 			m_eCurrPhase = GP_INIT;
 		}
 		break;
-	case CGamePlayState::GP_END:
+	case GP_END:
 		break;
 	default:
 		break;
@@ -189,15 +189,15 @@ void CGamePlayState::Sleep(void)
 
 	switch (m_eCurrPhase)
 	{
-	case CGamePlayState::GP_BATTLE:
+	case GP_BATTLE:
 		break;
-	case CGamePlayState::GP_MENU:
+	case GP_MENU:
 		break;
-	case CGamePlayState::GP_START:
+	case GP_START:
 		break;
-	case CGamePlayState::GP_NAV:
+	case GP_NAV:
 		break;
-	case CGamePlayState::GP_END:
+	case GP_END:
 		{
 			if(m_pES != nullptr)
 			{

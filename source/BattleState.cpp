@@ -392,14 +392,10 @@ void CBattleState::Render(void)
 
 					}
 				}
-				RECT rTemp = {};
-
-				rTemp.top = 498 + (pTemp->GetSkillID() * 16);
-				rTemp.bottom = rTemp.top + 10;
-				rTemp.left = 348;
-				rTemp.right = 358;
 				if(!pTemp->GetReady())
-					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+				{
+					pTM->Draw(GetCursorIMG(),354 , 498 + (pTemp->GetSkillID() * 16), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
+				}
 
 			}
 		}
@@ -407,22 +403,6 @@ void CBattleState::Render(void)
 
 		for(int i = 0; i < (int)m_vText.size(); i++)
 			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
-
-
-
-
-		if(m_bVictory)
-		{
-			woss.str(_T(""));
-			woss << "Victory!";
-			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
-		}
-		else if(m_bDefeat)
-		{
-			woss.str(_T(""));
-			woss << "Defeated!";
-			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
-		}
 
 		RECT rPTemp = m_vBattleUnits[m_nTurn]->GetCollisionRectNoCam();
 
@@ -553,7 +533,15 @@ void CBattleState::Battle(float fElapsedTime)
 				if(m_vBattleUnits.size() == 1)
 				{
 					if(m_vBattleUnits[0]->GetType() == OBJ_PLAYER_UNIT)
+					{
+						if(m_pPlayerUnit->GetClass() == UC_WARRIOR || m_pPlayerUnit->GetClass() == UC_NONE)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Warrior_Battle_Victory");
+						else if(m_pPlayerUnit->GetClass() == UC_RANGER)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Ranger_Battle_Victory");
+						else if(m_pPlayerUnit->GetClass() == UC_MAGE)
+							m_pPlayerUnit->GetAnimInfo()->SetAnimation("Mage_Battle_Victory");
 						m_eCurrentPhase = BP_END;
+					}
 				}
 
 				if(m_nTurn >= (int)m_vBattleUnits.size())

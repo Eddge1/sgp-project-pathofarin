@@ -230,7 +230,7 @@
       <Tile_Data xTileID="5" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="76" posX="1" posY="5">
-      <Tile_Data xTileID="6" yTileID="1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+      <Tile_Data EventBroad="titonz" xTileID="6" yTileID="1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
         <Chest Name="Titan-Potion" Amount="3" />
       </Tile_Data>
     </Tile>
@@ -915,7 +915,7 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="76" posX="1" posY="5">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="77" posX="2" posY="5">
       <Tile_Data xTileID="11" yTileID="13" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

@@ -88,7 +88,11 @@ bool CProfileMenuState::Input()
 	if(m_fPosY <= 0.0f)
 	{
 		if(pDI->KeyPressed(DIK_ESCAPE) || pDI->JoystickButtonPressed(2))
+		{
+			CGamePlayState::GetInstance()->SetGameState(GP_END);
+			CGamePlayState::GetInstance()->Sleep();
 			CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+		}
 		if(pDI->KeyPressed(DIK_W) || pDI->KeyPressed(DIK_UPARROW) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP))
 		{
 			if(GetCursorSelection() <= 0)
@@ -255,6 +259,8 @@ bool CProfileMenuState::Input()
 					m_eCurrState = PS_SELECT;
 				break;
 			case 5:
+				CGamePlayState::GetInstance()->SetGameState(GP_END);
+				CGamePlayState::GetInstance()->Sleep();
 				CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
 			default:
 				break;
@@ -433,15 +439,22 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 		{
 		case 1:
 			pUnit = CreateWarrior();
+			pPlayer->GetAnimInfo()->SetAnimation("Warrior_Idle_Down");
 			break;
 		case 2:
 			pUnit = CreateRanger();
+			pPlayer->GetAnimInfo()->SetAnimation("Ranger_Idle_Down");
+
 			break;
 		case 3: 
 			pUnit = CreateMage();
+			pPlayer->GetAnimInfo()->SetAnimation("Mage_Idle_Down");
+
 			break;
 		default:
 			pUnit = CreateTempPlayer();
+			pPlayer->GetAnimInfo()->SetAnimation("Kid_Idle_Down");
+			break;
 		}
 
 		pPlayer->SetUnit(pUnit);
@@ -750,6 +763,10 @@ CPlayerUnit* CProfileMenuState::CreateRanger(void)
 	tempC->SetName("Ranger");
 	tempC->SetIsGame(false);
 	CSteadyShot *pAim = new CSteadyShot;
+	CProjectile* pArrow = new CProjectile();
+	pArrow->SetMasterGame(pAim);
+	pArrow->GetAnimInfo()->SetAnimation("Arrow_Left");
+	pAim->SetSkill(pArrow);
 	pTest->SetName("Aimed Shot");
 	pTest->SetMiniGame(pAim);
 	pAim->SetDamage(4.0f);
@@ -815,7 +832,7 @@ CPlayerUnit* CProfileMenuState::CreateWarrior(void)
 	tempC->SetName("Warrior");
 	tempC->SetIsGame(false);
 	CTriggerSpree *pSpree = new CTriggerSpree;
-	pTest->SetName("SwordSlash");
+	pTest->SetName("Frenzy");
 	pSpree->SetCost(15);
 	pSpree->SetDamage(0.75f);
 	pSpree->SetOwner(temp);

@@ -1258,7 +1258,7 @@ namespace SGP_PoA_LevelEditor
                         if (xTileEventType.Value == "CHESTS")
                         {
                             XAttribute xChestBroadCast = xTileInfo.Attribute("EventBroad");
-                            if (xChestBroadCast.Value != null)
+                            if (xChestBroadCast != null)
                                 lTemp.MyTiles[Convert.ToInt32(xPosX.Value), Convert.ToInt32(xPosY.Value)].BroadCast = xChestBroadCast.Value;
 
                             IEnumerable<XElement> xChests = xTileInfo.Elements("Chest");
