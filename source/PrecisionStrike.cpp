@@ -107,7 +107,7 @@ void CPrecisionStrike::Update(float fElapsedTime)
 	{
 		auto vUnits = CBattleState::GetInstance()->GetBattleUnits();
 
-		for(int i = 0; i < vUnits.size(); i++)
+		for(unsigned int i = 0; i < vUnits.size(); i++)
 		{
 			if(vUnits[i]->GetType() != OBJ_PLAYER_UNIT)
 			{
@@ -119,8 +119,8 @@ void CPrecisionStrike::Update(float fElapsedTime)
 					int nRangeX = rArea.right - rArea.left;
 					int nRangeY = rArea.bottom - rArea.top;
 					TargetLocs nTemp;
-					nTemp.fX = (rand() % nRangeX) + rArea.left;
-					nTemp.fY = (rand() % nRangeY) + rArea.top;
+					nTemp.fX = float((rand() % nRangeX) + rArea.left);
+					nTemp.fY = float((rand() % nRangeY) + rArea.top);
 
 					m_vTargets.push_back(nTemp);
 				}

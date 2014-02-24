@@ -35,7 +35,7 @@ void CChest::HandleEvent( const CEvent* pEvent )
 			m_bOpened = true;
 		}
 	}
-	if(pEvent->GetEventID() == m_szErase)
+	if(pEvent->GetEventID() == m_szErase && m_bCollided == false)
 	{
 		this->GetAnimInfo()->SetAnimation("Chest_Opening");
 		m_bCollided = true;
