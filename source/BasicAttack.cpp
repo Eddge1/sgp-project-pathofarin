@@ -32,6 +32,7 @@ CBasicAttack::CBasicAttack(void)
 
 
 
+
 	bAttacked = false;
 	bhasPlayed = false;
 }
@@ -160,6 +161,8 @@ void CBasicAttack::HandleEvent( const CEvent* pEvent )
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBee);
 			else if(GetOwner()->GetName() == "Cultist")
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCult);
+			else if(GetOwner()->GetName() == "Snake")
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnake);
 
 			bhasPlayed = true;
 		}

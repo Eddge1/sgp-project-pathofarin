@@ -191,6 +191,8 @@ void CUnits::ModifyHealth(int nAmount, bool isCrit, bool inMenu)
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBee);
 				else if(this->GetName() == "Cultist")
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nCult);
+				else if(this->GetName() == "Snake")
+					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSnake);
 
 
 
