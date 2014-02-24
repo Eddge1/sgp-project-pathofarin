@@ -10,6 +10,7 @@ class CSteadyShot :
 	float	m_fCursorY;
 	int		m_nImageID;
 	int		m_nCursorImageID;
+	int		m_nGreatSFXID;
 	bool	m_bCompleted;
 public:
 	CSteadyShot(void);

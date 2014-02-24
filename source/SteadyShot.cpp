@@ -14,6 +14,7 @@ CSteadyShot::CSteadyShot(void)
 	m_fCursorY = 300.0f;
 	m_bCompleted = false;
 
+	m_nGreatSFXID = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("Assets/Audio/Minigame/POA_SteadyShot_Great.wav"));
 	m_nImageID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/MiniGames/PoA_Target.png"));
 	m_nCursorImageID = CSGD_TextureManager::GetInstance()->LoadTexture(_T("assets/Graphics/MiniGames/PoA_Cross.png"));
 }
@@ -101,6 +102,11 @@ void CSteadyShot::Update(float fElapsedTime)
 		m_fCursorX += fX;
 		m_fCursorY += fY;
 
+		if(ScalarDistance(400.0f,300.0f,m_fCursorX, m_fCursorY) < 45)
+		{
+			if(!CSGD_XAudio2::GetInstance()->SFXIsSoundPlaying(m_nGreatSFXID))
+				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nGreatSFXID, false);
+		}
 
 		if(m_fTimer <= 0 && !m_bCompleted)
 		{
