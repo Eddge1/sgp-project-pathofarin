@@ -1,5 +1,5 @@
 #include "AITigerlily.h"
-
+#include "Buff.h"
 
 CAITigerlily::CAITigerlily(void)
 {
@@ -67,8 +67,17 @@ void CAITigerlily::Update(float fElapsedTime)
 						if(m_vBattleUnits[i]->GetType() == OBJ_ENEMY_UNIT)
 						{
 							m_vBattleUnits[i]->ModifyHealth(-m_vBattleUnits[i]->GetMaxHealth() / 3, false);
+
 						}
 					}
+
+					CBuff* pHeal = new CBuff();
+					pHeal->SetPosX(GetOwner()->GetPosX());
+					pHeal->SetPosY(GetOwner()->GetPosY());
+					pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_All");
+					CBattleState::GetInstance()->AddSkill(pHeal);
+					pHeal->Release();
+
 					GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
 					wostringstream woss;
 					woss << "AOE Heal";
@@ -94,6 +103,15 @@ void CAITigerlily::Update(float fElapsedTime)
 			{
 				if(GetOwner()->GetHealth() <= GetOwner()->GetMaxHealth() * 0.75)
 				{
+
+
+					CBuff* pHeal = new CBuff();
+					pHeal->SetPosX(GetOwner()->GetPosX());
+					pHeal->SetPosY(GetOwner()->GetPosY());
+					pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+					CBattleState::GetInstance()->AddSkill(pHeal);
+					pHeal->Release();
+
 					GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3, false);
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 					comrades = 0;
@@ -127,6 +145,14 @@ void CAITigerlily::Update(float fElapsedTime)
 						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 						m_nTurns = 0;
 						comrades = 0;
+
+						CBuff* pHeal = new CBuff();
+						pHeal->SetPosX(GetOwner()->GetPosX());
+						pHeal->SetPosY(GetOwner()->GetPosY());
+						pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+						CBattleState::GetInstance()->AddSkill(pHeal);
+						pHeal->Release();
+
 						m_nAoeHeal++;
 						GetOwner()->EndTurn();
 						return;
@@ -141,6 +167,13 @@ void CAITigerlily::Update(float fElapsedTime)
 					{
 						if(temp[0]->GetHealth() > temp[1]->GetHealth())
 						{
+							CBuff* pHeal = new CBuff();
+							pHeal->SetPosX(GetOwner()->GetPosX());
+							pHeal->SetPosY(GetOwner()->GetPosY());
+							pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+							CBattleState::GetInstance()->AddSkill(pHeal);
+							pHeal->Release();
+
 							temp[1]->ModifyHealth(-temp[1]->GetMaxHealth() / 3, false);
 							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 							m_nTurns = 0;
@@ -151,6 +184,14 @@ void CAITigerlily::Update(float fElapsedTime)
 						}
 						else if(temp[0]->GetHealth() < temp[1]->GetHealth())
 						{
+
+							CBuff* pHeal = new CBuff();
+							pHeal->SetPosX(GetOwner()->GetPosX());
+							pHeal->SetPosY(GetOwner()->GetPosY());
+							pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+							CBattleState::GetInstance()->AddSkill(pHeal);
+							pHeal->Release();
+
 							temp[0]->ModifyHealth(-temp[0]->GetMaxHealth() / 3, false);
 							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
 							m_nTurns = 0;
@@ -177,6 +218,14 @@ void CAITigerlily::Update(float fElapsedTime)
 				{
 					temp[0]->ModifyHealth(-temp[0]->GetMaxHealth() / 3, false);
 					CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
+
+					CBuff* pHeal = new CBuff();
+					pHeal->SetPosX(GetOwner()->GetPosX());
+					pHeal->SetPosY(GetOwner()->GetPosY());
+					pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+					CBattleState::GetInstance()->AddSkill(pHeal);
+					pHeal->Release();
+
 					m_nTurns = 0;
 					comrades = 0;
 					m_nAoeHeal++;
@@ -191,6 +240,14 @@ void CAITigerlily::Update(float fElapsedTime)
 			{
 				GetOwner()->ModifyHealth(-GetOwner()->GetMaxHealth() / 3 , false);
 				CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpellSfx);
+
+				CBuff* pHeal = new CBuff();
+				pHeal->SetPosX(GetOwner()->GetPosX());
+				pHeal->SetPosY(GetOwner()->GetPosY());
+				pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+				CBattleState::GetInstance()->AddSkill(pHeal);
+				pHeal->Release();
+
 				m_nTurns = 0;
 				comrades = 0;
 				m_nAoeHeal++;

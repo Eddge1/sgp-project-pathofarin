@@ -1,5 +1,5 @@
 #include "AIBasicHealer.h"
-
+#include "Buff.h"
 
 CAIBasicHealer::CAIBasicHealer(void)
 {
@@ -13,12 +13,12 @@ CAIBasicHealer::CAIBasicHealer(void)
 	m_nCult = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/Enemies/POA_Cult_Spell.wav"));
 
 
-
 }
 
 
 CAIBasicHealer::~CAIBasicHealer(void)
 {
+
 }
 
 void CAIBasicHealer::Update(float fElapsedTime)
@@ -33,10 +33,16 @@ void CAIBasicHealer::Update(float fElapsedTime)
 		m_nTurns = 0;
 		GetOwner()->EndTurn();
 
+		//Heal Animation
+		CBuff* pHeal = new CBuff();
+		pHeal->SetPosX(GetOwner()->GetPosX());
+		pHeal->SetPosY(GetOwner()->GetPosY());
+		pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+		CBattleState::GetInstance()->AddSkill(pHeal);
+		pHeal->Release();
+
 		if(GetOwner()->GetName() == "Cave_Bat")
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nBat);
-		else if(GetOwner()->GetName() == "Tree")
-			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nTree);
 		else if(GetOwner()->GetName() == "Orc_Shaman")
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nOrcSha);
 		else if(GetOwner()->GetName() == "Snake")

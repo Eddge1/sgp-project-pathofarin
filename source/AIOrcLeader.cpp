@@ -1,5 +1,5 @@
 #include "AIOrcLeader.h"
-
+#include "Buff.h"
 
 CAIOrcLeader::CAIOrcLeader(void)
 {
@@ -52,6 +52,15 @@ void CAIOrcLeader::Update(float fElapsedTime )
 		{
 			int tempRestore = GetOwner()->GetMaxHealth() / 4; // TODO: add random values
 			GetOwner()->ModifyHealth(-tempRestore, false);
+
+			//Heal Animation:
+			CBuff* pHeal = new CBuff();
+			pHeal->SetPosX(GetOwner()->GetPosX());
+			pHeal->SetPosY(GetOwner()->GetPosY());
+			pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+			CBattleState::GetInstance()->AddSkill(pHeal);
+			pHeal->Release();
+
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpell);
 			m_pTarget = nullptr;
 			m_nTurns = 0;
