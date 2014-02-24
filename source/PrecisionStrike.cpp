@@ -48,7 +48,7 @@ void CPrecisionStrike::Update(float fElapsedTime)
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		float fX = 0.0f;
 		float fY = 0.0f;
-
+		
 		if(pDI->KeyDown(DIK_UPARROW) ||pDI->KeyDown(DIK_W)  || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP) )
 			fY -= 100.0f * fElapsedTime;
 		else if(pDI->KeyDown(DIK_DOWNARROW) || pDI->KeyDown(DIK_S) || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN) )

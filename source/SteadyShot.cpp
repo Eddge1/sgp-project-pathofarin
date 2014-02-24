@@ -42,13 +42,21 @@ void CSteadyShot::DoAttack(void)
 			temp = int(temp * GetDamage() * fDamage);
 			tempP->ModifyHealth(temp, false);
 			if(!GetTutorial())
-				GetOwner()->EndTurn();
-			else
 			{
-				CTutorialBattle::GetInstance()->SetPlayerTurn(false);
 				if(fDamage < 10)
 					PlayCompletion();
 				else if(fDamage < 30)
+					PlayCrit();
+				else
+					PlaySuccess();
+				GetOwner()->EndTurn();
+			}
+			else
+			{
+				CTutorialBattle::GetInstance()->SetPlayerTurn(false);
+				if(fDamage < 30)
+					PlayCompletion();
+				else if(fDamage < 60)
 					PlayCrit();
 				else
 					PlaySuccess();
