@@ -64,9 +64,9 @@ void CMainMenuState::Activate(void)
 	m_fPosX = 360.0f;
 	m_fPosY = 0.0f;
 
-	m_fRune1Scale =  0.1f;
-	m_fRune2Scale =  0.4f;
-	m_fRunes3Scale = 0.7f;
+	m_fRune1Scale =  (rand() % 100) * 0.01f;
+	m_fRune2Scale =  (rand() % 100) * 0.01f;
+	m_fRunes3Scale = (rand() % 100) * 0.01f;
 	m_fRune1ReactTimer  = 0.0f;
 	m_fRune2ReactTimer  = 0.0f;
 	m_fRunes3ReactTimer = 0.0f;
@@ -91,7 +91,7 @@ void CMainMenuState::Update(float fElapsedTime)
 		m_fRune1Scale += 0.33f * fElapsedTime;
 		if(m_fRune1Scale >= 1.0f)
 		{
-			m_fRune1ReactTimer = 0.5f;
+			m_fRune1ReactTimer =(rand() % 100) * 0.01f;
 			m_fRune1Scale = 0;
 		}
 	}
@@ -102,7 +102,7 @@ void CMainMenuState::Update(float fElapsedTime)
 		m_fRune2Scale += 0.33f * fElapsedTime;
 		if(m_fRune2Scale >= 1.0f)
 		{
-			m_fRune2ReactTimer = 0.5f;
+			m_fRune2ReactTimer =(rand() % 100) * 0.01f;
 			m_fRune2Scale = 0;
 		}
 	}
@@ -113,7 +113,7 @@ void CMainMenuState::Update(float fElapsedTime)
 		m_fRunes3Scale += 0.33f * fElapsedTime;
 		if(m_fRunes3Scale >= 1.0f)
 		{
-			m_fRunes3ReactTimer = 0.5f;
+			m_fRunes3ReactTimer =(rand() % 100) * 0.01f;
 			m_fRunes3Scale = 0;
 		}
 	}

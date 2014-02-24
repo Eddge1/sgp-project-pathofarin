@@ -25,6 +25,8 @@ CComboGame::CComboGame(void)
 
 	m_bSuccess = false;
 	m_nCurr = 0;
+	m_fComboCompletionTimer = 0.0f;
+	m_fComboFailTimer = 0.0f;
 }
 
 
@@ -45,7 +47,8 @@ void CComboGame::ResetSkill()
 	m_fTimer = 10.0f;
 	m_bSuccess = false;
 	m_nCurr = 0;
-
+	m_fComboCompletionTimer = 0.0f;
+	m_fComboFailTimer = 0.0f;
 }
 
 void CComboGame::Render()
@@ -84,97 +87,127 @@ void CComboGame::Render()
 		else if(m_vMovesMade[i] == 3)
 			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (i*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2,D3DCOLOR_XRGB(100,255,100));
 	}
+	if(m_fComboFailTimer > 0)
+	{
+		if(m_vMoveList[m_nCurr ] == 0)
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (m_nCurr*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,0.0f,D3DCOLOR_XRGB(255,0,0));
+		else if(m_vMoveList[m_nCurr] == 1)
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (m_nCurr*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,0,0));
+		else if(m_vMoveList[m_nCurr] == 2)
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (m_nCurr*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI,D3DCOLOR_XRGB(255,0,0));
+		else if(m_vMoveList[m_nCurr ] == 3)
+			pTM->Draw(m_nCombArrowImgID,400 - int(m_nTotalMoves *0.5f * 16) + (m_nCurr*16),97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2,D3DCOLOR_XRGB(255,0,0));
+
+	}
 }
 
 void CComboGame::Update(float fElapsedTime)
 {
-	m_fTimer -= fElapsedTime;
-	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->KeyPressed(DIK_D) || pDI->JoystickDPadPressed(DIR_RIGHT) || pDI->JoystickGetLStickDirPressed(DIR_RIGHT)  )
+	if(m_fComboFailTimer > 0)
+		m_fComboFailTimer -= fElapsedTime;
+	if(m_fComboCompletionTimer <= 0)
 	{
-		if(m_vMoveList[m_nCurr] == 0)
+		m_fTimer -= fElapsedTime;
+		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
+		if(pDI->KeyPressed(DIK_RIGHTARROW) || pDI->KeyPressed(DIK_D) || pDI->JoystickDPadPressed(DIR_RIGHT) || pDI->JoystickGetLStickDirPressed(DIR_RIGHT)  )
 		{
-			m_vMovesMade.push_back(0);
-			m_nCurr++;
-			PlaySuccess();
-		}
-		else
-		{
-			if(m_vMovesMade.size() > 0)
-				m_vMovesMade.pop_back();
-			m_nCurr--;
-			PlayFail();
+			if(m_vMoveList[m_nCurr] == 0)
+			{
+				m_vMovesMade.push_back(0);
+				m_nCurr++;
+				PlaySuccess();
+			}
+			else
+			{
+				if(m_vMovesMade.size() > 0)
+					m_vMovesMade.pop_back();
+				m_nCurr--;
+				PlayFail();
+				m_fComboFailTimer = 0.5f;
+
+			}
+
 		}
 
+		if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP)  )
+		{
+			if(m_vMoveList[m_nCurr] == 3)
+			{
+				m_vMovesMade.push_back(3);
+				m_nCurr++;
+				PlaySuccess();
+
+			}
+			else
+			{
+				if(m_vMovesMade.size() > 0)
+					m_vMovesMade.pop_back();
+				m_nCurr--;
+				PlayFail();
+				m_fComboFailTimer = 0.5f;
+
+			}
+		}
+
+		if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A) || pDI->JoystickDPadPressed(DIR_LEFT) || pDI->JoystickGetLStickDirPressed(DIR_LEFT))
+		{
+			if(m_vMoveList[m_nCurr] == 2)
+			{
+				m_vMovesMade.push_back(2);
+				m_nCurr++;
+				PlaySuccess();
+			}
+			else
+			{
+				if(m_vMovesMade.size() > 0)
+					m_vMovesMade.pop_back();
+				m_nCurr--;
+				PlayFail();
+				m_fComboFailTimer = 0.5f;
+
+			}
+		}
+
+		if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
+		{
+			if(m_vMoveList[m_nCurr] == 1)
+			{
+				m_vMovesMade.push_back(1);
+				m_nCurr++;
+				PlaySuccess();
+			}
+			else
+			{
+				if(m_vMovesMade.size() > 0)
+					m_vMovesMade.pop_back();
+				m_nCurr--;
+				PlayFail();
+				m_fComboFailTimer = 0.5f;
+			}
+		}
+
+		if(m_nCurr < 0)
+			m_nCurr = 0;
+
+		if(m_vMovesMade.size() > unsigned int(m_nTotalMoves))
+			m_vMovesMade.erase(m_vMovesMade.begin());
+
+		if(m_vMovesMade.size() > unsigned int(m_nTotalMoves - 1))
+		{
+			if(m_vMoveList == m_vMovesMade)
+				m_bSuccess =true;
+		}
+
+		if(m_bSuccess)
+		{
+			m_fComboCompletionTimer = 0.33f;
+			PlayCrit();
+		}
 	}
+	else
+		m_fComboCompletionTimer -= fElapsedTime;
 
-	if(pDI->KeyPressed(DIK_UPARROW) || pDI->KeyPressed(DIK_W) || pDI->JoystickDPadPressed(DIR_UP) || pDI->JoystickGetLStickDirPressed(DIR_UP)  )
-	{
-		if(m_vMoveList[m_nCurr] == 3)
-		{
-			m_vMovesMade.push_back(3);
-			m_nCurr++;
-			PlaySuccess();
-
-		}
-		else
-		{
-			if(m_vMovesMade.size() > 0)
-				m_vMovesMade.pop_back();
-			m_nCurr--;
-			PlayFail();
-
-		}
-	}
-
-	if(pDI->KeyPressed(DIK_LEFTARROW) || pDI->KeyPressed(DIK_A) || pDI->JoystickDPadPressed(DIR_LEFT) || pDI->JoystickGetLStickDirPressed(DIR_LEFT))
-	{
-		if(m_vMoveList[m_nCurr] == 2)
-		{
-			m_vMovesMade.push_back(2);
-			m_nCurr++;
-			PlaySuccess();
-		}
-		else
-		{
-			if(m_vMovesMade.size() > 0)
-				m_vMovesMade.pop_back();
-			m_nCurr--;
-			PlayFail();
-		}
-	}
-
-	if(pDI->KeyPressed(DIK_DOWNARROW) || pDI->KeyPressed(DIK_S) || pDI->JoystickDPadPressed(DIR_DOWN) || pDI->JoystickGetLStickDirPressed(DIR_DOWN))
-	{
-		if(m_vMoveList[m_nCurr] == 1)
-		{
-			m_vMovesMade.push_back(1);
-			m_nCurr++;
-			PlaySuccess();
-		}
-		else
-		{
-			if(m_vMovesMade.size() > 0)
-				m_vMovesMade.pop_back();
-			m_nCurr--;
-			PlayFail();
-
-		}
-	}
-
-	if(m_nCurr < 0)
-		m_nCurr = 0;
-
-	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves))
-		m_vMovesMade.erase(m_vMovesMade.begin());
-
-	if(m_vMovesMade.size() > unsigned int(m_nTotalMoves - 1))
-	{
-		if(m_vMoveList == m_vMovesMade)
-			m_bSuccess =true;
-	}
-
-	if(m_bSuccess)
+	if(m_bSuccess && m_fComboCompletionTimer <0)
 	{
 		m_nSuccessCombo++;
 		if(m_nSuccessCombo >= 3)
@@ -193,7 +226,6 @@ void CComboGame::Update(float fElapsedTime)
 		m_vMovesMade.clear();
 		m_fTimer += 1.0f;
 		m_nCurr = 0;
-		PlayCrit();
 		CUnits* tempP;
 
 		if(!GetTutorial())

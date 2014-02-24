@@ -10,6 +10,8 @@ class CComboGame :	public CMiniGames
 	int m_nCurr;
 	int m_nTotalMoves;
 	int m_nSuccessCombo;
+	float m_fComboCompletionTimer;
+	float m_fComboFailTimer;
 public:
 	CComboGame(void);
 	virtual ~CComboGame(void);
