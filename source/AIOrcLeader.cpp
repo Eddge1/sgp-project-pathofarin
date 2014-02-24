@@ -38,7 +38,7 @@ void CAIOrcLeader::Update(float fElapsedTime )
 		//GetMinigame()->Update(fElapsedTime);
 		//GetOwner()->SetAttack(GetOwner()->GetAttack() / 4);
 
-		
+
 
 		m_pTarget->ModifyHealth(GetOwner()->GetAttack() * 4, false);
 		CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nAttk);
@@ -57,7 +57,7 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			CBuff* pHeal = new CBuff();
 			pHeal->SetPosX(GetOwner()->GetPosX());
 			pHeal->SetPosY(GetOwner()->GetPosY());
-			pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Self");
+			pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal");
 			CBattleState::GetInstance()->AddSkill(pHeal);
 			pHeal->Release();
 
@@ -84,6 +84,15 @@ void CAIOrcLeader::Update(float fElapsedTime )
 		{
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpell);
 			m_pTarget->ModifyHealth(-m_pTarget->GetMaxHealth() / 3, false);
+
+			//Heal Animation:
+			CBuff* pHeal = new CBuff();
+			pHeal->SetPosX(GetOwner()->GetPosX());
+			pHeal->SetPosY(GetOwner()->GetPosY());
+			pHeal->GetAnimInfo()->SetAnimation("Enemy_Heal_Other");
+			CBattleState::GetInstance()->AddSkill(pHeal);
+			pHeal->Release();
+
 			m_pTarget = nullptr;
 			m_nTurns = 0;
 			GetOwner()->EndTurn();
