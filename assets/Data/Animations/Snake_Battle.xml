@@ -28,9 +28,9 @@
       <ActiveCollision posX="0" posY="0" Width="94" Height="75" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Snake_Battle_Basic_Attack" Frames="1" repeat="0" Texture="PoA_Desert_Snake_Battle.png">
+  <Animation_Info Name="Snake_Battle_Basic_Attack" Frames="2" repeat="0" Texture="PoA_Desert_Snake_Battle.png">
     <Frame_Data>
-      <Render posX="3" posY="173" Width="89" Height="90" anchorX="50" anchorY="69" Duration="0.2" Event="START_AUDIO" />
+      <Render posX="3" posY="173" Width="89" Height="90" anchorX="50" anchorY="69" Duration="0.1" Event="START_AUDIO" />
       <ActiveCollision posX="0" posY="0" Width="89" Height="90" />
       <Render posX="3" posY="173" Width="89" Height="90" anchorX="50" anchorY="69" Duration="0.2" Event="BASIC_ATTACK" />
       <ActiveCollision posX="0" posY="0" Width="89" Height="90" />
