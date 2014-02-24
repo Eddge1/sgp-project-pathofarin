@@ -29,6 +29,12 @@ private:
 	bool m_bLeft;
 	bool m_bLeftMenuState;
 	char m_cTrans;
+	float m_fRune1Scale;
+	float m_fRune2Scale;
+	float m_fRunes3Scale;
+	float m_fRune1ReactTimer;
+	float m_fRune2ReactTimer;
+	float m_fRunes3ReactTimer;
 
 	CMainMenuState(void);
 	virtual ~CMainMenuState(void);

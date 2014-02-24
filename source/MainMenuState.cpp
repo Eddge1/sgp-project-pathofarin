@@ -37,6 +37,12 @@ CMainMenuState::CMainMenuState(void)
 	m_fPosY = 0.0f;
 	m_bLeft = false;
 	m_bLeftMenuState = false;
+	m_fRune1Scale = 0.0f;
+	m_fRune2Scale = 0.0f;
+	m_fRunes3Scale = 0.0f;
+	m_fRune1ReactTimer  = 0.0f;
+	m_fRune2ReactTimer  = 0.0f;
+	m_fRunes3ReactTimer = 0.0f;
 }
 
 CMainMenuState::~CMainMenuState(void)
@@ -51,21 +57,67 @@ void CMainMenuState::Activate(void)
 	if(m_bLeftMenuState)
 	{
 		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
-		m_bLeftMenuState = false;
+			m_bLeftMenuState = false;
 	}
 
 	m_fRotation = 0.0f;
 	m_fPosX = 360.0f;
 	m_fPosY = 0.0f;
+
+	m_fRune1Scale =  0.1f;
+	m_fRune2Scale =  0.4f;
+	m_fRunes3Scale = 0.7f;
+	m_fRune1ReactTimer  = 0.0f;
+	m_fRune2ReactTimer  = 0.0f;
+	m_fRunes3ReactTimer = 0.0f;
 }
 
 void CMainMenuState::Sleep(void)
 {
-
+	m_fRune1Scale = 0.0f;
+	m_fRune2Scale = 0.0f;
+	m_fRunes3Scale = 0.0f;
+	m_fRune1ReactTimer  = 0.0f;
+	m_fRune2ReactTimer  = 0.0f;
+	m_fRunes3ReactTimer = 0.0f;
 }
 
 void CMainMenuState::Update(float fElapsedTime)
 {
+	if(	m_fRune1ReactTimer >= 0)
+		m_fRune1ReactTimer -= fElapsedTime;
+	else
+	{
+		m_fRune1Scale += 0.33f * fElapsedTime;
+		if(m_fRune1Scale >= 1.0f)
+		{
+			m_fRune1ReactTimer = 0.5f;
+			m_fRune1Scale = 0;
+		}
+	}
+	if(	m_fRune2ReactTimer >= 0)
+		m_fRune2ReactTimer -= fElapsedTime;
+	else
+	{
+		m_fRune2Scale += 0.33f * fElapsedTime;
+		if(m_fRune2Scale >= 1.0f)
+		{
+			m_fRune2ReactTimer = 0.5f;
+			m_fRune2Scale = 0;
+		}
+	}
+	if(	m_fRunes3ReactTimer >= 0)
+		m_fRunes3ReactTimer -= fElapsedTime;
+	else
+	{
+		m_fRunes3Scale += 0.33f * fElapsedTime;
+		if(m_fRunes3Scale >= 1.0f)
+		{
+			m_fRunes3ReactTimer = 0.5f;
+			m_fRunes3Scale = 0;
+		}
+	}
+
 	m_fRotation += (1.0f * fElapsedTime);
 
 	if(m_fPosY >= 172.0f)
@@ -93,13 +145,25 @@ void CMainMenuState::Render(void)
 	CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	RECT rtemp = {36, 48, 220, 206};
-	CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
-	CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,1.0f,1.0f,&rtemp,92,79,-m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
-	CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,1.0f,1.0f,&rtemp,92,79,m_fRotation, D3DCOLOR_ARGB(250,255,255,255));
+	if(m_fRune1Scale <0.5f)
+		CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,m_fRune1Scale,m_fRune1Scale,&rtemp,92 * m_fRune1Scale,79*m_fRune1Scale,m_fRotation *2, D3DCOLOR_ARGB(250,255,255,255));
+	else
+		CSGD_TextureManager::GetInstance()->Draw(m_nWarriorID,100,300,m_fRune1Scale,m_fRune1Scale,&rtemp,92 * m_fRune1Scale,79*m_fRune1Scale,m_fRotation *2, D3DCOLOR_ARGB(char(250 * (1.0f - (m_fRune1Scale * 2))),255,255,255));
+
+	if(m_fRune2Scale <0.5f)
+		CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,m_fRune2Scale,m_fRune2Scale,&rtemp,92 * m_fRune2Scale,79 *m_fRune2Scale,-m_fRotation *2, D3DCOLOR_ARGB(250,255,255,255));
+	else
+		CSGD_TextureManager::GetInstance()->Draw(m_nMageID,325,100,m_fRune2Scale,m_fRune2Scale,&rtemp,92 * m_fRune2Scale,79 *m_fRune2Scale,-m_fRotation *2, D3DCOLOR_ARGB(char(250 * (1.0f - (m_fRune2Scale * 2))),255,255,255));
+
+	if(m_fRunes3Scale <0.5f)
+		CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,m_fRunes3Scale,m_fRunes3Scale,&rtemp,92*m_fRunes3Scale,79*m_fRunes3Scale,m_fRotation *2, D3DCOLOR_ARGB(250,255,255,255));
+	else
+		CSGD_TextureManager::GetInstance()->Draw(m_nRangerID,500,300,m_fRunes3Scale,m_fRunes3Scale,&rtemp,92*m_fRunes3Scale,79*m_fRunes3Scale,m_fRotation *2, D3DCOLOR_ARGB(char(250 * (1.0f - (m_fRunes3Scale * 2))),255,255,255));
+
 	RECT rLogo = {0,0,512,256};
 	CSGD_TextureManager::GetInstance()->Draw(m_nLogoID,144,(int)m_fPosY,1.0f,1.0f,&rLogo,0.0f,0.0f,0.0f,D3DCOLOR_ARGB(230,255,255,255));
-	
-	
+
+
 	if(m_fPosY >= 172.0f)
 	{
 		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
