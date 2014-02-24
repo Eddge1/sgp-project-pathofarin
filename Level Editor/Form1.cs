@@ -276,6 +276,16 @@ namespace SGP_PoA_LevelEditor
             cmbItemChoice.Items.Add("Ether");
             cmbItemChoice.Items.Add("Hi-Ether");
             cmbItemChoice.Items.Add("Titan-Ether");
+            cmbItemChoice.Items.Add("HP Augment");
+            cmbItemChoice.Items.Add("AP Augment");
+            cmbItemChoice.Items.Add("Atk Augment");
+            cmbItemChoice.Items.Add("Speed Augment");
+            cmbItemChoice.Items.Add("Sword of Suffering");
+            cmbItemChoice.Items.Add("Staff of Lucidity");
+            cmbItemChoice.Items.Add("Bow of the Great Hunt");
+            cmbItemChoice.Items.Add("Armor of the Ghost Wolf");
+            cmbItemChoice.Items.Add("Robes of the Ancient One");
+            cmbItemChoice.Items.Add("Vestments of the Savage tribes");
 
             cmbMode.SelectedIndex = 0;
             cmbItemChoice.SelectedIndex = 0;

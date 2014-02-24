@@ -1236,7 +1236,7 @@
             this.grpChest.Controls.Add(this.label7);
             this.grpChest.Controls.Add(this.lstItems);
             this.grpChest.Controls.Add(this.cmbItemChoice);
-            this.grpChest.Location = new System.Drawing.Point(1261, 327);
+            this.grpChest.Location = new System.Drawing.Point(1033, 181);
             this.grpChest.Name = "grpChest";
             this.grpChest.Size = new System.Drawing.Size(223, 201);
             this.grpChest.TabIndex = 34;

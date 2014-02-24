@@ -81,6 +81,10 @@ void CGamePlayState::Activate(void)
 	case GP_INIT:
 		if(m_pPlayer->GetUnit()->GetClass() == UC_NONE)
 		{
+			m_pPlayer->AddListen("CREATE_WARRIOR");
+			m_pPlayer->AddListen("CREATE_MAGE");
+			m_pPlayer->AddListen("CREATE_RANGER");
+
 			m_eCurrPhase = GP_NAV;
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
@@ -98,17 +102,6 @@ void CGamePlayState::Activate(void)
 			m_mWorldManager[m_sCurrWorld]->AddObject(m_pPlayer, 2);
 			WorldCamX =  int(m_pPlayer->GetPosX() - (CGame::GetInstance()->GetScreenWidth() / 2));
 			WorldCamY =  int(m_pPlayer->GetPosY() - (CGame::GetInstance()->GetScreenHeight() / 2));
-
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["HP Augment"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["AP Augment"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Atk Augment"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Speed Augment"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Sword of Suffering"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Staff of Lucidity"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Bow of the Great Hunt"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Armor of the Ghost Wolf"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Robes of the Ancient One"].Item, 1);
-			m_pPlayer->GetUnit()->AddConsumableItem(m_mItemManager["Vestments of the Savage tribes"].Item, 1);
 
 			int nTemp = CMainMenuState::GetInstance()->GetBackgroundMusic();
 			if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(nTemp))
@@ -575,7 +568,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "DA_DUMMY")
 	{
-			assert(true && "Why are you sending the dummy message?");
+		assert(true && "Why are you sending the dummy message?");
 	}
 }
 
@@ -788,10 +781,6 @@ void CGamePlayState::LoadWorld(string szFileName)
 									pNpc->AddEraseEvent("CREATE_WARRIOR");
 									pNpc->AddEraseEvent("CREATE_MAGE");
 									pNpc->AddEraseEvent("CREATE_RANGER");
-
-									m_pPlayer->AddListen("CREATE_WARRIOR");
-									m_pPlayer->AddListen("CREATE_MAGE");
-									m_pPlayer->AddListen("CREATE_RANGER");
 								}
 
 
@@ -882,6 +871,15 @@ void CGamePlayState::LoadWorld(string szFileName)
 									szItemName = "";
 									nItemAmount = 0;
 								}
+							}
+							string szBroadcast = "";
+							if(pTileData->Attribute("EventBroad") != nullptr)
+							{
+								szBroadcast = pTileData->Attribute("EventBroad");
+								pChest->AddEraseEvent(szBroadcast);
+								pChest->RegEvent(szBroadcast);
+								m_pPlayer->AddListen(szBroadcast);
+								szBroadcast = "";
 							}
 							Worldtemp->AddObject(pChest, 2);
 							pChest->Release();
@@ -1138,27 +1136,30 @@ CWorld* CGamePlayState::GetWorld(string szName)
 
 void CGamePlayState::AddFloatingText(CObjects* pOwner, DWORD dColor, wostringstream &szText)
 {
-	NPCDialogue* ftTemp = new NPCDialogue;
-	for(unsigned int i = 0; i < m_vShowOnScreen.size(); i++)
+	if(m_pPlayer->isBroadcasting() == false)
 	{
-		if(m_vShowOnScreen[i]->szText.str() == szText.str())
+		NPCDialogue* ftTemp = new NPCDialogue;
+		for(unsigned int i = 0; i < m_vShowOnScreen.size(); i++)
 		{
-			delete ftTemp;
-			return;
+			if(m_vShowOnScreen[i]->szText.str() == szText.str())
+			{
+				delete ftTemp;
+				return;
+			}
 		}
+		ftTemp->pOwner = pOwner;
+		if(pOwner != nullptr)
+			pOwner->AddRef();
+
+		CGame::GetInstance()->GetFont("Arial")->GetDimensions(pOwner,ftTemp->rPos, szText);
+
+		ftTemp->Color = dColor;
+		ftTemp->szText << szText.str();
+		ftTemp->m_fTimer = 0.1f;
+
+
+		m_vShowOnScreen.push_back(ftTemp);
 	}
-	ftTemp->pOwner = pOwner;
-	if(pOwner != nullptr)
-		pOwner->AddRef();
-
-	CGame::GetInstance()->GetFont("Arial")->GetDimensions(pOwner,ftTemp->rPos, szText);
-
-	ftTemp->Color = dColor;
-	ftTemp->szText << szText.str();
-	ftTemp->m_fTimer = 0.1f;
-
-
-	m_vShowOnScreen.push_back(ftTemp);
 }
 
 CConsumable* CGamePlayState::CreatePotion(string input)

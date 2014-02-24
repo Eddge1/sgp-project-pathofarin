@@ -231,7 +231,6 @@ void CEquipmentState::Render( void )
 	pTM->Draw(m_nUnusedSlotID, 232 + 128, 336);
 	pTM->Draw(m_nUnusedSlotID, 300 + 128, 336);
 
-
 	pTM->Draw(m_nUnusedSlotID, 164 + 128, 404);
 	pTM->Draw(m_nUnusedSlotID, 232 + 128, 404);
 	pTM->Draw(m_nUnusedSlotID, 300 + 128, 404);
@@ -365,8 +364,215 @@ void CEquipmentState::Render( void )
 	woss << m_pPlayer->GetAbilityPoints() << " / " << m_pPlayer->GetMaxAP();
 	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),232,134,0.75f,D3DCOLOR_ARGB(255,0,0,0));
 	woss.str(_T(""));
-	woss << "Attack: " << m_pPlayer->GetAttack() << "\nSpeed: " << m_pPlayer->GetSpeed() << "\nExperience: " << m_pPlayer->GetExperience() << " / " << m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100;
+	woss <<"Level: " << m_pPlayer->GetLevel() << "\nAttack: " << m_pPlayer->GetAttack() << "\nSpeed: " << m_pPlayer->GetSpeed() << "\nExperience: " << m_pPlayer->GetExperience() << " / " << m_pPlayer->GetLevel() * m_pPlayer->GetLevel() * 100;
 	CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),232,150,0.75f,D3DCOLOR_ARGB(255,0,0,0));
+
+	/////////////////////////////////////////////////////////////////////////////
+	int nHealthMod, nAPMod, nAttackMod, nSpeedMod;
+	nHealthMod = nAPMod = nAttackMod = nSpeedMod = 0;
+	CWeapon* pWeapon = nullptr;
+	CArmor* pArmor = nullptr;
+	CAugment* pAugment = nullptr;
+	switch(m_nEquippedWeapon)
+	{
+	case 0:
+		pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+		break;
+	case 1:
+		pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Staff of Lucidity"].Item);
+		break;
+	case 2:
+		pWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+		break;
+	default:
+		break;
+	}
+
+	switch(m_nEquippedArmor)
+	{
+	case 0:
+		pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Armor of the Ghost Wolf"].Item);
+		break;
+	case 1:
+		pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Robes of the Ancient One"].Item);
+		break;
+	case 2:
+		pArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Vestments of the Savage tribes"].Item);
+		break;
+	default:
+		break;
+	}
+
+	switch(m_nEquippedAugment)
+	{
+
+	case 0:
+		pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["HP Augment"].Item);
+		break;
+	case 1:
+		pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["AP Augment"].Item);
+		break;
+	case 2:
+		pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Atk Augment"].Item);
+		break;
+	case 3:
+		pAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Speed Augment"].Item);
+		break;
+	default:
+		break;
+	}
+
+	CWeapon* pLWeapon = nullptr;
+	CArmor* pLArmor = nullptr;
+	CAugment* pLAugment = nullptr;
+
+	switch(m_nWeaponSelection)
+	{
+	case 0:
+		pLWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+		break;
+	case 1:
+		pLWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Staff of Lucidity"].Item);
+		break;
+	case 2:
+		pLWeapon = reinterpret_cast<CWeapon*>((*m_vInventory)["Sword of Suffering"].Item);
+		break;
+	default:
+		break;
+	}
+
+	switch(m_nArmorSelection)
+	{
+	case 0:
+		pLArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Armor of the Ghost Wolf"].Item);
+		break;
+	case 1:
+		pLArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Robes of the Ancient One"].Item);
+		break;
+	case 2:
+		pLArmor = reinterpret_cast<CArmor*>((*m_vInventory)["Vestments of the Savage tribes"].Item);
+		break;
+	default:
+		break;
+	}
+
+	switch(m_nAugmentSelection)
+	{
+
+	case 0:
+		pLAugment = reinterpret_cast<CAugment*>((*m_vInventory)["HP Augment"].Item);
+		break;
+	case 1:
+		pLAugment = reinterpret_cast<CAugment*>((*m_vInventory)["AP Augment"].Item);
+		break;
+	case 2:
+		pLAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Atk Augment"].Item);
+		break;
+	case 3:
+		pLAugment = reinterpret_cast<CAugment*>((*m_vInventory)["Speed Augment"].Item);
+		break;
+	default:
+		break;
+	}
+	//////////////////////////////////////////////////////////////////////////////
+
+	if(pWeapon != nullptr)
+		nAttackMod -= (int)pWeapon->GetAttack();
+
+	if(pArmor != nullptr)
+	{
+		nSpeedMod -=  (int)pArmor->GetSpeedStat();
+		nHealthMod -= (int)pArmor->GetHpStat();
+		nAttackMod -= (int)pArmor->GetAttkStat();
+
+	}
+	if(pAugment != nullptr)
+	{
+		if(pAugment->GetAugType() == "HP")
+			nHealthMod -= (int)pAugment->GetEffect();
+		else if(pAugment->GetAugType() == "ATTK")
+			nAttackMod -= (int)pAugment->GetEffect();
+		else if(pAugment->GetAugType() == "AP")
+			nAPMod -= (int)pAugment->GetEffect();
+		else if(pAugment->GetAugType() == "SPEED")
+			nSpeedMod -= (int)pAugment->GetEffect();
+	}
+
+	if(pLWeapon != nullptr)
+		nAttackMod += (int)pLWeapon->GetAttack();
+
+	if(pLArmor != nullptr)
+	{
+		nSpeedMod +=  (int)pLArmor->GetSpeedStat();
+		nHealthMod += (int)pLArmor->GetHpStat();
+		nAttackMod += (int)pLArmor->GetAttkStat();
+
+	}
+	if(pLAugment != nullptr)
+	{
+		if(pLAugment->GetAugType() == "HP")
+			nHealthMod += (int)pLAugment->GetEffect();
+		else if(pLAugment->GetAugType() == "ATTK")
+			nAttackMod += (int)pLAugment->GetEffect();
+		else if(pLAugment->GetAugType() == "AP")
+			nAPMod += (int)pLAugment->GetEffect();
+		else if(pLAugment->GetAugType() == "SPEED")
+			nSpeedMod += (int)pLAugment->GetEffect();
+	}
+	if(m_bSubMenu && GetCursorSelection() == 0)
+	{
+		//////////////////////////////////////////////////////////////////////////////
+		woss.str(_T(""));
+		if(nHealthMod > 0)
+			woss << "+";
+		woss << nHealthMod;
+		if(nHealthMod != 0)
+		{
+			if(nHealthMod > 0)
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),168,126,0.75f,D3DCOLOR_ARGB(255,0,255,0));
+			else 
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),168,126,0.75f,D3DCOLOR_ARGB(255,255,0,0));
+		}
+
+		woss.str(_T(""));
+		if(nAPMod > 0)
+			woss << "+";
+		woss << nAPMod;
+		if(nAPMod != 0)
+		{
+			if(nAPMod > 0)
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,134,0.75f,D3DCOLOR_ARGB(255,0,255,0));
+			else
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,134,0.75f,D3DCOLOR_ARGB(255,255,0,0));
+		}
+
+
+		woss.str(_T(""));
+		woss << "\n ";
+		if(nAttackMod > 0)
+			woss << "+";
+		woss << nAttackMod;
+
+		if(nAttackMod != 0)
+		{
+			if(nAttackMod > 0)
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,150,0.75f,D3DCOLOR_ARGB(255,0,255,0));
+			else
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,150,0.75f,D3DCOLOR_ARGB(255,255,0,0));
+		}
+		woss.str(_T(""));
+		woss << "\n\n " ;
+		if(nSpeedMod > 0)
+			woss << "+";
+		woss << nSpeedMod;
+		if(nSpeedMod != 0)
+		{
+			if(nSpeedMod > 0)
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,150,0.75f,D3DCOLOR_ARGB(255,0,255,0));
+			else
+				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),332,150,0.75f,D3DCOLOR_ARGB(255,255,0,0));
+		}
+	}
 
 }	
 
