@@ -235,7 +235,7 @@ void CPlayer::HandleEvent( const CEvent* pEvent )
 		bool bHeard = false;
 		if(pEvent->GetEventID() == m_szListen[i])
 		{
-			for(unsigned int nLoop = 0; i < m_szHeard.size(); i++)
+			for(unsigned int nLoop = 0; nLoop < m_szHeard.size(); nLoop++)
 			{
 				if(m_szHeard[nLoop] == m_szListen[i])
 				{
