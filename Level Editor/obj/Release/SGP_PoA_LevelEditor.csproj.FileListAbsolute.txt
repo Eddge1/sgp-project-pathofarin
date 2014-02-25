@@ -8,3 +8,12 @@ C:\Users\fullsail\Desktop\Small\sgp-project-pathofarin\Level Editor\obj\Release\
 C:\Users\fullsail\Desktop\Small\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.pdb
 C:\Users\fullsail\Desktop\Small\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.exe
 C:\Users\fullsail\Desktop\Small\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.pdb
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.Form1.resources
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.ModalNpc.resources
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.Properties.Resources.resources
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.csproj.GenerateResource.Cache
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.exe.config
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.exe
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.pdb
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.exe
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.pdb
