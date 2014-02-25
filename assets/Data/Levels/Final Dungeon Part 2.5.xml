@@ -239,7 +239,7 @@
       <Tile_Data xTileID="8" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="77" posX="12" posY="5">
-      <Tile_Data xTileID="9" yTileID="5" EventID="Final Dungeon Part 2.9" EventType="WARP" WarpX="320" WarpY="640" Total_Waypoints="0" />
+      <Tile_Data xTileID="9" yTileID="5" EventID="Final Dungeon Part 2" EventType="WARP" WarpX="128" WarpY="576" Total_Waypoints="0" />
     </Tile>
     <Tile ID="78" posX="0" posY="6">
       <Tile_Data xTileID="9" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

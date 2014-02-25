@@ -5,7 +5,7 @@
 
 CCreditState::CCreditState(void)
 {
-	m_szCredits = "\t            Path of Arin\n\t\tCredits\nExecutive Producer:\t John Oleske\nAssociate Producer:\t Robert Martinez\n\nProgrammer:\t\t James Bean\nProgrammer:\t\t David Lindley\nProgrammer:\t\t Daniel Tyree\n\nArtist:\t\t\tGregory Bey\nArtist:\t\t\tCaris Frasier";
+	m_szCredits = "\t            Path of Arin\n\t\tCredits\nExecutive Producer:\t John O'leske\nAssociate Producer:\t Robert Martinez\n\nProgrammer:\t\t James Bean\nProgrammer:\t\t David Lindley\nProgrammer:\t\t Daniel Tyree\n\nArtist:\t\t\tGregory Bey\nArtist:\t\t\tCaris Frasier";
 	SetBackgroundMusic(-1);
 	SetBackgroundImg(-1);
 	SetCursorIMG(-1);
@@ -30,13 +30,11 @@ CCreditState* CCreditState::GetInstance( void )
 void CCreditState::Activate( void )	
 {
 	m_fDrawY = 600.0f;
-	//SetBackgroundImg(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_MainMenu.png")));
 
 }
 
 void CCreditState::Sleep( void )	
 {
-	//SetBackgroundImg(-1);
 }
 
 void CCreditState::Update( float fElapsedTime )	
@@ -51,7 +49,6 @@ void CCreditState::Update( float fElapsedTime )
 void CCreditState::Render( void )
 {
 	CBitmapFont *pFont = CGame::GetInstance()->GetFont("Arial");
-	//CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(),0,0);
 
 	std::wostringstream woss;
 	woss << m_szCredits.c_str();
