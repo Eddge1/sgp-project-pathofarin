@@ -64,6 +64,7 @@ void CAIOrcLeader::Update(float fElapsedTime )
 			CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSpell);
 			m_pTarget = nullptr;
 			m_nTurns = 0;
+			GetOwner()->EndTurn();
 			return;
 		}
 
