@@ -277,15 +277,12 @@ void CVictoryState::Render( void )
 			{
 				if(i->second.Item != nullptr)
 				{
-					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					CItem* pTemp = i->second.Item;
+					if(pTemp != nullptr)
 					{
-						CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-						if(pTemp != nullptr)
-						{
-							woss.str(_T(""));
-							woss << pTemp->GetName().c_str() << "  x" << i->second.Owned;
-							CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 432, 113 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
-						}
+						woss.str(_T(""));
+						woss << pTemp->GetName().c_str() << "  x" << i->second.Owned;
+						CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(), 432, 113 + (nCount * 17), 0.75f, D3DCOLOR_XRGB(0,0,0));
 					}
 				}
 				nCount++;

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="KinoTownGuard">
+<NPC Total_Conversations="1" Name="OldGuard" Hostile="false" Units="0" File="KinoTownGuard">
   <Convo Text="Since travelers have come through the cave the garden has been a mess we cannot let anyone pass until we have discovered the root cause of the problem" Event="" />
 </NPC>

@@ -103,21 +103,18 @@ void CChargeCrystal::Update(float fElapsedTime)
 				switch (m_nSuccess)
 				{
 				case 0:
-					SetDamage(1.3f);
 					m_fScale -= 0.1f;
 					m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f * m_fScale;
 					m_fTimer = 1.5f;
 					PlaySuccess();
 					break;
 				case 1:
-					SetDamage(1.6f);
 					m_fScale -= 0.1f;
 					m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f * m_fScale;
 					m_fTimer = 1.0f;
 					PlaySuccess();
 					break;
 				case 2:
-					SetDamage(2.3f);
 					PlayCrit();
 					break;
 				default:
@@ -162,7 +159,6 @@ void CChargeCrystal::ResetSkill()
 	m_nSuccess = 0;
 	m_fRadius = CSGD_TextureManager::GetInstance()->GetTextureWidth(m_nChargeImgID) * 0.5f;
 	m_fScale = 1.0f;
-	SetDamage(0);
 	m_bFailed = false;
 	m_bAuraPlay = true;
 	m_fCursorX = 400.0f;
@@ -224,7 +220,7 @@ void CChargeCrystal::DoAttack(void)
 			if(GetOwner() != nullptr)
 			{
 				int temp = GetOwner()->GetAttack();
-				tempP->ModifyHealth(int(temp * GetDamage()), false);
+				tempP->ModifyHealth(int(temp * (GetDamage() + 0.5f)), false);
 			}
 			GetOwner()->EndTurn();
 			break;
@@ -237,7 +233,7 @@ void CChargeCrystal::DoAttack(void)
 			if(GetOwner() != nullptr)
 			{
 				int temp = GetOwner()->GetAttack();
-				tempP->ModifyHealth(int(temp * GetDamage()), false);
+				tempP->ModifyHealth(int(temp * (GetDamage() + 1.0f)), false);
 			}
 			GetOwner()->EndTurn();
 			break;
@@ -250,7 +246,7 @@ void CChargeCrystal::DoAttack(void)
 			if(GetOwner() != nullptr)
 			{
 				int temp = GetOwner()->GetAttack();
-				tempP->ModifyHealth(int(temp * GetDamage()), true);
+				tempP->ModifyHealth(int(temp * (GetDamage() + 2.0f)), true);
 			}
 			GetOwner()->EndTurn();
 			break;

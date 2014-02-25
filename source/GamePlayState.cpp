@@ -506,7 +506,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
-		//m_eCurrPhase = GP_END;
+		m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
 	}
 	else if(pEvent->GetEventID() == "GIVE_ITEM" && m_pPlayer->isBroadcasting() == false)
@@ -519,14 +519,11 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			{
 				if(i->second.Item != nullptr)
 				{
-					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					CItem* pTemp = i->second.Item;
+					if(pTemp != nullptr)
 					{
-						CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-						if(pTemp != nullptr)
-						{
-							woss << "Obtained " << pTemp->GetName().c_str() << " x" << i->second.Owned << "\n";
-							m_pPlayer->GetUnit()->AddConsumableItem(pTemp, i->second.Owned);
-						}
+						woss << "Obtained " << pTemp->GetName().c_str() << " x" << i->second.Owned << "\n";
+						m_pPlayer->GetUnit()->AddConsumableItem(pTemp, i->second.Owned);
 					}
 				}
 			}

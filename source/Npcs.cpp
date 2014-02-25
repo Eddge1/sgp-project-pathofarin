@@ -129,6 +129,8 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 		{
 			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 		}
+		else if(this->GetName() == "Valrion")
+			CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 	}
 	for(unsigned int i = 0; i < m_szEraseEvents.size();i++)
 	{
@@ -166,8 +168,6 @@ void CNpcs::HandleCollision(CObjects* col)
 
 							woss << m_szConversation[0].c_str();
 							CGamePlayState::GetInstance()->AddFloatingText(this, D3DCOLOR_XRGB(0,0,0), woss);
-							if(m_bGameVictory)
-								CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 							m_fDelayChat = 1.0f;
 							if(m_szEventThrow != "")
 							{

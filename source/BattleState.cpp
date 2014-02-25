@@ -717,24 +717,21 @@ void CBattleState::SetItems(CUnits* pDead)
 	{
 		if(i->second.Item != nullptr)
 		{
-			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			CItem* pTemp = i->second.Item;
+			if(pTemp != nullptr)
 			{
-				CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-				if(pTemp != nullptr)
+				if(rand() % 100 + 1 < int(i->second.DropChance * 100))
 				{
-					if(rand() % 100 + 1 < int(i->second.DropChance * 100))
+					if(m_vItems[pTemp->GetName()].Item == nullptr)
 					{
-						if(m_vItems[pTemp->GetName()].Item == nullptr)
-						{
-							m_vItems[pTemp->GetName()].Item = pTemp;
-							m_vItems[pTemp->GetName()].Owned = 1;
-							i->second.Item = nullptr;
-						}
-						else
-						{
-							m_vItems[pTemp->GetName()].Owned++;
-							i->second.Item = nullptr;
-						}
+						m_vItems[pTemp->GetName()].Item = pTemp;
+						m_vItems[pTemp->GetName()].Owned = 1;
+						i->second.Item = nullptr;
+					}
+					else
+					{
+						m_vItems[pTemp->GetName()].Owned++;
+						i->second.Item = nullptr;
 					}
 				}
 			}

@@ -407,16 +407,16 @@
       <Tile_Data xTileID="12" yTileID="0" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="135" posX="5" posY="10">
-      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Passing" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Village" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="136" posX="6" posY="10">
-      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Passing" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Village" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="137" posX="7" posY="10">
-      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Passing" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Village" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="138" posX="8" posY="10">
-      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Passing" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="Kino Village" EventType="WARP" WarpX="640" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="139" posX="9" posY="10">
       <Tile_Data xTileID="12" yTileID="0" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
