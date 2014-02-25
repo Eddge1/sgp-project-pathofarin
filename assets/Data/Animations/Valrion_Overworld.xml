@@ -1,23 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="5">
-  <Animation_Info Name="Valrion_Idle" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
+   <Animation_Info Name="Valrion_Idle" Frames="2" repeat="1" Texture="valrion2.png">
     <Frame_Data>
-      <Render posX="729" posY="2151" Width="56" Height="102" anchorX="32" anchorY="56" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-4" posY="-3" Width="45" Height="91" />
-      <Render posX="809" posY="2149" Width="52" Height="102" anchorX="31" anchorY="58" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="1" posY="-1" Width="50" Height="98" />
-      <Render posX="888" posY="2150" Width="50" Height="101" anchorX="31" anchorY="57" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-2" posY="-2" Width="46" Height="96" />
-      <Render posX="965" posY="2150" Width="52" Height="102" anchorX="33" anchorY="57" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-4" posY="-4" Width="43" Height="94" />
-      <Render posX="1046" posY="2151" Width="52" Height="102" anchorX="31" anchorY="56" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-2" posY="0" Width="45" Height="98" />
-      <Render posX="1125" posY="2149" Width="50" Height="102" anchorX="31" anchorY="58" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-4" posY="-2" Width="44" Height="98" />
-      <Render posX="1203" posY="2148" Width="52" Height="102" anchorX="32" anchorY="59" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-7" posY="-4" Width="40" Height="96" />
-      <Render posX="1284" posY="2150" Width="49" Height="101" anchorX="30" anchorY="57" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-4" posY="-1" Width="42" Height="97" />
+      <Render posX="3" posY="0" Width="112" Height="100" anchorX="61" anchorY="95" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="112" Height="99" />
+      <Render posX="122" posY="0" Width="111" Height="102" anchorX="56" anchorY="94" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="111" Height="102" />
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Valrion_Walk_Down" Frames="8" repeat="1" Texture="POA_Valrion_Overworld.png">
