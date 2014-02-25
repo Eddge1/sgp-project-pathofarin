@@ -736,8 +736,8 @@ CPlayerUnit* CProfileMenuState::CreateTempPlayer(void)
 
 void CProfileMenuState::ContinueGame( int ID )
 {
-	string szZone = m_vCharacterList[ID-1]->GetZone() + ".xml";
 	CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[ID-1]);
+	string szZone = m_vCharacterList[ID-1]->GetZone() + ".xml";
 	CWorld* pWorld = CGamePlayState::GetInstance()->GetWorld(szZone);
 	for(unsigned int i = 0; i < m_vWorldData[ID-1].size();i++)
 		pWorld->AddClear(m_vWorldData[ID-1][i]);
