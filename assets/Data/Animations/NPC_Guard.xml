@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="1">
+  <Animation_Info Name="OldGuard_Idle" Frames="1" repeat="1" Texture="townfolk1_m.png">
+    <Frame_Data>
+      <Render posX="33" posY="74" Width="31" Height="33" anchorX="17" anchorY="19" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="33" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
