@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="5">
-  <Animation_Info Name="Pathetic_Orc_Idle" Frames="1" repeat="1" Texture="POA_Pathetic_Orc_Overworld.png">
+  <Animation_Info Name="Orc_Shaman_Idle" Frames="1" repeat="1" Texture="POA_Orc_Shaman_Overworld.png">
     <Frame_Data>
       <Render posX="2" posY="3" Width="37" Height="54" anchorX="18" anchorY="50" Duration="1.0" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="37" Height="54" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Walk_Down" Frames="4" repeat="1" Texture="POA_Pathetic_Orc_Overworld.png">
+  <Animation_Info Name="Orc_Shaman_Walk_Down" Frames="4" repeat="1" Texture="POA_Orc_Shaman_Overworld.png">
     <Frame_Data>
       <Render posX="2" posY="3" Width="37" Height="54" anchorX="18" anchorY="50" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="37" Height="54" />
@@ -18,7 +18,7 @@
       <ActiveCollision posX="-1" posY="0" Width="33" Height="53" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Walk_Left" Frames="4" repeat="1" Texture="POA_Pathetic_Orc_Overworld.png">
+  <Animation_Info Name="Orc_Shaman_Walk_Left" Frames="4" repeat="1" Texture="POA_Orc_Shaman_Overworld.png">
     <Frame_Data>
       <Render posX="8" posY="57" Width="26" Height="57" anchorX="12" anchorY="52" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="26" Height="57" />
@@ -30,7 +30,7 @@
       <ActiveCollision posX="0" posY="0" Width="32" Height="52" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Walk_Right" Frames="4" repeat="1" Texture="POA_Pathetic_Orc_Overworld.png">
+  <Animation_Info Name="Orc_Shaman_Walk_Right" Frames="4" repeat="1" Texture="POA_Orc_Shaman_Overworld.png">
     <Frame_Data>
       <Render posX="7" posY="114" Width="27" Height="56" anchorX="13" anchorY="51" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="26" Height="56" />
@@ -42,7 +42,7 @@
       <ActiveCollision posX="0" posY="0" Width="39" Height="56" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Walk_Up" Frames="4" repeat="1" Texture="POA_Pathetic_Orc_Overworld.png">
+  <Animation_Info Name="Orc_Shaman_Walk_Up" Frames="4" repeat="1" Texture="POA_Orc_Shaman_Overworld.png">
     <Frame_Data>
       <Render posX="1" posY="171" Width="38" Height="55" anchorX="19" anchorY="50" Duration="0.2" Event="NULL" />
       <ActiveCollision posX="-1" posY="0" Width="39" Height="55" />

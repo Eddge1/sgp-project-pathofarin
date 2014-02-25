@@ -1,37 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data Count="3">
-  <Animation_Info Name="TigerLily_Battle_Idle" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+<Animation_Data Count="4">
+  <Animation_Info Name="TigerLily_Battle_Idle" Frames="2" repeat="1" Texture="tigerlily.png">
     <Frame_Data>
-      <Render posX="1" posY="2" Width="48" Height="49" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="48" Height="48" />
-      <Render posX="52" posY="3" Width="45" Height="47" anchorX="17" anchorY="30" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="0" Width="46" Height="46" />
-      <Render posX="100" posY="6" Width="41" Height="44" anchorX="17" anchorY="28" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="41" Height="45" />
-      <Render posX="150" posY="3" Width="42" Height="48" anchorX="15" anchorY="32" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="0" Width="43" Height="48" />
-      <Render posX="194" posY="2" Width="48" Height="48" anchorX="20" anchorY="34" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="48" Height="49" />
+      <Render posX="36" posY="34" Width="137" Height="144" anchorX="79" anchorY="125" Duration="0.4" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="137" Height="144" />
+      <Render posX="172" posY="36" Width="138" Height="143" anchorX="80" anchorY="123" Duration="0.4" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="138" Height="143" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="TigerLily_Battle_Basic_Attack" Frames="5" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+  <Animation_Info Name="TigerLily_Battle_Taking_Damage" Frames="3" repeat="0" Texture="tigerlily.png">
     <Frame_Data>
-      <Render posX="7" posY="100" Width="40" Height="45" anchorX="16" anchorY="29" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="40" Height="45" />
-      <Render posX="53" posY="100" Width="41" Height="46" anchorX="17" anchorY="32" Duration="0.2" Event="START_AUDIO" />
-      <ActiveCollision posX="1" posY="0" Width="40" Height="46" />
-      <Render posX="99" posY="97" Width="47" Height="49" anchorX="18" anchorY="32" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="-1" Width="48" Height="48" />
-      <Render posX="148" posY="100" Width="40" Height="46" anchorX="18" anchorY="33" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="41" Height="47" />
-      <Render posX="190" posY="99" Width="47" Height="47" anchorX="16" anchorY="34" Duration="0.2" Event="BASIC_ATTACK" />
-      <ActiveCollision posX="1" posY="0" Width="47" Height="47" />
+      <Render posX="23" posY="432" Width="133" Height="138" anchorX="77" anchorY="119" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="133" Height="138" />
+      <Render posX="157" posY="432" Width="180" Height="139" anchorX="124" anchorY="119" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="180" Height="138" />
+      <Render posX="340" posY="433" Width="147" Height="139" anchorX="91" anchorY="118" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="148" Height="139" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="TigerLily_Battle_Taking_Damage" Frames="1" repeat="1" Texture="PlayStation - Final Fantasy Tactics - Treant.png">
+  <Animation_Info Name="TigerLily_Battle_Basic_Attack" Frames="4" repeat="0" Texture="tigerlily.png">
     <Frame_Data>
-      <Render posX="7" posY="203" Width="38" Height="41" anchorX="15" anchorY="30" Duration="0.2" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="36" Height="40" />
+      <Render posX="39" posY="642" Width="131" Height="146" anchorX="77" anchorY="120" Duration="0.1" Event="START_AUDIO" />
+      <ActiveCollision posX="0" posY="0" Width="131" Height="146" />
+      <Render posX="172" posY="590" Width="156" Height="195" anchorX="120" anchorY="172" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="156" Height="194" />
+      <Render posX="363" posY="587" Width="231" Height="198" anchorX="37" anchorY="175" Duration="0.1" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="1" posY="0" Width="232" Height="198" />
+      <Render posX="653" posY="651" Width="224" Height="133" anchorX="35" anchorY="111" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="224" Height="133" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Enemy_Heal_All" Frames="6" repeat="0" Texture="tigerlily.png">
+    <Frame_Data>
+      <Render posX="32" posY="321" Width="52" Height="61" anchorX="19" anchorY="50" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="1" Width="52" Height="62" />
+      <Render posX="90" posY="316" Width="65" Height="64" anchorX="36" anchorY="55" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="66" Height="63" />
+      <Render posX="161" posY="271" Width="95" Height="107" anchorX="50" anchorY="98" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="96" Height="107" />
+      <Render posX="263" posY="227" Width="148" Height="154" anchorX="87" anchorY="143" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="1" posY="0" Width="149" Height="154" />
+      <Render posX="412" posY="205" Width="148" Height="174" anchorX="86" anchorY="163" Duration="0.1" Event="FLARE" />
+      <ActiveCollision posX="0" posY="0" Width="148" Height="174" />
+      <Render posX="570" posY="193" Width="190" Height="187" anchorX="99" anchorY="169" Duration="0.1" Event="COMPLETE" />
+      <ActiveCollision posX="0" posY="0" Width="190" Height="187" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>
