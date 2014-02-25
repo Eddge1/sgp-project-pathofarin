@@ -21,10 +21,16 @@ class CGameOverState :
 
 	int selection;
 	int m_music;
+	int m_background;
+	int m_cursor;
 	float timer;
 	CPlayer* m_pPlayer;
 	string m_szGameOverMsg;
 	
+	bool m_bMainMenu;
+	bool m_bShowMenu;
+	float m_fFadeScreen;
+	float m_fFadeText;
 
 public:
 	static CGameOverState* GetInstance( void );

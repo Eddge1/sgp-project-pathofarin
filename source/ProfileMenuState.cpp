@@ -17,6 +17,7 @@
 
 #include "MainMenuState.h"
 #include "GamePlayState.h"
+#include "GameOverState.h"
 #include "Game.h"
 #include "Buff.h"
 #include <sstream>
@@ -60,11 +61,14 @@ void CProfileMenuState::Activate()
 	m_fOffSetX = 0.0f;
 	m_fPosY = 172.0f;
 
-	if(CMainMenuState::GetInstance()->GetLeftMenuState())
+	if(CGame::GetInstance()->GetCurrentState() != CGameOverState::GetInstance())
 	{
-		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
-			CSGD_XAudio2::GetInstance()->MusicPlaySong(CMainMenuState::GetInstance()->GetBackgroundMusic(), true);
-		CMainMenuState::GetInstance()->SetLeftMenuState(false);
+		if(CMainMenuState::GetInstance()->GetLeftMenuState())
+		{
+			if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(CMainMenuState::GetInstance()->GetBackgroundMusic()))
+				CSGD_XAudio2::GetInstance()->MusicPlaySong(CMainMenuState::GetInstance()->GetBackgroundMusic(), true);
+			CMainMenuState::GetInstance()->SetLeftMenuState(false);
+		}
 	}
 }
 
