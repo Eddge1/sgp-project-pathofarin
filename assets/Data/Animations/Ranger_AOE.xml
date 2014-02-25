@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animation_Data Count="2">
+  <Animation_Info Name="Ranger_AOE" Frames="4" repeat="1" Texture="POA_Ranger_AOE.png">
+    <Frame_Data>
+      <Render posX="18" posY="3" Width="41" Height="29" anchorX="2" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="41" Height="29" />
+      <Render posX="73" posY="6" Width="33" Height="35" anchorX="4" anchorY="18" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="32" Height="36" />
+      <Render posX="130" posY="6" Width="38" Height="33" anchorX="3" anchorY="15" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="37" Height="33" />
+      <Render posX="189" posY="12" Width="39" Height="26" anchorX="5" anchorY="13" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="39" Height="26" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_AOE_Alternate" Frames="4" repeat="1" Texture="POA_Ranger_AOE.png">
+    <Frame_Data>
+      <Render posX="4" posY="56" Width="60" Height="43" anchorX="6" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="60" Height="43" />
+      <Render posX="72" posY="59" Width="53" Height="43" anchorX="4" anchorY="21" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="-1" posY="0" Width="52" Height="43" />
+      <Render posX="132" posY="54" Width="50" Height="48" anchorX="6" anchorY="25" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="-1" Width="49" Height="47" />
+      <Render posX="189" posY="52" Width="50" Height="49" anchorX="2" anchorY="26" Duration="0.1" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="49" Height="49" />
+    </Frame_Data>
+  </Animation_Info>
+</Animation_Data>
