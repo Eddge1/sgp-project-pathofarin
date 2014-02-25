@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Unit Name="TigerLily" Health="3000" Ap="1" Attack="75" Exp="5000" Speed="1" Level="13" AI="TigerLily" Total_Items="2">
+<Unit Name="TigerLily" Health="3000" Ap="1" Attack="75" Exp="5000" Speed="1" Level="13" AI="TigerLily" Total_Items="4">
   <Item Name="Titan-Potion" Chance="100" />
   <Item Name="Titan-Ether" Chance="100" />
+  <Item Name="Staff of Lucidity" Chance="100" />
+  <Item Name="Robes of the Ancient One" Chance="100" />
 </Unit>

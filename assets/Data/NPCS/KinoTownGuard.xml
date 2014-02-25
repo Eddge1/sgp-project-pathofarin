@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="KinoTownGuard">
-  <Convo Text="HALT!  This Town is off limits!  I have been ordered not to let anyone from this side of the town enter.  Our beautiful Gardens have been polluted by you crazy beyond-the-mountain people!  Although... I guess I can't really stop you.  We would appreciate it if you can figure out what is going on though." Event="" />
+  <Convo Text="Since travelers have come through the cave the garden has been a mess we cannot let anyone pass until we have discovered the root cause of the problem" Event="" />
 </NPC>

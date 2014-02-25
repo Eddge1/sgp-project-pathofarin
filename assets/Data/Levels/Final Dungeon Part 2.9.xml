@@ -128,9 +128,7 @@
       <Tile_Data xTileID="5" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="42" posX="3" posY="3">
-      <Tile_Data EventBroad="doyouwork" xTileID="6" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
-        <Chest Name="Titan-Potion" Amount="2" />
-      </Tile_Data>
+      <Tile_Data xTileID="6" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="43" posX="4" posY="3">
       <Tile_Data xTileID="7" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -139,8 +137,8 @@
       <Tile_Data xTileID="8" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="45" posX="6" posY="3">
-      <Tile_Data EventBroad="onlyfivehands2" xTileID="9" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
-        <Chest Name="Titan-Ether" Amount="2" />
+      <Tile_Data EventBroad="ATKAUGMENT" xTileID="9" yTileID="5" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Atk Augment" Amount="1" />
       </Tile_Data>
     </Tile>
     <Tile ID="46" posX="7" posY="3">
@@ -408,10 +406,10 @@
       <Tile_Data xTileID="6" yTileID="12" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="134" posX="4" posY="10">
-      <Tile_Data xTileID="7" yTileID="12" EventID="" EventType="WARP" WarpX="256" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="7" yTileID="12" EventID="Final Dungeon Part 2.5" EventType="WARP" WarpX="256" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="135" posX="5" posY="10">
-      <Tile_Data xTileID="8" yTileID="12" EventID="" EventType="WARP" WarpX="256" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="8" yTileID="12" EventID="Final Dungeon Part 2.5" EventType="WARP" WarpX="256" WarpY="128" Total_Waypoints="0" />
     </Tile>
     <Tile ID="136" posX="6" posY="10">
       <Tile_Data xTileID="9" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

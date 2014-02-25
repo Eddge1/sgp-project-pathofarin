@@ -321,7 +321,7 @@
       <Tile_Data xTileID="7" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="105" posX="15" posY="3">
-      <Tile_Data xTileID="7" yTileID="1" EventID="OrcLeader" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="ORC_LEADER" xTileID="7" yTileID="1" EventID="OrcLeader" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="106" posX="16" posY="3">
       <Tile_Data xTileID="7" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

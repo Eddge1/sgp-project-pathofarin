@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="OldMan" Hostile="false" Units="0" File="CaveGuard">
+  <Convo Text="Due to the outbreak of orcs we cannot let anyone pass.  Please wait til we have confirmed the Orc leader is no longer a threat." Event="" />
+</NPC>
