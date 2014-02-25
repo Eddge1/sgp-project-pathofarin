@@ -157,7 +157,7 @@ void CNpcs::HandleCollision(CObjects* col)
 				}
 				else
 				{
-					if(pTemp->GetInteraction())
+					if(pTemp->GetInteraction() && m_fDelayChat <= 0.0f)
 					{
 						wostringstream woss;
 						if(m_szConversation.size() > 0)
@@ -172,6 +172,7 @@ void CNpcs::HandleCollision(CObjects* col)
 								CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 							}
 						}
+						m_fDelayChat = 0.25f;
 					}
 				}
 			}
