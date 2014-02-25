@@ -544,6 +544,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateWarrior();
 			m_pPlayer->SetUnit(ptemp);
 			ptemp->Release();
+			m_pPlayer->GetAnimInfo()->SetAnimation("Warrior_Idle_Down");
 		}
 	}
 	else if(pEvent->GetEventID() == "CREATE_MAGE")
@@ -553,6 +554,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateMage();
 			m_pPlayer->SetUnit(ptemp);
 			ptemp->Release();
+			m_pPlayer->GetAnimInfo()->SetAnimation("Mage_Idle_Down");
+
 		}
 	}
 	else if(pEvent->GetEventID() == "CREATE_RANGER")
@@ -562,6 +565,8 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 			CPlayerUnit* ptemp = CProfileMenuState::GetInstance()->CreateRanger();
 			m_pPlayer->SetUnit(ptemp);
 			ptemp->Release();
+			m_pPlayer->GetAnimInfo()->SetAnimation("Ranger_Idle_Down");
+
 		}
 	}
 	else if(pEvent->GetEventID() == "DA_DUMMY")

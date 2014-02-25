@@ -406,9 +406,11 @@ void CBattleState::Render(void)
 
 		RECT rPTemp = m_vBattleUnits[m_nTurn]->GetCollisionRectNoCam();
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
+			//////////////////////// BUG CURSOR APPEARING ON LEFT ON TREE MONSTERS
 			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.right + 8), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5f*D3DX_PI,D3DCOLOR_XRGB(255,255,255));
+			/////////////////////// FIXED BY JAMES BEAN SWITCHED FROM == OBJ_ENEMY_UNIT != OBJ_PLAYER_UNIT IS IT APPEARS CORRECTLY FOR ALL UNIT TYPES
 		}
 		else
 		{

@@ -492,7 +492,9 @@ void CProfileMenuState::LoadSave(std::string szFileName)
 
 		pPlayer->GetUnit()->SetLevel(nLevel);
 		pPlayer->GetUnit()->SetMaxHealth(nMaxHealth);
-		pPlayer->GetUnit()->SetMaxAP(nAP);
+		///////////////// BUG PLAYER'S MAX AP GETTING SET AS THEIR CURRENT WHEN LOADED
+		pPlayer->GetUnit()->SetMaxAP(nMaxAP);
+		///////////////// FIX SWITCHED FROM nAP to nMaxAP AS IT SHOULD HAVE BEEN
 		pPlayer->GetUnit()->GiveExperience(nExp);
 		pPlayer->GetUnit()->SetSpeed(nSpeed);
 		pPlayer->GetUnit()->SetHealth(nHealth);
@@ -685,7 +687,7 @@ CPlayer* CProfileMenuState::CreatePlayer()
 	temp->SetVelY(0.0f);
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Warrior_Idle_Down");
+	pTemp->SetAnimation("Kid_Idle_Down");
 	temp->SetZone("Cavern of souls");
 	CPlayerUnit* pUnit = CreateTempPlayer();
 	pUnit->SetClass(UC_NONE);
