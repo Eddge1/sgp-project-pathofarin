@@ -61,43 +61,46 @@ void CUseItem::Update(float fElapsedTime)
 			int nID = 0;
 			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
 			{
-				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+				if(i->second.Item != nullptr)
 				{
-					if(nID == m_nSelection)
+					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 					{
-						CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-						if(ItemTemp != nullptr)
+						if(nID == m_nSelection)
 						{
-							if(i->second.Owned > 0)
+							CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+							if(ItemTemp != nullptr)
 							{
-								if(ItemTemp->GetType() == "HP")
-									GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
-
-								else if(ItemTemp->GetType() == "MP")
-									GetOwner()->ModifyAP(-ItemTemp->GetAmount());
-
-
-								ResetSkill();
-								if(i->second.Item != nullptr)
+								if(i->second.Owned > 0)
 								{
-									if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+									if(ItemTemp->GetType() == "HP")
+										GetOwner()->ModifyHealth(-ItemTemp->GetAmount(), false);
+
+									else if(ItemTemp->GetType() == "MP")
+										GetOwner()->ModifyAP(-ItemTemp->GetAmount());
+
+
+									ResetSkill();
+									if(i->second.Item != nullptr)
 									{
-										CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-										if(pTemp != nullptr)
+										if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 										{
-											GetOwner()->RemoveConsumableItem(pTemp);
+											CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+											if(pTemp != nullptr)
+											{
+												GetOwner()->RemoveConsumableItem(pTemp);
+											}
 										}
 									}
+									tempP->SetReady(false);
+									tempP->SetCasting(false);
+									tempP->SetTurn(false);
+									return;
 								}
-								tempP->SetReady(false);
-								tempP->SetCasting(false);
-								tempP->SetTurn(false);
-								return;
 							}
 						}
+						else
+							nID++;
 					}
-					else
-						nID++;
 				}
 			}
 		}
@@ -116,18 +119,21 @@ void CUseItem::Render(void)
 		{
 			for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
 			{
-				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+				if(i->second.Item != nullptr)
 				{
-					m_nItemTotal++;
-					CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-					if(ItemTemp != nullptr)
+					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 					{
-						if(i->second.Owned > 0)
+						m_nItemTotal++;
+						CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+						if(ItemTemp != nullptr)
 						{
-							woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
-							m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
-							woss.str(_T(""));
-							m_nCount++;
+							if(i->second.Owned > 0)
+							{
+								woss << ItemTemp->GetName().c_str() << " " << i->second.Owned;
+								m_pFont->Draw(woss.str().c_str(), 360, 490 + m_nCount * 16, 0.75f, D3DCOLOR_XRGB(255,255,255));
+								woss.str(_T(""));
+								m_nCount++;
+							}
 						}
 					}
 				}
