@@ -1,35 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="3">
-  <Animation_Info Name="Orc_Battle_Idle" Frames="4" repeat="1" Texture="PC Computer - Heroes of Might and Magic III - Orc.png">
+  <Animation_Info Name="Orc_Battle_Idle" Frames="2" repeat="1" Texture="POA_Orc.png">
     <Frame_Data>
-      <Render posX="32" posY="30" Width="61" Height="76" anchorX="29" anchorY="46" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="61" Height="76" />
-      <Render posX="115" posY="26" Width="61" Height="80" anchorX="25" anchorY="48" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="61" Height="80" />
-      <Render posX="198" posY="18" Width="56" Height="89" anchorX="26" anchorY="58" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="57" Height="90" />
-      <Render posX="270" posY="11" Width="63" Height="95" anchorX="38" anchorY="64" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="-1" Width="64" Height="96" />
+      <Render posX="17" posY="8" Width="65" Height="92" anchorX="29" anchorY="87" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="92" />
+      <Render posX="17" posY="8" Width="65" Height="92" anchorX="27" anchorY="87" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="92" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Orc_Battle_Basic_Attack" Frames="4" repeat="0" Texture="PC Computer - Heroes of Might and Magic III - Orc.png">
+  <Animation_Info Name="Orc_Battle_Basic_Attack" Frames="2" repeat="0" Texture="POA_Orc.png">
     <Frame_Data>
-      <Render posX="22" posY="469" Width="68" Height="83" anchorX="41" anchorY="48" Duration="0.1" Event="START_AUDIO" />
-      <ActiveCollision posX="0" posY="0" Width="68" Height="83" />
-      <Render posX="117" posY="465" Width="84" Height="88" anchorX="57" anchorY="53" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="83" Height="88" />
-      <Render posX="233" posY="466" Width="71" Height="85" anchorX="35" anchorY="57" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="71" Height="85" />
-      <Render posX="25" posY="847" Width="81" Height="70" anchorX="30" anchorY="42" Duration="0.1" Event="BASIC_ATTACK" />
-      <ActiveCollision posX="0" posY="0" Width="81" Height="70" />
+      <Render posX="18" posY="116" Width="64" Height="127" anchorX="48" anchorY="123" Duration="0.3" Event="START_AUDIO" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="127" />
+      <Render posX="96" posY="159" Width="119" Height="84" anchorX="86" anchorY="77" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="0" Width="119" Height="84" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Orc_Battle_Taking_Damage" Frames="2" repeat="0" Texture="PC Computer - Heroes of Might and Magic III - Orc.png">
+  <Animation_Info Name="Orc_Battle_Taking_Damage" Frames="1" repeat="0" Texture="POA_Orc.png">
     <Frame_Data>
-      <Render posX="22" posY="1296" Width="68" Height="83" anchorX="25" anchorY="68" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="-827" Width="68" Height="83" />
-      <Render posX="109" posY="1299" Width="106" Height="78" anchorX="55" anchorY="65" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="-1" posY="0" Width="107" Height="78" />
+      <Render posX="12" posY="255" Width="64" Height="95" anchorX="33" anchorY="90" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="95" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>

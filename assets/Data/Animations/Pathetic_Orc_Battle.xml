@@ -1,33 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animation_Data Count="3">
-  <Animation_Info Name="Pathetic_Orc_Battle_Idle" Frames="4" repeat="1" Texture="orc_regular_0.png">
+  <Animation_Info Name="Pathetic_Orc_Battle_Idle" Frames="2" repeat="1" Texture="POA_Pathetic_Orc.png">
     <Frame_Data>
-      <Render posX="3116" posY="554" Width="56" Height="65" anchorX="5" anchorY="55" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="0" Width="57" Height="65" />
-      <Render posX="3245" posY="541" Width="61" Height="76" anchorX="4" anchorY="68" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="62" Height="77" />
-      <Render posX="3364" posY="542" Width="67" Height="75" anchorX="14" anchorY="66" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="68" Height="76" />
-      <Render posX="3496" posY="538" Width="58" Height="78" anchorX="9" anchorY="72" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="1" posY="1" Width="59" Height="79" />
+      <Render posX="9" posY="8" Width="65" Height="92" anchorX="29" anchorY="87" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="92" />
+      <Render posX="9" posY="8" Width="65" Height="92" anchorX="27" anchorY="87" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="65" Height="92" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Battle_Basic_Attack" Frames="4" repeat="1" Texture="orc_regular_0.png">
+  <Animation_Info Name="Pathetic_Orc_Battle_Basic_Attack" Frames="2" repeat="0" Texture="POA_Pathetic_Orc.png">
     <Frame_Data>
-      <Render posX="1574" posY="551" Width="55" Height="65" anchorX="7" anchorY="57" Duration="0.1" Event="START_AUDIO" />
-      <ActiveCollision posX="0" posY="0" Width="55" Height="65" />
-      <Render posX="1704" posY="552" Width="61" Height="63" anchorX="7" anchorY="57" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="0" Width="61" Height="63" />
-      <Render posX="1831" posY="556" Width="83" Height="63" anchorX="4" anchorY="52" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="-1" Width="84" Height="62" />
-      <Render posX="1956" posY="559" Width="76" Height="58" anchorX="7" anchorY="49" Duration="0.1" Event="BASIC_ATTACK" />
-      <ActiveCollision posX="1" posY="1" Width="77" Height="59" />
+      <Render posX="7" posY="107" Width="64" Height="127" anchorX="48" anchorY="124" Duration="0.3" Event="START_AUDIO" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="127" />
+      <Render posX="74" posY="159" Width="119" Height="84" anchorX="86" anchorY="77" Duration="0.2" Event="BASIC_ATTACK" />
+      <ActiveCollision posX="0" posY="0" Width="119" Height="84" />
     </Frame_Data>
   </Animation_Info>
-  <Animation_Info Name="Pathetic_Orc_Battle_Taking_Damage" Frames="1" repeat="1" Texture="orc_regular_0.png">
+  <Animation_Info Name="Pathetic_Orc_Battle_Taking_Damage" Frames="1" repeat="0" Texture="POA_Pathetic_Orc.png">
     <Frame_Data>
-      <Render posX="2592" posY="571" Width="57" Height="51" anchorX="6" anchorY="35" Duration="0.1" Event="NULL" />
-      <ActiveCollision posX="0" posY="1" Width="57" Height="52" />
+      <Render posX="10" posY="246" Width="64" Height="95" anchorX="34" anchorY="91" Duration="0.5" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="64" Height="95" />
     </Frame_Data>
   </Animation_Info>
 </Animation_Data>
