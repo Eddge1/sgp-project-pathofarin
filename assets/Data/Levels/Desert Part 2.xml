@@ -167,7 +167,7 @@
     </Tile>
     <Tile ID="52" posX="12" posY="2">
       <Tile_Data EventBroad="ROTAO" xTileID="10" yTileID="4" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
-        <Chest Name="Robes of the Ancient One" Amount="1" />
+        <Chest Name="Vestments of the Savage tribes" Amount="1" />
       </Tile_Data>
     </Tile>
     <Tile ID="53" posX="13" posY="2">

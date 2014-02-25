@@ -99,34 +99,37 @@ namespace SGP_PoA_LevelEditor
 
                                     if (L.MyTiles[x, y].X != -1)
                                     {
-                                        if (L.MyTiles[x, y].EventType == "WARP")
-                                        {
-                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 127, 255));
-                                        }
-                                        else if (L.MyTiles[x, y].EventType == "EVENT")
-                                        {
-                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 25, 25, 25));
-                                        }
-                                        else if (L.MyTiles[x, y].EventType == "NPCS")
-                                        {
-                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 0, 255, 0));
-                                        }
-                                        else if (L.MyTiles[x, y].EventType == "CHESTS")
-                                        {
-                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                            new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                             TileSize.Width, TileSize.Height), 0, 0, 0, Color.FromArgb(255, 127, 0, 127));
-                                        }
-                                        else
-                                            TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
-                                                new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
-                                                TileSize.Width, TileSize.Height));
+                                        TM.Draw(imageID, nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y, 1, 1,
+                                                     new Rectangle(L.MyTiles[x, y].X * TileSize.Width, L.MyTiles[x, y].Y * TileSize.Height,
+                                                    TileSize.Width, TileSize.Height));
+
+                                    }
+                                    if (L.MyTiles[x, y].EventType == "WARP")
+                                    {
+                                        DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
+                                        , TileSize.Width, TileSize.Height), Color.FromArgb(255, 0, 127, 255));
+                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2, Color.FromArgb(255, 0, 0, 0));
+                                    }
+                                    else if (L.MyTiles[x, y].EventType == "EVENT")
+                                    {
+                                        DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
+                                       , TileSize.Width, TileSize.Height), Color.FromArgb(255, 25, 25, 25));
+                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2, Color.FromArgb(255, 0, 0, 0));
+
+                                    }
+                                    else if (L.MyTiles[x, y].EventType == "NPCS")
+                                    {
+                                        DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
+                                       , TileSize.Width, TileSize.Height), Color.FromArgb(255, 0, 255, 0));
+                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2, Color.FromArgb(255, 0, 0, 0));
+
+                                    }
+                                    else if (L.MyTiles[x, y].EventType == "CHESTS")
+                                    {
+                                        DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
+                                       , TileSize.Width, TileSize.Height), Color.FromArgb(255, 127, 0, 127));
+                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2, Color.FromArgb(255, 0, 0, 0));
+
                                     }
                                 }
                             }
