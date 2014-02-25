@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Unit Name="Pathetic_Orc" Health="100" Ap="1" Attack="5" Exp="15" Speed="1" Level="1" AI="Minion Melee" Total_Items="1">
+<Unit Name="Pathetic_Orc" Health="100" Ap="1" Attack="5" Exp="45" Speed="1" Level="1" AI="Minion Melee" Total_Items="1">
   <Item Name="Potion" Chance="25" />
 </Unit>

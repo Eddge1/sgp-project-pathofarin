@@ -157,7 +157,7 @@ void CGamePlayState::Activate(void)
 			m_pES->RegisterClient("WARP", this);
 			m_pES->RegisterClient("TEMP_SPAWN_FIREBALL", this);
 			m_pES->RegisterClient("LEVEL_UP", this);
-			m_pES->RegisterClient("VALRION_DEFEAT", this);
+			m_pES->RegisterClient("DEFEAT_VALRION", this);
 			m_pES->RegisterClient("GIVE_ITEM", this);
 			m_pES->RegisterClient("GAME_WON", this);
 			m_pES->RegisterClient("CREATE_WARRIOR", this);
@@ -504,7 +504,7 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	{
 
 	}
-	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
+	else if(pEvent->GetEventID() == "DEFEAT_VALRION")
 	{
 		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Unit Name="Tree" Health="200" Ap="1" Attack="15" Exp="60" Speed="8" Level="2" AI="BasicHealer" Total_Items="2">
+<Unit Name="Tree" Health="200" Ap="1" Attack="15" Exp="80" Speed="8" Level="2" AI="BasicHealer" Total_Items="2">
   <Item Name="Ether" Chance="15" />
   <Item Name="Potion" Chance="5" />
 </Unit>

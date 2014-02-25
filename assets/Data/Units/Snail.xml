@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Unit Name="Snail" Health="150" Ap="1" Attack="15" Exp="20" Speed="1" Level="1" AI="Brute" Total_Items="1">
+<Unit Name="Snail" Health="150" Ap="1" Attack="15" Exp="50" Speed="1" Level="1" AI="Brute" Total_Items="1">
   <Item Name="Potion" Chance="15" />
 </Unit>
