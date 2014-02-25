@@ -92,13 +92,10 @@ void CVictoryState::Update( float fElapsedTime )
 		{
 			if(i->second.Item != nullptr)
 			{
-				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+				CItem* pTemp = i->second.Item;
+				if(pTemp != nullptr)
 				{
-					CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-					if(pTemp != nullptr)
-					{
-						m_pPlayer->AddConsumableItem(pTemp, i->second.Owned);
-					}
+					m_pPlayer->AddConsumableItem(pTemp, i->second.Owned);
 				}
 			}
 		}
