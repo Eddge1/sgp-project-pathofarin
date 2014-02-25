@@ -2077,11 +2077,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="678" posX="38" posY="16">
-      <Tile_Data xTileID="0" yTileID="3" EventID="VillageKid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="3">
-        <Waypoint X="2464" Y="1184" />
-        <Waypoint X="2464" Y="1056" />
-        <Waypoint X="2464" Y="1184" />
-      </Tile_Data>
+      <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="679" posX="39" posY="16">
       <Tile_Data xTileID="3" yTileID="1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -2198,7 +2194,7 @@
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="717" posX="37" posY="17">
-      <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="3" EventID="VillageKid" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="718" posX="38" posY="17">
       <Tile_Data xTileID="0" yTileID="3" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5347,7 +5343,7 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="117" posX="37" posY="2">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="118" posX="38" posY="2">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
