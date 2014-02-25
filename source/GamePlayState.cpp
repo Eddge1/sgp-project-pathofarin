@@ -506,8 +506,9 @@ void CGamePlayState::HandleEvent( const CEvent* pEvent )
 	}
 	else if(pEvent->GetEventID() == "VALRION_DEFEAT")
 	{
-		m_eCurrPhase = GP_END;
+		//m_eCurrPhase = GP_END;
 		m_bGameVictory = true;
+		CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 	}
 	else if(pEvent->GetEventID() == "GIVE_ITEM" && m_pPlayer->isBroadcasting() == false)
 	{

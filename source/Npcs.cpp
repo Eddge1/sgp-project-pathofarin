@@ -129,8 +129,6 @@ void CNpcs::HandleEvent( const CEvent* pEvent )
 		{
 			CSGD_EventSystem::GetInstance()->SendEventNow(m_szEventThrow.c_str(), nullptr, nullptr, this);
 		}
-		else if(this->GetName() == "Valrion")
-			CSGD_EventSystem::GetInstance()->SendEventNow("GAME_WON", nullptr, nullptr, this);
 	}
 	for(unsigned int i = 0; i < m_szEraseEvents.size();i++)
 	{
