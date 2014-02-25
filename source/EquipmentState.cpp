@@ -71,9 +71,12 @@ void CEquipmentState::Activate( void )
 
 	for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
 	{
-		if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+		if(i->second.Item != nullptr)
 		{
-			m_nTotalItems++;
+			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			{
+				m_nTotalItems++;
+			}
 		}
 	}
 
@@ -338,13 +341,16 @@ void CEquipmentState::Render( void )
 	for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
 	{
 		woss.str(_T(""));
-		if(i->second.Owned > 0)
+		if(i->second.Item != nullptr)
 		{
-			if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+			if(i->second.Owned > 0)
 			{
-				woss << i->second.Item->GetName().c_str() << " x" << i->second.Owned;
-				CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),632,112 + (nCount * 16),0.75f,D3DCOLOR_ARGB(255,200,200,0));
-				nCount++;
+				if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+				{
+					woss << i->second.Item->GetName().c_str() << " x" << i->second.Owned;
+					CGame::GetInstance()->GetFont("Arial")->Draw(woss.str().c_str(),632,112 + (nCount * 16),0.75f,D3DCOLOR_ARGB(255,200,200,0));
+					nCount++;
+				}
 			}
 		}
 	}
@@ -974,47 +980,50 @@ bool CEquipmentState::Input( void )
 				int nID = 0;
 				for(auto i = m_vInventory->begin(); i != m_vInventory->end(); i++)
 				{
-					if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+					if(i->second.Item != nullptr)
 					{
-						if(nID == m_nItemSelection)
+						if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 						{
-							CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-							if(ItemTemp != nullptr)
+							if(nID == m_nItemSelection)
 							{
-								if(i->second.Owned > 0)
+								CConsumable* ItemTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+								if(ItemTemp != nullptr)
 								{
-									if(ItemTemp->GetType() == "HP")
-										m_pPlayer->ModifyHealth(-ItemTemp->GetAmount(), false, true);
-
-									else if(ItemTemp->GetType() == "MP")
-										m_pPlayer->ModifyAP(-ItemTemp->GetAmount(), true);
-
-									if(i->second.Item != nullptr)
+									if(i->second.Owned > 0)
 									{
-										if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+										if(ItemTemp->GetType() == "HP")
+											m_pPlayer->ModifyHealth(-ItemTemp->GetAmount(), false, true);
+
+										else if(ItemTemp->GetType() == "MP")
+											m_pPlayer->ModifyAP(-ItemTemp->GetAmount(), true);
+
+										if(i->second.Item != nullptr)
 										{
-											CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
-											if(pTemp != nullptr)
+											if(i->second.Item->GetItemType() == IT_CONSUMABLE)
 											{
-												m_pPlayer->RemoveConsumableItem(pTemp);
-												if(i->second.Owned <= 0)
-													m_nTotalItems--;
-												if(m_nTotalItems <= 0)
-													m_bSubMenu = false;
-												else
+												CConsumable* pTemp = reinterpret_cast<CConsumable*>(i->second.Item);
+												if(pTemp != nullptr)
 												{
-													if(m_nItemSelection >= m_nTotalItems)
-														m_nItemSelection = m_nTotalItems -1;
+													m_pPlayer->RemoveConsumableItem(pTemp);
+													if(i->second.Owned <= 0)
+														m_nTotalItems--;
+													if(m_nTotalItems <= 0)
+														m_bSubMenu = false;
+													else
+													{
+														if(m_nItemSelection >= m_nTotalItems)
+															m_nItemSelection = m_nTotalItems -1;
+													}
+													break;
 												}
-												break;
 											}
 										}
 									}
 								}
 							}
+							else
+								nID++;
 						}
-						else
-							nID++;
 					}
 				}
 			}

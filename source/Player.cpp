@@ -278,10 +278,12 @@ void CPlayer::AddListen (std::string szEvent)
 
 void CPlayer::BroadCastHeard()
 {
+	this->SetBroadcasting(true);
 	for(unsigned int i = 0; i < m_szHeard.size(); i++)
 	{
 		CSGD_EventSystem::GetInstance()->SendEventNow(m_szHeard[i]);
 	}
+	this->SetBroadcasting(false);
 }
 
 void CPlayer::AddHeard (std::string szEvent)
