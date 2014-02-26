@@ -26,16 +26,37 @@ void CUseItem::Update(float fElapsedTime)
 	CPlayerUnit* tempP = reinterpret_cast<CPlayerUnit*>(GetOwner());
 	if(tempP != nullptr)
 	{
+		//////////// BUG FIX FOR ITEM USE HAVING TO HIT ENTER MULTIPLE TIMES
+		if(!m_bFirstDone)
+		{
+			if(!m_bGetInventory)
+			{
+				m_mTemp = GetOwner()->GetInv();
+			}
+			if(m_mTemp != nullptr)
+			{
+				for(auto i = m_mTemp->begin(); i != m_mTemp->end(); i++)
+				{
+					if(i->second.Item != nullptr)
+					{
+						if(i->second.Item->GetItemType() == IT_CONSUMABLE)
+						{
+							m_nItemTotal++;
+						}
+					}
+					m_bFirstDone = true;
+				}
+			}
+		}
+		/////////////////////////////////////////////////////////////////
+
 		if(m_bFirstDone && m_nItemTotal < 1)
 		{
 			ResetSkill();
 			tempP->SetReady(false);
 			tempP->SetCasting(false);
 		}
-		if(!m_bGetInventory)
-		{
-			m_mTemp = GetOwner()->GetInv();
-		}
+
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 		if(pDI->KeyPressed(DIK_ESCAPE))
 		{
@@ -77,9 +98,6 @@ void CUseItem::Update(float fElapsedTime)
 
 									else if(ItemTemp->GetType() == "MP")
 										GetOwner()->ModifyAP(-ItemTemp->GetAmount());
-
-
-									ResetSkill();
 									if(i->second.Item != nullptr)
 									{
 										if(i->second.Item->GetItemType() == IT_CONSUMABLE)
@@ -94,6 +112,7 @@ void CUseItem::Update(float fElapsedTime)
 									tempP->SetReady(false);
 									tempP->SetCasting(false);
 									tempP->SetTurn(false);
+									ResetSkill();
 									return;
 								}
 							}
@@ -150,6 +169,5 @@ void CUseItem::Render(void)
 			}
 		}
 
-		m_bFirstDone = true;
 	}
 }

@@ -165,7 +165,6 @@ bool CGame::Update( void )
 	if(!m_bGamePaused)
 	{
 		// Update the audio
-		m_pXA->Update();
 
 		// Reading input here, before update.
 
@@ -177,6 +176,7 @@ bool CGame::Update( void )
 		// Current state updates
 		m_pCurrState->Update( fElapsedTime );
 	}
+	m_pXA->Update();
 	return true;
 }
 

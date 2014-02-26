@@ -33,9 +33,45 @@ void CPlayer::Update(float fElapsedTime)
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
 	m_fLastY = GetPosY();
 	m_fLastX = GetPosX();
+	float fDiff = 0.0f;
 
-	SetVelX(0);
-	SetVelY(0);
+	if(GetVelX() > 10)
+	{
+		fDiff = GetVelX() - (500 * fElapsedTime);
+		if(fDiff < 0)
+			SetVelX(0);
+		else
+			SetVelX(fDiff);
+	}
+	else if(GetVelX () < - 10)
+	{
+		fDiff = GetVelX() + (500 * fElapsedTime);
+		if(fDiff > 0)
+			SetVelX(0);
+		else
+			SetVelX(fDiff);
+	}
+	else
+		SetVelX(0);
+
+	if(GetVelY() > 10)
+	{
+		fDiff = GetVelY() - (500 * fElapsedTime);
+		if(fDiff < 0)
+			SetVelY(0);
+		else
+			SetVelY(fDiff);
+	}
+	else if(GetVelY () < - 10)
+	{
+		fDiff = GetVelY() + (500 * fElapsedTime);
+		if(fDiff > 0)
+			SetVelY(0);
+		else
+			SetVelY(fDiff);
+	}
+	else
+		SetVelY(0);
 
 	if((pDI->KeyPressed(DIK_RETURN)|| pDI->JoystickButtonPressed(1)) && m_bInteraction == false)
 		m_bInteraction = true;
@@ -64,16 +100,6 @@ void CPlayer::Update(float fElapsedTime)
 		break;
 	default:
 		break;
-	}
-
-	if (pDI->KeyPressed(DIK_F12))
-	{
-		if (this->GetAnimInfo()->GetPaused() == false)
-		{
-			this->GetAnimInfo()->Pause(true);
-		}
-		else
-			this->GetAnimInfo()->Pause(false);
 	}
 
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP))
@@ -196,34 +222,66 @@ void CPlayer::HandleCollision(CObjects* col)
 {
 	if(col->GetType() == OBJ_UNDEFINE || col->GetType() == OBJ_NPC || col->GetType() == OBJ_CHEST)
 	{
+		int nCamX = CGamePlayState::GetInstance()->GetWorldCamX();
+		int nCamY = CGamePlayState::GetInstance()->GetWorldCamY();
+		float fWidthR =   GetCollisionRectNoCam().right -GetPosX();
+		float fWidthL =   GetCollisionRectNoCam().left - GetPosX();
+		float fHeightT = GetCollisionRectNoCam().top -	GetPosY();
+		float fHeightB = GetCollisionRectNoCam().bottom -GetPosY();
+
 		RECT rTemp = col->GetCollisionRect();
-		if(GetCollisionRect().left > rTemp.left && GetCollisionRect().left < rTemp.right)
+		if(GetCollisionRect().left >= rTemp.left && GetCollisionRect().right <= rTemp.right)
 		{
-			SetPosX(m_fLastX);
-		}
-		else if(GetCollisionRect().right < rTemp.right && GetCollisionRect().right > rTemp.left)
-		{
-			SetPosX(m_fLastX);
-		}
-		else if(GetCollisionRect().left > rTemp.right && GetCollisionRect().right < rTemp.left)
-		{
-			if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
+			if(GetCollisionRect().bottom >= rTemp.top && GetCollisionRect().top <= rTemp.top)
 			{
-				SetPosY(m_fLastY);
+				if(GetVelY() > 0)
+				{
+					SetVelY(0);
+					SetPosY(m_fLastY);
+				}
 			}
-			else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
+			else if(GetCollisionRect().top <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.bottom)
 			{
-				SetPosY(m_fLastY);
+				if(GetVelY() < 0)
+				{
+					SetVelY(0);
+					SetPosY(m_fLastY);
+				}
 			}
 		}
 
-		if(GetCollisionRect().bottom > rTemp.top && GetCollisionRect().bottom < rTemp.bottom)
+		if(GetCollisionRect().left <= rTemp.right && GetCollisionRect().left >= rTemp.left)
 		{
-			SetPosY(m_fLastY);
+			if(GetVelX() < 0)
+			{
+				SetVelX(0);
+				SetPosX(m_fLastX);
+			}
 		}
-		else if(GetCollisionRect().top > rTemp.top - 10 && GetCollisionRect().top < rTemp.bottom)
+		else if(GetCollisionRect().right >= rTemp.left && GetCollisionRect().right <= rTemp.right)
 		{
-			SetPosY(m_fLastY);
+			if(GetVelX() > 0)
+			{
+				SetVelX(0);
+				SetPosX(m_fLastX);
+			}
+		}
+
+		if(GetCollisionRect().bottom >= rTemp.top && GetCollisionRect().top <= rTemp.top)
+		{
+			if(GetVelY() < 0)
+			{
+				SetVelY(0);
+				SetPosY(m_fLastY);
+			}
+		}
+		else if(GetCollisionRect().top <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.bottom)
+		{
+			if(GetVelY() > 0)
+			{
+				SetVelY(0);
+				SetPosY(m_fLastY);
+			}
 		}
 	}
 }

@@ -227,6 +227,9 @@ void CGamePlayState::Sleep(void)
 			}
 
 			m_mItemManager.clear();
+			/////////////// BUG MUSIC NOT RELOADING AFTER SAVING QUITTING AND LOADING
+			m_sCurrWorld = "";
+			/////////////// ADDED THIS LINE TO CLEAR CURRENT WORLD SINCE THEY ARE NO LONGER IN GAME THIS SHOULD BE RESET.
 		}
 
 		break;

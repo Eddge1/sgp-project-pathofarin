@@ -166,15 +166,15 @@ void CMainMenuState::Render(void)
 
 	if(m_fPosY >= 172.0f)
 	{
+		RECT rTemp = {316, 416, 490,536};
+		CSGD_Direct3D::GetInstance()->DrawRect(rTemp, D3DCOLOR_ARGB(200,0,0,0));
 		CSGD_TextureManager::GetInstance()->Draw(m_nSelectionMenuID,272,360);
-
-		RECT rTemp = {336, 408, 464,536};
-		pFont->Draw(_T("Play\nTutorial\nOptions\nCredits\nExit"), 368,440, 0.75f, D3DCOLOR_XRGB(255,255,255));
+		pFont->Draw(_T("Play\nTutorial\nOptions\nCredits\nExit"), 384,440, 0.66f, D3DCOLOR_XRGB(255,255,255));
 		rTemp.left = 0;
 		rTemp.top = 0;
 		rTemp.right = 16;
 		rTemp.bottom = 32;
-		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), (int)m_fPosX, 442 + (GetCursorSelection() * 21), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
+		CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), (int)m_fPosX, 442 + (GetCursorSelection() * 18), 1.0f,1.0f,&rTemp, 0.0f,0.0f, D3DX_PI / 2);
 	}
 }
 
