@@ -2,7 +2,7 @@
 <Animation_Data Count="1">
   <Animation_Info Name="Defensive_Aura" Frames="10" repeat="1" Texture="POA_Defensive_Aura.png">
     <Frame_Data>
-      <Render posX="386" posY="13" Width="100" Height="132" anchorX="50" anchorY="66" Duration="0.1" Event="FLARE" />
+      <Render posX="386" posY="13" Width="100" Height="132" anchorX="50" anchorY="66" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="1" posY="0" Width="101" Height="131" />
       <Render posX="497" posY="11" Width="99" Height="131" anchorX="49" anchorY="67" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="98" Height="131" />
@@ -18,9 +18,9 @@
       <ActiveCollision posX="0" posY="0" Width="102" Height="133" />
       <Render posX="1155" posY="13" Width="101" Height="133" anchorX="51" anchorY="69" Duration="0.1" Event="NULL" />
       <ActiveCollision posX="-1" posY="0" Width="100" Height="133" />
-      <Render posX="1262" posY="13" Width="106" Height="133" anchorX="54" anchorY="69" Duration="0.1" Event="NULL" />
+      <Render posX="1262" posY="13" Width="106" Height="133" anchorX="54" anchorY="69" Duration="0.1" Event="FLARE" />
       <ActiveCollision posX="1" posY="0" Width="106" Height="133" />
-      <Render posX="1373" posY="13" Width="104" Height="133" anchorX="53" anchorY="69" Duration="0.1" Event="NULL" />
+      <Render posX="1373" posY="13" Width="104" Height="133" anchorX="53" anchorY="69" Duration="0.1" Event="COMPLETE" />
       <ActiveCollision posX="0" posY="-1" Width="105" Height="132" />
     </Frame_Data>
   </Animation_Info>
