@@ -19,7 +19,13 @@ CTutorialBattle::CTutorialBattle(void)
 	m_pPlayerUnit = nullptr;
 	m_eCurrentPhase = BP_INIT;
 
-	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Battle.xwm")));
+	SetCursorIMG(CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_Cursor.png")));
+	SetBackgroundMusic(CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_MainBattleLoop.xwm")));
+	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
+	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
+	m_nHealthBar			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBar.png"));
+	m_nHealthBarPlate		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/PoA_HealthBarPlate.png"));
+
 	m_nForestBattleID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Backgrounds/Forest_Battle.png"));
 	m_nMenuImage			= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_BattleMenu.png"));
 	m_nMenuSelectionImage	= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_SelectionMenu.png"));
@@ -27,13 +33,14 @@ CTutorialBattle::CTutorialBattle(void)
 	m_nDefeatMusic			= CSGD_XAudio2::GetInstance()->MusicLoadSong(_T("assets/Audio/Music/POA_Defeat.xwm"));
 	m_nSelectionChange  	= CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_SelectionMove.wav"));
 	m_nCombArrowImgID		= CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/MiniGames/PoA_MoveArrow.png"));
-	m_nHealthBar = -1;
 	m_nAPBar = -1;
 
 	m_bVictory = false;
 	m_bDelayed = false;
 	m_bMenu = false;
 	m_bPlayerTurn = false;
+	m_bTutorialPause = false;
+	m_nTutorialPauseSelection = 0;
 
 	m_nTarget = 0;
 	m_nTurn = 0;
@@ -101,7 +108,8 @@ void CTutorialBattle::Activate( void )
 	m_bExplainTrigger = true;
 	m_bExplainCombo = true;
 
-
+	m_bTutorialPause = false;
+	m_nTutorialPauseSelection = 0;
 }				
 void CTutorialBattle::Sleep( void )	
 {
@@ -140,87 +148,124 @@ void CTutorialBattle::Sleep( void )
 }				
 bool CTutorialBattle::Input( void )	
 {
-	if(m_vBattleUnits.size() > 0)
+	if(m_bTutorialPause)
 	{
-		if(m_bExplanation == false)
+		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+			m_bTutorialPause = false;
+		else if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN))
 		{
-			if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
+			if(m_nTutorialPauseSelection == 0)
+				m_bTutorialPause = false;
+			else
 			{
-				CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
-				if(pTemp != nullptr)
+				if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
+					CSGD_XAudio2::GetInstance()->MusicStopSong(GetBackgroundMusic());
+				else if(CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(m_nVictoryMusic))
+					CSGD_XAudio2::GetInstance()->MusicStopSong(m_nVictoryMusic);
+
+				if(m_bMenu)
+					CGame::GetInstance()->ChangeState(CMainMenuState::GetInstance());
+				else
+					CGame::GetInstance()->ChangeState(CGamePlayState::GetInstance());
+			}
+		}
+		if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+			|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
+			m_nTutorialPauseSelection = 0;
+		else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+			|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
+			m_nTutorialPauseSelection = 1;
+	}
+	else if(!m_bTutorialPause)
+	{
+		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+			m_bTutorialPause = true;
+
+		if(m_vBattleUnits.size() > 0)
+		{
+			if(m_bExplanation == false)
+			{
+				if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 				{
-					if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
-						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
+					CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
+					if(pTemp != nullptr)
 					{
-						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-						GetNextTarget();
-					}
-					else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
-						|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
-					{
-						CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
-						GetPreviousTarget();
+						if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_W ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_UPARROW ) 
+							|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_UP) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_UP) )
+						{
+							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+							GetNextTarget();
+						}
+						else if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_S ) || CSGD_DirectInput::GetInstance()->KeyPressed( DIK_DOWNARROW )
+							|| CSGD_DirectInput::GetInstance()->JoystickDPadPressed(DIR_DOWN) || CSGD_DirectInput::GetInstance()->JoystickGetLStickDirPressed(DIR_DOWN))
+						{
+							CSGD_XAudio2::GetInstance()->SFXPlaySound(m_nSelectionChange);
+							GetPreviousTarget();
+						}
 					}
 				}
 			}
-		}
-		else
-		{
-			if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2) )
+			else
 			{
-				m_bExplanation = false;
-				if(m_bExplainDodge)
-					m_bExplainDodge = false;
-			}
+				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2) )
+				{
+					m_bExplanation = false;
+					if(m_bExplainDodge)
+						m_bExplainDodge = false;
+				}
 
+			}
 		}
 	}
 	return true;
 }					
 void CTutorialBattle::Update( float fElapsedTime )	
 {
-	if(!m_bExplanation)
+	if(!m_bTutorialPause)
 	{
-		m_fDelayTurn -= fElapsedTime;
-		timer -= fElapsedTime;
-		m_fEnemyDelay -= fElapsedTime;
-		for(int i = 0; i < (int)m_vText.size(); )
+		if(!m_bExplanation)
 		{
-			m_vText[i]->m_fTimer -= fElapsedTime;
-			m_vText[i]->m_fLocY -= (20 * fElapsedTime);
-			if(m_vText[i]->m_fTimer <= 0.0f)
+			m_fDelayTurn -= fElapsedTime;
+			timer -= fElapsedTime;
+			m_fEnemyDelay -= fElapsedTime;
+			for(int i = 0; i < (int)m_vText.size(); )
 			{
-				delete m_vText[i];
-				m_vText.erase(m_vText.begin() + i);
+				m_vText[i]->m_fTimer -= fElapsedTime;
+				m_vText[i]->m_fLocY -= (20 * fElapsedTime);
+				if(m_vText[i]->m_fTimer <= 0.0f)
+				{
+					delete m_vText[i];
+					m_vText.erase(m_vText.begin() + i);
+				}
+				else
+					i++;
 			}
-			else
-				i++;
-		}
 
-		if(m_bVictory)
-			m_fEndBatleTimer -= fElapsedTime;
+			if(m_bVictory)
+				m_fEndBatleTimer -= fElapsedTime;
 
-		switch (m_eCurrentPhase)
-		{
-		case CTutorialBattle::BP_INIT:
-			Initialize();
-			break;
-		case CTutorialBattle::BP_BATTLE:
-			Battle(fElapsedTime);
-			break;
-		case CTutorialBattle::BP_END:
-			EndBattle();
-			break;
-		default:
-			break;
+			switch (m_eCurrentPhase)
+			{
+			case CTutorialBattle::BP_INIT:
+				Initialize();
+				break;
+			case CTutorialBattle::BP_BATTLE:
+				Battle(fElapsedTime);
+				break;
+			case CTutorialBattle::BP_END:
+				EndBattle();
+				break;
+			default:
+				break;
+			}
 		}
 	}
-
 }	
 void CTutorialBattle::Render( void )	
 {
 	CSGD_TextureManager*	pTM	= CSGD_TextureManager::GetInstance();
 	CSGD_Direct3D*			pD3D = CSGD_Direct3D::GetInstance();
+	RECT rCursor = {0,0,16,32};
 
 	//Temp drawing the UI
 	pTM->Draw(m_nForestBattleID, 0, 0, 2.0f, 2.0f);
@@ -230,65 +275,86 @@ void CTutorialBattle::Render( void )
 	// Printing out variables
 	std::wostringstream woss;
 
-	m_pFont->Draw(_T("HP:"), 660, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-	m_pFont->Draw(_T("AP:"), 660, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-
 	if(m_vBattleUnits.size() > 0)
 	{
+		float hPercent = m_pPlayerUnit->GetHealth() / float(m_pPlayerUnit->GetMaxHealth());
+		RECT rHealth = {0,0,256, 32};
+		pTM->Draw(m_nHealthBar, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+		rHealth.right = long(256 * hPercent);
+		pTM->Draw(m_nHealthBar, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+		rHealth.right = 256;
+		pTM->Draw(m_nHealthBarPlate, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				woss << m_vBattleUnits[i]->GetHealth();
-				m_pFont->Draw( woss.str().c_str(), 700, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+				m_pFont->Draw( woss.str().c_str(), 540, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-				woss << m_vBattleUnits[i]->GetAbilityPoints();
+				woss << "AP: " << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			}
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
+		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
+			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
+			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			rHealth.right = long(256 * hPercent);
+			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			rHealth.right = 256;
+			pTM->Draw(m_nHealthBarPlate, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
-			woss << m_vBattleUnits[m_nTarget]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTarget]->GetAbilityPoints();
-			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss << m_vBattleUnits[m_nTarget]->GetHealth();
+			m_pFont->Draw( woss.str().c_str(), 80, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 80, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			m_pFont->Draw(_T("HP:"), 10, 500, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
-			m_pFont->Draw(_T("AP:"), 10, 520, 0.8f, D3DCOLOR_XRGB(0, 0, 255));
+			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			rHealth.right = long(256 * hPercent);
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			rHealth.right = 256;
+			pTM->Draw(m_nHealthBarPlate, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 50, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss << m_vBattleUnits[m_nTarget]->GetHealth();
+			m_pFont->Draw( woss.str().c_str(), 80, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetAbilityPoints();
-			m_pFont->Draw( woss.str().c_str(), 50, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
-			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 50, 480, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
+			m_pFont->Draw( woss.str().c_str(), 80, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
-		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_ENEMY_UNIT)
+		int nImageID = -1;
+		CAnimation* pAnim; 
+		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
-			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -30),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -25),  long(m_vBattleUnits[m_nTurn]->GetPosY() - 20) };
-			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
+			if(m_vBattleUnits[i]->GetRender())
+			{
+				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
+				{
+					pAnim = CAnimationSystem::GetInstance()->GetAnimation(m_vBattleUnits[i]->GetAnimInfo()->GetCurrentAnimation());
+					nImageID = pAnim->GetImageID();
+				}
+				float PosX = m_vBattleUnits[i]->GetPosX(); 
+				float PosY = m_vBattleUnits[i]->GetPosY();
+				if (nImageID != -1)
+				{
+					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT || m_vBattleUnits[i]->GetName() == "Orc_Leader" || m_vBattleUnits[i]->GetName() == "Ogre" || m_vBattleUnits[i]->GetName() == "Cave_Spider" || m_vBattleUnits[i]->GetName() == "Cultist" || m_vBattleUnits[i]->GetName() == "TigerLily")
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+					else
+						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
+
+				}
+				nImageID = -1;
+			}
 		}
-		else
-		{
-			RECT temp = { long(m_vBattleUnits[m_nTurn]->GetPosX() -20),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 25),  long(m_vBattleUnits[m_nTurn]->GetPosX() -15),  long(m_vBattleUnits[m_nTurn]->GetPosY() + 30) };
-			pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,255 ));
-		}
+
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT)
 		{
 			CPlayerUnit* pTemp = reinterpret_cast<CPlayerUnit*>(m_vBattleUnits[m_nTurn]);
@@ -298,7 +364,10 @@ void CTutorialBattle::Render( void )
 				{
 					RECT temp = {  long(m_vBattleUnits[m_nTarget]->GetPosX() +60),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 25),  long(m_vBattleUnits[m_nTarget]->GetPosX() + 65),  long(m_vBattleUnits[m_nTarget]->GetPosY() - 20) };
 					if(pTemp->GetCasting() == false)
-						pD3D->DrawHollowRect(temp, D3DCOLOR_XRGB( 0,0,0 ));
+					{
+						RECT rTarget = m_vBattleUnits[m_nTarget]->GetCollisionRectNoCam();
+						CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rTarget.right + 8), int((rTarget.top + rTarget.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5f*D3DX_PI,D3DCOLOR_XRGB(255,0,0));
+					}
 					if(pTemp->GetCasting())
 					{
 						if(pTemp->GetInSubMenu())
@@ -333,39 +402,28 @@ void CTutorialBattle::Render( void )
 
 					}
 				}
-				RECT rTemp = {};
-
-				rTemp.top = 498 + (pTemp->GetSkillID() * 16);
-				rTemp.bottom = rTemp.top + 10;
-				rTemp.left = 348;
-				rTemp.right = 358;
 				if(!pTemp->GetReady())
-					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+				{
+					pTM->Draw(GetCursorIMG(),354 , 498 + (pTemp->GetSkillID() * 16), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
+				}
 
 			}
 		}
-		int nImageID = -1;
-		CAnimation* pAnim; 
-		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
+
+		for(int i = 0; i < (int)m_vText.size(); i++)
+			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);
+
+		RECT rPTemp = m_vBattleUnits[m_nTurn]->GetCollisionRectNoCam();
+
+		if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			if(m_vBattleUnits[i]->GetRender())
-			{
-				if (m_vBattleUnits[i]->GetType() != OBJ_UNDEFINE && m_vBattleUnits[i]->GetType() != OBJ_WARP)
-				{
-					pAnim = CAnimationSystem::GetInstance()->GetAnimation(m_vBattleUnits[i]->GetAnimInfo()->GetCurrentAnimation());
-					nImageID = pAnim->GetImageID();
-				}
-				float PosX = m_vBattleUnits[i]->GetPosX(); 
-				float PosY = m_vBattleUnits[i]->GetPosY();
-				if (nImageID != -1)
-				{
-					if (m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT || m_vBattleUnits[i]->GetName() == "Pathetic_Orc" || m_vBattleUnits[i]->GetName() == "Orc" || m_vBattleUnits[i]->GetName() == "Orc_Shaman" || m_vBattleUnits[i]->GetName() == "Orc_Leader" || m_vBattleUnits[i]->GetName() == "Ogre" || m_vBattleUnits[i]->GetName() == "Cave_Spider")
-						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, 1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
-					else
-						CAnimationSystem::GetInstance()->Render(m_vBattleUnits[i]->GetAnimInfo(), PosX, PosY, -1.0f, 1.0f, D3DCOLOR_XRGB(255, 255, 255));
-				}
-				nImageID = -1;
-			}
+			//////////////////////// BUG CURSOR APPEARING ON LEFT ON TREE MONSTERS
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.right + 8), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,1.5f*D3DX_PI,D3DCOLOR_XRGB(255,255,255));
+			/////////////////////// FIXED BY JAMES BEAN SWITCHED FROM == OBJ_ENEMY_UNIT != OBJ_PLAYER_UNIT IS IT APPEARS CORRECTLY FOR ALL UNIT TYPES
+		}
+		else
+		{
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), int(rPTemp.left - 32), int((rPTemp.top + rPTemp.bottom) / 2), 1.0f,1.0f,&rCursor, 16.0f,8.0f,D3DX_PI / 2,D3DCOLOR_XRGB(255,255,255));
 		}
 
 		for(int i = 0; i < (int)m_vText.size(); i++)
@@ -385,95 +443,106 @@ void CTutorialBattle::Render( void )
 			m_pFont->Draw(woss.str().c_str(), 380, 15,1.0f, D3DCOLOR_XRGB(0,0,255));
 		}
 
-		if(m_bExplanation)
+		if(!m_bTutorialPause)
 		{
-			////////////////////////// EXPLAIN DODGE
-			if(m_bExplainDodge)
+			if(m_bExplanation)
 			{
-				woss.str(_T(""));
-				woss << "Action Key - Press when you see Attempt to dodge\n\nPress the Action key to continue";
-				RECT rCover = {0,0,800,600};
-				pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
+				////////////////////////// EXPLAIN DODGE
+				if(m_bExplainDodge)
+				{
+					woss.str(_T(""));
+					woss << "Action Key - Press when you see Attempt to dodge\n\nPress the Action key to continue";
+					RECT rCover = {0,0,800,600};
+					pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
 
-				m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
-				woss.str(_T(""));
-				woss << "\"Attempt\"";
-				m_pFont->Draw(woss.str().c_str(), int(m_pPlayerUnit->GetPosX()),int(m_pPlayerUnit->GetPosY()),1.0f, D3DCOLOR_XRGB(0,255,255));
+					m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
+					woss.str(_T(""));
+					woss << "\"Attempt\"";
+					m_pFont->Draw(woss.str().c_str(), int(m_pPlayerUnit->GetPosX()),int(m_pPlayerUnit->GetPosY()),1.0f, D3DCOLOR_XRGB(0,255,255));
+				}
+				//////////////////////// EXPLAIN ATTACK
+				else if(m_bExplainAttack)
+				{
+					woss.str(_T(""));
+					woss << "Arrow Keys - Navigate Menu / Navigate Enemy\nAction Key - Select Skill/Enemy\nPlease use the attack ability now\nCancel Key - To back out of a selection\n\nPress the Action key to continue";
+					RECT rCover = {0,0,800,600};
+					pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
+
+					m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
+				}
+				/////////////////////// EXPLAIN TRIGGER
+				else if(m_bExplainTrigger)
+				{
+					RECT rCover = {0,0,800,600};
+					pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
+
+					CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
+					RECT rTemp = {200,64,600,96};
+					pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(120, 255, 0, 0 ));
+					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
+
+					RECT temp1 = {264,64,296,96};
+					pD3D->DrawRect(temp1, D3DCOLOR_ARGB(120, 0, 200, 0));
+					pD3D->DrawHollowRect(temp1, D3DCOLOR_XRGB(0,0,0));
+
+
+					RECT temp2 = {302,64,318,96};
+					pD3D->DrawRect(temp2, D3DCOLOR_ARGB(255, 0, 0, 255 ));
+					pD3D->DrawHollowRect(temp2, D3DCOLOR_XRGB(0,0,0));
+					woss.str(_T(""));
+					woss << "This is the Trigger Event! these mini games only take AP Once!";
+					m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
+					woss.str(_T(""));
+					woss << "You have 10 chances to line the blue and green triggers up.\nMissing one ends the game.";
+					m_pFont->Draw(woss.str().c_str(), 15, 102,0.75f, D3DCOLOR_XRGB(255,255,255));
+					woss.str(_T(""));
+					woss << "Action Key - Press when lined up to attack.\nPlease Use the SwordSlash in Spells!\n\nPress the Action key to continue";
+					m_pFont->Draw(woss.str().c_str(), 15, 148,0.75f, D3DCOLOR_XRGB(255,255,255));
+				}
+				//////////////////////// EXPLAIN COMBO
+				else if(m_bExplainCombo)
+				{
+					RECT rCover = {0,0,800,600};
+					pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
+
+					CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
+					CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
+					RECT rTemp = {200,64,600, 96};
+
+					pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,255,255));
+					pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0),1);
+
+					rTemp.left = 0;
+					rTemp.right = 16;
+					rTemp.top = 0;
+					rTemp.bottom = 16;
+
+					pTM->Draw(m_nCombArrowImgID,352,97,1.0f,1.0f);
+					pTM->Draw(m_nCombArrowImgID,368,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
+					pTM->Draw(m_nCombArrowImgID,384,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
+					pTM->Draw(m_nCombArrowImgID,400,97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
+					pTM->Draw(m_nCombArrowImgID,416,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI);
+					pTM->Draw(m_nCombArrowImgID,432,97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
+
+					woss.str(_T(""));
+					woss << "This is the Combo Event!";
+					m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
+					woss.str(_T(""));
+					woss << "You must complete as many combos as you can in 10 seconds! \nEvery success gives you 1 more second. Missing an arrow will set you back 1 move.";
+					m_pFont->Draw(woss.str().c_str(), 15, 108,0.75f, D3DCOLOR_XRGB(255,255,255));
+					woss.str(_T(""));
+					woss << "Arrow Key - Press them in the order shown.\nPlease Use the Blitz Ability in Spells!\n\nPress the Action key to continue";
+					m_pFont->Draw(woss.str().c_str(), 15, 164,0.75f, D3DCOLOR_XRGB(255,255,255));
+				}
 			}
-			//////////////////////// EXPLAIN ATTACK
-			else if(m_bExplainAttack)
-			{
-				woss.str(_T(""));
-				woss << "Arrow Keys - Navigate Menu / Navigate Enemy\nAction Key - Select Skill/Enemy\nPlease use the attack ability now\nCancel Key - To back out of a selection\n\nPress the Action key to continue";
-				RECT rCover = {0,0,800,600};
-				pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
-
-				m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
-			}
-			/////////////////////// EXPLAIN TRIGGER
-			else if(m_bExplainTrigger)
-			{
-				RECT rCover = {0,0,800,600};
-				pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
-
-				CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-				RECT rTemp = {200,64,600,96};
-				pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(120, 255, 0, 0 ));
-				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0));
-
-				RECT temp1 = {264,64,296,96};
-				pD3D->DrawRect(temp1, D3DCOLOR_ARGB(120, 0, 200, 0));
-				pD3D->DrawHollowRect(temp1, D3DCOLOR_XRGB(0,0,0));
-
-
-				RECT temp2 = {302,64,318,96};
-				pD3D->DrawRect(temp2, D3DCOLOR_ARGB(255, 0, 0, 255 ));
-				pD3D->DrawHollowRect(temp2, D3DCOLOR_XRGB(0,0,0));
-				woss.str(_T(""));
-				woss << "This is the Trigger Event! these mini games only take AP Once!";
-				m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
-				woss.str(_T(""));
-				woss << "You have 10 chances to line the blue and green triggers up.\nMissing one ends the game.";
-				m_pFont->Draw(woss.str().c_str(), 15, 102,0.75f, D3DCOLOR_XRGB(255,255,255));
-				woss.str(_T(""));
-				woss << "Action Key - Press when lined up to attack.\nPlease Use the SwordSlash in Spells!\n\nPress the Action key to continue";
-				m_pFont->Draw(woss.str().c_str(), 15, 148,0.75f, D3DCOLOR_XRGB(255,255,255));
-			}
-			//////////////////////// EXPLAIN COMBO
-			else if(m_bExplainCombo)
-			{
-				RECT rCover = {0,0,800,600};
-				pD3D->DrawRect(rCover, D3DCOLOR_ARGB(127,0,0,0));
-
-				CSGD_Direct3D* pD3D = CSGD_Direct3D::GetInstance();
-				CSGD_TextureManager* pTM = CSGD_TextureManager::GetInstance();
-				RECT rTemp = {200,64,600, 96};
-
-				pD3D->DrawRect(rTemp, D3DCOLOR_XRGB(0,255,255));
-				pD3D->DrawHollowRect(rTemp, D3DCOLOR_XRGB(0,0,0),1);
-
-				rTemp.left = 0;
-				rTemp.right = 16;
-				rTemp.top = 0;
-				rTemp.bottom = 16;
-
-				pTM->Draw(m_nCombArrowImgID,352,97,1.0f,1.0f);
-				pTM->Draw(m_nCombArrowImgID,368,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
-				pTM->Draw(m_nCombArrowImgID,384,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI/2);
-				pTM->Draw(m_nCombArrowImgID,400,97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
-				pTM->Draw(m_nCombArrowImgID,416,97,1.0f,1.0f,&rTemp,8.0f,8.0f,D3DX_PI);
-				pTM->Draw(m_nCombArrowImgID,432,97,1.0f,1.0f,&rTemp,8.0f,8.0f,3*D3DX_PI/2);
-
-				woss.str(_T(""));
-				woss << "This is the Combo Event!";
-				m_pFont->Draw(woss.str().c_str(), 15, 15,0.75f, D3DCOLOR_XRGB(255,255,255));
-				woss.str(_T(""));
-				woss << "You must complete as many combos as you can in 10 seconds! \nEvery success gives you 1 more second. Missing an arrow will set you back 1 move.";
-				m_pFont->Draw(woss.str().c_str(), 15, 108,0.75f, D3DCOLOR_XRGB(255,255,255));
-				woss.str(_T(""));
-				woss << "Arrow Key - Press them in the order shown.\nPlease Use the Blitz Ability in Spells!\n\nPress the Action key to continue";
-				m_pFont->Draw(woss.str().c_str(), 15, 164,0.75f, D3DCOLOR_XRGB(255,255,255));
-			}
+		}
+		else
+		{
+			RECT rPause = {316, 236, 484,364};
+			pD3D->DrawRect(rPause, D3DCOLOR_ARGB(190,0,0,0));
+			CSGD_TextureManager::GetInstance()->Draw(m_nMenuSelectionImage, 272, 172);
+			CGame::GetInstance()->GetFont("Arial")->Draw(_T("Tutorial\n\nResume\nSkip Tutorial"), 368,258, 0.66f, D3DCOLOR_XRGB(255,255, 255));
+			CSGD_TextureManager::GetInstance()->Draw(GetCursorIMG(), 360, 304 + (m_nTutorialPauseSelection * 18),1.0f,1.0f,&rCursor,0.0f,0.0f,D3DX_PI /2, D3DCOLOR_XRGB(255,255,255));
 		}
 	}
 
@@ -487,11 +556,11 @@ void CTutorialBattle::Initialize(void)
 	m_vBattleUnits.push_back(m_pPlayerUnit);
 	// Add Enemy units here.
 
-	CEnemyUnit* pTemp = CreateTempEnemy("Thornbiter", 100.0f, 250.0f, 12, 30, 20);
+	CEnemyUnit* pTemp = CreateTempEnemy("Pathetic_Orc", 100.0f, 250.0f, 12, 30, 20);
 	m_vBattleUnits.push_back(pTemp);
-	pTemp = CreateTempEnemy("Thornbiter", 200.0f, 350.0f, 5,  30, 20);
+	pTemp = CreateTempEnemy("Pathetic_Orc", 200.0f, 350.0f, 5,  30, 20);
 	m_vBattleUnits.push_back(pTemp);
-	pTemp = CreateTempEnemy("Thornbiter", 100.0f, 400.0f, 9,  30, 20);
+	pTemp = CreateTempEnemy("Pathetic_Orc", 100.0f, 400.0f, 9,  30, 20);
 	m_vBattleUnits.push_back(pTemp);
 
 	sort(m_vBattleUnits.begin(), m_vBattleUnits.end(), CBattleState::SortSpeed); 
@@ -568,7 +637,7 @@ void CTutorialBattle::Battle(float fElapsedTime)
 			{
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation("Warrior_Battle_Idle");
 			}
-			else if (m_vBattleUnits[i]->GetName() == "Thornbiter")
+			else if (m_vBattleUnits[i]->GetName() == "Pathetic_Orc")
 			{
 				string szTemp = m_vBattleUnits[i]->GetName() + "_Battle_Idle";
 				m_vBattleUnits[i]->GetAnimInfo()->SetAnimation(szTemp.c_str());
@@ -639,7 +708,7 @@ CEnemyUnit* CTutorialBattle::CreateTempEnemy(string input, float X, float Y, int
 	CBasicAttack* tempAtk = new CBasicAttack;
 	CAnimationTimeStamp* pTemp;
 	pTemp = temp->GetAnimInfo();
-	pTemp->SetAnimation("Thornbiter_Battle_Idle");
+	pTemp->SetAnimation("Pathetic_Orc_Battle_Idle");
 	pTemp->SetCurrentFrame(0);
 	temp->SetType(OBJ_ENEMY_UNIT);
 	tempAtk->SetTutorial(true);
@@ -753,6 +822,6 @@ void CTutorialBattle::AddFloatingText(float posX, float posY, DWORD dColor, std:
 	ftTemp->m_fLocY = posY;
 	ftTemp->Color = dColor;
 	ftTemp->szText << szText.str();
-	ftTemp->m_fTimer = 1.5f;
+	ftTemp->m_fTimer = 0.5f;
 	m_vText.push_back(ftTemp);
 }

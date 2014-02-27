@@ -263,17 +263,17 @@ void CBattleState::Render(void)
 	{
 		float hPercent = m_pPlayerUnit->GetHealth() / float(m_pPlayerUnit->GetMaxHealth());
 		RECT rHealth = {0,0,256, 32};
-		pTM->Draw(m_nHealthBar, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+		pTM->Draw(m_nHealthBar, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 		rHealth.right = long(256 * hPercent);
-		pTM->Draw(m_nHealthBar, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+		pTM->Draw(m_nHealthBar, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 		rHealth.right = 256;
-		pTM->Draw(m_nHealthBarPlate, 500,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+		pTM->Draw(m_nHealthBarPlate, 516,500,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 		for(unsigned int i = 0; i < m_vBattleUnits.size(); i++)
 		{
 			if(m_vBattleUnits[i]->GetType() == OBJ_PLAYER_UNIT)
 			{
 				woss << m_vBattleUnits[i]->GetHealth();
-				m_pFont->Draw( woss.str().c_str(), 524, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+				m_pFont->Draw( woss.str().c_str(), 540, 500, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 				woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 				woss << "AP: " << m_vBattleUnits[i]->GetAbilityPoints();
 				m_pFont->Draw( woss.str().c_str(), 700, 520, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
@@ -284,34 +284,34 @@ void CBattleState::Render(void)
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
-			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
-			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 			rHealth.right = 256;
-			pTM->Draw(m_nHealthBarPlate, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBarPlate, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 80, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			m_pFont->Draw( woss.str().c_str(), 80, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			hPercent = m_vBattleUnits[m_nTurn]->GetHealth() / float(m_vBattleUnits[m_nTurn]->GetMaxHealth());
-			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
-			pTM->Draw(m_nHealthBar, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 			rHealth.right = 256;
-			pTM->Draw(m_nHealthBarPlate, 64,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBarPlate, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetHealth();
-			m_pFont->Draw( woss.str().c_str(), 96, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss << m_vBattleUnits[m_nTarget]->GetHealth();
+			m_pFont->Draw( woss.str().c_str(), 80, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
-			m_pFont->Draw( woss.str().c_str(), 64, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
+			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
+			m_pFont->Draw( woss.str().c_str(), 80, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
 		int nImageID = -1;
@@ -382,24 +382,33 @@ void CBattleState::Render(void)
 					{
 						woss.str(_T(""));
 						woss << vTemp[i]->GetName().c_str();
+
 						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() <= pTemp->GetAbilityPoints() && vTemp[i]->GetIsGame())
-							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else if(vTemp[i]->GetMiniGame() == nullptr)
-							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else
-							m_pFont->Draw(woss.str().c_str(), 364, 490 + (i * 16), 0.75f, D3DCOLOR_XRGB(155,155,155));
+							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
 
-
+						woss.str(_T(""));
+						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() > 0)
+							woss << " AP: " << vTemp[i]->GetMiniGame()->GetCost();
+						
+						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() <= pTemp->GetAbilityPoints() && vTemp[i]->GetIsGame())
+							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+						else if(vTemp[i]->GetMiniGame() == nullptr)
+							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+						else
+							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
 					}
 				}
 				if(!pTemp->GetReady())
 				{
-					pTM->Draw(GetCursorIMG(),354 , 498 + (pTemp->GetSkillID() * 16), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
+					pTM->Draw(GetCursorIMG(),354 , 514 + (pTemp->GetSkillID() * 13), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
 				}
 
 			}
 		}
-
 
 		for(int i = 0; i < (int)m_vText.size(); i++)
 			m_pFont->Draw(m_vText[i]->szText.str().c_str(), (int)m_vText[i]->m_fLocX, (int)m_vText[i]->m_fLocY, 1.0f, m_vText[i]->Color);

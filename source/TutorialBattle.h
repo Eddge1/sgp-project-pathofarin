@@ -49,8 +49,11 @@ class CTutorialBattle :	public CGameStates
 	int m_nVictoryMusic;
 	int m_nDefeatMusic;
 	int m_nHealthBar;
+	int m_nHealthBarPlate;
 	int m_nAPBar;
 	int m_nTarget;
+	bool m_bTutorialPause;
+	int m_nTutorialPauseSelection;
 	bool m_bVictory;
 	bool m_bDelayed;
 	bool m_bMenu;

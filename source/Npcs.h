@@ -23,7 +23,7 @@ class CNpcs : public CEntity
 	float m_fDelayChat;
 	float m_fLastX;
 	float m_fLastY;
-
+	float m_fMoveSpeed;
 
 
 	int m_nChat;

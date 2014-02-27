@@ -105,12 +105,12 @@ void CPlayer::Update(float fElapsedTime)
 	if(pDI->KeyDown( DIK_W ) == true || pDI->JoystickDPadDown(DIR_UP) || pDI->JoystickGetLStickDirDown(DIR_UP))
 	{
 		szAnimation += "_Walk_Up";
-		SetVelY(-100);
+		SetVelY(-125);
 	}
 	else if(pDI->KeyDown( DIK_S ) == true || pDI->JoystickDPadDown(DIR_DOWN) || pDI->JoystickGetLStickDirDown(DIR_DOWN))
 	{
 		szAnimation += "_Walk_Down";
-		SetVelY(100);
+		SetVelY(125);
 	}
 
 	if(pDI->KeyDown( DIK_A ) == true || pDI->JoystickDPadDown(DIR_LEFT) || pDI->JoystickGetLStickDirDown(DIR_LEFT))
@@ -119,7 +119,7 @@ void CPlayer::Update(float fElapsedTime)
 		{
 			szAnimation += "_Walk_Left";
 		}
-		SetVelX(-100);
+		SetVelX(-125);
 	}
 	else if(pDI->KeyDown( DIK_D ) == true || pDI->JoystickDPadDown(DIR_RIGHT) || pDI->JoystickGetLStickDirDown(DIR_RIGHT))
 	{
@@ -127,10 +127,8 @@ void CPlayer::Update(float fElapsedTime)
 		{
 			szAnimation += "_Walk_Right";
 		}
-		SetVelX(100);
+		SetVelX(125);
 	}
-	else
-		SetVelX( GetVelX() - (GetVelX() * 0.005f));
 
 	if (this->GetVelX() == 0 && this->GetVelY() == 0)
 	{

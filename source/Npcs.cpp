@@ -13,6 +13,7 @@ CNpcs::CNpcs(void)
 	CSGD_EventSystem::GetInstance()->RegisterClient("BATTLE_END", this);
 	m_fDelayChat = 0.0f;
 	m_bGameVictory = false;
+	m_fMoveSpeed = float(rand() % 51 + 100);
 
 	m_nChat = CSGD_XAudio2::GetInstance()->SFXLoadSound(_T("assets/Audio/SFX/POA_Chat_Open.wav"));
 }
@@ -75,14 +76,14 @@ void CNpcs::Update(float fElapsedTime)
 
 		if(GetPosY() < m_vWaypoints[m_nWaypoint]->locY - 1)
 		{
-			SetVelY(100);
+			SetVelY(m_fMoveSpeed);
 			string szTemp = GetName();
 			szTemp += "_Walk_Down";
 			GetAnimInfo()->SetAnimation(szTemp.c_str());
 		}
 		else if(GetPosY() > m_vWaypoints[m_nWaypoint]->locY + 1)
 		{
-			SetVelY(-100);
+			SetVelY(-m_fMoveSpeed);
 			string szTemp = GetName();
 			szTemp += "_Walk_Up";
 			GetAnimInfo()->SetAnimation(szTemp.c_str());
@@ -91,7 +92,7 @@ void CNpcs::Update(float fElapsedTime)
 
 		if(GetPosX() < m_vWaypoints[m_nWaypoint]->locX - 1)
 		{
-			SetVelX(100);
+			SetVelX(m_fMoveSpeed);
 			if(GetVelY() == 0)
 			{
 				string szTemp = GetName();
@@ -102,7 +103,7 @@ void CNpcs::Update(float fElapsedTime)
 		}
 		else if(GetPosX() > m_vWaypoints[m_nWaypoint]->locX + 1)
 		{
-			SetVelX(-100);
+			SetVelX(-m_fMoveSpeed);
 			if(GetVelY() == 0)
 			{
 				string szTemp = GetName();
