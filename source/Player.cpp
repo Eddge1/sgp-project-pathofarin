@@ -37,7 +37,7 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(GetVelX() > 10)
 	{
-		fDiff = GetVelX() - (500 * fElapsedTime);
+		fDiff = GetVelX() - (1200 * fElapsedTime);
 		if(fDiff < 0)
 			SetVelX(0);
 		else
@@ -45,7 +45,7 @@ void CPlayer::Update(float fElapsedTime)
 	}
 	else if(GetVelX () < - 10)
 	{
-		fDiff = GetVelX() + (500 * fElapsedTime);
+		fDiff = GetVelX() + (1200 * fElapsedTime);
 		if(fDiff > 0)
 			SetVelX(0);
 		else
@@ -56,7 +56,7 @@ void CPlayer::Update(float fElapsedTime)
 
 	if(GetVelY() > 10)
 	{
-		fDiff = GetVelY() - (500 * fElapsedTime);
+		fDiff = GetVelY() - (1200 * fElapsedTime);
 		if(fDiff < 0)
 			SetVelY(0);
 		else
@@ -64,7 +64,7 @@ void CPlayer::Update(float fElapsedTime)
 	}
 	else if(GetVelY () < - 10)
 	{
-		fDiff = GetVelY() + (500 * fElapsedTime);
+		fDiff = GetVelY() + (1200 * fElapsedTime);
 		if(fDiff > 0)
 			SetVelY(0);
 		else

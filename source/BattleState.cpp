@@ -384,27 +384,27 @@ void CBattleState::Render(void)
 						woss << vTemp[i]->GetName().c_str();
 
 						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() <= pTemp->GetAbilityPoints() && vTemp[i]->GetIsGame())
-							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 360, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else if(vTemp[i]->GetMiniGame() == nullptr)
-							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 360, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else
-							m_pFont->Draw(woss.str().c_str(), 360, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
+							m_pFont->Draw(woss.str().c_str(), 360, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
 
 						woss.str(_T(""));
 						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() > 0)
 							woss << " AP: " << vTemp[i]->GetMiniGame()->GetCost();
 						
 						if(vTemp[i]->GetMiniGame() != nullptr && vTemp[i]->GetMiniGame()->GetCost() <= pTemp->GetAbilityPoints() && vTemp[i]->GetIsGame())
-							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 420, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else if(vTemp[i]->GetMiniGame() == nullptr)
-							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
+							m_pFont->Draw(woss.str().c_str(), 420, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(255,255,255));
 						else
-							m_pFont->Draw(woss.str().c_str(), 420, 510 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
+							m_pFont->Draw(woss.str().c_str(), 420, 495 + (i * 16), 0.66f, D3DCOLOR_XRGB(155,155,155));
 					}
 				}
 				if(!pTemp->GetReady())
 				{
-					pTM->Draw(GetCursorIMG(),354 , 514 + (pTemp->GetSkillID() * 13), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
+					pTM->Draw(GetCursorIMG(),354 , 497 + (pTemp->GetSkillID() * 16), 1.0f,1.0f,&rCursor, 0.0f,0.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
 				}
 
 			}
