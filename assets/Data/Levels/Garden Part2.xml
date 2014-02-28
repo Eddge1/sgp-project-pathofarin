@@ -5491,16 +5491,16 @@
   </Layer>
   <Layer ID="3" Width="4" Height="1" Xoffset="997" Yoffset="118">
     <Tile ID="0" posX="0" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="TIGERLILY" xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1" posX="1" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="TIGERLILY" xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="2" posX="2" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="TIGERLILY" xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="3" posX="3" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="TIGERLILY" xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
   </Layer>
   <Block_Data Total="19">
