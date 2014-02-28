@@ -129,10 +129,10 @@ namespace SGP_PoA_LevelEditor
                                         DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
                                        , TileSize.Width, TileSize.Height), Color.FromArgb(255, 127, 0, 127));
                                         DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2 - 2, Color.FromArgb(255, 0, 0, 0));
-                                       
+
                                     }
                                     if (ShowGrid)
-                                        DX.DrawText("X: " + x.ToString() + "\n\nY: " + y.ToString() , nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y + 8, Color.FromArgb(255, 255, 0, 0));
+                                        DX.DrawText("X: " + x.ToString() + "\n\nY: " + y.ToString(), nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y + 8, Color.FromArgb(255, 255, 0, 0));
 
                                 }
                             }
@@ -1526,12 +1526,15 @@ namespace SGP_PoA_LevelEditor
 
         private void lstLayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bChangedLayers = true;
-            myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
-            nudMapHeight.Value = L.LayerSize.Height;
-            nudMapWidth.Value = L.LayerSize.Width;
-            nudXOffset.Value = L.OffSet.Width;
-            nudYOffset.Value = L.OffSet.Height;
+            if (lstLayers.SelectedIndex >= 0)
+            {
+                bChangedLayers = true;
+                myLayers L = (myLayers)lstLayers.Items[lstLayers.SelectedIndex];
+                nudMapHeight.Value = L.LayerSize.Height;
+                nudMapWidth.Value = L.LayerSize.Width;
+                nudXOffset.Value = L.OffSet.Width;
+                nudYOffset.Value = L.OffSet.Height;
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
