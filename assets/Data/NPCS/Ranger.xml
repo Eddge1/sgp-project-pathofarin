@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPC Total_Conversations="1" Name="Ranger" Hostile="false" Units="0" File="Ranger">
+  <Convo Text="Greeting Arin, I am the spirit of ancient Rangers past, touch the crystal next to me to obtain my power." Event="" />
+</NPC>

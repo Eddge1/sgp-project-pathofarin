@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data Count="8">
+<Animation_Data Count="9">
   <Animation_Info Name="Ranger_Idle_Down" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
+    <Frame_Data>
+      <Render posX="3" posY="1" Width="22" Height="28" anchorX="12" anchorY="19" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="1" posY="1" Width="24" Height="29" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Ranger_Idle" Frames="1" repeat="1" Texture="POA_Ranger_Overworld.png">
     <Frame_Data>
       <Render posX="3" posY="1" Width="22" Height="28" anchorX="12" anchorY="19" Duration="1.0" Event="NULL" />
       <ActiveCollision posX="1" posY="1" Width="24" Height="29" />

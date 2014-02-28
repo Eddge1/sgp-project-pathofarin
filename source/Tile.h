@@ -10,10 +10,6 @@ class CTile
 	bool m_bisEvent;
 	string m_sEvent;
 
-	// handlecollide TODO:
-
-
-
 public:
 
 

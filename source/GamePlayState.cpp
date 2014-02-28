@@ -712,8 +712,8 @@ void CGamePlayState::LoadWorld(string szFileName)
 								pNpc->SetName(pOtherRoot->Attribute("Name"));
 								string szTemporary = pNpc->GetName() + "_Idle";
 								pNpc->GetAnimInfo()->SetAnimation(szTemporary);
-								pNpc->SetPosX(float(tileID % layerWidth * tileWidth));
-								pNpc->SetPosY(float(tileID / layerWidth * tileHeight));
+								pNpc->SetPosX(float((tileID % nLayerWidth) * tileWidth) + nLayerXOffset);
+								pNpc->SetPosY(float((tileID / nLayerWidth) * tileHeight) + nLayerYOffset);
 
 								int nUnits = 0;
 								int nConvos = 0;

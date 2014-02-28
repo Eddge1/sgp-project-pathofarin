@@ -222,23 +222,15 @@ void CPlayer::HandleCollision(CObjects* col)
 	{
 		int nCamX = CGamePlayState::GetInstance()->GetWorldCamX();
 		int nCamY = CGamePlayState::GetInstance()->GetWorldCamY();
-		float fWidthR =   GetCollisionRectNoCam().right -GetPosX();
-		float fWidthL =   GetCollisionRectNoCam().left - GetPosX();
+		float fWidthR = GetCollisionRectNoCam().right -GetPosX();
+		float fWidthL = GetCollisionRectNoCam().left - GetPosX();
 		float fHeightT = GetCollisionRectNoCam().top -	GetPosY();
 		float fHeightB = GetCollisionRectNoCam().bottom -GetPosY();
 
 		RECT rTemp = col->GetCollisionRect();
-		if(GetCollisionRect().left >= rTemp.left && GetCollisionRect().right <= rTemp.right)
+		if(GetCollisionRect().left >= rTemp.left && GetCollisionRect().left <= rTemp.right)
 		{
-			if(GetCollisionRect().bottom >= rTemp.top && GetCollisionRect().top <= rTemp.top)
-			{
-				if(GetVelY() > 0)
-				{
-					SetVelY(0);
-					SetPosY(m_fLastY);
-				}
-			}
-			else if(GetCollisionRect().top <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.bottom)
+			if(GetCollisionRect().top >= rTemp.top && GetCollisionRect().top <= rTemp.bottom)
 			{
 				if(GetVelY() < 0)
 				{
@@ -246,26 +238,47 @@ void CPlayer::HandleCollision(CObjects* col)
 					SetPosY(m_fLastY);
 				}
 			}
-		}
+			else if(GetCollisionRect().bottom <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.top)
+			{
+				if(GetVelY() > 0)
+				{
+					SetVelY(0);
+					SetPosY(m_fLastY);
+				}
+			}
 
-		if(GetCollisionRect().left <= rTemp.right && GetCollisionRect().left >= rTemp.left)
-		{
 			if(GetVelX() < 0)
 			{
 				SetVelX(0);
 				SetPosX(m_fLastX);
 			}
 		}
-		else if(GetCollisionRect().right >= rTemp.left && GetCollisionRect().right <= rTemp.right)
+		else if(GetCollisionRect().right <= rTemp.right && GetCollisionRect().right >= rTemp.left)
 		{
+			if(GetCollisionRect().top >= rTemp.top && GetCollisionRect().top <= rTemp.bottom)
+			{
+				if(GetVelY() < 0)
+				{
+					SetVelY(0);
+					SetPosY(m_fLastY);
+				}
+			}
+			else if(GetCollisionRect().bottom <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.top)
+			{
+				if(GetVelY() > 0)
+				{
+					SetVelY(0);
+					SetPosY(m_fLastY);
+				}
+			}
+
 			if(GetVelX() > 0)
 			{
 				SetVelX(0);
 				SetPosX(m_fLastX);
 			}
 		}
-
-		if(GetCollisionRect().bottom >= rTemp.top && GetCollisionRect().top <= rTemp.top)
+		else if(GetCollisionRect().top >= rTemp.top && GetCollisionRect().top <= rTemp.bottom)
 		{
 			if(GetVelY() < 0)
 			{
@@ -273,7 +286,7 @@ void CPlayer::HandleCollision(CObjects* col)
 				SetPosY(m_fLastY);
 			}
 		}
-		else if(GetCollisionRect().top <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.bottom)
+		else if(GetCollisionRect().bottom <= rTemp.bottom && GetCollisionRect().bottom >= rTemp.top)
 		{
 			if(GetVelY() > 0)
 			{

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NPC Total_Conversations="1" Name="Crystal_Ranger" Hostile="false" Units="0" File="Crystal_Ranger">
-  <Convo Text="I AM SO MANY BOW-SHOOTING PEOPLE RIGHT NOW!" Event="" />
+  <Convo Text="Go fourth Arin, and save this world from Valrion" Event="" />
 </NPC>
