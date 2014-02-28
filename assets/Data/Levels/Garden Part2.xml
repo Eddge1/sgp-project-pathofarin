@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<World Music="POA_Garden_Background.xwm" Width="30" Height="20" Layers="3" TileWidth="64" TileHeight="64" Image="PoA_ForestTiles.png" Transparency="-16777216">
+<World Music="POA_Garden_Background.xwm" Width="30" Height="20" Layers="4" TileWidth="64" TileHeight="64" Image="PoA_ForestTiles.png" Transparency="-16777216">
   <Layer ID="0" Width="30" Height="20" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
       <Tile_Data xTileID="0" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -5487,6 +5487,20 @@
     </Tile>
     <Tile ID="599" posX="29" posY="19">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+    </Tile>
+  </Layer>
+  <Layer ID="3" Width="4" Height="1" Xoffset="997" Yoffset="118">
+    <Tile ID="0" posX="0" posY="0">
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+    </Tile>
+    <Tile ID="1" posX="1" posY="0">
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+    </Tile>
+    <Tile ID="2" posX="2" posY="0">
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
+    </Tile>
+    <Tile ID="3" posX="3" posY="0">
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="KinoTownGuard" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
   </Layer>
   <Block_Data Total="19">
