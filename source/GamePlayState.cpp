@@ -456,7 +456,7 @@ void CGamePlayState::Render(void)
 	}
 	else if(m_bSaveGameStatus && !m_bSaveSuccess)
 	{
-		RECT rTemp = {336, 236, 464,364};
+		RECT rTemp = {316, 236, 484,364};
 		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
 		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
 		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Save?\n\nYes\nNo"), 368,258, 0.66f, D3DCOLOR_XRGB(255,255, 255));
@@ -468,7 +468,7 @@ void CGamePlayState::Render(void)
 	}
 	else if(m_bSaveSuccess)
 	{
-		RECT rTemp = {336, 236, 464,364};
+		RECT rTemp = {316, 236, 484,364};
 		pD3D->DrawRect(rTemp, D3DCOLOR_ARGB(190,0,0,0));
 		CSGD_TextureManager::GetInstance()->Draw(GetBackgroundImg(), 272, 172);
 		CGame::GetInstance()->GetFont("Arial")->Draw(_T("Success!"), 360,294, 0.66f, D3DCOLOR_XRGB(255,255, 255));
