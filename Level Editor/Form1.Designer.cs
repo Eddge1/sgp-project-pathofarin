@@ -172,7 +172,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1267, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1904, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -291,7 +291,7 @@
             this.panel2.AutoScroll = true;
             this.panel2.Location = new System.Drawing.Point(294, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(733, 723);
+            this.panel2.Size = new System.Drawing.Size(1369, 1003);
             this.panel2.TabIndex = 2;
             this.panel2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel2_Scroll);
             this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
@@ -445,7 +445,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.nudTileHeight);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(1033, 27);
+            this.groupBox1.Location = new System.Drawing.Point(1669, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(223, 149);
             this.groupBox1.TabIndex = 18;
@@ -547,7 +547,7 @@
             this.grpWarp.Controls.Add(this.label11);
             this.grpWarp.Controls.Add(this.label10);
             this.grpWarp.Controls.Add(this.label9);
-            this.grpWarp.Location = new System.Drawing.Point(1033, 181);
+            this.grpWarp.Location = new System.Drawing.Point(1669, 182);
             this.grpWarp.Name = "grpWarp";
             this.grpWarp.Size = new System.Drawing.Size(223, 201);
             this.grpWarp.TabIndex = 21;
@@ -651,7 +651,7 @@
             this.grpNPC.Controls.Add(this.btnNpcApply);
             this.grpNPC.Controls.Add(this.btnNpcCancel);
             this.grpNPC.Controls.Add(this.chkMoves);
-            this.grpNPC.Location = new System.Drawing.Point(1033, 181);
+            this.grpNPC.Location = new System.Drawing.Point(1669, 182);
             this.grpNPC.Name = "grpNPC";
             this.grpNPC.Size = new System.Drawing.Size(223, 201);
             this.grpNPC.TabIndex = 22;
@@ -765,7 +765,7 @@
             this.grpBlock.Controls.Add(this.nudBlockY);
             this.grpBlock.Controls.Add(this.nudBlockX);
             this.grpBlock.Controls.Add(this.lstBlock);
-            this.grpBlock.Location = new System.Drawing.Point(1033, 181);
+            this.grpBlock.Location = new System.Drawing.Point(1669, 182);
             this.grpBlock.Name = "grpBlock";
             this.grpBlock.Size = new System.Drawing.Size(223, 201);
             this.grpBlock.TabIndex = 12;
@@ -899,7 +899,7 @@
             this.grpWayPoints.Controls.Add(this.radWPMove);
             this.grpWayPoints.Controls.Add(this.radWPAdd);
             this.grpWayPoints.Controls.Add(this.lstWaypoints);
-            this.grpWayPoints.Location = new System.Drawing.Point(1033, 400);
+            this.grpWayPoints.Location = new System.Drawing.Point(1669, 401);
             this.grpWayPoints.Name = "grpWayPoints";
             this.grpWayPoints.Size = new System.Drawing.Size(222, 146);
             this.grpWayPoints.TabIndex = 23;
@@ -1041,7 +1041,7 @@
             this.grpUnits.Controls.Add(this.label19);
             this.grpUnits.Controls.Add(this.lstUnitAnimation);
             this.grpUnits.Controls.Add(this.lstUnits);
-            this.grpUnits.Location = new System.Drawing.Point(1033, 400);
+            this.grpUnits.Location = new System.Drawing.Point(1669, 401);
             this.grpUnits.Name = "grpUnits";
             this.grpUnits.Size = new System.Drawing.Size(223, 273);
             this.grpUnits.TabIndex = 33;
@@ -1236,7 +1236,7 @@
             this.grpChest.Controls.Add(this.label7);
             this.grpChest.Controls.Add(this.lstItems);
             this.grpChest.Controls.Add(this.cmbItemChoice);
-            this.grpChest.Location = new System.Drawing.Point(1033, 181);
+            this.grpChest.Location = new System.Drawing.Point(1669, 182);
             this.grpChest.Name = "grpChest";
             this.grpChest.Size = new System.Drawing.Size(223, 201);
             this.grpChest.TabIndex = 34;
@@ -1345,7 +1345,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1267, 762);
+            this.ClientSize = new System.Drawing.Size(1904, 1042);
             this.Controls.Add(this.grpChest);
             this.Controls.Add(this.grpBlock);
             this.Controls.Add(this.grpWayPoints);

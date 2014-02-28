@@ -2,7 +2,7 @@
 <World Width="15" Height="15" Layers="3" TileWidth="64" TileHeight="64" Image="PoA_ForestTiles.png" Transparency="-16777216">
   <Layer ID="0" Width="15" Height="15" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
-      <Tile_Data xTileID="6" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="6" yTileID="9" EventID="Cavern of Souls" EventType="MAP_EDIT" WarpX="192" WarpY="2304" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1" posX="1" posY="0">
       <Tile_Data xTileID="6" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -32,7 +32,7 @@
       <Tile_Data xTileID="2" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="10" posX="10" posY="0">
-      <Tile_Data xTileID="1" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="1" yTileID="6" EventID="Forest Level 1" EventType="WARP" WarpX="192" WarpY="2304" Total_Waypoints="0" />
     </Tile>
     <Tile ID="11" posX="11" posY="0">
       <Tile_Data xTileID="0" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -656,7 +656,7 @@
       <Tile_Data xTileID="1" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="218" posX="8" posY="14">
-      <Tile_Data xTileID="6" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="219" posX="9" posY="14">
       <Tile_Data xTileID="6" yTileID="9" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -1333,10 +1333,10 @@
       <Tile_Data xTileID="2" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="218" posX="8" posY="14">
-      <Tile_Data xTileID="7" yTileID="11" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="219" posX="9" posY="14">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="0" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="220" posX="10" posY="14">
       <Tile_Data xTileID="2" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
