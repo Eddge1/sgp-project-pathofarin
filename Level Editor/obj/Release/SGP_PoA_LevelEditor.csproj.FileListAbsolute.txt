@@ -17,3 +17,4 @@ C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_Po
 C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.pdb
 C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.exe
 C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\SGP_PoA_LevelEditor.pdb
+C:\Users\Edge\Desktop\SGP\sgp-project-pathofarin\Level Editor\obj\Release\SGP_PoA_LevelEditor.csprojResolveAssemblyReference.cache

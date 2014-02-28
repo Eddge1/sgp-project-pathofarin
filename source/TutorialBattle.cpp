@@ -84,7 +84,7 @@ void CTutorialBattle::Activate( void )
 	m_pAttack->SetCost(0);
 	m_bExplainOnceTurn = true;
 
-	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
+	CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic(), true);
 	m_bVictory = false;
 	m_fEndBatleTimer = 0.0f;
 	m_fCancelTimer = 2.0f;
@@ -150,9 +150,9 @@ bool CTutorialBattle::Input( void )
 {
 	if(m_bTutorialPause)
 	{
-		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(9) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(6))
 			m_bTutorialPause = false;
-		else if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN))
+		else if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1))
 		{
 			if(m_nTutorialPauseSelection == 0)
 				m_bTutorialPause = false;
@@ -178,7 +178,7 @@ bool CTutorialBattle::Input( void )
 	}
 	else if(!m_bTutorialPause)
 	{
-		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE))
+		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(9) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(6))
 			m_bTutorialPause = true;
 
 		if(m_vBattleUnits.size() > 0)
@@ -207,7 +207,7 @@ bool CTutorialBattle::Input( void )
 			}
 			else
 			{
-				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2) )
+				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1) )
 				{
 					m_bExplanation = false;
 					if(m_bExplainDodge)

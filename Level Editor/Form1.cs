@@ -128,9 +128,12 @@ namespace SGP_PoA_LevelEditor
                                     {
                                         DX.DrawRect(new Rectangle(nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y
                                        , TileSize.Width, TileSize.Height), Color.FromArgb(255, 127, 0, 127));
-                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2, Color.FromArgb(255, 0, 0, 0));
-
+                                        DX.DrawText(nLayer.ToString(), nX + panel2.AutoScrollPosition.X + TileSize.Width / 2, nY + panel2.AutoScrollPosition.Y + TileSize.Height / 2 - 2, Color.FromArgb(255, 0, 0, 0));
+                                       
                                     }
+                                    if (ShowGrid)
+                                        DX.DrawText("X: " + x.ToString() + "\n\nY: " + y.ToString() , nX + panel2.AutoScrollPosition.X, nY + panel2.AutoScrollPosition.Y + 8, Color.FromArgb(255, 255, 0, 0));
+
                                 }
                             }
                         }

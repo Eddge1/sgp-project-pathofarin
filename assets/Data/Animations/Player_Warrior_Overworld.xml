@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Animation_Data Count="8">
+<Animation_Data Count="9">
   <Animation_Info Name="Warrior_Idle_Up" Frames="1" repeat="1" Texture="Sprites.png">
     <Frame_Data>
       <Render posX="0" posY="1" Width="32" Height="32" anchorX="16" anchorY="20" Duration="1.0" Event="NULL" />
@@ -15,6 +15,12 @@
     </Frame_Data>
   </Animation_Info>
   <Animation_Info Name="Warrior_Idle_Down" Frames="1" repeat="1" Texture="Sprites.png">
+    <Frame_Data>
+      <Render posX="97" posY="0" Width="31" Height="33" anchorX="15" anchorY="21" Duration="1.0" Event="NULL" />
+      <ActiveCollision posX="0" posY="0" Width="31" Height="33" />
+    </Frame_Data>
+  </Animation_Info>
+  <Animation_Info Name="Warrior_Idle" Frames="1" repeat="1" Texture="Sprites.png">
     <Frame_Data>
       <Render posX="97" posY="0" Width="31" Height="33" anchorX="15" anchorY="21" Duration="1.0" Event="NULL" />
       <ActiveCollision posX="0" posY="0" Width="31" Height="33" />
