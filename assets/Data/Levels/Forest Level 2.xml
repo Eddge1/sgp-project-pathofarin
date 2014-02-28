@@ -9606,7 +9606,7 @@
   </Layer>
   <Layer ID="2" Width="40" Height="40" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="BLOCK" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1" posX="1" posY="0">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -14406,5 +14406,40 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
   </Layer>
-  <Block_Data Total="0" />
+  <Block_Data Total="34">
+    <Block PosX="1" PosY="1" Width="62" Height="447" />
+    <Block PosX="63" PosY="1" Width="28" Height="237" />
+    <Block PosX="91" PosY="1" Width="17" Height="226" />
+    <Block PosX="108" PosY="1" Width="19" Height="210" />
+    <Block PosX="1" PosY="448" Width="62" Height="23" />
+    <Block PosX="1" PosY="471" Width="43" Height="13" />
+    <Block PosX="1" PosY="483" Width="26" Height="25" />
+    <Block PosX="1" PosY="641" Width="10" Height="25" />
+    <Block PosX="2" PosY="666" Width="40" Height="19" />
+    <Block PosX="2" PosY="685" Width="62" Height="1302" />
+    <Block PosX="1" PosY="1987" Width="60" Height="17" />
+    <Block PosX="1" PosY="2004" Width="52" Height="9" />
+    <Block PosX="1" PosY="2013" Width="42" Height="9" />
+    <Block PosX="1" PosY="2022" Width="28" Height="6" />
+    <Block PosX="1" PosY="2028" Width="18" Height="20" />
+    <Block PosX="1" PosY="2177" Width="14" Height="23" />
+    <Block PosX="1" PosY="2200" Width="47" Height="20" />
+    <Block PosX="1" PosY="2220" Width="62" Height="21" />
+    <Block PosX="1" PosY="2241" Width="60" Height="317" />
+    <Block PosX="61" PosY="2441" Width="21" Height="117" />
+    <Block PosX="82" PosY="2454" Width="23" Height="105" />
+    <Block PosX="105" PosY="2469" Width="18" Height="90" />
+    <Block PosX="123" PosY="2508" Width="2434" Height="51" />
+    <Block PosX="2442" PosY="2485" Width="116" Height="24" />
+    <Block PosX="2451" PosY="2464" Width="106" Height="21" />
+    <Block PosX="2473" PosY="2452" Width="83" Height="12" />
+    <Block PosX="2489" PosY="2441" Width="68" Height="11" />
+    <Block PosX="2500" PosY="1" Width="59" Height="2440" />
+    <Block PosX="2241" PosY="2" Width="260" Height="140" />
+    <Block PosX="2251" PosY="142" Width="249" Height="19" />
+    <Block PosX="2270" PosY="161" Width="230" Height="19" />
+    <Block PosX="2434" PosY="180" Width="66" Height="32" />
+    <Block PosX="2450" PosY="212" Width="51" Height="16" />
+    <Block PosX="2471" PosY="228" Width="29" Height="11" />
+  </Block_Data>
 </World>
