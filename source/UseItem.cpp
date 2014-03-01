@@ -58,7 +58,7 @@ void CUseItem::Update(float fElapsedTime)
 		}
 
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-		if(pDI->KeyPressed(DIK_ESCAPE)|| CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1))
+		if(pDI->KeyPressed(DIK_ESCAPE)|| CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2))
 		{
 			ResetSkill();
 			tempP->SetReady(false);
