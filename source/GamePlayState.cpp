@@ -380,8 +380,6 @@ bool CGamePlayState::Input(void)
 void CGamePlayState::Update( float fElapsedTime )
 {
 	CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-	if(pDI->JoystickIsUnplugged())
-		bisPaused = true;
 	if(m_eCurrPhase == GP_END)
 	{
 		m_fGameEndTimer -= fElapsedTime;

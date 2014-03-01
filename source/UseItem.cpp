@@ -12,6 +12,7 @@ CUseItem::CUseItem(void)
 	m_nSelection = 0;
 	m_nItemTotal = 0;
 	m_bFirstDone = false;
+	m_nItemCursor = CSGD_TextureManager::GetInstance()->LoadTexture(_T("Assets/Graphics/Menus/POA_Cursor.png"));
 }
 
 
@@ -58,7 +59,7 @@ void CUseItem::Update(float fElapsedTime)
 		}
 
 		CSGD_DirectInput* pDI = CSGD_DirectInput::GetInstance();
-		if(pDI->KeyPressed(DIK_ESCAPE)|| CSGD_DirectInput::GetInstance()->JoystickButtonPressed(2))
+		if(pDI->KeyPressed(DIK_ESCAPE)|| CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1))
 		{
 			ResetSkill();
 			tempP->SetReady(false);
@@ -159,12 +160,8 @@ void CUseItem::Render(void)
 			}
 			if(m_mTemp->size() > 0)
 			{
-				RECT rTemp = { };
-				rTemp.top = 498 + (m_nSelection * 16);
-				rTemp.bottom = rTemp.top + 10;
-				rTemp.left = 348;
-				rTemp.right = 358;
-				CSGD_Direct3D::GetInstance()->DrawHollowRect(rTemp, D3DCOLOR_XRGB( 0,0,255 ));
+				RECT rCursor = {0,0,16,32};
+				CSGD_TextureManager::GetInstance()->Draw(m_nItemCursor, 336, 502 + (m_nSelection * 16), 1.0f,1.0f,&rCursor, 16.0f,8.0f,D3DX_PI/2,D3DCOLOR_XRGB(255,255,255));
 
 			}
 		}

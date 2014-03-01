@@ -152,7 +152,7 @@ bool CTutorialBattle::Input( void )
 	{
 		if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_ESCAPE) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(9) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(6))
 			m_bTutorialPause = false;
-		else if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1))
+		else if(CSGD_DirectInput::GetInstance()->KeyPressed(DIK_RETURN) || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(0))
 		{
 			if(m_nTutorialPauseSelection == 0)
 				m_bTutorialPause = false;
@@ -207,7 +207,7 @@ bool CTutorialBattle::Input( void )
 			}
 			else
 			{
-				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(1) )
+				if( CSGD_DirectInput::GetInstance()->KeyPressed( DIK_RETURN ) == true || CSGD_DirectInput::GetInstance()->JoystickButtonPressed(0) )
 				{
 					m_bExplanation = false;
 					if(m_bExplainDodge)

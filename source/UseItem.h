@@ -7,6 +7,7 @@ class CUseItem : public CMiniGames
 	map<string, InventoryItems>* m_mTemp;
 	int m_nSelection;
 	int m_nItemTotal;
+	int m_nItemCursor;
 	bool m_bFirstDone;
 public:
 
