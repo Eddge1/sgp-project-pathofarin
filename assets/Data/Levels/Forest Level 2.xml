@@ -10008,7 +10008,10 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="134" posX="14" posY="3">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_Po4" xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Potion" Amount="1" />
+        <Chest Name="Ether" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="135" posX="15" posY="3">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -10077,7 +10080,9 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="157" posX="37" posY="3">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="SPD_AUG" xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Speed Augment" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="158" posX="38" posY="3">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -11061,7 +11066,15 @@
       <Tile_Data xTileID="10" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="485" posX="5" posY="12">
-      <Tile_Data xTileID="11" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_TREE" RemoveEvent="FOR2_TREE" xTileID="11" yTileID="1" EventID="Tree" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="7">
+        <Waypoint X="352" Y="800" />
+        <Waypoint X="352" Y="608" />
+        <Waypoint X="224" Y="544" />
+        <Waypoint X="480" Y="480" />
+        <Waypoint X="608" Y="608" />
+        <Waypoint X="544" Y="672" />
+        <Waypoint X="352" Y="800" />
+      </Tile_Data>
     </Tile>
     <Tile ID="486" posX="6" posY="12">
       <Tile_Data xTileID="12" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -11265,7 +11278,9 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="553" posX="33" posY="13">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_Pot!" xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Potion" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="554" posX="34" posY="13">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -11346,7 +11361,29 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="580" posX="20" posY="14">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_SNAIL2" RemoveEvent="FOR2_SNAIL2" xTileID="-1" yTileID="-1" EventID="AllSnail" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="21">
+        <Waypoint X="1312" Y="928" />
+        <Waypoint X="1120" Y="1056" />
+        <Waypoint X="1120" Y="1248" />
+        <Waypoint X="1120" Y="1504" />
+        <Waypoint X="992" Y="1568" />
+        <Waypoint X="672" Y="1504" />
+        <Waypoint X="544" Y="1376" />
+        <Waypoint X="608" Y="1184" />
+        <Waypoint X="736" Y="1056" />
+        <Waypoint X="864" Y="864" />
+        <Waypoint X="608" Y="800" />
+        <Waypoint X="544" Y="608" />
+        <Waypoint X="800" Y="480" />
+        <Waypoint X="1056" Y="416" />
+        <Waypoint X="1184" Y="224" />
+        <Waypoint X="1376" Y="352" />
+        <Waypoint X="1376" Y="480" />
+        <Waypoint X="1248" Y="608" />
+        <Waypoint X="1056" Y="800" />
+        <Waypoint X="1120" Y="928" />
+        <Waypoint X="1312" Y="928" />
+      </Tile_Data>
     </Tile>
     <Tile ID="581" posX="21" posY="14">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -12096,7 +12133,15 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="830" posX="30" posY="20">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_TREE2" RemoveEvent="FOR2_TREE2" xTileID="-1" yTileID="-1" EventID="Tree" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="7">
+        <Waypoint X="1952" Y="1312" />
+        <Waypoint X="1440" Y="1312" />
+        <Waypoint X="1440" Y="1632" />
+        <Waypoint X="1440" Y="1312" />
+        <Waypoint X="1696" Y="1056" />
+        <Waypoint X="1696" Y="1312" />
+        <Waypoint X="1952" Y="1312" />
+      </Tile_Data>
     </Tile>
     <Tile ID="831" posX="31" posY="20">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -12693,7 +12738,18 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1029" posX="29" posY="25">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_SNAIL1" RemoveEvent="FOR2_SNAIL1" xTileID="-1" yTileID="-1" EventID="AllSnail" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="10">
+        <Waypoint X="1888" Y="1632" />
+        <Waypoint X="2080" Y="1632" />
+        <Waypoint X="2080" Y="1376" />
+        <Waypoint X="1888" Y="1248" />
+        <Waypoint X="1568" Y="1248" />
+        <Waypoint X="1440" Y="1440" />
+        <Waypoint X="1504" Y="1632" />
+        <Waypoint X="1568" Y="1760" />
+        <Waypoint X="1696" Y="1760" />
+        <Waypoint X="1888" Y="1632" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1030" posX="30" posY="25">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -13215,7 +13271,18 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1203" posX="3" posY="30">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_PatOrc1" RemoveEvent="FOR2_PatOrc1" xTileID="-1" yTileID="-1" EventID="AllPathOrc" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="10">
+        <Waypoint X="224" Y="1952" />
+        <Waypoint X="416" Y="1888" />
+        <Waypoint X="544" Y="1952" />
+        <Waypoint X="544" Y="2080" />
+        <Waypoint X="480" Y="2272" />
+        <Waypoint X="416" Y="2400" />
+        <Waypoint X="224" Y="2400" />
+        <Waypoint X="160" Y="2208" />
+        <Waypoint X="160" Y="1824" />
+        <Waypoint X="224" Y="1952" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1204" posX="4" posY="30">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -13473,7 +13540,10 @@
       <Tile_Data xTileID="9" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1289" posX="9" posY="32">
-      <Tile_Data xTileID="10" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_Po3" xTileID="10" yTileID="1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Potion" Amount="1" />
+        <Chest Name="Ether" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1290" posX="10" posY="32">
       <Tile_Data xTileID="11" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -13494,7 +13564,18 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1296" posX="16" posY="32">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_PatOrc2" RemoveEvent="FOR2_PatOrc2" xTileID="-1" yTileID="-1" EventID="AllPathOrc" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="10">
+        <Waypoint X="1056" Y="2080" />
+        <Waypoint X="800" Y="2080" />
+        <Waypoint X="800" Y="2208" />
+        <Waypoint X="1248" Y="2208" />
+        <Waypoint X="1312" Y="2144" />
+        <Waypoint X="1312" Y="2016" />
+        <Waypoint X="1248" Y="1952" />
+        <Waypoint X="800" Y="1952" />
+        <Waypoint X="800" Y="2080" />
+        <Waypoint X="1056" Y="2080" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1297" posX="17" posY="32">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -13542,7 +13623,9 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1312" posX="32" posY="32">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_Po2" xTileID="-1" yTileID="-1" EventID="" EventType="CHESTS" WarpX="0" WarpY="0" Total_Waypoints="0">
+        <Chest Name="Potion" Amount="1" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1313" posX="33" posY="32">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -13899,7 +13982,20 @@
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="1431" posX="31" posY="35">
-      <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="FOR2_TREE3" RemoveEvent="FOR2_TREE3" xTileID="-1" yTileID="-1" EventID="Tree1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="12">
+        <Waypoint X="2016" Y="2272" />
+        <Waypoint X="1760" Y="2272" />
+        <Waypoint X="1760" Y="2144" />
+        <Waypoint X="1760" Y="1888" />
+        <Waypoint X="1632" Y="1760" />
+        <Waypoint X="1376" Y="2080" />
+        <Waypoint X="1440" Y="2336" />
+        <Waypoint X="1696" Y="2272" />
+        <Waypoint X="1824" Y="2400" />
+        <Waypoint X="2080" Y="2464" />
+        <Waypoint X="2144" Y="2336" />
+        <Waypoint X="2016" Y="2272" />
+      </Tile_Data>
     </Tile>
     <Tile ID="1432" posX="32" posY="35">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
