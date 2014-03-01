@@ -179,9 +179,17 @@ void CAnimationSystem::Render(CAnimationTimeStamp* aTimeStamp, float fPosX, floa
 	int nAnchorX = loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetFrames()[aTimeStamp->GetCurrentFrame()]->GetAnchorX();
 	int nAnchorY = loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetFrames()[aTimeStamp->GetCurrentFrame()]->GetAnchorY();
 
-	CSGD_TextureManager::GetInstance()->Draw(
+	if(fScaleX > 0)
+		CSGD_TextureManager::GetInstance()->Draw(
 		loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetImageID(), 
 		(int)(fPosX - (nAnchorX * fScaleX)),
+		(int)(fPosY - (nAnchorY * fScaleY)), 
+		fScaleX, fScaleY, &rFrame, 
+		0.0f, 0.0f, 0.0f, dwColor);
+	else
+		CSGD_TextureManager::GetInstance()->Draw(
+		loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetImageID(), 
+		(int)(fPosX - (nAnchorX * fScaleX)) + int(loadedAnimation[aTimeStamp->GetCurrentAnimation()]->GetIndividualFrame(aTimeStamp->GetCurrentFrame())->GetCollisionRect().right),
 		(int)(fPosY - (nAnchorY * fScaleY)), 
 		fScaleX, fScaleY, &rFrame, 
 		0.0f, 0.0f, 0.0f, dwColor);

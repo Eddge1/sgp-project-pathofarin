@@ -128,12 +128,13 @@ bool CProfileMenuState::Input()
 			case 1:
 				if(m_eCurrState == PS_DELETE)
 				{
-					if(m_vCharacterList[0]->GetUnit()->GetName() != "Empty")
+					if(m_vCharacterList[0]->GetUnit()->GetName() != "\t")
 					{
 						m_vCharacterList[0]->Release();
 						m_vCharacterList[0] = nullptr;
 						m_vCharacterList[0] = CreatePlayer();
-						m_vCharacterList[0]->GetUnit()->SetName("Empty");
+						m_vCharacterList[0]->GetUnit()->SetName("\t");
+						m_vCharacterList[0]->SetZone("");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[0]);
 						m_vWorldData[0].clear();
 						SaveGame("Player1.xml");
@@ -143,7 +144,7 @@ bool CProfileMenuState::Input()
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					if(m_vCharacterList[0]->GetUnit()->GetName() == "Empty")
+					if(m_vCharacterList[0]->GetUnit()->GetName() == "\t")
 					{
 						m_vCharacterList[0]->Release();
 						m_vCharacterList[0] = nullptr;
@@ -173,12 +174,13 @@ bool CProfileMenuState::Input()
 			case 2:
 				if(m_eCurrState == PS_DELETE)
 				{
-					if(m_vCharacterList[1]->GetUnit()->GetName() != "Empty")
+					if(m_vCharacterList[1]->GetUnit()->GetName() != "\t")
 					{
 						m_vCharacterList[1]->Release();
 						m_vCharacterList[1] = nullptr;
 						m_vCharacterList[1] = CreatePlayer();
-						m_vCharacterList[1]->GetUnit()->SetName("Empty");
+						m_vCharacterList[1]->SetZone("");
+						m_vCharacterList[1]->GetUnit()->SetName("\t");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[1]);
 						m_vWorldData[1].clear();
 						SaveGame("Player2.xml");
@@ -188,7 +190,7 @@ bool CProfileMenuState::Input()
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					if(m_vCharacterList[1]->GetUnit()->GetName() == "Empty")
+					if(m_vCharacterList[1]->GetUnit()->GetName() == "\t")
 					{
 						m_vCharacterList[1]->Release();
 						m_vCharacterList[1] = nullptr;
@@ -217,13 +219,14 @@ bool CProfileMenuState::Input()
 			case 3:
 				if(m_eCurrState == PS_DELETE)
 				{
-					if(m_vCharacterList[2]->GetUnit()->GetName() != "Empty")
+					if(m_vCharacterList[2]->GetUnit()->GetName() != "\t")
 					{
 						m_vCharacterList[2]->Release();
 						m_vCharacterList[2] = nullptr;
 						m_vCharacterList[2] = CreatePlayer();
+						m_vCharacterList[2]->SetZone("");
+						m_vCharacterList[2]->GetUnit()->SetName("\t");
 						CGamePlayState::GetInstance()->SetPlayer(m_vCharacterList[2]);
-						m_vCharacterList[2]->GetUnit()->SetName("Empty");
 						m_vWorldData[2].clear();
 						SaveGame("Player3.xml");
 						m_eCurrState = PS_SELECT;
@@ -231,7 +234,7 @@ bool CProfileMenuState::Input()
 				}
 				else if(m_eCurrState == PS_NEWGAME)
 				{
-					if(m_vCharacterList[2]->GetUnit()->GetName() == "Empty")
+					if(m_vCharacterList[2]->GetUnit()->GetName() == "\t")
 					{
 						m_vCharacterList[2]->Release();
 						m_vCharacterList[2] = nullptr;

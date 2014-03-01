@@ -288,7 +288,7 @@ void CBattleState::Render(void)
 			rHealth.right = long(256 * hPercent);
 			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 			rHealth.right = 256;
-			pTM->Draw(m_nHealthBarPlate, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBarPlate, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
 			woss << m_vBattleUnits[m_nTarget]->GetHealth();
