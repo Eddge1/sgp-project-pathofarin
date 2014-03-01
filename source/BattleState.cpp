@@ -239,11 +239,11 @@ void CBattleState::Render(void)
 	//Temp drawing the UI
 	if (CGamePlayState::GetInstance()->GetMapName() == "Cavern of Souls.xml")
 		pTM->Draw(m_nCavernBattleID, 0, 0, 1.6f, 2.3f);
-	else if (CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "ForestLevelPart2.xml")
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Forest Level 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Forest Level 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Forest Level 3.xml")
 		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
-	else if (CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "OrcSiegeCampPart2.xml")
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Orc Camp 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Orc Camp 2.xml")
 		pTM->Draw(m_nCampBattleID, 0, 0, 3.125f, 4.69f);
-	else if (CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart1.xml" || CGamePlayState::GetInstance()->GetMapName() == "MountainCavePart2.xml")
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Mountain Pass Level 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Mountain Pass Level 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Mountain Pass Level 3.xml")
 		pTM->Draw(m_nCaveBattleID, 0, 0, 1.6f, 2.3f);
 	else if (CGamePlayState::GetInstance()->GetMapName() == "Garden Part1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Garden Part2.xml")
 		pTM->Draw(m_nGardenBattleID, 0, 0, 1.6f, 2.3f);
