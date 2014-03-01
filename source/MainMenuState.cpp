@@ -57,7 +57,10 @@ void CMainMenuState::Activate(void)
 	if(m_bLeftMenuState)
 	{
 		if(!CSGD_XAudio2::GetInstance()->MusicIsSongPlaying(GetBackgroundMusic()))
+		{
+			CSGD_XAudio2::GetInstance()->MusicPlaySong(GetBackgroundMusic());
 			m_bLeftMenuState = false;
+		}
 	}
 
 	m_fRotation = 0.0f;
