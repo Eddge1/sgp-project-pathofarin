@@ -284,9 +284,9 @@ void CBattleState::Render(void)
 		if(m_vBattleUnits[m_nTurn]->GetType() == OBJ_PLAYER_UNIT && m_nTarget < int(m_vBattleUnits.size()) && m_vBattleUnits[m_nTarget]->GetType() != OBJ_PLAYER_UNIT)
 		{
 			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
-			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
-			pTM->Draw(m_nHealthBar, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
+			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 			rHealth.right = 256;
 			pTM->Draw(m_nHealthBarPlate, 48,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
@@ -299,7 +299,7 @@ void CBattleState::Render(void)
 		}
 		else if(m_vBattleUnits[m_nTurn]->GetType() != OBJ_PLAYER_UNIT)
 		{
-			hPercent = m_vBattleUnits[m_nTarget]->GetHealth() / float(m_vBattleUnits[m_nTarget]->GetMaxHealth());
+			hPercent = m_vBattleUnits[m_nTurn]->GetHealth() / float(m_vBattleUnits[m_nTurn]->GetMaxHealth());
 			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(0,0,0));
 			rHealth.right = long(256 * hPercent);
 			pTM->Draw(m_nHealthBar, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
@@ -307,10 +307,10 @@ void CBattleState::Render(void)
 			pTM->Draw(m_nHealthBarPlate, 32,516,1.0f,1.0f,&rHealth,0.0f,0.0f,0.0f,D3DCOLOR_XRGB(255,255,255));
 
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTarget]->GetHealth();
+			woss << m_vBattleUnits[m_nTurn]->GetHealth();
 			m_pFont->Draw( woss.str().c_str(), 80, 516, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 			woss.str(_T("")); // <- This is used to clear the woss so it can take new variables.
-			woss << m_vBattleUnits[m_nTarget]->GetName().c_str();
+			woss << m_vBattleUnits[m_nTurn]->GetName().c_str();
 			m_pFont->Draw( woss.str().c_str(), 80, 492, 0.8f, D3DCOLOR_ARGB(255, 0, 0, 0) );
 		}
 
