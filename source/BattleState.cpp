@@ -249,7 +249,7 @@ void CBattleState::Render(void)
 		pTM->Draw(m_nGardenBattleID, 0, 0, 1.6f, 2.3f);
 	else if (CGamePlayState::GetInstance()->GetMapName() == "Desert Part 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Desert Part 2.xml")
 		pTM->Draw(m_nDesertBattleID, 0, 0, 1.6f, 2.3f);
-	else if (CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 1.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 2.9.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Part 3.5.xml" || CGamePlayState::GetInstance()->GetMapName() == "Behold, Valrion.xml")
+	else if (CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Floor 1.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Floor 2.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Floor 3.xml" || CGamePlayState::GetInstance()->GetMapName() == "Final Dungeon Floor 4.xml" || CGamePlayState::GetInstance()->GetMapName() == "Dungeon Passage.xml" || CGamePlayState::GetInstance()->GetMapName() == "Valrion's Throne Room.xml")
 		pTM->Draw(m_nDungeonBattleID, 0, 0, 1.6f, 2.3f);
 	else
 		pTM->Draw(m_nForestBattleID, 0, 0, 1.6f, 2.3f);
