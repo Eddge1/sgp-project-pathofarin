@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<World Width="14" Height="14" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Dungeon_Middle.png" Transparency="-16777216">
+<World Music="POA_Dungeon_Background.xwm" Width="14" Height="14" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Dungeon_Middle.png" Transparency="-16777216">
   <Layer ID="0" Width="14" Height="14" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
       <Tile_Data xTileID="-1" yTileID="-1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -191,7 +191,15 @@
       <Tile_Data xTileID="4" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="63" posX="7" posY="4">
-      <Tile_Data xTileID="5" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="DUNG2_2" RemoveEvent="DUNG2_2" xTileID="5" yTileID="2" EventID="Shade" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="7">
+        <Waypoint X="480" Y="288" />
+        <Waypoint X="608" Y="288" />
+        <Waypoint X="608" Y="480" />
+        <Waypoint X="416" Y="480" />
+        <Waypoint X="288" Y="352" />
+        <Waypoint X="288" Y="288" />
+        <Waypoint X="480" Y="288" />
+      </Tile_Data>
     </Tile>
     <Tile ID="64" posX="8" posY="4">
       <Tile_Data xTileID="6" yTileID="2" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -305,7 +313,7 @@
       <Tile_Data xTileID="0" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="101" posX="3" posY="7">
-      <Tile_Data xTileID="1" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="DUNG2_1" RemoveEvent="DUNG2_1" xTileID="1" yTileID="5" EventID="Cultist" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="102" posX="4" posY="7">
       <Tile_Data xTileID="2" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -392,7 +400,7 @@
       <Tile_Data xTileID="1" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="130" posX="4" posY="9">
-      <Tile_Data xTileID="2" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="2" yTileID="7" EventID="Final Dungeon Floor 3" EventType="WARP" WarpX="192" WarpY="448" Total_Waypoints="0" />
     </Tile>
     <Tile ID="131" posX="5" posY="9">
       <Tile_Data xTileID="3" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -407,7 +415,7 @@
       <Tile_Data xTileID="6" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="135" posX="9" posY="9">
-      <Tile_Data xTileID="7" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="7" yTileID="7" EventID="Final Dungeon Floor 1" EventType="WARP" WarpX="384" WarpY="256" Total_Waypoints="0" />
     </Tile>
     <Tile ID="136" posX="10" posY="9">
       <Tile_Data xTileID="8" yTileID="7" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

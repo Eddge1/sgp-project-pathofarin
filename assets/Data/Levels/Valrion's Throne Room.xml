@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<World Width="18" Height="18" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Dungeon_Valrion.png" Transparency="-16777216">
+<World Music="POA_Valrion_Background.xwm" Width="18" Height="18" Layers="1" TileWidth="64" TileHeight="64" Image="POA_Dungeon_Valrion.png" Transparency="-16777216">
   <Layer ID="0" Width="18" Height="18" Xoffset="0" Yoffset="0">
     <Tile ID="0" posX="0" posY="0">
       <Tile_Data xTileID="0" yTileID="0" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -299,7 +299,7 @@
       <Tile_Data xTileID="8" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="99" posX="9" posY="5">
-      <Tile_Data xTileID="9" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data EventBroad="DEFEAT_VALRION" RemoveEvent="DEFEAT_VALRION" xTileID="9" yTileID="5" EventID="Valrion" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="100" posX="10" posY="5">
       <Tile_Data xTileID="10" yTileID="5" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -341,7 +341,7 @@
       <Tile_Data xTileID="4" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="113" posX="5" posY="6">
-      <Tile_Data xTileID="5" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="5" yTileID="6" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="114" posX="6" posY="6">
       <Tile_Data xTileID="6" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -365,7 +365,7 @@
       <Tile_Data xTileID="12" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="121" posX="13" posY="6">
-      <Tile_Data xTileID="13" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="13" yTileID="6" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="122" posX="14" posY="6">
       <Tile_Data xTileID="14" yTileID="6" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -455,7 +455,7 @@
       <Tile_Data xTileID="6" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="151" posX="7" posY="8">
-      <Tile_Data xTileID="7" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="7" yTileID="8" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="152" posX="8" posY="8">
       <Tile_Data xTileID="8" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -467,7 +467,7 @@
       <Tile_Data xTileID="10" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="155" posX="11" posY="8">
-      <Tile_Data xTileID="11" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="11" yTileID="8" EventID="CultistNPC1" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="156" posX="12" posY="8">
       <Tile_Data xTileID="12" yTileID="8" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -563,7 +563,7 @@
       <Tile_Data xTileID="6" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="187" posX="7" posY="10">
-      <Tile_Data xTileID="7" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="7" yTileID="10" EventID="CultistNPC2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="188" posX="8" posY="10">
       <Tile_Data xTileID="8" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -575,7 +575,7 @@
       <Tile_Data xTileID="10" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="191" posX="11" posY="10">
-      <Tile_Data xTileID="11" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="11" yTileID="10" EventID="CultistNPC2" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="192" posX="12" posY="10">
       <Tile_Data xTileID="12" yTileID="10" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -671,7 +671,7 @@
       <Tile_Data xTileID="6" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="223" posX="7" posY="12">
-      <Tile_Data xTileID="7" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="7" yTileID="12" EventID="CultistNPC3" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="224" posX="8" posY="12">
       <Tile_Data xTileID="8" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -683,7 +683,7 @@
       <Tile_Data xTileID="10" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="227" posX="11" posY="12">
-      <Tile_Data xTileID="11" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data RemoveEvent="DEFEAT_VALRION" xTileID="11" yTileID="12" EventID="CultistNPC3" EventType="NPCS" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="228" posX="12" posY="12">
       <Tile_Data xTileID="12" yTileID="12" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -944,13 +944,13 @@
       <Tile_Data xTileID="7" yTileID="17" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="314" posX="8" posY="17">
-      <Tile_Data xTileID="8" yTileID="17" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="8" yTileID="17" EventID="Final Dungeon Passage" EventType="WARP" WarpX="448" WarpY="256" Total_Waypoints="0" />
     </Tile>
     <Tile ID="315" posX="9" posY="17">
-      <Tile_Data xTileID="9" yTileID="17" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="9" yTileID="17" EventID="Final Dungeon Passage" EventType="WARP" WarpX="448" WarpY="256" Total_Waypoints="0" />
     </Tile>
     <Tile ID="316" posX="10" posY="17">
-      <Tile_Data xTileID="10" yTileID="17" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
+      <Tile_Data xTileID="10" yTileID="17" EventID="Final Dungeon Passage" EventType="WARP" WarpX="448" WarpY="256" Total_Waypoints="0" />
     </Tile>
     <Tile ID="317" posX="11" posY="17">
       <Tile_Data xTileID="11" yTileID="17" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />

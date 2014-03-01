@@ -176,10 +176,10 @@
       <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="58" posX="6" posY="4">
-      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Part 1" EventType="WARP" WarpX="448" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Floor 1" EventType="WARP" WarpX="576" WarpY="448" Total_Waypoints="0" />
     </Tile>
     <Tile ID="59" posX="7" posY="4">
-      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Part 1" EventType="WARP" WarpX="448" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Floor 1" EventType="WARP" WarpX="576" WarpY="448" Total_Waypoints="0" />
     </Tile>
     <Tile ID="60" posX="8" posY="4">
       <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
@@ -215,10 +215,10 @@
       <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
     </Tile>
     <Tile ID="71" posX="6" posY="5">
-      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Part 1" EventType="WARP" WarpX="448" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Floor 1" EventType="WARP" WarpX="576" WarpY="448" Total_Waypoints="0" />
     </Tile>
     <Tile ID="72" posX="7" posY="5">
-      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Part 1" EventType="WARP" WarpX="448" WarpY="128" Total_Waypoints="0" />
+      <Tile_Data xTileID="1" yTileID="5" EventID="Final Dungeon Floor 1" EventType="WARP" WarpX="576" WarpY="448" Total_Waypoints="0" />
     </Tile>
     <Tile ID="73" posX="8" posY="5">
       <Tile_Data xTileID="1" yTileID="1" EventID="" EventType="MAP_EDIT" WarpX="0" WarpY="0" Total_Waypoints="0" />
